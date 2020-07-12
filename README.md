@@ -13,7 +13,7 @@ system, combining the traditional xBase, with an extremely easy to use GUI.
 
 HMG can be downloaded at: 
 
-	http://sites.google.com/site/hmgweb
+	https://www.hmgforum.com
 
 
 Copyright (C) 2002-2010 Roberto Lopez. All rights reserved.
