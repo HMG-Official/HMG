@@ -1,0 +1,12 @@
+-hblib
+
+-o../../lib/report
+
+-Iinclude
+
+-D__HBIDE__
+
+-w2 -es2
+
+h_report.prg
+tprint.prg

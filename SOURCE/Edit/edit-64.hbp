@@ -1,0 +1,11 @@
+-hblib
+
+-o../../lib-64/edit-64
+
+-Iinclude
+
+-D__HBIDE__
+
+-w2 -es2
+
+h_edit.prg

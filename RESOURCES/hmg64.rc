@@ -1,0 +1,79 @@
+
+#include "_hmg_resconfig.h"
+
+// MANIFEST FOR CREATE 'XP-STYLE' APPLICATIONS
+
+//1 24 HMGRPATH\Windows64.Manifest
+1 24 HMGRPATH\Windows7.Manifest
+
+HMG_FINGER      CURSOR      HMGRPATH\FINGER.CUR
+HMG_DRAGLIST    CURSOR      HMGRPATH\DRAGLIST.CUR
+HMG_DRAGUP      CURSOR      HMGRPATH\DRAGUP.CUR
+HMG_DRAGDOWN    CURSOR      HMGRPATH\DRAGDOWN.CUR
+
+// EDIT COMMAND IMAGE BUTTONS
+
+HMG_EDIT_CANCEL     BITMAP          HMGRPATH\EDIT_CANCEL.BMP
+HMG_EDIT_CLOSE      BITMAP          HMGRPATH\EDIT_CLOSE.BMP
+HMG_EDIT_COPY       BITMAP          HMGRPATH\EDIT_COPY.BMP
+HMG_EDIT_DELETE     BITMAP          HMGRPATH\EDIT_DELETE.BMP
+HMG_EDIT_EDIT       BITMAP          HMGRPATH\EDIT_EDIT.BMP
+HMG_EDIT_FIND       BITMAP          HMGRPATH\EDIT_FIND.BMP
+HMG_EDIT_NEW        BITMAP          HMGRPATH\EDIT_NEW.BMP
+HMG_EDIT_OK         BITMAP          HMGRPATH\EDIT_OK.BMP
+HMG_EDIT_PRINT      BITMAP          HMGRPATH\EDIT_PRINT.BMP
+HMG_EDIT_ADD        BITMAP          HMGRPATH\EDIT_ADD.BMP
+HMG_EDIT_DEL        BITMAP          HMGRPATH\EDIT_DEL.BMP
+HMG_EDIT_SET        BITMAP          HMGRPATH\EDIT_SET.BMP
+
+ZZZ_AAAWINDOW   ICON HMGRPATH\WINDOW.ICO
+ZZZ_LED_ON      ICON HMGRPATH\LED_ON.ICO
+ZZZ_LED_OFF     ICON HMGRPATH\LED_OFF.ICO
+
+HP_END          BITMAP  HMGRPATH\go_last_page_24.bmp
+HP_TOP          BITMAP  HMGRPATH\go_first_page_24.bmp
+HP_NEXT         BITMAP  HMGRPATH\go_next_page_24.bmp
+HP_BACK         BITMAP  HMGRPATH\go_previous_page_24.bmp
+HP_PRINT        BITMAP  HMGRPATH\print_24.bmp
+HP_ZOOM         BITMAP  HMGRPATH\Zoom_24.bmp
+HP_GOPAGE       BITMAP  HMGRPATH\go_to_page_24.bmp
+HP_CLOSE        BITMAP  HMGRPATH\Exit_24.bmp
+HP_SAVE         BITMAP  HMGRPATH\save_24.bmp
+HP_THUMBNAIL    BITMAP  HMGRPATH\ThumNails.bmp
+HP_FOLDER       BITMAP  HMGRPATH\Search_Folder.bmp
+HP_GLASS        CURSOR  HMGRPATH\HP_GLASS.CUR
+
+GRID_MSAV       BITMAP  HMGRPATH\grid_msav.bmp
+GRID_MCAN       BITMAP  HMGRPATH\grid_mcan.bmp
+
+
+//------------------------------------------------
+// HMG Debugger resources
+//------------------------------------------------
+
+_about        	PNG   HMGRPATH\_dbg_about.png
+
+_animate      	PNG   HMGRPATH\_dbg_animate.png
+_step         	PNG   HMGRPATH\_dbg_step.png
+_trace        	PNG   HMGRPATH\_dbg_trace.png
+_go           	PNG   HMGRPATH\_dbg_go.png
+_tocursor     	PNG   HMGRPATH\_dbg_tocursor.png
+_next         	PNG   HMGRPATH\_dbg_next.png
+_pause        	PNG   HMGRPATH\_dbg_pause.png
+
+_breakpoint   	PNG   HMGRPATH\_dbg_breakpoint.png
+_watchpoint   	PNG   HMGRPATH\_dbg_watchpoint.png
+_tracepoint   	PNG   HMGRPATH\_dbg_tracepoint.png
+_configuration	PNG   HMGRPATH\_dbg_configuration.png
+_quit         	PNG   HMGRPATH\_dbg_quit.png
+
+_pointer      	PNG   HMGRPATH\_dbg_pointer.png
+_refresh      	PNG   HMGRPATH\_dbg_refresh.png
+
+_open      	PNG   HMGRPATH\_dbg_open.png
+_save      	PNG   HMGRPATH\_dbg_save.png
+
+_dbgIcon        ICON  HMGRPATH\_dbg_icon.ico
+
+_dbgbutton    	PNG   HMGRPATH\_dbg_button.png
+
