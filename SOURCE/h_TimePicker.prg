@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> h_TimePicker.prg  
+ HMG Source File --> h_TimePicker.prg
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -12,7 +12,7 @@
  that both that copyright notice and this permission notice appear
  in supporting documentation.
  It is provided "as is" without express or implied warranty.
- 
+
 ----------------------------------------------------------------------------*/
 
 
@@ -27,7 +27,7 @@ Function _DefineTimePick ( ControlName, ParentForm, x, y, w, h, cValue, ;
                            gotfocus, shownone, HelpId, invisible, notabstop, ;
                            bold, italic, underline, strikeout , Field, Enter, cTimeFormat)
 *-----------------------------------------------------------------------------*
-LOCAL cParentForm , mVar , k := 0
+LOCAL cParentForm , mVar , k
 LOCAL ControlHandle
 LOCAL FontHandle
 LOCAL cParentTabName
@@ -42,12 +42,12 @@ LOCAL WorkArea
    DEFAULT lostfocus   TO ""
    DEFAULT gotfocus    TO ""
    DEFAULT invisible   TO FALSE
-   DEFAULT notabstop   TO FALSE   
+   DEFAULT notabstop   TO FALSE
    DEFAULT shownone    TO FALSE
 
 
    If ValType ( Field ) != 'U'
-      if HB_UAT ( '>', Field ) == 0 
+      if HB_UAT ( '>', Field ) == 0
          MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated" )
       Else
          WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
@@ -66,13 +66,13 @@ LOCAL WorkArea
          FontSize := _HMG_SYSDATA [ 182 ]
       EndIf
    endif
-   
+
    if _HMG_SYSDATA [ 183 ] > 0
       IF _HMG_SYSDATA [ 240 ] == .F.
          x := x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
          y := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
          ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-         cParentTabName := _HMG_SYSDATA [ 225 ] 
+         cParentTabName := _HMG_SYSDATA [ 225 ]
       ENDIF
    EndIf
 
@@ -114,7 +114,7 @@ LOCAL WorkArea
    If _HMG_SYSDATA [ 265 ] = .T.
       aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
    EndIf
-   
+
    if valtype(tooltip) != "U"
       SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
    Endif
@@ -123,44 +123,44 @@ LOCAL WorkArea
 
    Public &mVar. := k
 
-   _HMG_SYSDATA [  1 ]  [k] :=  "TIMEPICK" 
-   _HMG_SYSDATA [  2 ]  [k] :=  ControlName 
-   _HMG_SYSDATA [  3 ]  [k] :=  ControlHandle 
-   _HMG_SYSDATA [  4 ]  [k] :=  ParentForm 
-   _HMG_SYSDATA [  5 ]  [k] :=  0 
-   _HMG_SYSDATA [  6 ]  [k] :=  Enter 
+   _HMG_SYSDATA [  1 ]  [k] :=  "TIMEPICK"
+   _HMG_SYSDATA [  2 ]  [k] :=  ControlName
+   _HMG_SYSDATA [  3 ]  [k] :=  ControlHandle
+   _HMG_SYSDATA [  4 ]  [k] :=  ParentForm
+   _HMG_SYSDATA [  5 ]  [k] :=  0
+   _HMG_SYSDATA [  6 ]  [k] :=  Enter
    _HMG_SYSDATA [  7 ]  [k] :=  Field
-   _HMG_SYSDATA [  8 ]  [k] :=  Nil 
+   _HMG_SYSDATA [  8 ]  [k] :=  Nil
    _HMG_SYSDATA [  9 ]  [k] :=  cTimeFormat
-   _HMG_SYSDATA [ 10 ]  [k] :=  lostfocus 
-   _HMG_SYSDATA [ 11 ]  [k] :=  gotfocus 
-   _HMG_SYSDATA [ 12 ]  [k] :=  change 
-   _HMG_SYSDATA [ 13 ]  [k] :=  .F. 
-   _HMG_SYSDATA [ 14 ]  [k] :=  Nil 
-   _HMG_SYSDATA [ 15 ]  [k] :=  Nil 
-   _HMG_SYSDATA [ 16 ]  [k] :=  "" 
-   _HMG_SYSDATA [ 17 ]  [k] :=  {} 
-   _HMG_SYSDATA [ 18 ]  [k] :=  y 
-   _HMG_SYSDATA [ 19 ]  [k] :=  x 
-   _HMG_SYSDATA [ 20 ]  [k] :=  w 
-   _HMG_SYSDATA [ 21 ]  [k] :=  h 
-   _HMG_SYSDATA [ 22 ]  [k] :=  0 
-   _HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-   _HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-   _HMG_SYSDATA [ 25 ]  [k] :=  "" 
-   _HMG_SYSDATA [ 26 ]  [k] :=  0 
-   _HMG_SYSDATA [ 27 ]  [k] :=  fontname 
-   _HMG_SYSDATA [ 28 ]  [k] :=  fontsize 
-   _HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout} 
-   _HMG_SYSDATA [ 30 ]  [k] :=  tooltip  
+   _HMG_SYSDATA [ 10 ]  [k] :=  lostfocus
+   _HMG_SYSDATA [ 11 ]  [k] :=  gotfocus
+   _HMG_SYSDATA [ 12 ]  [k] :=  change
+   _HMG_SYSDATA [ 13 ]  [k] :=  .F.
+   _HMG_SYSDATA [ 14 ]  [k] :=  Nil
+   _HMG_SYSDATA [ 15 ]  [k] :=  Nil
+   _HMG_SYSDATA [ 16 ]  [k] :=  ""
+   _HMG_SYSDATA [ 17 ]  [k] :=  {}
+   _HMG_SYSDATA [ 18 ]  [k] :=  y
+   _HMG_SYSDATA [ 19 ]  [k] :=  x
+   _HMG_SYSDATA [ 20 ]  [k] :=  w
+   _HMG_SYSDATA [ 21 ]  [k] :=  h
+   _HMG_SYSDATA [ 22 ]  [k] :=  0
+   _HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 25 ]  [k] :=  ""
+   _HMG_SYSDATA [ 26 ]  [k] :=  0
+   _HMG_SYSDATA [ 27 ]  [k] :=  fontname
+   _HMG_SYSDATA [ 28 ]  [k] :=  fontsize
+   _HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout}
+   _HMG_SYSDATA [ 30 ]  [k] :=  tooltip
    _HMG_SYSDATA [ 31 ]  [k] :=  cParentTabName
    _HMG_SYSDATA [ 32 ]  [k] :=  0
    _HMG_SYSDATA [ 33 ]  [k] :=  ''
-   _HMG_SYSDATA [ 34 ]  [k] :=  iif (invisible,FALSE,TRUE) 
-   _HMG_SYSDATA [ 35 ]  [k] :=  HelpId 
-   _HMG_SYSDATA [ 36 ]  [k] :=  FontHandle 
-   _HMG_SYSDATA [ 37 ]  [k] :=  0 
-   _HMG_SYSDATA [ 38 ]  [k] :=  .T. 
+   _HMG_SYSDATA [ 34 ]  [k] :=  iif (invisible,FALSE,TRUE)
+   _HMG_SYSDATA [ 35 ]  [k] :=  HelpId
+   _HMG_SYSDATA [ 36 ]  [k] :=  FontHandle
+   _HMG_SYSDATA [ 37 ]  [k] :=  0
+   _HMG_SYSDATA [ 38 ]  [k] :=  .T.
    _HMG_SYSDATA [ 39 ]  [k] :=  0
    _HMG_SYSDATA [ 40 ]  [k] :=  { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -170,14 +170,14 @@ Return Nil
 Procedure _DataTimePickerRefresh (i)
 Local Field
    Field := _HMG_SYSDATA [ 7 ] [i]
-   _SetValue ( '' , '' , &Field , i ) 
+   _SetValue ( '' , '' , &Field , i )
 Return
 
 Procedure _DataTimePickerSave (ControlName, ParentForm)
-Local Field , i 
+Local Field , i
    i := GetControlIndex ( ControlName , ParentForm)
    Field := _HMG_SYSDATA [ 7 ] [i]
-   REPLACE &Field WITH _GetValue ( Controlname , ParentForm ) 
+   REPLACE &Field WITH _GetValue ( Controlname , ParentForm )
 Return
 
 
@@ -258,14 +258,14 @@ LOCAL nHour, nMinute, nSecond
       IF (nHour == 12) .AND. (HMG_LOWER(cAMPM) == "am")
          nHour := 0
       ENDIF
-      IF (nHour < 12) .AND. HMG_LOWER(cAMPM) == "pm" 
+      IF (nHour < 12) .AND. HMG_LOWER(cAMPM) == "pm"
          nHour := nHour + 12
       ENDIF
 
-      // MsgDebug (nHour, nMinute, nSecond, cAMPM) 
+      // MsgDebug (nHour, nMinute, nSecond, cAMPM)
       IF (nHour < 0 .OR. nHour > 23) .OR. (nMinute < 0 .OR. nMinute > 59) .OR. (nSecond < 0 .OR. nSecond > 59)
          MsgHMGError ("Invalid Time format, must be string in format HH:MM [am|pm] or HH:MM:SS [am|pm]. Program Terminated")
-      ENDIF      
+      ENDIF
    ELSE
       MsgHMGError ("Invalid Time format, must be string in format HH:MM [am|pm] or HH:MM:SS [am|pm]. Program Terminated")
    ENDIF
@@ -276,7 +276,7 @@ RETURN {nHour, nMinute, nSecond}
 FUNCTION HMG_ValueToTime (aValue, cTimeFormat)
 //-----------------------------------------------
 LOCAL cTime, cAMPM, nHour, nMinute, nSecond
-   
+
    DEFAULT cTimeFormat TO _TIMELONG24H
    nHour   := aValue [1]
    nMinute := aValue [2]
@@ -289,10 +289,10 @@ LOCAL cTime, cAMPM, nHour, nMinute, nSecond
    DO CASE
       CASE ALLTRIM(cTimeFormat) == ALLTRIM( _TIMELONG24H )
            cTime := STRZERO (nHour, 2) +":"+ STRZERO (nMinute, 2) +":"+ STRZERO (nSecond, 2)
-           
+
       CASE ALLTRIM(cTimeFormat) == ALLTRIM( _TIMESHORT24H )
            cTime := STRZERO (nHour, 2) +":"+ STRZERO (nMinute, 2)
-           
+
       CASE ALLTRIM(cTimeFormat) == ALLTRIM( _TIMELONG12H )
            IF     nHour == 0
                     cAMPM := "am"
@@ -306,7 +306,7 @@ LOCAL cTime, cAMPM, nHour, nMinute, nSecond
                     nHour := nHour - 12
            ENDIF
            cTime := STRZERO (nHour, 2) +":"+ STRZERO (nMinute, 2) +":"+ STRZERO (nSecond, 2) +" "+ cAMPM
-           
+
       CASE ALLTRIM(cTimeFormat) == ALLTRIM( _TIMESHORT12H )
            IF     nHour == 0
                     cAMPM := "am"
