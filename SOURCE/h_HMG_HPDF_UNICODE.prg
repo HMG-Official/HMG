@@ -5,7 +5,7 @@ MEMVAR _HMG_SYSDATA
 #include "harupdf.ch"
 
 
-function _HMG_HPDF_MULTILINE_PRINT_UNICODE ( nRow, nCol, nToRow, nToCol, cFontName, nFontSize, aFontColor, cText, lBold, lItalic, lUnderline, lStrikeout, lColor, lFont, lSize, cAlign ) 
+function _HMG_HPDF_MULTILINE_PRINT_UNICODE ( nRow, nCol, nToRow, nToCol, cFontName, nFontSize, aFontColor, cText, lBold, lItalic, lUnderline, lStrikeout, lColor, lFont, lSize, cAlign )
    local nBitmapWidth, nBitmapHeight, nAlign, cRawImage, hBitmap, BTstruct, hDC, hFont
    local   aBackColor := WHITE
    default cFontName := _HMG_SYSDATA [ 150 ][ 8 ]
@@ -37,7 +37,7 @@ function _HMG_HPDF_MULTILINE_PRINT_UNICODE ( nRow, nCol, nToRow, nToCol, cFontNa
    ENDIF
 
    hBitmap := BT_BitmapCreateNew (nBitmapWidth, nBitmapHeight, aBackColor)
-   
+
    hDC := BT_CreateDC (hBitmap, BT_HDC_BITMAP, @BTstruct)
 
       #define DT_LEFT     0
@@ -51,7 +51,7 @@ function _HMG_HPDF_MULTILINE_PRINT_UNICODE ( nRow, nCol, nToRow, nToCol, cFontNa
       case HMG_UPPER( cAlign ) == 'JUSTIFY'   // not support
            nAlign := DT_LEFT
       otherwise
-           nAlign := DT_LEFT 
+           nAlign := DT_LEFT
       endcase
 
       hFont := _HMG_HPDF_CREATEFONT (hDC, cFontName, nFontSize, lBold, lItalic, lUnderline, lStrikeout )
@@ -59,7 +59,7 @@ function _HMG_HPDF_MULTILINE_PRINT_UNICODE ( nRow, nCol, nToRow, nToCol, cFontNa
       _HMG_HPDF_DRAWTEXT (hDC, hFont, RGB(aFontColor[1], aFontColor[2], aFontColor[3]), cText, nBitmapWidth, nBitmapHeight, nAlign)
 
       DeleteObject (hFont)
-      
+
    BT_DeleteDC (BTstruct)
 
    cRawImage := GetTempFolder() + "_HMG_HPDF_RawBitmapBits.dat"
@@ -77,12 +77,11 @@ return nil
 
 
 function _HMG_HPDF_DRAWIMAGERAW ( cRawImage, nRow, nCol, nToRow, nToCol, nImageWidth, nImageHeight )
-   local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
    local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
    local nxPos := _HMG_HPDF_MM2Pixel( nCol )
    local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
    local oImage := nil
-   
+
    if _HMG_SYSDATA[ 150 ][ 1 ] == nil // PDF object not found!
       _HMG_HPDF_Error( 3 )
       return nil
@@ -98,12 +97,12 @@ function _HMG_HPDF_DRAWIMAGERAW ( cRawImage, nRow, nCol, nToRow, nToCol, nImageW
       // MsgHMGError ("Error Nro: "+str(oImage))
       _HMG_HPDF_Error( 7 )
       return nil
-   endif   
+   endif
 
-   if empty( oImage ) 
+   if empty( oImage )
       _HMG_HPDF_Error( 7 )
       return nil
-   endif   
+   endif
    HPDF_Page_DrawImage( _HMG_SYSDATA[ 150 ][ 7 ], oImage, nxPos, nyPos - _HMG_HPDF_MM2Pixel( nToRow - nRow ), _HMG_HPDF_MM2Pixel( nToCol - nCol ), _HMG_HPDF_MM2Pixel( nToRow - nRow ) )
 return nil
 
@@ -142,7 +141,7 @@ HB_FUNC ( _HMG_HPDF_DRAWTEXT )
 
    SetGraphicsMode (hDC, GM_ADVANCED);
 
-   SelectObject (hDC, hFont); 
+   SelectObject (hDC, hFont);
    SetTextColor (hDC, RGBcolor);
 // SetBkColor (hDC, RGB (255,255,255));
    SetBkMode (hDC, TRANSPARENT);
@@ -212,7 +211,7 @@ HB_FUNC ( _HPDF_LOADRAWBITMAP )
 
 HB_FUNC ( _HMG_HPDF_SAVEBITMAPBITS )
 {
-   HBITMAP hBitmap  = (HBITMAP) HMG_parnl (1); 
+   HBITMAP hBitmap  = (HBITMAP) HMG_parnl (1);
    TCHAR  *FileName = (TCHAR*)  HMG_parc  (2);
    HGLOBAL hBits;
    LPBYTE  lp_Bits, _R, _B;
@@ -225,7 +224,7 @@ HB_FUNC ( _HMG_HPDF_SAVEBITMAPBITS )
    DWORD nBytes_Written;
    INT y, x;
 
-   GetObject(hBitmap, sizeof(BITMAP), (LPBYTE)&bm);    
+   GetObject(hBitmap, sizeof(BITMAP), (LPBYTE)&bm);
 
    BI.bmiHeader.biSize          = sizeof(BITMAPINFOHEADER);
    BI.bmiHeader.biWidth         = bm.bmWidth;
