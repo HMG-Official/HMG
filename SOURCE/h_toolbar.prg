@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -86,7 +86,7 @@ Local mVar
 Local k
 Local nId
 Local nFontHandle
-Local aTemp := {}
+Local aTemp
 LOCAL lSplitBoxActive
 
 Default nImageWidth	To -1
@@ -149,7 +149,7 @@ Default nImageHeight	To -1
 	If ValType(cFontName) != "U" .and. ValType(nFontSize) != "U"
 		nFontHandle := _SetFont (nControlHandle,cFontName,nFontSize,lbold,litalic,lunderline,lstrikeout)
 	Else
-		nFontHandle := _SetFont (nControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],lbold,litalic,lunderline,lstrikeout)		
+		nFontHandle := _SetFont (nControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],lbold,litalic,lunderline,lstrikeout)
 	Endif
 
 	if ValType(cToolTip) != "U"
@@ -161,44 +161,44 @@ Default nImageHeight	To -1
 
 	Public &mVar. := k
 
-	_HMG_SYSDATA [1]		[k] := "TOOLBAR" 
+	_HMG_SYSDATA [1]		[k] := "TOOLBAR"
 	_HMG_SYSDATA [2]		[k] := cControlName
-	_HMG_SYSDATA [3]		[k] := nControlHandle 
-	_HMG_SYSDATA [4]		[k] := nParentWindowHandle 
+	_HMG_SYSDATA [3]		[k] := nControlHandle
+	_HMG_SYSDATA [4]		[k] := nParentWindowHandle
 	_HMG_SYSDATA [  5 ]		[k] := nId
 	_HMG_SYSDATA [  6 ]		[k] := Nil
-	_HMG_SYSDATA [  7 ]		[k] := {} 
-	_HMG_SYSDATA [  8 ]		[k] := Nil 
-	_HMG_SYSDATA [  9 ]		[k] := "" 
-	_HMG_SYSDATA [ 10 ]		[k] := "" 
-	_HMG_SYSDATA [ 11 ]		[k] := "" 
-	_HMG_SYSDATA [ 12 ]		[k] := "" 
-	_HMG_SYSDATA [ 13 ]		[k] := .F.	
-	_HMG_SYSDATA [ 14 ]		[k] := Nil 
-	_HMG_SYSDATA [ 15 ]		[k] := Nil 
-	_HMG_SYSDATA [ 16 ]		[k] := ""  
-	_HMG_SYSDATA [ 17 ]		[k] := {} 
+	_HMG_SYSDATA [  7 ]		[k] := {}
+	_HMG_SYSDATA [  8 ]		[k] := Nil
+	_HMG_SYSDATA [  9 ]		[k] := ""
+	_HMG_SYSDATA [ 10 ]		[k] := ""
+	_HMG_SYSDATA [ 11 ]		[k] := ""
+	_HMG_SYSDATA [ 12 ]		[k] := ""
+	_HMG_SYSDATA [ 13 ]		[k] := .F.
+	_HMG_SYSDATA [ 14 ]		[k] := Nil
+	_HMG_SYSDATA [ 15 ]		[k] := Nil
+	_HMG_SYSDATA [ 16 ]		[k] := ""
+	_HMG_SYSDATA [ 17 ]		[k] := {}
 	_HMG_SYSDATA [ 18 ]		[k] := IF (VALTYPE (lBottom) == "L",         lBottom,         .F.)   // ADD
 	_HMG_SYSDATA [ 19 ]		[k] := IF (VALTYPE (lSplitBoxActive) == "L", lSplitBoxActive, .F.)   // ADD
 	_HMG_SYSDATA [ 20 ]		[k] := nButtonWidth
 	_HMG_SYSDATA [ 21 ]		[k] := nButtonHeight
-	_HMG_SYSDATA [ 22 ]		[k] := 0 
-	_HMG_SYSDATA [ 23 ]		[k] := -1  
-	_HMG_SYSDATA [ 24 ]		[k] := -1 
-	_HMG_SYSDATA [ 25 ]		[k] := "" 
-	_HMG_SYSDATA [ 26 ]		[k] := 0 
-	_HMG_SYSDATA [ 27 ]		[k] := "" 
-	_HMG_SYSDATA [ 28 ]		[k] := 0  
-	_HMG_SYSDATA [ 29 ]		[k] := {.f.,.f.,.f.,.f.} 
-	_HMG_SYSDATA [ 30 ]		[k] := "" 
-	_HMG_SYSDATA [ 31 ]		[k] := 0  
-	_HMG_SYSDATA [ 32 ]		[k] := 0  
-	_HMG_SYSDATA [ 33 ]		[k] := ""  
-	_HMG_SYSDATA [ 34 ]		[k] := .t. 
-	_HMG_SYSDATA [ 35 ]		[k] := 0 
-	_HMG_SYSDATA [ 36 ]		[k] := 0 
-	_HMG_SYSDATA [ 37 ]		[k] := 0 
-	_HMG_SYSDATA [ 38 ]		[k] := .T. 
+	_HMG_SYSDATA [ 22 ]		[k] := 0
+	_HMG_SYSDATA [ 23 ]		[k] := -1
+	_HMG_SYSDATA [ 24 ]		[k] := -1
+	_HMG_SYSDATA [ 25 ]		[k] := ""
+	_HMG_SYSDATA [ 26 ]		[k] := 0
+	_HMG_SYSDATA [ 27 ]		[k] := ""
+	_HMG_SYSDATA [ 28 ]		[k] := 0
+	_HMG_SYSDATA [ 29 ]		[k] := {.f.,.f.,.f.,.f.}
+	_HMG_SYSDATA [ 30 ]		[k] := ""
+	_HMG_SYSDATA [ 31 ]		[k] := 0
+	_HMG_SYSDATA [ 32 ]		[k] := 0
+	_HMG_SYSDATA [ 33 ]		[k] := ""
+	_HMG_SYSDATA [ 34 ]		[k] := .t.
+	_HMG_SYSDATA [ 35 ]		[k] := 0
+	_HMG_SYSDATA [ 36 ]		[k] := 0
+	_HMG_SYSDATA [ 37 ]		[k] := 0
+	_HMG_SYSDATA [ 38 ]		[k] := .T.
 	_HMG_SYSDATA [ 39 ]		[k] := 0
 	_HMG_SYSDATA [ 40 ] 		[k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -259,7 +259,7 @@ Local nButtonPos
 	* Create Public control variable
 	mVar := '_' + cParentWindowName + '_' + cControlName
 
-	* Get Id 
+	* Get Id
 	nId := _GetId()
 
 	* Increment ToolBar Button Count
@@ -286,44 +286,44 @@ Local nButtonPos
 
 	Public &mVar. := k
 
-	_HMG_SYSDATA [1]		[k] := "TOOLBUTTON" 
-	_HMG_SYSDATA [2]		[k] :=  cControlName 
+	_HMG_SYSDATA [1]		[k] := "TOOLBUTTON"
+	_HMG_SYSDATA [2]		[k] :=  cControlName
 	_HMG_SYSDATA [3]		[k] :=  nControlHandle
 	_HMG_SYSDATA [4]		[k] :=  nParentWindowHandle
-	_HMG_SYSDATA [  5 ]		[k] :=  nId 
+	_HMG_SYSDATA [  5 ]		[k] :=  nId
 	_HMG_SYSDATA [  6 ]		[k] :=  bAction
-	_HMG_SYSDATA [  7 ]		[k] :=  {} 
+	_HMG_SYSDATA [  7 ]		[k] :=  {}
 	_HMG_SYSDATA [  8 ]		[k] :=  _HMG_SYSDATA [ 309 ]   // ToolBar Button Count
-	_HMG_SYSDATA [  9 ]		[k] :=  "" 
+	_HMG_SYSDATA [  9 ]		[k] :=  ""
 	_HMG_SYSDATA [ 10 ]		[k] :=  ""
-	_HMG_SYSDATA [ 11 ]		[k] :=  "" 
-	_HMG_SYSDATA [ 12 ]		[k] :=  "" 
-	_HMG_SYSDATA [ 13 ]		[k] :=  .F. 
-	_HMG_SYSDATA [ 14 ]		[k] :=  Nil 
-	_HMG_SYSDATA [ 15 ]		[k] :=  Nil 
-	_HMG_SYSDATA [ 16 ]		[k] := "" 
-	_HMG_SYSDATA [ 17 ]		[k] := {} 
+	_HMG_SYSDATA [ 11 ]		[k] :=  ""
+	_HMG_SYSDATA [ 12 ]		[k] :=  ""
+	_HMG_SYSDATA [ 13 ]		[k] :=  .F.
+	_HMG_SYSDATA [ 14 ]		[k] :=  Nil
+	_HMG_SYSDATA [ 15 ]		[k] :=  Nil
+	_HMG_SYSDATA [ 16 ]		[k] := ""
+	_HMG_SYSDATA [ 17 ]		[k] := {}
 	_HMG_SYSDATA [ 18 ]		[k] := Nil
-	_HMG_SYSDATA [ 19 ]		[k] := Nil 
-	_HMG_SYSDATA [ 20 ]		[k] := 0 
-	_HMG_SYSDATA [ 21 ]		[k] := 0 
-	_HMG_SYSDATA [ 22 ]		[k] := 0 
-	_HMG_SYSDATA [ 23 ]		[k] := -1 
-	_HMG_SYSDATA [ 24 ]		[k] := -1 
+	_HMG_SYSDATA [ 19 ]		[k] := Nil
+	_HMG_SYSDATA [ 20 ]		[k] := 0
+	_HMG_SYSDATA [ 21 ]		[k] := 0
+	_HMG_SYSDATA [ 22 ]		[k] := 0
+	_HMG_SYSDATA [ 23 ]		[k] := -1
+	_HMG_SYSDATA [ 24 ]		[k] := -1
 	_HMG_SYSDATA [ 25 ]		[k] := cPicture
 	_HMG_SYSDATA [ 26 ]		[k] := _HMG_SYSDATA [ 310 ]   // ToolBar Handle
-	_HMG_SYSDATA [ 27 ]		[k] := '' 
-	_HMG_SYSDATA [ 28 ]		[k] := 0 
-	_HMG_SYSDATA [ 29 ]		[k] := {.f.,.f.,.f.,.f.} 
+	_HMG_SYSDATA [ 27 ]		[k] := ''
+	_HMG_SYSDATA [ 28 ]		[k] := 0
+	_HMG_SYSDATA [ 29 ]		[k] := {.f.,.f.,.f.,.f.}
 	_HMG_SYSDATA [ 30 ]		[k] := cToolTip
-	_HMG_SYSDATA [ 31 ]		[k] := 0  
-	_HMG_SYSDATA [ 32 ]		[k] := notrans  
-	_HMG_SYSDATA [ 33 ]		[k] := cCaption  
-	_HMG_SYSDATA [ 34 ]		[k] := .t. 
-	_HMG_SYSDATA [ 35 ]		[k] := 0 
-	_HMG_SYSDATA [ 36 ]		[k] := 0 
-	_HMG_SYSDATA [ 37 ]		[k] := 0 
-	_HMG_SYSDATA [ 38 ]		[k] := .T. 
+	_HMG_SYSDATA [ 31 ]		[k] := 0
+	_HMG_SYSDATA [ 32 ]		[k] := notrans
+	_HMG_SYSDATA [ 33 ]		[k] := cCaption
+	_HMG_SYSDATA [ 34 ]		[k] := .t.
+	_HMG_SYSDATA [ 35 ]		[k] := 0
+	_HMG_SYSDATA [ 36 ]		[k] := 0
+	_HMG_SYSDATA [ 37 ]		[k] := 0
+	_HMG_SYSDATA [ 38 ]		[k] := .T.
 	_HMG_SYSDATA [ 39 ]		[k] := 0
 	_HMG_SYSDATA [ 40 ] 		[k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -335,7 +335,7 @@ Local nButtonPos
 		i := HB_UAT ( '&' , cCaption )
 
 		If i > 0
-			c := ASC ( HB_USUBSTR ( cCaption , i+1 , 1 ) )			
+			c := ASC ( HB_USUBSTR ( cCaption , i+1 , 1 ) )
 
 			If c >= 48 .And. c <= 90
 
@@ -362,7 +362,7 @@ Local i
 
 	ActivateToolBar ( _HMG_SYSDATA [ 310 ] )
 
-	if _HMG_SYSDATA [ 262 ] == .T. 
+	if _HMG_SYSDATA [ 262 ] == .T.
 		i := GetFormIndex ( _HMG_SYSDATA [ 222 ] )
 
 		AddSplitBoxItem ( _HMG_SYSDATA [ 310 ] , ;
@@ -385,7 +385,7 @@ Return Nil
 *------------------------------------------------------------------------------*
 Procedure _DropDownShortcut ( nToolButtonId , nParentWindowHandle , i , nButtonPos )
 *------------------------------------------------------------------------------*
-Local aPos := { 0 , 0 , 0 , 0 }
+Local aPos
 Local aSize
 Local x
 
@@ -417,7 +417,7 @@ LOCAL nRow, nCol, cFormName
 
    DEFAULT nIndex TO GetLastActiveFormIndex()
    IF nIndex > 0
-      cFormName := GetFormNameByIndex (nIndex) 
+      cFormName := GetFormNameByIndex (nIndex)
       IF BT_StatusBarHeight (cFormName) > 0 .AND. BT_ToolBarBottomHeight (cFormName) > 0
          nCol := GETWINDOWCOL (BT_ToolBarBottomHandle(cFormName))
          ScreenToClient (GetFormHandle(cFormName), @nCOL, NIL)
