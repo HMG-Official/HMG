@@ -181,7 +181,7 @@ Return Nil
 *-----------------------------------------------------------------------------------------*
 Function _DefineMenuItem ( caption , action , name , Image , checked , NoTrans, ToolTip )
 *-----------------------------------------------------------------------------------------*
-Local Controlhandle , mVar, k, cTypeMenu :=""
+Local mVar, k, cTypeMenu :=""
 Local id
 LOCAL cParentName := "", MenuItemID
 
@@ -189,7 +189,8 @@ LOCAL cParentName := "", MenuItemID
 
 		Id := _GetId()
 
-		Controlhandle := AppendMenuString ( _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ] ] , id ,  caption )   // This Not return a Handle, return lBoolean value
+      // unused Controlhandle.	Controlhandle := AppendMenuString(...) . asistex
+		AppendMenuString ( _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ] ] , id ,  caption )   // This Not return a Handle, return lBoolean value
 
 		if Valtype ( image ) != 'U'
 			MenuItem_SetBitMaps ( _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ]] , Id , image , "" , NoTrans )
@@ -256,7 +257,8 @@ LOCAL cParentName := "", MenuItemID
 
 		id := _GetId()
 
-		Controlhandle := AppendMenuString ( _HMG_SYSDATA [ 175 ] , id ,  caption )   // This Not return a Handle, return lBoolean value
+      // unused Controlhandle.	Controlhandle := AppendMenuString(...) . asistex
+		AppendMenuString ( _HMG_SYSDATA [ 175 ] , id ,  caption )   // This Not return a Handle, return lBoolean value
 
 		if Valtype ( image ) != 'U'
 			MenuItem_SetBitMaps ( _HMG_SYSDATA [ 175 ] , Id , image , "" , NoTrans )
