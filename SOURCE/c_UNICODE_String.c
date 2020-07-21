@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_UNICODE_STRING.c  
+ HMG Source File --> c_UNICODE_STRING.c
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -28,7 +28,7 @@
 #ifdef COMPILE_HMG_UNICODE
 
    HB_FUNC (HMG_LOWER)
-   {  
+   {
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -51,7 +51,7 @@
 
 
    HB_FUNC (HMG_UPPER)
-   {  
+   {
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -118,12 +118,12 @@ HB_FUNC (HMG_STRCMP)
    TCHAR *Text2 = (TCHAR *) HMG_parc (2);
    BOOL  lCaseSensitive = (BOOL) hb_parl (3);
    int CmpValue;
-   
+
    if ( lCaseSensitive == FALSE )
       CmpValue = lstrcmpi (Text1, Text2);
    else
       CmpValue = lstrcmp  (Text1, Text2);
-   
+
    hb_retni ((int) CmpValue);
 }
 

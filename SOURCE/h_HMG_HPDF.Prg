@@ -1,12 +1,12 @@
 /*
   - by S. Rathinagiri on October 22nd, 2012
-  
-  - The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-    by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+
+  - The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+    by Dr. Claudio Soto, November 2012 and June 2014 respectively.
 
   - Revised by Pablo César Arrascaeta on April 12th, 2014
     Implement of _HMG_HPDF_SetFont() with improvements extra functions
-   
+
 */
 MEMVAR _HMG_SYSDATA, nFhandle, lDoLog
 
@@ -34,16 +34,16 @@ If valtype( _HMG_SYSDATA[ 150 ] ) == 'U'
                         'Helvetica',;           //  8.PDF default font
                         12,;                    //  9.PDF default fontsize
                         "StandardEncoding",;    // 10.PDF default encoding
-                        {},;                    // 11.PDF Outlines Array                           
+                        {},;                    // 11.PDF Outlines Array
                         {},;                    // 12.PDF Pages Array
-                        0;                      // 13.PDF Current Page Number 
+                        0;                      // 13.PDF Current Page Number
                         }
    _HMG_SYSDATA[ 150 ][ 1 ] := HPDF_New()
    If _HMG_SYSDATA[ 150 ][ 1 ] == Nil
       _HMG_HPDF_Error( 2 )
       Return lReturn
    endif
-   
+
    If lLog
       nFhandle := FCreate( 'UsedFonts.htm', 0 )
 	  Html_Table_Ini(nFHandle,"TruType Fonts used",1024,3)
@@ -55,7 +55,7 @@ If valtype( _HMG_SYSDATA[ 150 ] ) == 'U'
 						 	     {HTML_BOLD(nFHandle,"Properties"),"#ABABAB",.f.},;
 						 	     {HTML_BOLD(nFHandle,"Reassigned Font Name"),"#ABABAB",.f.}} )
    Endif
-   
+
    _HMG_SYSDATA[ 150 ][ 3 ] := nPaperSize
    If nPaperSize == 256 // user size
       If _HMG_SYSDATA[ 150 ][ 6 ] == 1 // orientation portrait
@@ -64,15 +64,15 @@ If valtype( _HMG_SYSDATA[ 150 ] ) == 'U'
       else // orientation landscape
          _HMG_SYSDATA[ 150 ][ 4 ] := _HMG_HPDF_MM2Pixel( nPaperLength )
          _HMG_SYSDATA[ 150 ][ 5 ] := _HMG_HPDF_MM2Pixel( nPaperWidth )
-      endIf         
+      endIf
    else
       _HMG_HPDF_INIT_PAPERSIZE( nPaperSize )
-   endIf   
+   endIf
    lReturn := .t.
 else
    _HMG_HPDF_Error( 1 )
    Return lReturn
-endIf   
+endIf
 Return lReturn
 
 Function _hmg_hpdf_setencoding( cEncoding )
@@ -80,7 +80,7 @@ If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
    _HMG_HPDF_Error( 3 )
    Return Nil
 endif
-HPDF_SetCurrentEncoder( _HMG_SYSDATA[ 150 ][ 1 ], cEncoding ) 
+HPDF_SetCurrentEncoder( _HMG_SYSDATA[ 150 ][ 1 ], cEncoding )
 _HMG_SYSDATA[ 150 ] [ 10 ] := cEncoding
 Return Nil
 
@@ -91,7 +91,7 @@ Function _hmg_hpdf_startpage()
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
    _HMG_HPDF_Error( 3 )
    Return Nil
-endIf   
+endIf
 If _HMG_SYSDATA[ 150 ][ 7 ] == Nil // Page is free
    _HMG_SYSDATA[ 150 ][ 7 ] := HPDF_AddPage( _HMG_SYSDATA[ 150 ][ 1 ] )
    If EMPTY( _HMG_SYSDATA[ 150, 7 ] )
@@ -107,7 +107,7 @@ If _HMG_SYSDATA[ 150 ][ 7 ] == Nil // Page is free
    endif
 else
    _HMG_HPDF_Error( 4 )
-endIf   
+endIf
 Return Nil
 
 Function _HMG_HPDF_InsertPage( nPage )
@@ -117,12 +117,12 @@ Local aPages := aclone( _HMG_SYSDATA[ 150 ][ 12 ] )
 If nPage > HMG_LEN( aPages ) .or. nPage < 1
    _HMG_HPDF_Error( 16 )
    Return Nil
-endIf   
+endIf
 oOldPage := aPages[ nPage ]
 If empty( oOldPage )
    _HMG_HPDF_Error( 16 )
    Return Nil
-endIf   
+endIf
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
    _HMG_HPDF_Error( 3 )
    Return Nil
@@ -138,13 +138,13 @@ If _HMG_SYSDATA[ 150 ][ 7 ] == Nil // Page is free
       ains( aPages, nPage )
       aPages[ nPage ] := _HMG_SYSDATA[ 150, 7 ]
       _HMG_SYSDATA[ 150 ][ 12 ] := aclone( aPages )
-      _HMG_SYSDATA[ 150 ][ 13 ] := nPage     
+      _HMG_SYSDATA[ 150 ][ 13 ] := nPage
       HPDF_Page_SetWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_SYSDATA[ 150 ][ 4 ] )
       HPDF_Page_SetHeight( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_SYSDATA[ 150 ][ 5 ] )
    endif
 else
    _HMG_HPDF_Error( 4 )
-endIf   
+endIf
 Return Nil
 
 Function _HMG_HPDF_GoToPage( nPage )
@@ -154,7 +154,7 @@ Local aPages := aclone( _HMG_SYSDATA[ 150 ][ 12 ] )
 If nPage > HMG_LEN( aPages ) .or. nPage < 1
    _HMG_HPDF_Error( 18 )
    Return Nil
-endIf   
+endIf
 oPage := aPages[ nPage ]
 If empty( oPage )
    _HMG_HPDF_Error( 18 )
@@ -171,19 +171,19 @@ If _HMG_SYSDATA[ 150 ][ 7 ] == Nil // Page is free
       Return Nil
    ENDIF
    _HMG_SYSDATA[ 150 ][ 13 ] := nPage
-endIf   
+endIf
 Return Nil
 
 Function _hmg_hpdf_endpage()
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
    _HMG_HPDF_Error( 3 )
    Return Nil
-endIf   
+endIf
 If _HMG_SYSDATA[ 150 ][ 7 ] == Nil // Page is free
    _HMG_HPDF_Error( 5 )
    Return Nil
 else
-   _HMG_SYSDATA[ 150 ][ 7 ] := Nil         
+   _HMG_SYSDATA[ 150 ][ 7 ] := Nil
 endif
 Return Nil
 
@@ -191,14 +191,14 @@ Function HMG_HPDF_PageCount()
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
    _HMG_HPDF_Error( 3 )
    Return Nil
-endIf   
+endIf
 Return HMG_LEN( _HMG_SYSDATA[ 150 ][ 12 ] )
 
 Function HMG_HPDF_PageNo()
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
    _HMG_HPDF_Error( 3 )
    Return Nil
-endIf   
+endIf
 If _HMG_SYSDATA[ 150 ][ 7 ] == Nil // Page is free
    _HMG_HPDF_Error( 5 )
    Return Nil
@@ -234,13 +234,13 @@ _HMG_SYSDATA[ 150 ][ 1 ] := Nil
 Return Nil
 
 Function _HMG_HPDF_PRINT ( nRow, nCol, cFontName, nFontSize, nRColor, nGColor, nBColor, cText, lBold, lItalic, lUnderline, lStrikeout, lColor, lFont, lSize, cAlign )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+Local nTextWidth
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
 Local oFont := Nil
-Local cFont := ''
+Local cFont
 Local cTtfFnt
 default cFontName := ''
 default nFontSize := 12
@@ -272,7 +272,7 @@ If lColor
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], nRColor/255, nGColor/255, nBColor/255 )
 else
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 
 // set font
 If HMG_LEN( AllTrim( cFontName ) ) == 0
@@ -280,9 +280,9 @@ If HMG_LEN( AllTrim( cFontName ) ) == 0
    oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, _HMG_SYSDATA[ 150 ][ 10 ] )
 else
    cFontName := AllTrim(_HMG_HPDF_SetFont( cFontName, lBold, lItalic ))
-   
+
    if HMG_UPPER (cFileExt (cFontName)) == '.TTF' // load ttf font
-   
+
       cFont := HPDF_LOADTTFONTFROMFILE( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, .t. )
       If HMG_LEN( alltrim( cFont ) ) == 0
          _HMG_HPDF_Error( 6 , cFontName )
@@ -292,11 +292,11 @@ else
    else
       If HMG_UPPER( alltrim( cFontName ) ) == "SYMBOL" .or. HMG_UPPER( alltrim( cFontName ) ) == "ZAPFDINGBATS"
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, Nil )
-      else   
+      else
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, _HMG_SYSDATA[ 150 ][ 10 ] )
-      endIf   
+      endIf
    endif
-endIf   
+endIf
 If oFont == Nil
    _HMG_HPDF_Error( 6 , cFontName )
    Return Nil
@@ -313,7 +313,7 @@ Else
    HPDF_Page_BeginText( _HMG_SYSDATA[ 150 ][ 7 ] )
    HPDF_PAGE_TEXTOUT( _HMG_SYSDATA[ 150 ][ 7 ], nxPos, nyPos, cText )
    HPDF_Page_EndText( _HMG_SYSDATA[ 150 ][ 7 ] )
-   
+
    If lDoLog
 	  HTML_TABLE_LINE(nFHandle,{{StrZero(nRow,4,0)+" ("+StrZero(nyPos,7,2)+")","#FFFFFF",.t.},;
 	                            {StrZero(nCol,4,0)+" ("+StrZero(nxPos,7,2)+")","#FFFFFF",.t.},;
@@ -328,15 +328,15 @@ Return Nil
 
 
 Function _HMG_HPDF_MULTILINE_PRINT ( nRow, nCol, nToRow, nToCol, cFontName, nFontSize, nRColor, nGColor, nBColor, cText, lBold, lItalic, lUnderline, lStrikeout, lColor, lFont, lSize, cAlign )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
 Local nToxPos := nxPos + _HMG_HPDF_MM2Pixel( nToCol - nCol )
 Local nToyPos := nyPos - _HMG_HPDF_MM2Pixel( nToRow - nRow )
 Local oFont := Nil
-Local cFont := ''
+Local cFont
 Local cTtfFnt // Pablo June, 2014
 
 default cFontName := ''
@@ -369,7 +369,7 @@ If lColor
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], nRColor/255, nGColor/255, nBColor/255 )
 else
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 
 // set font
 If HMG_LEN( alltrim( cFontName ) ) == 0
@@ -378,9 +378,9 @@ If HMG_LEN( alltrim( cFontName ) ) == 0
 else
    // cFontName := alltrim( cFontName )
    cFontName := AllTrim(_HMG_HPDF_SetFont( cFontName, lBold, lItalic ))
-   
+
    if HMG_UPPER (cFileExt (cFontName)) == '.TTF' // load ttf font
-   
+
       cFont := HPDF_LOADTTFONTFROMFILE( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, .t. )
       If HMG_LEN( alltrim( cFont ) ) == 0
          _HMG_HPDF_Error( 6 , cFontName )
@@ -390,11 +390,11 @@ else
    else
       If HMG_UPPER( alltrim( cFontName ) ) == "SYMBOL" .or. HMG_UPPER( alltrim( cFontName ) ) == "ZAPFDINGBATS"
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, Nil )
-      else   
+      else
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, _HMG_SYSDATA[ 150 ][ 10 ] )
-      endIf   
+      endIf
    endif
-endIf   
+endIf
 If oFont == Nil
    _HMG_HPDF_Error( 6 , cFontName )
    Return Nil
@@ -408,11 +408,11 @@ else
          HPDF_Page_TextRect( _HMG_SYSDATA[ 150 ][ 7 ], nxPos, nyPos, nToxPos, nToyPos, cText, HPDF_TALIGN_RIGHT, Nil )
       case HMG_UPPER( cAlign ) == 'JUSTIFY'
          HPDF_Page_TextRect( _HMG_SYSDATA[ 150 ][ 7 ], nxPos, nyPos, nToxPos, nToyPos, cText, HPDF_TALIGN_JUSTIFY, Nil )
-      otherwise         
+      otherwise
          HPDF_Page_TextRect( _HMG_SYSDATA[ 150 ][ 7 ], nxPos, nyPos, nToxPos, nToyPos, cText, HPDF_TALIGN_LEFT, Nil )
-   endcase         
+   endcase
    HPDF_Page_EndText( _HMG_SYSDATA[ 150 ][ 7 ] )
-   
+
    If lDoLog // Pablo June, 2014
      HTML_TABLE_LINE(nFHandle,{{StrZero(nRow,4,0)+" ("+StrZero(nyPos,7,2)+")","#FFFFFF",.t.},;
                                {StrZero(nCol,4,0)+" ("+StrZero(nxPos,7,2)+")","#FFFFFF",.t.},;
@@ -426,10 +426,10 @@ endif
 Return Nil
 
 
-Function _HMG_HPDF_LINE ( nRow , nCol , nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor ) 
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+Function _HMG_HPDF_LINE ( nRow , nCol , nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor )
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
 Local nToxPos := nxPos + _HMG_HPDF_MM2Pixel( nToCol - nCol )
@@ -437,7 +437,7 @@ Local nToyPos := nyPos - _HMG_HPDF_MM2Pixel( nToRow - nRow )
 default nRColor := 0
 default nGColor := 0
 default nBColor := 0
-default nWidth := 1
+
 default lWidth := .f.
 default lColor := .f.
 
@@ -455,7 +455,7 @@ If lColor
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], nRColor/255, nGColor/255, nBColor/255 )
 else
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 
 If lWidth
    HPDF_Page_SetLineWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_HPDF_MM2Pixel( nlineWidth ) )
@@ -467,18 +467,18 @@ HPDF_Page_LineTo( _HMG_SYSDATA[ 150 ][ 7 ], nToxPos, nToyPos )
 HPDF_Page_Stroke( _HMG_SYSDATA[ 150 ][ 7 ] )
 Return Nil
 
-Function _HMG_HPDF_RECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled ) 
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+Function _HMG_HPDF_RECTANGLE ( nRow, nCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled )
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
-Local nToxPos := nxPos + _HMG_HPDF_MM2Pixel( nToCol - nCol )
-Local nToyPos := nyPos - _HMG_HPDF_MM2Pixel( nToRow - nRow )
+
+
 default nRColor := 0
 default nGColor := 0
 default nBColor := 0
-default nWidth := 1
+
 default lWidth := .f.
 default lColor := .f.
 default lFilled := .f.
@@ -500,7 +500,7 @@ If lColor
    endif
 else
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 
 If lWidth
    HPDF_Page_SetLineWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_HPDF_MM2Pixel( nlineWidth ) )
@@ -512,13 +512,13 @@ If lFilled
    HPDF_Page_FillStroke( _HMG_SYSDATA[ 150 ][ 7 ] )
 else
    HPDF_Page_Stroke( _HMG_SYSDATA[ 150 ][ 7 ] )
-endIf   
+endIf
 Return Nil
 
-Function _HMG_HPDF_ROUNDRECTANGLE ( nRow , nCol , nToRow , nToCol , nLineWidth, nRColor , nGColor , nBColor , lWidth , lColor, lFilled, nRoundness ) 
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+Function _HMG_HPDF_ROUNDRECTANGLE ( nRow , nCol , nToRow , nToCol , nLineWidth, nRColor , nGColor , nBColor , lWidth , lColor, lFilled, nRoundness )
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
 Local nToxPos := nxPos + _HMG_HPDF_MM2Pixel( nToCol - nCol )
@@ -528,7 +528,7 @@ Local nRectHeight := nToRow - nRow
 default nRColor := 0
 default nGColor := 0
 default nBColor := 0
-default nWidth := 1
+
 default lWidth := .f.
 default lColor := .f.
 default lFilled := .f.
@@ -549,7 +549,7 @@ If lColor
    endif
 else
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 // set line Width
 If lWidth
    HPDF_Page_SetLineWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_HPDF_MM2Pixel( nlineWidth ) )
@@ -578,20 +578,20 @@ HPDF_Page_CurveTo2( _HMG_SYSDATA[ 150 ][ 7 ], nxPos, nToyPos, nxPos, nToyPos + n
 HPDF_Page_LineTo( _HMG_SYSDATA[ 150 ][ 7 ], nxPos, nyPos - nRoundness ) // draw left line
 HPDF_Page_CurveTo2( _HMG_SYSDATA[ 150 ][ 7 ], nxPos, nyPos, nxPos + nRoundness, nyPos ) // draw top left curve
 
-// now start and finish drawing along the path   
+// now start and finish drawing along the path
 If lFilled
    HPDF_Page_FillStroke( _HMG_SYSDATA[ 150 ][ 7 ] )
 else
    HPDF_Page_Stroke( _HMG_SYSDATA[ 150 ][ 7 ] )
-endIf   
+endIf
 Return Nil
 
 Function _HMG_HPDF_CIRCLE( nRow, nCol, nR, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
-default nWidth := 1
+
 default lWidth := .f.
 default lColor := .f.
 default lFilled := .f.
@@ -612,7 +612,7 @@ If lColor
    endif
 else
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 // set line Width
 If lWidth
    HPDF_Page_SetLineWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_HPDF_MM2Pixel( nlineWidth ) )
@@ -624,15 +624,15 @@ If lFilled
    HPDF_Page_FillStroke( _HMG_SYSDATA[ 150 ][ 7 ] )
 else
    HPDF_Page_Stroke( _HMG_SYSDATA[ 150 ][ 7 ] )
-endIf   
-Return Nil   
+endIf
+Return Nil
 
 Function _HMG_HPDF_ELLIPSE( nRow, nCol, nHR, nVR, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor, lFilled )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
-default nWidth := 1
+
 default lWidth := .f.
 default lColor := .f.
 default lFilled := .f.
@@ -653,7 +653,7 @@ If lColor
    endif
 else
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 // set line Width
 If lWidth
    HPDF_Page_SetLineWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_HPDF_MM2Pixel( nlineWidth ) )
@@ -665,16 +665,16 @@ If lFilled
    HPDF_Page_FillStroke( _HMG_SYSDATA[ 150 ][ 7 ] )
 else
    HPDF_Page_Stroke( _HMG_SYSDATA[ 150 ][ 7 ] )
-endIf   
-Return Nil   
+endIf
+Return Nil
 
 
 Function _HMG_HPDF_ARC( nRow, nCol, nR, nFromAngle, nToAngle, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
-default nWidth := 1
+
 default lWidth := .f.
 default lColor := .f.
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
@@ -691,7 +691,7 @@ If lColor
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], nRColor/255, nGColor/255, nBColor/255 )
 else
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 // set line Width
 If lWidth
    HPDF_Page_SetLineWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_HPDF_MM2Pixel( nlineWidth ) )
@@ -700,12 +700,12 @@ else
 endif
 HPDF_Page_Arc( _HMG_SYSDATA[ 150 ][ 7 ], nxPos , nyPos, _HMG_HPDF_MM2Pixel( nR ), nFromAngle, nToAngle )
 HPDF_Page_Stroke( _HMG_SYSDATA[ 150 ][ 7 ] )
-Return Nil   
-   
-Function _HMG_HPDF_CURVE ( nRow , nCol , nFromRow, nFromCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor ) 
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+Return Nil
+
+Function _HMG_HPDF_CURVE ( nRow , nCol , nFromRow, nFromCol, nToRow, nToCol, nLineWidth, nRColor, nGColor, nBColor, lWidth, lColor )
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
 Local nToxPos := nxPos + _HMG_HPDF_MM2Pixel( nToCol - nCol )
@@ -715,7 +715,7 @@ Local nFromyPos := nHeight - _HMG_HPDF_MM2Pixel( nFromRow )
 default nRColor := 0
 default nGColor := 0
 default nBColor := 0
-default nWidth := 1
+
 default lWidth := .f.
 default lColor := .f.
 
@@ -733,7 +733,7 @@ If lColor
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], nRColor/255, nGColor/255, nBColor/255 )
 else
    HPDF_Page_SetRGBSTROKE( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 
 If lWidth
    HPDF_Page_SetLineWidth( _HMG_SYSDATA[ 150 ][ 7 ], _HMG_HPDF_MM2Pixel( nlineWidth ) )
@@ -746,7 +746,7 @@ HPDF_Page_Stroke( _HMG_SYSDATA[ 150 ][ 7 ] )
 Return Nil
 
 Function _HMG_HPDF_IMAGE ( cImage, nRow, nCol, nImageheight, nImageWidth, lStretch , cImageType)
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
@@ -770,20 +770,20 @@ do case
       oImage := _HPDF_LOAD_JPG (_HMG_SYSDATA[ 150 ][ 1 ], cImage)
    otherwise
        _HMG_HPDF_Error( 20 )
-endcase    
+endcase
 
-If oImage = Nil  
+If oImage = Nil
    _HMG_HPDF_Error( 7 )
    Return Nil
-endIf   
+endIf
 
-If empty( oImage ) 
+If empty( oImage )
    _HMG_HPDF_Error( 7 )
    Return Nil
-endIf   
+endIf
 HPDF_Page_DrawImage( _HMG_SYSDATA[ 150 ][ 7 ], oImage, nxPos, nyPos - _HMG_HPDF_MM2Pixel( nImageHeight ), _HMG_HPDF_MM2Pixel( nImageWidth ), _HMG_HPDF_MM2Pixel( nImageHeight ) )
 Return Nil
-   
+
 Function _HMG_HPDF_SetPassword( cOwnerPass, cUserPass )
 default cUserPass := ''
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
@@ -811,9 +811,9 @@ do case
       HPDF_SetCompressionMode( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_COMP_METADATA )
    case cMode == 'ALL'
       HPDF_SetCompressionMode( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_COMP_ALL )
-   otherwise      
+   otherwise
       HPDF_SetCompressionMode( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_COMP_NONE )
-endcase      
+endcase
 Return Nil
 
 Function _HMG_HPDF_SetPermission( cMode )
@@ -825,16 +825,16 @@ endif
 cMode := HMG_UPPER( cMode )
 do case
    case cMode == 'READ'
-      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_READ )  
+      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_READ )
    case cMode == 'PRINT'
-      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_PRINT )  
+      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_PRINT )
    case cMode == 'COPY'
-      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_COPY )  
+      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_COPY )
    case cMode == 'EDIT'
-      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_EDIT )  
+      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_EDIT )
    case cMode == 'EDIT_ALL'
-      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_EDIT_ALL )  
-endcase      
+      HPDF_SetPermission( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_ENABLE_EDIT_ALL )
+endcase
 Return Nil
 
 Function _HMG_HPDF_SetPageMode( cMode )
@@ -855,11 +855,11 @@ do case
       HPDF_SetPageMode( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_PAGE_MODE_FULL_SCREEN )
    case cMode == 'EOF'
       HPDF_SetPageMode( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_PAGE_MODE_EOF )
-endcase      
+endcase
 Return Nil
 
 Function _HMG_HPDF_RootOutline( cTitle, cName, cParent )
-Local aOutlines := {}
+Local aOutlines
 Local oOutline := Nil
 Local i
 default cParent := ''
@@ -901,7 +901,7 @@ endif
 Return Nil
 
 Function _HMG_HPDF_PageOutline( cTitle, cParent, cName )
-Local aOutlines := {}
+Local aOutlines
 Local oOutline := Nil
 Local oDestination := Nil
 Local i
@@ -941,12 +941,12 @@ else
 endif
 If HMG_LEN( alltrim( cName ) ) > 0
    aadd( _HMG_SYSDATA[ 150 ][ 11 ], { oOutline, cName } )
-endIf      
+endIf
 HPDF_Outline_SetDestination( oOutline, oDestination )
-Return Nil      
+Return Nil
 
 Function _HMG_HPDF_SetTextAnnot( nRow, nCol, cToolTip, cIcon )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
 Local nToRow := nRow + 5
 Local nToCol := nCol + 5
@@ -984,22 +984,22 @@ do case
       HPDF_TextAnnot_SetIcon ( oAnnot, HPDF_ANNOT_ICON_PARAGRAPH )
    case HMG_UPPER( alltrim( cIcon ) ) == "INSERT"
       HPDF_TextAnnot_SetIcon ( oAnnot, HPDF_ANNOT_ICON_INSERT )
-endcase   
+endcase
 Return Nil
 
 Function _HMG_HPDF_SetPageLink( nRow, nCol, cText, nPage, cFontName, nFontSize, nRColor, nGColor, nBColor, cAlign, lColor, lFont, lSize, lBorder, lWidth, nBorderWidth )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+Local nTextWidth
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
 Local oFont := Nil
-Local cFont := ''
-Local aRect := { }
-Local aCurXY := {}
+Local cFont
+Local aRect
+
 Local oAnnot := Nil
 Local oDest := Nil
-Local aPages := {}
+Local aPages
 Local oLinkPage := Nil
 default cFontName := ''
 default nFontSize := 12
@@ -1028,7 +1028,7 @@ If nPage > HMG_LEN( aPages ) .or. nPage < 1
    _HMG_HPDF_Error( 17 )
    Return Nil
 endif
-   
+
 oLinkPage := aPages[ nPage ]
 If empty( oLinkPage )
    _HMG_HPDF_Error( 17 )
@@ -1045,7 +1045,7 @@ If lColor
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], nRColor/255, nGColor/255, nBColor/255 )
 else
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 
 // set font
 If HMG_LEN( alltrim( cFontName ) ) == 0
@@ -1054,9 +1054,9 @@ If HMG_LEN( alltrim( cFontName ) ) == 0
 else
    // cFontName := alltrim( cFontName )
    cFontName := AllTrim(_HMG_HPDF_SetFont( cFontName ))
-   
+
    if HMG_UPPER (cFileExt (cFontName)) == '.TTF' // load ttf font
-   
+
       cFont := HPDF_LOADTTFONTFROMFILE( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, .t. )
       If HMG_LEN( alltrim( cFont ) ) == 0
          _HMG_HPDF_Error( 6 , cFontName )
@@ -1066,11 +1066,11 @@ else
    else
       If HMG_UPPER( alltrim( cFontName ) ) == "SYMBOL" .or. HMG_UPPER( alltrim( cFontName ) ) == "ZAPFDINGBATS"
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, Nil )
-      else   
+      else
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, _HMG_SYSDATA[ 150 ][ 10 ] )
-      endIf   
+      endIf
    endif
-endIf   
+endIf
 If oFont == Nil
    _HMG_HPDF_Error( 6 , cFontName )
    Return Nil
@@ -1096,22 +1096,22 @@ else
       HPDF_LinkAnnot_SetBorderStyle ( oAnnot, nBorderWidth, 0, 0)
    else
       HPDF_LinkAnnot_SetBorderStyle ( oAnnot, 0, 0, 0)
-   endIf      
+   endIf
    HPDF_Page_EndText( _HMG_SYSDATA[ 150 ][ 7 ] )
 endif
-Return Nil   
+Return Nil
 
 
 Function _HMG_HPDF_SetURLLink( nRow, nCol, cText, cLink, cFontName, nFontSize, nRColor, nGColor, nBColor, cAlign, lColor, lFont, lSize, lBold, lItalic  )
-Local nWidth := _HMG_SYSDATA[ 150 ][ 4 ]
+
 Local nHeight := _HMG_SYSDATA[ 150 ][ 5 ]
-Local nTextWidth := 0
+Local nTextWidth
 Local nxPos := _HMG_HPDF_MM2Pixel( nCol )
 Local nyPos := nHeight - _HMG_HPDF_MM2Pixel( nRow )
 Local oFont := Nil
-Local cFont := ''
-Local aRect := { }
-Local aCurXY := {}
+Local cFont
+Local aRect
+
 Local oAnnot := Nil
 default cFontName := ''
 default nFontSize := 12
@@ -1140,7 +1140,7 @@ If lColor
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], nRColor/255, nGColor/255, nBColor/255 )
 else
    HPDF_Page_SetRGBFill( _HMG_SYSDATA[ 150 ][ 7 ], 0.0, 0.0, 0.0 )
-endIf   
+endIf
 
 // set font
 If HMG_LEN( alltrim( cFontName ) ) == 0
@@ -1149,9 +1149,9 @@ If HMG_LEN( alltrim( cFontName ) ) == 0
 else
    // cFontName := alltrim( cFontName )
    cFontName := AllTrim(_HMG_HPDF_SetFont( cFontName, lBold, lItalic ))
-   
+
    if HMG_UPPER (cFileExt (cFontName)) == '.TTF' // load ttf font
-   
+
       cFont := HPDF_LOADTTFONTFROMFILE( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, .t. )
       If HMG_LEN( alltrim( cFont ) ) == 0
          _HMG_HPDF_Error( 6 , cFontName )
@@ -1161,11 +1161,11 @@ else
    else
       If HMG_UPPER( alltrim( cFontName ) ) == "SYMBOL" .or. HMG_UPPER( alltrim( cFontName ) ) == "ZAPFDINGBATS"
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, Nil )
-      else   
+      else
          oFont := HPDF_GetFont( _HMG_SYSDATA[ 150 ][ 1 ], cFontName, _HMG_SYSDATA[ 150 ][ 10 ] )
-      endIf   
+      endIf
    endif
-endIf   
+endIf
 If oFont == Nil
    _HMG_HPDF_Error( 6 , cFontName )
    Return Nil
@@ -1184,7 +1184,7 @@ else
    HPDF_Page_CreateURILinkAnnot( _HMG_SYSDATA[ 150 ][ 7 ], aRect, cLink )
    HPDF_Page_EndText( _HMG_SYSDATA[ 150 ][ 7 ] )
 endif
-Return Nil   
+Return Nil
 
 Function _HMG_HPDF_SetLineSpacing( nSpacing )
 If _HMG_SYSDATA[ 150 ][ 1 ] == Nil // PDF object not found!
@@ -1214,7 +1214,7 @@ do case
       dValue := xValue
    otherwise
       cValue := xValue
-endcase      
+endcase
 do case
    case HMG_UPPER( alltrim( cAttrib ) ) == "AUTHOR"
       HPDF_SetInfoAttr( _HMG_SYSDATA[ 150 ][ 1 ], HPDF_INFO_AUTHOR, cValue )
@@ -1280,21 +1280,21 @@ endif
 do case
    case HMG_UPPER( alltrim( cStyle ) ) == "DECIMAL"
       HPDF_AddPageLabel( _HMG_SYSDATA[ 150 ][ 1 ], nPage, HPDF_PAGE_NUM_STYLE_DECIMAL, nPage, cPrefix )
-   case HMG_UPPER( alltrim( cStyle ) ) == "ROMAN" 
+   case HMG_UPPER( alltrim( cStyle ) ) == "ROMAN"
       If HMG_UPPER( alltrim( cCase ) ) == "LOWER"
          HPDF_AddPageLabel( _HMG_SYSDATA[ 150 ][ 1 ], nPage, HPDF_PAGE_NUM_STYLE_LOWER_ROMAN, nPage, cPrefix )
       else
          HPDF_AddPageLabel( _HMG_SYSDATA[ 150 ][ 1 ], nPage, HPDF_PAGE_NUM_STYLE_UPPER_ROMAN, nPage, cPrefix )
-      endIf   
-   case HMG_UPPER( alltrim( cStyle ) ) == "LETTERS" 
+      endIf
+   case HMG_UPPER( alltrim( cStyle ) ) == "LETTERS"
       If HMG_UPPER( alltrim( cCase ) ) == "LOWER"
          HPDF_AddPageLabel( _HMG_SYSDATA[ 150 ][ 1 ], nPage, HPDF_PAGE_NUM_STYLE_LOWER_LETTERS, nPage, cPrefix )
       else
          HPDF_AddPageLabel( _HMG_SYSDATA[ 150 ][ 1 ], nPage, HPDF_PAGE_NUM_STYLE_UPPER_LETTERS, nPage, cPrefix )
-      endIf   
-endcase      
+      endIf
+endcase
 Return Nil
-   
+
 Function _HMG_HPDF_Error( nErr, ctxt )
 Local cErr := ''
 
@@ -1346,7 +1346,7 @@ Return Nil
 
 Function _HMG_HPDF_Inch2Pixel( nInches )
 Return ( nInches * 72 )
-   
+
 Function _HMG_HPDF_Pixel2Inch( nPixels )
 Return ( nPixels / 72 )
 
@@ -1355,9 +1355,9 @@ Return ( ( nMM / 25.4 ) * 72 )
 
 Function _HMG_HPDF_Pixel2MM( nPixel )
 Return ( ( nPixel / 72 ) * 25.4 )
-   
+
 Function _HMG_HPDF_INIT_PAPERSIZE( nPaperSize )
-Local nTemp := 0
+Local nTemp
 do case
    case nPaperSize == 1 .or. nPaperSize == -999 // HPDF_PAPER_LETTER or default
       _HMG_SYSDATA[ 150 ][ 4 ] := 612
@@ -1728,7 +1728,7 @@ Return Nil
 *------------------------------------------------------------------------------
 
 Function _HMG_HPDF_SetFont( cFntName, lBold, lItalic )
-Local cFntTmp := "", cFnt := "", cFntNoExt
+Local cFntTmp, cFnt, cFntNoExt
 
 Default lBold := .f., lItalic := .f.
 
@@ -1742,7 +1742,7 @@ If HMG_Len( AllTrim( cFntName ) ) == 0
       cFnt += '-Oblique'
    Endif
    Return cFnt
-EndIf   
+EndIf
 
 if HMG_UPPER (cFileExt (cFntName)) == '.TTF' // load ttf font
    cFnt := _HMG_HPDF_ExistInLocal(cFntName)
@@ -1797,7 +1797,7 @@ If (nPos := AScan(aHpdf_Font, {|cFnt| HMG_Upper(cFnt) == HMG_Upper(cFontName)}))
           cFntHaru := "Symbol"
       Case "ZAPFDINGBATS" $ HMG_Upper( cFont )
            cFntHaru := "ZapfDingbats"
-      Case HMG_Upper(HB_USubStr(cFont,1,5)) == 'TIMES' 
+      Case HMG_Upper(HB_USubStr(cFont,1,5)) == 'TIMES'
            cFnt := "Times"
            If lBold .and. lItalic
               cFntHaru := cFnt + '-BoldItalic'
@@ -1877,7 +1877,7 @@ Endif
 Return cFntTmp
 
 Function _HMG_HPDF_SeekInLocalOptions(FontName,lBold,lItalic)
-Local aDirFnts := {}, cRet:=""
+Local aDirFnts, cRet:=""
 Local cFldWindows, cFileTTF
 
 Default lBold := .f., lItalic := .f.
@@ -1930,7 +1930,7 @@ cStyle := '<html><head>'+CRLF+;
           '</head>'+CRLF+;
           '<body>'+CRLF+;
 		  '<table style='+Chr(34)+'width:'+StrZero(nWidth,4,0)+'px'+Chr(34)+' cellpadding='+Chr(34)+Str(nPading,1,0)+Chr(34)+'>'
-cTit := alltrim( cTit )        
+cTit := alltrim( cTit )
 FWriteLine( nFHandle,cStyle)
 Return Nil
 
@@ -2055,7 +2055,7 @@ HGLOBAL _bt_HPDF_LoadFileFromDisk (TCHAR * FileName)
 typedef void*         HPDF_HANDLE;
 typedef HPDF_HANDLE   HPDF_Image;   // void* ptr
 typedef HPDF_HANDLE   HPDF_Doc;     // void* ptr
-HPDF_LoadPngImageFromFile () ---> return image = void* ptr 
+HPDF_LoadPngImageFromFile () ---> return image = void* ptr
 HPDF_LoadPngImageFromMem  () ---> return image = void* ptr
 */
 
@@ -2083,8 +2083,8 @@ HB_FUNC (_HPDF_LOAD_PNG)
     {    hb_ret();  // return Nil
          return;
     }
- 
-    nSizeGlobalAlloc = (UINT) GlobalSize(hGlobalAlloc); 
+
+    nSizeGlobalAlloc = (UINT) GlobalSize(hGlobalAlloc);
     lpGlobalAlloc = GlobalLock (hGlobalAlloc);
         image = HPDF_LoadPngImageFromMem  (hpdf_Doc, (BYTE*)lpGlobalAlloc, nSizeGlobalAlloc);
     GlobalUnlock (hGlobalAlloc);
@@ -2125,8 +2125,8 @@ HB_FUNC (_HPDF_LOAD_JPG)
     {    hb_ret();  // return Nil
          return;
     }
- 
-    nSizeGlobalAlloc = (UINT) GlobalSize(hGlobalAlloc); 
+
+    nSizeGlobalAlloc = (UINT) GlobalSize(hGlobalAlloc);
     lpGlobalAlloc = GlobalLock (hGlobalAlloc);
         image = HPDF_LoadJpegImageFromMem (hpdf_Doc, (BYTE*)lpGlobalAlloc, nSizeGlobalAlloc);
     GlobalUnlock (hGlobalAlloc);

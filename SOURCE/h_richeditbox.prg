@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -86,11 +86,11 @@ Function _DefineRichEditBox ( ControlName, ;
 				underline, ;
 				strikeout , ;
 				field, ;
-				backcolor, ; 
+				backcolor, ;
             noHscroll, noVscroll, selectionchange, OnLink, OnVScroll )
 
 *-----------------------------------------------------------------------------*
-Local i  , cParentForm , mVar , ContainerHandle := 0 , k := 0
+Local i  , cParentForm , mVar , ContainerHandle := 0 , k
 Local ControlHandle
 Local FontHandle
 Local WorkArea
@@ -105,11 +105,11 @@ DEFAULT noVscroll    TO .F.
 DEFAULT MaxLength    TO -1  // 64000
 
 IF MaxLength == 0
-   MaxLength := -1   // for compatibility with TextBox and EditBox 
+   MaxLength := -1   // for compatibility with TextBox and EditBox
 ENDIF
 
 	If ValType ( Field ) != 'U'
-		if  HB_UAT ( '>', Field ) == 0 
+		if  HB_UAT ( '>', Field ) == 0
 			MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated")
 		Else
 			WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
@@ -150,7 +150,7 @@ ENDIF
 
 	ParentForm = GetFormHandle (ParentForm)
 
-	if valtype(x) == "U" .or. valtype(y) == "U"
+	if ValType(x) == "U" .or. ValType(y) == "U"
 
 		If _HMG_SYSDATA [ 216 ] == 'TOOLBAR'
 			Break := .T.
@@ -163,7 +163,7 @@ ENDIF
 		if i > 0
 
 			ControlHandle := InitRichEditBox ( _HMG_SYSDATA [ 87 ] [i] , 0, x, y, w, h, '', 0 , MaxLength , readonly, invisible, notabstop, noHscroll, noVscroll )
-			if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+			if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 				FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 			Else
 				FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -181,7 +181,7 @@ ENDIF
 	Else
 
 		ControlHandle := InitRichEditBox ( ParentForm, 0, x, y, w, h, '', 0 , MaxLength , readonly, invisible, notabstop,  noHscroll, noVscroll)
-		if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+		if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 			FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 		Else
 			FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -197,56 +197,56 @@ ENDIF
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	If valtype(tooltip) != "U"
+	If ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
-   
+
    RichEditBox_SetRTFTextMode   ( ControlHandle , .T. )   // ADD
    RichEditBox_SetAutoURLDetect ( ControlHandle , .T. )   // ADD
-   
+
 	k := _GetControlFree()
 
 	Public &mVar. := k
 
-	_HMG_SYSDATA [1] [k] := "RICHEDIT" 
-	_HMG_SYSDATA [2] [k] :=  ControlName 
-	_HMG_SYSDATA [3] [k] :=  ControlHandle 
-	_HMG_SYSDATA [4] [k] :=  ParentForm 
-	_HMG_SYSDATA [  5 ]  [k] :=  0 
-	_HMG_SYSDATA [  6 ]  [k] :=  "" 
-	_HMG_SYSDATA [  7 ]  [k] :=  Field 
+	_HMG_SYSDATA [1] [k] := "RICHEDIT"
+	_HMG_SYSDATA [2] [k] :=  ControlName
+	_HMG_SYSDATA [3] [k] :=  ControlHandle
+	_HMG_SYSDATA [4] [k] :=  ParentForm
+	_HMG_SYSDATA [  5 ]  [k] :=  0
+	_HMG_SYSDATA [  6 ]  [k] :=  ""
+	_HMG_SYSDATA [  7 ]  [k] :=  Field
 	_HMG_SYSDATA [  8 ]  [k] :=  NIL
 	_HMG_SYSDATA [  9 ]  [k] :=  ""
-	_HMG_SYSDATA [ 10 ]  [k] :=  lostfocus 
-	_HMG_SYSDATA [ 11 ]  [k] :=  gotfocus 
-	_HMG_SYSDATA [ 12 ] [k] :=   change 
-	_HMG_SYSDATA [ 13 ]  [k] :=  .F. 
-	_HMG_SYSDATA [ 14 ]  [k] :=  backcolor 
+	_HMG_SYSDATA [ 10 ]  [k] :=  lostfocus
+	_HMG_SYSDATA [ 11 ]  [k] :=  gotfocus
+	_HMG_SYSDATA [ 12 ] [k] :=   change
+	_HMG_SYSDATA [ 13 ]  [k] :=  .F.
+	_HMG_SYSDATA [ 14 ]  [k] :=  backcolor
 	_HMG_SYSDATA [ 15 ]  [k] :=  Nil
-	_HMG_SYSDATA [ 16 ]  [k] :=  "" 
-	_HMG_SYSDATA [ 17 ]   [k] := {} 
-	_HMG_SYSDATA [ 18 ]  [k] :=  y 
-	_HMG_SYSDATA [ 19 ]  [k] :=  x 
-	_HMG_SYSDATA [ 20 ]   [k] := w 
-	_HMG_SYSDATA [ 21 ]   [k] := h 
+	_HMG_SYSDATA [ 16 ]  [k] :=  ""
+	_HMG_SYSDATA [ 17 ]   [k] := {}
+	_HMG_SYSDATA [ 18 ]  [k] :=  y
+	_HMG_SYSDATA [ 19 ]  [k] :=  x
+	_HMG_SYSDATA [ 20 ]   [k] := w
+	_HMG_SYSDATA [ 21 ]   [k] := h
 	_HMG_SYSDATA [ 22 ]   [k] := selectionchange
-	_HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 25 ]  [k] :=  "" 
-	_HMG_SYSDATA [ 26 ] [k] :=   ContainerHandle 
-	_HMG_SYSDATA [ 27 ]  [k] :=  fontname 
-	_HMG_SYSDATA [ 28 ]  [k] :=  fontsize 
-	_HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout} 
-	_HMG_SYSDATA [ 30 ]   [k] :=  tooltip  
+	_HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 25 ]  [k] :=  ""
+	_HMG_SYSDATA [ 26 ] [k] :=   ContainerHandle
+	_HMG_SYSDATA [ 27 ]  [k] :=  fontname
+	_HMG_SYSDATA [ 28 ]  [k] :=  fontsize
+	_HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout}
+	_HMG_SYSDATA [ 30 ]   [k] :=  tooltip
 	_HMG_SYSDATA [ 31 ]  [k] :=  OnLink
 	_HMG_SYSDATA [ 32 ]  [k] :=  OnVScroll
-	_HMG_SYSDATA [ 33 ]   [k] :=  ''  
-	_HMG_SYSDATA [ 34 ]  [k] :=   if(invisible,.f.,.t.) 
-	_HMG_SYSDATA [ 35 ]  [k] :=   HelpId 
-	_HMG_SYSDATA [ 36 ]  [k] :=   FontHandle 
-	_HMG_SYSDATA [ 37 ]  [k] :=   0 
-	_HMG_SYSDATA [ 38 ]  [k] :=   .T. 
+	_HMG_SYSDATA [ 33 ]   [k] :=  ''
+	_HMG_SYSDATA [ 34 ]  [k] :=   if(invisible,.f.,.t.)
+	_HMG_SYSDATA [ 35 ]  [k] :=   HelpId
+	_HMG_SYSDATA [ 36 ]  [k] :=   FontHandle
+	_HMG_SYSDATA [ 37 ]  [k] :=   0
+	_HMG_SYSDATA [ 38 ]  [k] :=   .T.
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -267,19 +267,19 @@ Procedure _DataRichEditBoxRefresh (i)
 Local Field
 
 	Field		:= _HMG_SYSDATA [  7 ] [i]
-	_SetValue ( '' , '' , &Field , i ) 
+	_SetValue ( '' , '' , &Field , i )
 
 Return
 *------------------------------------------------------------------------------*
 Procedure _DataRichEditBoxSave ( ControlName , ParentForm)
 *------------------------------------------------------------------------------*
-Local Field , i 
+Local Field , i
 
-	i := GetControlIndex ( ControlName , ParentForm)	
+	i := GetControlIndex ( ControlName , ParentForm)
 
 	Field := _HMG_SYSDATA [  7 ] [i]
 
-	REPLACE &Field WITH _GetValue ( Controlname , ParentForm ) 
+	REPLACE &Field WITH _GetValue ( Controlname , ParentForm )
 
 Return
 
@@ -326,7 +326,7 @@ Return Nil
 FUNCTION RichEditBox_ReplaceText ( hWndControl, cFind, cReplace, lMatchCase, lWholeWord, lSelectFindText )
 *---------------------------------------------------------------------------------------------------------*
 LOCAL lDown := .T.
-LOCAL aPos  := {0,0}
+LOCAL aPos
    aPos := RichEditBox_GetSelRange ( hWndControl )
    RichEditBox_SetSelRange ( hWndControl, { aPos[1] , aPos[1] } )
    aPos := RichEditBox_FindText ( hWndControl, cFind, lDown, lMatchCase, lWholeWord, lSelectFindText )
@@ -434,7 +434,7 @@ LOCAL lSuccess
    IF ValType( lSelection ) <> "L"
       lSelection := .F.
    ENDIF
-   
+
    IF ValType( nType ) <> "N"
       nType := RICHEDITFILE_RTF
    ENDIF
@@ -455,7 +455,7 @@ FUNCTION RichEditBox_SaveFile( hWndControl, cFile, lSelection, nType )
    IF ValType( lSelection ) <> "L"
       lSelection := .F.
    ENDIF
-   
+
    IF ValType( nType ) <> "N"
       nType := RICHEDITFILE_RTF
    ENDIF

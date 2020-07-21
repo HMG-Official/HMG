@@ -2,39 +2,39 @@
  HMG_SQL_Bridge - HMG -> SQL Bridges for MySQL,PostgreSQL and SQLite
 
  Copyright 2010 S. Rathinagiri <srgiri@dataone.in>
- 
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
  As a special exception, you have permission for additional uses of the text
  contained in this release of HMG_SQL_Bridge.
 
- The exception is that, if you link the HMG_SQL_Bridge library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG_SQL_Bridge library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG_SQL_Bridge library code into it.
 
  Parts of this project (especially hbmysql, hbpgsql and hbsqlit3 library contributions) are based upon:
 
 	"Harbour Project"
 	Copyright 1999-2008, http://www.harbour-project.org/
-	
+
   "HMG - Harbour Windows GUI"
   Copyright 2002-2010 Roberto Lopez <mail.box.hmg@gmail.com>,http://sites.google.com/site/hmgweb/
-	
+
 	"HBMYSQL"  - Luiz Rafael Culik - <culik@sl.conex.net>
 	"HBPGSQL"  - Rodrigo Moreno rodrigo_moreno@yahoo.com
 	"HBSQLIT3" - P.Chornyj <myorg63@mail.ru>
@@ -47,7 +47,7 @@ FUNCTION connect2db(cHost,cUser,cPass,cDb,nPort)
 local dbo1 := nil
 default nPort := 5432
 dbo1 := PQConnect(cDb, cHost, cUser, cPass, nPort)
-IF PQStatus(dbo1) != CONNECTION_OK 
+IF PQStatus(dbo1) != CONNECTION_OK
    msginfo("Database could not be connected!")
    RETURN nil
 ENDIF
@@ -75,7 +75,7 @@ else
       aMetaData := PQmetadata(oRes)
       aTable := PQRESULT2ARRAY(oRes)
       for i := 1 to HMG_LEN(aTable)
-         asize(rowarr,0)     
+         asize(rowarr,0)
          for j := 1 to HMG_LEN(aTable[i])
             do case
                case HMG_UPPER(aMetaData[j,2]) == "BIGINT".or. ;
@@ -89,7 +89,7 @@ else
                case HMG_UPPER(aMetaData[j,2]) == "CHAR".or. ;
                     HMG_UPPER(aMetaData[j,2]) == "CHARACTER VARYING".or. ;
                     HMG_UPPER(aMetaData[j,2]) == "CHARACTER".or. ;
-                    HMG_UPPER(aMetaData[j,2]) == "VARCHAR" 
+                    HMG_UPPER(aMetaData[j,2]) == "VARCHAR"
                   aadd(rowarr,aTable[i,j])
                case HMG_UPPER(aMetaData[j,2]) == "BOOLEAN"
                   aadd(rowarr,iif(aTable[i,j]=="t",.t.,.f.))
@@ -101,7 +101,7 @@ else
             endcase
          next j
          aadd(tablearr,rowarr)
-      next i                        
+      next i
    endif
    PQclear(oRes)
 endif
@@ -123,7 +123,7 @@ else
       msgstop("Query Execution Error!")
       PQclear(oRes)
       return .f.
-   endif    
+   endif
    PQclear(oRes)
 endif
 return .t.

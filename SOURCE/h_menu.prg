@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -62,7 +62,7 @@ MEMVAR _HMG_SYSDATA_nControlHandle
 Function _DefineMainMenu ( Parent )
 *------------------------------------------------------------------------------*
 
-   if valtype(Parent) == 'U'
+   if ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    Endif
 
@@ -75,7 +75,7 @@ Function _DefineMainMenu ( Parent )
 	_HMG_SYSDATA [ 218 ] := 'MAIN'
 	_HMG_SYSDATA [ 172 ] := 0
 	_HMG_SYSDATA [ 173 ] := 0
-	_HMG_SYSDATA [ 174 ] := 0 
+	_HMG_SYSDATA [ 174 ] := 0
 	_HMG_SYSDATA [ 220 ] := ""
 
 
@@ -87,7 +87,7 @@ Return Nil
 *------------------------------------------------------------------------------*
 Function _DefineMenuPopup ( Caption , Name )
 *------------------------------------------------------------------------------*
-Local mVar , k := 0
+Local mVar , k
 
 	If _HMG_SYSDATA [ 218 ] == 'MAIN'
 
@@ -108,45 +108,45 @@ Local mVar , k := 0
 			k := _GetControlFree()
 
 			Public &mVar. := k
-	
-			_HMG_SYSDATA [1] [k] :=  "POPUP" 
-			_HMG_SYSDATA [2]  [k] :=  Name 
+
+			_HMG_SYSDATA [1] [k] :=  "POPUP"
+			_HMG_SYSDATA [2]  [k] :=  Name
 			_HMG_SYSDATA [3]  [k] :=  _HMG_SYSDATA [ 172 ]   // Main Menu Handle  // Dr. Claudio Soto (July 2013)  // 0
 			_HMG_SYSDATA [4]  [k] :=  _HMG_SYSDATA [ 173 ]   // Form Parent Handle
-			_HMG_SYSDATA [  5 ]  [k] :=  0 
+			_HMG_SYSDATA [  5 ]  [k] :=  0
 			_HMG_SYSDATA [  6 ] [k] :=   Nil
 			_HMG_SYSDATA [  7 ]  [k] :=   _HMG_SYSDATA [ 172 ]   // Main Menu Handle
-			_HMG_SYSDATA [  8 ]  [k] :=  Nil 
-			_HMG_SYSDATA [  9 ]   [k] := "" 
-			_HMG_SYSDATA [ 10 ]  [k] :=  "" 
-			_HMG_SYSDATA [ 11 ]  [k] :=  "" 
+			_HMG_SYSDATA [  8 ]  [k] :=  Nil
+			_HMG_SYSDATA [  9 ]   [k] := ""
+			_HMG_SYSDATA [ 10 ]  [k] :=  ""
+			_HMG_SYSDATA [ 11 ]  [k] :=  ""
 			_HMG_SYSDATA [ 12 ]  [k] :=  "MAIN_MENU_POPUP"   // ADD
-			_HMG_SYSDATA [ 13 ]  [k] :=  .F. 
-			_HMG_SYSDATA [ 14 ]  [k] :=  Nil 
-			_HMG_SYSDATA [ 15 ]  [k] :=  Nil 
-			_HMG_SYSDATA [ 16 ]   [k] := "" 
-			_HMG_SYSDATA [ 17 ]  [k] :=  {} 
-			_HMG_SYSDATA [ 18 ]  [k] :=  0 
-			_HMG_SYSDATA [ 19 ]  [k] :=  0 
-			_HMG_SYSDATA [ 20 ]  [k] :=  0 
-			_HMG_SYSDATA [ 21 ]  [k] :=  0 
+			_HMG_SYSDATA [ 13 ]  [k] :=  .F.
+			_HMG_SYSDATA [ 14 ]  [k] :=  Nil
+			_HMG_SYSDATA [ 15 ]  [k] :=  Nil
+			_HMG_SYSDATA [ 16 ]   [k] := ""
+			_HMG_SYSDATA [ 17 ]  [k] :=  {}
+			_HMG_SYSDATA [ 18 ]  [k] :=  0
+			_HMG_SYSDATA [ 19 ]  [k] :=  0
+			_HMG_SYSDATA [ 20 ]  [k] :=  0
+			_HMG_SYSDATA [ 21 ]  [k] :=  0
 			_HMG_SYSDATA [ 22 ]  [k] :=  _HMG_SYSDATA [ 335 ] [ _HMG_SYSDATA [ 174 ] ]   // Popup Menu Handle
-			_HMG_SYSDATA [ 23 ]  [k] :=  -1 
-			_HMG_SYSDATA [ 24 ]  [k] :=  -1 
-			_HMG_SYSDATA [ 25 ]  [k] :=  "" 
-			_HMG_SYSDATA [ 26 ]  [k] :=  0 
-			_HMG_SYSDATA [ 27 ]  [k] :=  '' 
-			_HMG_SYSDATA [ 28 ]  [k] :=  0 
-			_HMG_SYSDATA [ 29 ]  [k] :=  {.f.,.f.,.f.,.f.} 
-			_HMG_SYSDATA [ 30 ]   [k] :=  ''  
-			_HMG_SYSDATA [ 31 ]   [k] :=  0  
-			_HMG_SYSDATA [ 32 ]  [k] :=   0  
-			_HMG_SYSDATA [ 33 ]  [k] :=   Caption  
-			_HMG_SYSDATA [ 34 ]  [k] :=   .t. 
-			_HMG_SYSDATA [ 35 ]  [k] :=   0 
-			_HMG_SYSDATA [ 36 ]   [k] :=  0 
-			_HMG_SYSDATA [ 37 ]  [k] :=   0 
-			_HMG_SYSDATA [ 38 ]  [k] :=   .T. 
+			_HMG_SYSDATA [ 23 ]  [k] :=  -1
+			_HMG_SYSDATA [ 24 ]  [k] :=  -1
+			_HMG_SYSDATA [ 25 ]  [k] :=  ""
+			_HMG_SYSDATA [ 26 ]  [k] :=  0
+			_HMG_SYSDATA [ 27 ]  [k] :=  ''
+			_HMG_SYSDATA [ 28 ]  [k] :=  0
+			_HMG_SYSDATA [ 29 ]  [k] :=  {.f.,.f.,.f.,.f.}
+			_HMG_SYSDATA [ 30 ]   [k] :=  ''
+			_HMG_SYSDATA [ 31 ]   [k] :=  0
+			_HMG_SYSDATA [ 32 ]  [k] :=   0
+			_HMG_SYSDATA [ 33 ]  [k] :=   Caption
+			_HMG_SYSDATA [ 34 ]  [k] :=   .t.
+			_HMG_SYSDATA [ 35 ]  [k] :=   0
+			_HMG_SYSDATA [ 36 ]   [k] :=  0
+			_HMG_SYSDATA [ 37 ]  [k] :=   0
+			_HMG_SYSDATA [ 38 ]  [k] :=   .T.
 			_HMG_SYSDATA [ 39 ] [k] := 0
 			_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -181,15 +181,16 @@ Return Nil
 *-----------------------------------------------------------------------------------------*
 Function _DefineMenuItem ( caption , action , name , Image , checked , NoTrans, ToolTip )
 *-----------------------------------------------------------------------------------------*
-Local Controlhandle , mVar := '' , k := 0, cTypeMenu :=""
+Local mVar, k, cTypeMenu :=""
 Local id
-LOCAL cParentName := "", MenuItemID := 0
+LOCAL cParentName := "", MenuItemID
 
 	If _HMG_SYSDATA [ 218 ] == 'MAIN'
 
 		Id := _GetId()
 
-		Controlhandle := AppendMenuString ( _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ] ] , id ,  caption )   // This Not return a Handle, return lBoolean value
+      // unused Controlhandle.	Controlhandle := AppendMenuString(...) . asistex
+		AppendMenuString ( _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ] ] , id ,  caption )   // This Not return a Handle, return lBoolean value
 
 		if Valtype ( image ) != 'U'
 			MenuItem_SetBitMaps ( _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ]] , Id , image , "" , NoTrans )
@@ -203,60 +204,61 @@ LOCAL cParentName := "", MenuItemID := 0
 		Else
 			*mVar := '_MenuDummyVar'
 			*Name := 'DummyMenuName'
-			*Public &mVar. := 0  
+			*Public &mVar. := 0
 			Name := ''
 		EndIf
 
-		_HMG_SYSDATA [1] [k] := "MENU" 
-		_HMG_SYSDATA [2]  [k] :=  Name 
+		_HMG_SYSDATA [1] [k] := "MENU"
+		_HMG_SYSDATA [2]  [k] :=  Name
 		_HMG_SYSDATA [3]  [k] :=  _HMG_SYSDATA [ 172 ]   // Main Menu Handle   // Dr. Claudio Soto (July 2013)  Controlhandle   // This Not a Handle, this is lBoolean value
 		_HMG_SYSDATA [4]  [k] :=  _HMG_SYSDATA [ 173 ]   // Form Parent Handle
-		_HMG_SYSDATA [  5 ]  [k] :=  id 
-		_HMG_SYSDATA [  6 ]  [k] :=  action 
+		_HMG_SYSDATA [  5 ]  [k] :=  id
+		_HMG_SYSDATA [  6 ]  [k] :=  action
 		_HMG_SYSDATA [  7 ]  [k] :=  _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ] ]   // Popup Menu Handle
 		_HMG_SYSDATA [  8 ]  [k] :=  Nil                                            // _HMG_SYSDATA [ 335 ] -> _HMG_xMenuPopuphandle
-		_HMG_SYSDATA [  9 ]  [k] :=  ""                                             // _HMG_SYSDATA [ 174 ] -> counter of Popup Menu Handle 
+		_HMG_SYSDATA [  9 ]  [k] :=  ""                                             // _HMG_SYSDATA [ 174 ] -> counter of Popup Menu Handle
 		_HMG_SYSDATA [ 10 ]  [k] :=  ""
 		_HMG_SYSDATA [ 11 ]  [k] :=  ""
-		_HMG_SYSDATA [ 12 ]  [k] :=  "MAIN_MENU_ITEM"   // ADD 
-		_HMG_SYSDATA [ 13 ]  [k] :=  .F. 
-		_HMG_SYSDATA [ 14 ]  [k] :=  Nil 
-		_HMG_SYSDATA [ 15 ] [k] :=   Nil 
-		_HMG_SYSDATA [ 16 ]   [k] := "" 
-		_HMG_SYSDATA [ 17 ]  [k] :=  {} 
-		_HMG_SYSDATA [ 18 ]  [k] :=  0 
-		_HMG_SYSDATA [ 19 ]   [k] := 0 
-		_HMG_SYSDATA [ 20 ]  [k] :=  0 
-		_HMG_SYSDATA [ 21 ]  [k] :=  0 
-		_HMG_SYSDATA [ 22 ]  [k] :=  0 
-		_HMG_SYSDATA [ 23 ]  [k] :=  -1 
-		_HMG_SYSDATA [ 24 ]  [k] :=  -1 
-		_HMG_SYSDATA [ 25 ]  [k] :=  "" 
-		_HMG_SYSDATA [ 26 ]  [k] :=  0 
-		_HMG_SYSDATA [ 27 ]  [k] :=  '' 
-		_HMG_SYSDATA [ 28 ]  [k] :=  0 
-		_HMG_SYSDATA [ 29 ]  [k] :=  {.f.,.f.,.f.,.f.} 
+		_HMG_SYSDATA [ 12 ]  [k] :=  "MAIN_MENU_ITEM"   // ADD
+		_HMG_SYSDATA [ 13 ]  [k] :=  .F.
+		_HMG_SYSDATA [ 14 ]  [k] :=  Nil
+		_HMG_SYSDATA [ 15 ] [k] :=   Nil
+		_HMG_SYSDATA [ 16 ]   [k] := ""
+		_HMG_SYSDATA [ 17 ]  [k] :=  {}
+		_HMG_SYSDATA [ 18 ]  [k] :=  0
+		_HMG_SYSDATA [ 19 ]   [k] := 0
+		_HMG_SYSDATA [ 20 ]  [k] :=  0
+		_HMG_SYSDATA [ 21 ]  [k] :=  0
+		_HMG_SYSDATA [ 22 ]  [k] :=  0
+		_HMG_SYSDATA [ 23 ]  [k] :=  -1
+		_HMG_SYSDATA [ 24 ]  [k] :=  -1
+		_HMG_SYSDATA [ 25 ]  [k] :=  ""
+		_HMG_SYSDATA [ 26 ]  [k] :=  0
+		_HMG_SYSDATA [ 27 ]  [k] :=  ''
+		_HMG_SYSDATA [ 28 ]  [k] :=  0
+		_HMG_SYSDATA [ 29 ]  [k] :=  {.f.,.f.,.f.,.f.}
 		_HMG_SYSDATA [ 30 ]   [k] :=  ToolTip
-		_HMG_SYSDATA [ 31 ]  [k] :=   0  
-		_HMG_SYSDATA [ 32 ]   [k] :=  0  
-		_HMG_SYSDATA [ 33 ]  [k] :=   Caption  
-		_HMG_SYSDATA [ 34 ]  [k] :=   .t. 
-		_HMG_SYSDATA [ 35 ]  [k] :=   0 
-		_HMG_SYSDATA [ 36 ]  [k] :=   0 
-		_HMG_SYSDATA [ 37 ]   [k] :=  0 
-		_HMG_SYSDATA [ 38 ]  [k] :=   .T. 
+		_HMG_SYSDATA [ 31 ]  [k] :=   0
+		_HMG_SYSDATA [ 32 ]   [k] :=  0
+		_HMG_SYSDATA [ 33 ]  [k] :=   Caption
+		_HMG_SYSDATA [ 34 ]  [k] :=   .t.
+		_HMG_SYSDATA [ 35 ]  [k] :=   0
+		_HMG_SYSDATA [ 36 ]  [k] :=   0
+		_HMG_SYSDATA [ 37 ]   [k] :=  0
+		_HMG_SYSDATA [ 38 ]  [k] :=   .T.
 		_HMG_SYSDATA [ 39 ] [k] := 0
 		_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }   // ToolTip MenuItem Data
 
 		if checked == .t.
 			xCheckMenuItem ( _HMG_SYSDATA [ 335 ] [_HMG_SYSDATA [ 174 ] ] , id )
 		EndIf
-			
+
 	Else
 
 		id := _GetId()
 
-		Controlhandle := AppendMenuString ( _HMG_SYSDATA [ 175 ] , id ,  caption )   // This Not return a Handle, return lBoolean value
+      // unused Controlhandle.	Controlhandle := AppendMenuString(...) . asistex
+		AppendMenuString ( _HMG_SYSDATA [ 175 ] , id ,  caption )   // This Not return a Handle, return lBoolean value
 
 		if Valtype ( image ) != 'U'
 			MenuItem_SetBitMaps ( _HMG_SYSDATA [ 175 ] , Id , image , "" , NoTrans )
@@ -270,7 +272,7 @@ LOCAL cParentName := "", MenuItemID := 0
 		Else
 			*mVar := '_MenuDummyVar'
 			*Name := 'DummyMenuName'
-			*Public &mVar. := 0  
+			*Public &mVar. := 0
 			Name := ''
 		EndIf
 
@@ -286,44 +288,44 @@ LOCAL cParentName := "", MenuItemID := 0
         ENDIF
 
 
-		_HMG_SYSDATA [  1 ]  [k] :=   "MENU" 
-		_HMG_SYSDATA [  2 ]  [k] :=   Name 
+		_HMG_SYSDATA [  1 ]  [k] :=   "MENU"
+		_HMG_SYSDATA [  2 ]  [k] :=   Name
 		_HMG_SYSDATA [  3 ]  [k] :=   _HMG_SYSDATA [ 175 ]   // Popup Menu Handle  // Dr. Claudio Soto (July 2013)   Controlhandle   // This Not a Handle, this is lBoolean value
 		_HMG_SYSDATA [  4 ]  [k] :=   _HMG_SYSDATA [ 176 ]   // _HMG_SYSDATA [ 176 ] := GetFormHandle ( Parent )   // Form Parent Handle
-		_HMG_SYSDATA [  5 ]  [k] :=   id 
-		_HMG_SYSDATA [  6 ]  [k] :=   action 
-		_HMG_SYSDATA [  7 ]  [k] :=   _HMG_SYSDATA [ 175 ]   //_HMG_SYSDATA [ 175 ] := CreatePopupMenu()   // Popup Menu Handle 
-		_HMG_SYSDATA [  8 ]  [k] :=   Nil 
+		_HMG_SYSDATA [  5 ]  [k] :=   id
+		_HMG_SYSDATA [  6 ]  [k] :=   action
+		_HMG_SYSDATA [  7 ]  [k] :=   _HMG_SYSDATA [ 175 ]   //_HMG_SYSDATA [ 175 ] := CreatePopupMenu()   // Popup Menu Handle
+		_HMG_SYSDATA [  8 ]  [k] :=   Nil
 		_HMG_SYSDATA [  9 ]  [k] :=   ""
 		_HMG_SYSDATA [ 10 ]  [k] :=   ""
 		_HMG_SYSDATA [ 11 ]  [k] :=   _HMG_SYSDATA_cButtonName   // ADD
       _HMG_SYSDATA [ 12 ]  [k] :=   cTypeMenu         // ADD
-		_HMG_SYSDATA [ 13 ]  [k] :=   .F. 
-		_HMG_SYSDATA [ 14 ]  [k] :=   Nil 
-		_HMG_SYSDATA [ 15 ]  [k] :=   Nil 
-		_HMG_SYSDATA [ 16 ]  [k] :=   "" 
-		_HMG_SYSDATA [ 17 ]  [k] :=   {} 
+		_HMG_SYSDATA [ 13 ]  [k] :=   .F.
+		_HMG_SYSDATA [ 14 ]  [k] :=   Nil
+		_HMG_SYSDATA [ 15 ]  [k] :=   Nil
+		_HMG_SYSDATA [ 16 ]  [k] :=   ""
+		_HMG_SYSDATA [ 17 ]  [k] :=   {}
 		_HMG_SYSDATA [ 18 ]  [k] :=   _HMG_SYSDATA_nControlHandle // ADD
-		_HMG_SYSDATA [ 19 ]  [k] :=   0 
-		_HMG_SYSDATA [ 20 ]  [k] :=   0 
-		_HMG_SYSDATA [ 21 ]  [k] :=   0 
-		_HMG_SYSDATA [ 22 ]  [k] :=   0 
-		_HMG_SYSDATA [ 23 ]  [k] :=   -1 
-		_HMG_SYSDATA [ 24 ]  [k] :=   -1 
-		_HMG_SYSDATA [ 25 ]  [k] :=   "" 
-		_HMG_SYSDATA [ 26 ]  [k] :=   0 
-		_HMG_SYSDATA [ 27 ]  [k] :=   '' 
-		_HMG_SYSDATA [ 28 ]  [k] :=   0 
-		_HMG_SYSDATA [ 29 ]  [k] :=   {.f.,.f.,.f.,.f.} 
+		_HMG_SYSDATA [ 19 ]  [k] :=   0
+		_HMG_SYSDATA [ 20 ]  [k] :=   0
+		_HMG_SYSDATA [ 21 ]  [k] :=   0
+		_HMG_SYSDATA [ 22 ]  [k] :=   0
+		_HMG_SYSDATA [ 23 ]  [k] :=   -1
+		_HMG_SYSDATA [ 24 ]  [k] :=   -1
+		_HMG_SYSDATA [ 25 ]  [k] :=   ""
+		_HMG_SYSDATA [ 26 ]  [k] :=   0
+		_HMG_SYSDATA [ 27 ]  [k] :=   ''
+		_HMG_SYSDATA [ 28 ]  [k] :=   0
+		_HMG_SYSDATA [ 29 ]  [k] :=   {.f.,.f.,.f.,.f.}
 		_HMG_SYSDATA [ 30 ]  [k] :=   ToolTip
-		_HMG_SYSDATA [ 31 ]  [k] :=   0  
-		_HMG_SYSDATA [ 32 ]  [k] :=   0  
-		_HMG_SYSDATA [ 33 ]  [k] :=   Caption  
-		_HMG_SYSDATA [ 34 ]  [k] :=   .t. 
-		_HMG_SYSDATA [ 35 ]  [k] :=   0 
+		_HMG_SYSDATA [ 31 ]  [k] :=   0
+		_HMG_SYSDATA [ 32 ]  [k] :=   0
+		_HMG_SYSDATA [ 33 ]  [k] :=   Caption
+		_HMG_SYSDATA [ 34 ]  [k] :=   .t.
+		_HMG_SYSDATA [ 35 ]  [k] :=   0
 		_HMG_SYSDATA [ 36 ]  [k] :=   0
 		_HMG_SYSDATA [ 37 ]  [k] :=   0
-		_HMG_SYSDATA [ 38 ]  [k] :=   .T. 
+		_HMG_SYSDATA [ 38 ]  [k] :=   .T.
 		_HMG_SYSDATA [ 39 ]  [k] :=   0
 		_HMG_SYSDATA [ 40 ]  [k] :=   { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -334,7 +336,7 @@ LOCAL cParentName := "", MenuItemID := 0
 	EndIf
 
     // by Dr. Claudio Soto, December 2014
-   if valtype(tooltip) != "U"
+   if ValType(tooltip) != "U"
       GetFormNameByHandle ( _HMG_SYSDATA [ 4 ] [ k ] , @cParentName )
       MenuItemID  := _HMG_SYSDATA [ 5 ] [ k ]
       SetToolTipMenuItem ( GetFormHandle (cParentName), ToolTip, MenuItemID, GetMenuToolTipHandle (cParentName) )
@@ -363,7 +365,7 @@ Local i
 	Do Case
 	Case _HMG_SYSDATA [ 218 ] == 'MAIN'
 
-		SetMenu( _HMG_SYSDATA [ 173 ] , _HMG_SYSDATA [ 172 ] ) 
+		SetMenu( _HMG_SYSDATA [ 173 ] , _HMG_SYSDATA [ 172 ] )
 
 	Case _HMG_SYSDATA [ 218 ] == 'CONTEXT'
 
@@ -471,7 +473,7 @@ Local x,h,i,r,z
 
 	r := xGetMenuCheckState ( h , i )
 
-	If r == 1 
+	If r == 1
 		z := .t.
 	Else
 		z := .f.
@@ -495,7 +497,7 @@ Local x,h,i,r,z
 
 	r := xGetMenuEnabledState ( h , i )
 
-	If r == 1 
+	If r == 1
 		z := .t.
 	Else
 		z := .f.
@@ -508,7 +510,7 @@ Return z
 Function _DefineContextMenu ( Parent )
 *------------------------------------------------------------------------------*
 
-   IF valtype(Parent) == 'U'
+   IF ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    ENDIF
 
@@ -520,7 +522,7 @@ Function _DefineContextMenu ( Parent )
 
    _HMG_SYSDATA [ 175 ] := 0
    _HMG_SYSDATA [ 176 ] := 0
-   _HMG_SYSDATA [ 177 ] := 0 
+   _HMG_SYSDATA [ 177 ] := 0
    _HMG_SYSDATA [ 221 ] := ""
 
    _HMG_SYSDATA [ 218 ] := 'CONTEXT'
@@ -530,14 +532,14 @@ Function _DefineContextMenu ( Parent )
    _HMG_SYSDATA [ 176 ] := GetFormHandle ( Parent )
    _HMG_SYSDATA [ 221 ] := Parent
    _HMG_SYSDATA [ 175 ] := CreatePopupMenu()
-   
+
 Return Nil
 
 *------------------------------------------------------------------------------*
 Function _DefineNotifyMenu ( Parent )
 *------------------------------------------------------------------------------*
 
-   IF valtype(Parent) == 'U'
+   IF ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    ENDIF
 
@@ -549,7 +551,7 @@ Function _DefineNotifyMenu ( Parent )
 
    _HMG_SYSDATA [ 175 ] := 0
    _HMG_SYSDATA [ 176 ] := 0
-   _HMG_SYSDATA [ 177 ] := 0 
+   _HMG_SYSDATA [ 177 ] := 0
    _HMG_SYSDATA [ 221 ] := ""
 
    _HMG_SYSDATA [ 218 ] := 'NOTIFY'
@@ -566,7 +568,7 @@ Return Nil
 Function _DefineDropDownMenu ( cButton , Parent )
 *------------------------------------------------------------------------------*
 
-   IF valtype(Parent) == 'U'
+   IF ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    ENDIF
 
@@ -578,7 +580,7 @@ Function _DefineDropDownMenu ( cButton , Parent )
 
    _HMG_SYSDATA [ 175 ] := 0
    _HMG_SYSDATA [ 176 ] := 0
-   _HMG_SYSDATA [ 177 ] := 0 
+   _HMG_SYSDATA [ 177 ] := 0
    _HMG_SYSDATA [ 221 ] := ""
 
    _HMG_SYSDATA [ 218 ] := 'DROPDOWN'
@@ -622,16 +624,16 @@ Procedure DeleteItem_HMG_SYSDATA (k)
           _HMG_SYSDATA [ 20 ] [k] := 0
           _HMG_SYSDATA [ 21 ] [k] := 0
           _HMG_SYSDATA [ 22 ] [k] := 0
-          _HMG_SYSDATA [ 23 ] [k] := 0 
-          _HMG_SYSDATA [ 24 ] [k] := 0 
+          _HMG_SYSDATA [ 23 ] [k] := 0
+          _HMG_SYSDATA [ 24 ] [k] := 0
           _HMG_SYSDATA [ 25 ] [k] := ''
-          _HMG_SYSDATA [ 26 ] [k] := 0 
-          _HMG_SYSDATA [ 27 ] [k] := '' 
-          _HMG_SYSDATA [ 28 ] [k] := 0  
-          _HMG_SYSDATA [ 30 ] [k] := ''  
+          _HMG_SYSDATA [ 26 ] [k] := 0
+          _HMG_SYSDATA [ 27 ] [k] := ''
+          _HMG_SYSDATA [ 28 ] [k] := 0
+          _HMG_SYSDATA [ 30 ] [k] := ''
           _HMG_SYSDATA [ 31 ] [k] := 0
           _HMG_SYSDATA [ 32 ] [k] := 0
-          _HMG_SYSDATA [ 33 ] [k] := '' 
+          _HMG_SYSDATA [ 33 ] [k] := ''
           _HMG_SYSDATA [ 34 ] [k] := .F.
           _HMG_SYSDATA [ 35 ] [k] := 0
           _HMG_SYSDATA [ 36 ] [k] := 0
@@ -710,9 +712,9 @@ LOCAL hWnd, k, Ret := 0
        MsgHMGError("Main Menu not defined in Window: "+ cParentForm + ". Program Terminated" )
     ENDIF
 
-    hWnd := GetFormHandle ( cParentForm )    
+    hWnd := GetFormHandle ( cParentForm )
     DeleteMainMenu (hWnd)
-    
+
     FOR k = 1 TO HMG_LEN (_HMG_SYSDATA [1])
         IF (_HMG_SYSDATA [1] [k] == "MENU") .OR. (_HMG_SYSDATA [1] [k] == "POPUP")
           IF ((_HMG_SYSDATA [12] [k] == "MAIN_MENU_ITEM" .OR. _HMG_SYSDATA [12] [k] == "MAIN_MENU_POPUP") .AND. (_HMG_SYSDATA [4] [k] == hWnd))
@@ -737,8 +739,8 @@ LOCAL hWnd, hMenu, k, Ret := 0
        MsgHMGError("Context Menu not defined in Window: "+ cParentForm + ". Program Terminated" )
     ENDIF
 
-    hWnd := GetFormHandle ( cParentForm )    
-    
+    hWnd := GetFormHandle ( cParentForm )
+
     FOR k = 1 TO HMG_LEN (_HMG_SYSDATA [1])
         IF (_HMG_SYSDATA [1] [k] == "MENU") .OR. (_HMG_SYSDATA [1] [k] == "POPUP")
           IF ((_HMG_SYSDATA [12] [k] == "CONTEXT_MENU_ITEM") .AND. (_HMG_SYSDATA [4] [k] == hWnd))
@@ -765,8 +767,8 @@ LOCAL hWnd, hMenu, k, Ret := 0
        MsgHMGError("Notify Menu not defined in Window: "+ cParentForm + ". Program Terminated" )
     ENDIF
 
-    hWnd := GetFormHandle ( cParentForm )    
-    
+    hWnd := GetFormHandle ( cParentForm )
+
     FOR k = 1 TO HMG_LEN (_HMG_SYSDATA [1])
         IF (_HMG_SYSDATA [1] [k] == "MENU") .OR. (_HMG_SYSDATA [1] [k] == "POPUP")
           IF ((_HMG_SYSDATA [12] [k] == "NOTIFY_MENU_ITEM") .AND. (_HMG_SYSDATA [4] [k] == hWnd))
@@ -793,8 +795,8 @@ LOCAL hWnd, hMenu, k, Ret := 0
        MsgHMGError("DropDown Menu of Button: " + cButton + " not defined in Window: "+ cParentForm + ". Program Terminated" )
     ENDIF
 
-    hWnd := GetFormHandle ( cParentForm )    
-    
+    hWnd := GetFormHandle ( cParentForm )
+
     FOR k = 1 TO HMG_LEN (_HMG_SYSDATA [1])
         IF (_HMG_SYSDATA [1] [k] == "MENU") .OR. (_HMG_SYSDATA [1] [k] == "POPUP")
           IF ((_HMG_SYSDATA [12] [k] == "DROPDOWN_MENU_ITEM") .AND. (_HMG_SYSDATA [11] [k] == cButton) .AND. (_HMG_SYSDATA [4] [k] == hWnd))
@@ -812,7 +814,7 @@ Return Ret
 
 
 //***************************************************************************************
-// Control Context Menu 
+// Control Context Menu
 //***************************************************************************************
 
 // Dr. Claudio Soto (May 2013)
@@ -822,7 +824,7 @@ Return Ret
 Function _DefineControlContextMenu ( cControl, cParentForm )
 *------------------------------------------------------------------------------*
 
-   IF valtype(cParentForm) == 'U'
+   IF ValType(cParentForm) == 'U'
       cParentForm := _HMG_SYSDATA [ 223 ]
    ENDIF
 
@@ -834,7 +836,7 @@ Function _DefineControlContextMenu ( cControl, cParentForm )
 
    _HMG_SYSDATA [ 175 ] := 0
    _HMG_SYSDATA [ 176 ] := 0
-   _HMG_SYSDATA [ 177 ] := 0 
+   _HMG_SYSDATA [ 177 ] := 0
    _HMG_SYSDATA [ 221 ] := ""
 
    _HMG_SYSDATA [ 218 ] := 'CONTROL'
@@ -880,9 +882,9 @@ LOCAL hWnd, hMenu, nControlHandle, k, Ret := 0
       MsgHMGError("Context Menu of Control: " + cControl + " not defined in Window: "+ cParentForm + ". Program Terminated" )
    ENDIF
 
-    hWnd := GetFormHandle ( cParentForm )    
+    hWnd := GetFormHandle ( cParentForm )
     nControlHandle := GetControlHandle ( cControl, cParentForm )
-    
+
     FOR k = 1 TO HMG_LEN (_HMG_SYSDATA [1])
         IF (_HMG_SYSDATA [1] [k] == "MENU") .OR. (_HMG_SYSDATA [1] [k] == "POPUP")
           IF ((_HMG_SYSDATA [12] [k] == "CONTROL_MENU_ITEM") .AND. _TestControlHandle_ContextMenu (_HMG_SYSDATA [18] [k], nControlHandle) .AND. (_HMG_SYSDATA [4] [k] == hWnd))
@@ -902,11 +904,11 @@ Function _TestControlHandle_ContextMenu  ( Handle , ControlHandle )
 *------------------------------------------------------------------------------*
 LOCAL i, k
 
-   IF ValType (Handle) == "N" .AND. ValType (ControlHandle) == "N" 
+   IF ValType (Handle) == "N" .AND. ValType (ControlHandle) == "N"
       Return (Handle == ControlHandle)
    ENDIF
-   
-   
+
+
    IF ValType (Handle) == "A" .AND. ValType (ControlHandle) == "N"
       FOR i = 1 TO HMG_LEN (Handle)
           IF Handle [i] == ControlHandle
@@ -915,8 +917,8 @@ LOCAL i, k
       NEXT
       Return .F.
    ENDIF
-   
-   
+
+
    IF ValType (Handle) == "N" .AND. ValType (ControlHandle) == "A"
       FOR i = 1 TO HMG_LEN (ControlHandle)
           IF Handle == ControlHandle [i]
@@ -925,8 +927,8 @@ LOCAL i, k
       NEXT
       Return .F.
    ENDIF
-   
-   
+
+
    IF ValType (Handle) == "A" .AND. ValType (ControlHandle) == "A"
       FOR i = 1 TO HMG_LEN (Handle)
          FOR k = 1 TO HMG_LEN (ControlHandle)
@@ -937,7 +939,7 @@ LOCAL i, k
       NEXT
       Return .F.
    ENDIF
-   
+
 Return .F.
 
 

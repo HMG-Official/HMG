@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> h_EventCB.prg  
+ HMG Source File --> h_EventCB.prg
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -46,7 +46,7 @@ Function EventCompareParam (Param1, Param2)
    IF ValType (Param1) <> "U" .AND. ValType (Param2) <> "U"
       IF ValType (Param1) == "C" .AND. ValType (Param2) == "C"
          Return (ALLTRIM(Param1) == ALLTRIM(Param2))
-      ELSE 
+      ELSE
          Return (Param1 == Param2)
       ENDIF
    ENDIF
@@ -152,10 +152,10 @@ LOCAL lProcessMessage
             _HMG_EventPROCNAME := EventGetPROCNAME (nIndex)
 
             IF ValType( _HMG_EventPROCNAME ) <> "C"
-               Ret := EVAL( _HMG_EventPROCNAME )   // is codeblock
+               Ret := Eval( _HMG_EventPROCNAME )   // is codeblock
             ELSE
                cProcName := _HMG_EventPROCNAME
-               IF HB_URIGHT(cProcName, 1) <> ")"
+               IF hb_URight(cProcName, 1) <> ")"
                   Ret := &cProcName()
                ELSE
                   Ret := &cProcName
@@ -349,13 +349,13 @@ Function ListCalledFunctions (nActivation, aInfo)
 LOCAL cMsg := "", i:= 1
 LOCAL nProcLine, cProcFile, cProcName
    aInfo := {}
-   nActivation := IF (ValType(nActivation) <> "N", 1, nActivation) 
-   DO WHILE .NOT.(PROCNAME(nActivation) == "")
-      cProcName := PROCNAME(nActivation)
-      nProcLine := PROCLINE(nActivation)
-      cProcFile := PROCFILE(nActivation)
+   nActivation := IF (ValType(nActivation) <> "N", 1, nActivation)
+   DO WHILE .NOT.(ProcName(nActivation) == "")
+      cProcName := ProcName(nActivation)
+      nProcLine := ProcLine(nActivation)
+      cProcFile := ProcFile(nActivation)
       AADD (aInfo, {cProcName, nProcLine, cProcFile})
-      cMsg := cMsg + aInfo[i,1] + "(" + HB_NTOS(aInfo[i,2]) + ") ("+ aInfo[i,3] + ")" + HB_OSNEWLINE()
+      cMsg := cMsg + aInfo[i,1] + "(" + hb_ntos(aInfo[i,2]) + ") ("+ aInfo[i,3] + ")" + hb_osNewLine()
       nActivation++
       i++
    ENDDO
@@ -458,8 +458,8 @@ Return cType
 *-----------------------------------------------------------------------------*
 Function GetWindowInfoByHandle (hWnd, aInfo, lShowType)
 *-----------------------------------------------------------------------------*
-LOCAL i, ControlParentHandle:=0, FormParentHandle:=0, cInfo := "", lFlagControl := .F.
-LOCAL nIndexForm := 0, nIndexControl := 0, nInfoLen := 0, Text := "", nControlSubIndex2 := 0
+LOCAL i, ControlParentHandle:=0, FormParentHandle, cInfo := "", lFlagControl := .F.
+LOCAL nIndexForm, nIndexControl, nInfoLen, Text, nControlSubIndex2 := 0
 
    IF ValType (lShowType) <> "L"
       lShowType := .T.
@@ -494,7 +494,7 @@ LOCAL nIndexForm := 0, nIndexControl := 0, nInfoLen := 0, Text := "", nControlSu
    WHILE nIndexForm > 0
       IF nIndexForm > 0
          Text := ALLTRIM(GetFormNameByIndex(nIndexForm)) + IF (lShowType, "("+ ALLTRIM(GetFormTypeByIndexEx (nIndexForm)) +")", "")
-         AADD (aInfo, Text)         
+         AADD (aInfo, Text)
          FormParentHandle := GetFormParentHandleByIndex (nIndexForm)
          IF FormParentHandle <> 0
             nIndexForm := GetFormIndexByHandle (FormParentHandle)
@@ -503,8 +503,8 @@ LOCAL nIndexForm := 0, nIndexControl := 0, nInfoLen := 0, Text := "", nControlSu
          ENDIF
       ENDIF
    ENDDO
-   
-   nInfoLen := HMG_LEN(aInfo) 
+
+   nInfoLen := HMG_LEN(aInfo)
    FOR i = nInfoLen TO 1 STEP -1
       cInfo := cInfo + IF(i == nInfoLen,"",".") + aInfo [i]
    NEXT
@@ -514,8 +514,8 @@ Return cInfo
 *-----------------------------------------------------------------------------*
 Function GetWindowInfoByHandleEx (hWnd, aInfo, lShowType)
 *-----------------------------------------------------------------------------*
-LOCAL i, ControlParentHandle:=0, FormParentHandle:=0, cInfo := "", lFlagControl := .F.
-LOCAL nIndexForm := 0, nIndexControl := 0, nInfoLen := 0, Text := ""
+LOCAL i, ControlParentHandle:=0, FormParentHandle, cInfo := "", lFlagControl := .F.
+LOCAL nIndexForm, nIndexControl, nInfoLen, Text
 LOCAL nControlSubIndex1 := 0, nControlSubIndex2 := 0
 
    IF ValType (lShowType) <> "L"
@@ -527,7 +527,7 @@ LOCAL nControlSubIndex1 := 0, nControlSubIndex2 := 0
    IF nIndexControl > 0 .AND. nControlSubIndex1 > 0
       hWnd := hWnd [nControlSubIndex1]
    ENDIF
-   
+
    WHILE nIndexControl > 0
       IF nIndexControl > 0
          lFlagControl := .T.
@@ -567,8 +567,8 @@ LOCAL nControlSubIndex1 := 0, nControlSubIndex2 := 0
          ENDIF
       ENDIF
    ENDDO
-   
-   nInfoLen := HMG_LEN(aInfo) 
+
+   nInfoLen := HMG_LEN(aInfo)
    FOR i = nInfoLen TO 1 STEP -1
       cInfo := cInfo + IF(i == nInfoLen,"",".") + aInfo [i]
    NEXT
@@ -588,7 +588,7 @@ LOCAL i,k
 
       ELSEIF ValType (Handle1) == "A" .AND. ValType (Handle2) == "N"
          FOR i = 1 TO HMG_LEN (Handle1)
-            IF Handle1 [i] == Handle2 
+            IF Handle1 [i] == Handle2
                nSubIndex1 := i
                Return .T.
             ENDIF
@@ -619,8 +619,8 @@ Return .F.
 *-----------------------------------------------------------------------------*
 Function GetFormInfoByHandle (hWnd, aInfo, lShowType)
 *-----------------------------------------------------------------------------*
-LOCAL i, FormParentHandle:=0, cInfo := ""
-LOCAL nIndexForm := 0, nInfoLen := 0, Text := ""
+LOCAL i, FormParentHandle, cInfo := ""
+LOCAL nIndexForm, nInfoLen, Text
 
    IF ValType (lShowType) <> "L"
       lShowType := .T.
@@ -631,7 +631,7 @@ LOCAL nIndexForm := 0, nInfoLen := 0, Text := ""
    WHILE nIndexForm > 0
       IF nIndexForm > 0
          Text := ALLTRIM(GetFormNameByIndex(nIndexForm)) + IF( lShowType, "("+ ALLTRIM(GetFormTypeByIndex (nIndexForm)) +")", "")
-         AADD (aInfo, Text)         
+         AADD (aInfo, Text)
          FormParentHandle := GetFormParentHandleByIndex (nIndexForm)
          IF FormParentHandle <> 0
             nIndexForm := GetFormIndexByHandle (FormParentHandle)
@@ -640,8 +640,8 @@ LOCAL nIndexForm := 0, nInfoLen := 0, Text := ""
          ENDIF
       ENDIF
    ENDDO
-   
-   nInfoLen := HMG_LEN(aInfo) 
+
+   nInfoLen := HMG_LEN(aInfo)
    FOR i = nInfoLen TO 1 STEP -1
       cInfo := cInfo + IF(i == nInfoLen,"",".") + aInfo [i]
    NEXT
@@ -651,8 +651,8 @@ Return cInfo
 *-----------------------------------------------------------------------------*
 Function GetControlInfoByHandle (hWnd, aInfo, lShowType)
 *-----------------------------------------------------------------------------*
-LOCAL i, ControlParentHandle:=0, FormParentHandle:=0, cInfo := "", lFlagControl := .F.
-LOCAL nIndexForm := 0, nIndexControl := 0, nInfoLen := 0, Text := "", nControlSubIndex2 := 0
+LOCAL i, ControlParentHandle:=0, FormParentHandle, cInfo := "", lFlagControl := .F.
+LOCAL nIndexForm, nIndexControl, nInfoLen, Text, nControlSubIndex2 := 0
 
    IF ValType (lShowType) <> "L"
       lShowType := .T.
@@ -684,7 +684,7 @@ LOCAL nIndexForm := 0, nIndexControl := 0, nInfoLen := 0, Text := "", nControlSu
       WHILE nIndexForm > 0
          IF nIndexForm > 0
             Text := ALLTRIM(GetFormNameByIndex(nIndexForm)) + IF( lShowType, "("+ ALLTRIM(GetFormTypeByIndex (nIndexForm)) +")", "")
-            AADD (aInfo, Text)         
+            AADD (aInfo, Text)
             FormParentHandle := GetFormParentHandleByIndex (nIndexForm)
             IF FormParentHandle <> 0
                nIndexForm := GetFormIndexByHandle (FormParentHandle)
@@ -694,8 +694,8 @@ LOCAL nIndexForm := 0, nIndexControl := 0, nInfoLen := 0, Text := "", nControlSu
          ENDIF
       ENDDO
    ENDIF
-   
-   nInfoLen := HMG_LEN(aInfo) 
+
+   nInfoLen := HMG_LEN(aInfo)
    FOR i = nInfoLen TO 1 STEP -1
       cInfo := cInfo + IF(i == nInfoLen,"",".") + aInfo [i]
    NEXT
@@ -791,11 +791,11 @@ Return nIndexControl
 
 /*
 #xtranslate CHECK TYPE [ <lSoft: SOFT> ] <var> AS <type> [, <varN> AS <typeN> ] => ;
-            HMG_CheckType( <.lSoft.>, { <"type"> , ValType( <var> ), <"var"> } [, { <"typeN"> , ValType( <varN> ), <"varN"> } ] )  
+            HMG_CheckType( <.lSoft.>, { <"type"> , ValType( <var> ), <"var"> } [, { <"typeN"> , ValType( <varN> ), <"varN"> } ] )
 */
 
 PROCEDURE HMG_CheckType( lSoft, ... )
-LOCAL i, j 
+LOCAL i, j
 LOCAL aParams, aData
 LOCAL aType := {;
          { "ARRAY"      , "A" } ,;
@@ -813,33 +813,33 @@ LOCAL aType := {;
          { "OBJECT"     , "O" } ,;
          { "USUAL"      , ""  }}
 
-   aParams := hb_aParams()
+   aParams := hb_AParams()
 
-   hb_ADEL( aParams, 1, .T. )   // Remove lSoft param of the array
+   hb_ADel( aParams, 1, .T. )   // Remove lSoft param of the array
 
    FOR EACH aData IN aParams
 
       IF HMG_UPPER( AllTrim( aData[ 1 ] ) ) <> "USUAL"
-         
-         IF .NOT. ( lSoft == .T. .AND. HMG_UPPER( AllTrim( aData[ 2 ] ) ) == "U" ) 
-         
+
+         IF .NOT. ( lSoft == .T. .AND. HMG_UPPER( AllTrim( aData[ 2 ] ) ) == "U" )
+
             // aData := { cTypeDef, cValType, cVarName }
             // aType := { cTypeDef, cValType }
-         
+
             i := ASCAN( aType, { | x | HMG_UPPER( AllTrim( x[ 1 ] ) ) == HMG_UPPER( AllTrim( aData[ 1 ] ) ) } )
-         
+
             IF i == 0 .OR. HMG_UPPER( AllTrim( aType[ i ][ 2 ] ) ) <> HMG_UPPER( AllTrim( aData[ 2 ] ) )
-         
+
                j := ASCAN( aType, { | x | HMG_UPPER( AllTrim( x[ 2 ] ) ) == HMG_UPPER( AllTrim( aData[ 2 ] ) ) } )
-         
-               MsgHMGError( "CHECK TYPE ( Param # "+ hb_NtoS( aData:__enumindex() ) + " ) : " + AllTrim( aData[ 3 ] ) + " is declared as " + HMG_UPPER( AllTrim( aData[ 1 ] ) ) + " but it is of type " + HMG_UPPER( AllTrim( aType[ j ][ 1 ] ) ) + ". Program terminated", "HMG Error" )
-         
+
+               MsgHMGError( "CHECK TYPE ( Param # "+ hb_ntos( aData:__enumindex() ) + " ) : " + AllTrim( aData[ 3 ] ) + " is declared as " + HMG_UPPER( AllTrim( aData[ 1 ] ) ) + " but it is of type " + HMG_UPPER( AllTrim( aType[ j ][ 1 ] ) ) + ". Program terminated", "HMG Error" )
+
             ENDIF
-            
+
          ENDIF
-         
+
       ENDIF
-      
+
    NEXT
 RETURN
 
@@ -850,8 +850,8 @@ RETURN
 *-----------------------------------------------*
 Function HMG_GetAllSubMenu (hMenu)
 *-----------------------------------------------*
-LOCAL aMenuInfo:={}, hSubMenu 
-LOCAL nParent:=0, n1:=0, n2:=0, nItem:=0
+LOCAL aMenuInfo:={}, hSubMenu
+LOCAL nParent:=0, n1:=0, n2:=0, nItem
 // nParent := parent position in array
    IF IsMenu (hMenu)
       WHILE .T.
@@ -882,17 +882,17 @@ LOCAL nPos, i, cText:="", hMenu, nIndex, nParent
    aInfo := {}
    FOR i = 1 TO HMG_LEN (aMenuInfo)
       hMenu := aMenuInfo [i] [1]
-      nPos := MenuItemFromPoint (hWnd, hMenu, x_scr, y_scr)   
+      nPos := MenuItemFromPoint (hWnd, hMenu, x_scr, y_scr)
       IF nPos >= 0
          cText   := HB_NTOS (nPos+1)
-         AADD (aInfo, nPos+1)        
+         AADD (aInfo, nPos+1)
          nParent := aMenuInfo [i] [2]
          IF nParent == 0
             cText := HB_NTOS (aMenuInfo [i] [3] + 1) + ":" + cText
             AADD (aInfo, (aMenuInfo [i] [3] + 1))
             Return cText
          ENDIF
-         
+
          nIndex  := i
          WHILE nParent > 0
             cText := HB_NTOS (aMenuInfo [nIndex] [3] + 1) + ":" + cText
@@ -922,7 +922,7 @@ Function GetSplitChildWindowHandle (cFormName, cParentForm)
 *--------------------------------------------------------------------*
 LOCAL i, hWnd := GetFormHandle (cParentForm)
    FOR i = 1 TO HMG_LEN (_HMG_SYSDATA [ 66 ])
-       IF (_HMG_SYSDATA [ 66 ] [i] == cFormName) .AND. (_HMG_SYSDATA [ 69 ] [i] ==  'X') .AND. (_HMG_SYSDATA [ 70 ]  [i] == hWnd) 
+       IF (_HMG_SYSDATA [ 66 ] [i] == cFormName) .AND. (_HMG_SYSDATA [ 69 ] [i] ==  'X') .AND. (_HMG_SYSDATA [ 70 ]  [i] == hWnd)
            Return _HMG_SYSDATA [ 67] [i]
        ENDIF
    NEXT

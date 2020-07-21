@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> HMG_TString.prg  
+ HMG Source File --> HMG_TString.prg
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -69,7 +69,7 @@ CREATE CLASS HMG_TString   INHERIT HMG_TGeneral
 
       METHOD EOL()                                                   INLINE   HB_EOL()       // CR+LF
       METHOD OsNewLine()                                             INLINE   HB_OSNEWLINE() // CR+LF
-      
+
       METHOD Lower( cString )                      INLINE   HMG_LOWER( cString )
       METHOD Upper( cString )                      INLINE   HMG_UPPER( cString )
       METHOD PadC( cString, nLength, cFillChar )   INLINE   HMG_PADC( cString, nLength, cFillChar )

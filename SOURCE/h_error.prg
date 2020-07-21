@@ -63,13 +63,13 @@ Function MsgHMGError ( Message )
    _HMG_SYSDATA [ 347 ] := .F.
 
     HtmArch := Html_ErrorLog()
-    Html_LineText(HtmArch,"Date:"+Dtoc(Date())+"  "+"Time: "+Time())
+    Html_LineText(HtmArch,"Date:"+DToC(Date())+"  "+"Time: "+Time())
     n := 1
     ai := "" + HMGVersion()+CHR(13) + CHR(10) + Message + CHR(13) + CHR (10) + CHR(13) + CHR (10)
     Html_LineText(HtmArch,"Error: " + HMGVersion())
     Html_LineText(HtmArch,Message)
     WHILE ! Empty( ProcName( n ) )
-       xText := "Called from " + ProcName( n ) + "(" + ALLTRIM( STR( ProcLine( n++ ) ) ) + ")" +CHR(13) +CHR(10)
+       xText := "Called from " + ProcName( n ) + "(" + ALLTRIM( Str( ProcLine( n++ ) ) ) + ")" +CHR(13) +CHR(10)
        ai += xText
        Html_LineText(HtmArch,xText)
     ENDDO
@@ -89,7 +89,7 @@ LOCAL cVersion := ""
    IF .NOT. EMPTY ( AllTrim (cVersion_NUMBER) )
       cVersion := alltrim (cVersion_NUMBER) + " "; 
                   + IF ( Is64Bits, alltrim(cVersion_WIN64_STABLE), alltrim(cVersion_WIN32_STABLE) ) ;
-                  + IF (.NOT. EMPTY(alltrim(cVersion_PATCH)) , " Patch "+alltrim(cVersion_PATCH), "") ;
+                  + IF (.NOT. Empty(alltrim(cVersion_PATCH)) , " Patch "+alltrim(cVersion_PATCH), "") ;
                   + IF ( Is64Bits, " (64 bits)", " (32 bits)" )
    ENDIF
 RETURN (cVersion)
@@ -129,7 +129,7 @@ LOCAL aVersion := { {"_HMG_VERSION_NUMBER_",       ""},;
 
    IF TYPE (aVersion [1] [2]) == "N"   // _HMG_VERSION_NUMBER_ is defined as Number
       Number := aVersion [1] [2]
-      aVersion [1] [2] := "HMG " + HB_USUBSTR(Number,1,1) +"."+ HB_USUBSTR(Number,2,1) +"."+ HB_USUBSTR(Number,3,1)
+      aVersion [1] [2] := "HMG " + hb_USubStr(Number,1,1) +"."+ hb_USubStr(Number,2,1) +"."+ hb_USubStr(Number,3,1)
    ENDIF
 
    IF TYPE (aVersion [4] [2]) == "N"   // _HMG_VERSION_PATCH_ is defined as Number

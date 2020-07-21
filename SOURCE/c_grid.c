@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -55,9 +55,9 @@
 
 
 
-/* 
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+/*
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -124,12 +124,12 @@ HB_FUNC (INITLISTVIEW)
 
 
    hWndLV = CreateWindowEx ( WS_EX_CLIENTEDGE , WC_LISTVIEW /*_TEXT("SysListView32")*/ ,
-                             _TEXT(""), 
+                             _TEXT(""),
                              style,
                              hb_parni(3), hb_parni(4) , hb_parni(5), hb_parni(6) ,
                              hwnd,
-                             (HMENU) HMG_parnl (2), 
-                             GetModuleHandle(NULL), 
+                             (HMENU) HMG_parnl (2),
+                             GetModuleHandle(NULL),
                              NULL ) ;
 
 
@@ -147,7 +147,7 @@ HB_FUNC ( LISTVIEW_SETITEMCOUNT )
 {
    HWND hWnd       = (HWND) HMG_parnl (1);
    INT  nItemCount = (INT) hb_parni (2);
-   
+
    if ( (GetWindowLongPtr (hWnd, GWL_STYLE) & LVS_OWNERDATA) == LVS_OWNERDATA )   // ADD3, July 2015
       ListView_SetItemCountEx (hWnd, nItemCount, LVSICF_NOINVALIDATEALL);
    else
@@ -197,7 +197,7 @@ HB_FUNC ( LISTVIEW_GETFIRSTITEM )
 HB_FUNC ( ADDLISTVIEWITEMS )
 {
    HWND hWnd;
-   LV_ITEM LI; 
+   LV_ITEM LI;
    int nColumnCount, nCol, nRow;
 
    hWnd = (HWND) HMG_parnl (1);
@@ -206,7 +206,7 @@ HB_FUNC ( ADDLISTVIEWITEMS )
    if ( HB_ISNIL(4) )
       nRow = ListView_GetItemCount (hWnd);
    else
-      nRow = hb_parni (4); 
+      nRow = hb_parni (4);
 
    LI.mask       = LVIF_TEXT | LVIF_IMAGE;
    LI.state      = 0;
@@ -387,10 +387,10 @@ HB_FUNC ( SETIMAGELISTVIEWITEMS )
 
 	h = (HWND) HMG_parnl (1);
 
-	LI.mask= LVIF_IMAGE ;	
+	LI.mask= LVIF_IMAGE ;
 	LI.state=0;
 	LI.stateMask=0;
-        LI.iImage= hb_parni( 3 );	
+        LI.iImage= hb_parni( 3 );
         LI.iSubItem=0;
 	LI.iItem=hb_parni(2) - 1 ;
 
@@ -405,7 +405,7 @@ HB_FUNC ( GETIMAGELISTVIEWITEMS )
 
 	h = (HWND) HMG_parnl (1);
 
-	LI.mask= LVIF_IMAGE ;	
+	LI.mask= LVIF_IMAGE ;
 	LI.state=0;
 	LI.stateMask=0;
         LI.iSubItem=0;
@@ -703,7 +703,7 @@ HB_FUNC ( GETGRIDVKEY )
 {
    LPARAM lParam = (LPARAM) HMG_parnl (1);
    LV_KEYDOWN * LVK = (LV_KEYDOWN *) lParam;
-   hb_retni ( LVK->wVKey ); 
+   hb_retni ( LVK->wVKey );
 }
 
 
@@ -746,8 +746,8 @@ HB_FUNC ( GETGRIDDISPINFOINDEX )
    int iSubItem = pDispInfo->item.iSubItem;
 
    hb_reta( 2 );
-   hb_storvni( iItem    + 1, -1, 1 ); 
-   hb_storvni( iSubItem + 1, -1, 2 ); 
+   hb_storvni( iItem    + 1, -1, 1 );
+   hb_storvni( iSubItem + 1, -1, 2 );
 }
 
 
@@ -755,7 +755,7 @@ HB_FUNC ( SETGRIDQUERYDATA )
 {
    LPARAM lParam = (LPARAM) HMG_parnl (1);
    LV_DISPINFO* pDispInfo = (LV_DISPINFO*) lParam;
-   
+
    // HMG_Trace( __FILE__, __LINE__, __FUNCTION__, _TEXT(" %p |- %s -| %d "), pDispInfo->item.pszText, (TCHAR*) HMG_parc (2), pDispInfo->item.cchTextMax, NULL );
 
 #ifdef COMPILE_HMG_UNICODE

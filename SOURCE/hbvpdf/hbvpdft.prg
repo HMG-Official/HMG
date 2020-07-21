@@ -449,9 +449,9 @@ DEFAULT cColor  TO ""
       IF nBorder > 0
 /*
             1
-         Ú-----¿
-       4 ³     ³ 2
-         À-----Ù
+         Ãš-----Â¿
+       4 Â³     Â³ 2
+         Ã€-----Ã™
             3
 */
          ::aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR( y1 )) + " " + LTRIM(STR( ::aReport[ PAGEY ] - x1 )) + " " + LTRIM(STR( y2 - y1 )) + " -" + LTRIM(STR( nBorder )) + " re f"

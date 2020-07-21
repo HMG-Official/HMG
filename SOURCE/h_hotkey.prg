@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -57,7 +57,7 @@ MEMVAR _HMG_SYSDATA
 *------------------------------------------------------------------------------*
 Procedure _DefineHotKey ( cParentForm , nMod , nKey , bAction )
 *------------------------------------------------------------------------------*
-Local nParentForm , nId , i , nControlCount , k := 0 , z 
+Local nParentForm , nId , i , nControlCount , k, z
 
 	If _HMG_SYSDATA [ 264 ] = .T.
 		cParentForm := _HMG_SYSDATA [ 223 ]
@@ -89,45 +89,45 @@ Local nParentForm , nId , i , nControlCount , k := 0 , z
 
 	k := _GetControlFree()
 
-	
-	_HMG_SYSDATA [1] [k] :=  "HOTKEY" 
-	_HMG_SYSDATA [2]  [k] :=   '' 
-	_HMG_SYSDATA [3]  [k] :=   0 
-	_HMG_SYSDATA [4]  [k] :=   nParentForm 
-	_HMG_SYSDATA [  5 ]  [k] :=   nId 
-	_HMG_SYSDATA [  6 ]  [k] :=   bAction 
-	_HMG_SYSDATA [  7 ]  [k] :=   nMod  
-	_HMG_SYSDATA [  8 ]  [k] :=   nKey 
-	_HMG_SYSDATA [  9 ]  [k] :=   "" 
-	_HMG_SYSDATA [ 10 ]  [k] :=   "" 
-	_HMG_SYSDATA [ 11 ]   [k] :=  "" 
-	_HMG_SYSDATA [ 12 ]  [k] :=   "" 
-	_HMG_SYSDATA [ 13 ]  [k] :=   .F. 
-	_HMG_SYSDATA [ 14 ]  [k] :=   Nil 
-	_HMG_SYSDATA [ 15 ]  [k] :=   Nil 
-	_HMG_SYSDATA [ 16 ]   [k] :=  "" 
-	_HMG_SYSDATA [ 17 ]  [k] :=   {} 
-	_HMG_SYSDATA [ 18 ]  [k] :=   0 
-	_HMG_SYSDATA [ 19 ]   [k] :=  0 
-	_HMG_SYSDATA [ 20 ]  [k] :=   0 
-	_HMG_SYSDATA [ 21 ]  [k] :=   0 
-	_HMG_SYSDATA [ 22 ]   [k] :=  0 
-	_HMG_SYSDATA [ 23 ]  [k] :=   0 
-	_HMG_SYSDATA [ 24 ]   [k] :=  0 
-	_HMG_SYSDATA [ 25 ]   [k] :=  "" 
-	_HMG_SYSDATA [ 26 ]   [k] :=  0 
-	_HMG_SYSDATA [ 27 ]   [k] :=  '' 
-	_HMG_SYSDATA [ 28 ]  [k] :=   0 
-	_HMG_SYSDATA [ 29 ]  [k] :=   {.f.,.f.,.f.,.f.} 
-	_HMG_SYSDATA [ 30 ]   [k] :=   ''  
-	_HMG_SYSDATA [ 31 ]   [k] :=   0  
-	_HMG_SYSDATA [ 32 ]   [k] :=   0  
-	_HMG_SYSDATA [ 33 ]   [k] :=   '' 
-	_HMG_SYSDATA [ 34 ]   [k] :=   .t. 
-	_HMG_SYSDATA [ 35 ]  [k] :=    0 
-	_HMG_SYSDATA [ 36 ]  [k] :=    0 
-	_HMG_SYSDATA [ 37 ]  [k] :=    0 
-	_HMG_SYSDATA [ 38 ]  [k] :=    .T. 
+
+	_HMG_SYSDATA [1] [k] :=  "HOTKEY"
+	_HMG_SYSDATA [2]  [k] :=   ''
+	_HMG_SYSDATA [3]  [k] :=   0
+	_HMG_SYSDATA [4]  [k] :=   nParentForm
+	_HMG_SYSDATA [  5 ]  [k] :=   nId
+	_HMG_SYSDATA [  6 ]  [k] :=   bAction
+	_HMG_SYSDATA [  7 ]  [k] :=   nMod
+	_HMG_SYSDATA [  8 ]  [k] :=   nKey
+	_HMG_SYSDATA [  9 ]  [k] :=   ""
+	_HMG_SYSDATA [ 10 ]  [k] :=   ""
+	_HMG_SYSDATA [ 11 ]   [k] :=  ""
+	_HMG_SYSDATA [ 12 ]  [k] :=   ""
+	_HMG_SYSDATA [ 13 ]  [k] :=   .F.
+	_HMG_SYSDATA [ 14 ]  [k] :=   Nil
+	_HMG_SYSDATA [ 15 ]  [k] :=   Nil
+	_HMG_SYSDATA [ 16 ]   [k] :=  ""
+	_HMG_SYSDATA [ 17 ]  [k] :=   {}
+	_HMG_SYSDATA [ 18 ]  [k] :=   0
+	_HMG_SYSDATA [ 19 ]   [k] :=  0
+	_HMG_SYSDATA [ 20 ]  [k] :=   0
+	_HMG_SYSDATA [ 21 ]  [k] :=   0
+	_HMG_SYSDATA [ 22 ]   [k] :=  0
+	_HMG_SYSDATA [ 23 ]  [k] :=   0
+	_HMG_SYSDATA [ 24 ]   [k] :=  0
+	_HMG_SYSDATA [ 25 ]   [k] :=  ""
+	_HMG_SYSDATA [ 26 ]   [k] :=  0
+	_HMG_SYSDATA [ 27 ]   [k] :=  ''
+	_HMG_SYSDATA [ 28 ]  [k] :=   0
+	_HMG_SYSDATA [ 29 ]  [k] :=   {.f.,.f.,.f.,.f.}
+	_HMG_SYSDATA [ 30 ]   [k] :=   ''
+	_HMG_SYSDATA [ 31 ]   [k] :=   0
+	_HMG_SYSDATA [ 32 ]   [k] :=   0
+	_HMG_SYSDATA [ 33 ]   [k] :=   ''
+	_HMG_SYSDATA [ 34 ]   [k] :=   .t.
+	_HMG_SYSDATA [ 35 ]  [k] :=    0
+	_HMG_SYSDATA [ 36 ]  [k] :=    0
+	_HMG_SYSDATA [ 37 ]  [k] :=    0
+	_HMG_SYSDATA [ 38 ]  [k] :=    .T.
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -135,7 +135,7 @@ Return
 *------------------------------------------------------------------------------*
 Procedure _ReleaseHotKey ( cParentForm, nMod , nKey )
 *------------------------------------------------------------------------------*
-Local i , nParentFormHandle , nControlCount , z 
+Local i , nParentFormHandle , nControlCount , z
 
 	nParentFormHandle := GetFormhandle ( cParentForm )
 	nControlCount := HMG_LEN ( _HMG_SYSDATA [3] )

@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_Init.c  
+ HMG Source File --> c_Init.c
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -105,7 +105,7 @@ HB_FUNC (HMG_INITALLCOMMONCONTROLS)   // Loaded, registers and initializes all c
            lVer30 = TRUE;
    }
    _THREAD_LOCK();
-      RichEditBoxVer30 = lVer30; 
+      RichEditBoxVer30 = lVer30;
    _THREAD_UNLOCK();
 
    hb_retni (i);
@@ -113,7 +113,7 @@ HB_FUNC (HMG_INITALLCOMMONCONTROLS)   // Loaded, registers and initializes all c
 
 
 HB_FUNC ( OLEINITIALIZE )
-{  // Applications that use the following functionality must call OleInitialize before calling 
+{  // Applications that use the following functionality must call OleInitialize before calling
    // any other function in the COM library: Clipboard, Drag and Drop, Object linking and embedding (OLE), In-place activation
    OleInitialize (NULL);
 }
@@ -199,7 +199,7 @@ _THREAD_LOCK();
 
    if( fp )
       fclose( fp );
-   
+
 _THREAD_UNLOCK();
 }
 

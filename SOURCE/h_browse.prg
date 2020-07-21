@@ -154,32 +154,32 @@ Local nHeaderImageListHandle
 
 	ParentForm = GetFormHandle (ParentForm)
 
-	if valtype(w) == "U"
+	if ValType(w) == "U"
 		w := 240
 	endif
-	if valtype(h) == "U"
+	if ValType(h) == "U"
 		h := 120
 	endif
-	if valtype(value) == "U"
+	if ValType(value) == "U"
 		value := 0
 	endif
-	if valtype(aFields) == "U"
+	if ValType(aFields) == "U"
 		aFields := {}
 	endif
-	if valtype(aJust) == "U"		// Browse+
+	if ValType(aJust) == "U"		// Browse+
 		aJust := Array( HMG_LEN( aFields ) )
 		aFill( aJust, 0 )
 	else
 		aSize( aJust, HMG_LEN( aFields) )
 		aEval( aJust, { |x| x := iif( x == NIL, 0, x ) } )
 	endif
-	if valtype(aImage) == "U"
+	if ValType(aImage) == "U"
 		aImage := {}
 	endif
 
 	// If splitboxed force no vertical scrollbar
 
-	if valtype(x) == "U" .or. valtype(y) == "U"
+	if ValType(x) == "U" .or. ValType(y) == "U"
 		novscroll := .T.
 	endif
 
@@ -189,7 +189,7 @@ Local nHeaderImageListHandle
 		DeltaWidth := 0
 	EndIf
 
-	if valtype(x) == "U" .or. valtype(y) == "U"
+	if ValType(x) == "U" .or. ValType(y) == "U"
 
 		If _HMG_SYSDATA [ 216 ] == 'TOOLBAR'
 			Break := .T.
@@ -206,7 +206,7 @@ Local nHeaderImageListHandle
 			x := GetWindowCol ( Controlhandle )
 			y := GetWindowRow ( Controlhandle )
 
-			if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+			if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 				FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 			Else
 				FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -219,7 +219,7 @@ Local nHeaderImageListHandle
 
 		ControlHandle := InitBrowse ( ParentForm, 0, x, y, w - DeltaWidth , h , '', 0, iif( nogrid, 0, 1 ) ) // Browse+
 
-		if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+		if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 			FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 		Else
 			FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -239,19 +239,19 @@ Local nHeaderImageListHandle
 	wBitmap := iif( HMG_LEN( aImage ) > 0, AddListViewBitmap( ControlHandle, aImage, NoTrans ), 0 ) //Add Bitmap Column
 	aWidths[1] := max ( aWidths[1], wBitmap + 2 ) // Set Column 1 witth to Bitmap width
 
-	if valtype(aHeadClick) == "U"
+	if ValType(aHeadClick) == "U"
 		aHeadClick := {}
 	endif
 
-	if valtype(change) == "U"
+	if ValType(change) == "U"
 		change := ""
 	endif
 
-	if valtype(dblclick) == "U"
+	if ValType(dblclick) == "U"
 		dblclick := ""
 	endif
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 	        SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -383,7 +383,7 @@ Local p
 Local cTempType	// added by Marek Olszewski 2016.05.25
 
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex(ControlName,ParentName)
 	Else
 		i := z
@@ -585,7 +585,7 @@ Local cTempType	// added by Marek Olszewski 2016.05.25
 
 			ElseIf cTempType == 'D'
 
-				aadd ( aTemp , Dtoc(&cTemp) )
+				aadd ( aTemp , DToC(&cTemp) )
 
 			ElseIf cTempType == 'L'
 
@@ -625,7 +625,7 @@ Local cTempType	// added by Marek Olszewski 2016.05.25
 
 			ElseIf cTempType == 'D'
 
-				aadd ( aTemp , Dtoc(&cTemp) )
+				aadd ( aTemp , DToC(&cTemp) )
 
 			ElseIf cTempType == 'L'
 
@@ -761,7 +761,7 @@ Procedure _BrowseNext ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , PageLength , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll, s
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -816,7 +816,7 @@ Procedure _BrowsePrior ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -862,7 +862,7 @@ Procedure _BrowseHome ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , _Alias , _RecNo , _BrowseArea , _DeltaScroll
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -898,7 +898,7 @@ Procedure _BrowseEnd ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , _Alias , _RecNo , _BrowseArea , _DeltaScroll, _BottomRec
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -937,7 +937,7 @@ Procedure _BrowseUp ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , s  , _Alias , _RecNo , _BrowseArea, _BrowseRecMap , _DeltaScroll
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -983,7 +983,7 @@ Procedure _BrowseDown ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , PageLength , s , _Alias , _RecNo , _BrowseArea , _BrowseRecMap , _DeltaScroll
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -1044,7 +1044,7 @@ MEMVAR cMacroVar
 Private cMacroVar
 
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -1075,7 +1075,7 @@ Private cMacroVar
 	Go v
 
 	if s == 1 .or. s == 0
-		cMacroVar := dbfilter()
+		cMacroVar := dbFilter()
 		If HMG_LEN (cMacroVar) > 0
 			If ! &cMacroVar
 				Skip
@@ -1084,8 +1084,8 @@ Private cMacroVar
 	EndIf
 
 	if s == 0 .or. s == 1
-		if INDEXORD() != 0
-			if ORDKEYVAL() == Nil
+		if IndexOrd() != 0
+			if ordKeyVal() == Nil
 				Go Top
 			endif
 		EndIf
@@ -1198,7 +1198,7 @@ Private cMacroVar
 
 	Go Value
 
-	cMacroVar := dbfilter()
+	cMacroVar := dbFilter()
 
 	If HMG_LEN (cMacroVar) > 0
 
@@ -1226,7 +1226,7 @@ Private cMacroVar
 		Endif
 		Return
 	Else
-		if pcount() < 5
+		if PCount() < 5
 			_BrowseVscrollUpdate( i )
 		EndIf
 		Skip -m + 1
@@ -1254,7 +1254,7 @@ Function _BrowseGetValue ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , RetVal , _BrowseRecMap , _BrowseArea
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -1281,7 +1281,7 @@ Function  _BrowseDelete (  ControlName , ParentForm , z  )
 *-----------------------------------------------------------------------------*
 Local i , _BrowseRecMap , Value , _Alias , _RecNo , _BrowseArea
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -1310,10 +1310,10 @@ Local i , _BrowseRecMap , Value , _Alias , _RecNo , _BrowseArea
 	Go Value
 
 	If _HMG_SYSDATA [  9 ] [i] == .t.
-		If Rlock()
+		If RLock()
 			Delete
 			Skip
-			if eof()
+			if Eof()
 				Go Bottom
 			EndIf
 
@@ -1331,7 +1331,7 @@ Local i , _BrowseRecMap , Value , _Alias , _RecNo , _BrowseArea
 
 		Delete
 		Skip
-		if eof()
+		if Eof()
 			Go Bottom
 		EndIf
 		If Set ( _SET_DELETED ) == .T.
@@ -1490,7 +1490,7 @@ Local br
 	// If LOCK clause is present, try to lock.
 
 	If lock == .T.
-		If Rlock() == .F.
+		If RLock() == .F.
 			MsgExclamation(_HMG_SYSDATA [ 136 ][9],_HMG_SYSDATA [ 136 ][10])
 			// Restore Original Record Pointer
 			Go BackRec
@@ -1510,7 +1510,7 @@ Local br
 		IF HMG_LEN (aTemp) == HMG_LEN (_GridFields)
 			IF VALTYPE ( aTemp [CellColIndex] ) = 'B'
 				ba := Alias()
-				br := recno()
+				br := RecNo()
 				_HMG_SYSDATA [ 232 ] := 'BROWSE_WHEN'
 				E := EVAL ( aTemp [CellColIndex] )
 				_HMG_SYSDATA [ 232 ] := ''
@@ -1535,10 +1535,10 @@ Local br
 
 	CellData := &FieldName
 
-        aFieldNames	:= ARRAY(FCOUNT())
-        aTypes		:= ARRAY(FCOUNT())
-        aWidths		:= ARRAY(FCOUNT())
-        aDecimals	:= ARRAY(FCOUNT())
+        aFieldNames	:= ARRAY(FCount())
+        aTypes		:= ARRAY(FCount())
+        aWidths		:= ARRAY(FCount())
+        aDecimals	:= ARRAY(FCount())
 
         AFIELDS(aFieldNames, aTypes, aWidths, aDecimals)
 
@@ -1582,7 +1582,7 @@ Local br
 
 	If ControlType == 'M'
 
-		r := InputBox ( '' , _HMG_SYSDATA [ 33 ] [I] [CellColIndex] , HB_UTF8STRTRAN(CellData,CHR(141),' ') , , , .T. )
+		r := InputBox ( '' , _HMG_SYSDATA [ 33 ] [I] [CellColIndex] , hb_utf8StrTran(CellData,CHR(141),' ') , , , .T. )
 
 		If _HMG_SYSDATA [ 257 ] == .F.
 			Replace &FieldName With r
@@ -1606,7 +1606,7 @@ Local br
 
 			ON KEY CONTROL+W ACTION if ( _IsWindowActive ( '_InPlaceEdit' ) , _InPlaceEditOk ( i , Fieldname , _InPlaceEdit.Control_1.Value , ControlType , aValid , CellColIndex , sFieldName , _GridWorkArea , aValidMessages , lock , aInputItems ) , Nil )
 			ON KEY RETURN ACTION if ( _IsWindowActive ( '_InPlaceEdit' ) , _InPlaceEditOk ( i , Fieldname , _InPlaceEdit.Control_1.Value , ControlType , aValid , CellColIndex , sFieldName , _GridWorkArea , aValidMessages , lock , aInputItems ) , Nil )
-			ON KEY ESCAPE ACTION ( _HMG_SYSDATA [ 256 ] := .T. , dbrunlock() , _InPlaceEdit.Release , setfocus ( _HMG_SYSDATA [3] [i] ) )
+			ON KEY ESCAPE ACTION ( _HMG_SYSDATA [ 256 ] := .T. , dbRUnlock() , _InPlaceEdit.Release , setfocus ( _HMG_SYSDATA [3] [i] ) )
 
 			If lInputItems == .T.
 
@@ -2121,7 +2121,7 @@ Procedure _BrowseInPlaceAppend ( ControlName , ParentForm , z )
 *-----------------------------------------------------------------------------*
 Local i , _Alias , _RecNo , _BrowseArea , _NewRec , aTemp
 
-	If pcount() == 2
+	If PCount() == 2
 		i := GetControlIndex ( ControlName , ParentForm )
 	Else
 		i := z
@@ -2176,9 +2176,9 @@ Local ActualRecord , RecordCount , KeyCount
 	// If vertical scrollbar is used it must be updated
 	If _HMG_SYSDATA [  5 ] [i] != 0
 
-		KeyCount := OrdKeyCount()
+		KeyCount := ordKeyCount()
 		If KeyCount > 0
-			ActualRecord := OrdKeyNo()
+			ActualRecord := ordKeyNo()
 			RecordCount := KeyCount
 		Else
 			ActualRecord := RecNo()

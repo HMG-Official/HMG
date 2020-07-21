@@ -563,7 +563,7 @@ Return ALLTRIM( If( n > 0, HB_ULEFT( cName, n - 1 ), cName ) )
 /*
 */
 FUNCTION DB_CODE(cData, cKey, aFields, cPass, cFor, cWhile)
-local cTmpFile := "__temp__.dbf", nRecno := recno(), cVal, cBuf 
+local cTmpFile := "__temp__.dbf", nRecno := recno(), cVal, cBuf
 
 Local aString[HMG_LEN(aFields)] , nFields , cSeek , i , cAlias , cTmpAlias // RL
 

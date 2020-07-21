@@ -72,12 +72,12 @@ Local Retval, t
 
    If ValType ( RevertDefault ) == 'L'
       If RevertDefault == .T.
-         t := c_msgyesno_id(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+         t := c_msgyesno_id(HMG_ValToStr(Message), hb_ValToStr(Title))
       Else
-         t := c_msgyesno(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+         t := c_msgyesno(HMG_ValToStr(Message), hb_ValToStr(Title))
       EndIf
    Else
-      t := c_msgyesno(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+      t := c_msgyesno(HMG_ValToStr(Message), hb_ValToStr(Title))
    EndIf
    
    if t = 6 
@@ -94,7 +94,7 @@ Function MsgRetryCancel ( Message , Title )
 Local Retval, t
    DEFAULT Message TO ''
    DEFAULT Title TO ''
-   t := c_msgretrycancel (HMG_ValToStr(Message), HB_VALTOSTR(Title))
+   t := c_msgretrycancel (HMG_ValToStr(Message), hb_ValToStr(Title))
    if t = 4 
       RetVal := .t.
    Else
@@ -109,7 +109,7 @@ Function MsgOkCancel ( Message , Title )
 Local Retval, t
    DEFAULT Message TO ''
    DEFAULT Title TO ''
-   t := c_msgokcancel(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+   t := c_msgokcancel(HMG_ValToStr(Message), hb_ValToStr(Title))
    if t = 1 
       RetVal := .t.
    Else
@@ -123,7 +123,7 @@ Function MsgInfo ( Message , Title )
 *-----------------------------------------------------------------------------*
    DEFAULT Message TO ''
    DEFAULT Title TO ''
-   c_msginfo(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+   c_msginfo(HMG_ValToStr(Message), hb_ValToStr(Title))
 Return Nil
 
 
@@ -132,7 +132,7 @@ Function MsgStop ( Message , Title )
 *-----------------------------------------------------------------------------*
    DEFAULT Message TO ''
    DEFAULT Title TO ''
-   c_msgstop(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+   c_msgstop(HMG_ValToStr(Message), hb_ValToStr(Title))
 Return Nil
 
 
@@ -141,7 +141,7 @@ Function MsgExclamation ( Message , Title )
 *-----------------------------------------------------------------------------*
    DEFAULT Message TO ''
    DEFAULT Title TO ''
-   c_msgexclamation(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+   c_msgexclamation(HMG_ValToStr(Message), hb_ValToStr(Title))
 Return Nil
 
 
@@ -150,7 +150,7 @@ Function MsgBox ( Message , Title )
 *-----------------------------------------------------------------------------*
    DEFAULT Message TO ''
    DEFAULT Title TO ''
-   c_msgbox(HMG_ValToStr(Message), HB_VALTOSTR(Title))
+   c_msgbox(HMG_ValToStr(Message), hb_ValToStr(Title))
 Return Nil
 
 
@@ -179,9 +179,9 @@ FUNCTION MsgDebug
 *-----------------------------------------------------------------------------*
 LOCAL i, cMsg, cTitle
    #define CRLF CHR(13)+CHR(10)
-   cMsg := "Called from: " + PROCNAME(1) + "(" + LTRIM(STR(PROCLINE(1))) + ") --> " + PROCFILE (1) + CRLF + CRLF
-   FOR i = 1 TO PCOUNT()
-       cMsg := cMsg + HB_VALTOEXP (PVALUE (i)) + IIF (i < PCOUNT(), ", ", "")
+   cMsg := "Called from: " + ProcName(1) + "(" + LTrim(Str(ProcLine(1))) + ") --> " + PROCFILE (1) + CRLF + CRLF
+   FOR i = 1 TO PCount()
+       cMsg := cMsg + HB_VALTOEXP (PVALUE (i)) + IIF (i < PCount(), ", ", "")
    NEXT
    // MsgBox (cMsg)
    cTitle := _HMG_MsgDebugTitle
@@ -228,6 +228,6 @@ Function MessageBoxTimeout ( Message , Title , nTypeIconButton , nMilliseconds )
    LOCAL nRetValue
    DEFAULT Message TO ''
    DEFAULT Title TO ''
-   nRetValue := HMG_MessageBoxTimeout ( HMG_ValToStr(Message), HB_VALTOSTR(Title), nTypeIconButton, nMilliseconds )
+   nRetValue := HMG_MessageBoxTimeout ( HMG_ValToStr(Message), hb_ValToStr(Title), nTypeIconButton, nMilliseconds )
 Return nRetValue
 
