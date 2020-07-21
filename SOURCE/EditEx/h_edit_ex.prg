@@ -2,27 +2,27 @@
  * Implementación del comando EDIT EXTENDED para la librería HMG.
  * (c) Cristóbal Mollá [cemese@terra.es]
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this file.
 
- The exception is that, if you link this code with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link this code with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking  
+ Your use of that executable is in no way restricted on account of linking
  this code into it.
 
  *
@@ -444,7 +444,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
 	// Opciones del usuario.
 	lSalida := .t.
 
-	if ValType( aOpciones ) != "A" 
+	if ValType( aOpciones ) != "A"
 		lSalida := .f.
 	elseif HMG_LEN(aOpciones)<1
 		lSalida := .f.
@@ -858,12 +858,12 @@ return NIL
 STATIC function ABM2CambiarOrden()
 
 ////////// Declaración de variables locales.-----------------------------------
-        local cIndice as character              // Nombre del indice.
+       // local cIndice as character              // Nombre del indice.
         local nIndice as numeric                // Número del indice.
 
 ////////// Inicializa las variables.-------------------------------------------
         nIndice := wndABM2Edit.cbIndices.Value
-        cIndice := wndABM2Edit.cbIndices.Item( nIndice )
+       // cIndice := wndABM2Edit.cbIndices.Item( nIndice ) //Variable 'CINDICE' is assigned but not used in function. asistex
 
 ////////// Cambia el orden del area de trabajo.--------------------------------
         nIndice--
@@ -2224,7 +2224,7 @@ STATIC function ABM2DefinirRegistro( nAccion )
 
 ////////// Inicializa las variables.-------------------------------------------
         nRegistro := (_cArea)->( RecNo() )
-        cValor    := ""
+
 
 ////////// Selecciona el registro.---------------------------------------------
         nReg := ABM2Seleccionar()
@@ -2539,14 +2539,14 @@ STATIC function ABM2Listado( aImpresoras )
 			SELECT PRINTER cImpresora ;
 				TO lSuccess ;
 				ORIENTATION PRINTER_ORIENT_LANDSCAPE ;
-				PAPERSIZE PRINTER_PAPER_A4 
+				PAPERSIZE PRINTER_PAPER_A4
 
 		else
 
 			SELECT PRINTER cImpresora ;
 				TO lSuccess ;
 				ORIENTATION PRINTER_ORIENT_PORTRAIT ;
-				PAPERSIZE PRINTER_PAPER_A4 
+				PAPERSIZE PRINTER_PAPER_A4
 
                 endif
 
@@ -2576,21 +2576,21 @@ STATIC function ABM2Listado( aImpresoras )
                                         @ 5*RF, (HBPRNMAXCOL-HMG_LEN(_cTitulo)-6)*CF PRINT _cTitulo  FONT "COURIER NEW" SIZE 12 BOLD
                                         @ (6*RF) + 1 , 10*CF PRINT LINE TO (6*RF) + 1 , (HBPRNMAXCOL-5)*CF PENWIDTH 0.2
 
-                                        @ 7*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ] [26]	FONT "COURIER NEW" SIZE 9 BOLD 
-                                        @ 8*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][27]	FONT "COURIER NEW" SIZE 9 BOLD 
-                                        @ 9*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][28]	FONT "COURIER NEW" SIZE 9 BOLD 
-                                        @ 10*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][33]	FONT "COURIER NEW" SIZE 9 BOLD 
+                                        @ 7*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ] [26]	FONT "COURIER NEW" SIZE 9 BOLD
+                                        @ 8*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][27]	FONT "COURIER NEW" SIZE 9 BOLD
+                                        @ 9*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][28]	FONT "COURIER NEW" SIZE 9 BOLD
+                                        @ 10*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][33]	FONT "COURIER NEW" SIZE 9 BOLD
 
-                                        @ 7*RF	, 23*CF PRINT (_cArea)->( ordName() )	FONT "COURIER NEW" SIZE 9  
-                                        @ 8*RF	, 23*CF PRINT cRegistro1		FONT "COURIER NEW" SIZE 9  
-                                        @ 9*RF	, 23*CF PRINT cRegistro2		FONT "COURIER NEW" SIZE 9 
-                                        @ 10*RF	, 23*CF PRINT _cFiltro			FONT "COURIER NEW" SIZE 9 
+                                        @ 7*RF	, 23*CF PRINT (_cArea)->( ordName() )	FONT "COURIER NEW" SIZE 9
+                                        @ 8*RF	, 23*CF PRINT cRegistro1		FONT "COURIER NEW" SIZE 9
+                                        @ 9*RF	, 23*CF PRINT cRegistro2		FONT "COURIER NEW" SIZE 9
+                                        @ 10*RF	, 23*CF PRINT _cFiltro			FONT "COURIER NEW" SIZE 9
 
                                         nColumna := 10
 
                                         for i := 1 to HMG_LEN( aCampo )
-                                                @ 12*RF, nColumna*CF PRINT RECTANGLE TO 12*RF, nColumna + aAncho[i] PENWIDTH 0.2 
-                                                @ 12*RF, (nColumna + 1) *CF PRINT aCampo[i] FONT "COURIER NEW" SIZE 9 BOLD 
+                                                @ 12*RF, nColumna*CF PRINT RECTANGLE TO 12*RF, nColumna + aAncho[i] PENWIDTH 0.2
+                                                @ 12*RF, (nColumna + 1) *CF PRINT aCampo[i] FONT "COURIER NEW" SIZE 9 BOLD
                                                 nColumna += aAncho[i]
                                         next
 
@@ -2605,11 +2605,11 @@ STATIC function ABM2Listado( aImpresoras )
                                         do case
                                                 case _aEstructura[nCampo,DBS_TYPE] == "N"
 
-                                                        @ nFila*RF, ( nColumna + aAncho[i] ) *CF PRINT (_cArea)->( FieldGet( aNumeroCampo[i] ) ) FONT "COURIER NEW" SIZE 8 
+                                                        @ nFila*RF, ( nColumna + aAncho[i] ) *CF PRINT (_cArea)->( FieldGet( aNumeroCampo[i] ) ) FONT "COURIER NEW" SIZE 8
 
                                                 case _aEstructura[nCampo,DBS_TYPE] == "L"
 
-                                                        @ nFila*RF, ( nColumna + 1 )  *CF PRINT iif( (_cArea)->( FieldGet( aNumeroCampo[i] ) ), _HMG_SYSDATA [ 130 ][29], _HMG_SYSDATA [ 130 ][30] ) FONT "COURIER NEW" SIZE 8 
+                                                        @ nFila*RF, ( nColumna + 1 )  *CF PRINT iif( (_cArea)->( FieldGet( aNumeroCampo[i] ) ), _HMG_SYSDATA [ 130 ][29], _HMG_SYSDATA [ 130 ][30] ) FONT "COURIER NEW" SIZE 8
 
                                                 case _aEstructura[nCampo,DBS_TYPE] == "M"
 
@@ -2640,11 +2640,11 @@ STATIC function ABM2Listado( aImpresoras )
                                 if lOrientacion
                                         if nFila > 44
 
-                                                @ (46*RF) - 1 , 10 *CF  PRINT LINE TO (46*RF)-1, ( HBPRNMAXCOL - 5 ) *CF PENWIDTH 0.2 
+                                                @ (46*RF) - 1 , 10 *CF  PRINT LINE TO (46*RF)-1, ( HBPRNMAXCOL - 5 ) *CF PENWIDTH 0.2
 
                                                 cPie := HB_ValToStr( Date() ) + " " + Time()
 
-                                                @ 46*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                                                @ 46*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
 
                                                 cPie := "Pagina:" + " " +          ;
@@ -2652,7 +2652,7 @@ STATIC function ABM2Listado( aImpresoras )
                                                         "/" +                           ;
                                                         ALLTRIM( STR( nPaginas ) )
 
-                                                @ 46*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                                                @ 46*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                                                 nPagina++
                                                 nFila := 13
@@ -2670,14 +2670,14 @@ STATIC function ABM2Listado( aImpresoras )
 
                                                 cPie := HB_ValToStr( Date() ) + " " + Time()
 
-                                                @ 68*RF, 10 *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                                                @ 68*RF, 10 *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                                                 cPie := "Pagina: " +                    ;
                                                         ALLTRIM( STR( nPagina) ) +      ;
                                                         "/" +                           ;
                                                         ALLTRIM( STR( nPaginas ) )
 
-                                                @ 68*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                                                @ 68*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                                                 nFila := 13
                                                 nPagina++
@@ -2698,24 +2698,24 @@ STATIC function ABM2Listado( aImpresoras )
                         @ (46*RF)-1, 10 *CF  PRINT LINE TO (46*RF)-1, ( HBPRNMAXCOL - 5 )  *CF PENWIDTH 0.2
 
                         cPie := HB_ValToStr( Date() ) + " " + Time()
-                        @ 46*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                        @ 46*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                         cPie := "Página: " +                    ;
                                 ALLTRIM( STR( nPagina) ) +      ;
                                 "/" +                           ;
                                 ALLTRIM( STR( nPaginas ) )
-                        @ 46*RF, ( HBPRNMAXCOL -HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                        @ 46*RF, ( HBPRNMAXCOL -HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
                 else
 
                         @ (68*RF)-1, 10  *CF PRINT LINE TO (68*RF)-1, ( HBPRNMAXCOL - 5 ) *CF PENWIDTH 0.2
                         cPie := HB_ValToStr( Date() ) + " " + Time()
-                        @ 68*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                        @ 68*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                         cPie := "Página: " +                    ;
                                 ALLTRIM( STR( nPagina) ) +      ;
                                 "/" +                           ;
                                 ALLTRIM( STR( nPaginas ) )
-                        @ 68*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5)  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD 
+                        @ 68*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5)  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                 endif
 
