@@ -1,0 +1,24 @@
+
+*.log
+*.dbi
+*.o
+
+# build generated files
+bak/*/
+lib/*/
+obj/*/
+bin/*/
+*.zip
+*.7z
+*.dic
+*.lst
+*.log
+
+# installed binaries
+*.exe
+*.dll
+*.lib
+
+# misc junk
+*.bak
+LICENSE
