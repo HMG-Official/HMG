@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -68,41 +68,40 @@
 FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDepth, nBarWidth, nSeparation, aTitleColor, nHValues, ;
                     l3DView, lShowGrid, lShowXGrid, lShowYGrid, lShowXValues, lShowYValues, lShowLegends, aSerieNames, aSerieColors, nGraphType, ;
                     lShowValues, cPicture, nLegendWindth, lNoBorder )
-                 
+
    LOCAL nI, nJ, nPos, nMax, nMin, nMaxBar, nDeep
-   LOCAL nRange, nResH, nResV,  nWide, aPoint, cName
+   LOCAL nRange, nResH, nResV,  nWide, aPoint
    LOCAL nXMax, nXMin, nHigh, nRel, nZero, nRPos, nRNeg
    LOCAL hBitmap, hDC, BTStruct
    LOCAL nTop := 0
    LOCAL nLeft := 0
    LOCAL nBottom := nHeight
    LOCAL nRight := nWidth
-   LOCAL nPenWidth := 1
 
    CHECK TYPE SOFT ;
-         nWidth         AS NUMERIC     ,; 
-         nHeight        AS NUMERIC     ,; 
-         aSerieValues   AS ARRAY       ,; 
-         cTitle         AS CHARACTER   ,; 
-         aSerieYNames   AS ARRAY       ,; 
-         nBarDepth      AS NUMERIC     ,; 
-         nBarWidth      AS NUMERIC     ,; 
-         nSeparation    AS NUMERIC     ,; 
-         aTitleColor    AS ARRAY       ,; 
+         nWidth         AS NUMERIC     ,;
+         nHeight        AS NUMERIC     ,;
+         aSerieValues   AS ARRAY       ,;
+         cTitle         AS CHARACTER   ,;
+         aSerieYNames   AS ARRAY       ,;
+         nBarDepth      AS NUMERIC     ,;
+         nBarWidth      AS NUMERIC     ,;
+         nSeparation    AS NUMERIC     ,;
+         aTitleColor    AS ARRAY       ,;
          nHValues       AS NUMERIC     ,;
-         l3DView        AS LOGICAL     ,; 
-         lShowGrid      AS LOGICAL     ,; 
-         lShowXGrid     AS LOGICAL     ,; 
-         lShowYGrid     AS LOGICAL     ,; 
-         lShowXValues   AS LOGICAL     ,; 
-         lShowYValues   AS LOGICAL     ,; 
-         lShowLegends   AS LOGICAL     ,; 
-         aSerieNames    AS ARRAY       ,; 
+         l3DView        AS LOGICAL     ,;
+         lShowGrid      AS LOGICAL     ,;
+         lShowXGrid     AS LOGICAL     ,;
+         lShowYGrid     AS LOGICAL     ,;
+         lShowXValues   AS LOGICAL     ,;
+         lShowYValues   AS LOGICAL     ,;
+         lShowLegends   AS LOGICAL     ,;
+         aSerieNames    AS ARRAY       ,;
          aSerieColors   AS ARRAY       ,;
          nGraphType     AS NUMERIC     ,;
-         lShowValues    AS LOGICAL     ,; 
-         cPicture       AS CHARACTER   ,; 
-         nLegendWindth  AS NUMERIC     ,; 
+         lShowValues    AS LOGICAL     ,;
+         cPicture       AS CHARACTER   ,;
+         nLegendWindth  AS NUMERIC     ,;
          lNoBorder      AS LOGICAL
 
    DEFAULT cTitle   := ""
@@ -121,7 +120,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
    IF lShowGrid
       lShowXGrid := lShowYGrid := .T.
    ENDIF
-   
+
    IF nBottom <> NIL .AND. nRight <> NIL
       nHeight := nBottom - nTop / 2
       nWidth  := nRight - nLeft / 2
@@ -143,7 +142,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
    //
    IF ! lNoBorder
       DrawWindowBoxInBitmap( hDC, Max( 1, nTop - 44 ), Max( 1, nLeft - 80 - nBarDepth ), nHeight - 1, nWidth - 1 )
-   ENDIF   
+   ENDIF
 
    // Back area
    //
@@ -227,7 +226,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
    nXMin := IF( nMin < 0, DetMaxVal( nMin ), 0 )
    nHigh := nXMax + nXMin
    nMax  := Max( nXMax, nXMin )
-   
+
    nRel  := ( nMaxBar / nHigh )
    nMaxBar := nMax * nRel
 
@@ -281,7 +280,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
       nRPos -= ( nMaxBar / nHValues )
       nRNeg += ( nMaxBar / nHValues )
    NEXT nI
-   
+
    IF lShowYGrid .and. nGraphType <> BARS
       nPos:=IF(l3DView, nTop, nTop-5 )
       nI  := nLeft + nWide
@@ -290,7 +289,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
          DrawLineInBitmap( hDC, nBottom, nI-nDeep, nBottom-nDeep, nI, COLOR_GREY41 )
          nI += nWide
       NEXT
-   ENDIF   
+   ENDIF
 
    DO WHILE .T.    // Bar adjust
       nPos = nLeft + ( nWide / 2 )
@@ -305,13 +304,13 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
    nMin := nMax / nMaxBar
 
    nPos := nLeft + ( ( nWide + nSeparation ) / 2 )            // first point graph
-   nRange := ( ( nWide + nSeparation ) * HMG_LEN(aSerieNames) ) / 2
+   // nRange := ( ( nWide + nSeparation ) * HMG_LEN(aSerieNames) ) / 2 // Variable 'NRANGE' is assigned but not used in function. asistex
 
    IF lShowYValues .AND. HMG_LEN( aSerieYNames ) > 0                // Show yLabels
       nBarWidth  := ( nRight - nLeft ) / ( nMax(aSerieValues) + 1 )
       nI := nLeft + nBarWidth
       FOR nJ := 1 TO nMax(aSerieValues)
-         cName := "yVal_Name_"+LTRIM(STR(nJ))
+         // cName := "yVal_Name_"+LTRIM(STR(nJ)) //  Variable 'CNAME' is assigned but not used in function.  asistex
          DrawTextInBitmap( hDC, nBottom + 8, nI - nDeep - IF(l3DView, 0, 8), aSerieYNames[nJ], 'Arial', 8, BLUE )
          nI += nBarWidth
       NEXT
@@ -329,7 +328,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
 
    // Bars
    //
-   
+
    IF nGraphType == BARS
       if nMin <> 0
          nPos := nLeft + ( ( nWide + nSeparation ) / 2 )
@@ -390,7 +389,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
             nPos += nBarWidth
          NEXT nI
       ENDIF
-   endif   
+   endif
 
    IF lShowValues
       IF nGraphType == BARS
@@ -431,47 +430,43 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
    LOCAL fromcol := 0
    LOCAL torow := nHeight
    LOCAL tocol := nWidth
-   LOCAL topleftrow := fromrow
-   LOCAL topleftcol := fromcol
-   LOCAL toprightrow := fromrow
-   LOCAL toprightcol := tocol
-   LOCAL bottomrightrow := torow
-   LOCAL bottomrightcol := tocol
-   LOCAL bottomleftrow := torow
-   LOCAL bottomleftcol := fromcol
-   LOCAL middletoprow := fromrow
-   LOCAL middletopcol := fromcol + int(tocol - fromcol) / 2
-   LOCAL middleleftrow := fromrow + int(torow - fromrow) / 2
-   LOCAL middleleftcol := fromcol
-   LOCAL middlebottomrow := torow
-   LOCAL middlebottomcol := fromcol + int(tocol - fromcol) / 2
-   LOCAL middlerightrow := fromrow + int(torow - fromrow) / 2
-   LOCAL middlerightcol := tocol
-   LOCAL fromradialrow := 0
-   LOCAL fromradialcol := 0
-   LOCAL toradialrow := 0
-   LOCAL toradialcol := 0
+   LOCAL topleftrow
+   LOCAL topleftcol
+   LOCAL toprightrow
+   LOCAL toprightcol
+   LOCAL bottomrightrow
+   LOCAL bottomrightcol
+   LOCAL bottomleftrow
+   LOCAL bottomleftcol
+   LOCAL middletopcol
+   LOCAL middleleftrow
+   LOCAL middleleftcol
+   LOCAL middlebottomcol
+   LOCAL middlerightrow
+   LOCAL middlerightcol
+   LOCAL fromradialrow
+   LOCAL fromradialcol
+   LOCAL toradialrow
+   LOCAL toradialcol
    LOCAL degrees := {}
    LOCAL cumulative := {}
    LOCAL j,i,sum := 0
-   LOCAL cname := ""
-   LOCAL shadowcolor := {}
+   LOCAL shadowcolor
    LOCAL previos_cumulative
    LOCAL hDC, hBitmap, BTStruct
-   LOCAL nPenWidth := 1
 
    CHECK TYPE SOFT;
-         nWidth         AS NUMERIC   ,; 
-         nHeight        AS NUMERIC   ,; 
-         aSerieValues   AS ARRAY     ,; 
-         aSerieNames    AS ARRAY     ,; 
-         aSerieColors   AS ARRAY     ,; 
-         cTitle         AS CHARACTER ,; 
+         nWidth         AS NUMERIC   ,;
+         nHeight        AS NUMERIC   ,;
+         aSerieValues   AS ARRAY     ,;
+         aSerieNames    AS ARRAY     ,;
+         aSerieColors   AS ARRAY     ,;
+         cTitle         AS CHARACTER ,;
          aTitleColor    AS ARRAY     ,;
-         nDepth         AS NUMERIC   ,; 
-         l3DView        AS LOGICAL   ,; 
-         lShowXValues   AS LOGICAL   ,; 
-         lShowLegends   AS LOGICAL   ,; 
+         nDepth         AS NUMERIC   ,;
+         l3DView        AS LOGICAL   ,;
+         lShowXValues   AS LOGICAL   ,;
+         lShowLegends   AS LOGICAL   ,;
          lNoBorder      AS LOGICAL
 
    hBitmap := BT_BitmapCreateNew ( nWidth, nHeight, WHITE )
@@ -487,13 +482,13 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
       DrawLineInBitmap( hDC, fromrow+1,fromcol+1,fromrow+1,tocol-2,GRAY )
       DrawLineInBitmap( hDC, fromrow  ,tocol  ,torow  ,tocol  ,WHITE)
       DrawLineInBitmap( hDC, fromrow  ,tocol-1,torow-1,tocol-1,GRAY )
-     
+
    endif
 
    if HMG_LEN(ALLTRIM(cTitle)) > 0
       DrawTextInBitmap( hDC, fromrow + 10, iif(HMG_LEN(ALLTRIM(cTitle)) * 12 > (tocol - fromcol),fromcol,int(((tocol - fromcol) - (HMG_LEN(ALLTRIM(cTitle)) * 12))/2) + fromcol), ALLTRIM(cTitle), 'Arial', 12, aTitleColor )
       fromrow := fromrow + 40
-   endif   
+   endif
 
    if lShowLegends
       if HMG_LEN(aSerieNames) * 20 > (torow - fromrow)
@@ -523,11 +518,9 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
    bottomrightcol := tocol
    bottomleftrow := torow
    bottomleftcol := fromcol
-   middletoprow := fromrow
    middletopcol := fromcol + int(tocol - fromcol) / 2
    middleleftrow := fromrow + int(torow - fromrow) / 2
    middleleftcol := fromcol
-   middlebottomrow := torow
    middlebottomcol := fromcol + int(tocol - fromcol) / 2
    middlerightrow := fromrow + int(torow - fromrow) / 2
    middlerightcol := tocol
@@ -582,48 +575,48 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
-         case cumulative[i] <= 135 .and. cumulative[i] > 90         
+         case cumulative[i] <= 135 .and. cumulative[i] > 90
             toradialrow := topleftrow
             toradialcol := middletopcol - round((cumulative[i] - 90) / 45 * (middletopcol - topleftcol),0)
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
-         case cumulative[i] <= 180 .and. cumulative[i] > 135         
+         case cumulative[i] <= 180 .and. cumulative[i] > 135
             toradialcol := topleftcol
             toradialrow := topleftrow + round((cumulative[i] - 135) / 45 * (middleleftrow - topleftrow),0)
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
-         case cumulative[i] <= 225 .and. cumulative[i] > 180         
+         case cumulative[i] <= 225 .and. cumulative[i] > 180
             toradialcol := topleftcol
             toradialrow := middleleftrow + round((cumulative[i] - 180) / 45 * (bottomleftrow - middleleftrow),0)
             if l3DView
                for j := 1 to nDepth
                   DrawArcInBitmap(hDC,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
                next j
-            endif   
+            endif
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
-         case cumulative[i] <= 270 .and. cumulative[i] > 225         
+         case cumulative[i] <= 270 .and. cumulative[i] > 225
             toradialrow := bottomleftrow
             toradialcol := bottomleftcol + round((cumulative[i] - 225) / 45 * (middlebottomcol - bottomleftcol),0)
             if l3DView
                for j := 1 to nDepth
                   DrawArcInBitmap(hDC,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
                next j
-            endif   
+            endif
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
-         case cumulative[i] <= 315 .and. cumulative[i] > 270         
+         case cumulative[i] <= 315 .and. cumulative[i] > 270
             toradialrow := bottomleftrow
             toradialcol := middlebottomcol + round((cumulative[i] - 270) / 45 * (bottomrightcol - middlebottomcol),0)
             if l3DView
                for j := 1 to nDepth
                   DrawArcInBitmap(hDC,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
                next j
-            endif   
+            endif
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
@@ -639,7 +632,7 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
             fromradialrow := toradialrow
             fromradialcol := toradialcol
          endcase
-      if l3DView           
+      if l3DView
          DrawLineInBitmap(hDC, middleleftrow, middleleftcol, middleleftrow+nDepth, middleleftcol, BLACK )
          DrawLineInBitmap(hDC, middlerightrow, middlerightcol, middlerightrow+nDepth, middlerightcol, BLACK )
          DrawArcInBitmap(hDC,fromrow + nDepth,fromcol,torow + nDepth,tocol,middleleftrow+nDepth,middleleftcol,middlerightrow+nDepth,middlerightcol )
@@ -653,9 +646,9 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
          fromrow := fromrow + 20
       next i
    endif
-   
+
    BT_DeleteDC( BTstruct )
-   
+
 RETURN hBitmap
 
 
@@ -665,7 +658,7 @@ RETURN hBitmap
 PROCEDURE DrawWindowBoxInBitmap( hDC, row, col, rowr, colr, nPenWidth )
    BT_DrawRectangle ( hDC, Row, Col, Colr - col, rowr - row, BLACK, nPenWidth )
 RETURN
-     
+
 
 PROCEDURE DrawRectInBitmap( hDC, row, col, row1, col1, aColor, nPenWidth )
    BT_DrawFillRectangle (hDC, Row, Col, col1 - col, row1 - row, aColor, aColor, nPenWidth )
@@ -674,7 +667,7 @@ RETURN
 
 PROCEDURE DrawLineInBitmap( hDC, Row1, Col1, Row2, Col2, aColor, nPenWidth )
    BT_DrawLine ( hDC, Row1, Col1, Row2, Col2, aColor, nPenWidth )
-RETURN   
+RETURN
 
 
 PROCEDURE DrawTextInBitmap( hDC, Row, Col, cText, cFontName, nFontSize, aColor, nAlign )
@@ -686,8 +679,8 @@ PROCEDURE DrawTextInBitmap( hDC, Row, Col, cText, cFontName, nFontSize, aColor, 
       BT_DrawText ( hDC, Row, Col, cText, cFontName, nFontSize, aColor, , BT_TEXT_RIGHT )
    case nAlign == 2
       BT_DrawText ( hDC, Row, Col, cText, cFontName, nFontSize, aColor, , BT_TEXT_CENTER )
-   endcase   
-RETURN   
+   endcase
+RETURN
 
 
 PROCEDURE DrawPointInBitmap( hDC, nGraphType, nY, nX, nHigh, aColor )
@@ -696,7 +689,7 @@ PROCEDURE DrawPointInBitmap( hDC, nGraphType, nY, nX, nHigh, aColor )
    ELSEIF nGraphType == LINES
       DrawCircleInBitmap( hDC, nX - nHigh - 2, nY - 2, 6, aColor )
    ENDIF
-RETURN 
+RETURN
 
 
 PROCEDURE DrawCircleInBitmap( hDC, nCol, nRow, nWidth, aColor, nPenWidth )
@@ -706,7 +699,7 @@ RETURN
 
 PROCEDURE DrawBarInBitmap( hDC, nY, nX, nHigh, nWidth, l3DView, nDeep, aColor )
    LOCAL nColTop, nShadow, nShadow2, nH := nHigh
-   
+
    nColTop := ClrShadow( RGB(aColor[1],aColor[2],aColor[3]), 20 )  // Tenia 15      Color arriba de la barra
    nShadow := ClrShadow( nColTop, 20 )  // Tenia 15      Color del costado de la barra
    nShadow2 := ClrShadow( nColTop, 40 ) // Añadido para el Gradiente
@@ -758,7 +751,7 @@ RETURN
 PROCEDURE DrawPolygonInBitmap( hDC, apoints, penrgb, penwidth, fillrgb )
    LOCAL xarr := {}
    LOCAL yarr := {}
-   LOCAL x := 0
+   LOCAL x
    if valtype(penrgb) == "U"
       penrgb = BLACK
    endif
