@@ -1193,8 +1193,8 @@ EndIf
 						Select &BrowseArea
 						BackRec := RecNo()
 
-						If OrdKeyCount() > 0
-							RecordCount := OrdKeyCount()
+						If ordKeyCount() > 0
+							RecordCount := ordKeyCount()
 						Else
 							RecordCount := RecCount()
 						EndIf
@@ -2635,7 +2635,7 @@ EndIf
 						if _HMG_SYSDATA [ 39 ] [i] [6] == .T.
 							_BrowseEdit ( _HMG_SYSDATA [3][i] , _HMG_SYSDATA [ 39 ] [i] [4] , _HMG_SYSDATA [ 39 ] [i] [5] , _HMG_SYSDATA [ 39 ] [i] [3] , _HMG_SYSDATA [  9 ] [i] , .f. , _HMG_SYSDATA [ 15 ] [i] , _HMG_SYSDATA [ 39 ] [i] [7] )
 						Else
-							if valtype(_HMG_SYSDATA [ 16 ] [i]  )=='B'
+							if ValType(_HMG_SYSDATA [ 16 ] [i]  )=='B'
 								Eval( _HMG_SYSDATA [ 16 ] [i]  )
 							EndIf
 						Endif
@@ -2911,7 +2911,7 @@ EndIf
 
                      Case GetGridvKey (lParam) == 65  // A
                         if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .AND. VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
+                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .AND. ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
                               DataGridAppend(i)
                            ENDIF
                         Else
@@ -2921,7 +2921,7 @@ EndIf
 
                      Case GetGridvKey (lParam) == 68 // D
                         if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
+                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
                               DataGridDelete(i)
                            ENDIF
                         Else
@@ -2931,7 +2931,7 @@ EndIf
 
                      Case GetGridvKey (lParam) == 82 // R
                         if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
+                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
                               DataGridReCall(i)
                            ENDIF
                         Else
@@ -2944,7 +2944,7 @@ EndIf
                            IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
                                 _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
                                 _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
-                                ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
+                                ( ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
                               DataGridSave(i)
                            ENDIF
                         Else
@@ -2957,7 +2957,7 @@ EndIf
                            IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
                                 _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
                                 _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
-                                ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
+                                ( ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
                               DataGridClearBuffer(i)
                            ENDIF
                         Else
@@ -3071,11 +3071,11 @@ EndIf
                   xTemp := _HMG_SYSDATA [ 230 ]   // This.QueryData
 
                   if valtype ( xTemp ) == 'C'
-                     cTemp := RTRIM(xTemp)
+                     cTemp := RTrim(xTemp)
                   elseif valtype ( xTemp ) == 'N'
-                     cTemp := STR(xTemp)
+                     cTemp := Str(xTemp)
                   elseif valtype ( xTemp ) == 'D'
-                     cTemp := dtoc(xTemp)
+                     cTemp := DToC(xTemp)
                   elseif valtype ( xTemp ) == 'L'
                      cTemp := if ( xTemp , '.T.' , '.F.' )
                   else
@@ -3223,7 +3223,7 @@ EndIf
 
 					Else
 
-						if valtype(_HMG_SYSDATA [ 16 ] [i]  )=='B'
+						if ValType(_HMG_SYSDATA [ 16 ] [i]  )=='B'
 
 								_PushEventInfo()
 								_HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )
@@ -3518,7 +3518,7 @@ EndIf
 			if _HMG_SYSDATA [ 69  ] [i] == 'A'   // Main Window
 				ReleaseAllWindows()   // call ExitProcess(0) and ends the application
 			Else
-				if valtype( _HMG_SYSDATA [  71 ] [i] )=='B'
+				if ValType( _HMG_SYSDATA [  71 ] [i] )=='B'
 					_HMG_SYSDATA [ 252 ] := .T.
 					_DoWindowEventProcedure ( _HMG_SYSDATA [  71 ] [i] , i , 'WINDOW_RELEASE')
 				EndIf
@@ -3579,7 +3579,7 @@ EndIf
          * Quit Message, will be posted always for single activated windows.
 
          if _HMG_SYSDATA [ 107 ] [i] > 0   // _HMG_aFormActivateId
-            TmpStr := '_HMG_ACTIVATE_' + ALLTRIM(STR(_HMG_SYSDATA [ 107 ] [i]))
+            TmpStr := '_HMG_ACTIVATE_' + ALLTRIM(Str(_HMG_SYSDATA [ 107 ] [i]))
             if __MVEXIST ( TmpStr )
                Tmp := __MVGET ( TmpStr )
                If ValType(Tmp) == 'N'
@@ -3853,11 +3853,11 @@ Local i, FormCount , x , ControlCount
 
 	UnloadAllDll()
 
-	dbcloseall()
+	dbCloseAll()
 
    ExitProcess(0)
 
-// if Set MixedMode --> call PostQuitMessage(0) and not ExitProcess(0), dbcloseall(), UnloadAllDll() ???
+// if Set MixedMode --> call PostQuitMessage(0) and not ExitProcess(0), dbCloseAll(), UnloadAllDll() ???
 
 Return Nil
 
@@ -4060,7 +4060,7 @@ Return Nil
 
 *-----------------------------------------------------------------------------*
 Function HMG_MakeWindowsClassName ( cForm )
-LOCAL ClassName := "_HMG_" + cForm  + "_" + hb_NtoS( GetCurrentThreadID() )
+LOCAL ClassName := "_HMG_" + cForm  + "_" + hb_ntos( GetCurrentThreadID() )
 Return ClassName
 *-----------------------------------------------------------------------------*
 
@@ -4088,39 +4088,39 @@ DEFAULT h := GetDeskTopRealHeight()
 
 	endif
 
-	If .not. empty( _HMG_SYSDATA [ 223 ] ) .and. panel == .f.
+	If .not. Empty( _HMG_SYSDATA [ 223 ] ) .and. panel == .f.
 		MsgHMGError("Only Panel windows can be defined inside a DEFINE WINDOW...END WINDOW structure. Program Terminated" )
 	EndIf
 
-	if valtype(sizable) == "L"
+	if ValType(sizable) == "L"
 		nosize	:= .Not. sizable
 	endif
 
-	if valtype(sysmenu) == "L"
+	if ValType(sysmenu) == "L"
 		nosysmenu	:= .Not. sysmenu
 	endif
 
-	if valtype(titlebar) == "L"
+	if ValType(titlebar) == "L"
 		nocaption	:= .Not. titlebar
 	endif
 
-	if valtype(minbutton) == "L"
+	if ValType(minbutton) == "L"
 		nominimize	:= .Not. minbutton
 	endif
 
-	if valtype(maxbutton) == "L"
+	if ValType(maxbutton) == "L"
 		nomaximize	:= .Not. maxbutton
 	endif
 
-	if valtype(autorelease) == "L"
+	if ValType(autorelease) == "L"
 		NoAutoRelease	:= .Not. AutoRelease
 	endif
 
-	if valtype(visible) == "L"
+	if ValType(visible) == "L"
 		NoShow	:= .Not. Visible
 	endif
 
-	if valtype(FormName) == "U"
+	if ValType(FormName) == "U"
 		FormName := _HMG_SYSDATA [ 214 ]
 
 		if _HMG_SYSDATA [ 235 ] <> -1
@@ -4225,79 +4225,79 @@ ENDIF
 
 
 
-	if valtype(FontName) == "U"
+	if ValType(FontName) == "U"
 		_HMG_SYSDATA [ 224 ] := ""
 	Else
 		_HMG_SYSDATA [ 224 ] := FontName
 	Endif
 
-	if valtype(FontSize) == "U"
+	if ValType(FontSize) == "U"
 		_HMG_SYSDATA [ 182 ] := 0
 	Else
 		_HMG_SYSDATA [ 182 ] := FontSize
 	Endif
 
-	if valtype(Caption) == "U"
+	if ValType(Caption) == "U"
 		Caption := ""
 	endif
 
-	if valtype(scrollup) == "U"
+	if ValType(scrollup) == "U"
 		scrollup := ""
 	endif
-	if valtype(scrolldown) == "U"
+	if ValType(scrolldown) == "U"
 		scrolldown := ""
 	endif
-	if valtype(scrollleft) == "U"
+	if ValType(scrollleft) == "U"
 		scrollleft := ""
 	endif
-	if valtype(scrollright) == "U"
+	if ValType(scrollright) == "U"
 		scrollright := ""
 	endif
 
-	if valtype(hscrollbox) == "U"
+	if ValType(hscrollbox) == "U"
 		hscrollbox := ""
 	endif
-	if valtype(vscrollbox) == "U"
+	if ValType(vscrollbox) == "U"
 		vscrollbox := ""
 	endif
 
-	if valtype(InitProcedure) == "U"
+	if ValType(InitProcedure) == "U"
 		InitProcedure := ""
 	endif
 
-	if valtype(ReleaseProcedure) == "U"
+	if ValType(ReleaseProcedure) == "U"
 		ReleaseProcedure := ""
 	endif
 
-	if valtype(MouseDragProcedure) == "U"
+	if ValType(MouseDragProcedure) == "U"
 		MouseDragProcedure := ""
 	endif
 
-	if valtype(SizeProcedure) == "U"
+	if ValType(SizeProcedure) == "U"
 		SizeProcedure := ""
 	endif
 
-	if valtype(ClickProcedure) == "U"
+	if ValType(ClickProcedure) == "U"
 		ClickProcedure := ""
 	endif
 
-	if valtype(MouseMoveProcedure) == "U"
+	if ValType(MouseMoveProcedure) == "U"
 		MouseMoveProcedure := ""
 	endif
 
-	if valtype(PaintProcedure) == "U"
+	if ValType(PaintProcedure) == "U"
 		PaintProcedure := ""
 	endif
 
-	if valtype(GotFocus) == "U"
+	if ValType(GotFocus) == "U"
 		GotFocus := ""
 	endif
 
-	if valtype(LostFocus) == "U"
+	if ValType(LostFocus) == "U"
 		LostFocus := ""
 	endif
 
-	if valtype(VirtualHeight) == "U"
+	if ValType(VirtualHeight) == "U"
 		VirtualHeight	:= 0
 		vscroll		:= .f.
 	Else
@@ -4309,7 +4309,7 @@ ENDIF
 
 	endif
 
-	if valtype(VirtualWidth) == "U"
+	if ValType(VirtualWidth) == "U"
 		VirtualWidth	:= 0
 		hscroll		:= .f.
 	Else
@@ -4350,7 +4350,7 @@ ENDIF
 		_HMG_SYSDATA [ 181 ] := Formhandle
 	EndIf
 
-	if valtype(NotifyIconName) == "U"
+	if ValType(NotifyIconName) == "U"
 		NotifyIconName := ""
 	Else
 		ShowNotifyIcon( FormHandle , .T. , LoadTrayIcon(GETINSTANCE(), NotifyIconName ), NotifyIconTooltip )
@@ -4555,32 +4555,32 @@ DEFAULT h := GetDeskTopRealHeight()
 
 
 
-	if valtype(titlebar) == "L"
+	if ValType(titlebar) == "L"
 		NoCaption := .Not. TitleBar
 	endif
 
-	if valtype(sysmenu) == "L"
+	if ValType(sysmenu) == "L"
 		NoSysMenu := .Not. sysmenu
 	endif
 
 
 
-	if valtype(sizable) == "L"
+	if ValType(sizable) == "L"
 		NoSize := .Not. Sizable
 	endif
 
 
-	if valtype(visible) == "L"
+	if ValType(visible) == "L"
 		NoShow := .Not. Visible
 	endif
 
 
-	if valtype(autorelease) == "L"
+	if ValType(autorelease) == "L"
 		NoAutoRelease := .Not. autorelease
 	endif
 
 
-	if valtype(FormName) == "U"
+	if ValType(FormName) == "U"
 		FormName := _HMG_SYSDATA [ 214 ]
 	endif
 
@@ -4597,79 +4597,79 @@ ENDIF
 
 	mVar := '_' + FormName
 
-	if valtype(FontName) == "U"
+	if ValType(FontName) == "U"
 		_HMG_SYSDATA [ 224 ] := ""
 	Else
 		_HMG_SYSDATA [ 224 ] := FontName
 	Endif
 
-	if valtype(FontSize) == "U"
+	if ValType(FontSize) == "U"
 		_HMG_SYSDATA [ 182 ] := 0
 	Else
 		_HMG_SYSDATA [ 182 ] := FontSize
 	Endif
 
-	if valtype(Caption) == "U"
+	if ValType(Caption) == "U"
 		Caption := ""
 	endif
 
-	if valtype(InitProcedure) == "U"
+	if ValType(InitProcedure) == "U"
 		InitProcedure := ""
 	endif
 
-	if valtype(PaintProcedure) == "U"
+	if ValType(PaintProcedure) == "U"
 		PaintProcedure := ""
 	endif
 
-	if valtype(ReleaseProcedure) == "U"
+	if ValType(ReleaseProcedure) == "U"
 		ReleaseProcedure := ""
 	endif
 
-	if valtype(MouseDragProcedure) == "U"
+	if ValType(MouseDragProcedure) == "U"
 		MouseDragProcedure := ""
 	endif
 
-	if valtype(SizeProcedure) == "U"
+	if ValType(SizeProcedure) == "U"
 		SizeProcedure := ""
 	endif
 
-	if valtype(ClickProcedure) == "U"
+	if ValType(ClickProcedure) == "U"
 		ClickProcedure := ""
 	endif
 
-	if valtype(MouseMoveProcedure) == "U"
+	if ValType(MouseMoveProcedure) == "U"
 		MouseMoveProcedure := ""
 	endif
 
-	if valtype(GotFocus) == "U"
+	if ValType(GotFocus) == "U"
 		GotFocus := ""
 	endif
 
-	if valtype(LostFocus) == "U"
+	if ValType(LostFocus) == "U"
 		LostFocus := ""
 	endif
 
-	if valtype(scrollup) == "U"
+	if ValType(scrollup) == "U"
 		scrollup := ""
 	endif
-	if valtype(scrolldown) == "U"
+	if ValType(scrolldown) == "U"
 		scrolldown := ""
 	endif
-	if valtype(scrollleft) == "U"
+	if ValType(scrollleft) == "U"
 		scrollleft := ""
 	endif
-	if valtype(scrollright) == "U"
+	if ValType(scrollright) == "U"
 		scrollright := ""
 	endif
 
-	if valtype(hscrollbox) == "U"
+	if ValType(hscrollbox) == "U"
 		hscrollbox := ""
 	endif
-	if valtype(vscrollbox) == "U"
+	if ValType(vscrollbox) == "U"
 		vscrollbox := ""
 	endif
 
-	if valtype(VirtualHeight) == "U"
+	if ValType(VirtualHeight) == "U"
 		VirtualHeight	:= 0
 		vscroll		:= .f.
 	Else
@@ -4681,7 +4681,7 @@ ENDIF
 
 	endif
 
-	if valtype(VirtualWidth) == "U"
+	if ValType(VirtualWidth) == "U"
 		VirtualWidth	:= 0
 		hscroll		:= .f.
 	Else
@@ -4873,11 +4873,11 @@ LOCAL hWnd_ToolTip
 DEFAULT w := GetDeskTopRealWidth()
 DEFAULT h := GetDeskTopRealHeight()
 
-	if valtype(titlebar) == "L"
+	if ValType(titlebar) == "L"
 		NoCaption := .Not. TitleBar
 	endif
 
-	if valtype(FormName) == "U"
+	if ValType(FormName) == "U"
 		FormName := _HMG_SYSDATA [ 214 ]
 	endif
 
@@ -4896,19 +4896,19 @@ ENDIF
 		MsgHMGError("SplitChild Windows Can be Defined Only Inside SplitBox. Program terminated" )
 	EndIf
 
-	if valtype(FontName) == "U"
+	if ValType(FontName) == "U"
 		_HMG_SYSDATA [ 224 ] := ""
 	Else
 		_HMG_SYSDATA [ 224 ] := FontName
 	Endif
 
-	if valtype(FontSize) == "U"
+	if ValType(FontSize) == "U"
 		_HMG_SYSDATA [ 182 ] := 0
 	Else
 		_HMG_SYSDATA [ 182 ] := FontSize
 	Endif
 
-	if valtype(VirtualHeight) == "U"
+	if ValType(VirtualHeight) == "U"
 		VirtualHeight	:= 0
 		vscroll		:= .f.
 	Else
@@ -4921,7 +4921,7 @@ ENDIF
 
 	endif
 
-	if valtype(VirtualWidth) == "U"
+	if ValType(VirtualWidth) == "U"
 		VirtualWidth	:= 0
 		hscroll		:= .f.
 	Else
@@ -4968,23 +4968,23 @@ ENDIF
 
 	EndIf
 
-	if valtype(scrollup) == "U"
+	if ValType(scrollup) == "U"
 		scrollup := ""
 	endif
-	if valtype(scrolldown) == "U"
+	if ValType(scrolldown) == "U"
 		scrolldown := ""
 	endif
-	if valtype(scrollleft) == "U"
+	if ValType(scrollleft) == "U"
 		scrollleft := ""
 	endif
-	if valtype(scrollright) == "U"
+	if ValType(scrollright) == "U"
 		scrollright := ""
 	endif
 
-	if valtype(hscrollbox) == "U"
+	if ValType(hscrollbox) == "U"
 		hscrollbox := ""
 	endif
-	if valtype(vscrollbox) == "U"
+	if ValType(vscrollbox) == "U"
 		vscrollbox := ""
 	endif
 
@@ -5862,7 +5862,7 @@ Return
 *------------------------------------------------------------------------------*
 Procedure _ProcessInitProcedure(i)
 *------------------------------------------------------------------------------*
-	if valtype(_HMG_SYSDATA [ 72  ] [i])=='B'
+	if ValType(_HMG_SYSDATA [ 72  ] [i])=='B'
 		DO EVENTS   // ProcessMessages()
 		_PushEventInfo()
 		_HMG_SYSDATA [ 232 ] := 'WINDOW_INIT'
@@ -5875,7 +5875,7 @@ Procedure _ProcessInitProcedure(i)
 		_PopEventInfo()
 	EndIf
    // added in hmg 3.0.43 - start
-   if valtype(_HMG_SYSDATA [ 80 ] [i])=='B' .OR.  HMG_LEN (_HMG_SYSDATA [ 102 ] [i]) > 0
+   if ValType(_HMG_SYSDATA [ 80 ] [i])=='B' .OR.  HMG_LEN (_HMG_SYSDATA [ 102 ] [i]) > 0
       InvalidateRect (_HMG_SYSDATA [ 67 ] [i], NIL, .F.)
    endif
    // end
@@ -6043,7 +6043,7 @@ Function _DoControlEventProcedure ( bBlock , i )
       _HMG_LastActiveControlIndex := i
    ENDIF
 
-   if valtype( bBlock )=='B'
+   if ValType( bBlock )=='B'
       _PushEventInfo()
       _HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )   // FormParentIndex
       _HMG_SYSDATA [ 231 ] := 'C'
@@ -6077,7 +6077,7 @@ Local lRetVal := .F.
       RETURN .F.
    ENDIF
 
-	if valtype( bBlock )=='B'
+	if ValType( bBlock )=='B'
 
 		_PushEventInfo()
 		_HMG_SYSDATA [ 194 ] := i
@@ -6313,7 +6313,7 @@ Local ntop , nleft , nbottom , nright
 		RETURN NIL
 	ENDIF
 
-	TempName := GetTempFolder() + '_hmg_printwindow_' + ALLTRIM(STR(int(seconds()*100))) + '.BMP'
+	TempName := GetTempFolder() + '_hmg_printwindow_' + ALLTRIM(Str(int(Seconds()*100))) + '.BMP'
 
    SAVEWINDOW ( cWindowName , TempName , nRow , nCol , nWidth , nHeight )
 
@@ -6381,7 +6381,7 @@ Local ntop , nleft , nbottom , nright
 
    DO EVENTS
 
-   FERASE( TempName )
+   FErase( TempName )
 
 RETURN NIL
 
@@ -6691,7 +6691,7 @@ Return Nil
 Function WaitWindow ( cMessage , lNoWait )
 *------------------------------------------------------------------------------*
 
-	if pcount() > 0
+	if PCount() > 0
 
 		If ValType ( lNoWait ) == 'L'
 
