@@ -114,7 +114,7 @@ Local cParentForm , mVar , ControlHandle , FontHandle , k, cParentTabName
 
 	ControlHandle := InitButton ( ParentForm, Caption, 0, x, y ,w ,h,'',0 , flat , NoTabStop, invisible , multiline )
 
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -124,7 +124,7 @@ Local cParentForm , mVar , ControlHandle , FontHandle , k, cParentTabName
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -230,7 +230,7 @@ Local cParentTabName
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -375,7 +375,7 @@ DEFAULT invisible TO FALSE
 
 	ControlHandle := aRet [1]
 
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -385,7 +385,7 @@ DEFAULT invisible TO FALSE
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
