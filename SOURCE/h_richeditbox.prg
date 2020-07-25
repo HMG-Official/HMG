@@ -150,7 +150,7 @@ ENDIF
 
 	ParentForm = GetFormHandle (ParentForm)
 
-	if valtype(x) == "U" .or. valtype(y) == "U"
+	if ValType(x) == "U" .or. ValType(y) == "U"
 
 		If _HMG_SYSDATA [ 216 ] == 'TOOLBAR'
 			Break := .T.
@@ -163,7 +163,7 @@ ENDIF
 		if i > 0
 
 			ControlHandle := InitRichEditBox ( _HMG_SYSDATA [ 87 ] [i] , 0, x, y, w, h, '', 0 , MaxLength , readonly, invisible, notabstop, noHscroll, noVscroll )
-			if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+			if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 				FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 			Else
 				FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -181,7 +181,7 @@ ENDIF
 	Else
 
 		ControlHandle := InitRichEditBox ( ParentForm, 0, x, y, w, h, '', 0 , MaxLength , readonly, invisible, notabstop,  noHscroll, noVscroll)
-		if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+		if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 			FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 		Else
 			FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -197,7 +197,7 @@ ENDIF
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	If valtype(tooltip) != "U"
+	If ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
