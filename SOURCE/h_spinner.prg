@@ -116,7 +116,7 @@ Local FontHandle
 
 	ControlHandle := RetArray [1]
 
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -126,7 +126,7 @@ Local FontHandle
 		aAdd ( _HMG_SYSDATA [ 142 ] , RetArray )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -175,7 +175,7 @@ Local FontHandle
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
-	if valtype(value) == "N"
+	if ValType(value) == "N"
 		SetSpinnerValue ( RetArray [2] , Value )
 	endif
 
