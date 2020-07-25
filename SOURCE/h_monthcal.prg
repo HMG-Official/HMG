@@ -65,7 +65,7 @@ Local cParentForm , mVar , k
 Local aControlHandle
 Local cParentTabName
 
-   DEFAULT value     TO date()
+   DEFAULT value     TO Date()
    DEFAULT change    TO ""
    DEFAULT bold      TO FALSE
    DEFAULT italic    TO FALSE
@@ -104,7 +104,7 @@ Local cParentTabName
 
 	ParentForm = GetFormHandle (ParentForm)
 
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		aControlHandle := InitMonthCal ( ParentForm, 0, x, y, w, h , fontname , fontsize , notoday , notodaycircle , weeknumbers, invisible, notabstop, bold, italic, underline, strikeout )
 	Else
 		aControlHandle := InitMonthCal ( ParentForm, 0, x, y, w, h , _HMG_SYSDATA [ 342 ] , _HMG_SYSDATA [ 343 ] , notoday , notodaycircle , weeknumbers, invisible, notabstop, bold, italic, underline, strikeout )
@@ -114,9 +114,9 @@ Local cParentTabName
 		aAdd ( _HMG_SYSDATA [ 142 ] , aControlhandle[1] )
 	EndIf
 
-	SetMonthCal( aControlHandle[1] ,year(value), month(value), day(value) )
+	SetMonthCal( aControlHandle[1] ,Year(value), Month(value), Day(value) )
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( aControlHandle[1] , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
