@@ -314,8 +314,8 @@ RETURN .T.
 PROCEDURE HMG_GarbageCall( lAll )
    DEFAULT lAll TO .T.
    IF lAll == .T.
-      hb_GCall()    // Check all memory blocks if they can be released
+      hb_gcAll()    // Check all memory blocks if they can be released
    ELSE
-      hb_GCStep()   // Check a single memory block if it can be released
+      hb_gcStep()   // Check a single memory block if it can be released
    ENDIF
 RETURN
