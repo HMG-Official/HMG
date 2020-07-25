@@ -117,7 +117,7 @@ Local cParentWindowName := ''
 
 	SendMessage( ControlHandle , TBM_SETPOS ,1,  value )
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
