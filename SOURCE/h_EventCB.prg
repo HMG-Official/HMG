@@ -152,10 +152,10 @@ LOCAL lProcessMessage
             _HMG_EventPROCNAME := EventGetPROCNAME (nIndex)
 
             IF ValType( _HMG_EventPROCNAME ) <> "C"
-               Ret := EVAL( _HMG_EventPROCNAME )   // is codeblock
+               Ret := Eval( _HMG_EventPROCNAME )   // is codeblock
             ELSE
                cProcName := _HMG_EventPROCNAME
-               IF HB_URIGHT(cProcName, 1) <> ")"
+               IF hb_URight(cProcName, 1) <> ")"
                   Ret := &cProcName()
                ELSE
                   Ret := &cProcName
@@ -350,12 +350,12 @@ LOCAL cMsg := "", i:= 1
 LOCAL nProcLine, cProcFile, cProcName
    aInfo := {}
    nActivation := IF (ValType(nActivation) <> "N", 1, nActivation)
-   DO WHILE .NOT.(PROCNAME(nActivation) == "")
-      cProcName := PROCNAME(nActivation)
-      nProcLine := PROCLINE(nActivation)
-      cProcFile := PROCFILE(nActivation)
+   DO WHILE .NOT.(ProcName(nActivation) == "")
+      cProcName := ProcName(nActivation)
+      nProcLine := ProcLine(nActivation)
+      cProcFile := ProcFile(nActivation)
       AADD (aInfo, {cProcName, nProcLine, cProcFile})
-      cMsg := cMsg + aInfo[i,1] + "(" + HB_NTOS(aInfo[i,2]) + ") ("+ aInfo[i,3] + ")" + HB_OSNEWLINE()
+      cMsg := cMsg + aInfo[i,1] + "(" + hb_ntos(aInfo[i,2]) + ") ("+ aInfo[i,3] + ")" + hb_osNewLine()
       nActivation++
       i++
    ENDDO
@@ -813,9 +813,9 @@ LOCAL aType := {;
          { "OBJECT"     , "O" } ,;
          { "USUAL"      , ""  }}
 
-   aParams := hb_aParams()
+   aParams := hb_AParams()
 
-   hb_ADEL( aParams, 1, .T. )   // Remove lSoft param of the array
+   hb_ADel( aParams, 1, .T. )   // Remove lSoft param of the array
 
    FOR EACH aData IN aParams
 
@@ -832,7 +832,7 @@ LOCAL aType := {;
 
                j := ASCAN( aType, { | x | HMG_UPPER( AllTrim( x[ 2 ] ) ) == HMG_UPPER( AllTrim( aData[ 2 ] ) ) } )
 
-               MsgHMGError( "CHECK TYPE ( Param # "+ hb_NtoS( aData:__enumindex() ) + " ) : " + AllTrim( aData[ 3 ] ) + " is declared as " + HMG_UPPER( AllTrim( aData[ 1 ] ) ) + " but it is of type " + HMG_UPPER( AllTrim( aType[ j ][ 1 ] ) ) + ". Program terminated", "HMG Error" )
+               MsgHMGError( "CHECK TYPE ( Param # "+ hb_ntos( aData:__enumindex() ) + " ) : " + AllTrim( aData[ 3 ] ) + " is declared as " + HMG_UPPER( AllTrim( aData[ 1 ] ) ) + " but it is of type " + HMG_UPPER( AllTrim( aType[ j ][ 1 ] ) ) + ". Program terminated", "HMG Error" )
 
             ENDIF
 
