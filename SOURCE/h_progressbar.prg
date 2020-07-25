@@ -101,7 +101,7 @@ Local cParentForm, mVar, ControlHandle , k
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
