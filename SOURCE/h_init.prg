@@ -62,7 +62,7 @@ MEMVAR _HMG_SYSDATA
 #include "hmg.ch"
 
 
-#define ABM_CRLF                HB_OsNewLine()
+#define ABM_CRLF                hb_osNewLine()
 
 
 
@@ -71,12 +71,12 @@ RETURN HMG_IsUnicode()
 
 
 FUNCTION HMG_IsCurrentCodePageUnicode()   // New Function HMG-UNICODE
-RETURN (SET(_SET_CODEPAGE) == "UTF8")
+RETURN (Set(_SET_CODEPAGE) == "UTF8")
 
 
 FUNCTION HMG_IsNotDefParam ( xDefineParam , xDefault )
 LOCAL xRet
-   IF PCOUNT() == 1
+   IF PCount() == 1
       xRet := xDefault
    ELSE
       xRet := xDefineParam
