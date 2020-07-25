@@ -123,7 +123,7 @@ Local i
 	NEXT
    c :=  c + CHR(0)
 
-	if valtype(multiselect) == 'U'
+	if ValType(multiselect) == 'U'
 		multiselect := .f.
 	endif
 
@@ -133,7 +133,7 @@ Local i
 		cfiles := C_GetFile ( c , title, cIniFolder, multiselect ,nochangedir, nFilterIndex )
 
 		if HMG_LEN( cfiles ) > 0
-			if valtype( cfiles ) == "A"
+			if ValType( cfiles ) == "A"
 				fileslist := aclone( cfiles )
 			else
 				aadd( fileslist, cfiles )
