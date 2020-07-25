@@ -123,7 +123,7 @@ Local cParentTabName
 
    _DatePickerFormatDate ( ControlHandle , cFormatDate )   // ADD
 
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -136,10 +136,10 @@ Local cParentTabName
 	If Empty (Value)
 		SetDatePickNull (ControlHandle)
 	Else
-		SetDatePick( ControlHandle ,year(value), month(value), day(value) )
+		SetDatePick( ControlHandle ,Year(value), Month(value), Day(value) )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	Endif
 
