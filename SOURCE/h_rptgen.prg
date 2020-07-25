@@ -947,11 +947,11 @@ Local aReport, lSuccess, lTempEof
 		_HMG_SYSDATA [ 149 ] += '</body>' + CHR(13) + CHR(10)
 		_HMG_SYSDATA [ 149 ] += '</html>' + CHR(13) + CHR(10)
 
-		nOutfile := FCREATE( cOutputFileName , FC_NORMAL)
+		nOutfile := FCreate( cOutputFileName , FC_NORMAL)
 
-		FWRITE( nOutfile , _HMG_SYSDATA [ 149 ] , HMG_LEN(_HMG_SYSDATA [ 149 ]) )
+		FWrite( nOutfile , _HMG_SYSDATA [ 149 ] , HMG_LEN(_HMG_SYSDATA [ 149 ]) )
 
-		FCLOSE(nOutfile)
+		FClose(nOutfile)
 
 	ENDIF
 
@@ -1049,7 +1049,7 @@ Local cHtmlAlignment
 
 		if	ValType (cValue) == "N"
 
-			cValue := ALLTRIM(STR(cValue))
+			cValue := ALLTRIM(Str(cValue))
 
 		Elseif	ValType (cValue) == "D"
 
@@ -1075,13 +1075,13 @@ Local cHtmlAlignment
 
 		EndIf
 
-		_HMG_SYSDATA [ 149 ] += '<div style=position:absolute;LEFT:' + ALLTRIM(STR(nCol)) +  'mm;top:' +  ALLTRIM(STR(nRow+nOffset)) + 'mm;width:' +  ALLTRIM(STR(nWidth)) + 'mm;font-size:' + ALLTRIM(STR(nFontSize)) + 'pt;font-family:"' +  cFontname + '";text-align:' + cHtmlAlignment + ';font-weight:' + if(lFontBold,'bold','normal') + ';font-style:' + if(lFontItalic,'italic','normal') + ';text-decoration:' + if(lFontUnderLine,'underline','none') + ';color:rgb(' + ALLTRIM(STR(aFontColor[1])) + ',' + ALLTRIM(STR(aFontColor[2])) + ',' +  ALLTRIM(STR(aFontColor[3])) + ');>' + cValue + '</div>' + CHR(13) + CHR(10)
+		_HMG_SYSDATA [ 149 ] += '<div style=position:absolute;LEFT:' + ALLTRIM(Str(nCol)) +  'mm;top:' +  ALLTRIM(Str(nRow+nOffset)) + 'mm;width:' +  ALLTRIM(Str(nWidth)) + 'mm;font-size:' + ALLTRIM(Str(nFontSize)) + 'pt;font-family:"' +  cFontname + '";text-align:' + cHtmlAlignment + ';font-weight:' + if(lFontBold,'bold','normal') + ';font-style:' + if(lFontItalic,'italic','normal') + ';text-decoration:' + if(lFontUnderLine,'underline','none') + ';color:rgb(' + ALLTRIM(Str(aFontColor[1])) + ',' + ALLTRIM(Str(aFontColor[2])) + ',' +  ALLTRIM(Str(aFontColor[3])) + ');>' + cValue + '</div>' + CHR(13) + CHR(10)
 
 	ELSEIF _HMG_SYSDATA [ 151 ] == .T.
 
 		if	ValType (cValue) == "N"
 
-			cValue := ALLTRIM(STR(cValue))
+			cValue := ALLTRIM(Str(cValue))
 
 		Elseif	ValType (cValue) == "D"
 
@@ -1171,7 +1171,7 @@ Local nHeight		:= aObject [ 6]
 
 	ELSEIF _HMG_SYSDATA [ 151 ] == .T.
 
-		IF HMG_UPPER ( HB_URIGHT( cValue , 4 ) ) == '.JPG'
+		IF HMG_UPPER ( hb_URight( cValue , 4 ) ) == '.JPG'
 
 			pdfImage( cValue , nRow + nOffset , nCol , "M" , nHeight , nWidth )
 
@@ -1183,7 +1183,7 @@ Local nHeight		:= aObject [ 6]
 
 	ELSEIF _HMG_SYSDATA [ 163 ] == .T.
 
-		_HMG_SYSDATA [ 149 ] += '<div style=position:absolute;LEFT:' + ALLTRIM(STR(nCol)) + 'mm;top:' + ALLTRIM(STR(nRow+nOffset))  + 'mm;> <img src="' + cValue + '" ' + 'width=' + ALLTRIM(STR(nWidth*3.85)) + 'mm height=' + ALLTRIM(STR(nHeight*3.85)) + 'mm/> </div>' + CHR(13) + CHR(10)
+		_HMG_SYSDATA [ 149 ] += '<div style=position:absolute;LEFT:' + ALLTRIM(Str(nCol)) + 'mm;top:' + ALLTRIM(Str(nRow+nOffset))  + 'mm;> <img src="' + cValue + '" ' + 'width=' + ALLTRIM(Str(nWidth*3.85)) + 'mm height=' + ALLTRIM(Str(nHeight*3.85)) + 'mm/> </div>' + CHR(13) + CHR(10)
 
 	ENDIF
 
@@ -1213,7 +1213,7 @@ Local aPenColor		:= aObject [ 7]
 
 	ELSEIF _HMG_SYSDATA [ 163 ] == .T.
 
-		_HMG_SYSDATA [ 149 ] += '<div style="LEFT:' + ALLTRIM(STR(nFromCol)) + 'mm;top:' +  ALLTRIM(STR(nFromRow+nOffset)) +  'mm;width:' +  ALLTRIM(STR(nToCol-nFromCol)) +  'mm;height:0mm;BORDER-STYLE:SOLID;BORDER-COLOR:' + 'rgb(' + ALLTRIM(STR(aPenColor[1])) + ',' + ALLTRIM(STR(aPenColor[2])) + ',' +  ALLTRIM(STR(aPenColor[3])) + ')' + ';BORDER-WIDTH:' + ALLTRIM(STR(nPenWidth)) + 'mm;BACKGROUND-COLOR:#FFFFFF;"><span class="line"></span></DIV>' + CHR(13) + CHR(10)
+		_HMG_SYSDATA [ 149 ] += '<div style="LEFT:' + ALLTRIM(Str(nFromCol)) + 'mm;top:' +  ALLTRIM(Str(nFromRow+nOffset)) +  'mm;width:' +  ALLTRIM(Str(nToCol-nFromCol)) +  'mm;height:0mm;BORDER-STYLE:SOLID;BORDER-COLOR:' + 'rgb(' + ALLTRIM(Str(aPenColor[1])) + ',' + ALLTRIM(Str(aPenColor[2])) + ',' +  ALLTRIM(Str(aPenColor[3])) + ')' + ';BORDER-WIDTH:' + ALLTRIM(Str(nPenWidth)) + 'mm;BACKGROUND-COLOR:#FFFFFF;"><span class="line"></span></DIV>' + CHR(13) + CHR(10)
 
 	ENDIF
 
@@ -1243,7 +1243,7 @@ Local aPenColor		:= aObject [ 7]
 
 	ELSEIF _HMG_SYSDATA [ 163 ] == .T.
 
-		_HMG_SYSDATA [ 149 ] += '<div style="LEFT:' + ALLTRIM(STR(nFromCol)) + 'mm;top:' +  ALLTRIM(STR(nFromRow+nOffset)) +  'mm;width:' +  ALLTRIM(STR(nToCol-nFromCol)) +  'mm;height:' + ALLTRIM(STR(nToRow-nFromRow)) + 'mm;BORDER-STYLE:SOLID;BORDER-COLOR:' + 'rgb(' + ALLTRIM(STR(aPenColor[1])) + ',' + ALLTRIM(STR(aPenColor[2])) + ',' +  ALLTRIM(STR(aPenColor[3])) + ')' + ';BORDER-WIDTH:' + ALLTRIM(STR(nPenWidth)) + 'mm;BACKGROUND-COLOR:#FFFFFF;"><span class="line"></span></DIV>' + CHR(13) + CHR(10)
+		_HMG_SYSDATA [ 149 ] += '<div style="LEFT:' + ALLTRIM(Str(nFromCol)) + 'mm;top:' +  ALLTRIM(Str(nFromRow+nOffset)) +  'mm;width:' +  ALLTRIM(Str(nToCol-nFromCol)) +  'mm;height:' + ALLTRIM(Str(nToRow-nFromRow)) + 'mm;BORDER-STYLE:SOLID;BORDER-COLOR:' + 'rgb(' + ALLTRIM(Str(aPenColor[1])) + ',' + ALLTRIM(Str(aPenColor[2])) + ',' +  ALLTRIM(Str(aPenColor[3])) + ')' + ';BORDER-WIDTH:' + ALLTRIM(Str(nPenWidth)) + 'mm;BACKGROUND-COLOR:#FFFFFF;"><span class="line"></span></DIV>' + CHR(13) + CHR(10)
 
 	ENDIF
 
