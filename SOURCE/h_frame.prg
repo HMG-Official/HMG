@@ -78,7 +78,7 @@ Local cParentWindowName := ''
 
 	Controlhandle := InitFrame ( ParentForm, 0, x, y, w, h , caption , '' , 0 , .F. )
 
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
