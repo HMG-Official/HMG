@@ -64,10 +64,10 @@ Return hWnd
 
 
 Function bt_FillRectIsNIL (Row, Col, Width, Height, Row_value, Col_value, Width_value, Height_value)
-   Row    := IF (Valtype(Row)    =="U",  Row_value,    Row)
-   Col    := IF (Valtype(Col)    =="U",  Col_value,    Col)
-   Width  := IF (Valtype(Width)  =="U",  Width_value,  Width)
-   Height := IF (Valtype(Height) =="U",  Height_value, Height)
+   Row    := IF (ValType(Row)    =="U",  Row_value,    Row)
+   Col    := IF (ValType(Col)    =="U",  Col_value,    Col)
+   Width  := IF (ValType(Width)  =="U",  Width_value,  Width)
+   Height := IF (ValType(Height) =="U",  Height_value, Height)
 Return Nil
 
 
@@ -82,8 +82,8 @@ Return Nil
 Function bt_ListCalledFunctions (nActivation)
    LOCAL cMsg := ""
    nActivation := IF (ValType(nActivation) <> "N", 1, nActivation)
-   DO WHILE .NOT.(PROCNAME(nActivation) == "")
-      cMsg := cMsg + "Called from:" + PROCNAME(nActivation) + "(" + LTRIM(STR(PROCLINE(nActivation))) + ")" + CRLF
+   DO WHILE .NOT.(ProcName(nActivation) == "")
+      cMsg := cMsg + "Called from:" + ProcName(nActivation) + "(" + LTrim(Str(ProcLine(nActivation))) + ")" + CRLF
       nActivation++
    ENDDO
 Return cMsg
@@ -136,11 +136,11 @@ Return hDC
 
 Function BT_DeleteDC (BTstruct)
    LOCAL lRet
-   IF Valtype(BTstruct)<> "A"
-      MsgBox ("Error in call to "+PROCNAME()+": The second parameter is not an array" + CRLF + bt_ListCalledFunctions(2),"BT Fatal Error")
+   IF ValType(BTstruct)<> "A"
+      MsgBox ("Error in call to "+ProcName()+": The second parameter is not an array" + CRLF + bt_ListCalledFunctions(2),"BT Fatal Error")
       RELEASE WINDOW ALL
    ELSEIF Len(BTstruct)  <>  50
-      MsgBox ("Error in call to "+PROCNAME()+": The second parameter is an corrupted array " + CRLF + bt_ListCalledFunctions(2),"BT Fatal Error")
+      MsgBox ("Error in call to "+ProcName()+": The second parameter is an corrupted array " + CRLF + bt_ListCalledFunctions(2),"BT Fatal Error")
       RELEASE WINDOW ALL
    ENDIF
    lRet:= BT_DC_DELETE (BTstruct)
@@ -181,7 +181,7 @@ Return Nil
 
 
 Function BT_DrawBitmapTransparent (hDC, Row, Col, Width, Height, Mode_Stretch, hBitmap, aRGBcolor_transp)
-   LOCAL ColorRef_Transp:= IF (Valtype(aRGBcolor_transp) == "U", BT_BMP_GETINFO(hBitmap, BT_BITMAP_INFO_GETCOLORPIXEL, 0, 0), ArrayRGB_TO_COLORREF(aRGBcolor_transp))
+   LOCAL ColorRef_Transp:= IF (ValType(aRGBcolor_transp) == "U", BT_BMP_GETINFO(hBitmap, BT_BITMAP_INFO_GETCOLORPIXEL, 0, 0), ArrayRGB_TO_COLORREF(aRGBcolor_transp))
    LOCAL Width2  := BT_BMP_GETINFO (hBitmap, BT_BITMAP_INFO_WIDTH)
    LOCAL Height2 := BT_BMP_GETINFO (hBitmap, BT_BITMAP_INFO_HEIGHT)
    bt_FillRectIsNIL (@Row, @Col, @Width, @Height, 0, 0, Width2, Height2)
@@ -206,7 +206,7 @@ Return Nil
 
 
 Function BT_DrawDCtoDCTransparent (hDC1, Row1, Col1, Width1, Height1, Mode_Stretch, hDC2, Row2, Col2, Width2, Height2, aRGBcolor_transp)
-   LOCAL ColorRef_Transp:= IF (Valtype(aRGBcolor_transp) == "U", ArrayRGB_TO_COLORREF(BT_DrawGetPixel(hDC2,0,0)), ArrayRGB_TO_COLORREF(aRGBcolor_transp))
+   LOCAL ColorRef_Transp:= IF (ValType(aRGBcolor_transp) == "U", ArrayRGB_TO_COLORREF(BT_DrawGetPixel(hDC2,0,0)), ArrayRGB_TO_COLORREF(aRGBcolor_transp))
    BT_DRAW_HDC_TO_HDC (hDC1, Col1, Row1, Width1, Height1, hDC2, Col2, Row2, Width2, Height2, Mode_Stretch, BT_HDC_TRANSPARENT, ColorRef_Transp)
 Return Nil
 
@@ -496,13 +496,13 @@ Return nWidth
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Function BT_ClientAreaInvalidateAll (Win, lErase)
-   lErase = IF (Valtype(lErase) == "U", .F., lErase)
+   lErase = IF (ValType(lErase) == "U", .F., lErase)
    BT_SCR_INVALIDATERECT (bt_WinHandle(Win), NIL, lErase)
 Return Nil
 
 
 Function BT_ClientAreaInvalidateRect (Win, Row, Col, Width, Height, lErase)
-   lErase = IF (Valtype(lErase) == "U", .F., lErase)
+   lErase = IF (ValType(lErase) == "U", .F., lErase)
    bt_FillRectIsNIL (@Row, @Col, @Width, @Height, 0, 0, BT_ClientAreaWidth(Win), BT_ClientAreaHeight(Win))
    BT_SCR_INVALIDATERECT (bt_WinHandle(Win), {Col, Row, Col+Width, Row+Height}, lErase)
 Return Nil
@@ -538,7 +538,7 @@ Return hBitmap
 
 Function BT_BitmapSaveFile (hBitmap, cFileName, nTypePicture)
    LOCAL lRet
-   nTypePicture := IF (Valtype(nTypePicture) == "U", BT_FILEFORMAT_BMP, nTypePicture)
+   nTypePicture := IF (ValType(nTypePicture) == "U", BT_FILEFORMAT_BMP, nTypePicture)
    lRet := BT_BMP_SAVEFILE (hBitmap, cFileName, nTypePicture)
 Return lRet
 
@@ -548,7 +548,7 @@ Return lRet
 
 Function BT_BitmapCreateNew (Width, Height, aRGBcolor_Fill_Bk)
    LOCAL New_hBitmap
-   aRGBcolor_Fill_Bk := IF (Valtype(aRGBColor_Fill_Bk) == "U", BLACK, aRGBcolor_Fill_Bk)
+   aRGBcolor_Fill_Bk := IF (ValType(aRGBColor_Fill_Bk) == "U", BLACK, aRGBcolor_Fill_Bk)
    New_hBitmap := BT_BMP_CREATE (Width, Height, ArrayRGB_TO_COLORREF(aRGBColor_Fill_Bk))
 Return New_hBitmap
 
@@ -609,7 +609,7 @@ Return Nil
 
 Function BT_BitmapTransform (hBitmap, Mode, Angle, aRGBColor_Fill_Bk)
    LOCAL New_hBitmap
-   LOCAL ColorRef_Fill_Bk:= IF (Valtype(aRGBColor_Fill_Bk) == "U", BT_BMP_GETINFO(hBitmap, BT_BITMAP_INFO_GETCOLORPIXEL, 0, 0), ArrayRGB_TO_COLORREF(aRGBColor_Fill_Bk))
+   LOCAL ColorRef_Fill_Bk:= IF (ValType(aRGBColor_Fill_Bk) == "U", BT_BMP_GETINFO(hBitmap, BT_BITMAP_INFO_GETCOLORPIXEL, 0, 0), ArrayRGB_TO_COLORREF(aRGBColor_Fill_Bk))
    New_hBitmap := BT_BMP_TRANSFORM (hBitmap, Mode, Angle, ColorRef_Fill_Bk)
 Return New_hBitmap
 
@@ -651,7 +651,7 @@ Function BT_BitmapPasteTransparent (hBitmap_D, Row_D, Col_D, Width_D, Height_D, 
    LOCAL Max_Height_D := BT_BitmapHeight (hBitmap_D)
    LOCAL Width_O      := BT_BitmapWidth  (hBitmap_O)
    LOCAL Height_O     := BT_BitmapHeight (hBitmap_O)
-   LOCAL ColorRef_Transp:= IF (Valtype(aRGBcolor_transp) == "U", BT_BMP_GETINFO(hBitmap_O, BT_BITMAP_INFO_GETCOLORPIXEL, 0, 0), ArrayRGB_TO_COLORREF(aRGBcolor_transp))
+   LOCAL ColorRef_Transp:= IF (ValType(aRGBcolor_transp) == "U", BT_BMP_GETINFO(hBitmap_O, BT_BITMAP_INFO_GETCOLORPIXEL, 0, 0), ArrayRGB_TO_COLORREF(aRGBcolor_transp))
    bt_FillRectIsNIL (@Row_D, @Col_D, @Width_D, @Height_D, 0, 0, Max_Width_D, Max_Height_D)
    BT_BMP_PASTE (hBitmap_D, Col_D, Row_D, Width_D, Height_D, hBitmap_O, 0, 0, Width_O, Height_O, Mode_Stretch, BT_BITMAP_TRANSPARENT, ColorRef_Transp)
 Return Nil
