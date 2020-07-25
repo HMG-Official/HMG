@@ -117,7 +117,7 @@ Local TimeValue24h, cTimeFormat
 
 retval := 0
 
-If Pcount() == 2
+If PCount() == 2
 
     If HMG_UPPER (ALLTRIM (ControlName)) == 'VSCROLLBAR'
 
@@ -265,7 +265,7 @@ do case
             WorkArea := _HMG_SYSDATA [ 22 ] [ix]
 
             BackRec := (WorkArea)->(RecNo())
-            (WorkArea)->(DBGoTop())
+            (WorkArea)->(dbGoTop())
 
             Do While ! (WorkArea)->(Eof())
                 rcount++
@@ -279,10 +279,10 @@ do case
                     EndIf
 
                 EndIf
-                (WorkArea)->(DBSkip())
+                (WorkArea)->(dbSkip())
             EndDo
 
-            (WorkArea)->(DBGoTo(BackRec))
+            (WorkArea)->(dbGoto(BackRec))
 
         Else
             retval := ComboGetCursel ( c )
@@ -306,8 +306,8 @@ do case
          retval := TABCTRL_GETCURSEL ( c )
 
     case T == "DATEPICK"
-         bf := set(2)
-         set(2,.f.)
+         bf := Set(2)
+         Set(2,.f.)
          //bd = Set (_SET_DATEFORMAT )
          bd := HBtoWinDateFormat()
 
@@ -315,7 +315,7 @@ do case
          d = ALLTRIM( STR ( GetDatePickYear ( c ) ) ) + "." + ALLTRIM ( STR ( GetDatePickMonth ( c ) ) ) + "." + ALLTRIM (STR ( GetDatePickDay ( c ) ) )
          retval := ctod (d)
          Set (_SET_DATEFORMAT ,bd)
-         set(2, bf )
+         Set(2, bf )
 
     case T == "TIMEPICK"   // ( Dr. Claudio Soto, April 2013 )
         TimeValue24h := GETTIMEPICK (c)
@@ -363,7 +363,7 @@ controlcount := HMG_LEN (_HMG_SYSDATA [  5 ])
 retval := 0
 
 
-if pcount() == 3
+if PCount() == 3
 
     ix = GetControlIndex (ControlName,ParentForm)
 
@@ -443,7 +443,7 @@ do case
 
     case T == "MONTHCAL"
 
-        SetMonthCal( c ,year(value), month(value), day(value) )
+        SetMonthCal( c ,Year(value), Month(value), Day(value) )
 
         _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [ix] , ix )
 
@@ -523,15 +523,15 @@ do case
         if t == "CHARMASKTEXT"
             if valtype ( _HMG_SYSDATA [ 17 ] [ix] ) == 'L'
                 if _HMG_SYSDATA [ 17 ] [ix] == .T.
-                    SetWindowText ( c , RTRIM(dtoc(value)) )
+                    SetWindowText ( c , RTrim(DToC(value)) )
                 Else
-                    SetWindowText ( c , RTRIM(value) )
+                    SetWindowText ( c , RTrim(value) )
                 endif
             Else
-                SetWindowText ( c , RTRIM(value) )
+                SetWindowText ( c , RTrim(value) )
             endif
         Else
-            SetWindowText ( c , RTRIM(value) )
+            SetWindowText ( c , RTrim(value) )
         endif
 
         if T == "EDIT"
@@ -542,7 +542,7 @@ do case
 
     case T == "NUMTEXT"
 
-        SetWindowText ( c , ALLTRIM(STR(value)) )
+        SetWindowText ( c , ALLTRIM(Str(value)) )
 
     case T == "SPINNER"
         SetSpinnerValue ( c [2] , Value )
@@ -581,15 +581,15 @@ do case
             WorkArea := _HMG_SYSDATA [ 22 ] [ix]
                 rcount := 0
             BackRec := (WorkArea)->(RecNo())
-            (WorkArea)->(DBGoTop())
+            (WorkArea)->(dbGoTop())
             Do While ! (WorkArea)->(Eof())
                 rcount++
                     if value == (WorkArea)->(RecNo())
                     Exit
                 EndIf
-                (WorkArea)->(DBSkip())
+                (WorkArea)->(dbSkip())
             EndDo
-            (WorkArea)->(DBGoTo(BackRec))
+            (WorkArea)->(dbGoto(BackRec))
             ComboSetCurSel ( c ,rcount)
         Else
             ComboSetCursel ( c , value )
@@ -659,7 +659,7 @@ do case
         If Empty (Value)
             SetDatePickNull(c)
         Else
-            SetDatePick( c ,year(value), month(value), day(value) )
+            SetDatePick( c ,Year(value), Month(value), Day(value) )
         EndIf
         _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [ix] , ix )
 
@@ -756,7 +756,7 @@ do case
 
         EndIf
 
-        ImgDef := iif( valtype( aImage ) == "A" , HMG_LEN( aImage ), 0 )  //Tree+
+        ImgDef := iif( ValType( aImage ) == "A" , HMG_LEN( aImage ), 0 )  //Tree+
 
         if Parent != 0
 
@@ -851,7 +851,7 @@ do case
             Else
 
                 If ascan ( _HMG_SYSDATA [ 25 ] [ ix ] , Id ) != 0
-                    MsgHMGError ("Additem Method:  Item Id "+ALLTRIM(STR(Id))+" Already In Use. Program Terminated" )
+                    MsgHMGError ("Additem Method:  Item Id "+ALLTRIM(Str(Id))+" Already In Use. Program Terminated" )
                 EndIf
 
                 _HMG_SYSDATA [  7 ] [ ix ] [ aPos + i ] := NewHandle
@@ -1154,7 +1154,7 @@ Return .F.
 Function _SetFocus ( ControlName , ParentForm , ix )
 Local H , T , MaskStart , X , i , j , L , F
 
-if pcount() == 2
+if PCount() == 2
     i := GetControlIndex ( ControlName,ParentForm )
     H = GetControlHandle( ControlName , ParentForm )
     T = GetControlType (ControlName,ParentForm)
@@ -1747,7 +1747,7 @@ Local ALABELS
 Local bd
 Local nCurrentValue
 
-if pcount() == 5
+if PCount() == 5
     i = index
 else
     i = GetControlIndex (ControlName,ParentForm)
@@ -1921,11 +1921,11 @@ Local V
 Local Z
 Local X
 
-if pcount() == 3
+if PCount() == 3
 
     i := GetControlIndex ( ControlName , ParentForm )
 
-elseif pcount() == 4
+elseif PCount() == 4
 
     i := idx
 
@@ -2763,7 +2763,7 @@ If ValType ( Data ) == 'A'
 
     If ValType ( Data [1] ) != 'A'
 
-        cData := '#DataRows=' + ALLTRIM(STR(HMG_LEN(Data))) + CHR(13) + CHR(10)
+        cData := '#DataRows=' + ALLTRIM(Str(HMG_LEN(Data))) + CHR(13) + CHR(10)
         cData := cData + '#DataCols=0'  + CHR(13) + CHR(10)
 
         For i := 1 To HMG_LEN ( Data )
@@ -2771,21 +2771,21 @@ If ValType ( Data ) == 'A'
             cType := ValType ( Data [i] )
 
             If cType == 'D'
-                pData := ALLTRIM(STR(year(data[i]))) + '.' + ALLTRIM(STR(month(data[i]))) + '.' + ALLTRIM(STR(day(data[i])))
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                pData := ALLTRIM(Str(Year(data[i]))) + '.' + ALLTRIM(Str(Month(data[i]))) + '.' + ALLTRIM(Str(Day(data[i])))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             ElseIf cType == 'L'
                 If Data [i] == .t.
                     pData := 'T'
                 Else
                     pData := 'F'
                 EndIf
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             ElseIf cType == 'N'
                 pData := STR ( Data [i] )
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             ElseIf cType == 'C'
                 pData := Data [i]
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             Else
                 MsgHMGError('SendData: Type Not Suported. Program terminated')
             EndIf
@@ -2802,8 +2802,8 @@ If ValType ( Data ) == 'A'
         Rows := HMG_LEN ( Data )
         Cols := HMG_LEN ( Data [1] )
 
-        cData := '#DataRows=' + ALLTRIM(STR(Rows))  + CHR(13) + CHR(10)
-        cData := cData + '#DataCols=' + ALLTRIM(STR(Cols)) + CHR(13) + CHR(10)
+        cData := '#DataRows=' + ALLTRIM(Str(Rows))  + CHR(13) + CHR(10)
+        cData := cData + '#DataCols=' + ALLTRIM(Str(Cols)) + CHR(13) + CHR(10)
 
         For i := 1 To Rows
 
@@ -2812,21 +2812,21 @@ If ValType ( Data ) == 'A'
             cType := ValType ( Data [i] [j] )
 
             If cType == 'D'
-                pData := ALLTRIM(STR(year(data[i][j]))) + '.' + ALLTRIM(STR(month(data[i][j]))) + '.' + ALLTRIM(STR(day(data[i][j])))
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                pData := ALLTRIM(Str(Year(data[i][j]))) + '.' + ALLTRIM(Str(Month(data[i][j]))) + '.' + ALLTRIM(Str(Day(data[i][j])))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             ElseIf cType == 'L'
                 If Data [i] [j] == .t.
                     pData := 'T'
                 Else
                     pData := 'F'
                 EndIf
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             ElseIf cType == 'N'
                 pData := STR ( Data [i] [j] )
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             ElseIf cType == 'C'
                 pData := Data [i] [j]
-                cLen := ALLTRIM(STR(HMG_LEN(pData)))
+                cLen := ALLTRIM(Str(HMG_LEN(pData)))
             Else
                 MsgHMGError('SendData: Type Not Suported. Program terminated')
             EndIf
@@ -2846,21 +2846,21 @@ Else
     cType := ValType ( Data )
 
     If cType == 'D'
-        pData := ALLTRIM(STR(year(data))) + '.' + ALLTRIM(STR(month(data))) + '.' + ALLTRIM(STR(day(data)))
-        cLen := ALLTRIM(STR(HMG_LEN(pData)))
+        pData := ALLTRIM(Str(Year(data))) + '.' + ALLTRIM(Str(Month(data))) + '.' + ALLTRIM(Str(Day(data)))
+        cLen := ALLTRIM(Str(HMG_LEN(pData)))
     ElseIf cType == 'L'
         If Data == .t.
             pData := 'T'
         Else
             pData := 'F'
         EndIf
-        cLen := ALLTRIM(STR(HMG_LEN(pData)))
+        cLen := ALLTRIM(Str(HMG_LEN(pData)))
     ElseIf cType == 'N'
         pData := STR ( Data )
-        cLen := ALLTRIM(STR(HMG_LEN(pData)))
+        cLen := ALLTRIM(Str(HMG_LEN(pData)))
     ElseIf cType == 'C'
         pData := Data
-        cLen := ALLTRIM(STR(HMG_LEN(pData)))
+        cLen := ALLTRIM(Str(HMG_LEN(pData)))
     Else
             MsgHMGError('SendData: Type Not Suported. Program terminated')
     EndIf
@@ -3883,7 +3883,7 @@ Return
 
 
 FUNCTION HBtoWinDateFormat()   // By Pablo César on June 26th, 2015
-Local cDateFormat := HMG_LOWER( SET( _SET_DATEFORMAT ) )
+Local cDateFormat := HMG_LOWER( Set( _SET_DATEFORMAT ) )
 RETURN CharRepl ("m", @cDateFormat, "M")   // this transform is need for internal structure of date format of MonthCal/DatePick controls
 
 
@@ -4419,10 +4419,10 @@ DEFAULT snRandom TO Seconds() / Exp(1)
 DEFAULT nLimit   TO 65535
 
 snRandom  := Log( snRandom + Sqrt(2) ) * Exp(3)
-snRandom  := Val( STR(snRandom - Int(snRandom), 17, 15 ) )
+snRandom  := Val( Str(snRandom - Int(snRandom), 17, 15 ) )
 cLimit    := Transform( nLimit, "@N" )
 
-nDecimals := HB_UAT(".", cLimit)
+nDecimals := hb_UAt(".", cLimit)
 
 if nDecimals > 0
    nDecimals := HMG_LEN(cLimit)-nDecimals
@@ -4475,18 +4475,18 @@ Return ( cExt )
 
 /*
 Function cFileNoPath( cPathMask )
-Local n := HB_UTF8RAT( "\", cPathMask )
+Local n := hb_utf8RAt( "\", cPathMask )
 
 Return If( n > 0 .and. n < HMG_LEN( cPathMask ), ;
-        HB_URIGHT( cPathMask, HMG_LEN( cPathMask ) - n ), ;
-        If( ( n := HB_UAT( ":", cPathMask ) ) > 0, ;
-        HB_URIGHT( cPathMask, HMG_LEN( cPathMask ) - n ), cPathMask ) )
+        hb_URight( cPathMask, HMG_LEN( cPathMask ) - n ), ;
+        If( ( n := hb_UAt( ":", cPathMask ) ) > 0, ;
+        hb_URight( cPathMask, HMG_LEN( cPathMask ) - n ), cPathMask ) )
 
 Function cFileNoExt( cPathMask )
 Local cName := ALLTRIM( cFileNoPath( cPathMask ) )
-Local n     := HB_UAT( ".", cName )
+Local n     := hb_UAt( ".", cName )
 
-Return ALLTRIM( If( n > 0, HB_ULEFT( cName, n - 1 ), cName ) )
+Return ALLTRIM( If( n > 0, hb_ULeft( cName, n - 1 ), cName ) )
 */
 
 ********************************************************************************
@@ -4807,12 +4807,12 @@ i := GetControlIndex ( ControlName , ParentForm )
 
 if i > 0
 
-    if HB_UAT("@",url)>0
+    if hb_UAt("@",url)>0
 
         _HMG_SYSDATA [  6 ] [i] := {||ShellExecute(0, "open", "rundll32.exe", "url.dll,FileProtocolHandler mailto:"+url, ,1)}
         _HMG_SYSDATA [  8 ] [i] := url
 
-    elseif HB_UAT("http",url)>0
+    elseif hb_UAt("http",url)>0
 
         _HMG_SYSDATA [  6 ] [i] := {||ShellExecute(0, "open", "rundll32.exe", "url.dll,FileProtocolHandler " + url, ,1)}
         _HMG_SYSDATA [  8 ] [i] := url
@@ -4870,7 +4870,7 @@ Local tFactor
 Local tvHeight
 Local icb
 Local ppnavtitle
-Local cLang       := HB_USubStr( HMG_UPPER( Set ( _SET_LANGUAGE ) ), 1 , 2 )
+Local cLang       := hb_USubStr( HMG_UPPER( Set ( _SET_LANGUAGE ) ), 1 , 2 )
 
 PUBLIC _Y1:=0,_X1:=0,_Y2:=0,_X2:=0 // ADD April 2014
 
@@ -4937,7 +4937,7 @@ DEFINE WINDOW _HMG_PRINTER_WAIT AT 0,0 width 310 height 85 title '' child noshow
 END WINDOW
 CENTER WINDOW _HMG_PRINTER_WAIT
 
-ppnavtitle := _HMG_SYSDATA [ 371 ] [01] + ' [' + ALLTRIM(STR(_HMG_SYSDATA [ 361 ])) + '/'+ALLTRIM(STR(_HMG_SYSDATA [ 380 ])) + ']'
+ppnavtitle := _HMG_SYSDATA [ 371 ] [01] + ' [' + ALLTRIM(Str(_HMG_SYSDATA [ 361 ])) + '/'+ALLTRIM(Str(_HMG_SYSDATA [ 380 ])) + ']'
 
 DEFINE WINDOW _HMG_PRINTER_SHOWPREVIEW ;
     AT 0,0 ;
@@ -5400,9 +5400,9 @@ ttHandle := GetFormToolTipHandle ('_HMG_PRINTER_SHOWTHUMBNAILS')
 
 For i := 1 To _HMG_SYSDATA [ 380 ]
 
-    cMacroTemp := 'Image' + ALLTRIM(STR(i))
+    cMacroTemp := 'Image' + ALLTRIM(Str(i))
 
-    cAction := "( _HMG_SYSDATA [ 361 ]:="+ ALLTRIM(STR(i)) +", _HMG_SYSDATA [ 368 ] := .F. , _HMG_PRINTER_PREVIEWRefresh() , _HMG_SYSDATA [ 368 ] := .T. )"
+    cAction := "( _HMG_SYSDATA [ 361 ]:="+ ALLTRIM(Str(i)) +", _HMG_SYSDATA [ 368 ] := .F. , _HMG_PRINTER_PREVIEWRefresh() , _HMG_SYSDATA [ 368 ] := .T. )"
 
     cFileName := _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".EMF"
 
@@ -5424,7 +5424,7 @@ For i := 1 To _HMG_SYSDATA [ 380 ]
     BT_HMGSetImage ('_HMG_PRINTER_SHOWTHUMBNAILS', cMacroTemp, hBitmap)
 
 
-    SetToolTip ( GetControlHandle ( cMacroTemp ,'_HMG_PRINTER_SHOWTHUMBNAILS'), _HMG_SYSDATA [ 371 ] [01] + ' ' + ALLTRIM(STR(i)) + ' [Click]' , ttHandle )
+    SetToolTip ( GetControlHandle ( cMacroTemp ,'_HMG_PRINTER_SHOWTHUMBNAILS'), _HMG_SYSDATA [ 371 ] [01] + ' ' + ALLTRIM(Str(i)) + ' [Click]' , ttHandle )
 
 Next i
 HideWindow ( GetFormHandle ( "_HMG_PRINTER_WAIT" ) )
@@ -5658,13 +5658,13 @@ Local nScrollMax
 LOCAL aCoord
 LOCAL hDC, BTstruct   // July 2015
 
-If _IsControlDefined ( 'Image' + ALLTRIM(STR(_HMG_SYSDATA [ 361 ])) , '_HMG_PRINTER_SHOWTHUMBNAILS' ) .and. _HMG_SYSDATA [ 368 ] == .T. .and. _HMG_SYSDATA [ 369 ] == .T.
+If _IsControlDefined ( 'Image' + ALLTRIM(Str(_HMG_SYSDATA [ 361 ])) , '_HMG_PRINTER_SHOWTHUMBNAILS' ) .and. _HMG_SYSDATA [ 368 ] == .T. .and. _HMG_SYSDATA [ 369 ] == .T.
 
     if _HMG_SYSDATA [ 370 ] != _HMG_SYSDATA [ 361 ]
 
         _HMG_SYSDATA [ 370 ] := _HMG_SYSDATA [ 361 ]
         hwnd := GetFormHandle('_HMG_PRINTER_SHOWTHUMBNAILS')
-        nRow := GetProperty ( '_HMG_PRINTER_SHOWTHUMBNAILS' , 'Image' + ALLTRIM(STR(_HMG_SYSDATA [ 361 ])) , 'Row' )
+        nRow := GetProperty ( '_HMG_PRINTER_SHOWTHUMBNAILS' , 'Image' + ALLTRIM(Str(_HMG_SYSDATA [ 361 ])) , 'Row' )
         nScrollMax := GetScrollRangeMax ( hwnd , SB_VERT )
 
         if _HMG_SYSDATA [ 380 ] == _HMG_SYSDATA [ 361 ]
@@ -5727,7 +5727,7 @@ _X1 := aCoord [2]
 _Y2 := aCoord [3]
 _X2 := aCoord [4]
 
-_HMG_PRINTER_SHOWPREVIEW.TITLE := _HMG_SYSDATA [ 371 ] [01] + ' [' + ALLTRIM(STR(_HMG_SYSDATA [ 361 ])) + '/'+ALLTRIM(STR(_HMG_SYSDATA [ 380 ])) + ']'
+_HMG_PRINTER_SHOWPREVIEW.TITLE := _HMG_SYSDATA [ 371 ] [01] + ' [' + ALLTRIM(Str(_HMG_SYSDATA [ 361 ])) + '/'+ALLTRIM(Str(_HMG_SYSDATA [ 380 ])) + ']'
 
 Return Nil
 
@@ -5804,14 +5804,14 @@ If _HMG_PRINTER_PrintPages.Spinner_3.Value == 1 // Copies
 
         If OddOnly == .T.
             If i / 2 != int (i / 2)
-                _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
             EndIf
         ElseIf EvenOnly == .T.
             If i / 2 == int (i / 2)
-                _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
             EndIf
         Else
-            _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+            _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
         EndIf
 
     Next i
@@ -5826,14 +5826,14 @@ Else
 
                 If OddOnly == .T.
                     If i / 2 != int (i / 2)
-                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
                     EndIf
                 ElseIf EvenOnly == .T.
                     If i / 2 == int (i / 2)
-                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
                     EndIf
                 Else
-                    _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                    _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
                 EndIf
 
             Next i
@@ -5848,14 +5848,14 @@ Else
 
                 If OddOnly == .T.
                     If i / 2 != int (i / 2)
-                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
                     EndIf
                 ElseIf EvenOnly == .T.
                     If i / 2 == int (i / 2)
-                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                        _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
                     EndIf
                 Else
-                    _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + strzero(i,4) + ".emf" )
+                    _HMG_PRINTER_PRINTPAGE ( _HMG_SYSDATA [ 372 ] , _HMG_SYSDATA [ 360 ] + StrZero(i,4) + ".emf" )
                 EndIf
 
             Next p
@@ -5962,7 +5962,7 @@ Function _HMG_PRINTER_H_PRINT ( nHdc , nRow , nCol , cFontName , nFontSize , nCo
 Local lAlignChanged := .F.
 
 if ValType (cText) == "N"
-   cText := ALLTRIM(STR(cText))
+   cText := ALLTRIM(Str(cText))
 Elseif ValType (cText) == "D"
    cText := dtoc (cText)
 Elseif ValType (cText) == "L"
@@ -6001,9 +6001,9 @@ Return nil
 Function _HMG_PRINTER_H_MULTILINE_PRINT ( nHdc , nRow , nCol , nToRow , nToCol , cFontName , nFontSize , nColor1 , nColor2 , nColor3 , cText , lbold , litalic , lunderline , lstrikeout , lcolor , lfont , lsize , cAlign )
 Local nAlign := TA_LEFT
 
-//  cText := hb_oemtoansi(cText)
+//  cText := hb_OEMToANSI(cText)
 if ValType (cText) == "N"
-    cText := ALLTRIM(STR(cText))
+    cText := ALLTRIM(Str(cText))
 Elseif ValType (cText) == "D"
     cText := dtoc (cText)
 Elseif ValType (cText) == "L"
@@ -7448,17 +7448,17 @@ if valtype (lOvr) == 'L'
     endif
 endif
 
-hZip := HB_ZIPOPEN( cFileName )
-IF ! EMPTY( hZip )
+hZip := hb_zipOpen( cFileName )
+IF ! Empty( hZip )
     FOR i := 1 To HMG_LEN (aDir)
         if valtype (bBlock) == 'B'
             Eval ( bBlock , aDir [i] , i )
         endif
-        // HB_ZipStoreFile( hZip, aDir [ i ], aDir [ i ] , cPassword ) missing asignation to cPassword
-        HB_ZipStoreFile( hZip, aDir [ i ], aDir [ i ] , NIL )
+        // hb_zipStoreFile( hZip, aDir [ i ], aDir [ i ] , cPassword ) missing asignation to cPassword
+        hb_zipStoreFile( hZip, aDir [ i ], aDir [ i ] , NIL )
     NEXT
 ENDIF
-HB_ZIPCLOSE( hZip )
+hb_zipClose( hZip )
 Return Nil
 
 *------------------------------------------------------------------------------*
@@ -7467,25 +7467,25 @@ Return Nil
 Function UNCOMPRESSFILES ( cFileName , bBlock )
 Local i := 0 , hUnzip , nErr, cFile, dDate, cTime, nSize, nCompSize
 
-hUnzip := HB_UNZIPOPEN( cFileName )
+hUnzip := hb_unzipOpen( cFileName )
 
-nErr := HB_UNZIPFILEFIRST( hUnzip )
+nErr := hb_unzipFileFirst( hUnzip )
 
 DO WHILE nErr == 0
 
-    HB_UnzipFileInfo( hUnzip, @cFile, @dDate, @cTime,,,, @nSize, @nCompSize )
+    hb_unzipFileInfo( hUnzip, @cFile, @dDate, @cTime,,,, @nSize, @nCompSize )
 
     i++
     if valtype (bBlock) = 'B'
         Eval ( bBlock , cFile , i )
     endif
 
-    HB_UnzipExtractCurrentFile( hUnzip, NIL, NIL )
+    hb_unzipExtractCurrentFile( hUnzip, NIL, NIL )
 
-    nErr := HB_UNZIPFILENEXT( hUnzip )
+    nErr := hb_unzipFileNext( hUnzip )
 
 ENDDO
-HB_UNZIPCLOSE( hUnzip )
+hb_unzipClose( hUnzip )
 Return Nil
 
 Function _GetControlObject (ControlName,ParentForm)
@@ -7566,7 +7566,7 @@ EndIf
 
 * Create OLE control
 
-oOle := ToleAuto():New( nInterfacePointer )
+oOle := TOleAuto():New( nInterfacePointer )
 
 k := _GetControlFree()
 
@@ -7767,7 +7767,7 @@ IF _RichEditBox_SetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , A
    RETURN NIL
 ENDIF
 
-if Pcount() == 3 // Window
+if PCount() == 3 // Window
 
     Arg2 := HMG_UPPER (ALLTRIM (Arg2))
 
@@ -7889,7 +7889,7 @@ if Pcount() == 3 // Window
 
   EndIf
 
-ElseIf Pcount() == 4 // CONTROL
+ElseIf PCount() == 4 // CONTROL
 
     Arg3 := HMG_UPPER (ALLTRIM (Arg3))
 
@@ -8135,7 +8135,7 @@ ElseIf Pcount() == 4 // CONTROL
 
     EndIf
 
-ElseIf Pcount() == 5    // CONTROL WITH ARGUMENT, TOOLBAR BUTTON OR
+ElseIf PCount() == 5    // CONTROL WITH ARGUMENT, TOOLBAR BUTTON OR
             // SPLITBOX CHILD CONTROL WITHOUT ARGUMENT
 
     Arg3 := HMG_UPPER (ALLTRIM (Arg3))
@@ -8229,7 +8229,7 @@ ElseIf Pcount() == 5    // CONTROL WITH ARGUMENT, TOOLBAR BUTTON OR
 
     EndIf
 
-ElseIf Pcount() == 6    // TAB CHILD CONTROL,
+ElseIf PCount() == 6    // TAB CHILD CONTROL,
             // SPLITBOX CHILD WITH 1 ARGUMENT
             // OR SPLITCHILD TOOLBAR BUTTON
 
@@ -8288,7 +8288,7 @@ ElseIf Pcount() == 6    // TAB CHILD CONTROL,
 
     SetProperty ( Arg1 , Arg4 , Arg5 , Arg6 )
 
-ElseIf Pcount() == 7    // TAB CHILD CONTROL WITH 1 ARGUMENT OR
+ElseIf PCount() == 7    // TAB CHILD CONTROL WITH 1 ARGUMENT OR
             // SPLITBOX WITH 2 ARGUMENTS
 
     If     HMG_UPPER (ALLTRIM (Arg2)) == 'SPLITBOX'
@@ -8308,7 +8308,7 @@ ElseIf Pcount() == 7    // TAB CHILD CONTROL WITH 1 ARGUMENT OR
 
     SetProperty ( Arg1 , Arg4 , Arg5 , Arg6 , Arg7 )
 
-ElseIf Pcount() == 8 // TAB CHILD CONTROL WITH 2 ARGUMENTS
+ElseIf PCount() == 8 // TAB CHILD CONTROL WITH 2 ARGUMENTS
 
     If     HMG_UPPER (ALLTRIM (Arg2)) == 'SPLITBOX'
 
@@ -8349,7 +8349,7 @@ IF _RichEditBox_GetProperty ( @xData, Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , 
 ENDIF
 
 
-if Pcount() == 2 // WINDOW
+if PCount() == 2 // WINDOW
 
     If .Not. _IsWindowDefined ( Arg1 )
         MsgHMGError("Window: "+ Arg1 + " is not defined. Program terminated" )
@@ -8459,7 +8459,7 @@ if Pcount() == 2 // WINDOW
 
     EndIf
 
-ElseIf Pcount() == 3 // CONTROL
+ElseIf PCount() == 3 // CONTROL
 
     Arg3 := HMG_UPPER (ALLTRIM (Arg3))
 
@@ -8697,7 +8697,7 @@ ElseIf Pcount() == 3 // CONTROL
 
     EndIf
 
-ElseIf Pcount() == 4    // CONTROL WITH ARGUMENT, TOOLBAR BUTTON
+ElseIf PCount() == 4    // CONTROL WITH ARGUMENT, TOOLBAR BUTTON
             // OR SPLITBOX CHILD WITHOUT ARGUMENT
 
     If HMG_UPPER (ALLTRIM (Arg2)) == 'SPLITBOX'
@@ -8763,7 +8763,7 @@ ElseIf Pcount() == 4    // CONTROL WITH ARGUMENT, TOOLBAR BUTTON
 
     EndIf
 
-ElseIf Pcount() == 5    // TAB CHILD CONTROL (WITHOUT ARGUMENT)
+ElseIf PCount() == 5    // TAB CHILD CONTROL (WITHOUT ARGUMENT)
             // OR SPLITBOX CHILD WITH ARGUMENT
 
     If HMG_UPPER (ALLTRIM (Arg2)) == 'SPLITBOX'
@@ -8819,7 +8819,7 @@ ElseIf Pcount() == 5    // TAB CHILD CONTROL (WITHOUT ARGUMENT)
 
     EndIf
 
-ElseIf Pcount() == 6    // TAB CHILD CONTROL (WITH 1 ARGUMENT
+ElseIf PCount() == 6    // TAB CHILD CONTROL (WITH 1 ARGUMENT
             // OR SPLITBOX CHILD WITH 2 ARGUMENT
 
     If HMG_UPPER (ALLTRIM (Arg2)) == 'SPLITBOX'
@@ -8840,7 +8840,7 @@ ElseIf Pcount() == 6    // TAB CHILD CONTROL (WITH 1 ARGUMENT
 
     EndIf
 
-ElseIf Pcount() == 7    // TAB CHILD CONTROL (WITH 2 ARGUMENT
+ElseIf PCount() == 7    // TAB CHILD CONTROL (WITH 2 ARGUMENT
             // OR SPLITBOX CHILD WITH 3 ARGUMENT
 
     If HMG_UPPER (ALLTRIM (Arg2)) == 'SPLITBOX'
@@ -8951,7 +8951,7 @@ IF _RichEditBox_DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8
    Return Nil
 ENDIF
 
-if Pcount() == 2 // Window
+if PCount() == 2 // Window
 
     Arg2 := HMG_UPPER (ALLTRIM (Arg2))
 
@@ -9043,7 +9043,7 @@ if Pcount() == 2 // Window
 
     EndIf
 
-ElseIf Pcount() == 3 // CONTROL
+ElseIf PCount() == 3 // CONTROL
 
    IF ValType (Arg2) == "C" .AND. HMG_UPPER (Arg2) == HMG_UPPER ('CenterIn')
         _CenterWindow ( Arg1 , Arg3 )   //  ---> window center
@@ -9188,7 +9188,7 @@ ElseIf Pcount() == 3 // CONTROL
 
     EndIf
 
-ElseIf Pcount() == 4    // CONTROL WITH 1 ARGUMENT
+ElseIf PCount() == 4    // CONTROL WITH 1 ARGUMENT
             // OR SPLITBOX CHILD WITHOUT ARGUMENT
 
 
@@ -9260,7 +9260,7 @@ ElseIf Pcount() == 4    // CONTROL WITH 1 ARGUMENT
 
     EndIf
 
-ElseIf Pcount() == 5 .And. ValType (Arg3) == 'C'
+ElseIf PCount() == 5 .And. ValType (Arg3) == 'C'
 
      // CONTROL WITH 2 ARGUMENTS
     //  OR SPLITBOX CHILD WITH 1 ARGUMENT
@@ -9313,7 +9313,7 @@ ElseIf Pcount() == 5 .And. ValType (Arg3) == 'C'
 
     EndIf
 
-ElseIf Pcount()=5  .And. ValType (Arg3)=='N'
+ElseIf PCount()=5  .And. ValType (Arg3)=='N'
 
     // TAB CHILD WITHOUT ARGUMENTS
 
@@ -9323,7 +9323,7 @@ ElseIf Pcount()=5  .And. ValType (Arg3)=='N'
 
     DoMethod ( Arg1 , Arg4 , Arg5 )
 
-ElseIf Pcount() == 6 .And. ValType (Arg3) == 'C'
+ElseIf PCount() == 6 .And. ValType (Arg3) == 'C'
 
     // CONTROL WITH 3 ARGUMENTS
     // OR SPLITBOX CHILD WITH 2 ARGUMENTS
@@ -9370,7 +9370,7 @@ ElseIf Pcount() == 6 .And. ValType (Arg3) == 'C'
 
     EndIf
 
-ElseIf Pcount() == 6 .And. ValType (Arg3) == 'N'
+ElseIf PCount() == 6 .And. ValType (Arg3) == 'N'
     // TAB CHILD WITH 1 ARGUMENT
 
     If GetControlTabPage ( Arg4 , Arg2 , Arg1 ) <> Arg3
@@ -9379,11 +9379,11 @@ ElseIf Pcount() == 6 .And. ValType (Arg3) == 'N'
 
     DoMethod ( Arg1 , Arg4 , Arg5 , Arg6 )
 
-ElseIf Pcount() == 7 .And. HMG_UPPER (ALLTRIM (Arg2)) == 'CAPTURE'
+ElseIf PCount() == 7 .And. HMG_UPPER (ALLTRIM (Arg2)) == 'CAPTURE'
 
     SaveWindow ( Arg1 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 )
 
-ElseIf Pcount() == 7 .And. ValType (Arg3) == 'C'
+ElseIf PCount() == 7 .And. ValType (Arg3) == 'C'
 
     // CONTROL WITH 4 ARGUMENTS
     // OR SPLITBOX CHILD WITH 3 ARGUMENTS
@@ -9434,7 +9434,7 @@ ElseIf Pcount() == 7 .And. ValType (Arg3) == 'C'
 
     EndIf
 
-ElseIf Pcount() == 7 .And. ValType (Arg3) == 'N'
+ElseIf PCount() == 7 .And. ValType (Arg3) == 'N'
 
     // TAB CHILD WITH 2 ARGUMENTS
 
@@ -9444,7 +9444,7 @@ ElseIf Pcount() == 7 .And. ValType (Arg3) == 'N'
 
     DoMethod ( Arg1 , Arg4 , Arg5 , Arg6 , Arg7 )
 
-ElseIf Pcount() == 8
+ElseIf PCount() == 8
 
     // TAB CHILD WITH 3 ARGUMENTS
     // OR SPLITBOX CHILD WITH 4 ARGUMENTS
@@ -9470,7 +9470,7 @@ ElseIf Pcount() == 8
 
     EndIf
 
-ElseIf Pcount() == 9
+ElseIf PCount() == 9
     // TAB CHILD WITH 4 ARGUMENTS
     // OR SPLITBOX CHILD WITH 5 ARGUMENTS
 
@@ -9567,7 +9567,7 @@ Function _GridEx_GetProperty (xData, Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , A
 Local i, RetVal := .F.
 Local cHeader, nAlignHeader, cFooter, nAlingFooter, nState
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. ((GetControlType(Arg2 , Arg1) <> "GRID") .AND. (GetControlType(Arg2 , Arg1) <> "MULTIGRID"))
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. ((GetControlType(Arg2 , Arg1) <> "GRID") .AND. (GetControlType(Arg2 , Arg1) <> "MULTIGRID"))
    RETURN .F.
 ENDIF
 
@@ -9729,7 +9729,7 @@ Return RetVal
 Function _GridEx_SetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 Local i, hImageList, RetVal := .F.
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. ((GetControlType(Arg2 , Arg1) <> "GRID") .AND. (GetControlType(Arg2 , Arg1) <> "MULTIGRID"))
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. ((GetControlType(Arg2 , Arg1) <> "GRID") .AND. (GetControlType(Arg2 , Arg1) <> "MULTIGRID"))
    RETURN .F.
 ENDIF
 
@@ -9894,7 +9894,7 @@ Return RetVal
 Function _GridEx_DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9 )
 Local RetVal := .F.
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. ((GetControlType(Arg2 , Arg1) <> "GRID") .AND. (GetControlType(Arg2 , Arg1) <> "MULTIGRID"))
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. ((GetControlType(Arg2 , Arg1) <> "GRID") .AND. (GetControlType(Arg2 , Arg1) <> "MULTIGRID"))
    RETURN .F.
 ENDIF
 
@@ -9948,7 +9948,7 @@ Return RetVal
 Function _Tree_GetProperty (xData, Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 Local i, nPos, RetVal := .F.
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "TREE")
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "TREE")
    RETURN .F.
 ENDIF
 
@@ -10058,7 +10058,7 @@ Return RetVal
 Function _Tree_SetProperty ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 )
 Local RetVal := .F.
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "TREE")
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "TREE")
    RETURN .F.
 ENDIF
 
@@ -10140,7 +10140,7 @@ Return RetVal
 Function _Tree_DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9 )
 Local RetVal := .F.
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "TREE")
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "TREE")
    RETURN .F.
 ENDIF
 
@@ -10175,7 +10175,7 @@ Local nAlignment, nNumbering, nNumberingStyle, nNumberingStart, ndOffset, ndLine
 Local nNumerator, nDenominator
 Local RetVal := .F.
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "RICHEDIT")
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "RICHEDIT")
    RETURN .F.
 ENDIF
 
@@ -10344,7 +10344,7 @@ Local nAlignment, nNumbering, nNumberingStyle, nNumberingStart, ndOffset, ndLine
 Local nNumerator, nDenominator
 Local RetVal := .F.
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "RICHEDIT")
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "RICHEDIT")
    RETURN .F.
 ENDIF
 
@@ -10485,7 +10485,7 @@ Function _RichEditBox_DoMethod ( Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 
 Local RetVal := .F.
 Local hWndControl
 
-IF (Valtype(Arg1) <> "C") .OR. (Valtype(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "RICHEDIT")
+IF (ValType(Arg1) <> "C") .OR. (ValType(Arg2) <> "C") .OR. (Valtype (Arg3) <> "C") .OR. (_IsControlDefined(Arg2 , Arg1) == .F.) .OR. (GetControlType(Arg2 , Arg1) <> "RICHEDIT")
    RETURN .F.
 ENDIF
 
@@ -10651,7 +10651,7 @@ LOCAL hFont := 0
          ASIZE (aFont, 6 )   // { cFontName, nFontSize, [ lBold, lItalic, lUnderline, lStrikeOut ] }
       ENDIF
 
-      IF ValType (aFont [1]) == "C" .AND. .NOT. EMPTY(aFont [1]) .AND. ValType (aFont [2]) == "N" .AND. aFont [2] > 0
+      IF ValType (aFont [1]) == "C" .AND. .NOT. Empty(aFont [1]) .AND. ValType (aFont [2]) == "N" .AND. aFont [2] > 0
          cFontName  := aFont [1]
          nFontSize  := aFont [2]
          lBold      := aFont [3]
@@ -11040,7 +11040,7 @@ __DYNSCOUNT()    // How much symbols do we have:    dsCount = __dynsCount()
 __DYNSGETNAME()  // Get name of symbol:             cSymbol = __dynsGetName( dsIndex )
 __DYNSGETINDEX() // Get index number of symbol:     dsIndex = __dynsGetIndex( cSymbol )
 __DYNSISFUN()    // returns .T. if a symbol has a function/procedure pointer given its symbol index or name:   __DynsIsFun( cSymbol | dsIndex )
-HB_ISFUNCTION()  // returns .T. if a symbol has a function/procedure pointer:                                  hb_IsFunction( cSymbol )
+hb_IsFunction()  // returns .T. if a symbol has a function/procedure pointer:                                  hb_IsFunction( cSymbol )
 */
 
    FOR i := __DYNSCOUNT() TO 1 STEP -1
