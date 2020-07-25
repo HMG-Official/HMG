@@ -62,7 +62,7 @@ MEMVAR _HMG_SYSDATA_nControlHandle
 Function _DefineMainMenu ( Parent )
 *------------------------------------------------------------------------------*
 
-   if valtype(Parent) == 'U'
+   if ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    Endif
 
@@ -336,7 +336,7 @@ LOCAL cParentName := "", MenuItemID
 	EndIf
 
     // by Dr. Claudio Soto, December 2014
-   if valtype(tooltip) != "U"
+   if ValType(tooltip) != "U"
       GetFormNameByHandle ( _HMG_SYSDATA [ 4 ] [ k ] , @cParentName )
       MenuItemID  := _HMG_SYSDATA [ 5 ] [ k ]
       SetToolTipMenuItem ( GetFormHandle (cParentName), ToolTip, MenuItemID, GetMenuToolTipHandle (cParentName) )
@@ -510,7 +510,7 @@ Return z
 Function _DefineContextMenu ( Parent )
 *------------------------------------------------------------------------------*
 
-   IF valtype(Parent) == 'U'
+   IF ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    ENDIF
 
@@ -539,7 +539,7 @@ Return Nil
 Function _DefineNotifyMenu ( Parent )
 *------------------------------------------------------------------------------*
 
-   IF valtype(Parent) == 'U'
+   IF ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    ENDIF
 
@@ -568,7 +568,7 @@ Return Nil
 Function _DefineDropDownMenu ( cButton , Parent )
 *------------------------------------------------------------------------------*
 
-   IF valtype(Parent) == 'U'
+   IF ValType(Parent) == 'U'
       Parent := _HMG_SYSDATA [ 223 ]
    ENDIF
 
@@ -824,7 +824,7 @@ Return Ret
 Function _DefineControlContextMenu ( cControl, cParentForm )
 *------------------------------------------------------------------------------*
 
-   IF valtype(cParentForm) == 'U'
+   IF ValType(cParentForm) == 'U'
       cParentForm := _HMG_SYSDATA [ 223 ]
    ENDIF
 
