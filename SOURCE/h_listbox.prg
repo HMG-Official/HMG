@@ -112,7 +112,7 @@ Local FontHandle , k
 
 	ParentForm = GetFormHandle (ParentForm)
 
-	if valtype(x) == "U" .or. valtype(y) == "U"
+	if ValType(x) == "U" .or. ValType(y) == "U"
 
 		If _HMG_SYSDATA [ 216 ] == "TOOLBAR"
 			Break := TRUE
@@ -128,7 +128,7 @@ Local FontHandle , k
 				ControlHandle := InitListBox ( _HMG_SYSDATA [ 87 ] [i] , 0 , 0 , 0 , w , h , '' , 0 , invisible , notabstop, sort , dragitems )
 			endif
 
-			if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+			if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 				FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 			Else
 				FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -148,7 +148,7 @@ Local FontHandle , k
 			ControlHandle := InitListBox ( ParentForm , 0 , x , y , w , h , '' , 0 , invisible , notabstop, sort , dragitems )
 		endif
 
-		if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+		if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 			FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 		Else
 			FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -160,7 +160,7 @@ Local FontHandle , k
 		aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
