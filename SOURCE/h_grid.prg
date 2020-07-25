@@ -187,7 +187,7 @@ Available3 := Nil
 
       aSize ( aColumnClassMap , HMG_LEN ( aHeaders ) )
 
-      aSize ( aFieldNames , &cRecordSource->( FCOUNT() ) )
+      aSize ( aFieldNames , &cRecordSource->( FCount() ) )
 
       &cRecordSource->( AFIELDS( aFieldNames ) )
 
@@ -277,14 +277,14 @@ Available3 := Nil
          IF ValType( aHeaders ) == "U" .AND. ValType ( aWidths ) == "U"
             aHeaders := ARRAY( HMG_LEN( aRows[ 1 ] ))
             aWidths  := ARRAY( HMG_LEN( aRows[ 1 ] ))
-            AEVAL( aHeaders, { |xValue,nIndex| xValue:= NIL, aHeaders[ nIndex ] := DEFAULT_COLUMNHEADER + hb_NtoS( nIndex ) } )
+            AEVAL( aHeaders, { |xValue,nIndex| xValue:= NIL, aHeaders[ nIndex ] := DEFAULT_COLUMNHEADER + hb_ntos( nIndex ) } )
             AFILL( aWidths,  DEFAULT_COLUMNWIDTH )
          ELSEIF ValType( aHeaders ) == "A" .AND. ValType ( aWidths ) == "U"
             aWidths  := ARRAY( HMG_LEN( aHeaders ))
             AFILL( aWidths,  DEFAULT_COLUMNWIDTH )
          ELSEIF ValType( aHeaders ) == "U" .AND. ValType ( aWidths ) == "A"
             aHeaders := ARRAY( HMG_LEN( aWidths ))
-            AEVAL( aHeaders, { |xValue,nIndex| xValue:= NIL, aHeaders[ nIndex ] := DEFAULT_COLUMNHEADER + hb_NtoS( nIndex ) } )
+            AEVAL( aHeaders, { |xValue,nIndex| xValue:= NIL, aHeaders[ nIndex ] := DEFAULT_COLUMNHEADER + hb_ntos( nIndex ) } )
          ENDIF
       ELSE
          IF ValType( aHeaders ) == "U" .AND. ValType ( aWidths ) == "U"
@@ -295,7 +295,7 @@ Available3 := Nil
             AFILL( aWidths,  DEFAULT_COLUMNWIDTH )
          ELSEIF ValType( aHeaders ) == "U" .AND. ValType ( aWidths ) == "A"
             aHeaders := ARRAY( HMG_LEN( aWidths ))
-            AEVAL( aHeaders, { |xValue,nIndex| xValue:= NIL, aHeaders[ nIndex ] := DEFAULT_COLUMNHEADER + hb_NtoS( nIndex ) } )
+            AEVAL( aHeaders, { |xValue,nIndex| xValue:= NIL, aHeaders[ nIndex ] := DEFAULT_COLUMNHEADER + hb_ntos( nIndex ) } )
          ENDIF
       ENDIF
    ENDIF
@@ -666,11 +666,11 @@ LOCAL iImage := 0, aTemp
    IF ValType (nRowIndex) == "U"
       nRowIndex := ListView_GetItemCount (hWnd) + 1
    ELSEIF nRowIndex > (ListView_GetItemCount(hWnd) + 1)
-      MsgHMGError ("Grid.AddItem (nRowIndex = " +ALLTRIM(STR(nRowIndex))+ "): Invalid nRowIndex. Program Terminated")
+      MsgHMGError ("Grid.AddItem (nRowIndex = " +ALLTRIM(Str(nRowIndex))+ "): Invalid nRowIndex. Program Terminated")
    ENDIF
 
    if HMG_LEN ( _HMG_SYSDATA [ 7 ] [i] ) != HMG_LEN ( aItem )
-      MsgHMGError ("Grid.AddItem (nRowIndex = " +ALLTRIM(STR(nRowIndex))+ "): Item size mismatch. Program Terminated")
+      MsgHMGError ("Grid.AddItem (nRowIndex = " +ALLTRIM(Str(nRowIndex))+ "): Item size mismatch. Program Terminated")
    EndIf
 
    IF ValType ( _HMG_SYSDATA [40] [i] [2] ) == 'A'   // editcontrols
@@ -870,11 +870,11 @@ _HMG_GridInplaceEdit_GridIndex := IDX  // ADD
 
       cRecordSource   := _HMG_SYSDATA [ 40 ] [ idx ] [ 10 ]
 
-      if &cRecordSource->(RddName()) == 'PGRDD'
+      if &cRecordSource->(rddName()) == 'PGRDD'
          MsgHMGError("GRID: Modify PostGre RDD tables is not allowed. Program terminated" )
       endif
 
-      if &cRecordSource->(RddName()) == 'SQLMIX'
+      if &cRecordSource->(rddName()) == 'SQLMIX'
          MsgHMGError("GRID: Modify SQLMIX RDD tables is not allowed. Program terminated" )
       endif
 
@@ -1285,7 +1285,7 @@ _HMG_GridInplaceEdit_ControlHandle := GetControlHandle ("C","_HMG_GRID_InplaceEd
    _HMG_OnInplaceEditEvent( IDX )
 
    _HMG_GridInplaceEdit_StageEvent := 2   // Into Event
-   cProc := "_HMG_OnInplaceEditEvent( " + hb_NtoS( IDX ) + " ) "
+   cProc := "_HMG_OnInplaceEditEvent( " + hb_ntos( IDX ) + " ) "
    nIndex := EventCreate( cProc, NIL, NIL )   // by Dr. Claudio Soto, April 2016
 
    IF AEC = 'EDITBOX'
@@ -1323,7 +1323,7 @@ RETURN .t.
 FUNCTION _HMG_OnInplaceEditEvent( nIndex )
 LOCAL Ret := NIL
    IF _HMG_GridInplaceEdit_ControlHandle <> 0 .AND. ValType( _HMG_SYSDATA [ 40 ] [ nIndex ] [ 47 ] ) == "B"
-      Ret := EVAL( _HMG_SYSDATA [ 40 ] [ nIndex ] [ 47 ] )
+      Ret := Eval( _HMG_SYSDATA [ 40 ] [ nIndex ] [ 47 ] )
    ENDIF
 RETURN Ret
 
@@ -1816,7 +1816,7 @@ Local x , c , s
 
 	For x := 1 To HMG_LEN ( Text )
 
-		c := HB_USUBSTR(Text,x,1)
+		c := hb_USubStr(Text,x,1)
 
 		If c='0' .or. c='1' .or. c='2' .or. c='3' .or. c='4' .or. c='5' .or. c='6' .or. c='7' .or. c='8' .or. c='9' .or. c='.' .or. c='-'
 			s := s + c
@@ -1840,7 +1840,7 @@ Local x , c , s
 
 	For x := 1 To HMG_LEN ( Text )
 
-		c := HB_USUBSTR(Text,x,1)
+		c := hb_USubStr(Text,x,1)
 
 		If c='0' .or. c='1' .or. c='2' .or. c='3' .or. c='4' .or. c='5' .or. c='6' .or. c='7' .or. c='8' .or. c='9' .or. c=',' .or. c='-' .or. c = '.'
 
@@ -2124,9 +2124,9 @@ RETURN
 //   VIRTUAL GRID DATABASE FUNCTIONS
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define _IS_DBFILTER_ON_      ( ! Empty( &cRecordSource->( DBFILTER() ) ) )
+#define _IS_DBFILTER_ON_      ( ! Empty( &cRecordSource->( dbFilter() ) ) )
 #define _IS_SETDELETED_ON_    ( Set ( _SET_DELETED ) )
-#define _IS_ORDFOR_ON_        ( ! Empty( &cRecordSource->( ORDFOR() ) ) )
+#define _IS_ORDFOR_ON_        ( ! Empty( &cRecordSource->( ordFor() ) ) )
 
 #define _IS_ACTIVE_FILTER_    ( _IS_DBFILTER_ON_ .OR. _IS_SETDELETED_ON_ .OR. _IS_ORDFOR_ON_ )
 
@@ -2138,12 +2138,12 @@ Local nCount := 0
 Local nOldRecno
 Local cRecordSource := _HMG_SYSDATA [ 40 ] [ index ] [ 10 ]
    IF _IS_ACTIVE_FILTER_
-      nOldRecno := &cRecordSource->( RECNO() )
-      &cRecordSource->( DBGOTOP() )
-      &cRecordSource->( DBEVAL( {|| nCount++ } ) )   // Dbeval  --> not ignore set delete, preceess only not deleleted records
-      &cRecordSource->( DBGOTO( nOldRecno ) )
+      nOldRecno := &cRecordSource->( RecNo() )
+      &cRecordSource->( dbGoTop() )
+      &cRecordSource->( dbEval( {|| nCount++ } ) )   // Dbeval  --> not ignore set delete, preceess only not deleleted records
+      &cRecordSource->( dbGoto( nOldRecno ) )
    ELSE
-      nCount := &cRecordSource->( ORDKEYCOUNT() )    // OrdKeyCount --> ignore set delete, proceess deleted and non deleted records
+      nCount := &cRecordSource->( ordKeyCount() )    // OrdKeyCount --> ignore set delete, proceess deleted and non deleted records
    ENDIF
 Return nCount
 
@@ -2178,12 +2178,12 @@ Function IsDataGridDeleted ( index , nRecno )
 *************************************************
 Local lRet := .F.
 Local cRecordSource := _HMG_SYSDATA [ 40 ] [ index ] [ 10 ]
-Local nOldRecno := &cRecordSource->( RECNO() )
-   &cRecordSource->( ORDKEYGOTO( nRecno ) )
-   if &cRecordSource->( DELETED() )
+Local nOldRecno := &cRecordSource->( RecNo() )
+   &cRecordSource->( ordKeyGoto( nRecno ) )
+   if &cRecordSource->( Deleted() )
       lRet := .T.
    endif
-   &cRecordSource->( DBGOTO( nOldRecno ) )
+   &cRecordSource->( dbGoto( nOldRecno ) )
 Return lRet
 
 
@@ -2198,34 +2198,34 @@ Local nBackRecNo
 LOCAL nNewRecno
 
    cRecordSource  := _HMG_SYSDATA [ 40 ] [ index ] [ 10 ]
-   nBackRecNo     := &cRecordSource->( RECNO() )
+   nBackRecNo     := &cRecordSource->( RecNo() )
    aValue         := _GetValue (  ,  ,  index )
 
    if _IS_ACTIVE_FILTER_
       lOk := .f.
       nLogicalPos := 1
-      &cRecordSource->( DBGOTOP() )
+      &cRecordSource->( dbGoTop() )
 
-      Do While .Not. EOF()
-         If &cRecordSource->( RECNO() ) == nRecNo
+      Do While .Not. Eof()
+         If &cRecordSource->( RecNo() ) == nRecNo
             lOk := .t.
-            nNewRecNo   := &cRecordSource->( RECNO() )   // ADD, march 2017 // unused nNewRecNo. asistex
+            nNewRecNo   := &cRecordSource->( RecNo() )   // ADD, march 2017 // unused nNewRecNo. asistex
             Exit
          EndIf
-         &cRecordSource->( DBSKIP() )
+         &cRecordSource->( dbSkip() )
          nLogicalPos++
       EndDo
    else
       lOk := .t.
       &cRecordSource->( DBGOTO ( nRecNo ) )
       nLogicalPos := &cRecordSource->( ORDKEYNO () )
-      nNewRecNo   := &cRecordSource->( RECNO() )   // ADD, march 2017 // unused nNewRecNo. asistex
+      nNewRecNo   := &cRecordSource->( RecNo() )   // ADD, march 2017 // unused nNewRecNo. asistex
    endif
 
    If lOk
-//      &cRecordSource->( DBGOTO( nNewRecNo ) )   // ADD, march 2017
+//      &cRecordSource->( dbGoto( nNewRecNo ) )   // ADD, march 2017
    else
-      &cRecordSource->( DBGOTO( nBackRecNo ) )
+      &cRecordSource->( dbGoto( nBackRecNo ) )
    endif
 
    If lOk
@@ -2252,17 +2252,17 @@ Local k
 // unused   nHandle        := _HMG_SYSDATA [  3 ] [ index ]
 // unused   aColumnFields  := _HMG_SYSDATA [ 40 ] [ index ] [ 11 ]
    cRecordSource  := _HMG_SYSDATA [ 40 ] [ index ] [ 10 ]
-   nBackRecNo     := &cRecordSource->( RECNO() )
+   nBackRecNo     := &cRecordSource->( RecNo() )
    aValue         := _GetValue (  ,  ,  index )
 
    if _IS_ACTIVE_FILTER_
-      &cRecordSource->( DBGOTOP() )
-      &cRecordSource->( DBSKIP( aValue[1] - 1 ) )
+      &cRecordSource->( dbGoTop() )
+      &cRecordSource->( dbSkip( aValue[1] - 1 ) )
    else
       &cRecordSource->( ORDKEYGOTO ( aValue[1] ) )
    endif
 
-   If &cRecordSource->(EOF())
+   If &cRecordSource->(Eof())
       nRecNo := 0
       // Try to get the buffer record number (if available)
       aTemp := _HMG_SYSDATA [ 40 ] [ index ] [21]
@@ -2276,10 +2276,10 @@ Local k
          EndIf
       Next
    Else
-      nRecNo := &cRecordSource->( RECNO() )
+      nRecNo := &cRecordSource->( RecNo() )
    EndIf
 
-   &cRecordSource->( DBGOTO( nBackRecNo ) )
+   &cRecordSource->( dbGoto( nBackRecNo ) )
 
 return nRecNo
 
@@ -2446,8 +2446,8 @@ Local j
    ListView_SetItemCount ( nHandle , 0 )
    ListView_SetItemCount ( nHandle , nItemCount + 1 )
 
-   &cRecordSource->( DBGOTOP() )
-   &cRecordSource->( DBGOBOTTOM() )
+   &cRecordSource->( dbGoTop() )
+   &cRecordSource->( dbGoBottom() )
 
    nItemCount := ListView_GetItemCount ( nHandle )
    _SetValue ( , , { nItemCount , 1 } , index )
@@ -2511,7 +2511,7 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
    nItemCount        := ListView_GetItemCount ( nHandle )   // unused nItemCount. To check what it does ListView_GetItemCount(). asistex
 
    // Backup Record Number ************************************************
-   nRecNo := &cRecordSource->( RECNO() )
+   nRecNo := &cRecordSource->( RecNo() )
 
    // If OnSave Specified, Process It And Exit ****************************
    If ValType ( _HMG_SYSDATA [ 40 ] [ index ] [ 26 ] ) == 'B'
@@ -2585,9 +2585,9 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
 // RDD DEPENDANT CODE
 ///////////////////////////////////////////////////////////////////////
 
-   if &cRecordSource->( RddName() ) == 'SQLMIX'
+   if &cRecordSource->( rddName() ) == 'SQLMIX'
       MsgHMGError("GRID: Modify SQLMIX RDD tables are not allowed. Program terminated" )
-   ElseIf   &cRecordSource->(RddName()) == 'PGRDD'
+   ElseIf   &cRecordSource->(rddName()) == 'PGRDD'
       MsgHMGError("GRID: Modify PostGre RDD tables are not allowed. Program terminated" )
    Else
       _HMG_SYSDATA [ 347 ] := .F.   // Grid Automatic Update
@@ -2604,12 +2604,12 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
 
          // Position in Physical Row ..............
          If nPhysicalRow > 0
-            &cRecordSource->( DBGOTO( nPhysicalRow ) )
+            &cRecordSource->( dbGoto( nPhysicalRow ) )
 
             // Attempt To Lock To Save ....................................
-            If RLOCK() == .F.
+            If RLock() == .F.
                MsgExclamation(_HMG_SYSDATA [ 136 ][9],_HMG_SYSDATA [ 136 ][10])
-               &cRecordSource->( DBGOTO( nRecNo ) )
+               &cRecordSource->( dbGoto( nRecNo ) )
                Return .f.
             endif
 
@@ -2621,7 +2621,7 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
             EndIf
 
             // Unlock .....................................................
-            &cRecordSource->( DBRUNLOCK( &cRecordSource->( RECNO() ) ) )
+            &cRecordSource->( dbRUnlock( &cRecordSource->( RecNo() ) ) )
          EndIf
       Next x
 
@@ -2631,14 +2631,14 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
          If aTemp [ z ] [ 4 ] < 0
             // If the new record is marked as 'Deleted' do not append.
             If ! IsBufferedRecordMarkedForDeletion( index , aTemp [ z ] [ 4 ] )
-               &cRecordSource->( DBAPPEND() )
+               &cRecordSource->( dbAppend() )
                n := aTemp [ z ] [ 4 ]
                For j := 1 To l
                   If aTemp [j] [4] == n
                      // Attempt To Lock To Save .............
-                     If RLOCK() == .F.
+                     If RLock() == .F.
                         MsgExclamation(_HMG_SYSDATA [ 136 ][9],_HMG_SYSDATA [ 136 ][10])
-                        &cRecordSource->( DBGOTO( nRecNo ) )
+                        &cRecordSource->( dbGoto( nRecNo ) )
                         Return .f.
                      endif
 
@@ -2650,7 +2650,7 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
                      EndIf
 
                      // Unlock ..............................
-                     &cRecordSource->( DBRUNLOCK( &cRecordSource->( RECNO() ) ) )
+                     &cRecordSource->( dbRUnlock( &cRecordSource->( RecNo() ) ) )
 
                      // CleanUp .............................
                      aTemp [j] [1] := 0
@@ -2671,23 +2671,23 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
          cCommand := _HMG_SYSDATA [ 40 ] [ index ] [ 25 ] [ k ] [ 3 ]
 
          // Position On The Record To Process
-         &cRecordSource->( DBGOTO( nPhysicalRow ) )
+         &cRecordSource->( dbGoto( nPhysicalRow ) )
 
          // Lock Record
-         If RLOCK() == .F.
+         If RLock() == .F.
             MsgExclamation(_HMG_SYSDATA [ 136 ][9],_HMG_SYSDATA [ 136 ][10])
             return .f.
          endif
 
          // Excute Command **************************************
          If cCommand == 'D'
-            &cRecordSource->( DBDELETE() )
+            &cRecordSource->( dbDelete() )
          ElseIf cCommand == 'R'
-            &cRecordSource->( DBRECALL() )
+            &cRecordSource->( dbRecall() )
          EndIf
 
          // Unlock **********************************************
-         &cRecordSource->( DBRUNLOCK( &cRecordSource->( RECNO() ) ) )
+         &cRecordSource->( dbRUnlock( &cRecordSource->( RecNo() ) ) )
       Next
 
       _HMG_SYSDATA [347] := .T.   // Grid Automatic Update
@@ -2702,7 +2702,7 @@ Local cRecordSource, aColumnFields, nHandle, nItemCount, nRecNo, nLogicalCol, xV
    // Cleanup ********************************************
 
    // Restore Original Record Number **************************************
-   &cRecordSource->( DBGOTO( nRecNo ) )
+   &cRecordSource->( dbGoto( nRecNo ) )
 
    // Set Pending Updates Flag ********************************************
    _HMG_SYSDATA [ 40 ] [ index ] [ 20 ] := .F.
@@ -2838,7 +2838,7 @@ LOCAL nRecNo
    cRecordSource     := _HMG_SYSDATA [ 40 ] [ index ] [ 10 ]
 // unused   aColumnFields     := _HMG_SYSDATA [ 40 ] [ index ] [ 11 ]
 
-   nRecNo := &cRecordSource->( RECNO() )   // ADD, march 2017
+   nRecNo := &cRecordSource->( RecNo() )   // ADD, march 2017
 
    // Update Physical Record position
    If nLasthandle <> _HMG_SYSDATA [3] [ Index ] .OR. nLastLogicalRecord <> This.QueryRowIndex .OR. ListView_GetItemCount( _HMG_SYSDATA [3] [ Index ] ) == 1
@@ -2846,7 +2846,7 @@ LOCAL nRecNo
       nLastLogicalRecord := This.QueryRowIndex
       nLastPhysicalRecord := GridSetPhysicalRecord( index, This.QueryRowIndex )
    else
-      &cRecordSource->( DBGOTO( nLastPhysicalRecord ) )   // ADD, march 2017
+      &cRecordSource->( dbGoto( nLastPhysicalRecord ) )   // ADD, march 2017
    endif
 
    // Determine If The Required Cell Is Buffered
@@ -2885,7 +2885,7 @@ LOCAL nRecNo
       Endif
    Endif
 
-   &cRecordSource->( DBGOTO( nRecNo ) )   // ADD, march 2017
+   &cRecordSource->( dbGoto( nRecNo ) )   // ADD, march 2017
 
 Return
 
@@ -2898,7 +2898,7 @@ Local aColumnFields   := _HMG_SYSDATA [ 40 ] [ index ] [ 11 ]
 Local aColumnClassMap := _HMG_SYSDATA [ 40 ] [ index ] [ 30 ]
 Local xData
    IF aColumnClassMap [ nField ] == 'F'
-   // xData := &cRecordSource->( FIELDGET( &cRecordSource->( FIELDPOS( aColumnFields[ nField ] ) ) ) )
+   // xData := &cRecordSource->( FieldGet( &cRecordSource->( FieldPos( aColumnFields[ nField ] ) ) ) )
       xData := &cRecordSource->&( aColumnFields[ nField ] )   //  Field in this Area
    ELSE
       xData := &( aColumnFields[ nField ] )   // Field in other Area
@@ -2916,29 +2916,29 @@ Local nOldWorkArea
 
    IF _IS_ACTIVE_FILTER_
 /*
-      &cRecordSource->( DBGOTOP() )
-      WHILE .NOT. &cRecordSource->( EOF() )
-         IF &cRecordSource->( DELETED() ) == .F.
+      &cRecordSource->( dbGoTop() )
+      WHILE .NOT. &cRecordSource->( Eof() )
+         IF &cRecordSource->( Deleted() ) == .F.
             nLogicalRecord ++
             IF nLogicalRecord == nLogicalRecno
-               nPhysicalRecord := &cRecordSource->( RECNO() )
+               nPhysicalRecord := &cRecordSource->( RecNo() )
                EXIT
             ENDIF
          ENDIF
-         &cRecordSource->( DBSKIP() )
+         &cRecordSource->( dbSkip() )
       ENDDO
 */
-      nOldWorkArea := SELECT()
-      SELECT( cRecordSource )
-      DBGOTOP()
-      // if Set Delete is On, dbeval() not process deleted records
-      DBEVAL( {|| nLogicalRecord++, nPhysicalRecord := RECNO() }, NIL, {|| nLogicalRecord <> nLogicalRecno } )
-      DBGOTO( nPhysicalRecord )
-      SELECT( nOldWorkArea )
+      nOldWorkArea := Select()
+      Select( cRecordSource )
+      dbGoTop()
+      // if Set Delete is On, dbEval() not process deleted records
+      dbEval( {|| nLogicalRecord++, nPhysicalRecord := RecNo() }, NIL, {|| nLogicalRecord <> nLogicalRecno } )
+      dbGoto( nPhysicalRecord )
+      Select( nOldWorkArea )
    ELSE
       nLogicalRecord := nLogicalRecno
-      &cRecordSource->( ORDKEYGOTO( nLogicalRecord ) )
-      nPhysicalRecord := &cRecordSource->( RECNO() )
+      &cRecordSource->( ordKeyGoto( nLogicalRecord ) )
+      nPhysicalRecord := &cRecordSource->( RecNo() )
    ENDIF
 RETURN nPhysicalRecord
 
