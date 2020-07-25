@@ -94,12 +94,12 @@ function _HMG_HPDF_DRAWIMAGERAW ( cRawImage, nRow, nCol, nToRow, nToCol, nImageW
    oImage := _HPDF_LOADRAWBITMAP (_HMG_SYSDATA[ 150 ][ 1 ], cRawImage, nImageWidth, nImageHeight)
 
    IF HB_ISNUMERIC (oImage)
-      // MsgHMGError ("Error Nro: "+str(oImage))
+      // MsgHMGError ("Error Nro: "+Str(oImage))
       _HMG_HPDF_Error( 7 )
       return nil
    endif
 
-   if empty( oImage )
+   if Empty( oImage )
       _HMG_HPDF_Error( 7 )
       return nil
    endif
