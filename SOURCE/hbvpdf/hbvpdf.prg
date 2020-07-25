@@ -42,8 +42,8 @@ DEFAULT cId to ""
       return pdfHeader( "PDFATSAY", cId, { cString, nRow, nCol, cUnits, lExact } )
    ENDIF
 
-   IF ( nAt := HB_UAT( "#pagenumber#", cString ) ) > 0
-      cString := HB_ULEFT( cString, nAt - 1 ) + LTRIM(STR( pdfPageNumber())) + HB_USUBSTR( cString, nAt + 12 )
+   IF ( nAt := hb_UAt( "#pagenumber#", cString ) ) > 0
+      cString := hb_ULeft( cString, nAt - 1 ) + LTrim(Str( pdfPageNumber())) + hb_USubStr( cString, nAt + 12 )
    ENDIF
 
    lReverse := .f.
@@ -60,37 +60,37 @@ DEFAULT cId to ""
               nCol * 100.00 / t_aReport[ REPORTWIDTH ] * ;
               ( t_aReport[ PAGEX ] - pdfM2X( t_aReport[ PDFLEFT ] ) * 2 - 9.0 ) / 100.00
    ENDIF
-   IF !empty( cString )
+   IF !Empty( cString )
       cString := pdfStringB( cString )
-      IF HB_URIGHT( cString, 1 ) == CHR(255) //reverse
-         cString := HB_ULEFT( cString, HMG_LEN( cString ) - 1 )
+      IF hb_URight( cString, 1 ) == CHR(255) //reverse
+         cString := hb_ULeft( cString, HMG_LEN( cString ) - 1 )
          pdfBox( t_aReport[ PAGEY ] - nRow - t_aReport[ FONTSIZE ] + 2.0 , nCol, t_aReport[ PAGEY ] - nRow + 2.0, nCol + pdfM2X( pdfLen( cString )) + 1,,100, "D")
          t_aReport[ PAGEBUFFER ] += " 1 g "
          lReverse := .t.
-      ELSEIF HB_URIGHT( cString, 1 ) == CHR(254) //underline
-         cString := HB_ULEFT( cString, HMG_LEN( cString ) - 1 )
+      ELSEIF hb_URight( cString, 1 ) == CHR(254) //underline
+         cString := hb_ULeft( cString, HMG_LEN( cString ) - 1 )
          pdfBox( t_aReport[ PAGEY ] - nRow + 0.5,  nCol, t_aReport[ PAGEY ] - nRow + 1, nCol + pdfM2X( pdfLen( cString )) + 1,,100, "D")
       ENDIF
 
       // version 0.01
-      IF ( nAt := HB_UAT( CHR(253), cString )) > 0 // some color text inside
+      IF ( nAt := hb_UAt( CHR(253), cString )) > 0 // some color text inside
          t_aReport[ PAGEBUFFER ] += CRLF + ;
-         Chr_RGB( HB_USUBSTR( cString, nAt + 1, 1 )) + " " + ;
-         Chr_RGB( HB_USUBSTR( cString, nAt + 2, 1 )) + " " + ;
-         Chr_RGB( HB_USUBSTR( cString, nAt + 3, 1 )) + " rg "
-         cString := HB_UTF8STUFF( cString, nAt, 4, "")
+         Chr_RGB( hb_USubStr( cString, nAt + 1, 1 )) + " " + ;
+         Chr_RGB( hb_USubStr( cString, nAt + 2, 1 )) + " " + ;
+         Chr_RGB( hb_USubStr( cString, nAt + 3, 1 )) + " rg "
+         cString := hb_utf8Stuff( cString, nAt, 4, "")
       ENDIF
       // version 0.01
 
       _nFont := ascan( t_aReport[ FONTS ], {|arr| arr[1] == t_aReport[ FONTNAME ]} )
       IF !( t_aReport[ FONTNAME ] == t_aReport[ FONTNAMEPREV ] )
          t_aReport[ FONTNAMEPREV ] := t_aReport[ FONTNAME ]
-         t_aReport[ PAGEBUFFER ] += CRLF + "BT /Fo" + LTRIM(STR( _nFont )) + " " + LTRIM(transform( t_aReport[ FONTSIZE ], "999.99")) + " Tf " + LTRIM(transform( nCol, "9999.99" )) + " " + LTRIM(transform( nRow, "9999.99" )) + " Td (" + cString + ") Tj ET"
+         t_aReport[ PAGEBUFFER ] += CRLF + "BT /Fo" + LTrim(Str( _nFont )) + " " + LTrim(Transform( t_aReport[ FONTSIZE ], "999.99")) + " Tf " + LTrim(Transform( nCol, "9999.99" )) + " " + LTrim(Transform( nRow, "9999.99" )) + " Td (" + cString + ") Tj ET"
       ELSEIF t_aReport[ FONTSIZE ] != t_aReport[ FONTSIZEPREV ]
          t_aReport[ FONTSIZEPREV ] := t_aReport[ FONTSIZE ]
-         t_aReport[ PAGEBUFFER ] += CRLF + "BT /Fo" + LTRIM(STR( _nFont )) + " " + LTRIM(transform( t_aReport[ FONTSIZE ], "999.99")) + " Tf " + LTRIM(transform( nCol, "9999.99" )) + " " + LTRIM(transform( nRow, "9999.99" )) + " Td (" + cString + ") Tj ET"
+         t_aReport[ PAGEBUFFER ] += CRLF + "BT /Fo" + LTrim(Str( _nFont )) + " " + LTrim(Transform( t_aReport[ FONTSIZE ], "999.99")) + " Tf " + LTrim(Transform( nCol, "9999.99" )) + " " + LTrim(Transform( nRow, "9999.99" )) + " Td (" + cString + ") Tj ET"
       ELSE
-         t_aReport[ PAGEBUFFER ] += CRLF + "BT " + LTRIM(transform( nCol, "9999.99" )) + " " + LTRIM(transform( nRow, "9999.99" )) + " Td (" + cString + ") Tj ET"
+         t_aReport[ PAGEBUFFER ] += CRLF + "BT " + LTrim(Transform( nCol, "9999.99" )) + " " + LTrim(Transform( nRow, "9999.99" )) + " Td (" + cString + ") Tj ET"
       ENDIF
       IF lReverse
          t_aReport[ PAGEBUFFER ] += " 0 g "
@@ -261,11 +261,11 @@ DEFAULT cColor to ""
 
    // version 0.02
    cBoxColor := ""
-   IF !empty( cColor )
-      cBoxColor := " " + Chr_RGB( HB_USUBSTR( cColor, 2, 1 )) + " " + ;
-                         Chr_RGB( HB_USUBSTR( cColor, 3, 1 )) + " " + ;
-                         Chr_RGB( HB_USUBSTR( cColor, 4, 1 )) + " rg "
-      IF empty( ALLTRIM( cBoxColor ) )
+   IF !Empty( cColor )
+      cBoxColor := " " + Chr_RGB( hb_USubStr( cColor, 2, 1 )) + " " + ;
+                         Chr_RGB( hb_USubStr( cColor, 3, 1 )) + " " + ;
+                         Chr_RGB( hb_USubStr( cColor, 4, 1 )) + " rg "
+      IF Empty( ALLTRIM( cBoxColor ) )
          cBoxColor := ""
       ENDIF
    ENDIF
@@ -281,20 +281,20 @@ DEFAULT cColor to ""
 
       IF nShade > 0
          // version 0.02
-         t_aReport[ PAGEBUFFER ] += CRLF + transform( 1.00 - nShade / 100.00, "9.99") + " g " + cBoxColor + LTRIM(STR(pdfM2X( y1 ))) + " " + LTRIM(STR(pdfM2Y( x1 ))) + " " + LTRIM(STR(pdfM2X( y2 - y1 ))) + " -" + LTRIM(STR(pdfM2X( x2 - x1 ))) + " re f 0 g"
+         t_aReport[ PAGEBUFFER ] += CRLF + Transform( 1.00 - nShade / 100.00, "9.99") + " g " + cBoxColor + LTrim(Str(pdfM2X( y1 ))) + " " + LTrim(Str(pdfM2Y( x1 ))) + " " + LTrim(Str(pdfM2X( y2 - y1 ))) + " -" + LTrim(Str(pdfM2X( x2 - x1 ))) + " re f 0 g"
       ENDIF
 
       IF nBorder > 0
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR(pdfM2X( y1 ))) + " " + LTRIM(STR(pdfM2Y( x1 ))) + " " + LTRIM(STR(pdfM2X( y2 - y1 ))) + " -" + LTRIM(STR(pdfM2X( nBorder ))) + " re f"
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR(pdfM2X( y2 - nBorder ))) + " " + LTRIM(STR(pdfM2Y( x1 ))) + " " + LTRIM(STR(pdfM2X( nBorder ))) + " -" + LTRIM(STR(pdfM2X( x2 - x1 ))) + " re f"
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR(pdfM2X( y1 ))) + " " + LTRIM(STR(pdfM2Y( x2 - nBorder ))) + " " + LTRIM(STR(pdfM2X( y2 - y1 ))) + " -" + LTRIM(STR(pdfM2X( nBorder ))) + " re f"
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR(pdfM2X( y1 ))) + " " + LTRIM(STR(pdfM2Y( x1 ))) + " " + LTRIM(STR(pdfM2X( nBorder ))) + " -" + LTRIM(STR(pdfM2X( x2 - x1 ))) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str(pdfM2X( y1 ))) + " " + LTrim(Str(pdfM2Y( x1 ))) + " " + LTrim(Str(pdfM2X( y2 - y1 ))) + " -" + LTrim(Str(pdfM2X( nBorder ))) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str(pdfM2X( y2 - nBorder ))) + " " + LTrim(Str(pdfM2Y( x1 ))) + " " + LTrim(Str(pdfM2X( nBorder ))) + " -" + LTrim(Str(pdfM2X( x2 - x1 ))) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str(pdfM2X( y1 ))) + " " + LTrim(Str(pdfM2Y( x2 - nBorder ))) + " " + LTrim(Str(pdfM2X( y2 - y1 ))) + " -" + LTrim(Str(pdfM2X( nBorder ))) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str(pdfM2X( y1 ))) + " " + LTrim(Str(pdfM2Y( x1 ))) + " " + LTrim(Str(pdfM2X( nBorder ))) + " -" + LTrim(Str(pdfM2X( x2 - x1 ))) + " re f"
       ENDIF
    ELSEIF cUnits == "D"// "Dots"
       //x1, y1, x2, y2 - nTop, nLeft, nBottom, nRight
       IF nShade > 0
          // version 0.02
-         t_aReport[ PAGEBUFFER ] += CRLF + transform( 1.00 - nShade / 100.00, "9.99") + " g " + cBoxColor + LTRIM(STR( y1 )) + " " + LTRIM(STR( t_aReport[ PAGEY ] - x1 )) + " " + LTRIM(STR( y2 - y1 )) + " -" + LTRIM(STR( x2 - x1 )) + " re f 0 g"
+         t_aReport[ PAGEBUFFER ] += CRLF + Transform( 1.00 - nShade / 100.00, "9.99") + " g " + cBoxColor + LTrim(Str( y1 )) + " " + LTrim(Str( t_aReport[ PAGEY ] - x1 )) + " " + LTrim(Str( y2 - y1 )) + " -" + LTrim(Str( x2 - x1 )) + " re f 0 g"
       ENDIF
 
       IF nBorder > 0
@@ -305,10 +305,10 @@ DEFAULT cColor to ""
          �������
             3
 */
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR( y1 )) + " " + LTRIM(STR( t_aReport[ PAGEY ] - x1 )) + " " + LTRIM(STR( y2 - y1 )) + " -" + LTRIM(STR( nBorder )) + " re f"
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR( y2 - nBorder )) + " " + LTRIM(STR( t_aReport[ PAGEY ] - x1 )) + " " + LTRIM(STR( nBorder )) + " -" + LTRIM(STR( x2 - x1 )) + " re f"
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR( y1 )) + " " + LTRIM(STR( t_aReport[ PAGEY ] - x2 + nBorder )) + " " + LTRIM(STR( y2 - y1 )) + " -" + LTRIM(STR( nBorder )) + " re f"
-         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTRIM(STR( y1 )) + " " + LTRIM(STR( t_aReport[ PAGEY ] - x1 )) + " " + LTRIM(STR( nBorder )) + " -" + LTRIM(STR( x2 - x1 )) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str( y1 )) + " " + LTrim(Str( t_aReport[ PAGEY ] - x1 )) + " " + LTrim(Str( y2 - y1 )) + " -" + LTrim(Str( nBorder )) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str( y2 - nBorder )) + " " + LTrim(Str( t_aReport[ PAGEY ] - x1 )) + " " + LTrim(Str( nBorder )) + " -" + LTrim(Str( x2 - x1 )) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str( y1 )) + " " + LTrim(Str( t_aReport[ PAGEY ] - x2 + nBorder )) + " " + LTrim(Str( y2 - y1 )) + " -" + LTrim(Str( nBorder )) + " re f"
+         t_aReport[ PAGEBUFFER ] += CRLF + "0 g " + LTrim(Str( y1 )) + " " + LTrim(Str( t_aReport[ PAGEY ] - x1 )) + " " + LTrim(Str( nBorder )) + " -" + LTrim(Str( x2 - x1 )) + " re f"
       ENDIF
    ENDIF
 
@@ -323,20 +323,20 @@ DEFAULT cBorderColor to CHR(0) + CHR(0) + CHR(0)
 DEFAULT cBoxColor to CHR(255) + CHR(255) + CHR(255)
 
    t_aReport[ PAGEBUFFER ] +=  CRLF + ;
-                         Chr_RGB( HB_USUBSTR( cBorderColor, 1, 1 )) + " " + ;
-                         Chr_RGB( HB_USUBSTR( cBorderColor, 2, 1 )) + " " + ;
-                         Chr_RGB( HB_USUBSTR( cBorderColor, 3, 1 )) + ;
+                         Chr_RGB( hb_USubStr( cBorderColor, 1, 1 )) + " " + ;
+                         Chr_RGB( hb_USubStr( cBorderColor, 2, 1 )) + " " + ;
+                         Chr_RGB( hb_USubStr( cBorderColor, 3, 1 )) + ;
                          " RG" + ;
                          CRLF + ;
-                         Chr_RGB( HB_USUBSTR( cBoxColor, 1, 1 )) + " " + ;
-                         Chr_RGB( HB_USUBSTR( cBoxColor, 2, 1 )) + " " + ;
-                         Chr_RGB( HB_USUBSTR( cBoxColor, 3, 1 )) + ;
+                         Chr_RGB( hb_USubStr( cBoxColor, 1, 1 )) + " " + ;
+                         Chr_RGB( hb_USubStr( cBoxColor, 2, 1 )) + " " + ;
+                         Chr_RGB( hb_USubStr( cBoxColor, 3, 1 )) + ;
                          " rg" + ;
-                         CRLF + LTRIM(STR( nBorderWidth )) + " w" + ;
-                         CRLF + LTRIM( STR ( nLeft + nBorderWidth / 2 )) + " " + ;
-                         CRLF + LTRIM( STR ( t_aReport[ PAGEY ] - nBottom + nBorderWidth / 2)) + " " + ;
-                         CRLF + LTRIM( STR ( nRight - nLeft -  nBorderWidth )) + ;
-                         CRLF + LTRIM( STR ( nBottom - nTop - nBorderWidth )) + " " + ;
+                         CRLF + LTrim(Str( nBorderWidth )) + " w" + ;
+                         CRLF + LTrim( STR ( nLeft + nBorderWidth / 2 )) + " " + ;
+                         CRLF + LTrim( STR ( t_aReport[ PAGEY ] - nBottom + nBorderWidth / 2)) + " " + ;
+                         CRLF + LTrim( STR ( nRight - nLeft -  nBorderWidth )) + ;
+                         CRLF + LTrim( STR ( nBottom - nTop - nBorderWidth )) + " " + ;
                          " re" + ;
                          CRLF + "B"
 return nil
@@ -354,8 +354,8 @@ DEFAULT nCol to IIF( cUnits == "R", t_aReport[ REPORTWIDTH ] / 2, t_aReport[ PAG
       return pdfHeader( "PDFCENTER", cId, { cString, nRow, nCol, cUnits, lExact } )
    ENDIF
 
-   IF ( nAt := HB_UAT( "#pagenumber#", cString ) ) > 0
-      cString := HB_ULEFT( cString, nAt - 1 ) + LTRIM(STR( pdfPageNumber())) + HB_USUBSTR( cString, nAt + 12 )
+   IF ( nAt := hb_UAt( "#pagenumber#", cString ) ) > 0
+      cString := hb_ULeft( cString, nAt - 1 ) + LTrim(Str( pdfPageNumber())) + hb_USubStr( cString, nAt + 12 )
    ENDIF
 
    nLen := pdfLen( cString ) / 2
@@ -392,11 +392,11 @@ local nI, cTemp, nCurLevel, nObj1, nLast, nCount, nFirst, nRecno, nBooklen
    cTemp := ;
    "1 0 obj"+CRLF+;
    "<<"+CRLF+;
-   "/Type /Pages /Count " + LTRIM(STR(t_aReport[ REPORTPAGE ])) + CRLF +;
+   "/Type /Pages /Count " + LTrim(Str(t_aReport[ REPORTPAGE ])) + CRLF +;
    "/Kids ["
 
    for nI := 1 to t_aReport[ REPORTPAGE ]
-      cTemp += " " + LTRIM(STR( t_aReport[ PAGES ][ nI ] )) + " 0 R"
+      cTemp += " " + LTrim(Str( t_aReport[ PAGES ][ nI ] )) + " 0 R"
    next
 
    cTemp += " ]" + CRLF + ;
@@ -404,12 +404,12 @@ local nI, cTemp, nCurLevel, nObj1, nLast, nCount, nFirst, nRecno, nBooklen
    "endobj" + CRLF
 
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    // info
    ++t_aReport[ REPORTOBJ ]
    aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
-   cTemp := LTRIM(STR( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
+   cTemp := LTrim(Str( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
             "<<" + CRLF + ;
             "/Producer ()" + CRLF + ;
             "/Title ()" + CRLF + ;
@@ -417,19 +417,19 @@ local nI, cTemp, nCurLevel, nObj1, nLast, nCount, nFirst, nRecno, nBooklen
             "/Creator ()" + CRLF + ;
             "/Subject ()" + CRLF + ;
             "/Keywords ()" + CRLF + ;
-            "/CreationDate (D:" + STR(year(date()), 4) + HMG_PADL( month(date()), 2, "0") + HMG_PADL( day(date()), 2, "0") + HB_USUBSTR( time(), 1, 2 ) + HB_USUBSTR( time(), 4, 2 ) + HB_USUBSTR( time(), 7, 2 ) + ")" + CRLF + ;
+            "/CreationDate (D:" + Str(Year(Date()), 4) + HMG_PADL( Month(Date()), 2, "0") + HMG_PADL( Day(Date()), 2, "0") + hb_USubStr( Time(), 1, 2 ) + hb_USubStr( Time(), 4, 2 ) + hb_USubStr( Time(), 7, 2 ) + ")" + CRLF + ;
             ">>" + CRLF + ;
             "endobj" + CRLF
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    // root
    ++t_aReport[ REPORTOBJ ]
    aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
-   cTemp := LTRIM(STR( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
-   "<< /Type /Catalog /Pages 1 0 R /Outlines " + LTRIM(STR( t_aReport[ REPORTOBJ ] + 1 )) + " 0 R" + IIF( ( nBookLen := HMG_LEN( t_aReport[ BOOKMARK ] )) > 0, " /PageMode /UseOutlines", "") + " >>" + CRLF + "endobj" + CRLF
+   cTemp := LTrim(Str( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
+   "<< /Type /Catalog /Pages 1 0 R /Outlines " + LTrim(Str( t_aReport[ REPORTOBJ ] + 1 )) + " 0 R" + IIF( ( nBookLen := HMG_LEN( t_aReport[ BOOKMARK ] )) > 0, " /PageMode /UseOutlines", "") + " >>" + CRLF + "endobj" + CRLF
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    ++t_aReport[ REPORTOBJ ]
    nObj1 := t_aReport[ REPORTOBJ ]
@@ -457,39 +457,39 @@ local nI, cTemp, nCurLevel, nObj1, nLast, nCount, nFirst, nRecno, nBooklen
 
       nLast += t_aReport[ REPORTOBJ ]
 
-      cTemp := LTRIM(STR( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + "<< /Type /Outlines /Count " + LTRIM(STR( nCount )) + " /First " + LTRIM(STR( nFirst )) + " 0 R /Last " + LTRIM(STR( nLast )) + " 0 R >>" + CRLF + "endobj" //+ CRLF
+      cTemp := LTrim(Str( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + "<< /Type /Outlines /Count " + LTrim(Str( nCount )) + " /First " + LTrim(Str( nFirst )) + " 0 R /Last " + LTrim(Str( nLast )) + " 0 R >>" + CRLF + "endobj" //+ CRLF
       aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
       t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-      fwrite( t_aReport[ HANDLE ], cTemp )
+      FWrite( t_aReport[ HANDLE ], cTemp )
 
       ++t_aReport[ REPORTOBJ ]
       nRecno := 1
       FOR nI := 1 to nBookLen
-         cTemp := CRLF + LTRIM(STR( t_aReport[ REPORTOBJ ] + nI - 1 )) + " 0 obj" + CRLF + ;
+         cTemp := CRLF + LTrim(Str( t_aReport[ REPORTOBJ ] + nI - 1 )) + " 0 obj" + CRLF + ;
                  "<<" + CRLF + ;
-                 "/Parent " + LTRIM(STR( t_aReport[ BOOKMARK ][ nRecno ][ BOOKPARENT ])) + " 0 R" + CRLF + ;
-                 "/Dest [" + LTRIM(STR( t_aReport[ PAGES ][ t_aReport[ BOOKMARK ][ nRecno ][ BOOKPAGE ] ] )) + " 0 R /XYZ 0 " + LTRIM( STR( t_aReport[ BOOKMARK ][ nRecno ][ BOOKCOORD ])) + " 0]" + CRLF + ;
+                 "/Parent " + LTrim(Str( t_aReport[ BOOKMARK ][ nRecno ][ BOOKPARENT ])) + " 0 R" + CRLF + ;
+                 "/Dest [" + LTrim(Str( t_aReport[ PAGES ][ t_aReport[ BOOKMARK ][ nRecno ][ BOOKPAGE ] ] )) + " 0 R /XYZ 0 " + LTrim( Str( t_aReport[ BOOKMARK ][ nRecno ][ BOOKCOORD ])) + " 0]" + CRLF + ;
                  "/Title (" + ALLTRIM( t_aReport[ BOOKMARK ][ nRecno ][ BOOKTITLE ]) + ")" + CRLF + ;
-                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKPREV ] > 0, "/Prev " + LTRIM(STR( t_aReport[ BOOKMARK ][ nRecno ][ BOOKPREV ])) + " 0 R" + CRLF, "") + ;
-                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKNEXT ] > 0, "/Next " + LTRIM(STR( t_aReport[ BOOKMARK ][ nRecno ][ BOOKNEXT ])) + " 0 R" + CRLF, "") + ;
-                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKFIRST ] > 0, "/First " + LTRIM(STR( t_aReport[ BOOKMARK ][ nRecno ][ BOOKFIRST ])) + " 0 R" + CRLF, "") + ;
-                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKLAST ] > 0, "/Last " + LTRIM(STR( t_aReport[ BOOKMARK ][ nRecno ][ BOOKLAST ])) + " 0 R" + CRLF, "") + ;
-                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKCOUNT ] != 0, "/Count " + LTRIM(STR( t_aReport[ BOOKMARK ][ nRecno ][ BOOKCOUNT ])) + CRLF, "") + ;
+                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKPREV ] > 0, "/Prev " + LTrim(Str( t_aReport[ BOOKMARK ][ nRecno ][ BOOKPREV ])) + " 0 R" + CRLF, "") + ;
+                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKNEXT ] > 0, "/Next " + LTrim(Str( t_aReport[ BOOKMARK ][ nRecno ][ BOOKNEXT ])) + " 0 R" + CRLF, "") + ;
+                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKFIRST ] > 0, "/First " + LTrim(Str( t_aReport[ BOOKMARK ][ nRecno ][ BOOKFIRST ])) + " 0 R" + CRLF, "") + ;
+                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKLAST ] > 0, "/Last " + LTrim(Str( t_aReport[ BOOKMARK ][ nRecno ][ BOOKLAST ])) + " 0 R" + CRLF, "") + ;
+                 IIF( t_aReport[ BOOKMARK ][ nRecno ][ BOOKCOUNT ] != 0, "/Count " + LTrim(Str( t_aReport[ BOOKMARK ][ nRecno ][ BOOKCOUNT ])) + CRLF, "") + ;
                  ">>" + CRLF + "endobj" + CRLF
 
          aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] + 2 )
          t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-         fwrite( t_aReport[ HANDLE ], cTemp )
+         FWrite( t_aReport[ HANDLE ], cTemp )
          ++nRecno
       NEXT
       pdfBookClose()
 
       t_aReport[ REPORTOBJ ] += nBookLen - 1
    ELSE
-      cTemp := LTRIM(STR( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + "<< /Type /Outlines /Count 0 >>" + CRLF + "endobj" + CRLF
+      cTemp := LTrim(Str( t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + "<< /Type /Outlines /Count 0 >>" + CRLF + "endobj" + CRLF
       aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
       t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-      fwrite( t_aReport[ HANDLE ], cTemp )
+      FWrite( t_aReport[ HANDLE ], cTemp )
    ENDIF
 
    cTemp := CRLF
@@ -498,24 +498,24 @@ local nI, cTemp, nCurLevel, nObj1, nLast, nCount, nFirst, nRecno, nBooklen
    ++t_aReport[ REPORTOBJ ]
 
    cTemp += "xref" + CRLF + ;
-   "0 " + LTRIM(STR( t_aReport[ REPORTOBJ ] )) + CRLF +;
+   "0 " + LTrim(Str( t_aReport[ REPORTOBJ ] )) + CRLF +;
    HMG_PADL( t_aReport[ REFS ][ 1 ], 10, "0") + " 65535 f" + CRLF
 
    for nI := 2 to HMG_LEN( t_aReport[ REFS ] )
       cTemp += HMG_PADL( t_aReport[ REFS ][ nI ], 10, "0") + " 00000 n" + CRLF
    next
 
-   cTemp += "trailer << /Size " + LTRIM(STR( t_aReport[ REPORTOBJ ] )) + " /Root " + LTRIM(STR( nObj1 - 1 )) + " 0 R /Info " + LTRIM(STR( nObj1 - 2 )) + " 0 R >>" + CRLF + ;
+   cTemp += "trailer << /Size " + LTrim(Str( t_aReport[ REPORTOBJ ] )) + " /Root " + LTrim(Str( nObj1 - 1 )) + " 0 R /Info " + LTrim(Str( nObj1 - 2 )) + " 0 R >>" + CRLF + ;
             "startxref" + CRLF + ;
-            LTRIM(STR( t_aReport[ DOCLEN ] )) + CRLF + ;
+            LTrim(Str( t_aReport[ DOCLEN ] )) + CRLF + ;
             "%%EOF" + CRLF
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 /*
    IF t_aReport[ OPTIMIZE ]
       pdfOptimize( ) coming !
    ENDIF
 */
-   fclose( t_aReport[ HANDLE ] )
+   FClose( t_aReport[ HANDLE ] )
 
    t_aReport := nil
 
@@ -531,22 +531,22 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
    aadd( t_aReport[ PAGES ], t_aReport[ REPORTOBJ ] + 1 )
 
    cTemp := ;
-   LTRIM(STR( ++t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
+   LTrim(Str( ++t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
    "<<" + CRLF + ;
    "/Type /Page /Parent 1 0 R" + CRLF + ;
-   "/Resources " + LTRIM(STR( ++t_aReport[ REPORTOBJ ] )) + " 0 R" + CRLF + ;
-   "/MediaBox [ 0 0 " + LTRIM(transform( t_aReport[ PAGEX ], "9999.99")) + " " + ;
-   LTRIM(transform(t_aReport[ PAGEY ], "9999.99")) + " ]" + CRLF + ;
-   "/Contents " + LTRIM(STR( ++t_aReport[ REPORTOBJ ] )) + " 0 R" + CRLF + ;
+   "/Resources " + LTrim(Str( ++t_aReport[ REPORTOBJ ] )) + " 0 R" + CRLF + ;
+   "/MediaBox [ 0 0 " + LTrim(Transform( t_aReport[ PAGEX ], "9999.99")) + " " + ;
+   LTrim(Transform(t_aReport[ PAGEY ], "9999.99")) + " ]" + CRLF + ;
+   "/Contents " + LTrim(Str( ++t_aReport[ REPORTOBJ ] )) + " 0 R" + CRLF + ;
    ">>" + CRLF + ;
    "endobj" + CRLF
 
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
    cTemp := ;
-   LTRIM(STR(t_aReport[ REPORTOBJ ] - 1)) + " 0 obj" + CRLF + ;
+   LTrim(Str(t_aReport[ REPORTOBJ ] - 1)) + " 0 obj" + CRLF + ;
    "<<"+CRLF+;
    "/ColorSpace << /DeviceRGB /DeviceGray >>" + CRLF + ; //version 0.01
    "/ProcSet [ /PDF /Text /ImageB /ImageC ]"
@@ -558,7 +558,7 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
 
       for nI := 1 to HMG_LEN( t_aReport[ PAGEFONTS ] )
          nFont := ascan( t_aReport[ FONTS ], { |arr| arr[1] == t_aReport[ PAGEFONTS ][ nI ] } )
-         cTemp += CRLF + "/Fo" + LTRIM(STR( nFont )) + " " + LTRIM(STR( t_aReport[ FONTS ][ nFont ][ 2 ])) + " 0 R"
+         cTemp += CRLF + "/Fo" + LTrim(Str( nFont )) + " " + LTrim(Str( t_aReport[ FONTS ][ nFont ][ 2 ])) + " 0 R"
       next
 
       cTemp += CRLF + ">>"
@@ -572,7 +572,7 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
             aadd( t_aReport[ IMAGES ], { t_aReport[ PAGEIMAGES ][ nI ][ 1 ], ++t_aReport[ NEXTOBJ ], pdfImageInfo( t_aReport[ PAGEIMAGES ][ nI ][ 1 ] ) } )
             nImage := HMG_LEN( t_aReport[ IMAGES ] )
          ENDIF
-         cTemp += CRLF + "/Image" + LTRIM(STR( nImage )) + " " + LTRIM(STR( t_aReport[ IMAGES ][ nImage ][ 2 ])) + " 0 R"
+         cTemp += CRLF + "/Image" + LTrim(Str( nImage )) + " " + LTrim(Str( t_aReport[ IMAGES ][ nImage ][ 2 ])) + " 0 R"
       next
       cTemp += CRLF + ">>"
    ENDIF
@@ -580,28 +580,28 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
    cTemp += CRLF + ">>" + CRLF + "endobj" + CRLF
 
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
-   cTemp := LTRIM(STR( t_aReport[ REPORTOBJ ] )) + " 0 obj << /Length " + ;
-   LTRIM(STR( t_aReport[ REPORTOBJ ] + 1 )) + " 0 R >>" + CRLF +;
+   cTemp := LTrim(Str( t_aReport[ REPORTOBJ ] )) + " 0 obj << /Length " + ;
+   LTrim(Str( t_aReport[ REPORTOBJ ] + 1 )) + " 0 R >>" + CRLF +;
    "stream"
 
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    IF HMG_LEN( t_aReport[ PAGEIMAGES ] ) > 0
       cTemp := ""
       for nI := 1 to HMG_LEN( t_aReport[ PAGEIMAGES ] )
          cTemp += CRLF + "q"
          nImage := ascan( t_aReport[ IMAGES ], { |arr| arr[1] == t_aReport[ PAGEIMAGES ][ nI ][ 1 ] } )
-         cTemp += CRLF + LTRIM(STR( IIF( t_aReport[ PAGEIMAGES ][ nI ][ 5 ] == 0, pdfM2X( t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_WIDTH ] / t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_XRES ] * 25.4 ), t_aReport[ PAGEIMAGES ][ nI ][ 5 ]))) + ;
+         cTemp += CRLF + LTrim(Str( IIF( t_aReport[ PAGEIMAGES ][ nI ][ 5 ] == 0, pdfM2X( t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_WIDTH ] / t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_XRES ] * 25.4 ), t_aReport[ PAGEIMAGES ][ nI ][ 5 ]))) + ;
          " 0 0 " + ;
-         LTRIM(STR( IIF( t_aReport[ PAGEIMAGES ][ nI ][ 4 ] == 0, pdfM2X( t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_HEIGHT ] / t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_YRES ] * 25.4 ), t_aReport[ PAGEIMAGES ][ nI ][ 4 ]))) + ;
-         " " + LTRIM(STR( t_aReport[ PAGEIMAGES ][ nI ][ 3 ] )) + ;
-         " " + LTRIM(STR( t_aReport[ PAGEY ] - t_aReport[ PAGEIMAGES ][ nI ][ 2 ] - ;
+         LTrim(Str( IIF( t_aReport[ PAGEIMAGES ][ nI ][ 4 ] == 0, pdfM2X( t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_HEIGHT ] / t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_YRES ] * 25.4 ), t_aReport[ PAGEIMAGES ][ nI ][ 4 ]))) + ;
+         " " + LTrim(Str( t_aReport[ PAGEIMAGES ][ nI ][ 3 ] )) + ;
+         " " + LTrim(Str( t_aReport[ PAGEY ] - t_aReport[ PAGEIMAGES ][ nI ][ 2 ] - ;
          IIF( t_aReport[ PAGEIMAGES ][ nI ][ 4 ] == 0, pdfM2X( t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_HEIGHT ] / t_aReport[ IMAGES ][ nImage ][ 3 ][ IMAGE_YRES ] * 25.4 ), t_aReport[ PAGEIMAGES ][ nI ][ 4 ]))) + " cm"
-         cTemp += CRLF + "/Image" + LTRIM(STR( nImage )) + " Do"
+         cTemp += CRLF + "/Image" + LTrim(Str( nImage )) + " Do"
          cTemp += CRLF + "Q"
       next
       t_aReport[ PAGEBUFFER ] := cTemp + t_aReport[ PAGEBUFFER ]
@@ -613,16 +613,16 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
    "endobj" + CRLF
 
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
 
-   cTemp := LTRIM(STR( ++t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
-   LTRIM(STR(HMG_LEN( t_aReport[ PAGEBUFFER ] ))) + CRLF + ;
+   cTemp := LTrim(Str( ++t_aReport[ REPORTOBJ ] )) + " 0 obj" + CRLF + ;
+   LTrim(Str(HMG_LEN( t_aReport[ PAGEBUFFER ] ))) + CRLF + ;
    "endobj" + CRLF
 
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
    for nI := 1 to HMG_LEN( t_aReport[ FONTS ] )
       IF t_aReport[ FONTS ][ nI ][ 2 ] > t_aReport[ REPORTOBJ ]
@@ -630,18 +630,18 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
          aadd( t_aReport[ REFS ], t_aReport[ DOCLEN ] )
 
          cTemp := ;
-         LTRIM(STR( t_aReport[ FONTS ][ nI ][ 2 ] )) + " 0 obj" + CRLF + ;
+         LTrim(Str( t_aReport[ FONTS ][ nI ][ 2 ] )) + " 0 obj" + CRLF + ;
          "<<" + CRLF + ;
          "/Type /Font" + CRLF + ;
          "/Subtype /Type1" + CRLF + ;
-         "/Name /Fo" + LTRIM(STR( nI )) + CRLF + ;
+         "/Name /Fo" + LTrim(Str( nI )) + CRLF + ;
          "/BaseFont /" + t_aReport[ TYPE1 ][ t_aReport[ FONTS ][ nI ][ 1 ] ] + CRLF + ;
          "/Encoding /WinAnsiEncoding" + CRLF + ;
          ">>" + CRLF + ;
          "endobj" + CRLF
 
          t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-         fwrite( t_aReport[ HANDLE ], cTemp )
+         FWrite( t_aReport[ HANDLE ], cTemp )
 
       ENDIF
    next
@@ -653,28 +653,28 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
 
          // "/Filter /CCITTFaxDecode" for B&W only ?
          cTemp :=  ;
-         LTRIM(STR( t_aReport[ IMAGES ][ nI ][ 2 ] )) + " 0 obj" + CRLF + ;
+         LTrim(Str( t_aReport[ IMAGES ][ nI ][ 2 ] )) + " 0 obj" + CRLF + ;
          "<<" + CRLF + ;
          "/Type /XObject" + CRLF + ;
          "/Subtype /Image" + CRLF + ;
-         "/Name /Image" + LTRIM(STR(nI)) + CRLF + ;
-         "/Filter [" + IIF( HB_UAT( ".jpg", HMG_LOWER( t_aReport[ IMAGES ][ nI ][ 1 ]) ) > 0, " /DCTDecode", "" ) + " ]" + CRLF + ;
-         "/Width " + LTRIM(STR( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_WIDTH ] )) + CRLF + ;
-         "/Height " + LTRIM(STR( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_HEIGHT ] )) + CRLF + ;
-         "/BitsPerComponent " + LTRIM(STR( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_BITS ] )) + CRLF + ;
+         "/Name /Image" + LTrim(Str(nI)) + CRLF + ;
+         "/Filter [" + IIF( hb_UAt( ".jpg", HMG_LOWER( t_aReport[ IMAGES ][ nI ][ 1 ]) ) > 0, " /DCTDecode", "" ) + " ]" + CRLF + ;
+         "/Width " + LTrim(Str( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_WIDTH ] )) + CRLF + ;
+         "/Height " + LTrim(Str( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_HEIGHT ] )) + CRLF + ;
+         "/BitsPerComponent " + LTrim(Str( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_BITS ] )) + CRLF + ;
          "/ColorSpace /" + IIF( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_SPACE ] == 1, "DeviceGray", "DeviceRGB") + CRLF + ;
-         "/Length " + LTRIM(STR( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_LENGTH ])) + CRLF + ;
+         "/Length " + LTrim(Str( t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_LENGTH ])) + CRLF + ;
          ">>" + CRLF + ;
          "stream" + CRLF
 
          t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-         fwrite( t_aReport[ HANDLE ], cTemp )
+         FWrite( t_aReport[ HANDLE ], cTemp )
 
-         nImageHandle := fopen( t_aReport[ IMAGES ][ nI ][ 1 ] )
-         fseek( nImageHandle, t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_FROM ] )
+         nImageHandle := FOpen( t_aReport[ IMAGES ][ nI ][ 1 ] )
+         FSeek( nImageHandle, t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_FROM ] )
 
          nBuffer := 8192
-         cBuffer := space( nBuffer )
+         cBuffer := Space( nBuffer )
          k := 0
          while k < t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_LENGTH ]
             IF k + nBuffer <= t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_LENGTH ]
@@ -682,20 +682,20 @@ local cTemp, cBuffer, nBuffer, nRead, nI, k, nImage, nFont, nImageHandle
             ELSE
                nRead := t_aReport[ IMAGES ][ nI ][ 3 ][ IMAGE_LENGTH ] - k
             ENDIF
-            fread( nImageHandle, @cBuffer, nRead )
+            FRead( nImageHandle, @cBuffer, nRead )
 
             t_aReport[ DOCLEN ] += nRead
-            fwrite( t_aReport[ HANDLE ], cBuffer, nRead )
+            FWrite( t_aReport[ HANDLE ], cBuffer, nRead )
             k += nRead
          enddo
 
-         fclose( nImageHandle )
+         FClose( nImageHandle )
 
          cTemp := CRLF + "endstream" + CRLF + ;
          "endobj" + CRLF
 
          t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-         fwrite( t_aReport[ HANDLE ], cTemp )
+         FWrite( t_aReport[ HANDLE ], cTemp )
 
       ENDIF
    next
@@ -713,9 +713,9 @@ STATIC function pdfGetFontInfo( cParam )                                      /*
 ========================================                                      */
 local cRet
    IF cParam == "NAME"
-      IF HB_ULEFT( t_aReport[ TYPE1 ][ t_aReport[ FONTNAME ] ], 5 ) == "Times"
+      IF hb_ULeft( t_aReport[ TYPE1 ][ t_aReport[ FONTNAME ] ], 5 ) == "Times"
          cRet := "Times"
-      ELSEIF HB_ULEFT( t_aReport[ TYPE1 ][ t_aReport[ FONTNAME ] ], 9 ) == "Helvetica"
+      ELSEIF hb_ULeft( t_aReport[ TYPE1 ][ t_aReport[ FONTNAME ] ], 9 ) == "Helvetica"
          cRet := "Helvetica"
       ELSE
          cRet := "Courier" // 0.04
@@ -783,7 +783,7 @@ function pdfLen( cString )                                                    /*
 local nWidth := 0.00, nI, nLen, nArr, nAdd := ( t_aReport[ FONTNAME ] - 1 ) % 4
 
    nLen := HMG_LEN( cString )
-   IF HB_URIGHT( cString, 1 ) == CHR(255) .or. HB_URIGHT( cString, 1 ) == CHR(254 )// reverse or underline
+   IF hb_URight( cString, 1 ) == CHR(255) .or. hb_URight( cString, 1 ) == CHR(254 )// reverse or underline
       --nLen
    ENDIF
    IF pdfGetFontInfo("NAME") == "Times"
@@ -794,9 +794,9 @@ local nWidth := 0.00, nI, nLen, nArr, nAdd := ( t_aReport[ FONTNAME ] - 1 ) % 4
       nArr := 3 // 0.04
    ENDIF
 
-   if !empty( t_aReport[ FONTWIDTH ] )
+   if !Empty( t_aReport[ FONTWIDTH ] )
       For nI:= 1 To nLen
-         nWidth += t_aReport[ FONTWIDTH ][ nArr ][ ( ASC( HB_USUBSTR( cString, nI, 1 )) - 32 ) * 4 + 1 + nAdd ] * 25.4 * t_aReport[ FONTSIZE ] / 720.00 / 100.00
+         nWidth += t_aReport[ FONTWIDTH ][ nArr ][ ( ASC( hb_USubStr( cString, nI, 1 )) - 32 ) * 4 + 1 + nAdd ] * 25.4 * t_aReport[ FONTSIZE ] / 720.00 / 100.00
       Next
    endif
 
@@ -840,7 +840,7 @@ DEFAULT _cFontName to pdfGetFontInfo("NAME")
 DEFAULT _nFontType to pdfGetFontInfo("TYPE")
 DEFAULT _nFontSize to t_aReport[ FONTSIZE ]
 
-   IF !empty(t_aReport[ PAGEBUFFER ])
+   IF !Empty(t_aReport[ PAGEBUFFER ])
       pdfClosePage()
    ENDIF
 
@@ -907,7 +907,7 @@ DEFAULT lOptimize to .f.
    t_aReport[ PDFTOP       ] := 1 // top
    t_aReport[ PDFLEFT      ] := 10 // LEFT & RIGHT
    t_aReport[ PDFBOTTOM    ] := t_aReport[ PAGEY ] / 72 * t_aReport[ LPI ] - 1 // bottom, default "LETTER", "P", 6
-   t_aReport[ HANDLE       ] := fcreate( cFile )
+   t_aReport[ HANDLE       ] := FCreate( cFile )
    t_aReport[ PAGES        ] := {}
    t_aReport[ REFS         ] := { 0, 0 }
    t_aReport[ BOOKMARK     ] := {}
@@ -930,14 +930,14 @@ DEFAULT lOptimize to .f.
    n12 := 2 * n2 // 0.04
    for nI := 1 to n1
       for nJ := 1 to n2
-         t_aReport[ FONTWIDTH ][ nI ][ nJ ] := bin2i(HB_USUBSTR( cTemp, ( nI - 1 ) * n12 + ( nJ - 1 ) * 2 + 1, 2 ))
+         t_aReport[ FONTWIDTH ][ nI ][ nJ ] := bin2i(hb_USubStr( cTemp, ( nI - 1 ) * n12 + ( nJ - 1 ) * 2 + 1, 2 ))
       next
    next
 
    t_aReport[ DOCLEN ] := 0
    cTemp := "%PDF-1.3" + CRLF
    t_aReport[ DOCLEN ] += HMG_LEN( cTemp )
-   fwrite( t_aReport[ HANDLE ], cTemp )
+   FWrite( t_aReport[ HANDLE ], cTemp )
 
 return nil
                                                                               /*
@@ -965,7 +965,7 @@ local nSize, aSize, nWidth, nHeight
 
    DEFAULT _cPageSize to "LETTER"
 
-   if empty( _nWidth ) .or. empty( _nHeight )
+   if Empty( _nWidth ) .or. Empty( _nHeight )
 
       nSize := ascan( aSize, { |arr| arr[ 1 ] == _cPageSize } )
 
@@ -980,8 +980,8 @@ local nSize, aSize, nWidth, nHeight
 
    else
 
-      _nWidth := val( STR( _nWidth ) )
-      _nHeight := val( STR( _nHeight ) )
+      _nWidth := Val( Str( _nWidth ) )
+      _nHeight := Val( Str( _nHeight ) )
 
       nSize := ascan( aSize, { |arr| ( arr[ 2 ] == _nWidth  ) .and. ( arr[ 3 ] == _nHeight ) } )
 
@@ -1056,8 +1056,8 @@ DEFAULT lExact to .f.
       return pdfHeader( "PDFRJUST", cId, { cString, nRow, nCol, cUnits, lExact } )
    ENDIF
 
-   IF ( nAt := HB_UAT( "#pagenumber#", cString ) ) > 0
-      cString := HB_ULEFT( cString, nAt - 1 ) + LTRIM(STR( pdfPageNumber())) + HB_USUBSTR( cString, nAt + 12 )
+   IF ( nAt := hb_UAt( "#pagenumber#", cString ) ) > 0
+      cString := hb_ULeft( cString, nAt - 1 ) + LTrim(Str( pdfPageNumber())) + hb_USubStr( cString, nAt + 12 )
    ENDIF
 
    nLen := pdfLen( cString )
@@ -1104,11 +1104,11 @@ return nil
 =========================                                                     */
 function pdfSetLPI(_nLpi)                                                     /*
 =========================                                                     */
-local cLpi := ALLTRIM(STR(_nLpi))
+local cLpi := ALLTRIM(Str(_nLpi))
 DEFAULT _nLpi to 6
 
    cLpi := iif(cLpi$"1;2;3;4;6;8;12;16;24;48",cLpi,"6")
-   t_aReport[ LPI ] := val( cLpi )
+   t_aReport[ LPI ] := Val( cLpi )
 
    pdfPageSize( t_aReport[ PAGESIZE ] )
 return nil
@@ -1116,8 +1116,8 @@ return nil
 ==============================                                                */
 function pdfStringB( cString )                                                /*
 ==============================                                                */
-   cString := HB_UTF8STRTRAN( cString, "(", "\(" )
-   cString := HB_UTF8STRTRAN( cString, ")", "\)" )
+   cString := hb_utf8StrTran( cString, "(", "\(" )
+   cString := hb_utf8StrTran( cString, ")", "\)" )
 return cString
                                                                               /*
 ==============================================================================*/
@@ -1154,7 +1154,7 @@ DEFAULT cColor to ""
    nNew := nTab
 
    cString := ALLTRIM( cString )
-   nTokens := numtoken( cString, cDelim )
+   nTokens := NumToken( cString, cDelim )
    nStart := 1
 
    IF nJustify == 1 .or. nJustify == 4
@@ -1196,13 +1196,13 @@ DEFAULT cColor to ""
                ELSEIF nJustify == 3
                   nL := nLeft + nLength - pdfLen( cTemp )
                ENDIF
-               while k <= nLen .and. ( ( nLineLen += pdfLen( HB_USUBSTR( cToken, k, 1 ))) <= nLength )
-                  nLineLen += pdfLen( HB_USUBSTR( cToken, k, 1 ))
-                  cTemp += HB_USUBSTR( cToken, k, 1 )
+               while k <= nLen .and. ( ( nLineLen += pdfLen( hb_USubStr( cToken, k, 1 ))) <= nLength )
+                  nLineLen += pdfLen( hb_USubStr( cToken, k, 1 ))
+                  cTemp += hb_USubStr( cToken, k, 1 )
                   ++k
                enddo
-               IF empty( cTemp ) // single character > nlength
-                  cTemp := HB_USUBSTR( cToken, k, 1 )
+               IF Empty( cTemp ) // single character > nlength
+                  cTemp := hb_USubStr( cToken, k, 1 )
                   ++k
                ENDIF
                ++nLines
@@ -1291,9 +1291,9 @@ STATIC function pdfTextNextPara( cString, cDelim, nI )                        /*
 local nAt, cAt, nCRLF, nNew, nRat, nRet := 0
    // check if next spaces paragraph(s)
    nAt := attoken( cString, cDelim, nI ) + HMG_LEN( token( cString, cDelim, nI ) )
-   cAt := HB_USUBSTR( cString, nAt, attoken( cString, cDelim, nI + 1 ) - nAt )
-   nCRLF := numat( CHR(13) + CHR(10), cAt )
-   nRat := HB_UTF8RAT( CHR(13) + CHR(10), cAt )
+   cAt := hb_USubStr( cString, nAt, attoken( cString, cDelim, nI + 1 ) - nAt )
+   nCRLF := NumAt( CHR(13) + CHR(10), cAt )
+   nRat := hb_utf8RAt( CHR(13) + CHR(10), cAt )
    nNew := HMG_LEN( cAt ) - nRat - IIF( nRat > 0, 1, 0 )
    IF nCRLF > 1 .or. ( nCRLF == 1 .and. nNew > 0 )
       nRet := nCRLF
@@ -1313,29 +1313,29 @@ return n * 25.4 / 72
 ===================================                                           */
 STATIC function TimeAsAMPM( cTime )                                           /*
 ===================================                                           */
-   IF VAL(cTime) < 12
+   IF Val(cTime) < 12
       cTime += " am"
-   ELSEIF VAL(cTime) == 12
+   ELSEIF Val(cTime) == 12
       cTime += " pm"
    ELSE
-      cTime := STR(VAL(cTime) - 12, 2) + HB_USUBSTR(cTime, 3) + " pm"
+      cTime := Str(Val(cTime) - 12, 2) + hb_USubStr(cTime, 3) + " pm"
    ENDIF
-   cTime := HB_ULEFT( cTime, 5 ) + HB_USUBSTR( cTime, 10 )
+   cTime := hb_ULeft( cTime, 5 ) + hb_USubStr( cTime, 10 )
 return cTime
 
 function pdfOpenHeader( cFile )
 local nAt //, nErrorCode:=0
 DEFAULT cFile to ""
-   IF !empty( cFile )
+   IF !Empty( cFile )
       cFile := ALLTRIM( cFile )
       IF HMG_LEN( cFile ) > 12 .or. ;
-         HB_UAT( ' ', cFile ) > 0 .or. ;
-         ( HB_UAT( ' ', cFile ) == 0 .and. HMG_LEN( cFile ) > 8 ) .or. ;
-         ( ( nAt := HB_UAT( '.', cFile )) > 0 .and. HMG_LEN( HB_USUBSTR( cFile, nAt + 1 )) > 3 )
+         hb_UAt( ' ', cFile ) > 0 .or. ;
+         ( hb_UAt( ' ', cFile ) == 0 .and. HMG_LEN( cFile ) > 8 ) .or. ;
+         ( ( nAt := hb_UAt( '.', cFile )) > 0 .and. HMG_LEN( hb_USubStr( cFile, nAt + 1 )) > 3 )
          copy file (cFile) to temp.tmp
          cFile := "temp.tmp"
       ENDIF
-      //t_aReport[ HEADER ] := FT_RestArr( cFile, @nErrorCode )
+      //t_aReport[ HEADER ] := ft_RestArr( cFile, @nErrorCode )
       t_aReport[ HEADER ] := File2Array( cFile )
    ELSE
       t_aReport[ HEADER ] := {}
@@ -1398,24 +1398,24 @@ return nil
 function pdfHeader( cFunction, cId, arr )
 local nId, nI, nLen, nIdLen
    nId := 0
-   IF !empty( cId )
+   IF !Empty( cId )
       cId := HMG_UPPER( cId )
       nId := ascan( t_aReport[ HEADER ], {| arr | arr[ 3 ] == cId })
    ENDIF
    IF nId == 0
       nLen := HMG_LEN( t_aReport[ HEADER ] )
-      IF empty( cId )
+      IF Empty( cId )
          cId := cFunction
          nIdLen := HMG_LEN( cId )
          for nI := 1 to nLen
             IF t_aReport[ HEADER ][ nI ][ 2 ] == cId
-               IF val( HB_USUBSTR( t_aReport[ HEADER ][ nI ][ 3 ], nIdLen + 1 ) ) > nId
-                  nId := val( HB_USUBSTR( t_aReport[ HEADER ][ nI ][ 3 ], nIdLen + 1 ) )
+               IF Val( hb_USubStr( t_aReport[ HEADER ][ nI ][ 3 ], nIdLen + 1 ) ) > nId
+                  nId := Val( hb_USubStr( t_aReport[ HEADER ][ nI ][ 3 ], nIdLen + 1 ) )
                ENDIF
             ENDIF
          next
          ++nId
-         cId += LTRIM(STR(nId))
+         cId += LTrim(Str(nId))
       ENDIF
       aadd( t_aReport[ HEADER ], { .t., cFunction, cId } )
       ++nLen
@@ -1740,7 +1740,7 @@ DEFAULT _width to 200
    pdfSetFont("Helvetica", BOLD, 10) // 0.04
    pdfAtSay( "Test Line 5", t_aReportStyle[ nStyle ][ 5 ], 1, "R", .t. )
 
-   pdfAtSay( dtoc( date()) + " " + TimeAsAMPM( time() ), t_aReportStyle[ nStyle ][ 6 ], 1, "R", .t. )
+   pdfAtSay( DToC( Date()) + " " + TimeAsAMPM( Time() ), t_aReportStyle[ nStyle ][ 6 ], 1, "R", .t. )
    pdfRJust( "Page: #pagenumber#", t_aReportStyle[ nStyle ][ 6 ], t_aReport[ REPORTWIDTH ], "R", .t. )
 
    pdfEditOffHeader()
@@ -1749,7 +1749,7 @@ DEFAULT _width to 200
 return nil
 
 function pdfImageInfo( cFile )
-local cTemp := HMG_UPPER(HB_USUBSTR( cFile, HB_UTF8RAT('.', cFile) + 1 )), aTemp := {}
+local cTemp := HMG_UPPER(hb_USubStr( cFile, hb_utf8RAt('.', cFile) + 1 )), aTemp := {}
    do case
    case cTemp == "TIF"
       aTemp := pdfTIFFInfo( cFile )
@@ -1767,32 +1767,32 @@ local nOffset, cTemp, cIFDNext, nIFD, nFields, nn//, cTag, nPages
 
 local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0, yRes := 0, aTemp := {}, nSpace
 
-   nHandle := fopen( cFile )
+   nHandle := FOpen( cFile )
 
    c2 := '  '
-   fread( nHandle, @c2, 2 )
-   fread( nHandle, @c2, 2 )
+   FRead( nHandle, @c2, 2 )
+   FRead( nHandle, @c2, 2 )
    cIFDNext := '    '
-   fread( nHandle, @cIFDNext, 4 )
+   FRead( nHandle, @cIFDNext, 4 )
 
-   cTemp := space(12)
+   cTemp := Space(12)
    //nPages := 0
 
    while !( cIFDNext == c40 ) //read IFD's
 
       nIFD := bin2l( cIFDNext )
 
-      fseek( nHandle, nIFD )
-      //?'*** IFD ' + LTRIM(STR( ++nPages ))
+      FSeek( nHandle, nIFD )
+      //?'*** IFD ' + LTrim(Str( ++nPages ))
 
-      fread( nHandle, @c2, 2 )
+      FRead( nHandle, @c2, 2 )
       nFields := bin2i( c2 )
 
       for nn := 1 to nFields
-         fread( nHandle, @cTemp, 12 )
+         FRead( nHandle, @cTemp, 12 )
 
-         nTag := bin2w( HB_USUBSTR( cTemp, 1, 2 ) )
-         nFieldType := bin2w(HB_USUBSTR( cTemp, 3, 2 ))
+         nTag := bin2w( hb_USubStr( cTemp, 1, 2 ) )
+         nFieldType := bin2w(hb_USubStr( cTemp, 3, 2 ))
       /*
       1 = BYTE       8-bit unsigned integer.
       2 = ASCII      8-bit byte that contains a 7-bit ASCII code; the last byte
@@ -1814,19 +1814,19 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
       11 = FLOAT     Single precision (4-byte) IEEE format.
       12 = DOUBLE    Double precision (8-byte) IEEE format.
       */
-         nCount := bin2l(HB_USUBSTR( cTemp, 5, 4 ))
-         nOffset := bin2l(HB_USUBSTR( cTemp, 9, 4 ))
+         nCount := bin2l(hb_USubStr( cTemp, 5, 4 ))
+         nOffset := bin2l(hb_USubStr( cTemp, 9, 4 ))
 
          IF nCount > 1 .or. nFieldType == RATIONAL .or. nFieldType == SRATIONAL
             nPos := filepos( nHandle )
-            fseek( nHandle, nOffset)
+            FSeek( nHandle, nOffset)
 
             nValues := nCount * aCount[ nFieldType ]
-            cValues := space( nValues )
-            fread( nHandle, @cValues, nValues )
-            fseek( nHandle, nPos )
+            cValues := Space( nValues )
+            FRead( nHandle, @cValues, nValues )
+            FSeek( nHandle, nPos )
          ELSE
-            cValues := HB_USUBSTR( cTemp, 9, 4 )
+            cValues := hb_USubStr( cTemp, 9, 4 )
          ENDIF
 
          IF nFieldType ==  ASCII
@@ -1851,9 +1851,9 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
                ENDIF
 */
             IF nFieldType ==  SHORT
-               nWidth := bin2w(HB_USUBSTR( cValues, 1, 2 ))
+               nWidth := bin2w(hb_USubStr( cValues, 1, 2 ))
             ELSEIF nFieldType ==  LONG
-               nWidth := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+               nWidth := bin2l(hb_USubStr( cValues, 1, 4 ))
             ENDIF
 
          case nTag == 257
@@ -1871,9 +1871,9 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
                ENDIF
 */
             IF nFieldType ==  SHORT
-               nHeight := bin2w(HB_USUBSTR( cValues, 1, 2 ))
+               nHeight := bin2w(hb_USubStr( cValues, 1, 2 ))
             ELSEIF nFieldType ==  LONG
-               nHeight := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+               nHeight := bin2l(hb_USubStr( cValues, 1, 4 ))
             ENDIF
 
          case nTag == 258
@@ -2005,9 +2005,9 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
             ENDIF
 
             IF nFieldType ==  SHORT
-               nFrom := bin2w(HB_USUBSTR( cValues, 1, 2 ))
+               nFrom := bin2w(hb_USubStr( cValues, 1, 2 ))
             ELSEIF nFieldType ==  LONG
-               nFrom := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+               nFrom := bin2l(hb_USubStr( cValues, 1, 4 ))
             ENDIF
 
          case nTag == 277
@@ -2053,9 +2053,9 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
             ENDIF
 
             IF nFieldType ==  SHORT
-               nLength := bin2w(HB_USUBSTR( cValues, 1, 2 ))
+               nLength := bin2w(hb_USubStr( cValues, 1, 2 ))
             ELSEIF nFieldType ==  LONG
-               nLength := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+               nLength := bin2l(hb_USubStr( cValues, 1, 4 ))
             ENDIF
 
             nLength *= nCount // Count all strips !!!
@@ -2073,7 +2073,7 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
             IF nFieldType != RATIONAL
                //alert('Wrong Type for XResolution')
             ENDIF
-            xRes := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+            xRes := bin2l(hb_USubStr( cValues, 1, 4 ))
          case nTag == 283
                /*
                YResolution
@@ -2087,7 +2087,7 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
             IF nFieldType != RATIONAL
                //alert('Wrong Type for YResolution')
             ENDIF
-            yRes := bin2l(HB_USUBSTR( cValues, 1, 4 ))
+            yRes := bin2l(hb_USubStr( cValues, 1, 4 ))
          case nTag == 284
             //??'PlanarConfiguration'
             //cTag := 'PlanarConfiguration'
@@ -2236,63 +2236,63 @@ local nWidth := 0, nHeight := 0, nBits := 0, nFrom := 0, nLength := 0, xRes := 0
          endcase
       /*
       ??HMG_PADR( cTag, 30 )
-      ??' type ' + HMG_PADR(aType[ nFieldType ], 10) + ' count ' + LTRIM(STR(nCount)) + ' <'
+      ??' type ' + HMG_PADR(aType[ nFieldType ], 10) + ' count ' + LTrim(Str(nCount)) + ' <'
       do case
          case nFieldType ==  BYTE
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(ASC( HB_USUBSTR( cValues, nI, 1 ))))
+                  ??' ' + LTrim(Str(ASC( hb_USubStr( cValues, nI, 1 ))))
               next
          case nFieldType ==  ASCII
               ??' '
               for nI := 1 to nCount
-                  ??HB_USUBSTR( cValues, nI, 1 )
+                  ??hb_USubStr( cValues, nI, 1 )
               next
          case nFieldType ==  SHORT
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(bin2w(HB_USUBSTR( cValues, ( nI - 1 ) * 2 + 1, 2 ))))
+                  ??' ' + LTrim(Str(bin2w(hb_USubStr( cValues, ( nI - 1 ) * 2 + 1, 2 ))))
               next
          case nFieldType ==  LONG
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(bin2l(HB_USUBSTR( cValues, ( nI - 1 ) * 4 + 1, 4 ))))
+                  ??' ' + LTrim(Str(bin2l(hb_USubStr( cValues, ( nI - 1 ) * 4 + 1, 4 ))))
               next
          case nFieldType ==  RATIONAL
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(bin2l(HB_USUBSTR( cValues, ( nI - 1 ) * 8 + 1, 4 )))) + '/' + LTRIM(STR(bin2l(HB_USUBSTR( cValues, nI + 4, 4 ))))
+                  ??' ' + LTrim(Str(bin2l(hb_USubStr( cValues, ( nI - 1 ) * 8 + 1, 4 )))) + '/' + LTrim(Str(bin2l(hb_USubStr( cValues, nI + 4, 4 ))))
               next
          case nFieldType ==  SBYTE
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(ASC( HB_USUBSTR( cValues, nI, 1 ))))
+                  ??' ' + LTrim(Str(ASC( hb_USubStr( cValues, nI, 1 ))))
               next
          case nFieldType ==  UNDEFINED
               for nI := 1 to nCount
-                  ??' ' + HB_USUBSTR( cValues, nI, 1 )
+                  ??' ' + hb_USubStr( cValues, nI, 1 )
               next
          case nFieldType ==  SSHORT
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(bin2i(HB_USUBSTR( cValues, ( nI - 1 ) * 2 + 1, 2 ))))
+                  ??' ' + LTrim(Str(bin2i(hb_USubStr( cValues, ( nI - 1 ) * 2 + 1, 2 ))))
               next
          case nFieldType ==  SLONG
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(bin2l(HB_USUBSTR( cValues, ( nI - 1 ) * 4 + 1, 4 ))))
+                  ??' ' + LTrim(Str(bin2l(hb_USubStr( cValues, ( nI - 1 ) * 4 + 1, 4 ))))
               next
          case nFieldType == SRATIONAL
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(bin2l(HB_USUBSTR( cValues, ( nI - 1 ) * 8 + 1, 4 )))) + '/' + LTRIM(STR(bin2l(HB_USUBSTR( cValues, nI + 4, 4 ))))
+                  ??' ' + LTrim(Str(bin2l(hb_USubStr( cValues, ( nI - 1 ) * 8 + 1, 4 )))) + '/' + LTrim(Str(bin2l(hb_USubStr( cValues, nI + 4, 4 ))))
               next
          case nFieldType == FLOAT
          case nFieldType == DOUBLE
               for nI := 1 to nCount
-                  ??' ' + LTRIM(STR(ctof(HB_USUBSTR( cValues, ( nI - 1 ) * 8 + 1, 8 ))))
+                  ??' ' + LTrim(Str(CToF(hb_USubStr( cValues, ( nI - 1 ) * 8 + 1, 8 ))))
               next
 
       endcase
       ??' >'
       */
       next
-      fread( nHandle, @cIFDNext, 4 )
+      FRead( nHandle, @cIFDNext, 4 )
    enddo
 
-   fclose( nHandle )
+   FClose( nHandle )
 
    aadd( aTemp, nWidth )
    aadd( aTemp, nHeight )
@@ -2312,23 +2312,23 @@ local nWidth, nHeight, nBits := 8, nFrom := 0, nLength, xRes, yRes, aTemp := {}
 local nBuffer := 20000
 local nSpace  // := 3 // 3 - RGB, 1 - GREY, 4 - CMYK
 
-   nHandle := fopen( cFile )
+   nHandle := FOpen( cFile )
 
-   c255 := space( nBuffer )
-   fread( nHandle, @c255, nBuffer )
+   c255 := Space( nBuffer )
+   FRead( nHandle, @c255, nBuffer )
 
-   xRes := ASC(HB_USUBSTR( c255, 15, 1 )) * 256 + ASC(HB_USUBSTR( c255, 16, 1 ))
-   yRes := ASC( HB_USUBSTR( c255, 17, 1 )) * 256 + ASC(HB_USUBSTR( c255, 18, 1 ))
+   xRes := ASC(hb_USubStr( c255, 15, 1 )) * 256 + ASC(hb_USubStr( c255, 16, 1 ))
+   yRes := ASC( hb_USubStr( c255, 17, 1 )) * 256 + ASC(hb_USubStr( c255, 18, 1 ))
 
-   nAt := HB_UTF8RAT( CHR(255) + CHR(192), c255 ) + 5
-   nHeight := ASC(HB_USUBSTR( c255, nAt, 1 )) * 256 + ASC(HB_USUBSTR( c255, nAt + 1, 1 ))
-   nWidth := ASC( HB_USUBSTR( c255, nAt + 2, 1 )) * 256 + ASC(HB_USUBSTR( c255, nAt + 3, 1 ))
+   nAt := hb_utf8RAt( CHR(255) + CHR(192), c255 ) + 5
+   nHeight := ASC(hb_USubStr( c255, nAt, 1 )) * 256 + ASC(hb_USubStr( c255, nAt + 1, 1 ))
+   nWidth := ASC( hb_USubStr( c255, nAt + 2, 1 )) * 256 + ASC(hb_USubStr( c255, nAt + 3, 1 ))
 
-   nSpace := ASC( HB_USUBSTR( c255, nAt + 4, 1 ))
+   nSpace := ASC( hb_USubStr( c255, nAt + 4, 1 ))
 
-   nLength := filesize( nHandle )
+   nLength := FileSize( nHandle )
 
-   fclose( nHandle )
+   FClose( nHandle )
 
    aadd( aTemp, nWidth )
    aadd( aTemp, nHeight )
@@ -2342,10 +2342,10 @@ local nSpace  // := 3 // 3 - RGB, 1 - GREY, 4 - CMYK
 return aTemp
 
 STATIC FUNCTION FilePos( nHandle )
-RETURN ( FSEEK( nHandle, 0, FS_RELATIVE ) )
+RETURN ( FSeek( nHandle, 0, FS_RELATIVE ) )
 
 STATIC FUNCTION Chr_RGB( cChar )
-RETURN STR(ASC( cChar ) / 255, 4, 2)
+RETURN Str(ASC( cChar ) / 255, 4, 2)
 
 STATIC FUNCTION NumToken( cString, cDelimiter )
 RETURN AllToken( cString, cDelimiter )
@@ -2366,16 +2366,16 @@ DEFAULT nAction to 0
 // nAction == 2 - attoken
 
       while nPos <= nLen
-            if !HB_USUBSTR( cString, nPos, 1 ) $ cDelimiter
+            if !hb_USubStr( cString, nPos, 1 ) $ cDelimiter
                nStart := nPos
-               while nPos <= nLen .and. !HB_USUBSTR( cString, nPos, 1 ) $ cDelimiter
+               while nPos <= nLen .and. !hb_USubStr( cString, nPos, 1 ) $ cDelimiter
                      ++nPos
                enddo
                ++nTokens
                IF nAction > 0
                   IF nPointer == nTokens
                      IF nAction == 1
-                        cRet := HB_USUBSTR( cString, nStart, nPos - nStart )
+                        cRet := hb_USubStr( cString, nStart, nPos - nStart )
                      ELSE
                         cRet := nStart
                      ENDIF
@@ -2383,8 +2383,8 @@ DEFAULT nAction to 0
                   ENDIF
                ENDIF
             endif
-            if HB_USUBSTR( cString, nPos, 1 ) $ cDelimiter
-               while nPos <= nLen .and. HB_USUBSTR( cString, nPos, 1 ) $ cDelimiter
+            if hb_USubStr( cString, nPos, 1 ) $ cDelimiter
+               while nPos <= nLen .and. hb_USubStr( cString, nPos, 1 ) $ cDelimiter
                      ++nPos
                enddo
             endif
@@ -2394,7 +2394,7 @@ RETURN cRet
 
 STATIC FUNCTION NumAt( cSearch, cString )
    LOCAL n := 0, nAt, nPos := 0
-   WHILE ( nAt := HB_UAT( cSearch, HB_USUBSTR( cString, nPos + 1 ) )) > 0
+   WHILE ( nAt := hb_UAt( cSearch, hb_USubStr( cString, nPos + 1 ) )) > 0
            nPos += nAt
            ++n
    ENDDO
@@ -2409,12 +2409,12 @@ STATIC FUNCTION FileSize( nHandle )
    nCurrent := FilePos( nHandle )
 
    // Get file length
-   nLength := FSEEK( nHandle, 0, FS_END )
+   nLength := FSeek( nHandle, 0, FS_END )
 
    // nLength := FilePos( nHandle )
 
    // Reset file position
-   FSEEK( nHandle, nCurrent )
+   FSeek( nHandle, nCurrent )
 
 RETURN ( nLength )
 
@@ -2426,7 +2426,7 @@ local nBytes := 0
 local i
 nDepth := iif(ISNUMBER(nDepth),nDepth,0)
 if hFile == NIL
-   if (hFile := fCreate(cFile,FC_NORMAL)) == -1
+   if (hFile := FCreate(cFile,FC_NORMAL)) == -1
       return nBytes
    endif
 endif
@@ -2439,53 +2439,53 @@ if ISARRAY(aRay)
 endif
 nDepth--
 if nDepth == 0
-   fClose(hFile)
+   FClose(hFile)
 endif
 return nBytes
 
 STATIC function WriteData(hFile,xData)
-local cData  := valtype(xData)
+local cData  := ValType(xData)
    if ISCHARACTER(xData)
-       cData += i2bin(HMG_LEN(xData))+xData
+       cData += I2Bin(HMG_LEN(xData))+xData
    elseif ISNUMBER(xData)
-       cData += i2bin(HMG_LEN(ALLTRIM(STR(xData))) )+ALLTRIM(STR(xData))
+       cData += I2Bin(HMG_LEN(ALLTRIM(Str(xData))) )+ALLTRIM(Str(xData))
    elseif ISDATE(xData)
-       cData += i2bin(8)+dtos(xData)
+       cData += I2Bin(8)+DToS(xData)
    elseif ISLOGICAL(xData)
-       cData += i2bin(1)+iif(xData,'T','F')
+       cData += I2Bin(1)+iif(xData,'T','F')
    elseif ISARRAY(xData)
-       cData += i2bin(HMG_LEN(xData))
+       cData += I2Bin(HMG_LEN(xData))
    else
-       cData += i2bin(0)   // NIL
+       cData += I2Bin(0)   // NIL
    endif
-return fWrite(hFile,cData,HMG_LEN(cData))
+return FWrite(hFile,cData,HMG_LEN(cData))
 
 STATIC function File2Array(cFile,nLen,hFile)
 LOCAL cData,cType,nDataLen,nBytes
 local nDepth := 0
 local aRay   := {}
 if hFile == NIL
-     if (hFile:=fOpen(cFile,FO_READ)) == -1
+     if (hFile:=FOpen(cFile,FO_READ)) == -1
          return aRay
      endif
-     cData := space(3)
-     fRead(hFile,@cData,3)
-     if HB_ULEFT(cData,1) != 'A'
+     cData := Space(3)
+     FRead(hFile,@cData,3)
+     if hb_ULeft(cData,1) != 'A'
          return aRay
      endif
-     nLen := bin2i(HB_URIGHT(cData,2))
+     nLen := bin2i(hb_URight(cData,2))
 endif
 do while nDepth < nLen
-    cData  := space(3)
-    nBytes := fRead(hFile,@cData,3)
+    cData  := Space(3)
+    nBytes := FRead(hFile,@cData,3)
     if nBytes<3
        exit
     endif
     cType:= HMG_PADL(cData,1)
-    nDataLen:= bin2i(HB_URIGHT(cData,2))
+    nDataLen:= bin2i(hb_URight(cData,2))
     if cType != 'A'
-       cData := space(nDataLen)
-       nBytes:= fRead(hFile,@cData,nDataLen)
+       cData := Space(nDataLen)
+       nBytes:= FRead(hFile,@cData,nDataLen)
        if nBytes<nDataLen
            exit
        endif
@@ -2495,9 +2495,9 @@ do while nDepth < nLen
     if cType=='C'
         aRay[nDepth] := cData
     elseif cType=='N'
-        aRay[nDepth] := val(cData)
+        aRay[nDepth] := Val(cData)
     elseif cType=='D'
-        aRay[nDepth] := ctod( HB_ULEFT( cData, 4 ) + "/" + HB_USUBSTR( cData, 5, 2 ) + "/" + HB_USUBSTR( cData, 7, 2 )) //stod(cData)
+        aRay[nDepth] := ctod( hb_ULeft( cData, 4 ) + "/" + hb_USubStr( cData, 5, 2 ) + "/" + hb_USubStr( cData, 7, 2 )) //SToD(cData)
     elseif cType=='L'
         aRay[nDepth] := (cData=='T')
     elseif cType=='A'
@@ -2505,7 +2505,7 @@ do while nDepth < nLen
     endif
 enddo
 if cFile!=NIL
-    fClose(hFile)
+    FClose(hFile)
 endif
 return aRay
 // end of 3rd function written by Peter Kulek
