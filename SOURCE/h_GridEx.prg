@@ -708,7 +708,7 @@ LOCAL hFont
          _GridEx_SetThisGridData (i, nRow, nCol)
       ENDIF
       IF ValType (aDynamicForeColor [nCol]) == "B"
-         aRGB := EVAL( aDynamicForeColor [nCol] )
+         aRGB := Eval( aDynamicForeColor [nCol] )
       ELSE
          aRGB := HMG_DoProc( aDynamicForeColor [nCol] )
       ENDIF
@@ -747,7 +747,7 @@ LOCAl DefaultFontHandle := _HMG_SYSDATA [36] [i]
             ASIZE (DynamicData, 6 )   // { cFontName, nFontSize, [ lBold, lItalic, lUnderline, lStrikeOut ] }
          ENDIF
 
-         IF ValType (DynamicData [1]) == "C" .AND. .NOT. EMPTY(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
+         IF ValType (DynamicData [1]) == "C" .AND. .NOT. Empty(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
             cFontName  := DynamicData [1]
             nFontSize  := DynamicData [2]
             lBold      := DynamicData [3]
@@ -797,7 +797,7 @@ Function _GridEx_GetCellVirtualValueByIndex ( i, nRow , nCol )
    _HMG_SYSDATA [ 201 ] := nRow        // This.QueryRowIndex
    _HMG_SYSDATA [ 202 ] := nCol        // This.QueryColIndex
 
-   IF ValType ( _HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' .AND. USED() == .T.   // RecordSource
+   IF ValType ( _HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' .AND. Used() == .T.   // RecordSource
       GetDataGridCellData (i, .T.)   // ADD    March 2015
    ELSEIF ValType (_HMG_SYSDATA [6] [i]) == 'B'
       EVAL (_HMG_SYSDATA [6] [i])      // OnQueryData Event
@@ -861,7 +861,7 @@ LOCAl DefaultFontHandle := _HMG_SYSDATA [36] [i]
             ASIZE (DynamicData, 6 )   // { cFontName, nFontSize, [ lBold, lItalic, lUnderline, lStrikeOut ] }
          ENDIF
 
-         IF ValType (DynamicData [1]) == "C" .AND. .NOT. EMPTY(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
+         IF ValType (DynamicData [1]) == "C" .AND. .NOT. Empty(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
             cFontName  := DynamicData [1]
             nFontSize  := DynamicData [2]
             lBold      := DynamicData [3]
