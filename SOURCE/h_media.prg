@@ -420,7 +420,7 @@ Local hh , mVar , k
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
-	if valtype(file) <> 'U'
+	if ValType(file) <> 'U'
 		_OpenAnimateBox ( ControlName , ParentForm , File )
 	EndIf
 
