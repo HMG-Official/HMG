@@ -160,7 +160,7 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 	nControlHandle := InitTextBox( nParentForm, 0, nx, ny, nWidth, nHeight, '', 0, nMaxLength, ;
                                  lUpper, lLower, .f., lPassword , RIGHT , readonly , invisible , notabstop )
 
-	if valtype(cfontname) != "U" .and. valtype(nfontsize) != "U"
+	if ValType(cfontname) != "U" .and. ValType(nfontsize) != "U"
 		FontHandle := _SetFont (nControlHandle,cFontName,nFontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (nControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -227,8 +227,8 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 
 	// With NUMERIC clause, transform numeric value into a string.
 	if ( lNumeric )
-		If Valtype(cValue) != 'C'
-			cValue := ALLTRIM( STR( cValue ) )
+		If ValType(cValue) != 'C'
+			cValue := ALLTRIM( Str( cValue ) )
 		EndIf
 	EndIf
 
@@ -274,7 +274,7 @@ RightAlign := NIL
 		EndIf
 	EndIf
 
-	if valtype(Format) == "U"
+	if ValType(Format) == "U"
 		Format := ""
 	endif
 
@@ -302,31 +302,31 @@ RightAlign := NIL
 
 	Next i
 
-	if valtype(change) == "U"
+	if ValType(change) == "U"
 		change := ""
 	endif
 
-	if valtype(gotfocus) == "U"
+	if ValType(gotfocus) == "U"
 		gotfocus := ""
 	endif
 
-	if valtype(enter) == "U"
+	if ValType(enter) == "U"
 		enter := ""
 	endif
 
-	if valtype(lostfocus) == "U"
+	if ValType(lostfocus) == "U"
 		lostfocus := ""
 	endif
 
-	if valtype(Width) == "U"
+	if ValType(Width) == "U"
 		Width := 120
 	endif
 
-	if valtype(height) == "U"
+	if ValType(height) == "U"
 		height := 24
 	endif
 
-	if valtype(Value) == "U"
+	if ValType(Value) == "U"
 		Value := ""
 	endif
 
@@ -371,7 +371,7 @@ RightAlign := NIL
 	ParentForm = GetFormHandle (ParentForm)
 
 	ControlHandle := InitMaskedTextBox ( ParentForm, 0, x, y, width , '' , 0  , 255 , .f. , .f. , height , .t. , readonly  , invisible , notabstop )
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -381,7 +381,7 @@ RightAlign := NIL
 		aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 	        SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -450,7 +450,7 @@ Local x , c , s
 
 	For x := 1 To HMG_LEN ( Text )
 
-		c := HB_USUBSTR(Text,x,1)
+		c := hb_USubStr(Text,x,1)
 
 		If c='0' .or. c='1' .or. c='2' .or. c='3' .or. c='4' .or. c='5' .or. c='6' .or. c='7' .or. c='8' .or. c='9' .or. c='.' .or. c='-'
 			s := s + c
@@ -473,7 +473,7 @@ Local i , c , s
 
 	For i := 1 To HMG_LEN ( Text )
 
-		c := HB_USUBSTR(Text,i,1)
+		c := hb_USubStr(Text,i,1)
 
 		If c='9' .or. c='.'
 			s := s + c
@@ -508,35 +508,35 @@ Local cParentTabName
 		EndIf
 	EndIf
 
-	if valtype(date) == "U"
+	if ValType(date) == "U"
 		date := .F.
 	endif
 
-	if valtype(change) == "U"
+	if ValType(change) == "U"
 		change := ""
 	endif
 
-	if valtype(gotfocus) == "U"
+	if ValType(gotfocus) == "U"
 		gotfocus := ""
 	endif
 
-	if valtype(enter) == "U"
+	if ValType(enter) == "U"
 		enter := ""
 	endif
 
-	if valtype(lostfocus) == "U"
+	if ValType(lostfocus) == "U"
 		lostfocus := ""
 	endif
 
-	if valtype(Width) == "U"
+	if ValType(Width) == "U"
 		Width := 120
 	endif
 
-	if valtype(height) == "U"
+	if ValType(height) == "U"
 		height := 24
 	endif
 
-	if valtype(Value) == "U"
+	if ValType(Value) == "U"
 		if date == .F.
 			Value := ""
 		else
@@ -613,7 +613,7 @@ Local cParentTabName
 	ParentForm = GetFormHandle (ParentForm)
 
 	ControlHandle := InitCharMaskTextBox ( ParentForm, 0, x, y, width , '' , 0  , 255 , .f. , .f. , height , rightalign , readonly  , invisible , notabstop )
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -623,7 +623,7 @@ Local cParentTabName
 		aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 	        SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -730,7 +730,7 @@ d := Nil
 
 	//
 
-	If Pcount() > 1
+	If PCount() > 1
 
 		// Point Count For Numeric InputMask
 
@@ -825,7 +825,7 @@ d := Nil
 
 			Case CM == '9'
 
-				If HMG_ISDIGIT ( CB ) .Or. CB == ' ' .Or. ( CB == '-' .And. x == fnb .And. Pcount() > 1 )
+				If HMG_ISDIGIT ( CB ) .Or. CB == ' ' .Or. ( CB == '-' .And. x == fnb .And. PCount() > 1 )
 
 					OutBuffer := OutBuffer + CB
 
@@ -885,12 +885,12 @@ d := Nil
 			// Replace Text
 
 			SetWindowText ( _HMG_SYSDATA [3] [i] , Output )
-		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , HB_UAT('.',OutBuffer) + dc , HB_UAT('.',OutBuffer) + dc )
+		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , hb_UAt('.',OutBuffer) + dc , hb_UAt('.',OutBuffer) + dc )
 
 		Else
 
 			SetWindowText ( _HMG_SYSDATA [3] [i] , Transform ( GetNumFromText ( GetWindowText ( _HMG_SYSDATA [3] [i] ) , i ) , Mask ) )
-		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , HB_UAT('.',OutBuffer) + dc , HB_UAT('.',OutBuffer) + dc )
+		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , hb_UAt('.',OutBuffer) + dc , hb_UAt('.',OutBuffer) + dc )
 
 		EndIf
 
@@ -938,7 +938,7 @@ Function CharMaskTekstOK(cString,cMask)
 
 Local lPassed:=.f.,CB,CM,x
 
-For x := 1 To min(HMG_LEN(cString),HMG_LEN(cMask))
+For x := 1 To Min(HMG_LEN(cString),HMG_LEN(cMask))
 
 	CB := HB_USUBSTR ( cString , x , 1 )
 	CM := HB_USUBSTR ( cMask , x , 1 )
@@ -999,7 +999,7 @@ Local Field
 	EndIf
 
 	If Type ( Field ) == 'C'
-		_SetValue ( '' , '' , RTRIM( &(Field)) , i )
+		_SetValue ( '' , '' , RTrim( &(Field)) , i )
 	Else
 		_SetValue ( '' , '' , &(Field) , i )
 	EndIf
@@ -1049,7 +1049,7 @@ Local InBuffer , OutBuffer := '' , icp , x , CB , BackInBuffer , BadEntry := .F.
 
 	For x := 1 To HMG_LEN(InBuffer)
 
-		CB := HB_USUBSTR(InBuffer , x , 1 )
+		CB := hb_USubStr(InBuffer , x , 1 )
 
 		If HMG_ISDIGIT ( CB ) .Or. ( CB == '-' .And. x == fnb ) .or. (CB == '.' .and. HB_UAT (CB, OutBuffer) == 0)  .or. ;
          (CB == ',' .and. HB_UAT ('.', OutBuffer) == 0)   // MOL, April 2016
@@ -1086,7 +1086,7 @@ Local x , c , s
 
 	For x := 1 To HMG_LEN ( Text )
 
-		c := HB_USUBSTR(Text,x,1)
+		c := hb_USubStr(Text,x,1)
 
 		If c='0' .or. c='1' .or. c='2' .or. c='3' .or. c='4' .or. c='5' .or. c='6' .or. c='7' .or. c='8' .or. c='9' .or. c=',' .or. c='-' .or. c = '.'
 
