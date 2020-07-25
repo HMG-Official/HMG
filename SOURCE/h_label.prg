@@ -132,7 +132,7 @@ LOCAL value := Caption
 
 	Controlhandle := InitLabel ( ParentForm, Caption, 0, x, y, w, h, '', 0, Nil , border , clientedge , HSCROLL , VSCROLL , TRANSPARENT , invisible , rightalign , centeralign, EndEllipses, NoPrefix )
 
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
 		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -144,7 +144,7 @@ LOCAL value := Caption
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
