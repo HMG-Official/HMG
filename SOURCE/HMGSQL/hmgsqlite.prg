@@ -68,7 +68,7 @@ local type1 := ""
 local stmt := nil
 local cDate
 default cMsg := ''
-if empty( dbo1 )
+if Empty( dbo1 )
    if PCount() > 2
       cMsg := "Database Connection Error!"
    else
@@ -103,7 +103,7 @@ IF ! Empty( stmt )
       endcase
    next i
 endif
-SQLITE3_FINALIZE( stmt )
+sqlite3_finalize( stmt )
 stmt := nil
 if HMG_LEN(table) > 1
    asize(tablearr,0)
@@ -112,12 +112,12 @@ if HMG_LEN(table) > 1
       for j := 1 to HMG_LEN(rowarr)
          do case
             case typesarr[j] == "D"
-               cDate := HB_USUBSTR(rowarr[j],1,4)+HB_USUBSTR(rowarr[j],6,2)+HB_USUBSTR(rowarr[j],9,2)
-               rowarr[j] := stod(cDate)
+               cDate := hb_USubStr(rowarr[j],1,4)+hb_USubStr(rowarr[j],6,2)+hb_USubStr(rowarr[j],9,2)
+               rowarr[j] := SToD(cDate)
             case typesarr[j] == "N"
-               rowarr[j] := val(rowarr[j])
+               rowarr[j] := Val(rowarr[j])
             case typesarr[j] == "L"
-               if val(rowarr[j]) == 1
+               if Val(rowarr[j]) == 1
                   rowarr[j] := .t.
                else
                   rowarr[j] := .f.
@@ -131,7 +131,7 @@ return tablearr
 
 function miscsql( dbo1, qstr, cMsg )
 default cMsg := ''
-if empty( dbo1 )
+if Empty( dbo1 )
    if PCount() > 2
       cMsg := "Database Connection Error!"
    else
@@ -153,26 +153,26 @@ return .t.
 function C2SQL(Value)
 local cValue := ""
 local cdate := ""
-if ( valtype(value) == "C" .or. valtype( value ) == "M" ) .and. HMG_LEN(alltrim(value)) > 0
-   value := HB_UTF8STRTRAN(value, "'", "''" )
+if ( ValType(value) == "C" .or. ValType( value ) == "M" ) .and. HMG_LEN(alltrim(value)) > 0
+   value := hb_utf8StrTran(value, "'", "''" )
 endif
 do case
-   case Valtype(Value) == "N"
+   case ValType(Value) == "N"
       cValue := AllTrim(Str(Value))
-   case Valtype(Value) == "D"
+   case ValType(Value) == "D"
       if !Empty(Value)
-         cdate := dtos(value)
-         cValue := "'"+HB_USUBSTR(cDate,1,4)+"-"+HB_USUBSTR(cDate,5,2)+"-"+HB_USUBSTR(cDate,7,2)+"'"
+         cdate := DToS(value)
+         cValue := "'"+hb_USubStr(cDate,1,4)+"-"+hb_USubStr(cDate,5,2)+"-"+hb_USubStr(cDate,7,2)+"'"
       else
          cValue := "''"
       endif
-   case Valtype(Value) $ "CM"
+   case ValType(Value) $ "CM"
       IF Empty( Value)
          cValue="''"
       ELSE
          cValue := "'" + value + "'"
       ENDIF
-   case Valtype(Value) == "L"
+   case ValType(Value) == "L"
       cValue := AllTrim(Str(iif(Value == .F., 0, 1)))
    otherwise
       cValue := "''"       // NOTE: Here we lose values we cannot convert
