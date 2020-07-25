@@ -310,7 +310,7 @@ FUNCTION HMG_Graph( nWidth, nHeight, aSerieValues, cTitle, aSerieYNames, nBarDep
       nBarWidth  := ( nRight - nLeft ) / ( nMax(aSerieValues) + 1 )
       nI := nLeft + nBarWidth
       FOR nJ := 1 TO nMax(aSerieValues)
-         // cName := "yVal_Name_"+LTRIM(STR(nJ)) //  Variable 'CNAME' is assigned but not used in function.  asistex
+         // cName := "yVal_Name_"+LTrim(Str(nJ)) //  Variable 'CNAME' is assigned but not used in function.  asistex
          DrawTextInBitmap( hDC, nBottom + 8, nI - nDeep - IF(l3DView, 0, 8), aSerieYNames[nJ], 'Arial', 8, BLUE )
          nI += nBarWidth
       NEXT
@@ -532,7 +532,7 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
       sum := sum + aSerieValues[i]
    next i
    for i := 1 to HMG_LEN(aSerieValues)
-      aadd(degrees,round(aSerieValues[i]/sum * 360,0))
+      aadd(degrees,Round(aSerieValues[i]/sum * 360,0))
    next i
    sum := 0
    for i := 1 to HMG_LEN(degrees)
@@ -565,31 +565,31 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
       do case
          case cumulative[i] <= 45
             toradialcol := middlerightcol
-            toradialrow := middlerightrow - round(cumulative[i] / 45 * (middlerightrow - toprightrow),0)
+            toradialrow := middlerightrow - Round(cumulative[i] / 45 * (middlerightrow - toprightrow),0)
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
          case cumulative[i] <= 90 .and. cumulative[i] > 45
             toradialrow := toprightrow
-            toradialcol := toprightcol - round((cumulative[i] - 45) / 45 * (toprightcol - middletopcol),0)
+            toradialcol := toprightcol - Round((cumulative[i] - 45) / 45 * (toprightcol - middletopcol),0)
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
          case cumulative[i] <= 135 .and. cumulative[i] > 90
             toradialrow := topleftrow
-            toradialcol := middletopcol - round((cumulative[i] - 90) / 45 * (middletopcol - topleftcol),0)
+            toradialcol := middletopcol - Round((cumulative[i] - 90) / 45 * (middletopcol - topleftcol),0)
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
          case cumulative[i] <= 180 .and. cumulative[i] > 135
             toradialcol := topleftcol
-            toradialrow := topleftrow + round((cumulative[i] - 135) / 45 * (middleleftrow - topleftrow),0)
+            toradialrow := topleftrow + Round((cumulative[i] - 135) / 45 * (middleleftrow - topleftrow),0)
             DrawPieInBitmap(hDC,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,aSerieColors[i])
             fromradialrow := toradialrow
             fromradialcol := toradialcol
          case cumulative[i] <= 225 .and. cumulative[i] > 180
             toradialcol := topleftcol
-            toradialrow := middleleftrow + round((cumulative[i] - 180) / 45 * (bottomleftrow - middleleftrow),0)
+            toradialrow := middleleftrow + Round((cumulative[i] - 180) / 45 * (bottomleftrow - middleleftrow),0)
             if l3DView
                for j := 1 to nDepth
                   DrawArcInBitmap(hDC,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
@@ -600,7 +600,7 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
             fromradialcol := toradialcol
          case cumulative[i] <= 270 .and. cumulative[i] > 225
             toradialrow := bottomleftrow
-            toradialcol := bottomleftcol + round((cumulative[i] - 225) / 45 * (middlebottomcol - bottomleftcol),0)
+            toradialcol := bottomleftcol + Round((cumulative[i] - 225) / 45 * (middlebottomcol - bottomleftcol),0)
             if l3DView
                for j := 1 to nDepth
                   DrawArcInBitmap(hDC,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
@@ -611,7 +611,7 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
             fromradialcol := toradialcol
          case cumulative[i] <= 315 .and. cumulative[i] > 270
             toradialrow := bottomleftrow
-            toradialcol := middlebottomcol + round((cumulative[i] - 270) / 45 * (bottomrightcol - middlebottomcol),0)
+            toradialcol := middlebottomcol + Round((cumulative[i] - 270) / 45 * (bottomrightcol - middlebottomcol),0)
             if l3DView
                for j := 1 to nDepth
                   DrawArcInBitmap(hDC,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
@@ -622,7 +622,7 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
             fromradialcol := toradialcol
          case cumulative[i] <= 360 .and. cumulative[i] > 315
             toradialcol := bottomrightcol
-            toradialrow := bottomrightrow - round((cumulative[i] - 315) / 45 * (bottomrightrow - middlerightrow),0)
+            toradialrow := bottomrightrow - Round((cumulative[i] - 315) / 45 * (bottomrightrow - middlerightrow),0)
             if l3DView
                for j := 1 to nDepth
                   DrawArcInBitmap(hDC,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
@@ -642,7 +642,7 @@ FUNCTION HMG_PieGraph( nWidth, nHeight, aSerieValues, aSerieNames, aSerieColors,
       fromrow := torow + 20 + iif(l3DView,nDepth,0)
       for i := 1 to HMG_LEN(aSerieNames)
          DrawRectInBitmap(hDC, fromrow, fromcol, fromrow + 15, fromcol + 15, aSerieColors[ i ] )
-         DrawTextInBitmap( hDC, fromrow, fromcol + 20, aSerieNames[i]+iif(lShowXValues," - "+ALLTRIM(STR(aSerieValues[i],19,2))+" ("+ALLTRIM(STR(degrees[i] / 360 * 100,6,2))+" %)",""), 'Arial', 8, aSerieColors[i] )
+         DrawTextInBitmap( hDC, fromrow, fromcol + 20, aSerieNames[i]+iif(lShowXValues," - "+ALLTRIM(Str(aSerieValues[i],19,2))+" ("+ALLTRIM(Str(degrees[i] / 360 * 100,6,2))+" %)",""), 'Arial', 8, aSerieColors[i] )
          fromrow := fromrow + 20
       next i
    endif
@@ -724,10 +724,10 @@ RETURN
 
 
 PROCEDURE DrawArcInBitmap(hDC,row,col,row1,col1,rowr,colr,rowr1,colr1,penrgb,penwidth)
-   if valtype(penrgb) == "U"
+   if ValType(penrgb) == "U"
       penrgb = BLACK
    endif
-   if valtype(penwidth) == "U"
+   if ValType(penwidth) == "U"
       penwidth = 1
    endif
    BT_DrawArc (hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth)
@@ -735,13 +735,13 @@ RETURN
 
 
 PROCEDURE DrawPieInBitmap(hDC,row,col,row1,col1,rowr,colr,rowr1,colr1,penrgb,penwidth,fillrgb)
-   if valtype(penrgb) == "U"
+   if ValType(penrgb) == "U"
       penrgb = BLACK
    endif
-   if valtype(penwidth) == "U"
+   if ValType(penwidth) == "U"
       penwidth = 1
    endif
-   if valtype(fillrgb) == "U"
+   if ValType(fillrgb) == "U"
       fillrgb := WHITE
    endif
    BT_DrawPie (hDC, row, col, row1, col1, rowr, colr, rowr1, colr1, penrgb, penwidth, fillrgb)
@@ -752,13 +752,13 @@ PROCEDURE DrawPolygonInBitmap( hDC, apoints, penrgb, penwidth, fillrgb )
    LOCAL xarr := {}
    LOCAL yarr := {}
    LOCAL x
-   if valtype(penrgb) == "U"
+   if ValType(penrgb) == "U"
       penrgb = BLACK
    endif
-   if valtype(penwidth) == "U"
+   if ValType(penwidth) == "U"
       penwidth = 1
    endif
-   if valtype(fillrgb) == "U"
+   if ValType(fillrgb) == "U"
       fillrgb := WHITE
    endif
    for x := 1 to HMG_LEN(apoints)
