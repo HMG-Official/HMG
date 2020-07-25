@@ -184,7 +184,7 @@ Local cImageField
 		EndIf
 	EndIf
 
-	if valtype(value) == "U"
+	if ValType(value) == "U"
 		value := 0
 	endif
 
@@ -194,7 +194,7 @@ Local cImageField
 
 	ParentForm = GetFormHandle (ParentForm)
 
-	if valtype(x) == "U" .or. valtype(y) == "U"
+	if ValType(x) == "U" .or. ValType(y) == "U"
 
 		_HMG_SYSDATA [ 216 ]	:= 'COMBOBOX'
 
@@ -214,7 +214,7 @@ Local cImageField
 
 			EndIf
 
-			if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+			if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 				FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 			Else
 				FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -240,7 +240,7 @@ Local cImageField
 
 		EndIf
 
-		if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+		if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 			FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 		Else
 			FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -252,11 +252,11 @@ Local cImageField
 		aAdd ( _HMG_SYSDATA [ 142 ] , Controlhandle )
 	EndIf
 
-	if valtype(uEnter) == "U"
+	if ValType(uEnter) == "U"
 		uEnter := ""
 	endif
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 		SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -315,7 +315,7 @@ Local cImageField
 
 			BackRec := (WorkArea)->(RecNo())
 
-			(WorkArea)->(DBGoTop())
+			(WorkArea)->(dbGoTop())
 
 			If ValType ( aImage ) = 'U'
 
@@ -325,7 +325,7 @@ Local cImageField
 						cset := rcount
 					EndIf
 					ComboAddString (ControlHandle, (WorkArea)->&(cField) )
-					(WorkArea)->(DBSkip())
+					(WorkArea)->(dbSkip())
 				EndDo
 
 			Else
@@ -336,12 +336,12 @@ Local cImageField
 						cset := rcount
 					EndIf
 					ImageComboAddItem ( ControlHandle , (WorkArea)->&(cImageField) , (WorkArea)->&(cField) , -1 )
-					(WorkArea)->(DBSkip())
+					(WorkArea)->(dbSkip())
 				EndDo
 
 			EndIf
 
-			(WorkArea)->(DBGoTo(BackRec))
+			(WorkArea)->(dbGoto(BackRec))
 
 			ComboSetCurSel (ControlHandle,cset)
 
@@ -405,7 +405,7 @@ Local BackRec , WorkArea , cField , cImageField , xCurrentValue , Tmp
 
 	BackRec := (WorkArea)->(RecNo())
 
-	(WorkArea)->(DBGoTop())
+	(WorkArea)->(dbGoTop())
 
 	ComboboxReset ( _HMG_SYSDATA [3] [i] )
 
@@ -415,7 +415,7 @@ Local BackRec , WorkArea , cField , cImageField , xCurrentValue , Tmp
 
 			ComboAddString ( _HMG_SYSDATA [3] [i] , (WorkArea)->&(cField) )
 
-			(WorkArea)->(DBSkip())
+			(WorkArea)->(dbSkip())
 
 		EndDo
 
@@ -424,7 +424,7 @@ Local BackRec , WorkArea , cField , cImageField , xCurrentValue , Tmp
 		Do While ! (WorkArea)->(Eof())
 			ComboAddString ( _HMG_SYSDATA [3] [i] , (WorkArea)->&(cField) )
 			ImageComboAddItem ( _HMG_SYSDATA [3] [i] , (WorkArea)->&(cImageField) , (WorkArea)->&(cField) , -1 )
-			(WorkArea)->(DBSkip())
+			(WorkArea)->(dbSkip())
 		EndDo
 
 	EndIf
@@ -433,7 +433,7 @@ Local BackRec , WorkArea , cField , cImageField , xCurrentValue , Tmp
 		_SetValue ( , , xCurrentValue , i )
 	EndIf
 
-	(WorkArea)->(DBGoTo(BackRec))
+	(WorkArea)->(dbGoto(BackRec))
 
 Return
 
