@@ -116,19 +116,19 @@ Local FontHandle , k
 
 	ParentForm = GetFormHandle (ParentForm)
 
-	if valtype(Value) == "U"
+	if ValType(Value) == "U"
 		_HMG_SYSDATA [ 178 ] := 0
 	Else
 		_HMG_SYSDATA [ 178 ] := Value
 	EndIf
-	if valtype(Width) == "U"
+	if ValType(Width) == "U"
 		Width := 120
 	endif
-	if valtype(Height) == "U"
+	if ValType(Height) == "U"
 		Height := 120
 	endif
 
-	if valtype(Row) == "U" .or. valtype(Col) == "U"
+	if ValType(Row) == "U" .or. ValType(Col) == "U"
 
 		If _HMG_SYSDATA [ 216 ] == 'TOOLBAR'
 			Break := .T.
@@ -139,7 +139,7 @@ Local FontHandle , k
 		if i > 0
 
 			ControlHandle := InitTree ( _HMG_SYSDATA [ 87 ] [i] , col , row , width , height , 0 , '' , 0, iif(noBot,.T.,.F.) )
-			if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+			if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 				FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 			Else
 				FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
@@ -154,7 +154,7 @@ Local FontHandle , k
 	Else
 
 		ControlHandle := InitTree ( ParentForm , col , row , width , height , 0 , '' , 0, iif(noBot,.T.,.F.) )
-		if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+		if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 			FontHandle := _SetFont (ControlHandle,FontName,FontSize)
 		Else
 			FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ])
@@ -162,8 +162,8 @@ Local FontHandle , k
 
 	endif
 
-	ImgDefNode := iif( valtype( aImgNode ) == "A" , HMG_LEN( aImgNode ), 0 )  //Tree+
-	ImgDefItem := iif( valtype( aImgItem ) == "A" , HMG_LEN( aImgItem ), 0 )  //Tree+
+	ImgDefNode := iif( ValType( aImgNode ) == "A" , HMG_LEN( aImgNode ), 0 )  //Tree+
+	ImgDefItem := iif( ValType( aImgItem ) == "A" , HMG_LEN( aImgItem ), 0 )  //Tree+
 
    ImgDefNode := IF (ImgDefNode > 2, 2, ImgDefNode)   // ADD  get only first two NODE bitmaps
    ImgDefItem := IF (ImgDefItem > 2, 2, ImgDefItem)   // ADD  get only first two ITEM bitmaps
@@ -194,23 +194,23 @@ Local FontHandle , k
 		aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
 	EndIf
 
-	if valtype(change) == "U"
+	if ValType(change) == "U"
 		change := ""
 	endif
 
-	if valtype(gotfocus) == "U"
+	if ValType(gotfocus) == "U"
 		gotfocus := ""
 	endif
 
-	if valtype(lostfocus) == "U"
+	if ValType(lostfocus) == "U"
 		lostfocus := ""
 	endif
 
-	if valtype(dblclick) == "U"
+	if ValType(dblclick) == "U"
 		dblclick := ""
 	endif
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 	        SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -280,7 +280,7 @@ LOCAL k := GetControlIndexByHandle ( _HMG_SYSDATA [ 180 ] )
 		nID := 0
 	EndIf
 
-	ImgDef := iif( valtype( aImage ) == "A" , HMG_LEN( aImage ), 0 )  //Tree+
+	ImgDef := iif( ValType( aImage ) == "A" , HMG_LEN( aImage ), 0 )  //Tree+
 
 	if ImgDef == 0
 
@@ -316,7 +316,7 @@ LOCAL k := GetControlIndexByHandle ( _HMG_SYSDATA [ 180 ] )
 		nID := 0
 	EndIf
 
-	ImgDef := iif( valtype( aImage ) == "A" , HMG_LEN( aImage ), 0 )  //Tree+
+	ImgDef := iif( ValType( aImage ) == "A" , HMG_LEN( aImage ), 0 )  //Tree+
 
 	if ImgDef == 0
 
@@ -516,7 +516,7 @@ LOCAL i := GetControlIndex  ( ControlName , ParentForm )
          aAllValues := _HMG_SYSDATA [25] [i]   // nTreeItemID
       EndIf
    Endif
-Return IF (EMPTY(aAllValues), NIL, aAllValues)
+Return IF (Empty(aAllValues), NIL, aAllValues)
 
 
 Function TreeItemGetRootValue ( ControlName , ParentForm )
@@ -553,7 +553,7 @@ LOCAL ItemHandle     := TreeItemGetHandle ( ControlName , ParentForm , nItem )
        NextItem = TreeView_GetNextSibling ( nControlHandle , ChildItem )
        ChildItem = NextItem
    ENDDO
-Return IF (EMPTY(aChildValues), NIL, aChildValues)
+Return IF (Empty(aChildValues), NIL, aChildValues)
 
 
 Function TreeItemGetSiblingValue ( ControlName , ParentForm , nItem )
@@ -575,7 +575,7 @@ LOCAL ItemHandle     := TreeItemGetHandle ( ControlName , ParentForm , nItem )
          SiblingItem = NextItem
       ENDDO
    ENDIF
-Return IF (EMPTY(aSiblingValues), NIL, aSiblingValues)
+Return IF (Empty(aSiblingValues), NIL, aSiblingValues)
 
 
 //---------------------------------------------------------------------------------------
@@ -826,7 +826,7 @@ LOCAL DynamicData
             ASIZE (DynamicData, 6 )   // { cFontName, nFontSize, [ lBold, lItalic, lUnderline, lStrikeOut ] }
          ENDIF
 
-         IF ValType (DynamicData [1]) == "C" .AND. .NOT. EMPTY(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
+         IF ValType (DynamicData [1]) == "C" .AND. .NOT. Empty(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
             cFontName  := DynamicData [1]
             nFontSize  := DynamicData [2]
             lBold      := DynamicData [3]
