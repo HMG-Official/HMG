@@ -116,7 +116,7 @@ Local ControlHandle, BackgroundColor, TransparentColor
       lActionTooltip := .F.
    ENDIF
 
-	if valtype(ProcedureName) == "U"
+	if ValType(ProcedureName) == "U"
 		ProcedureName := ""
 	endif
 
