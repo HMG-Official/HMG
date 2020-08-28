@@ -3,7 +3,7 @@ name: Build HMG for Windows 32 MSVC
 on:
   push:
     paths: 
-      - '.github/workflows/harbour_win32_msvc.yml'
+      - '.github/workflows/harbour_win32_msvc2.yml'
 
 jobs:
   build:

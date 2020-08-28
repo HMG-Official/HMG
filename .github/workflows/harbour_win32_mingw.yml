@@ -16,7 +16,7 @@ jobs:
       run: |
         choco install mingw --version=4.9.3
         gcc --version
-		
+
     - name: Build HMG
       shell: cmd
       run: |
