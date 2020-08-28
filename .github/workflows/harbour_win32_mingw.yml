@@ -14,8 +14,9 @@ jobs:
     
     - name: Install dependencies
       run: |
-        choco install mingw --version=4.9.3
+        choco install mingw
         gcc --version
+        PATH
 
     - name: Build HMG
       shell: cmd
