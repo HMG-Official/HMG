@@ -12,7 +12,7 @@ rem hbmk2 hmg.hbp
 
 rem cd..\..
 cd source\crypt
-hbmk2 crypt.hbp -i%hmgpath%\include
+hbmk2 crypt.hbp -i%hmgpath%\include -comp=mingw
 echo.
 
 cd..\..
