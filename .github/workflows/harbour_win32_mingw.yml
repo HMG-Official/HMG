@@ -15,7 +15,7 @@ jobs:
     - name: Install dependencies
       run: |
         gcc --version
-        dir c:\
+        dir c:\msys64
 
     - name: Build HMG
       shell: cmd
