@@ -15,13 +15,13 @@ jobs:
     - name: Install dependencies
       run: |
         gcc --version
-        SET PATH
+        dir c:\
 
     - name: Build HMG
       shell: cmd
       run: |
+        set HB_COMPILER=mingw	  
         move harbour\bin\win\mingw\*.* harbour\bin
-        set path=c:\mingw32\mingw32\bin;%path%		
         BuildAllLib32.bat
 
     - name: Preparing result folders...
