@@ -1,4 +1,4 @@
-name: Build HMG for Windows 32 MSVC
+name: Build HMG for Windows 32 MINGW
 
 on:
   push:
@@ -14,9 +14,8 @@ jobs:
     
     - name: Install dependencies
       run: |
-        choco install mingw
         gcc --version
-        PATH
+        SET PATH
 
     - name: Build HMG
       shell: cmd
