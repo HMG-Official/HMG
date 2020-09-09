@@ -55,15 +55,3 @@ cd..\..
 
 echo.
 pause
-
-
-
-cd..\..
-cd hfcl\source
-hbmk2 hfcl.hbp -i%hmgpath%\include -i%hmgpath%\hfcl\include
-echo.
-
-cd..\..
-
-echo.
-:: pause
