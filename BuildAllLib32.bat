@@ -3,7 +3,7 @@
 SET HMGPATH=%~dp0
 SET PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
 
-CALL BuildLib32_ansi.bat
+CALL BuildLib32.bat /nopause
 
 SET HMGPATH=%~dp0
 SET PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
@@ -44,6 +44,18 @@ cd..\..
 cd source\report
 hbmk2 report.hbp -i%hmgpath%\include
 echo.
+
+
+cd..\..
+cd hfcl\source
+hbmk2 hfcl.hbp -i%hmgpath%\include -i%hmgpath%\hfcl\include
+echo.
+
+cd..\..
+
+echo.
+pause
+
 
 
 cd..\..
