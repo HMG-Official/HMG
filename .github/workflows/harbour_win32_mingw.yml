@@ -2,6 +2,7 @@ name: Build HMG for Windows 32 MINGW
 
 on:
   push:
+    -   workflow_dispatch:
     paths: 
       - '.github/workflows/harbour_win32_mingw.yml'
 
