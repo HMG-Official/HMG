@@ -4,8 +4,16 @@ on:
   push:
     paths: 
       - '.github/workflows/harbour_win32_mingw.yml'
-on:
-  -   workflow_dispatch:
+
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
 
 jobs:
   build:
