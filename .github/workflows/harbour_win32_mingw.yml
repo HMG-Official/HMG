@@ -44,3 +44,4 @@ jobs:
       with:
        name: hmg_win32_msvc
        path: result
+       
