@@ -3,7 +3,7 @@
 SET HMGPATH=%~dp0
 SET PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
 
-CALL BuildLib32.bat /nopause
+CALL BuildLib32_ansi.bat
 
 SET HMGPATH=%~dp0
 SET PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
@@ -54,4 +54,4 @@ echo.
 cd..\..
 
 echo.
-pause
+:: pause
