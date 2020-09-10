@@ -25,12 +25,12 @@ jobs:
     - name: Install dependencies
       run: |
         gcc --version
-        dir C:\mingw32
+        dir c:\bcd\prg\comp\mgw102
     - name: Build HMG
       shell: cmd
       run: |
         move harbour\bin\win\mingw\*.* harbour\bin
-        SET PATH=C:\mingw32\bin;%PATH%
+        SET PATH=c:\bcd\prg\comp\mgw102\bin;%PATH%
         SET HB_COMPILER=mingw
         BuildAllLib32.bat
     - name: Preparing result folders...
