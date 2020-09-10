@@ -30,7 +30,7 @@ jobs:
       run: |
         set PATH=c:\bcd\prg\comp\mgw102\bin;%PATH%
         cd harbour
-        set HB_BUILD_MODE=c
+        ::set HB_BUILD_MODE=c
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
         set HB_COMPILER=mingw
