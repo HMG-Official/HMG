@@ -28,28 +28,26 @@ jobs:
     - name: Compile Harbour
       shell: cmd
       run: |
+        set PATH=c:\bcd\prg\comp\mgw102\bin;%PATH%
         cd harbour
-        set path=c:\bcd\prg\comp\mgw102\bin;%path%
-        set HB_INSTALL_PREFIX=c:\bcd\prg\pcomp\hb32_mgw102
-        set HB_BUILD_PARTS=all
+        set HB_BUILD_MODE=c
+        set HB_USER_PRGFLAGS=-l-
+        set HB_BUILD_CONTRIBS=
+        set HB_COMPILER=mingw
+        set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
-        set HB_BUILD_SHARED=no
-        :: set HB_WITH_LIBHARU=
         win-make.exe
         
     - name: Create output folders
       shell: cmd
       run: |
+        mkdir output
         mkdir output\bin
         copy harbour\bin\win\mingw\*.exe output\bin
         mkdir output\lib
         copy harbour\lib\win\mingw\*.a output\lib
         mkdir output\include 
-        copy harbour\include\*.* output\include
-        mkdir harbour\doc
-        copy harbour\doc\*.* output\doc
-        mkdir harbour\contrib
-        copy harbour\contrib\*.* output\contrib
+        copy harbour\include output\include
         
     - name: Get current time
       uses: srfrnk/current-time@master
