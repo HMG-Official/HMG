@@ -25,12 +25,12 @@ jobs:
     - name: Install dependencies
       run: |
         gcc --version
-        dir c:\bcd\prg\comp\mgw102
+        dir C:\bcd\prg\comp\mgw102\i686-w64-mingw32
     - name: Build HMG
       shell: cmd
       run: |
         move harbour\bin\win\mingw\*.* harbour\bin
-        SET PATH=c:\bcd\prg\comp\mgw102\bin;%PATH%
+        SET PATH=C:\bcd\prg\comp\mgw102\i686-w64-mingw32\bin;%PATH%
         SET HB_COMPILER=mingw
         BuildAllLib32.bat
     - name: Preparing result folders...
@@ -52,5 +52,5 @@ jobs:
     - name: Create artifact
       uses: actions/upload-artifact@v2
       with:
-       name: hmg_win32_mingw
+       name: hmg35_32b
        path: result
