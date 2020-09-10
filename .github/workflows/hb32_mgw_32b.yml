@@ -40,7 +40,7 @@ jobs:
         set HB_COMPILER=mingw
         set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
-        set path=C:\mingw32\bin;%path%
+        set path=C:\mingw32\i686-w64-mingw32\bin;%path%
         win-make.exe
         
     - name: Create output folders
