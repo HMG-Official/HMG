@@ -38,7 +38,7 @@ jobs:
         set HB_BUILD_DYN=no
         set HB_BUILD_SHARED=no
         win-make.exe
-        
+         
     - name: Create output folders
       shell: cmd
       run: |
