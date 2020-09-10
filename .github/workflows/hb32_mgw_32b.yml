@@ -24,7 +24,7 @@ jobs:
          # choco install curl
          # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
          # Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
-         
+          
     - name: Compile Harbour
       shell: cmd
       run: |
