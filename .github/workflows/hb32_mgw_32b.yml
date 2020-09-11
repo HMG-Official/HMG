@@ -21,7 +21,7 @@ jobs:
          # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
          # Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
          # choco install openssl
-         # choco install curl
+          choco install curl
          # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
          # Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
           
@@ -29,11 +29,7 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        set HB_USER_PRGFLAGS=-l-
-        set HB_BUILD_CONTRIBS=
         set HB_COMPILER=mingw
-        set HB_BUILD_CONTRIB_DYN=
-        set HB_BUILD_DYN=
         set path=c:\bcd\prg\comp\mgw102\i686-w64-mingw32\bin;%path%
         win-make.exe
         
