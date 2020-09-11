@@ -29,10 +29,8 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        set HB_BUILD_MODE=c
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_CONTRIBS=
-        set HB_WITH_ADS=C:\acesdk 
         set HB_COMPILER=mingw
         set HB_BUILD_CONTRIB_DYN=
         set HB_BUILD_DYN=
