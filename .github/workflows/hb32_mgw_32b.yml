@@ -16,15 +16,7 @@ jobs:
        repository: harbour/core
        path: harbour
 
-    - name: Install dependencies
-      run: |
-         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
-         # Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
-         # choco install openssl
-          choco install curl
-         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
-         # Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
-          
+         
     - name: Compile Harbour
       shell: cmd
       run: |
