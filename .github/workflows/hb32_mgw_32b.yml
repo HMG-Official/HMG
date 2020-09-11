@@ -1,4 +1,4 @@
-name: create Harbour binaries for Windows 32 using MinGW
+name: create Harbour binaries for Windows 32 using MinGW 102
 
 on:
     push:
@@ -48,6 +48,8 @@ jobs:
         copy harbour\bin output\bin
         mkdir output\lib
         copy harbour\lib output\lib
+        mkdir output\contrib
+        copy harbour\contrib output\contrib
         
     - name: Get current time
       uses: srfrnk/current-time@master
@@ -60,5 +62,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hb32_win32_mingw_${{ env.TIME }}
+       name: hb32_win32_mgw102_${{ env.TIME }}
        path: output
