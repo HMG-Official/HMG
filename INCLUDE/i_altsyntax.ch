@@ -73,6 +73,10 @@
 
 #xcommand DISABLEDFONTCOLOR   <value>              => _HMG_SYSDATA \[ 299 \]  := <value>
 
+#xcommand BORDERCOLOR         <color>              => _HMG_SYSDATA \[ 298 \]  := <color>
+
+#xcommand TRAILINGFONTCOLOR   <color>              => _HMG_SYSDATA \[ 299 \]  := <color>
+
 #xcommand CELLNAVIGATION      <cellnavigation>     => _HMG_SYSDATA \[ 329 \]  := <cellnavigation>
 
 #xcommand DYNAMICDISPLAY      <value>              => _HMG_SYSDATA \[ 244 \]  := <value>
@@ -180,6 +184,12 @@
 #xcommand DYNAMICBACKCOLOR    <aDynamicBackColor>  => _HMG_SYSDATA \[ 391 \]  := <aDynamicBackColor> 
 
 #xcommand DYNAMICFORECOLOR    <aDynamicForeColor>  => _HMG_SYSDATA \[ 390 \]  := <aDynamicForeColor> 
+
+#xcommand TITLEBACKCOLOR      <color>              => _HMG_SYSDATA \[ 391 \]  := <color>
+
+#xcommand TITLEFONTCOLOR      <color>              => _HMG_SYSDATA \[ 390 \]  := <color>
+
+#xcommand VIEW                <view>               => _HMG_SYSDATA \[ 464 \]  := <view>
 
 #xcommand ON HEADCLICK        <aHeadClick>         => _HMG_SYSDATA \[ 448 \]  := <aHeadClick>
 
@@ -924,6 +934,8 @@ Month Calendar
 	_HMG_SYSDATA \[ 417 \]		:= NIL		;;
 	_HMG_SYSDATA \[ 432 \]		:= NIL		;;
 	_HMG_SYSDATA \[ 431 \]		:= NIL		;;
+  _HMG_SYSDATA \[ 420 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 421 \]    := NIL    ;;
 	_HMG_SYSDATA \[ 434 \]		:= NIL		;;
 	_HMG_SYSDATA \[ 422 \]		:= NIL		;;
 	_HMG_SYSDATA \[ 423 \]		:= NIL		;;
@@ -937,10 +949,18 @@ Month Calendar
 	_HMG_SYSDATA \[ 428 \]		:= .F.		;;
 	_HMG_SYSDATA \[ 412 \]		:= .F.		;;
 	_HMG_SYSDATA \[ 413 \]	:= .F.		;;
-	_HMG_SYSDATA \[ 414 \]	:= .F.		;;
-	_HMG_SYSDATA \[ 415 \]	:= .F.		
+  _HMG_SYSDATA \[ 415 \]  := .F.    ;;
+  _HMG_SYSDATA \[ 414 \]  := .F.    ;;
+  _HMG_SYSDATA \[ 458 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 299 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 457 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 298 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 390 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 391 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 465 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 466 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 464 \]    := NIL
 
-	
 #xcommand END MONTHCALENDAR;
 	=>;
 	_DefineMonthCal (;
@@ -948,8 +968,8 @@ Month Calendar
 		_HMG_SYSDATA \[ 417 \],;
 		_HMG_SYSDATA \[ 432 \],;
 		_HMG_SYSDATA \[ 431 \],;
-		0,;
-		0,;
+    _HMG_SYSDATA \[ 420 \],;
+    _HMG_SYSDATA \[ 421 \],;
 		_HMG_SYSDATA \[ 434 \],;
 		_HMG_SYSDATA \[ 422 \],;
 		_HMG_SYSDATA \[ 423 \],;
@@ -960,7 +980,20 @@ Month Calendar
 		_HMG_SYSDATA \[ 435 \],;
 		_HMG_SYSDATA \[ 429 \],;
 		_HMG_SYSDATA \[ 430 \],;
-		_HMG_SYSDATA \[ 428 \] , _HMG_SYSDATA \[ 412 \] , _HMG_SYSDATA \[ 413 \] , _HMG_SYSDATA \[ 415 \] , _HMG_SYSDATA \[ 414 \] )
+    _HMG_SYSDATA \[ 428 \],;
+    _HMG_SYSDATA \[ 412 \],;
+    _HMG_SYSDATA \[ 413 \],;
+    _HMG_SYSDATA \[ 415 \],;
+    _HMG_SYSDATA \[ 414 \],;
+    _HMG_SYSDATA \[ 458 \],;
+    _HMG_SYSDATA \[ 299 \],;
+    _HMG_SYSDATA \[ 457 \],;
+    _HMG_SYSDATA \[ 298 \],;
+    _HMG_SYSDATA \[ 390 \],;
+    _HMG_SYSDATA \[ 391 \],;
+    _HMG_SYSDATA \[ 465 \],;
+    _HMG_SYSDATA \[ 466 \],;
+    _HMG_SYSDATA \[ 464 \] )
 
 /*----------------------------------------------------------------------------
 Button

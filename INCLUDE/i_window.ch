@@ -130,7 +130,7 @@
 #xtranslate <w>. \<c\> . \<p:ChangeFontSize\> := \<arg\> =>  SetProperty ( <"w">, \<"c"\> , \<"p"\> , \<arg\> ) ;;
 ;;
 ;;   // Grid
-#xtranslate <w>. \<c\> . \<p:ColumnCOUNT, CellRowFocused, CellColFocused, CellNavigation, CellRowClicked, CellColClicked, EditOption, ImageList\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;
+#xtranslate <w>. \<c\> . \<p:ColumnCOUNT, CellRowFocused, CellColFocused, CellNavigation, CellRowClicked, CellColClicked, EditOption, ImageList, RowsPerPage\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;
 #xtranslate <w>. \<c\> . \<p:ColumnHEADER, ColumnWIDTH, ColumnJUSTIFY, ColumnCONTROL, ColumnDYNAMICBACKCOLOR, ColumnDYNAMICFORECOLOR,;
                              ColumnVALID, ColumnWHEN, ColumnONHEADCLICK, ColumnDISPLAYPOSITION, ColumnDYNAMICFONT, HeaderDYNAMICFONT, HeaderDYNAMICBACKCOLOR, HeaderDYNAMICFORECOLOR, HeaderImageIndex,;
                              CheckBoxItem\> (\<n\>) => GetProperty ( <"w">, \<"c"\> , \<"p"\> , \<n\> );;
@@ -150,6 +150,10 @@
 #xtranslate <w>. \<c\> . \<p:GroupAdd> (\<a1\> , \<a2\>) => Domethod ( <"w">, \<"c"\> , \<"p"\> , \<a1\> , \<a2\> ) ;;
 #xtranslate <w>. \<c\> . \<p:GroupInfo,GroupItemID,GroupGetAllItemIndex,GroupExist\> (\<n1\>) => GetProperty ( <"w">, \<"c"\> , \<"p"\> , \<n1\> );;
 #xtranslate <w>. \<c\> . \<p:GroupInfo,GroupItemID,GroupCheckBoxAllItems\> (\<n1\>) := \<arg\> => SetProperty ( <"w">, \<"c"\> , \<"p"\> , \<n1\>, \<arg\>);;
+;;
+;;   // MonthCalendar
+#xtranslate <w>. \<c\> . \<p:FontColor, TrailingFontColor, BackColor, BorderColor, TitleFontColor, TitleBackColor, View\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;
+#xtranslate <w>. \<c\> . \<p:FontColor, TrailingFontColor, BackColor, BorderColor, TitleFontColor, TitleBackColor, View\> := \<n\> => SetProperty ( <"w">, \<"c"\>, \<"p"\> , \<n\> ) ;;
 ;;
 ;;   // TimePicker
 #xtranslate <w>. \<c\> . \<p:Format\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;

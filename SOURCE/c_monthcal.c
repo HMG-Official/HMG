@@ -202,6 +202,60 @@ HB_FUNC ( SETMONTHCAL )
 	MonthCal_SetCurSel(hwnd, &sysTime);
 }
 
+HB_FUNC ( SETMONTHCALMIN )
+{
+  HWND hwnd;
+  SYSTEMTIME sysTime[2];
+  int y;
+  int m;
+  int d;
+
+  hwnd = (HWND) HMG_parnl (1);
+
+  y = hb_parni(2);
+  m = hb_parni(3);
+  d = hb_parni(4);
+
+  sysTime[0].wYear = y;
+  sysTime[0].wMonth = m;
+  sysTime[0].wDay = d;
+  sysTime[0].wDayOfWeek = 0;
+
+  sysTime[0].wHour = 0;
+  sysTime[0].wMinute = 0;
+  sysTime[0].wSecond = 0;
+  sysTime[0].wMilliseconds = 0;
+
+  MonthCal_SetRange(hwnd, GDTR_MIN, &sysTime);
+}
+
+HB_FUNC ( SETMONTHCALMAX )
+{
+  HWND hwnd;
+  SYSTEMTIME sysTime[2];
+  int y;
+  int m;
+  int d;
+
+  hwnd = (HWND) HMG_parnl (1);
+
+  y = hb_parni(2);
+  m = hb_parni(3);
+  d = hb_parni(4);
+
+  sysTime[1].wYear = y;
+  sysTime[1].wMonth = m;
+  sysTime[1].wDay = d;
+  sysTime[1].wDayOfWeek = 0;
+
+  sysTime[1].wHour = 0;
+  sysTime[1].wMinute = 0;
+  sysTime[1].wSecond = 0;
+  sysTime[1].wMilliseconds = 0;
+
+  MonthCal_SetRange(hwnd, GDTR_MAX, &sysTime);
+}
+
 HB_FUNC ( GETMONTHCALYEAR )
 {
 	HWND hwnd;

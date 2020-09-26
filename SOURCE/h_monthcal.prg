@@ -59,12 +59,17 @@ MEMVAR _HMG_SYSDATA
 Function _DefineMonthCal ( ControlName, ParentForm, x, y, w, h, value, ;
                            fontname, fontsize, tooltip, notoday, notodaycircle, ;
                            weeknumbers, change, HelpId, invisible, notabstop, ;
-                           bold, italic, underline, strikeout )
+                           bold, italic, underline, strikeout, ;
+                           fontcolor, trailingfontcolor, backcolor, ;
+                           bordercolor, titlefontcolor, titlebackcolor, ;
+                           rangemin, rangemax, view )
 *-----------------------------------------------------------------------------*
 Local cParentForm , mVar , k := 0
 Local aControlHandle
 Local cParentTabName
 
+   DEFAULT w         TO 0
+   DEFAULT h         TO 0
    DEFAULT value     TO date()
    DEFAULT change    TO ""
    DEFAULT bold      TO FALSE
@@ -110,6 +115,14 @@ Local cParentTabName
 		aControlHandle := InitMonthCal ( ParentForm, 0, x, y, w, h , _HMG_SYSDATA [ 342 ] , _HMG_SYSDATA [ 343 ] , notoday , notodaycircle , weeknumbers, invisible, notabstop, bold, italic, underline, strikeout )
 	endif
 
+  if ISVISTA() .And. IsAppThemed()
+    SetWindowTheme(aControlHandle[1], "", "")
+  endif
+
+  if w != 0 .and. h != 0
+    SetWindowPos(aControlHandle[1], NIL, x, y, w, h, SWP_NOZORDER)
+  endif  
+
 	If _HMG_SYSDATA [ 265 ] = .T.
 		aAdd ( _HMG_SYSDATA [ 142 ] , aControlhandle[1] )
 	EndIf
@@ -119,6 +132,37 @@ Local cParentTabName
 	if valtype(tooltip) != "U"
 		SetToolTip ( aControlHandle[1] , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
+
+  IF IsArrayRGB( fontcolor )
+     SendMessage( aControlHandle[1], MCM_SETCOLOR, MCSC_TEXT, RGB( fontcolor[1], fontcolor[2], fontcolor[3] ) )
+  ENDIF
+  IF IsArrayRGB( trailingfontcolor )
+     SendMessage( aControlHandle[1], MCM_SETCOLOR, MCSC_TRAILINGTEXT, RGB (trailingfontcolor[1], trailingfontcolor[2], trailingfontcolor[3] ) )
+  ENDIF
+  IF IsArrayRGB( backcolor )
+     SendMessage( aControlHandle[1], MCM_SETCOLOR, MCSC_MONTHBK, RGB (backcolor[1], backcolor[2], backcolor[3] ) )
+  ENDIF
+  IF IsArrayRGB( bordercolor )
+     SendMessage( aControlHandle[1], MCM_SETCOLOR, MCSC_BACKGROUND, RGB (bordercolor[1], bordercolor[2], bordercolor[3] ) )
+  ENDIF
+  IF IsArrayRGB( titlefontcolor )
+     SendMessage( aControlHandle[1], MCM_SETCOLOR, MCSC_TITLETEXT, RGB (titlefontcolor[1], titlefontcolor[2], titlefontcolor[3] ) )
+  ENDIF
+  IF IsArrayRGB( titlebackcolor )
+     SendMessage( aControlHandle[1], MCM_SETCOLOR, MCSC_TITLEBK, RGB (titlebackcolor[1], titlebackcolor[2], titlebackcolor[3] ) )
+  ENDIF
+
+  IF HB_ISDATE( rangemin )
+    SetMonthCalMin( aControlHandle[1] , YEAR(rangemin), MONTH(rangemin), DAY(rangemin) )
+    rangemax := NIL
+  ENDIF
+  IF HB_ISDATE( rangemax )
+    SetMonthCalMax( aControlHandle[1] , YEAR(rangemax), MONTH(rangemax), DAY(rangemax) )
+    rangemin := NIL
+  ENDIF
+  IF HB_ISNUMERIC( view ) .AND. view >= 0 .AND. view <= MCMV_MAX
+     SendMessage( aControlHandle[1], MCM_SETCURRENTVIEW, 0, view )
+  ENDIF
 
 	w := GetWindowWidth ( aControlHandle[1] )
 	h := GetWindowHeight ( aControlHandle[1] )
@@ -148,7 +192,7 @@ Local cParentTabName
 	_HMG_SYSDATA [ 19 ]   [k] := x 
 	_HMG_SYSDATA [ 20 ]   [k] := w 
 	_HMG_SYSDATA [ 21 ]   [k] := h 
-	_HMG_SYSDATA [ 22 ]   [k] := 0 
+  _HMG_SYSDATA [ 22 ]   [k] := iif ( view == NIL, 0, view )
 	_HMG_SYSDATA [ 23 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
 	_HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
 	_HMG_SYSDATA [ 25 ]  [k] :=  "" 
@@ -158,30 +202,31 @@ Local cParentTabName
 	_HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout} 
 	_HMG_SYSDATA [ 30 ]   [k] :=  tooltip  
 	_HMG_SYSDATA [ 31 ]  [k] :=   cParentTabName
-	_HMG_SYSDATA [ 32 ]  [k] :=   0  
+  _HMG_SYSDATA [ 32 ]  [k] :=   iif ( HB_ISDATE( rangemax ), rangemax, d"0000-00-00" )
 	_HMG_SYSDATA [ 33 ]   [k] :=  ''  
 	_HMG_SYSDATA [ 34 ]  [k] :=   if(invisible,FALSE,TRUE) 
 	_HMG_SYSDATA [ 35 ]  [k] :=   HelpId 
 	_HMG_SYSDATA [ 36 ]  [k] :=   aControlHandle[2] 
-	_HMG_SYSDATA [ 37 ]  [k] :=   0 
+  _HMG_SYSDATA [ 37 ]  [k] :=   iif ( HB_ISDATE( rangemin ), rangemin, d"0000-00-00" )
 	_HMG_SYSDATA [ 38 ]  [k] :=   .T. 
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
 Return Nil
 
+FUNCTION GetMonthCalendarView (cControlName, cParentName)
+LOCAL nView := SendMessage( GetControlHandle (cControlName, cParentName), MCM_GETCURRENTVIEW, 0, 0 )
+RETURN nView
 
-// by Dr. Claudio Soto (April 2013)
+FUNCTION SetMonthCalendarView (cControlName, cParentName, nView)
+LOCAL nStatus := SendMessage( GetControlHandle (cControlName, cParentName), MCM_SETCURRENTVIEW, 0, nView )
+RETURN !EMPTY(nStatus)
+
 FUNCTION GetMonthCalendarColor (cControlName, cParentName, nIndexColor)
-LOCAL RGBcolorRef := DATETIME_GETMONTHCALCOLOR (GetControlHandle (cControlName, cParentName), nIndexColor)
-RETURN { GETRED (RGBcolorRef), GETGREEN (RGBcolorRef), GETBLUE (RGBcolorRef) } 
+LOCAL nRGBcolor := SendMessage( GetControlHandle (cControlName, cParentName), MCM_GETCOLOR, nIndexColor )
+RETURN { GETRED (nRGBcolor), GETGREEN (nRGBcolor), GETBLUE (nRGBcolor) } 
 
-
-// by Dr. Claudio Soto (April 2013)
 FUNCTION SetMonthCalendarColor (cControlName, cParentName, nIndexColor, aRGBcolor)
-LOCAL RGBcolorRef := DATETIME_SETMONTHCALCOLOR (GetControlHandle (cControlName, cParentName), nIndexColor, RGB (aRGBcolor[1], aRGBcolor[2], aRGBcolor[3]))
-RETURN { GETRED (RGBcolorRef), GETGREEN (RGBcolorRef), GETBLUE (RGBcolorRef) } 
-
-
-
+LOCAL nRGBcolor := SendMessage( GetControlHandle (cControlName, cParentName), MCM_SETCOLOR, nIndexColor, RGB( aRGBcolor[1], aRGBcolor[2], aRGBcolor[3] ) )
+RETURN { GETRED (nRGBcolor), GETGREEN (nRGBcolor), GETBLUE (nRGBcolor) } 
 
