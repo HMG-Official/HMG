@@ -1,0 +1,25 @@
+/* Encoding: UTF-8 (No BOM)  Notation (in 5th position):
+     * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
+   Entries may not always be in chronological/commit order.
+   See license at the end of file. */
+
+
+2020-07-21 Carlos Britos asistex /at/ yahoo.com.ar
+2020-07-25 Carlos Britos asistex /at/ yahoo.com.ar
+  * source\*.prg
+    * removed ending spaces
+    * pacified warnings. -w3
+
+2020-09-28 Carlos Britos asistex /at/ yahoo.com.ar
+  * source\*.c
+    * removed ending spaces
+
+  * source\h_graphbitmap.prg
+    ! RGB2HSL()
+    ! HSL2RGB()
+      ; Replaced with new, more accurate functions.
+        Checked at https://www.w3schools.com/colors/colors_converter.asp
+        Added via #define PARAM_IS_3_NUMBERS the possibility to use
+           3 numerical parameters or 1 parameter array.
+
+
