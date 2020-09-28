@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_TimePicker.c  
+ HMG Source File --> c_TimePicker.c
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -16,12 +16,12 @@
 ----------------------------------------------------------------------------*/
 
 //**********************************************
-// I force this file compile in ANSI, because:  
+// I force this file compile in ANSI, because:
 //**********************************************
 
 // Date/Time Picker format present different behavior with Unicode and ANSI
 // DateTime_SetFormat(hWnd, cTextFormat) NOT WORK IN UNICODE (is a Windows bug ???)
-// Macro DateTime_SetFormat() returns TRUE (success) with ANSI and FALSE (failed) with Unicode, with same parameters. GetLastError() is always 0. 
+// Macro DateTime_SetFormat() returns TRUE (success) with ANSI and FALSE (failed) with Unicode, with same parameters. GetLastError() is always 0.
 // SendMessage (DTM_SETFORMAT) fails too.
 
 /*
@@ -68,7 +68,7 @@ HB_FUNC ( INITTIMEPICK )
    InitCommonControlsEx(&icex);
 
    hWnd = (HWND) HMG_parnl (1);
- 
+
    if (hb_parl (6) == TRUE)
        Style = Style | DTS_SHOWNONE;
 
@@ -78,10 +78,10 @@ HB_FUNC ( INITTIMEPICK )
    if (hb_parl (8) == FALSE)
       Style = Style | WS_TABSTOP ;
 
-   hWndControl = CreateWindowEx ( WS_EX_CLIENTEDGE , DATETIMEPICK_CLASS /*_TEXT("SysDateTimePick32")*/ , 
-                                 TEXT(""), Style | WS_CHILD | DTS_TIMEFORMAT | DTS_UPDOWN, 
+   hWndControl = CreateWindowEx ( WS_EX_CLIENTEDGE , DATETIMEPICK_CLASS /*_TEXT("SysDateTimePick32")*/ ,
+                                 TEXT(""), Style | WS_CHILD | DTS_TIMEFORMAT | DTS_UPDOWN,
                                  hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hWnd, NULL, GetModuleHandle(NULL), NULL);
-                                                                  
+
    HMG_retnl ((LONG_PTR) hWndControl);
 }
 

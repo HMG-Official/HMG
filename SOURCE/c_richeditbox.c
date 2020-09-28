@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -55,9 +55,9 @@
 
 
 
-/* 
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+/*
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -111,16 +111,16 @@ HB_FUNC ( INITRICHEDITBOX )
 
    Style = Style | (( ! hb_parl(14) ) ? WS_VSCROLL : ES_AUTOVSCROLL);
 
-   hWndControl = CreateWindowEx( WS_EX_CLIENTEDGE , ( HMG_IsRichEditBoxVer30() ? (LPCTSTR) RICHEDIT_CLASS : (LPCTSTR) MSFTEDIT_CLASS ) , 
-                                 TEXT("") , 
+   hWndControl = CreateWindowEx( WS_EX_CLIENTEDGE , ( HMG_IsRichEditBoxVer30() ? (LPCTSTR) RICHEDIT_CLASS : (LPCTSTR) MSFTEDIT_CLASS ) ,
+                                 TEXT("") ,
                                  Style ,
-                                 hb_parni(3) , 
-                                 hb_parni(4) , 
-                                 hb_parni(5) , 
+                                 hb_parni(3) ,
+                                 hb_parni(4) ,
+                                 hb_parni(5) ,
                                  hb_parni(6) ,
                                  hWnd ,
-                                 hMenu, 
-                                 GetModuleHandle(NULL) , 
+                                 hMenu,
+                                 GetModuleHandle(NULL) ,
                                  NULL ) ;
 
 // SendMessage (hWndControl, EM_EXLIMITTEXT, ( WPARAM ) hb_parni (9), 0);
@@ -133,7 +133,7 @@ HB_FUNC ( INITRICHEDITBOX )
    RegisterClipboardFormat ( CF_RTF );
    RegisterClipboardFormat ( CF_RETEXTOBJ );
 // RegisterClipboardFormat ( CF_RTFNOOBJS );
- 
+
    HMG_retnl ((LONG_PTR) hWndControl);
 }
 
@@ -141,7 +141,7 @@ HB_FUNC ( INITRICHEDITBOX )
 DWORD CALLBACK EditStreamCallbackRead (DWORD_PTR dwCookie, LPBYTE lpBuff, LONG cb, LONG *pcb)
 {
     HANDLE hFile = (HANDLE)dwCookie;
-    if ( ReadFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) ) 
+    if ( ReadFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) )
        return  0;
     else
        return -1;
@@ -163,7 +163,7 @@ HB_FUNC ( RICHEDITBOX_STREAMIN )
    {
       case 1:   Format = SF_TEXT; break; // ANSI and UTF-8 with BOM
       case 2:   Format = ( CP_UTF8 << 16 ) | SF_USECODEPAGE | SF_TEXT; break; // ANSI and UTF-8 without BOM
-      case 3:   Format = SF_TEXT | SF_UNICODE; break;   // UTF-16 LE 
+      case 3:   Format = SF_TEXT | SF_UNICODE; break;   // UTF-16 LE
       case 4:   Format = SF_RTF;  break;
       case 5:   Format = ( CP_UTF8 << 16 ) | SF_USECODEPAGE | SF_RTF; break;
       default:  Format = SF_RTF; break;
@@ -196,7 +196,7 @@ HB_FUNC ( RICHEDITBOX_STREAMIN )
 DWORD CALLBACK EditStreamCallbackWrite (DWORD_PTR dwCookie, LPBYTE lpBuff, LONG cb, LONG *pcb)
 {
     HANDLE hFile = (HANDLE) dwCookie;
-    if ( WriteFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) ) 
+    if ( WriteFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) )
        return  0;
     else
        return -1;
@@ -218,7 +218,7 @@ HB_FUNC ( RICHEDITBOX_STREAMOUT )
    {
       case 1:   Format = SF_TEXT; break; // ANSI and UTF-8 with BOM
       case 2:   Format = ( CP_UTF8 << 16 ) | SF_USECODEPAGE | SF_TEXT; break; // ANSI and UTF-8 without BOM
-      case 3:   Format = SF_TEXT | SF_UNICODE; break;   // UTF-16 LE 
+      case 3:   Format = SF_TEXT | SF_UNICODE; break;   // UTF-16 LE
       case 4:   Format = SF_RTF;  break;
       case 5:   Format = ( CP_UTF8 << 16 ) | SF_USECODEPAGE | SF_RTF; break;
       default:  Format = SF_RTF; break;
@@ -237,7 +237,7 @@ HB_FUNC ( RICHEDITBOX_STREAMOUT )
    es.dwError     = 0;
 
    SendMessage ( hWndControl, EM_STREAMOUT, (WPARAM) Format, (LPARAM) &es );
-   
+
    CloseHandle (hFile);
 
    if( es.dwError )
@@ -266,7 +266,7 @@ HB_FUNC ( RICHEDITBOX_RTFLOADRESOURCEFILE )
        if ( hGlobalResource != NULL )
        {
            lpGlobalResource  = LockResource ( hGlobalResource );
-           if ( lpGlobalResource != NULL ) 
+           if ( lpGlobalResource != NULL )
            {
                SETTEXTEX  ST;
                ST.flags = ( lSelect ? ST_SELECTION : ST_DEFAULT );
@@ -367,9 +367,9 @@ HB_FUNC ( RICHEDITBOX_SETFONT )
 {
    HWND        hWndControl = (HWND) HMG_parnl (1);
    CHARFORMAT2 CharFormat2;
-   DWORD       Mask    = 0; 
-   DWORD       Effects = 0; 
-   
+   DWORD       Mask    = 0;
+   DWORD       Effects = 0;
+
    ZeroMemory ( &CharFormat2, sizeof (CHARFORMAT2) );
    CharFormat2.cbSize = sizeof (CHARFORMAT2);
 
@@ -379,16 +379,16 @@ HB_FUNC ( RICHEDITBOX_SETFONT )
    }
 
    if ( HB_ISNUM (3) && hb_parnl (3) )
-   {   Mask = Mask | CFM_SIZE; 
+   {   Mask = Mask | CFM_SIZE;
        CharFormat2.yHeight = hb_parnl (3) * 20 / 1;   // yHeight (character height) is in twips (1/1440 of an inch or 1/20 of a printer point)
    }
-   
+
    if ( HB_ISLOG (4) )
    {   Mask = Mask | CFM_BOLD;
        if ( hb_parl (4) )
            Effects = Effects | CFE_BOLD;
    }
-   
+
    if ( HB_ISLOG (5) )
    {   Mask = Mask | CFM_ITALIC;
        if ( hb_parl (5) )
@@ -400,7 +400,7 @@ HB_FUNC ( RICHEDITBOX_SETFONT )
        if ( hb_parl (6) )
            Effects = Effects | CFE_UNDERLINE;
    }
-   
+
    if ( HB_ISLOG (7) )
    {   Mask = Mask | CFM_STRIKEOUT;
        if ( hb_parl (7) )
@@ -456,11 +456,11 @@ HB_FUNC ( RICHEDITBOX_GETFONT )
 {
    HWND        hWndControl = (HWND) HMG_parnl (1);
    CHARFORMAT2 CharFormat2;
-   DWORD       Mask = 0; 
-   DWORD       Effects = 0; 
-   
+   DWORD       Mask = 0;
+   DWORD       Effects = 0;
+
    ZeroMemory ( &CharFormat2, sizeof (CHARFORMAT2) );
-   
+
    CharFormat2.cbSize = sizeof (CHARFORMAT2);
    Mask = CFM_FACE | CFM_SIZE | CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_STRIKEOUT | CFM_COLOR | CFM_BACKCOLOR | CFM_SUBSCRIPT | CFM_SUPERSCRIPT | CFM_LINK;
    CharFormat2.dwMask = Mask;
@@ -472,10 +472,10 @@ HB_FUNC ( RICHEDITBOX_GETFONT )
 
    if ( HB_ISBYREF (3) )
        hb_stornl ((LONG) (CharFormat2.yHeight * 1 / 20), 3);   // yHeight (character height) is in twips (1/1440 of an inch or 1/20 of a printer point)
-   
+
    if ( HB_ISBYREF (4) )
        hb_storl ((BOOL) (Effects & CFE_BOLD), 4);
-   
+
    if ( HB_ISBYREF (5) )
        hb_storl ((BOOL) (Effects & CFE_ITALIC), 5);
 
@@ -486,7 +486,7 @@ HB_FUNC ( RICHEDITBOX_GETFONT )
        hb_storl ((BOOL) (Effects & CFE_STRIKEOUT), 7);
 
    if ( HB_ISBYREF (8) )
-   {   PHB_ITEM pArray = hb_param (8, HB_IT_ANY ); 
+   {   PHB_ITEM pArray = hb_param (8, HB_IT_ANY );
        hb_arrayNew ( pArray, 3 );
        hb_arraySetNL ( pArray, 1, GetRValue (CharFormat2.crTextColor) );
        hb_arraySetNL ( pArray, 2, GetGValue (CharFormat2.crTextColor) );
@@ -494,7 +494,7 @@ HB_FUNC ( RICHEDITBOX_GETFONT )
     }
 
    if ( HB_ISBYREF (9) )
-   {   PHB_ITEM pArray = hb_param (9, HB_IT_ANY ); 
+   {   PHB_ITEM pArray = hb_param (9, HB_IT_ANY );
        hb_arrayNew ( pArray, 3 );
        hb_arraySetNL ( pArray, 1, GetRValue (CharFormat2.crBackColor) );
        hb_arraySetNL ( pArray, 2, GetGValue (CharFormat2.crBackColor) );
@@ -615,7 +615,7 @@ HB_FUNC ( RICHEDITBOX_GETTEXTLENGTH )
        GTL.codepage = CP_ACP;
    #endif
    LONG nLength = SendMessage ( hWndControl, EM_GETTEXTLENGTHEX, (WPARAM) &GTL, 0 );
-   hb_retnl ((LONG) nLength); 
+   hb_retnl ((LONG) nLength);
 }
 
 
@@ -655,7 +655,7 @@ HB_FUNC ( RICHEDITBOX_FINDTEXT )
    BOOL  MatchCase      = (BOOL)  (HB_ISNIL (4) ? FALSE : hb_parl (4));
    BOOL  WholeWord      = (BOOL)  (HB_ISNIL (5) ? FALSE : hb_parl (5));
    BOOL  SelectFindText = (BOOL)  (HB_ISNIL (6) ? TRUE  : hb_parl (6));
-   
+
    CHARRANGE   CharRange;
    int         Options = 0;
    #ifdef UNICODE
@@ -717,7 +717,7 @@ HB_FUNC ( RICHEDITBOX_SETPARAFORMAT )
    double Offset         = HB_ISNIL (6) ?  0.0 : (double) hb_parnd (6);
    double LineSpacing    = HB_ISNIL (7) ?  0.0 : (double) hb_parnd (7);
    double StartIndent    = HB_ISNIL (8) ?  0.0 : (double) hb_parnd (8);
-   
+
    PARAFORMAT2 ParaFormat2;
    DWORD       Mask = 0;
 
@@ -731,7 +731,7 @@ HB_FUNC ( RICHEDITBOX_SETPARAFORMAT )
        {
           case 1:  ParaFormat2.wAlignment = PFA_LEFT; break;
           case 2:  ParaFormat2.wAlignment = PFA_RIGHT; break;
-          case 3:  ParaFormat2.wAlignment = PFA_CENTER; break; 
+          case 3:  ParaFormat2.wAlignment = PFA_CENTER; break;
           case 4:  ParaFormat2.wAlignment = PFA_JUSTIFY; break;
 
           default: ParaFormat2.wAlignment = PFA_LEFT; break;
@@ -766,7 +766,7 @@ HB_FUNC ( RICHEDITBOX_SETPARAFORMAT )
           case 4:  ParaFormat2.wNumberingStyle = PFNS_PLAIN; break;     // Displays only the number
           case 5:  ParaFormat2.wNumberingStyle = PFNS_NONUMBER; break;  // Continues a numbered list without applying the next number or bullet
           case 6:  ParaFormat2.wNumberingStyle = PFNS_NEWNUMBER; break; // Starts a new number with nNumberingStart
-          
+
           default: ParaFormat2.wNumberingStyle = 0; break;
        }
    }
@@ -813,7 +813,7 @@ HB_FUNC ( RICHEDITBOX_GETPARAFORMAT )
    double Offset         = 0.0;
    double LineSpacing    = 0.0;
    double StartIndent    = 0.0;
-   
+
    PARAFORMAT2 ParaFormat2;
    ZeroMemory ( &ParaFormat2, sizeof (PARAFORMAT2) );
 
@@ -828,7 +828,7 @@ HB_FUNC ( RICHEDITBOX_GETPARAFORMAT )
           Alignment = 1;
       else if ( ParaFormat2.wAlignment == PFA_RIGHT )
           Alignment = 2;
-      else if ( ParaFormat2.wAlignment == PFA_CENTER ) 
+      else if ( ParaFormat2.wAlignment == PFA_CENTER )
           Alignment = 3;
       else if ( ParaFormat2.wAlignment == PFA_JUSTIFY )
           Alignment = 4;
@@ -944,7 +944,7 @@ HB_FUNC ( RICHEDITBOX_SELCUT )
 HB_FUNC ( RICHEDITBOX_SELCLEAR )
 {
    HWND hWndControl = (HWND) HMG_parnl (1);
-   SendMessage ( hWndControl, WM_CLEAR, 0, 0 );   // delete (cut) the current selection 
+   SendMessage ( hWndControl, WM_CLEAR, 0, 0 );   // delete (cut) the current selection
 }
 
 
@@ -990,7 +990,7 @@ HB_FUNC ( RICHEDITBOX_CANREDO )
 }
 
 
-//        RichEditBox_GetRect ( hWndControl ) --> { nLeft, nTop, nRight, nBottom } 
+//        RichEditBox_GetRect ( hWndControl ) --> { nLeft, nTop, nRight, nBottom }
 HB_FUNC ( RICHEDITBOX_GETRECT )
 {
    HWND hWndControl = (HWND) HMG_parnl (1);

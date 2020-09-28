@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_UNICODE.c  
+ HMG Source File --> c_UNICODE.c
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -38,7 +38,7 @@ HB_FUNC (HMG_GETUNICODEVALUE)
    hb_reta (nLen);
    if (nLen > 0)
    {  for (i=0; i < nLen; i++)
-            hb_storvnl ((LONG) cText[i], -1, i+1); 
+            hb_storvnl ((LONG) cText[i], -1, i+1);
    }
 }
 
@@ -48,7 +48,7 @@ HB_FUNC (HMG_GETUNICODECHARACTER)
 {
    WCHAR *cText, cBuffer [2] = {0,0};
    INT i, nLen;
-   
+
    cText = cBuffer;
 
    if ( HB_ISNUM(1) )
@@ -58,7 +58,7 @@ HB_FUNC (HMG_GETUNICODECHARACTER)
        if ( nLen > 0 )
        {   cText = (WCHAR *) hb_xgrab ((nLen + 1) * sizeof (WCHAR));
            for (i=0; i < nLen; i++)
-                cText [i] = (WCHAR) hb_parvnl (1, i+1); 
+                cText [i] = (WCHAR) hb_parvnl (1, i+1);
            cText [nLen] = (WCHAR) 0;
        }
    }
