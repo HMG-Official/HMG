@@ -803,103 +803,162 @@ FUNCTION ClrShadow( nColor, nFactor )
 RETURN RGB( aRGB[1], aRGB[2], aRGB[3] )
 
 
-FUNCTION RGB2HSL( nR, nG, nB )
-   LOCAL nMax, nMin
-   LOCAL nH, nS, nL
+/*-----------------------------------*/
 
-   IF nR < 0
-      nR := Abs( nR )
-      nG := GetGreen( nR )
-      nB := GetBlue( nR )
-      nR := GetRed( nR )
-   ENDIF
+#define PARAM_IS_3_NUMBERS
+
+#ifdef PARAM_IS_3_NUMBERS
+
+/*-----------------------------------*/
+// 3 params numerics
+/*-----------------------------------*/
+
+FUNCTION RGB2HSL( nR, nG, nB )
+
+   LOCAL nMax, nMin, nDelta
+   LOCAL nH, nS, nL
 
    nR := nR / 255
    nG := nG / 255
    nB := nB / 255
    nMax := Max( nR, Max( nG, nB ) )
    nMin := Min( nR, Min( nG, nB ) )
+   nDelta := nMax - nMin
+
+#else  // PARAM_IS_ARRAY
+
+/*-----------------------------------*/
+// 1 param array rgb
+/*-----------------------------------*/
+
+FUNCTION RGB2HSL( aRGB )
+
+   LOCAL nMax, nMin, nDelta
+   LOCAL nH, nS, nL, nR, nG, nB
+
+   nR := aRGB[1] / 255
+   nG := aRGB[2] / 255
+   nB := aRGB[3] / 255
+   nMax := Max( nR, Max( nG, nB ) )
+   nMin := Min( nR, Min( nG, nB ) )
+   nDelta := nMax - nMin
+
+#endif
+
+  // Calcular nH hue
+   IF nDelta == 0
+      nH := 0
+
+   // Red = nMax
+   ELSEIF ( nMax == nR )
+      nH := (( nG - nB) / nDelta) % 6
+
+   // Green = nMax
+   ELSEIF ( nMax == nG )
+      nH := (nB - nR) / nDelta + 2;
+
+   // Blue = nMax
+   ELSE
+      nH := (nR - nG) / nDelta + 4;
+
+   ENDIF
+
+   nH := Int( nH * 60 )
+
+   // Cambiar hues negativos en positivos. 360°
+   IF ( nH < 0 )
+      nH += 360
+   ENDIF
+
+   // Calcular nL lightness
    nL := ( nMax + nMin ) / 2
 
-   IF nMax = nMin
-      nH := 0
-      nS := 0
-   ELSE
-      IF nL < 0.5
-         nS := ( nMax - nMin ) / ( nMax + nMin )
-      ELSE
-         nS := ( nMax - nMin ) / ( 2.0 - nMax - nMin )
-      ENDIF
-      DO CASE
-         CASE nR = nMax
-            nH := ( nG - nB ) / ( nMax - nMin )
-         CASE nG = nMax
-            nH := 2.0 + ( nB - nR ) / ( nMax - nMin )
-         CASE nB = nMax
-            nH := 4.0 + ( nR - nG ) / ( nMax - nMin )
-      ENDCASE
-   ENDIF
+   // Calcular nS saturation
+   nS := iif( nDelta == 0, 0, nDelta / ( 1 - Abs( 2 * nL - 1 )) )
 
-   nH := Int( (nH * 239) / 6 )
-   IF nH < 0 ; nH += 240 ; ENDIF
-   nS := Int( nS * 239 )
-   nL := Int( nL * 239 )
+   nS := nS * 100
+   nL := nL * 100
 
-RETURN { nH, nS, nL }
+   RETURN { nH, nS, nL }
 
+/*-----------------------------------*/
+
+#ifdef PARAM_IS_3_NUMBERS
+
+/*-----------------------------------*/
+// 3 params numerics
+/*-----------------------------------*/
 
 FUNCTION HSL2RGB( nH, nS, nL )
-   LOCAL nFor
-   LOCAL nR, nG, nB
-   LOCAL nTmp1, nTmp2, aTmp3 := { 0, 0, 0 }
 
-   nH /= 239
-   nS /= 239
-   nL /= 239
-   IF nS == 0
-      nR := nL
-      nG := nL
-      nB := nL
-   ELSE
-      IF nL < 0.5
-         nTmp2 := nL * ( 1 + nS )
-      ELSE
-         nTmp2 := nL + nS - ( nL * nS )
-      ENDIF
-      nTmp1 := 2 * nL - nTmp2
-      aTmp3[1] := nH + 1 / 3
-      aTmp3[2] := nH
-      aTmp3[3] := nH - 1 / 3
-      FOR nFor := 1 TO 3
-         IF aTmp3[nFor] < 0
-            aTmp3[nFor] += 1
-         ENDIF
-         IF aTmp3[nFor] > 1
-            aTmp3[nFor] -= 1
-         ENDIF
-         IF 6 * aTmp3[nFor] < 1
-            aTmp3[nFor] := nTmp1 + ( nTmp2 - nTmp1 ) * 6 * aTmp3[nFor]
-         ELSE
-            IF 2 * aTmp3[nFor] < 1
-               aTmp3[nFor] := nTmp2
-            ELSE
-               IF 3 * aTmp3[nFor] < 2
-                  aTmp3[nFor] := nTmp1 + ( nTmp2 - nTmp1 ) * ( ( 2 / 3 ) - aTmp3[nFor] ) * 6
-               ELSE
-                  aTmp3[nFor] := nTmp1
-               ENDIF
-            ENDIF
-         ENDIF
-      NEXT nFor
-      nR := aTmp3[1]
-      nG := aTmp3[2]
-      nB := aTmp3[3]
+   LOCAL nR := 0, nG := 0, nB := 0, c, x, m
+
+   // c = is color intensity, chroma
+   // x = the second largest component (first is chroma)
+   // m = the amount to add to each channel to match the lightness
+
+   nS /= 100
+   nL /= 100
+
+#else  // PARAM_IS_ARRAY
+
+/*-----------------------------------*/
+// 1 param array rgb
+/*-----------------------------------*/
+
+FUNCTION HSL2RGB( aHSL )
+
+   LOCAL nR := 0, nG := 0, nB := 0, nH, nS, nL, c, x, m
+   /*
+   c = es la intensida del color, chroma.
+   x = segundo componente mayor, primero es chroma.
+   m = cantidad a agregar a cada canal para conseguir lightness
+   */
+
+   nH := aHSL[1]
+   nS := aHSL[2] / 100
+   nL := aHSL[3] / 100
+
+#endif
+
+
+   c := ( 1 - Abs( 2 * nL - 1 ) ) * nS
+   x := c * ( 1 - Abs( ( nH / 60 ) % 2 - 1 ) )
+   m := nL - c / 2
+
+   IF (0 <= nH .And. nH < 60)
+      nR := c
+      nG := x
+      nB := 0
+   ELSEIF (60 <= nH .And. nH < 120)
+      nR := x
+      nG := c
+      nB := 0
+   ELSEIF (120 <= nH .And. nH < 180)
+      nR := 0
+      nG := c
+      nB := x
+   ELSEIF (180 <= nH .And. nH < 240)
+      nR := 0
+      nG := x
+      nB := c
+   ELSEIF (240 <= nH .And. nH < 300)
+      nR := x
+      nG := 0
+      nB := c
+   ELSEIF (300 <= nH .And. nH < 360)
+      nR := c
+      nG := 0
+      nB := x
    ENDIF
 
-RETURN { Int( nR * 255 ), Int( nG * 255 ), Int( nB * 255 ) }
+   nR := Int( ( nR + m ) * 255 )
+   nG := Int( ( nG + m ) * 255 )
+   nB := Int( ( nB + m ) * 255 )
 
+   RETURN { nR, nG, nB }
 
-
+/*-----------------------------------*/
 
 STATIC FUNCTION nMax(aSerieValues)
    LOCAL nI, nMax := 0
