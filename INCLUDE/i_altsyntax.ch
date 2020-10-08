@@ -1,37 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@asistex
-kcarmody /
-HMG
-forked from HMG-Official/HMG
-
-0
-0
-
-    5
-
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-
-    Insights
-
-HMG/INCLUDE/i_altsyntax.ch
-@kcarmody
-kcarmody MONTHCALENDAR, GRID, ISVISTA() enhancements
-Latest commit fd1c7df 15 hours ago
-History
-2 contributors
-@kcarmody
-@HMG-Official
-2120 lines (1799 sloc) 74.5 KB
 /*----------------------------------------------------------------------------
  HMG - Harbour Windows GUI library source code
  Copyright 2002-2017 Roberto Lopez <mail.box.hmg@gmail.com>
