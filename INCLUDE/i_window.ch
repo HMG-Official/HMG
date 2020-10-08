@@ -152,8 +152,8 @@
 #xtranslate <w>. \<c\> . \<p:GroupInfo,GroupItemID,GroupCheckBoxAllItems\> (\<n1\>) := \<arg\> => SetProperty ( <"w">, \<"c"\> , \<"p"\> , \<n1\>, \<arg\>);;
 ;;
 ;;   // MonthCalendar
-#xtranslate <w>. \<c\> . \<p:FontColor, TrailingFontColor, BackColor, BorderColor, TitleFontColor, TitleBackColor, View\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;
-#xtranslate <w>. \<c\> . \<p:FontColor, TrailingFontColor, BackColor, BorderColor, TitleFontColor, TitleBackColor, View\> := \<n\> => SetProperty ( <"w">, \<"c"\>, \<"p"\> , \<n\> ) ;;
+#xtranslate <w>. \<c\> . \<p:FontColor, OuterFontColor, BackColor, BorderColor, TitleFontColor, TitleBackColor, View, VisibleMax, VisibleMin\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;
+#xtranslate <w>. \<c\> . \<p:FontColor, OuterFontColor, BackColor, BorderColor, TitleFontColor, TitleBackColor, View\> := \<n\> => SetProperty ( <"w">, \<"c"\>, \<"p"\> , \<n\> ) ;;
 ;;
 ;;   // TimePicker
 #xtranslate <w>. \<c\> . \<p:Format\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;

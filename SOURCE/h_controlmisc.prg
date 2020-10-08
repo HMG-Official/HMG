@@ -165,13 +165,7 @@ do case
 
     case T == "MONTHCAL"
 
-        // bd = Set (_SET_DATEFORMAT )
-        bd := HBtoWinDateFormat()
-        
-        SET DATE TO ANSI
-        d = ALLTRIM( STR ( GetMOnthCalYear ( c ) ) ) + "." + ALLTRIM ( STR (GetMonthCalMonth ( c ) ) ) + "." + ALLTRIM (STR ( GetMonthCalDay( c ) ) )
-        retval := ctod (d)
-        Set (_SET_DATEFORMAT ,bd)
+        retval := GetMonthCalDate ( c )
 
     case T == "TREE" 
 
@@ -8148,7 +8142,7 @@ ElseIf Pcount() == 4 // CONTROL
 
         _SetFontColor ( Arg2 , Arg1 , Arg4 ) 
 
-    ElseIf Arg3 == 'TRAILINGFONTCOLOR'
+    ElseIf Arg3 == 'OUTERFONTCOLOR'
 
         IF GetControlType ( Arg2 , Arg1 ) == 'MONTHCAL'
           SetMonthCalendarColor ( Arg2, Arg1, MCSC_TRAILINGTEXT, Arg4 )
@@ -8759,7 +8753,7 @@ ElseIf Pcount() == 3 // CONTROL
 
         RetVal := _GetControlObject ( Arg2 , Arg1 )
 
-    ElseIf Arg3 == 'TRAILINGFONTCOLOR'
+    ElseIf Arg3 == 'OUTERFONTCOLOR'
 
         IF GetControlType ( Arg2 , Arg1 ) == 'MONTHCAL'
           RetVal := GetMonthCalendarColor ( Arg2, Arg1, MCSC_TRAILINGTEXT )
@@ -8787,6 +8781,18 @@ ElseIf Pcount() == 3 // CONTROL
 
         IF GetControlType ( Arg2 , Arg1 ) == 'MONTHCAL'
           RetVal := GetMonthCalendarView ( Arg2, Arg1 )
+        ENDIF
+
+    ElseIf Arg3 == 'VISIBLEMIN'
+
+        IF GetControlType ( Arg2 , Arg1 ) == 'MONTHCAL'
+          RetVal := GetMonthCalendarVisibleMin ( Arg2, Arg1 )
+        ENDIF
+
+    ElseIf Arg3 == 'VISIBLEMAX'
+
+        IF GetControlType ( Arg2 , Arg1 ) == 'MONTHCAL'
+          RetVal := GetMonthCalendarVisibleMax ( Arg2, Arg1 )
         ENDIF
 
     ElseIf Arg3 == 'READONLY'

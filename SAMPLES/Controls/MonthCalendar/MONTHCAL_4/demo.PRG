@@ -13,37 +13,40 @@ FUNCTION Main()
 
         DEFINE MAIN MENU
           DEFINE POPUP 'Get'
-            MENUITEM 'Get Row'                 ACTION MsgInfo ( 'Row:  '                 + HB_NTOS ( Win_1.Control_1.Row               ) )
-            MENUITEM 'Get Col'                 ACTION MsgInfo ( 'Col:  '                 + HB_NTOS ( Win_1.Control_1.Col               ) )
-            MENUITEM 'Get Width'               ACTION MsgInfo ( 'Width:  '               + HB_NTOS ( Win_1.Control_1.Width             ) )
-            MENUITEM 'Get Height'              ACTION MsgInfo ( 'Height:  '              + HB_NTOS ( Win_1.Control_1.Height            ) )
-            MENUITEM 'Get Font Name'           ACTION MsgInfo ( 'Font Name:  '           +           Win_1.Control_1.FontName            )
-            MENUITEM 'Get Font Size'           ACTION MsgInfo ( 'Font Size:  '           + HB_NTOS ( Win_1.Control_1.FontSize          ) )
-            MENUITEM 'Get Font Color'          ACTION MsgInfo ( 'Font Color:  '          + GetRGB  ( Win_1.Control_1.FontColor         ) )
-            MENUITEM 'Get Trailing Font Color' ACTION MsgInfo ( 'Trailing Font Color:  ' + GetRGB  ( Win_1.Control_1.TrailingFontColor ) )
-            MENUITEM 'Get Back Color'          ACTION MsgInfo ( 'Back Color:  '          + GetRGB  ( Win_1.Control_1.BackColor         ) )
-            MENUITEM 'Get Title Font Color'    ACTION MsgInfo ( 'Title Font Color:  '    + GetRGB  ( Win_1.Control_1.TitleFontColor    ) )
-            MENUITEM 'Get Title Back Color'    ACTION MsgInfo ( 'Title Back Color:  '    + GetRGB  ( Win_1.Control_1.TitleBackColor    ) )
-            MENUITEM 'Get Range Min'           ACTION MsgInfo ( 'Range Min:  '           + GetDate ( Win_1.Control_1.RangeMin          ) )
-            MENUITEM 'Get Range Max'           ACTION MsgInfo ( 'Range Max:  '           + GetDate ( Win_1.Control_1.RangeMax          ) )
-            MENUITEM 'Get View'                ACTION MsgInfo ( 'View:  '                + HB_NTOS ( Win_1.Control_1.View              ) )
+            MENUITEM 'Get Row'              ACTION MsgInfo ( 'Row:  '              + HB_NTOS ( Win_1.Control_1.Row            ) )
+            MENUITEM 'Get Col'              ACTION MsgInfo ( 'Col:  '              + HB_NTOS ( Win_1.Control_1.Col            ) )
+            MENUITEM 'Get Width'            ACTION MsgInfo ( 'Width:  '            + HB_NTOS ( Win_1.Control_1.Width          ) )
+            MENUITEM 'Get Height'           ACTION MsgInfo ( 'Height:  '           + HB_NTOS ( Win_1.Control_1.Height         ) )
+            MENUITEM 'Get Font Name'        ACTION MsgInfo ( 'Font Name:  '        +           Win_1.Control_1.FontName         )
+            MENUITEM 'Get Font Size'        ACTION MsgInfo ( 'Font Size:  '        + HB_NTOS ( Win_1.Control_1.FontSize       ) )
+            MENUITEM 'Get Font Color'       ACTION MsgInfo ( 'Font Color:  '       + GetRGB  ( Win_1.Control_1.FontColor      ) )
+            MENUITEM 'Get Outer Font Color' ACTION MsgInfo ( 'Outer Font Color:  ' + GetRGB  ( Win_1.Control_1.OuterFontColor ) )
+            MENUITEM 'Get Back Color'       ACTION MsgInfo ( 'Back Color:  '       + GetRGB  ( Win_1.Control_1.BackColor      ) )
+            MENUITEM 'Get Title Font Color' ACTION MsgInfo ( 'Title Font Color:  ' + GetRGB  ( Win_1.Control_1.TitleFontColor ) )
+            MENUITEM 'Get Title Back Color' ACTION MsgInfo ( 'Title Back Color:  ' + GetRGB  ( Win_1.Control_1.TitleBackColor ) )
+            MENUITEM 'Get Range Min'        ACTION MsgInfo ( 'Range Min:  '        + GetDate ( Win_1.Control_1.RangeMin       ) )
+            MENUITEM 'Get Range Max'        ACTION MsgInfo ( 'Range Max:  '        + GetDate ( Win_1.Control_1.RangeMax       ) )
+            MENUITEM 'Get Visible Min'      ACTION MsgInfo ( 'Visible Min:  '      + GetDate ( Win_1.Control_1.VisibleMin     ) )
+            MENUITEM 'Get Visible Max'      ACTION MsgInfo ( 'Visible Max:  '      + GetDate ( Win_1.Control_1.VisibleMax     ) )
+            MENUITEM 'Get View'             ACTION MsgInfo ( 'View:  '             + HB_NTOS ( Win_1.Control_1.View           ) )
           END POPUP
           DEFINE POPUP 'Set'
-            MENUITEM 'Set Row'                 ACTION Win_1.Control_1.Row               := Val(      InputBox('Enter Row'                 , , HB_NTOS ( Win_1.Control_1.Row               ) ) )
-            MENUITEM 'Set Col'                 ACTION Win_1.Control_1.Col               := Val(      InputBox('Enter Col'                 , , HB_NTOS ( Win_1.Control_1.Col               ) ) )
-            MENUITEM 'Set Width'               ACTION Win_1.Control_1.Width             := Val(      InputBox('Enter Width'               , , HB_NTOS ( Win_1.Control_1.Width             ) ) )
-            MENUITEM 'Set Height'              ACTION Win_1.Control_1.Height            := Val(      InputBox('Enter Height'              , , HB_NTOS ( Win_1.Control_1.Height            ) ) )
-            MENUITEM 'Set Font Color'          ACTION Win_1.Control_1.FontColor         := SetRGB  ( InputBox('Enter Font Color'          , , GetRGB  ( Win_1.Control_1.FontColor         ) ) )
-            MENUITEM 'Set Trailing Font Color' ACTION Win_1.Control_1.TrailingFontColor := SetRGB  ( InputBox('Enter Trailing Font Color' , , GetRGB  ( Win_1.Control_1.TrailingFontColor ) ) )
-            MENUITEM 'Set Back Color'          ACTION Win_1.Control_1.BackColor         := SetRGB  ( InputBox('Enter Back Color'          , , GetRGB  ( Win_1.Control_1.BackColor         ) ) )
-            MENUITEM 'Set Title Font Color'    ACTION Win_1.Control_1.TitleFontColor    := SetRGB  ( InputBox('Enter Title Font Color'    , , GetRGB  ( Win_1.Control_1.TitleFontColor    ) ) )
-            MENUITEM 'Set Title Back Color'    ACTION Win_1.Control_1.TitleBackColor    := SetRGB  ( InputBox('Enter Title Back Color'    , , GetRGB  ( Win_1.Control_1.TitleBackColor    ) ) )
-            MENUITEM 'Set Range Min'           ACTION Win_1.Control_1.RangeMin          := SetDate ( InputBox('Enter Range Min'           , , GetDate ( Win_1.Control_1.RangeMin          ) ) )
-            MENUITEM 'Set Range Max'           ACTION Win_1.Control_1.RangeMax          := SetDate ( InputBox('Enter Range Max'           , , GetDate ( Win_1.Control_1.RangeMax          ) ) )
-            MENUITEM 'Set View'                ACTION Win_1.Control_1.View              := Val(      InputBox('Enter View'                , , HB_NTOS ( Win_1.Control_1.View              ) ) )
+            MENUITEM 'Set Row'              ACTION Win_1.Control_1.Row            := Val(      InputBox('Enter Row'              , , HB_NTOS ( Win_1.Control_1.Row               ) ) )
+            MENUITEM 'Set Col'              ACTION Win_1.Control_1.Col            := Val(      InputBox('Enter Col'              , , HB_NTOS ( Win_1.Control_1.Col               ) ) )
+            MENUITEM 'Set Width'            ACTION Win_1.Control_1.Width          := Val(      InputBox('Enter Width'            , , HB_NTOS ( Win_1.Control_1.Width             ) ) )
+            MENUITEM 'Set Height'           ACTION Win_1.Control_1.Height         := Val(      InputBox('Enter Height'           , , HB_NTOS ( Win_1.Control_1.Height            ) ) )
+            MENUITEM 'Set Font Color'       ACTION Win_1.Control_1.FontColor      := SetRGB  ( InputBox('Enter Font Color'       , , GetRGB  ( Win_1.Control_1.FontColor         ) ) )
+            MENUITEM 'Set Outer Font Color' ACTION Win_1.Control_1.OuterFontColor := SetRGB  ( InputBox('Enter Outer Font Color' , , GetRGB  ( Win_1.Control_1.OuterFontColor    ) ) )
+            MENUITEM 'Set Back Color'       ACTION Win_1.Control_1.BackColor      := SetRGB  ( InputBox('Enter Back Color'       , , GetRGB  ( Win_1.Control_1.BackColor         ) ) )
+            MENUITEM 'Set Title Font Color' ACTION Win_1.Control_1.TitleFontColor := SetRGB  ( InputBox('Enter Title Font Color' , , GetRGB  ( Win_1.Control_1.TitleFontColor    ) ) )
+            MENUITEM 'Set Title Back Color' ACTION Win_1.Control_1.TitleBackColor := SetRGB  ( InputBox('Enter Title Back Color' , , GetRGB  ( Win_1.Control_1.TitleBackColor    ) ) )
+            MENUITEM 'Set Range Min'        ACTION Win_1.Control_1.RangeMin       := SetDate ( InputBox('Enter Range Min'        , , GetDate ( Win_1.Control_1.RangeMin          ) ) )
+            MENUITEM 'Set Range Max'        ACTION Win_1.Control_1.RangeMax       := SetDate ( InputBox('Enter Range Max'        , , GetDate ( Win_1.Control_1.RangeMax          ) ) )
+            MENUITEM 'Set View'             ACTION Win_1.Control_1.View           := Val(      InputBox('Enter View'             , , HB_NTOS ( Win_1.Control_1.View              ) ) )
           END POPUP
           DEFINE POPUP 'Value'
-            MENUITEM 'Get Value'               ACTION MsgInfo ( ShowDate ( Win_1.Control_1.Value ) )
+            MENUITEM 'Get Value'            ACTION MsgInfo ( ShowDate ( Win_1.Control_1.Value ) )
+            MENUITEM 'Set Value'            ACTION Win_1.Control_1.Value          := SetDate ( InputBox('Enter Value'            , , GetDate ( Win_1.Control_1.Value             ) ) )
           END POPUP
         END MENU
 
@@ -55,7 +58,7 @@ FUNCTION Main()
             FONT 'Arial' ; 
             SIZE 12 ;
             FONTCOLOR NAVY ;
-            TRAILINGFONTCOLOR BLUE ;
+            OUTERFONTCOLOR BLUE ;
             BACKCOLOR PINK ;
             TITLEBACKCOLOR GREEN ;
             BORDERCOLOR YELLOW

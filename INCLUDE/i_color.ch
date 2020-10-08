@@ -60,6 +60,7 @@
 #define CYAN      { 153 , 217 , 234 }
 #define FUCHSIA   { 255 ,   0 , 255 }
 #define GRAY      { 128 , 128 , 128 }
+#define GREY      { 128 , 128 , 128 }
 #define GREEN     {   0 , 255 ,   0 }
 #define LGREEN    {   0 , 128 ,   0 }
 #define LIME      {   0,  255 ,   0 }
@@ -112,6 +113,7 @@
 #xtranslate   COLOR_DarkSeaGreen       =>   { 143 , 188 , 143 }
 #xtranslate   COLOR_DarkSlateBlue      =>   {  72 ,  61 , 139 }
 #xtranslate   COLOR_DarkSlateGray      =>   {  47 ,  79 ,  79 }
+#xtranslate   COLOR_DarkSlateGrey      =>   {  47 ,  79 ,  79 }
 #xtranslate   COLOR_DarkTurquoise      =>   {   0 , 206 , 209 }
 #xtranslate   COLOR_DarkViolet         =>   { 148 ,   0 , 211 }
 #xtranslate   COLOR_DeepPink           =>   { 255 ,  20 , 147 }
@@ -147,12 +149,14 @@
 #xtranslate   COLOR_LightGoldenrodYe   =>   { 250 , 250 , 210 }
 #xtranslate   COLOR_LightGray          =>   { 211 , 211 , 211 }
 #xtranslate   COLOR_LightGreen         =>   { 144 , 238 , 144 }
+#xtranslate   COLOR_LightGrey          =>   { 211 , 211 , 211 }
 #xtranslate   COLOR_LightPink          =>   { 255 , 182 , 193 }
 #xtranslate   COLOR_LightSalmon        =>   { 255 , 160 , 122 }
 #xtranslate   COLOR_LightSeaGreen      =>   {  32 , 178 , 170 }
 #xtranslate   COLOR_LightSkyBlue       =>   { 135 , 206 , 250 }
 #xtranslate   COLOR_LightSlateBlue     =>   { 132 , 112 , 255 }
 #xtranslate   COLOR_LightSlateGray     =>   { 119 , 136 , 153 }
+#xtranslate   COLOR_LightSlateGrey     =>   { 119 , 136 , 153 }
 #xtranslate   COLOR_LightSteelBlue     =>   { 176 , 196 , 222 }
 #xtranslate   COLOR_LightYellow        =>   { 255 , 255 , 224 }
 #xtranslate   COLOR_Lime               =>   {   0,  255 ,   0 }
@@ -299,6 +303,10 @@
 #xtranslate   COLOR_DarkSlateGray2     =>   { 141 , 238 , 238 }
 #xtranslate   COLOR_DarkSlateGray3     =>   { 121 , 205 , 205 }
 #xtranslate   COLOR_DarkSlateGray4     =>   {  82 , 139 , 139 }
+#xtranslate   COLOR_DarkSlateGrey1     =>   { 151 , 255 , 255 }
+#xtranslate   COLOR_DarkSlateGrey2     =>   { 141 , 238 , 238 }
+#xtranslate   COLOR_DarkSlateGrey3     =>   { 121 , 205 , 205 }
+#xtranslate   COLOR_DarkSlateGrey4     =>   {  82 , 139 , 139 }
 #xtranslate   COLOR_DeepPink1          =>   { 255 ,  20 , 147 }
 #xtranslate   COLOR_DeepPink2          =>   { 238 ,  18 , 137 }
 #xtranslate   COLOR_DeepPink3          =>   { 205 ,  16 , 118 }
@@ -504,6 +512,10 @@
 #xtranslate   COLOR_SlateGray2         =>   { 185 , 211 , 238 }
 #xtranslate   COLOR_SlateGray3         =>   { 159 , 182 , 205 }
 #xtranslate   COLOR_SlateGray4         =>   { 108 , 123 , 139 }
+#xtranslate   COLOR_SlateGrey1         =>   { 198 , 226 , 255 }
+#xtranslate   COLOR_SlateGrey2         =>   { 185 , 211 , 238 }
+#xtranslate   COLOR_SlateGrey3         =>   { 159 , 182 , 205 }
+#xtranslate   COLOR_SlateGrey4         =>   { 108 , 123 , 139 }
 #xtranslate   COLOR_Snow1              =>   { 255 , 250 , 250 }
 #xtranslate   COLOR_Snow2              =>   { 238 , 233 , 233 }
 #xtranslate   COLOR_Snow3              =>   { 205 , 201 , 201 }

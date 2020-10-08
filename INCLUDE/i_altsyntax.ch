@@ -75,7 +75,7 @@
 
 #xcommand BORDERCOLOR         <color>              => _HMG_SYSDATA \[ 298 \]  := <color>
 
-#xcommand TRAILINGFONTCOLOR   <color>              => _HMG_SYSDATA \[ 299 \]  := <color>
+#xcommand OUTERFONTCOLOR      <color>              => _HMG_SYSDATA \[ 299 \]  := <color>
 
 #xcommand CELLNAVIGATION      <cellnavigation>     => _HMG_SYSDATA \[ 329 \]  := <cellnavigation>
 
@@ -190,6 +190,10 @@
 #xcommand TITLEFONTCOLOR      <color>              => _HMG_SYSDATA \[ 390 \]  := <color>
 
 #xcommand VIEW                <view>               => _HMG_SYSDATA \[ 464 \]  := <view>
+
+#xcommand ONGETBOLDDAYS       <getbolddays>        => _HMG_SYSDATA \[ 488 \]  := <getbolddays>
+
+#xcommand ON GETBOLDDAYS      <getbolddays>        => _HMG_SYSDATA \[ 488 \]  := <getbolddays>
 
 #xcommand ON HEADCLICK        <aHeadClick>         => _HMG_SYSDATA \[ 448 \]  := <aHeadClick>
 
@@ -959,7 +963,8 @@ Month Calendar
   _HMG_SYSDATA \[ 391 \]    := NIL    ;;
   _HMG_SYSDATA \[ 465 \]    := NIL    ;;
   _HMG_SYSDATA \[ 466 \]    := NIL    ;;
-  _HMG_SYSDATA \[ 464 \]    := NIL
+  _HMG_SYSDATA \[ 464 \]    := NIL    ;;
+  _HMG_SYSDATA \[ 488 \]    := NIL
 
 #xcommand END MONTHCALENDAR;
 	=>;
@@ -993,7 +998,8 @@ Month Calendar
     _HMG_SYSDATA \[ 391 \],;
     _HMG_SYSDATA \[ 465 \],;
     _HMG_SYSDATA \[ 466 \],;
-    _HMG_SYSDATA \[ 464 \] )
+    _HMG_SYSDATA \[ 464 \],;
+    _HMG_SYSDATA \[ 488 \] )
 
 /*----------------------------------------------------------------------------
 Button

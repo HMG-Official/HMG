@@ -67,7 +67,7 @@
     [ <underline : UNDERLINE> ] ;
     [ <strikeout : STRIKEOUT> ] ;
     [ FONTCOLOR <fontcolor> ] ;
-    [ TRAILINGFONTCOLOR <trailingfontcolor> ] ;
+    [ OUTERFONTCOLOR <outerfontcolor> ] ;
     [ BACKCOLOR <backcolor> ] ;
     [ BORDERCOLOR <bordercolor> ] ;
     [ TITLEFONTCOLOR <titlefontcolor> ] ;
@@ -80,6 +80,7 @@
     [ < invisible: INVISIBLE > ] ;
     [ < notabstop: NOTABSTOP > ] ;
     [ ON CHANGE <change> ] ;
+    [ ON GETBOLDDAYS <getbolddays> ] ;
     [ HELPID <helpid> ]     ;
   =>;
   _DefineMonthCal ( <"name"> , ;
@@ -101,16 +102,17 @@
                      <.notabstop.> , ;
                      <.bold.>, <.italic.>, <.underline.>, <.strikeout.>, ;
                      <fontcolor>, ;
-                     <trailingfontcolor>, ;
+                     <outerfontcolor>, ;
                      <backcolor>, ;
                      <bordercolor>, ;
                      <titlefontcolor>,  ;
                      <titlebackcolor>, ;
                      <rangemin>, ;
                      <rangemax>, ;
-                     <view> )
+                     <view>, ;
+                     <{getbolddays}> )
 
-#define MCM_FIRST 0x1000
+#define MCM_FIRST               0x1000
 
 #define MCM_GETCURSEL           (MCM_FIRST+1)
 #define MCM_SETCURSEL           (MCM_FIRST+2)
@@ -139,6 +141,14 @@
 #define MCM_SETCALENDARBORDER   (MCM_FIRST+30)
 #define MCM_GETCALENDARBORDER   (MCM_FIRST+31)
 #define MCM_SETCURRENTVIEW      (MCM_FIRST+32)
+
+#define MCN_FIRST               -746
+
+#define MCN_VIEWCHANGE          (MCN_FIRST-4)
+#define MCN_SELCHANGE           (MCN_FIRST-3)
+#define MCN_SELECT              (MCN_FIRST)
+//#define MCN_GETDAYSTATE         (MCN_FIRST+3)
+#define MCN_GETDAYSTATE         (MCN_FIRST-1)
 
 #define MCMV_MONTH         0
 #define MCMV_YEAR          1

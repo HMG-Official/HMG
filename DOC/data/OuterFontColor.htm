@@ -64,14 +64,6 @@ p.MsoPlainText2 {mso-style-link:"Texto sin formato Car";
   margin-bottom:.0001pt;
   font-size:10.0pt;
   font-family:"Courier New";}
-table.MsoPlainText2 {mso-style-link:"Texto sin formato Car";
-  margin:0cm;
-  margin-bottom:.0001pt;
-  font-size:10.0pt;
-  font-family:"Courier New";}
-table.MsoPlainText2 th, td {mso-style-link:"Texto sin formato Car";
-  text-align:left;
-  padding-right:0.5cm;
 -->
 </style>
 </head>
@@ -82,39 +74,27 @@ table.MsoPlainText2 th, td {mso-style-link:"Texto sin formato Car";
 background:#339966'>
   <p class=MsoPlainText1 style='background:#339966;color:white;border:none;padding:0cm'>&nbsp;</p>
   <p class=MsoPlainText1 style='background:#339966;color:white;border:none;padding:0cm'><b><span
-lang=EN-US style='font-size:14.0pt'>View Property</span></b><b><span lang=EN-US
+lang=EN-US style='font-size:14.0pt'>OuterFontColor Property</span><span lang=EN-US
 style='font-size:12.0pt;background:#339966'><br>
-  </span></b><b><i><span lang=EN-US>Specifies the initial view of a MonthCalendar control</span></i></b></p>
+  </span><i><span lang=EN-US>Specifies the text color of days before and after the current month in a MonthCalendar object</span></i></b></p>
   <p class=MsoPlainText1 style='background:#339966;color:white;border:none;padding:0cm'>&nbsp;</p>
 </div>
 <div class=Section1>
   <p class=MsoPlainText1><span lang=EN-US>&nbsp;</span></p>
   <p class=MsoPlainText2><span lang=EN-US>&nbsp;</span><span lang=EN-US>&nbsp;</span></p>
   <p class=MsoPlainText2><strong><span lang=EN-US>Syntax:</span></strong></p>
+  <p class=MsoPlainText2>&nbsp;</p>
   <blockquote>
+    <p class="MsoPlainText2">OuterFontColor &lt;aColor&gt; (Control Definition) </p>
     <p class="MsoPlainText2">&nbsp;</p>
-    <p class="MsoPlainText2">View &lt;nValue&gt; (Control Definition) </p>
+    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.OuterFontColor := aColor</p>
     <p class="MsoPlainText2">&nbsp;</p>
-    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.View := nValue</p>
-    <p class="MsoPlainText2">&nbsp;</p>
-    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.View --&gt; nValue</p>
-    <p class="MsoPlainText2">&nbsp;</p>
-    <p class="MsoPlainText2">nValue must be one of the following.</p>
-    <p class="MsoPlainText2">&nbsp;</p>
-    <table class="MsoPlainText2">
-      <tr><th>Constant    </th><th>Value</th><th>Meaning     </th></tr>
-      <tr><td>MCMV_MONTH  </td><td>0    </td><td>Monthly view</td></tr>
-      <tr><td>MCMV_YEAR   </td><td>1    </td><td>Annual view </td></tr>
-      <tr><td>MCMV_DECADE </td><td>2    </td><td>Decade view </td></tr>
-      <tr><td>MCMV_CENTURY</td><td>3    </td><td>Century view</td></tr>
-    </table>
+    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.OuterFontColor --&gt; aColor </p>
   </blockquote>
-  <p class=MsoPlainText1><span lang=EN-US>&nbsp;</span></p>
-  <p class=MsoPlainText2><strong><span lang=EN-US>Remarks:</span></strong></p>
-  <blockquote>
-    <p class="MsoPlainText2">&nbsp;</p>
-    <p class="MsoPlainText2">In the control, the view can be changed by clicking on the title.</p>
-  </blockquote>
+  <p class="MsoPlainText2"><span class="MsoPlainText"><span lang=EN-US>&lt;aColor&gt must be a three element numeric array containing
+    red, green and blue components.  See <a href="colorarray.htm">Color array</a>.</span></p>
+  <p class="MsoPlainText2">&nbsp;</p>
+  <p class="MsoPlainText2">&nbsp;</p>
 </div>
 <div class=Section1></div>
 

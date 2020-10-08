@@ -84,6 +84,9 @@
 
 HFONT PrepareFont (TCHAR *, int, int, int, int, int );
 
+long hb_dateEncode( WORD, WORD, WORD );
+
+    
 HB_FUNC ( INITMONTHCAL )
 {
 	HWND hwnd;
@@ -130,6 +133,11 @@ HB_FUNC ( INITMONTHCAL )
 		Style = Style | WS_TABSTOP ;
 	}
 
+  if ( hb_parl(18) )
+  {
+    Style = Style | MCS_DAYSTATE ;
+  }
+
 	hmonthcal = CreateWindowEx( 0L , MONTHCAL_CLASS /*_TEXT("SysMonthCal32")*/,
                      _TEXT(""),
                      Style,
@@ -169,7 +177,7 @@ HB_FUNC ( INITMONTHCAL )
                 rc.right, rc.bottom,
                 SWP_NOZORDER);
 
-	hb_reta (2);
+  hb_reta (2);
 	HMG_storvnl ((LONG_PTR) hmonthcal, -1, 1 );
 	HMG_storvnl ((LONG_PTR) hfont    , -1, 2 );
 
@@ -286,6 +294,60 @@ HB_FUNC ( GETMONTHCALDAY )
 	hb_retni(st.wDay);
 }
 
+// GETMONTHCALDATE ( hwnd ) -> dSelected
+HB_FUNC ( GETMONTHCALDATE )
+{
+  HWND hwnd;
+  SYSTEMTIME st;
+  long lJulian;
+  hwnd = (HWND) HMG_parnl (1);
+
+  SendMessage(hwnd, MCM_GETCURSEL, 0, (LPARAM) &st);
+  lJulian = hb_dateEncode( st.wYear, st.wMonth, st.wDay );
+  hb_retdl(lJulian);
+}
+
+// GETMONTHCALVISIBLE ( hwnd, @dStart, @dEnd )
+HB_FUNC ( GETMONTHCALVISIBLE )
+{
+  HWND hwnd;
+  SYSTEMTIME sysTime[2];
+  long lJulianStart, lJulianEnd;
+  hwnd = (HWND) HMG_parnl (1);
+  
+  SendMessage(hwnd, MCM_GETMONTHRANGE, GMR_DAYSTATE, (LPARAM) &sysTime);
+  lJulianStart = hb_dateEncode( sysTime[0].wYear, sysTime[0].wMonth, sysTime[0].wDay );
+  lJulianEnd   = hb_dateEncode( sysTime[1].wYear, sysTime[1].wMonth, sysTime[1].wDay );
+  hb_stordl( lJulianStart, 2 );
+  hb_stordl( lJulianEnd  , 3 );
+}
+
+// INITBOLDDAYS ( lParam, @dStart, @nMonths )
+HB_FUNC ( INITBOLDDAYS )
+{
+  LPARAM lParam = (LPARAM) HMG_parnl (1);
+  NMDAYSTATE *nmDayState = (NMDAYSTATE*)lParam;
+  SYSTEMTIME sysTimeStart = nmDayState->stStart;
+  long lJulian = hb_dateEncode( sysTimeStart.wYear, sysTimeStart.wMonth, sysTimeStart.wDay );
+  int iMonths = nmDayState->cDayState;
+  hb_stordl( lJulian, 2 );
+  hb_storni( iMonths, 3 );
+}
+
+// SETBOLDDAYS ( lParam, anMonths )
+HB_FUNC ( SETBOLDDAYS )
+{
+  LPARAM lParam = (LPARAM) HMG_parnl (1);
+  NMDAYSTATE *nmDayState = (NMDAYSTATE*)lParam;
+  int iMonths = nmDayState->cDayState;
+  MONTHDAYSTATE rgMonths[14] = { 0 };
+  PHB_ITEM pMonths = hb_param (2, HB_IT_ARRAY);
+  for (int i = 0; i < iMonths; i++)
+  {
+    rgMonths[i] = (DWORD) hb_arrayGetNL (pMonths, i+1);
+  }
+  nmDayState->prgDayState = rgMonths;
+}
 
 // Dr. Claudio Soto (April 2013)
 HB_FUNC ( DATETIME_GETMONTHCALCOLOR )

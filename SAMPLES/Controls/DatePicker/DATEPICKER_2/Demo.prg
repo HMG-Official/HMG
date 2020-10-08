@@ -11,30 +11,26 @@ FUNCTION Main
 
 	DEFINE WINDOW Form_1 ;
 		AT 0,0 ;
-    WIDTH 600 HEIGHT 540 ;
-		TITLE "HMG DatePicker Demo" ;
+    WIDTH 620 HEIGHT 540 ;
+    TITLE "HMG Pseudo Calendar DatePicker Demo" ;
 		MAIN ;
     FONT "Arial" SIZE 12
+
+    // True calendar datepicker
 
     @  10, 10 DATEPICKER Date_1 WIDTH 270 ; 
               FONT "Arial" SIZE 12 ;
               TOOLTIP "DatePicker Control"
+
+    // Pseudo calendar datepicker with calendar icon
 
     @ 230, 10 DATEPICKER Date_2 WIDTH 247 ;
               FONT "Arial" SIZE 12 ;
               UPDOWN
               TOOLTIP "DatePicker Control UpDown"
 
-/*
-    @ 230,257 BUTTON Button_2 CAPTION HB_UTF8CHR(0x1F4C5) ;
-              FONT "Segoe UI Symbol" SIZE 12 ;
-              WIDTH 23 HEIGHT 23 FLAT ;
-              ACTION (Form_1.Calendar_2.VISIBLE := ! Form_1.Calendar_2.VISIBLE ) ;
-              TOOLTIP "Calendar Toggle"
-*/
-
     @ 230,257 BUTTON Button_2 PICTURE "Calendar20" ;
-              WIDTH 23 HEIGHT 23 FLAT ;
+              WIDTH 23 HEIGHT 23 ;
               ACTION (Form_1.Calendar_2.VISIBLE := ! Form_1.Calendar_2.VISIBLE ) ;
               TOOLTIP "Calendar Toggle"
 
@@ -43,6 +39,43 @@ FUNCTION Main
               NOTODAY INVISIBLE ;
               TITLEBACKCOLOR WHITE ;
               ON CHANGE (Form_1.Date_2.VALUE := Form_1.Calendar_2.VALUE, Form_1.Calendar_2.VISIBLE := .N.)
+
+    // Pseudo calendar datepicker with down triangle
+
+    @  10,310 DATEPICKER Date_3 WIDTH 247 ;
+              FONT "Arial" SIZE 12 ;
+              UPDOWN
+              TOOLTIP "DatePicker Control UpDown"
+
+    @  10,557 BUTTON Button_3 CAPTION HB_UTF8CHR(0x25BE) ;
+              WIDTH 23 HEIGHT 23 ;
+              ACTION (Form_1.Calendar_3.VISIBLE := ! Form_1.Calendar_3.VISIBLE ) ;
+              TOOLTIP "Calendar Toggle"
+
+    @  40,310 MONTHCALENDAR Calendar_3 WIDTH 270 HEIGHT 185 ;
+              FONT "Arial" SIZE 12 ;
+              NOTODAY INVISIBLE ;
+              TITLEBACKCOLOR WHITE ;
+              ON CHANGE (Form_1.Date_3.VALUE := Form_1.Calendar_3.VALUE, Form_1.Calendar_3.VISIBLE := .N.)
+
+    // Pseudo calendar datepicker with calendar character and down triangle
+
+    @ 230,310 DATEPICKER Date_4 WIDTH 230 ;
+              FONT "Arial" SIZE 12 ;
+              UPDOWN
+              TOOLTIP "DatePicker Control UpDown"
+
+    @ 230,540 BUTTON Button_4 CAPTION /* HB_UTF8CHR(0x1F4C5) */ HB_UTF8CHR(0xD83D) + HB_UTF8CHR(0xDCC5) + HB_UTF8CHR(0x25BE) ;
+              FONT "Segoe UI Symbol" SIZE 12 ;
+              WIDTH 40 HEIGHT 23 ;
+              ACTION (Form_1.Calendar_4.VISIBLE := ! Form_1.Calendar_4.VISIBLE ) ;
+              TOOLTIP "Calendar Toggle"
+
+    @ 260,310 MONTHCALENDAR Calendar_4 WIDTH 270 HEIGHT 185 ;
+              FONT "Arial" SIZE 12 ;
+              NOTODAY INVISIBLE ;
+              TITLEBACKCOLOR WHITE ;
+              ON CHANGE (Form_1.Date_4.VALUE := Form_1.Calendar_4.VALUE, Form_1.Calendar_4.VISIBLE := .N.)
 
 	END WINDOW
 

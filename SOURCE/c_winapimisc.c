@@ -183,7 +183,11 @@ HB_FUNC( ISVISTA )
 
 	GetVersionEx(&osvi);
 
-	if (osvi.dwMajorVersion == 6)
+  /*
+    Windows Vista, 7, 8, 8.1, and early releases of 10 set dwMajorVersion to 6.
+    Later releases of Windows 10 set dwMajorVersion to 10. 
+  */ 
+  if (osvi.dwMajorVersion >= 6)
 	{
 		hb_retl(TRUE);
 	}
