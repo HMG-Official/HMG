@@ -25,7 +25,6 @@ jobs:
     - name: Building HMG
       shell: cmd
       run: |
-        set path=C:\mingw32\bin;%path%
         cd\
         cd c:\bcd\prg\asistex\hmg
         SET HB_COMPILER=mingw
