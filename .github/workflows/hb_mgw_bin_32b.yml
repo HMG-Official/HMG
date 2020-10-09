@@ -41,7 +41,7 @@ jobs:
         set HB_STATIC_CURL=yes       
         set HB_COMPILER=mingw
         set HB_BUILD_DYN=yes
-        set path=c:\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
+        set path=c:\mingw32\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
         win-make.exe
         
     - name: Create output folders
