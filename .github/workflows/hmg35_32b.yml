@@ -1,9 +1,7 @@
 name: Build HMG for Windows 32 mingw
 
 on:
-  push:
-    paths: 
-      - '.github/workflows/hmg35_32b.yml'
+    push:
 
 jobs:
   build:
