@@ -4,6 +4,7 @@
 *.o
 
 # build generated files
+workflows/*/
 bak/*/
 lib/*/
 obj/*/
