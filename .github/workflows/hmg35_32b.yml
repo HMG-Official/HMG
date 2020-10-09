@@ -21,10 +21,12 @@ jobs:
     - name: Install dependencies
       run: |
         gcc --version
+        dir C:\mingw32
 
     - name: Building HMG
       shell: cmd
       run: |
+        move harbour\bin\win\mingw\*.* harbour\bin
         set path=C:\mingw32\bin;%path%
         echo %path%
         SET HB_COMPILER=mingw
