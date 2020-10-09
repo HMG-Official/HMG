@@ -9,19 +9,33 @@ jobs:
   build:
     runs-on: windows-latest
     
-    steps:
-    - uses: actions/checkout@v2
+    if: github.actor == github.event.repository.owner.login
     
+    steps:    
+    - name: Checkout hmg repo
+      uses: actions/checkout@v2
+      with:
+       repository: HMG-Official/HMG
+       path: HMG-Official/HMG
+
     - name: Install dependencies
       run: |
+         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
+         # Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
+         # choco install openssl
+         # choco install curl
+         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
+         # Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
         gcc --version
         dir c:\bcd\prg\comp\mgw102\i686-w64-mingw32
+
     - name: Building HMG
       shell: cmd
       run: |
         SET PATH=c:\bcd\prg\comp\mgw102\i686-w64-mingw32\bin;%PATH%
         SET HB_COMPILER=mingw
         BuildAllLib32.bat
+
     - name: Preparing result folders...
       shell: cmd
       run: |
@@ -29,6 +43,7 @@ jobs:
         mkdir result\hmg\lib
         move hmg\lib\*.* result\hmg\lib
         move lib\*.* result\lib
+
     - name: Create artifact
       uses: actions/upload-artifact@v2
       with:
