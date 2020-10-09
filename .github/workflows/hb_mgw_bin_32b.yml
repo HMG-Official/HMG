@@ -34,7 +34,7 @@ jobs:
         set HB_BUILD_PARTS=all
         set HB_BUILD_CONTRIBS=yes
         set HB_BUILD_CONTRIB_DYN=yes
-        :: set HB_WITH_OPENSSL=C:\OpenSSL\include
+        ::set HB_WITH_OPENSSL=C:\OpenSSL\include
         set HB_WITH_CURL=C:\curl\include
         set HB_WITH_ADS=C:\acesdk 
         set HB_STATIC_OPENSSL=yes
@@ -49,12 +49,12 @@ jobs:
       run: |
         mkdir output
         mkdir output\bin
-        mkdir output\include 
-        mkdir output\contrib 
-        mkdir output\lib
         copy harbour\bin\win\mingw\*.exe output\bin
+        mkdir output\lib
         copy harbour\lib\win\mingw\*.a output\lib
+        mkdir output\include 
         copy harbour\include output\include
+        mkdir output\contrib 
         copy harbour\contrib output\contrib
         
     - name: Get current time
