@@ -24,11 +24,9 @@ jobs:
       shell: cmd
       run: |
         set path=c:\mingw32\bin;%path%
-        echo %path%
+        :: echo %path%
+        BuildLib32.bat
         SET HB_COMPILER=mingw
-        dir d:\hng\*.*
-        Build.bat
-        BuildAllLib32.bat
 
     - name: Preparing output folders...
       shell: cmd
