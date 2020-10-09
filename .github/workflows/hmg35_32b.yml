@@ -23,14 +23,9 @@ jobs:
     - name: Building HMG
       shell: cmd
       run: |
-        :: echo %path%
         cd asistex\hmg
-        echo step 1
-        set path=c:\mingw32\bin;%path%
-        echo step 2
-        set HB_COMPILER=mingw
-        echo step 3
-        BuildAllLib32.bat
+        set path=c:\bcd\prg\comp\mgw102\bin;c:\bcd\prg\pcomp\hb32_mgw102\bin;%path%
+        libHmgUni.bat
         echo step 4
 
     - name: Create output folders...
