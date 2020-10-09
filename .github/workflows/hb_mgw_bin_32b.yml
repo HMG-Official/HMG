@@ -1,4 +1,4 @@
-name: Harbour 32bit MinGW Windows
+name: Harbour for Windows 32 using MinGW
 
 on:
     push:
@@ -32,14 +32,14 @@ jobs:
         set HB_BUILD_MODE=c
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_PARTS=all
-        set HB_BUILD_CONTRIBS=
-        set HB_BUILD_CONTRIB_DYN=yes
-        ::set HB_WITH_OPENSSL=C:\OpenSSL\include
-        set HB_WITH_CURL=C:\curl\include
-        set HB_WITH_ADS=C:\acesdk 
-        set HB_STATIC_OPENSSL=yes
-        set HB_STATIC_CURL=yes       
+        set HB_BUILD_CONTRIBS= 
+        :: set HB_WITH_OPENSSL=C:\OpenSSL\include
+        :: set HB_WITH_CURL=C:\curl\include
+        :: set HB_WITH_ADS=C:\acesdk 
+        :: set HB_STATIC_OPENSSL=yes
+        :: set HB_STATIC_CURL=yes       
         set HB_COMPILER=mingw
+        set HB_BUILD_CONTRIB_DYN=yes
         set HB_BUILD_DYN=yes
         set path=c:\mingw32\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
         win-make.exe
@@ -68,5 +68,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: harbour_win32_mgw_${{ env.TIME }}
+       name: harbour_win32_mingw_${{ env.TIME }}
        path: output
