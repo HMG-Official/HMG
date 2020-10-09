@@ -27,6 +27,7 @@ jobs:
         echo %path%
         SET HB_COMPILER=mingw
         cd hmg
+        dir *.bat
         BuildAllLib32.bat
 
     - name: Preparing output folders...
