@@ -13,8 +13,8 @@ jobs:
     - name: Checkout hmg repo
       uses: actions/checkout@v2
       with:
-       repository: asistex/HMG
-       path: asistex/HMG
+       repository: HMG-Official/HMG
+       path: HMG-Official/HMG
 
     - name: checking dependencies
       run: |
@@ -23,17 +23,18 @@ jobs:
     - name: Building HMG
       shell: cmd
       run: |
-        set HB_COMPILER=mingw
+        cd hmg
         set path=c:\mingw32\bin;%path%
         :: echo %path%
+        set HB_COMPILER=mingw
         BuildAllLib32.bat
 
-    - name: Preparing output folders...
+    - name: Create output folders...
       shell: cmd
       run: |
         mkdir output
         mkdir output\hmg\lib
-        move lib\*.* output\lib
+        move hmg\lib\*.a output\lib
 
     - name: Create artifact
       uses: actions/upload-artifact@v2
