@@ -15,7 +15,7 @@ jobs:
     - name: Install dependencies
       run: |
         gcc --version
-        dir c:\bcd\prg\comp\mgw102\i686-w64-mingw32\bin
+        dir c:\bcd\prg\comp\mgw102\i686-w64-mingw32
     - name: Building HMG
       shell: cmd
       run: |
