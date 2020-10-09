@@ -25,7 +25,8 @@ jobs:
     - name: Building HMG
       shell: cmd
       run: |
-        set path=C:\mingw32\bin;%path%
+        echo %path%
+        set path=C:\mingw32\bin
         echo %path%
         SET HB_COMPILER=mingw
         cd\
