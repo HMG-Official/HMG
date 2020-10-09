@@ -17,10 +17,8 @@ jobs:
        path: HMG-Official/HMG
 
     - name: checking dependencies
-      shell: cmd
       run: |
         gcc --version
-        dir c:\mingw32
 
     - name: Building HMG
       shell: cmd
