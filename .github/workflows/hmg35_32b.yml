@@ -28,9 +28,8 @@ jobs:
         set path=C:\mingw32\bin;%path%
         cd\
         cd c:\bcd\prg\asistex\hmg
-        move harbour\bin\win\mingw\*.* harbour\bin
         SET HB_COMPILER=mingw
-        BuildAllLib32.bat
+        c:\bcd\prg\asistex\hmg\BuildAllLib32.bat
 
     - name: Preparing result folders...
       shell: cmd
