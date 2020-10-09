@@ -23,7 +23,7 @@ jobs:
     - name: Building HMG
       shell: cmd
       run: |
-        cd hmg
+        cd HMG
         set path=c:\mingw32\bin;%path%
         :: echo %path%
         set HB_COMPILER=mingw
