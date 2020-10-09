@@ -13,8 +13,8 @@ jobs:
     - name: Checkout hmg repo
       uses: actions/checkout@v2
       with:
-       repository: HMG-Official/HMG
-       path: HMG-Official/HMG
+       repository: asistex/HMG
+       path: asistex/HMG
 
     - name: checking dependencies
       run: |
@@ -24,7 +24,7 @@ jobs:
       shell: cmd
       run: |
         :: echo %path%
-        cd HMG-Official
+        cd asistex\hmg
         echo step 1
         set path=c:\mingw32\bin;%path%
         echo step 2
