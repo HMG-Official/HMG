@@ -16,30 +16,29 @@ jobs:
        repository: HMG-Official/HMG
        path: HMG-Official/HMG
 
-    - name: Install dependencies
+    - name: checking dependencies
+      shell: cmd
       run: |
         gcc --version
-        dir C:\mingw32
+        dir c:\mingw32
 
     - name: Building HMG
       shell: cmd
       run: |
-        move harbour\bin\win\mingw\*.* harbour\bin
-        set path=C:\mingw32\bin;%path%
+        set path=c:\mingw32\bin;%path%
         echo %path%
         SET HB_COMPILER=mingw
         BuildAllLib32.bat
 
-    - name: Preparing result folders...
+    - name: Preparing output folders...
       shell: cmd
       run: |
-        mkdir result
-        mkdir result\hmg\lib
-        move hmg\lib\*.* result\hmg\lib
-        move lib\*.* result\lib
+        mkdir output
+        mkdir output\hmg\lib
+        move lib\*.* output\lib
 
     - name: Create artifact
       uses: actions/upload-artifact@v2
       with:
        name: hmg35_32b
-       path: result
+       path: output
