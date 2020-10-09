@@ -24,7 +24,7 @@ jobs:
       shell: cmd
       run: |
         :: echo %path%
-        cd HMG
+        cd HMG-Official
         echo step 1
         set path=c:\mingw32\bin;%path%
         echo step 2
