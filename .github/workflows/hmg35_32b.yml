@@ -23,11 +23,15 @@ jobs:
     - name: Building HMG
       shell: cmd
       run: |
-        cd HMG
-        set path=c:\mingw32\bin;%path%
         :: echo %path%
+        cd HMG
+        echo step 1
+        set path=c:\mingw32\bin;%path%
+        echo step 2
         set HB_COMPILER=mingw
+        echo step 3
         BuildAllLib32.bat
+        echo step 4
 
     - name: Create output folders...
       shell: cmd
