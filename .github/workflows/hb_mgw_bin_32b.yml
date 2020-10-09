@@ -68,5 +68,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: harbour_win32_mingw_${{ env.TIME }}
+       name: harbour_win32_mgw_${{ env.TIME }}
        path: output
