@@ -21,7 +21,6 @@ jobs:
     - name: Install dependencies
       run: |
         gcc --version
-        dir C:\mingw32
 
     - name: Building HMG
       shell: cmd
