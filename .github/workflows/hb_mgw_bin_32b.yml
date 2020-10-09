@@ -1,4 +1,4 @@
-name: Harbour for Windows 32 using MinGW
+name: Harbour 32bit MinGW Windows
 
 on:
     push:
@@ -18,12 +18,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
-         Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
-         choco install openssl
-         choco install curl
-         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
-         Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
+         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
+         # Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
+         # choco install openssl
+         # choco install curl
+         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
+         # Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
          
     - name: Compile Harbour
       shell: cmd
@@ -32,14 +32,14 @@ jobs:
         set HB_BUILD_MODE=c
         set HB_USER_PRGFLAGS=-l-
         set HB_BUILD_PARTS=all
-        set HB_BUILD_CONTRIBS= 
-        set HB_WITH_OPENSSL=C:\OpenSSL\include
+        set HB_BUILD_CONTRIBS=yes
+        set HB_BUILD_CONTRIB_DYN=yes
+        :: set HB_WITH_OPENSSL=C:\OpenSSL\include
         set HB_WITH_CURL=C:\curl\include
         set HB_WITH_ADS=C:\acesdk 
         set HB_STATIC_OPENSSL=yes
         set HB_STATIC_CURL=yes       
         set HB_COMPILER=mingw
-        set HB_BUILD_CONTRIB_DYN=yes
         set HB_BUILD_DYN=yes
         set path=c:\mingw32\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
         win-make.exe

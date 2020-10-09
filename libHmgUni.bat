@@ -2,8 +2,9 @@
 
 set previouspath=%path%
 set path=c:\bcd\prg\comp\mgw102\bin;c:\bcd\prg\pcomp\hb32_mgw102\bin;%path%
+:: set HMGPATH=%~dp0
+:: set PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
 
-echo. Build HMG Library to support the character set:
 echo.
 echo. Building HMG Library Unicode 32b
 echo.
@@ -19,5 +20,5 @@ exit
 
 
 :BUILDLIB
-hbmk2 hmg32.hbp
+c:\bcd\prg\comp\mgw102\bin\hbmk2 hmg32.hbp
 set path=%previouspath%

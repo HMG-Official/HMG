@@ -1,4 +1,4 @@
-name: Build HMG for Windows 32 mingw
+name: HMG 32bit MinGW Windows
 
 on:
     push:
@@ -20,13 +20,12 @@ jobs:
       run: |
         gcc --version
 
-    - name: Building HMG
+    - name: Building lib HMG
       shell: cmd
       run: |
         cd asistex\hmg
         set path=c:\bcd\prg\comp\mgw102\bin;c:\bcd\prg\pcomp\hb32_mgw102\bin;%path%
         libHmgUni.bat
-        echo step 4
 
     - name: Create output folders...
       shell: cmd
@@ -35,8 +34,16 @@ jobs:
         mkdir output\hmg\lib
         move hmg\lib\*.a output\lib
 
+    - name: Get current time
+      uses: srfrnk/current-time@master
+      id: current-time
+      with:
+        format: YYYY_MM_DD
+ 
     - name: Create artifact
+      env:
+         TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hmg35_32b
+       name: hmg_win32_mingw_${{ env.TIME }}
        path: output
