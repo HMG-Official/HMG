@@ -1,4 +1,4 @@
-name: Build HMG for Windows 32 MINGW
+name: Build HMG for Windows 32 mingw
 
 on:
   push:
