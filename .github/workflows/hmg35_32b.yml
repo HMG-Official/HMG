@@ -24,13 +24,14 @@ jobs:
       shell: cmd
       run: |
         cd asistex\hmg
-        set path=c:\bcd\prg\comp\mgw102\bin;c:\bcd\prg\pcomp\hb32_mgw102\bin;%path%
+        set path=c:\mingw32\mingw32\bin;c:\bcd\prg\pcomp\hb32_mgw102\bin;%path%
         libHmgUni.bat
 
     - name: Create output folders...
       shell: cmd
       run: |
         mkdir output
+        mkdir output\hmg
         mkdir output\hmg\lib
         move hmg\lib\*.a output\lib
 
