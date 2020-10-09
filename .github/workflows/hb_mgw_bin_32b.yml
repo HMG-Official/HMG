@@ -54,6 +54,8 @@ jobs:
         copy harbour\lib\win\mingw\*.a output\lib
         mkdir output\include 
         copy harbour\include output\include
+        mkdir output\contrib 
+        copy harbour\contrib output\contrib
         
     - name: Get current time
       uses: srfrnk/current-time@master
