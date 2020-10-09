@@ -25,7 +25,7 @@ jobs:
     - name: Building HMG
       shell: cmd
       run: |
-        cd bcd\prg\asistex\hmg
+        cd hmg
         move harbour\bin\win\mingw\*.* harbour\bin
         SET PATH=C:\mingw32\bin;%PATH%
         SET HB_COMPILER=mingw
