@@ -39,8 +39,8 @@ jobs:
         set HB_STATIC_OPENSSL=yes
         set HB_STATIC_CURL=yes       
         set HB_COMPILER=mingw
-        set HB_BUILD_CONTRIB_DYN=no
-        set HB_BUILD_DYN=no
+        set HB_BUILD_CONTRIB_DYN=yes
+        set HB_BUILD_DYN=yes
         set path=c:\mingw32\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
         win-make.exe
         
