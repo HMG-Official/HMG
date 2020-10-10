@@ -16,15 +16,19 @@ jobs:
        repository: asistex/HMG
        path: asistex/HMG
 
-    - name: checking dependencies
+    - name: Install dependencies
       run: |
+        (new-object System.Net.WebClient).DownloadFile('https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-10.0.1-9.0.0-r1/winlibs-i686-posix-dwarf-gcc-10.2.0-mingw-w64-8.0.0-r1.zip', 'C:\temp\mingw32.zip')
+        Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
+        (new-object System.Net.WebClient).DownloadFile('https://github.com/asistex/HMG/raw/master/workflows/harbour_win32_mingw_2020_10_10.zip', 'C:\temp\harbour.zip')
+        Expand-Archive -LiteralPath C:\temp\harbour.zip -DestinationPath C:\harbour -Force         
         gcc --version
 
     - name: Building lib HMG
       shell: cmd
       run: |
         cd asistex\hmg
-        set path=c:\mingw32\bin;c:\bcd\prg\pcomp\hb32_mgw102\bin;%path%
+        set path=c:\mingw32\bin;c:\harbour\bin;%path%
         libHmgUni.bat
 
     - name: Create output folders...
@@ -33,6 +37,8 @@ jobs:
         mkdir output
         mkdir output\hmg
         mkdir output\hmg\lib
+        mkdir output\hmg\include
+        copy hmg\include output\include
         move hmg\lib\*.a output\lib
 
     - name: Get current time
@@ -46,5 +52,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hmg_win32_mingw_${{ env.TIME }}
+       name: hmg34_mgw102_uni_${{ env.TIME }}
        path: output
