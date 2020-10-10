@@ -16,4 +16,5 @@ echo. ERROR: file (INCLUDE\_UNICODE.ch) not exist or failed copy
 exit
 
 :BUILDLIB
+set path=c:\mingw32\bin;c:\harbour\bin;%path%
 hbmk2 hmg32.hbp

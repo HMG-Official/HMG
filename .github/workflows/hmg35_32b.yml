@@ -36,6 +36,7 @@ jobs:
       run: |
         mkdir output
         mkdir output\lib
+        mkdir output\include
         dir output
         copy hmg\lib\*.a output\lib 
         set ERRORLEVEL=0
