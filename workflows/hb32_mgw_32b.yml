@@ -1,4 +1,4 @@
-name: create Harbour binaries for Windows 32 using MinGW
+name: Harbour for Windows 32 using MinGW
 
 on:
     push:
@@ -18,12 +18,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
-         # Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
-         choco install openssl
-         choco install curl
-         # (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
-         # Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
+        (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
+        Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
+        choco install openssl
+        choco install curl
+        (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/acesdk.zip', 'C:\temp\acesdk.zip')
+        Expand-Archive -LiteralPath C:\temp\acesdk.zip -DestinationPath C:\acesdk -Force         
          
     - name: Compile Harbour
       shell: cmd
@@ -31,7 +31,8 @@ jobs:
         cd harbour
         set HB_BUILD_MODE=c
         set HB_USER_PRGFLAGS=-l-
-        set HB_BUILD_CONTRIBS=
+        set HB_BUILD_PARTS=all
+        set HB_BUILD_CONTRIBS= 
         set HB_WITH_OPENSSL=C:\OpenSSL\include
         set HB_WITH_CURL=C:\curl\include
         set HB_WITH_ADS=C:\acesdk 
@@ -40,7 +41,8 @@ jobs:
         set HB_COMPILER=mingw
         set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
-        set path=C:\mingw32\bin;%path%
+        set HB_WITH_LIBHARU=c:\harbour\contrib\hbhpdf
+        set path=c:\mingw32\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
         win-make.exe
         
     - name: Create output folders
@@ -53,6 +55,9 @@ jobs:
         copy harbour\lib\win\mingw\*.a output\lib
         mkdir output\include 
         copy harbour\include output\include
+        mkdir output\contrib 
+        robocopy harbour\contrib\ output\contrib\ /E
+        set ERRORLEVEL=0
         
     - name: Get current time
       uses: srfrnk/current-time@master
@@ -65,5 +70,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hb32_win32_mingw_${{ env.TIME }}
+       name: hb_32b_mgw102_${{ env.TIME }}
        path: output
