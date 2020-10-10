@@ -35,9 +35,10 @@ jobs:
       shell: cmd
       run: |
         mkdir output
-        mkdir output\hmg
-        mkdir output\hmg\lib
+        mkdir output\lib
         move hmg\lib\*.a output\lib
+        mkdir output\include
+        move hmg\include\*.a output\include
 
     - name: Get current time
       uses: srfrnk/current-time@master
