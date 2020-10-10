@@ -57,6 +57,7 @@ jobs:
         copy harbour\include output\include
         mkdir output\contrib 
         robocopy harbour\contrib\ output\contrib\ /E
+        set ERRORLEVEL=0
         
     - name: Get current time
       uses: srfrnk/current-time@master
