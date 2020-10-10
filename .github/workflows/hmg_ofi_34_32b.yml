@@ -31,7 +31,7 @@ jobs:
       run: |
         cd HMG-Official\hmg
         set path=c:\mingw32\bin;c:\harbour\bin;%path%
-        BuilLib32.bat
+        BuildLib32.bat
 
     - name: Create output folders...
       shell: cmd
