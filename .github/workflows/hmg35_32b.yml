@@ -39,33 +39,6 @@ jobs:
         robocopy c:\hmg\ output\ /E
         set ERRORLEVEL=0
 
-
-
- -------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Saturday, October 10, 2020 5:25:16 PM
-   Source : D:\a\HMG\HMG\hmg\
-     Dest : D:\a\HMG\HMG\output\
-
-    Files : *.*
-      
-  Options : *.* /S /E /DCOPY:DA /COPY:DAT /R:1000000 /W:30 
-
-------------------------------------------------------------------------------
-
-2020/10/10 17:25:16 ERROR 2 (0x00000002) Accessing Source Directory D:\a\HMG\HMG\hmg\
-The system cannot find the file specified.
-
-
-
-
-
-
-
-
-
     - name: Get current time
       uses: srfrnk/current-time@master
       id: current-time
