@@ -39,8 +39,9 @@ jobs:
         set HB_STATIC_OPENSSL=yes
         set HB_STATIC_CURL=yes       
         set HB_COMPILER=mingw
-        set HB_BUILD_CONTRIB_DYN=yes
-        set HB_BUILD_DYN=yes
+        set HB_BUILD_CONTRIB_DYN=no
+        set HB_BUILD_DYN=no
+        set HB_WITH_LIBHARU=c:\harbour\contrib\hbhpdf
         set path=c:\mingw32\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
         win-make.exe
         
@@ -55,7 +56,7 @@ jobs:
         mkdir output\include 
         copy harbour\include output\include
         mkdir output\contrib 
-        copy harbour\contrib output\contrib
+        robocopy harbour\contrib\ output\contrib\ /E
         
     - name: Get current time
       uses: srfrnk/current-time@master
