@@ -35,9 +35,11 @@ jobs:
       shell: cmd
       run: |
         mkdir output
+        mkdir output\lib
         dir output
-        robocopy c:\hmg\ output\ /E
+        copy hmg\lib\*.a output\lib 
         set ERRORLEVEL=0
+        dir output
 
     - name: Get current time
       uses: srfrnk/current-time@master
