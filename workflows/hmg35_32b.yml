@@ -27,7 +27,7 @@ jobs:
     - name: Building lib HMG
       shell: cmd
       run: |
-        cd HMG-Official/HMG
+        cd HMG-Official/HMG 
         set path=c:\mingw32\bin;c:\harbour\bin;%path%
         libHmgUni.bat
 
