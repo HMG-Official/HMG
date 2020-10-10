@@ -13,8 +13,8 @@ jobs:
     - name: Checkout hmg repo
       uses: actions/checkout@v2
       with:
-       repository: HMG-Official/HMG
-       path: HMG-Official/HMG
+       repository: asistex/HMG
+       path: asistex/HMG
 
     - name: Install dependencies
       run: |
@@ -27,7 +27,7 @@ jobs:
     - name: Building lib HMG
       shell: cmd
       run: |
-        cd HMG-Official\hmg
+        cd asistex\hmg
         set path=c:\mingw32\bin;c:\harbour\bin;%path%
         libHmgUni.bat
 
