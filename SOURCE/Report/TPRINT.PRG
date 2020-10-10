@@ -60,9 +60,6 @@ METHOD printdata(nlin,ncol,data,cfont,nsize,lbold,acolor,calign,nlen)
 *-------------------------
 METHOD printimage(nlin,ncol,nlinf,ncolf,cimage)
 *-------------------------
-*-------------------------
-METHOD printline(nlin,ncol,nlinf,ncolf,atcolor,ntwpen )
-*-------------------------
 
 METHOD printline(nlin,ncol,nlinf,ncolf,atcolor,ntwpen )
 *-------------------------
@@ -309,19 +306,19 @@ case ::cprintlibrary="DOS"
    if ::impreview
          wr:= HB_MemoRead ((::tempfile))   // ADD
    DEFINE WINDOW PRINT_PREVIEW  ;
-   	AT 10,10 ;
-   	   WIDTH 640 HEIGHT 480 ;
-   	   TITLE 'Preview -----> ' + ::tempfile ;
-   	   MODAL
+    AT 10,10 ;
+       WIDTH 640 HEIGHT 480 ;
+       TITLE 'Preview -----> ' + ::tempfile ;
+       MODAL
 
-   	@ 0,0 EDITBOX EDIT_P ;
-   	OF PRINT_PREVIEW ;
-   	WIDTH 590 ;
-   	HEIGHT 440 ;
-   	VALUE WR ;
-   	READONLY ;
-   	FONT 'Courier new' ;
-   	SIZE 10
+    @ 0,0 EDITBOX EDIT_P ;
+    OF PRINT_PREVIEW ;
+    WIDTH 590 ;
+    HEIGHT 440 ;
+    VALUE WR ;
+    READONLY ;
+    FONT 'Courier new' ;
+    SIZE 10
 
         @ 10,600 button but_4 caption "X" width 30 action ( print_preview.release() )
         @ 110,600 button but_1 caption "+ +" width 30 action zoom("+")
@@ -556,39 +553,6 @@ endcase
 RETURN nil
 
 *-------------------------
-METHOD printline(nlin,ncol,nlinf,ncolf,atcolor,ntwpen )CLASS TPRINT
-*-------------------------
-
-
-DEFAULT nlin to 1
-
-DEFAULT ncol to 1
-
-DEFAULT nlinf to 4
-
-DEFAULT ncolf to 4
-
-DEFAULT atcolor to ::acolor
-
-DEFAULT ntwpen to ::nwpen
-
-if ::cunits="MM"
-   ::nmver:=1
-   ::nvfij:=0
-   ::nmhor:=1
-   ::nhfij:=0
-else
-   ::nmhor  := (::nfontsize)/4.75
-   ::nmver  := (::nfontsize)/2.45
-   ::nvfij  := (12/1.65)
-   ::nhfij  := (12/3.70)
-endif
-do case
-case ::cprintlibrary="MINIPRINT"
-   @  nlin*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT RECTANGLE TO  (nlinf+0.5)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2 COLOR atcolor  PENWIDTH ntwpen  //// CPEN
-endcase
-RETURN nil
-
 
 METHOD printroundrectangle(nlin,ncol,nlinf,ncolf,atcolor,ntwpen ) CLASS TPRINT
 *-------------------------

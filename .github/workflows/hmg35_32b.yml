@@ -37,8 +37,6 @@ jobs:
         mkdir output
         mkdir output\hmg
         mkdir output\hmg\lib
-        mkdir output\hmg\include
-        copy hmg\include output\include
         move hmg\lib\*.a output\lib
 
     - name: Get current time
