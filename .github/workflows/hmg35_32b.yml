@@ -34,11 +34,12 @@ jobs:
     - name: Create output folders...
       shell: cmd
       run: |
+        echo step 1 
         mkdir output
-        mkdir output\lib
-        move hmg\lib\*.a output\lib
-        mkdir output\include
-        move hmg\include\*.a output\include
+        echo step 2 
+        robocopy hmg\ output\ /E
+        set ERRORLEVEL=0
+        echo step 3 
 
     - name: Get current time
       uses: srfrnk/current-time@master
