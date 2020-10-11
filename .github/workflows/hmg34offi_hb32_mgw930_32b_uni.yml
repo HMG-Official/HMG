@@ -36,7 +36,7 @@ jobs:
       run: |
         mkdir output
         robocopy HMG-Official\hmg\ output\ /E
-        if %ERRORLEVEL% EQU 1 ERRORLEVEL=0
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
 
     - name: Get current time
       uses: srfrnk/current-time@master
