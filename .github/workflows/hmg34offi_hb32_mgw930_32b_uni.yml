@@ -38,7 +38,7 @@ jobs:
         mkdir output\lib
         mkdir output\include
         dir output
-        copy hmg\lib\*.a output\lib 
+        copy lib\*.a output\lib 
 
     - name: Get current time
       uses: srfrnk/current-time@master
