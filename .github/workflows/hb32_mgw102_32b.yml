@@ -18,7 +18,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        (new-object System.Net.WebClient).DownloadFile('https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-10.0.1-9.0.0-r1/winlibs-x86_64-posix-seh-gcc-10.2.0-mingw-w64-8.0.0-r1.zip', 'C:\temp\mingw32.zip')
+        # (new-object System.Net.WebClient).DownloadFile('https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-10.0.1-9.0.0-r1/winlibs-x86_64-posix-seh-gcc-10.2.0-mingw-w64-8.0.0-r1.zip', 'C:\temp\mingw32.zip')
+        # (new-object System.Net.WebClient).DownloadFile('https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-10.0.1-9.0.0-r1/winlibs-i686-posix-dwarf-gcc-10.2.0-mingw-w64-8.0.0-r1.zip', 'C:\temp\mingw32.zip')
+        (new-object System.Net.WebClient).DownloadFile('https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-10.0.1-9.0.0-r1/winlibs-i686-posix-dwarf-gcc-10.2.0-llvm-10.0.1-mingw-w64-8.0.0-r1.zip', 'C:\temp\mingw32.zip')
         Expand-Archive -LiteralPath c:\temp\mingw32.zip -DestinationPath c:\mingw32 -Force         
         choco install openssl
         choco install curl
