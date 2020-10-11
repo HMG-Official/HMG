@@ -46,8 +46,9 @@ jobs:
  
     - name: Create artifact
       env:
-         TIME: "${{ steps.current-time.outputs.formattedTime }}"
+        TIME: "${{ steps.current-time.outputs.time }}"
+        F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hmg34asistex_all_hb32_mgw930_uni_${{ env.TIME }}
-       path: output
+        name: hmg34asistex_all_hb32_mgw930_uni_${{ env.F_TIME }}${{ env.TIME }}
+        path: output
