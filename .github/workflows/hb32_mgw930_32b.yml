@@ -18,7 +18,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        (new-object System.Net.WebClient).DownloadFile('https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-10.0.1-9.0.0-r1/winlibs-i686-posix-dwarf-gcc-10.2.0-mingw-w64-8.0.0-r1.zip', 'C:\temp\mingw32.zip')
+        (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
         Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
         choco install openssl
         choco install curl
@@ -41,8 +41,8 @@ jobs:
         set HB_COMPILER=mingw
         set HB_BUILD_CONTRIB_DYN=no
         set HB_BUILD_DYN=no
-        set HB_WITH_LIBHARU=C:\harbour\contrib\hbhpdf
-        set path=c:\mingw32\bin;%path%
+        set HB_WITH_LIBHARU=c:\harbour\contrib\hbhpdf
+        set path=c:\mingw32\bin;c:\program Files\OpenSSL-Win64\bin;%path%
         win-make.exe
         
     - name: Create output folders
@@ -59,6 +59,7 @@ jobs:
         copy harbour\include output\include
         mkdir output\contrib 
         robocopy harbour\contrib\ output\contrib\ /E
+        copy harbour\contrib\hbhpdf\*.ch output\include
         if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
         
     - name: Get current time
@@ -72,5 +73,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hb32_mgw102_32b_${{ env.TIME }}
+       name: hb32_mgw930_32b_${{ env.TIME }}
        path: output
