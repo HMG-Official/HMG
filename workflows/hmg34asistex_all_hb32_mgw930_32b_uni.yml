@@ -1,4 +1,4 @@
-name: HMG official full binaries 32bit MinGW 930 unicode 
+name: HMG asistex all libs 32bit MinGW 930 unicode
 
 on:
     push:
@@ -13,8 +13,8 @@ jobs:
     - name: Checkout hmg repo
       uses: actions/checkout@v2
       with:
-       repository: HMG-Official/HMG
-       path: HMG-Official/HMG
+       repository: asistex/HMG
+       path: asistex/HMG
 
     - name: Install dependencies
       run: |
@@ -27,7 +27,7 @@ jobs:
     - name: Building lib HMG
       shell: cmd
       run: |
-        cd HMG-Official\hmg
+        cd asistex\hmg
         set path=c:\mingw32\bin;c:\harbour\bin;%path%
         BuildAllLib32.bat
 
@@ -35,17 +35,8 @@ jobs:
       shell: cmd
       run: |
         mkdir output
-        robocopy HMG-Official\hmg\ output\ /E
+        robocopy asistex\hmg\ output\ /E
         if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
-        set ERRORLEVEL=0
-        mkdir output\mingw32
-        robocopy c:\mingw32\ output\mingw32\ /E
-        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
-        set ERRORLEVEL=0
-        mkdir output\harbour
-        robocopy c:\harbour\ output\harbour\ /E
-        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
-        set ERRORLEVEL=0
 
     - name: Get current time
       uses: srfrnk/current-time@master
@@ -58,5 +49,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hmg34offi_full_hb32_mgw930_uni_${{ env.TIME }}
+       name: hmg34asistex_all_hb32_mgw930_uni_${{ env.TIME }}
        path: output
