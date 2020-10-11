@@ -1,6 +1,6 @@
 # Scripts to compile HMG on GitHub
 
-These scripts are to compile HMG official 32bit unicode with MinGW 930
+These scripts are to compile HMG official 32bit unicode with MinGW 9.30
 
   - 2020-10-11  hb32_mgw930_32b.yml
 
@@ -11,7 +11,7 @@ These scripts are to compile HMG official 32bit unicode with MinGW 930
     Output= All HMG libraries.
 
   - 2020-10-11  hmg34offi_full_hb32_mgw930_32b_uni.yml
-    Output= All HMG libraries, Harbour and Mingw 930 binaries.
+    Output= All HMG libraries, Harbour and Mingw 9.30 binaries.
 
   - 2020-10-11  hmg34_hb32_mgw930_32b_uni.yml
     Output= Harbour binaries
