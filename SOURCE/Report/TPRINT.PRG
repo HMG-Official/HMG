@@ -19,9 +19,9 @@ DATA cprinter           INIT ""           PROTECTED
 DATA aprinters          INIT {}           PROTECTED
 DATA aports             INIT {}           PROTECTED
 
-DATA lprerror           INIT .F.
+DATA lprerror           INIT .F.          
 DATA exit               INIT .F.          PROTECTED
-DATA acolor             INIT {1,1,1}      PROTECTED
+DATA acolor             INIT {1,1,1}      PROTECTED  
 DATA cfontname          INIT "courier new" PROTECTED
 DATA nfontsize          INIT 10            PROTECTED
 DATA nwpen              INIT 0.1   PROTECTED //// ancho del pen
@@ -30,10 +30,10 @@ DATA impreview          INIT .F. PROTECTED
 DATA cversion            INIT "V1.2" PROTECTED
 
 *-------------------------
-METHOD init(clibx)
+METHOD init()
 *-------------------------
 *-------------------------
-METHOD begindoc(cdoc)
+METHOD begindoc()
 *-------------------------
 *-------------------------
 METHOD enddoc()
@@ -55,16 +55,19 @@ METHOD endpage()
 METHOD release()
 *-------------------------
 *-------------------------
-METHOD printdata(nlin,ncol,data,cfont,nsize,lbold,acolor,calign,nlen)
+METHOD printdata()
 *-------------------------
 *-------------------------
-METHOD printimage(nlin,ncol,nlinf,ncolf,cimage)
+METHOD printimage
+*-------------------------
+*-------------------------
+METHOD printline
 *-------------------------
 
-METHOD printline(nlin,ncol,nlinf,ncolf,atcolor,ntwpen )
+METHOD printrectangle
 *-------------------------
 
-METHOD selprinter( lselect , lpreview, llandscape , npapersize ,cprinterx)
+METHOD selprinter()
 *-------------------------
 *-------------------------
 
@@ -72,7 +75,7 @@ METHOD getdefprinter()
 *-------------------------
 
 *-------------------------
-METHOD setcolor(atColor)
+METHOD setcolor()
 *-------------------------
 
 *-------------------------
@@ -80,7 +83,7 @@ METHOD setpreviewsize()
 *-------------------------
 
 *-------------------------
-METHOD setunits(cunitsx)   ////// mm o rowcol
+METHOD setunits()   ////// mm o rowcol
 *-------------------------
 
 METHOD printroundrectangle()
@@ -241,7 +244,7 @@ case ::cprintlibrary="MINIPRINT"
       else
          SELECT PRINTER cprinterx to lsucess ;
          ORIENTATION worientation ;
-         PREVIEW
+         PREVIEW 
       endif
    endif
 
@@ -257,7 +260,7 @@ case ::cprintlibrary="MINIPRINT"
          PAPERSIZE npapersize
       else
          SELECT PRINTER cprinterx to lsucess ;
-         ORIENTATION worientation
+         ORIENTATION worientation 
       endif
    endif
 
@@ -301,33 +304,33 @@ case ::cprintlibrary="MINIPRINT"
    END PRINTDOC
 case ::cprintlibrary="DOS"
    SET DEVICE TO SCREEN
-   SET PRINTER TO
-   _nhandle:=FOPEN(::tempfile,0+64)
+   SET PRINTER TO   
+   _nhandle:=FOPEN(::tempfile,0+64) 
    if ::impreview
          wr:= HB_MemoRead ((::tempfile))   // ADD
    DEFINE WINDOW PRINT_PREVIEW  ;
-    AT 10,10 ;
-       WIDTH 640 HEIGHT 480 ;
-       TITLE 'Preview -----> ' + ::tempfile ;
-       MODAL
-
-    @ 0,0 EDITBOX EDIT_P ;
-    OF PRINT_PREVIEW ;
-    WIDTH 590 ;
-    HEIGHT 440 ;
-    VALUE WR ;
-    READONLY ;
-    FONT 'Courier new' ;
-    SIZE 10
+   	AT 10,10 ;
+   	   WIDTH 640 HEIGHT 480 ;
+   	   TITLE 'Preview -----> ' + ::tempfile ;
+   	   MODAL
+  
+   	@ 0,0 EDITBOX EDIT_P ;
+   	OF PRINT_PREVIEW ;
+   	WIDTH 590 ;
+   	HEIGHT 440 ;
+   	VALUE WR ;
+   	READONLY ;
+   	FONT 'Courier new' ;
+   	SIZE 10
 
         @ 10,600 button but_4 caption "X" width 30 action ( print_preview.release() )
         @ 110,600 button but_1 caption "+ +" width 30 action zoom("+")
         @ 210,600 button but_2 caption "- -" width 30 action zoom("-")
         @ 310,600 button but_3 caption "P" width 30 action (::printdos())
 
-
+  
    END WINDOW
-
+   
    CENTER WINDOW PRINT_PREVIEW
    ACTIVATE WINDOW PRINT_PREVIEW
 
@@ -398,15 +401,15 @@ METHOD printdata(nlin,ncol,data,cfont,nsize,lbold,acolor,calign,nlen) CLASS TPRI
 local ctext,cspace
 // Local i,caux
 do case
-    case valtype(data)=='C'
+    case valtype(data)=='C' 
                 ctext:=data
     case valtype(data)=='N'
                 ctext:=ALLTRIM(STR(data))
     case valtype(data)=='D'
                 ctext:=dtoc(data)
     case valtype(data)=='L'
-               ctext:= iif(data,'T','F')
-    case valtype(data)=='M'
+               ctext:= iif(data,'T','F')  
+    case valtype(data)=='M'  
                ctext:=data
     otherwise
                ctext:=""
@@ -424,7 +427,7 @@ do case
         cspace = space(int(nlen)-HMG_LEN(ctext))
    otherwise
         cspace:=""
-endcase
+endcase   
 
 DEFAULT nlin to 1
 
@@ -474,7 +477,7 @@ case ::cprintlibrary="MINIPRINT"
 case ::cprintlibrary="DOS"
    if .not. lbold
        @ nlin,ncol say (ctext)
-   else
+   else   
        @ nlin,ncol say (ctext)
        @ nlin,ncol say (ctext)
    endif
@@ -553,6 +556,39 @@ endcase
 RETURN nil
 
 *-------------------------
+METHOD printrectangle(nlin,ncol,nlinf,ncolf,atcolor,ntwpen ) CLASS TPRINT
+*-------------------------
+
+
+DEFAULT nlin to 1
+
+DEFAULT ncol to 1
+
+DEFAULT nlinf to 4
+
+DEFAULT ncolf to 4
+
+DEFAULT atcolor to ::acolor
+
+DEFAULT ntwpen to ::nwpen
+
+if ::cunits="MM"
+   ::nmver:=1
+   ::nvfij:=0
+   ::nmhor:=1
+   ::nhfij:=0
+else
+   ::nmhor  := (::nfontsize)/4.75
+   ::nmver  := (::nfontsize)/2.45
+   ::nvfij  := (12/1.65)
+   ::nhfij  := (12/3.70)
+endif
+do case
+case ::cprintlibrary="MINIPRINT"
+   @  nlin*::nmver+::nvfij,ncol*::nmhor+::nhfij*2 PRINT RECTANGLE TO  (nlinf+0.5)*::nmver+::nvfij,ncolf*::nmhor+::nhfij*2 COLOR atcolor  PENWIDTH ntwpen  //// CPEN
+endcase
+RETURN nil
+
 
 METHOD printroundrectangle(nlin,ncol,nlinf,ncolf,atcolor,ntwpen ) CLASS TPRINT
 *-------------------------
@@ -599,7 +635,7 @@ return nil
 
 
 STATIC function zoom(cOp)
-
+ 
 if cop="+" .and. print_preview.edit_p.fontsize <= 24
   print_preview.edit_p.fontsize:=  print_preview.edit_p.fontsize + 2
 endif

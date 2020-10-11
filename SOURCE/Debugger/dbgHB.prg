@@ -250,12 +250,12 @@ METHOD GetNextValidStopLineEx( cFileName, nLine )
    VAR bGUIMessageBox          INIT {|| NIL }   // this code block is initialized in ProcInitGUIDebugger()
    VAR lGUIShowMessageBox      INIT .T.
 
-   METHOD GUICreateFormDebugger()    INLINE   Eval( ::bGUICreateFormDebugger )
-   METHOD GUIReleaseFormDebugger()   INLINE   Eval( ::bGUIReleaseFormDebugger )
-   METHOD GUIUpdateInfo()            INLINE   Eval( ::bGUIUpdateInfo )
-   METHOD GUIDoEvents()              INLINE   Eval( ::bGUIDoEvents )
-   METHOD GUIReleaseAllWindows()     INLINE   Eval( ::bGUIReleaseAllWindows )
-   METHOD GUIMessageBox( ... )       INLINE   Iif( ::lGUIShowMessageBox, Eval( ::bGUIMessageBox, ... ), NIL )
+   METHOD GUICreateFormDebugger()    INLINE   EVAL( ::bGUICreateFormDebugger )
+   METHOD GUIReleaseFormDebugger()   INLINE   EVAL( ::bGUIReleaseFormDebugger )
+   METHOD GUIUpdateInfo()            INLINE   EVAL( ::bGUIUpdateInfo )
+   METHOD GUIDoEvents()              INLINE   EVAL( ::bGUIDoEvents )
+   METHOD GUIReleaseAllWindows()     INLINE   EVAL( ::bGUIReleaseAllWindows )
+   METHOD GUIMessageBox( ... )       INLINE   Iif( ::lGUIShowMessageBox, EVAL( ::bGUIMessageBox, ... ), NIL )
 
 ENDCLASS
 
@@ -377,12 +377,12 @@ METHOD HandleEvent() CLASS HMGDebugger
 
    DO WHILE ! ::lExitLoop
       ::GUIDoEvents()   // GUI: execute Do Events function 
-      hb_ReleaseCPU()
+      hb_releaseCPU()
       IF ::lAnimate
          IF ::nSpeed != 0
             WHILE ( ( hb_MilliSeconds() - nTimeIni ) < ::nSpeed ) .AND. ( ! ::lExitLoop )
                ::GUIDoEvents()   // GUI: execute Do Events function 
-               hb_ReleaseCPU()
+               hb_releaseCPU()
             ENDDO
          ENDIF
          RETURN NIL
@@ -583,7 +583,7 @@ METHOD GetExprValue( xExpr, lValid ) CLASS HMGDebugger   // CMD_CALC
    LOCAL bOldError, oErr
    IFFAIL( NIL )
    lValid := .F.
-   bOldError := ErrorBlock( {|oErr|Break(oErr)} ) 
+   bOldError := Errorblock( {|oErr|Break(oErr)} ) 
    BEGIN SEQUENCE
       xResult := __dbgGetExprValue( ::pInfo, xExpr, @lValid )
       IF ! lValid
@@ -597,7 +597,7 @@ METHOD GetExprValue( xExpr, lValid ) CLASS HMGDebugger   // CMD_CALC
       ENDIF
       lValid := .F.
    END SEQUENCE
-   ErrorBlock( bOldError )
+   Errorblock( bOldError )
 RETURN xResult
 
 
@@ -988,9 +988,9 @@ LOCAL aAreas := {}
       AAdd ( aAreas, Array( WA_ITEMS ) )
       aAreas [i] [ 1] := Iif( arr1[i]==nAlias, "*", "" ) + Alias()
       aAreas [i] [ 2] := hb_ntos( arr1[i] ) 
-      aAreas [i] [ 3] := rddName() 
-      aAreas [i] [ 4] := hb_ntos( RecCount() )
-      aAreas [i] [ 5] := hb_ntos( RecNo() )
+      aAreas [i] [ 3] := rddname() 
+      aAreas [i] [ 4] := hb_ntos( Reccount() )
+      aAreas [i] [ 5] := hb_ntos( Recno() )
       aAreas [i] [ 6] := Iif( Bof(), "Yes", "No" )
       aAreas [i] [ 7] := Iif( Eof(), "Yes", "No" )
       aAreas [i] [ 8] := Iif( Found(), "Yes", "No" )
@@ -1020,7 +1020,7 @@ LOCAL arr := {}
       IF Len( cValue ) > VAR_MAX_LEN
          cValue := Left( cValue, VAR_MAX_LEN )
       ENDIF
-      AAdd( arr, { af[i,1], af[i,2], LTrim( Str( af[i,3] ) ), cValue } )   // { cName, cType, cLength, cValue }
+      AAdd( arr, { af[i,1], af[i,2], Ltrim( Str( af[i,3] ) ), cValue } )   // { cName, cType, cLength, cValue }
    NEXT
 RETURN arr
 
@@ -1034,7 +1034,7 @@ LOCAL cValue, i
       ::GUIMessageBox( "GetArrayInfo: Invalid data type ( ValType: " + ValType( aArrValue ) + " )" )   // GUI: message box info
    ELSE
       FOR i := 1 TO Len( aArrValue )
-         cValType := ValType( aArrValue[ i ] )
+         cValType := Valtype( aArrValue[ i ] )
          cValue := __dbgValToStr( aArrValue[ i ] )
          IF Len( cValue ) > VAR_MAX_LEN
             cValue := Left( cValue, VAR_MAX_LEN )
@@ -1053,7 +1053,7 @@ LOCAL cValue, i
       ::GUIMessageBox( "GetHashInfo: Invalid data type ( ValType: " + ValType( aHashValue ) + " )" )   // GUI: message box info
    ELSE
       FOR i := 1 TO Len( aHashValue )
-         cValType := ValType( hb_HValueAt( aHashValue, i ) )
+         cValType := Valtype( hb_HValueAt( aHashValue, i ) )
          cValue := __dbgValToStr( hb_HValueAt( aHashValue, i ) )
          IF Len( cValue ) > VAR_MAX_LEN
             cValue := Left( cValue, VAR_MAX_LEN )
@@ -1077,7 +1077,7 @@ LOCAL arr := {}
       aMethods := __objGetMethodList( oObject )   // create list of object method
       FOR i := 1 TO Len( aVars )
          xValue := __dbgObjGetValue( oObject, aVars[i] )
-         cValType := ValType( xValue )
+         cValType := Valtype( xValue )
          cValue := __dbgValToStr( xValue )
          IF Len( cValue ) > VAR_MAX_LEN
             cValue := Left( cValue, VAR_MAX_LEN )
@@ -1105,7 +1105,7 @@ FUNCTION __dbgValToStr( uVal )
       s := ""
       nLen := Min( 8, Len( uVal ) )
       FOR i := 1 TO nLen
-         s += '"' + ValType( uVal[i] ) + '"' + Iif( i==nLen, "", ", " )
+         s += '"' + Valtype( uVal[i] ) + '"' + Iif( i==nLen, "", ", " )
       NEXT
       IF nLen < Len( uVal )
          s += ", ..."

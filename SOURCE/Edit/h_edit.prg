@@ -4,27 +4,27 @@
  * Implementación del comando EDIT para la librería HMG.
  * (c) Cristóbal Mollá [cemese@terra.es]
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this file.
 
- The exception is that, if you link this code with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link this code with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking
+ Your use of that executable is in no way restricted on account of linking  
  this code into it.
 
 */
@@ -169,28 +169,28 @@ __THREAD STATIC _aNumeroCampo   := {}                            // Numero de ca
 function ABM( cArea, cTitulo, aCampos, aEditables, bGuardar, bBuscar )
 
 // Declaración de variables locales.-------------------------------------------
-local nArea                                             // Area anterior.
-local nRegistro                                         // Numero de registro anterior.
-// local cMensaje                                          // Mensajes al usuario.
+local nArea             := 0                            // Area anterior.
+local nRegistro         := 0                            // Numero de registro anterior.
+local cMensaje          := ""                           // Mensajes al usuario.
 local nCampos           := 0                            // Numero de campos de la base.
-local nItem                                             // Indice de iteración.
-local nFila                                             // Fila de creación del control.
-local nColumna                                          // Columna de creación de control.
-local aEtiquetas                                        // Array con los controles LABEL.
-local aBrwCampos                                        // Títulos de columna del BROWSE.
-local aBrwAnchos                                        // Anchos de columna del BROWSE.
-local nBrwAnchoCampo                                    // Ancho del campo para el browse.
-local nBrwAnchoRegistro                                 // Ancho del registro para el browse.
+local nItem             := 1                            // Indice de iteración.
+local nFila             := 20                           // Fila de creación del control.
+local nColumna          := 20                           // Columna de creación de control.
+local aEtiquetas        := {}                           // Array con los controles LABEL.
+local aBrwCampos        := {}                           // Títulos de columna del BROWSE.
+local aBrwAnchos        := {}                           // Anchos de columna del BROWSE.
+local nBrwAnchoCampo    := 0                            // Ancho del campo para el browse.
+local nBrwAnchoRegistro := 0                            // Ancho del registro para el browse.
 local cMascara          := ""                           // Mascara de datos para el TEXTBOX.
-local nMascaraTotal                                     // Tamaño de la máscara de edición.
-local nMascaraDecimales                                 // Tamaño de los decimales.
+local nMascaraTotal     := 0                            // Tamaño de la máscara de edición.
+local nMascaraDecimales := 0                            // Tamaño de los decimales.
 Local _BackDeleted
 
 // Inicializa el soporte multilenguaje.----------------------------------------
 InitMessages()
 
 ////////// Gusrdar estado actual de SET DELETED y activarlo
-        _BackDeleted := Set( _SET_DELETED )
+        _BackDeleted := set( _SET_DELETED )
         SET DELETED ON
 
 // Control de parámetros.
@@ -224,7 +224,7 @@ if ( ValType( aCampos ) != "A" ) .or. ( HMG_LEN( aCampos ) != nCampos )
         next
 else
         for nItem := 1 to nCampos
-                if ValType( aCampos[nItem] ) != "C"
+                if Valtype( aCampos[nItem] ) != "C"
                         _aCampos[nItem] := HMG_LOWER( _aEstructura[nItem,1] )
                 else
                         _aCampos[nItem] := aCampos[nItem]
@@ -241,7 +241,7 @@ if ( ValType( aEditables ) != "A" ) .or. ( HMG_LEN( aEditables ) != nCampos )
         next
 else
         for nItem := 1 to nCampos
-                if ValType( aEditables[nItem] ) != "L"
+                if Valtype( aEditables[nItem] ) != "L"
                         _aEditables[nItem] := .t.
                 else
                         _aEditables[nItem] := aEditables[nItem]
@@ -273,7 +273,7 @@ _HMG_aControles := Array( nCampos, 3)
 nFila    := 20
 nColumna := 20
 for nItem := 1 to nCampos
-        aEtiquetas[nItem,1] := "lbl" + "Etiqueta" + ALLTRIM( Str( nItem ,4,0 ) )
+        aEtiquetas[nItem,1] := "lbl" + "Etiqueta" + ALLTRIM( STR( nItem ,4,0 ) )
         aEtiquetas[nItem,2] := nFila
         aEtiquetas[nItem,3] := nColumna
         nFila += 25
@@ -298,23 +298,23 @@ nColumna := 20
 for nItem := 1 to nCampos
         do case
                 case _aEstructura[nItem,2] == "C"        // Campo tipo caracter.
-                        _HMG_aControles[nItem,1] := "txt" + "Control" + ALLTRIM( Str( nItem ,4,0) )
+                        _HMG_aControles[nItem,1] := "txt" + "Control" + ALLTRIM( STR( nItem ,4,0) )
                         _HMG_aControles[nItem,2] := nFila
                         _HMG_aControles[nItem,3] := nColumna + 80
                 case _aEstructura[nItem,2] == "N"        // Campo tipo numerico.
-                        _HMG_aControles[nItem,1] := "txn" + "Control" + ALLTRIM( Str( nItem ,4,0) )
+                        _HMG_aControles[nItem,1] := "txn" + "Control" + ALLTRIM( STR( nItem ,4,0) )
                         _HMG_aControles[nItem,2] := nFila
                         _HMG_aControles[nItem,3] := nColumna + 80
                 case _aEstructura[nItem,2] == "D"        // Campo tipo fecha.
-                        _HMG_aControles[nItem,1] := "dat" + "Control" + ALLTRIM( Str( nItem ,4,0) )
+                        _HMG_aControles[nItem,1] := "dat" + "Control" + ALLTRIM( STR( nItem ,4,0) )
                         _HMG_aControles[nItem,2] := nFila
                         _HMG_aControles[nItem,3] := nColumna + 80
                 case _aEstructura[nItem,2] == "L"        // Campo tipo lógico.
-                        _HMG_aControles[nItem,1] := "chk" + "Control" + ALLTRIM( Str( nItem ,4,0) )
+                        _HMG_aControles[nItem,1] := "chk" + "Control" + ALLTRIM( STR( nItem ,4,0) )
                         _HMG_aControles[nItem,2] := nFila
                         _HMG_aControles[nItem,3] := nColumna + 80
                 case _aEstructura[nItem,2] == "M"        // Campo tipo memo.
-                        _HMG_aControles[nItem,1] := "edt" + "Control" + ALLTRIM( Str( nItem ,4,0) )
+                        _HMG_aControles[nItem,1] := "edt" + "Control" + ALLTRIM( STR( nItem ,4,0) )
                         _HMG_aControles[nItem,2] := nFila
                         _HMG_aControles[nItem,3] := nColumna + 80
                         nFila += 25
@@ -353,7 +353,7 @@ end window
 for nItem := 1 to nCampos
 
 	_HMG_cMacroTemp := aEtiquetas[nItem,1]
-
+	
         @ aEtiquetas[nItem,2], aEtiquetas[nItem,3] label &_HMG_cMacroTemp ;
                 of     wndABM ;
                 value  _aCampos[nItem] ;
@@ -401,7 +401,7 @@ next
         workarea &_cArea ;
         fields   aBrwCampos ;
         value    (_cArea)->( RecNo() ) ;
-        on change {|| (_cArea)->( dbGoto( wndABM.brwBrowse.Value ) ), ABMRefresh( ABM_MODO_VER ) }
+        on change {|| (_cArea)->( dbGoTo( wndABM.brwBrowse.Value ) ), ABMRefresh( ABM_MODO_VER ) }
 
 // Definición de los botones.--------------------------------------------------
 @ 400, 535 button btnCerrar ;
@@ -552,9 +552,9 @@ for nItem := 1 to nCampos
                         else
                                 nMascaraTotal     := _aEstructura[nItem,3]
                                 nMascaraDecimales := _aEstructura[nItem,4]
-                                cMascara := Replicate( "9", nMascaraTotal - (nMascaraDecimales + 1) )
+                                cMascara := REPLICATE( "9", nMascaraTotal - (nMascaraDecimales + 1) )
                                 cMascara += "."
-                                cMascara += Replicate( "9", nMascaraDecimales )
+                                cMascara += REPLICATE( "9", nMascaraDecimales )
 
 				_HMG_cMacroTemp := _HMG_aControles[nItem,1]
 
@@ -582,7 +582,7 @@ for nItem := 1 to nCampos
                         *wndABM.&_HMG_cMacroTemp.Height := 21
 
 			SetProperty ( 'wndABM' , _HMG_aControles[nItem,1] , 'Height' , 21 )
-
+        
 
         case _aEstructura[nItem,2] == "L"        // Campo tipo logico.
 
@@ -620,13 +620,13 @@ activate window wndABM
 
 ////////// Restaurar SET DELETED a su valor inicial
 
-        Set( _SET_DELETED , _BackDeleted  )
+        set( _SET_DELETED , _BackDeleted  )
 
 
 // Salida.---------------------------------------------------------------------
 (_cArea )->( dbGoTop() )
 dbSelectArea( nArea )
-dbGoto( nRegistro )
+dbGoTo( nRegistro )
 
 return ( nil )
 
@@ -642,8 +642,8 @@ return ( nil )
 STATIC function ABMRefresh( nEstado )
 
 // Declaración de variables locales.-------------------------------------------
-local nItem                                          // Indice de iteración.
-// local cMensaje                                       // Mensajes al usuario.
+local nItem    := 1                                     // Indice de iteración.
+local cMensaje := ""                                    // Mensajes al usuario.
 
 // Refresco del cuadro de dialogo.
 do case
@@ -698,8 +698,8 @@ do case
                 next
 
                 // Numero de registro y total.
-                wndABM.lblRegistro.Value := ALLTRIM( Str( (_cArea)->(RecNo()) ) )
-                wndABM.lblTotales.Value  := ALLTRIM( Str( (_cArea)->(RecCount()) ) )
+                wndABM.lblRegistro.Value := ALLTRIM( STR( (_cArea)->(RecNo()) ) )
+                wndABM.lblTotales.Value  := ALLTRIM( STR( (_cArea)->(RecCount()) ) )
 
         // Modo de edición.----------------------------------------------------
         case nEstado == ABM_MODO_EDITAR
@@ -729,8 +729,8 @@ do case
                 next
 
                 // Numero de registro y total.
-                wndABM.lblRegistro.Value := ALLTRIM( Str( (_cArea)->(RecNo()) ) )
-                wndABM.lblTotales.Value  := ALLTRIM( Str( (_cArea)->(RecCount()) ) )
+                wndABM.lblRegistro.Value := ALLTRIM( STR( (_cArea)->(RecNo()) ) )
+                wndABM.lblTotales.Value  := ALLTRIM( STR( (_cArea)->(RecCount()) ) )
 
         // Control de error.---------------------------------------------------
         otherwise
@@ -751,13 +751,13 @@ return ( nil )
 STATIC function ABMEventos( nEvento )
 
 // Declaración de variables locales.-------------------------------------------
-local nItem                                             // Indice de iteración.
-// local cMensaje                                          // Mensaje al usuario.
+local nItem      := 1                                   // Indice de iteración.
+local cMensaje   := ""                                  // Mensaje al usuario.
 local aValores   := {}                                  // Valores de los campos de edición.
-local nRegistro                                         // Numero de registro.
-local lGuardar                                          // Salida del bloque _bGuardar.
-local cModo                                             // Texto del modo.
-local cRegistro                                         // Numero de registro.
+local nRegistro  := 0                                   // Numero de registro.
+local lGuardar   := .t.                                 // Salida del bloque _bGuardar.
+local cModo      := ""                                  // Texto del modo.
+local cRegistro  := ""                                  // Numero de registro.
 
 // Gestión de eventos.
 do case
@@ -823,15 +823,15 @@ do case
 
                 // Borra el registro si se acepta.
                 if MsgOKCancel( _HMG_SYSDATA [ 131 ][1], "" )
-	                if (_cArea)->( RLock() )
+	                if (_cArea)->( rlock() )
         	           (_cArea)->( dbDelete() )
                 	   (_cArea)->( dbCommit() )
-	                   (_cArea)->( dbUnlock() )
-        	           if .not. Set( _SET_DELETED )
+	                   (_cArea)->( dbunlock() )
+        	           if .not. set( _SET_DELETED )
                 	      set deleted on
 	                   endif
         	           (_cArea)->( dbSkip() )
-                	   if (_cArea)->( Eof() )
+                	   if (_cArea)->( eof() )
 	                      (_cArea)->( dbGoBottom() )
         	           endif
 	                else
@@ -862,7 +862,7 @@ do case
                 if !Empty( cRegistro )
                         nRegistro := Val( cRegistro )
                         if ( nRegistro != 0 ) .and. ( nRegistro <= (_cArea)->( RecCount() ) )
-                                (_cArea)->( dbGoto( nRegistro ) )
+                                (_cArea)->( dbGoTo( nRegistro ) )
                                 wndABM.brwBrowse.Value := nRegistro
                         endif
                 endif
@@ -875,29 +875,29 @@ do case
         case nEvento == ABM_EVENTO_PRIMERO
                 (_cArea)->( dbGoTop() )
                 wndABM.brwBrowse.Value   := (_cArea)->( RecNo() )
-                wndABM.lblRegistro.Value := ALLTRIM( Str( (_cArea)->(RecNo()) ) )
-                wndABM.lblTotales.Value  := ALLTRIM( Str( (_cArea)->(RecCount()) ) )
+                wndABM.lblRegistro.Value := ALLTRIM( STR( (_cArea)->(RecNo()) ) )
+                wndABM.lblTotales.Value  := ALLTRIM( STR( (_cArea)->(RecCount()) ) )
 
         // Pulsación del botón ANTERIOR.---------------------------------------
         case nEvento == ABM_EVENTO_ANTERIOR
                 (_cArea)->( dbSkip( -1 ) )
                 wndABM.brwBrowse.Value   := (_cArea)->( RecNo() )
-                wndABM.lblRegistro.Value := ALLTRIM( Str( (_cArea)->(RecNo()) ) )
-                wndABM.lblTotales.Value  := ALLTRIM( Str( (_cArea)->(RecCount()) ) )
+                wndABM.lblRegistro.Value := ALLTRIM( STR( (_cArea)->(RecNo()) ) )
+                wndABM.lblTotales.Value  := ALLTRIM( STR( (_cArea)->(RecCount()) ) )
 
         // Pulsación del botón SIGUIENTE.--------------------------------------
         case nEvento == ABM_EVENTO_SIGUIENTE
                 (_cArea)->( dbSkip( 1 ) )
                 wndABM.brwBrowse.Value := (_cArea)->( RecNo() )
-                wndABM.lblRegistro.Value := ALLTRIM( Str( (_cArea)->(RecNo()) ) )
-                wndABM.lblTotales.Value  := ALLTRIM( Str( (_cArea)->(RecCount()) ) )
+                wndABM.lblRegistro.Value := ALLTRIM( STR( (_cArea)->(RecNo()) ) )
+                wndABM.lblTotales.Value  := ALLTRIM( STR( (_cArea)->(RecCount()) ) )
 
         // Pulsación del botón ULTIMO.-----------------------------------------
         case nEvento == ABM_EVENTO_ULTIMO
                 (_cArea)->( dbGoBottom() )
                 wndABM.brwBrowse.Value   := (_cArea)->( RecNo() )
-                wndABM.lblRegistro.Value := ALLTRIM( Str( (_cArea)->(RecNo()) ) )
-                wndABM.lblTotales.Value  := ALLTRIM( Str( (_cArea)->(RecCount()) ) )
+                wndABM.lblRegistro.Value := ALLTRIM( STR( (_cArea)->(RecNo()) ) )
+                wndABM.lblTotales.Value  := ALLTRIM( STR( (_cArea)->(RecCount()) ) )
 
         // Pulsación del botón GUARDAR.----------------------------------------
         case nEvento == ABM_EVENTO_GUARDAR
@@ -907,8 +907,8 @@ do case
                         if .not. _lEditar
                                 (_cArea)->( dbAppend() )
                         endif
-
-			if (_cArea)->(RLock())
+  
+			if (_cArea)->(rlock())
 
 				for nItem := 1 to HMG_LEN( _HMG_aControles )
 					_HMG_cMacroTemp := _HMG_aControles[nItem,1]
@@ -923,7 +923,7 @@ do case
 
 	                        wndABM.brwBrowse.Value := (_cArea)->( RecNo() )
 	                        wndABM.brwBrowse.Refresh
-        	                wndABM.Title := hb_USubStr( wndABM.Title, 1, HMG_LEN(wndABM.Title) - 12 )
+        	                wndABM.Title := HB_USUBSTR( wndABM.Title, 1, HMG_LEN(wndABM.Title) - 12 )
 
 			else
 
@@ -946,7 +946,7 @@ do case
                                 // Refresca el browse.
                                 wndABM.brwBrowse.Value := (_cArea)->( RecNo() )
                                 wndABM.brwBrowse.Refresh
-                                wndABM.Title := hb_USubStr( wndABM.Title, 1, HMG_LEN(wndABM.Title) - 12 )
+                                wndABM.Title := HB_USUBSTR( wndABM.Title, 1, HMG_LEN(wndABM.Title) - 12 )
                         endif
                 endif
 
@@ -955,7 +955,7 @@ do case
 
                 // Pasa a modo de visualización.
                 ABMRefresh( ABM_MODO_VER )
-                wndABM.Title := hb_USubStr( wndABM.Title, 1, HMG_LEN(wndABM.Title) - 12 )
+                wndABM.Title := HB_USUBSTR( wndABM.Title, 1, HMG_LEN(wndABM.Title) - 12 )
 
         // Control de error.---------------------------------------------------
         otherwise
@@ -976,14 +976,14 @@ return ( nil )
 STATIC function ABMBuscar()
 
 // Declaración de variables locales.-------------------------------------------
-local nItem                                             // Indice de iteración.
+local nItem      := 0                                   // Indice de iteración.
 local aCampo     := {}                                  // Nombre de los campos.
 local aTipoCampo := {}                                  // Matriz con los tipos de campo.
-local cCampo                                            // Nombre del campo.
-// local cMensaje                                          // Mensaje al usuario.
-local nTipoCampo                                        // Indice el tipo de campo.
-local cTipoCampo                                        // Tipo de campo.
-local cModo                                             // Texto del modo de busqueda.
+local cCampo     := ""                                  // Nombre del campo.
+local cMensaje   := ""                                  // Mensaje al usuario.
+local nTipoCampo := 0                                   // Indice el tipo de campo.
+local cTipoCampo := ""                                  // Tipo de campo.
+local cModo      := ""                                  // Texto del modo de busqueda.
 
 // Obtiene el nombre y el tipo de campo.---------------------------------------
 for nItem := 1 to HMG_LEN( _aEstructura )
@@ -1095,7 +1095,7 @@ if (_cArea)->( dbSeek( wndABMBuscar.txtBuscar.Value ) )
         nRegistro := (_cArea)->( RecNo() )
 else
         msgExclamation( _HMG_SYSDATA [ 131 ][5] , "" )
-        (_cArea)->(dbGoto( nRegistro ) )
+        (_cArea)->(dbGoTo( nRegistro ) )
 endif
 
 // Cierra y actualiza.---------------------------------------------------------
@@ -1116,11 +1116,11 @@ return ( nil )
 function ABMListado()
 
 // Declaración de variables locales.-------------------------------------------
-local nItem                                             // Indice de iteración.
+local nItem          := 1                               // Indice de iteración.
 local aCamposListado := {}                              // Matriz con los campos del listado.
 local aCamposTotales := {}                              // Matriz con los campos totales.
-local nPrimero                                          // Registro inicial.
-local nUltimo                                           // Registro final.
+local nPrimero       := 0                               // Registro inicial.
+local nUltimo        := 0                               // Registro final.
 local nRegistro      := (_cArea)->( RecNo() )           // Registro anterior.
 
 // Inicialización de variables.------------------------------------------------
@@ -1138,7 +1138,7 @@ next
 nPrimero := (_cArea)->( RecNo() )
 (_cArea)->( dbGoBottom() )
 nUltimo  := (_cArea)->( RecNo() )
-(_cArea)->( dbGoto( nRegistro ) )
+(_cArea)->( dbGoTo( nRegistro ) )
 
 // Defincicón de la ventana del proceso.---------------------------------------
 define window wndABMListado ;
@@ -1277,14 +1277,14 @@ return ( nil )
 function ABMListadoEvento( nEvento )
 
 // Declaración de variables locales.-------------------------------------------
-local cItem                                             // Nombre del item.
-local nItem                                             // Numero del item.
+local cItem        := ""                                // Nombre del item.
+local nItem        := 0                                 // Numero del item.
 local aCampo       := {}                                // Nombres de los campos.
-local nIndice                                           // Numero del campo.
-local nAnchoCampo                                       // Ancho del campo.
-local nAnchoTitulo                                      // Ancho del título.
+local nIndice      := 0                                 // Numero del campo.
+local nAnchoCampo  := 0                                 // Ancho del campo.
+local nAnchoTitulo := 0                                 // Ancho del título.
 local nTotal       := 0                                 // Ancho total.
-// local cMensaje                                          // Mensaje al usuario.
+local cMensaje     := ""                                // Mensaje al usuario.
 local nPrimero     := wndABMListado.spnPrimero.Value    // Registro inicial.
 local nUltimo      := wndABMListado.spnUltimo.Value     // Registro final.
 
@@ -1392,28 +1392,28 @@ function ABMListadoImprimir( lOrientacion, nPrimero, nUltimo )
 
 // Declaración de variables locales.-------------------------------------------
 local nLineas   := 0                                    // Numero de linea.
-local nPaginas                                          // Numero de páginas.
+local nPaginas  := 0                                    // Numero de páginas.
 local nFila     := 12                                   // Numero de fila.
 local nColumna  := 10                                   // Numero de columna.
-local nItem                                             // Indice de iteracion.
-local nIndice                                           // Indice de campo.
-local lCabecera                                         // ¿Imprimir cabecera?.
-// local lPie                                              // ¿Imprimir pie?.
+local nItem     := 1                                    // Indice de iteracion.
+local nIndice   := 1                                    // Indice de campo.
+local lCabecera := .t.                                  // ¿Imprimir cabecera?.
+local lPie      := .f.                                  // ¿Imprimir pie?.
 local nPagina   := 1                                    // Numero de pagina.
-local lSalida                                           // ¿Salir del listado?.
+local lSalida   := .t.                                  // ¿Salir del listado?.
 local nRegistro := (_cArea)->( RecNo() )                // Registro anterior.
-local cTexto                                            // Texto para lógicos.
-local lsuccess
+local cTexto    := ""                                   // Texto para lógicos.
+local lsuccess  := .f.
 LOCAL RF := 4
 LOCAL CF := 3
 
 // Definición del rango del listado.-------------------------------------------
-(_cArea)->( dbGoto( nPrimero ) )
+(_cArea)->( dbGoTo( nPrimero ) )
 do while .not. ( (_cArea)->( RecNo() ) ) == nUltimo .or. ( (_cArea)->( Eof() ) )
          nLineas++
         (_cArea)->( dbSkip( 1 ) )
 enddo
-(_cArea)->( dbGoto( nPrimero ) )
+(_cArea)->( dbGoTo( nPrimero ) )
 
 // Inicialización de la impresora.---------------------------------------------
 
@@ -1437,17 +1437,17 @@ do while lSalida
         // Cabecera.-----------------------------------------------------------
         if lCabecera
 		START PRINTPAGE
-                @ 5*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][15] + _cTitulo FONT "COURIER NEW" SIZE 14 BOLD
+                @ 5*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][15] + _cTitulo FONT "COURIER NEW" SIZE 14 BOLD  
 
                 @ 6*RF + 2 , 10*CF PRINT LINE TO 6*RF + 2 , 62*CF PENWIDTH 0.2
-                @ 7*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][16]   FONT "COURIER NEW" SIZE 10 BOLD
-                @ 7*RF, 18*CF PRINT Date()                     FONT "COURIER NEW" SIZE 10
-                @ 8*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][17]    FONT "COURIER NEW" SIZE 10 BOLD
-                @ 8*RF, 30*CF PRINT ALLTRIM( Str( nPrimero ) ) FONT "COURIER NEW" SIZE 10
-                @ 8*RF, 40*CF PRINT _HMG_SYSDATA [ 132 ][18]     FONT "COURIER NEW" SIZE 10 BOLD
-                @ 8*RF, 60*CF PRINT ALLTRIM( Str( nUltimo ) )  FONT "COURIER NEW" SIZE 10
-                @ 9*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][19]     FONT "COURIER NEW" SIZE 10 BOLD
-                @ 9*RF, 30*CF PRINT ordName()                  FONT "COURIER NEW" SIZE 10
+                @ 7*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][16]   FONT "COURIER NEW" SIZE 10 BOLD  
+                @ 7*RF, 18*CF PRINT Date()                     FONT "COURIER NEW" SIZE 10   
+                @ 8*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][17]    FONT "COURIER NEW" SIZE 10 BOLD  
+                @ 8*RF, 30*CF PRINT ALLTRIM( STR( nPrimero ) ) FONT "COURIER NEW" SIZE 10   
+                @ 8*RF, 40*CF PRINT _HMG_SYSDATA [ 132 ][18]     FONT "COURIER NEW" SIZE 10 BOLD  
+                @ 8*RF, 60*CF PRINT ALLTRIM( STR( nUltimo ) )  FONT "COURIER NEW" SIZE 10   
+                @ 9*RF, 10*CF PRINT _HMG_SYSDATA [ 132 ][19]     FONT "COURIER NEW" SIZE 10 BOLD  
+                @ 9*RF, 30*CF PRINT ordName()                  FONT "COURIER NEW" SIZE 10   
                 nColumna := 10
                 for nItem := 1 to HMG_LEN( _aNumeroCampo )
                         nIndice := _aNumeroCampo[nItem]
@@ -1465,15 +1465,15 @@ do while lSalida
                 case _aEstructura[nIndice,2] == "L"
 
                         cTexto := iif( (_cArea)->( FieldGet( nIndice ) ), _HMG_SYSDATA [ 132 ][20], _HMG_SYSDATA [ 132 ][21] )
-                        @ nFila*RF, nColumna *CF PRINT cTexto FONT "COURIER NEW" SIZE 10
+                        @ nFila*RF, nColumna *CF PRINT cTexto FONT "COURIER NEW" SIZE 10   
                         nColumna += _aAnchoCampo[nItem]
                 case _aEstructura[nIndice,2] == "N"
                         nColumna += _aAnchoCampo[nItem] - 2
-                        @ nFila*RF, nColumna *CF PRINT (_cArea)->( FieldGet( nIndice ) ) FONT "COURIER NEW" SIZE 10
+                        @ nFila*RF, nColumna *CF PRINT (_cArea)->( FieldGet( nIndice ) ) FONT "COURIER NEW" SIZE 10   
                         nColumna += 2
                 otherwise
 
-                        @ nFila*RF, nColumna *CF PRINT (_cArea)->( FieldGet( nIndice ) ) FONT "COURIER NEW" SIZE 10
+                        @ nFila*RF, nColumna *CF PRINT (_cArea)->( FieldGet( nIndice ) ) FONT "COURIER NEW" SIZE 10   
                         nColumna += _aAnchoCampo[nItem]
                 endcase
         next
@@ -1491,7 +1491,7 @@ do while lSalida
 
                         @ 45*RF, 10 *CF PRINT LINE TO 45*RF , 50 *CF PENWIDTH 0.2
 
-                        @ 45*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( Str( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( Str( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD
+                        @ 45*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( STR( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( STR( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD  
                         lCabecera := .t.
                         nPagina++
                         nFila := 12
@@ -1507,7 +1507,7 @@ do while lSalida
 
                         @ 65 * RF - 1 , 10 *CF PRINT LINE TO 65 * RF - 1 , 62 * CF PENWIDTH 0.2
 
-                        @ 65*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( Str( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( Str( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD
+                        @ 65*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( STR( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( STR( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD  
                         lCabecera := .t.
                         nPagina++
                         nFila := 12
@@ -1525,7 +1525,7 @@ do while lSalida
                         nIndice := _aNumeroCampo[nItem]
                         do case
                         case _aEstructura[nIndice,2] == "L"
-
+                                
                                 cTexto := iif( (_cArea)->( FieldGet( nIndice ) ), _HMG_SYSDATA [ 132 ][20], _HMG_SYSDATA [ 132 ][21] )
                                 @ nFila*RF, nColumna *CF PRINT cTexto FONT "COURIER NEW" SIZE 10
                                 nColumna += _aAnchoCampo[nItem]
@@ -1554,7 +1554,7 @@ if lOrientacion
                         nPaginas++
                 endif
                 @ 45*RF, 10 *CF PRINT LINE TO 45*RF , 62*CF PENWIDTH 0.2
-                @ 45*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( Str( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( Str( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD
+                @ 45*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( STR( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( STR( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD  
         endif
 else
         // Vertical
@@ -1564,7 +1564,7 @@ else
                         nPaginas++
                 endif
                 @ 65*RF - 1 , 10*CF PRINT LINE TO 65*RF - 1 ,62*CF PENWIDTH 0.2
-                @ 65*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( Str( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( Str( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD
+                @ 65*RF, 60/2*CF PRINT _HMG_SYSDATA [ 132 ][22] + ALLTRIM( STR( nPagina ) ) + _HMG_SYSDATA [ 132 ][23] + ALLTRIM( STR( nPaginas ) ) FONT "COURIER NEW" SIZE 10 BOLD  
         endif
 endif
 
@@ -1572,7 +1572,7 @@ END PRINTPAGE
 END PRINTDOC
 
 // Restaura.-------------------------------------------------------------------
-(_cArea)->( dbGoto( nRegistro ) )
+(_cArea)->( dbGoTo( nRegistro ) )
 
 return ( nil )
 
@@ -1586,7 +1586,7 @@ Local i
 	ELse
 		Asize ( NewArray , HMG_LEN (OldArray) )
 	EndIf
-
+	
 	For i := 1 To HMG_LEN ( OldArray )
 
 		If OldArray [i] == .t.

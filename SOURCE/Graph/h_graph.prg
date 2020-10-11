@@ -2,7 +2,7 @@
 /*
 File:		h_graph.prg
 Author:		Grigory Filatov / Rathinagiri (Pie Graph)
-Description:
+Description:	
 Status:		Public Domain
 Notes:		Support function for DRAW commands
 
@@ -20,11 +20,11 @@ Local FormHandle := _HMG_SYSDATA [ 67  ] [i]
 
 	if formhandle > 0
 
-		if ValType(penrgb) == "U"
+		if valtype(penrgb) == "U"
 			penrgb = {0,0,0}
 		endif
-
-		if ValType(penwidth) == "U"
+	
+		if valtype(penwidth) == "U"
 			penwidth = 1
 		endif
 
@@ -42,19 +42,19 @@ Local FormHandle := _HMG_SYSDATA [ 67  ] [i] , fill
 
 if formhandle > 0
 
-   if ValType(penrgb) == "U"
+   if valtype(penrgb) == "U"
       penrgb = {0,0,0}
    endif
 
-   if ValType(penwidth) == "U"
+   if valtype(penwidth) == "U"
       penwidth = 1
    endif
 
-   if ValType(fillrgb) == "U"
+   if valtype(fillrgb) == "U"
       fillrgb := {255,255,255}
       fill := .f.
    else
-      fill := .t.
+      fill := .t.   
    endif
 
    rectdraw( FormHandle,row,col,row1,col1,penrgb,penwidth,fillrgb,fill)
@@ -66,20 +66,20 @@ return nil
 
 function drawroundrect(window,row,col,row1,col1,width,height,penrgb,penwidth,fillrgb)
 Local i := GetFormIndex ( Window )
-Local FormHandle := _HMG_SYSDATA [ 67  ] [i] , fill
+Local FormHandle := _HMG_SYSDATA [ 67  ] [i] , fill 
 
 if formhandle > 0
-   if ValType(penrgb) == "U"
+   if valtype(penrgb) == "U"
       penrgb = {0,0,0}
    endif
-   if ValType(penwidth) == "U"
+   if valtype(penwidth) == "U"
       penwidth = 1
    endif
-   if ValType(fillrgb) == "U"
+   if valtype(fillrgb) == "U"
       fillrgb := {255,255,255}
       fill := .f.
    else
-      fill := .t.
+      fill := .t.   
    endif
    roundrectdraw( FormHandle,row,col,row1,col1,width,height,penrgb,penwidth,fillrgb,fill)
 
@@ -93,17 +93,17 @@ Local i := GetFormIndex ( Window )
 Local FormHandle := _HMG_SYSDATA [ 67  ] [i] , fill
 
 if formhandle > 0
-   if ValType(penrgb) == "U"
+   if valtype(penrgb) == "U"
       penrgb = {0,0,0}
    endif
-   if ValType(penwidth) == "U"
+   if valtype(penwidth) == "U"
       penwidth = 1
    endif
-   if ValType(fillrgb) == "U"
+   if valtype(fillrgb) == "U"
       fillrgb := {255,255,255}
       fill := .f.
    else
-      fill := .t.
+      fill := .t.   
    endif
    ellipsedraw( FormHandle ,row,col,row1,col1,penrgb,penwidth,fillrgb,fill)
 
@@ -114,13 +114,13 @@ return nil
 
 function drawarc(window,row,col,row1,col1,rowr,colr,rowr1,colr1,penrgb,penwidth)
 Local i := GetFormIndex ( Window )
-Local FormHandle := _HMG_SYSDATA [ 67  ] [i]
+Local FormHandle := _HMG_SYSDATA [ 67  ] [i] 
 
 if formhandle > 0
-   if ValType(penrgb) == "U"
+   if valtype(penrgb) == "U"
       penrgb = {0,0,0}
    endif
-   if ValType(penwidth) == "U"
+   if valtype(penwidth) == "U"
       penwidth = 1
    endif
    arcdraw( FormHandle ,row,col,row1,col1,rowr,colr,rowr1,colr1,penrgb,penwidth)
@@ -135,17 +135,17 @@ Local i := GetFormIndex ( Window )
 Local FormHandle := _HMG_SYSDATA [ 67  ] [i] , fill
 
 if formhandle > 0
-   if ValType(penrgb) == "U"
+   if valtype(penrgb) == "U"
       penrgb = {0,0,0}
    endif
-   if ValType(penwidth) == "U"
+   if valtype(penwidth) == "U"
       penwidth = 1
    endif
-   if ValType(fillrgb) == "U"
+   if valtype(fillrgb) == "U"
       fillrgb := {255,255,255}
       fill := .f.
    else
-      fill := .t.
+      fill := .t.   
    endif
    piedraw( FormHandle,row,col,row1,col1,rowr,colr,rowr1,colr1,penrgb,penwidth,fillrgb,fill)
 
@@ -159,27 +159,27 @@ Local i := GetFormIndex ( Window )
 Local FormHandle := _HMG_SYSDATA [ 67  ] [i] , fill
 local xarr := {}
 local yarr := {}
-local x
+local x := 0
 
 if formhandle > 0
-   if ValType(penrgb) == "U"
+   if valtype(penrgb) == "U"
       penrgb = {0,0,0}
    endif
-   if ValType(penwidth) == "U"
+   if valtype(penwidth) == "U"
       penwidth = 1
    endif
-   if ValType(fillrgb) == "U"
+   if valtype(fillrgb) == "U"
       fillrgb := {255,255,255}
       fill := .f.
    else
-      fill := .t.
+      fill := .t.   
    endif
    for x := 1 to HMG_LEN(apoints)
        aadd(xarr,apoints[x,2])
        aadd(yarr,apoints[x,1])
    next x
    polygondraw(FormHandle,xarr,yarr,penrgb,penwidth,fillrgb,fill)
-   aadd( _HMG_SYSDATA [ 102 ][i] , {||polygondraw(FormHandle,xarr,yarr,penrgb,penwidth,fillrgb,fill)})
+   aadd( _HMG_SYSDATA [ 102 ][i] , {||polygondraw(FormHandle,xarr,yarr,penrgb,penwidth,fillrgb,fill)})   
 endif
 return nil
 
@@ -188,13 +188,13 @@ Local i := GetFormIndex ( Window )
 Local FormHandle := _HMG_SYSDATA [ 67  ] [i]
 local xarr := {}
 local yarr := {}
-local x
+local x := 0
 
 if formhandle > 0
-   if ValType(penrgb) == "U"
+   if valtype(penrgb) == "U"
       penrgb = {0,0,0}
    endif
-   if ValType(penwidth) == "U"
+   if valtype(penwidth) == "U"
       penwidth = 1
    endif
    for x := 1 to HMG_LEN(apoints)
@@ -202,7 +202,7 @@ if formhandle > 0
        aadd(yarr,apoints[x,1])
    next x
    polybezierdraw(FormHandle,xarr,yarr,penrgb,penwidth)
-   aadd( _HMG_SYSDATA [ 102 ][i] , {||polybezierdraw(FormHandle,xarr,yarr,penrgb,penwidth)})
+   aadd( _HMG_SYSDATA [ 102 ][i] , {||polybezierdraw(FormHandle,xarr,yarr,penrgb,penwidth)})   
 endif
 return nil
 
@@ -239,7 +239,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
 	DEFAULT nLegendWindth := 50
 
 	If 	( HMG_LEN (aSeries) != HMG_LEN (aData) ) .or. ;
-		( HMG_LEN (aSeries) != HMG_LEN (aColors) )
+		( HMG_LEN (aSeries) != HMG_LEN (aColors) ) 
 
 		MsgHMGError("DRAW GRAPH: 'Series' / 'SerieNames' / 'Colors' arrays size mismatch. Program terminated","HMG Error")
 	EndIf
@@ -251,28 +251,28 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
 	EndIf
 
 	For ni := 1 To 16
-		cName := "Ser_Name_"+LTrim(Str(ni))
+		cName := "Ser_Name_"+LTRIM(STR(ni))
 		If _IsControlDefined ( cName, Parent )
 			_ReleaseControl ( cName , Parent )
 		EndIf
 	Next
 
 	For ni := 0 To 15
-		cName := "xPVal_Name_"+LTrim(Str(ni))
+		cName := "xPVal_Name_"+LTRIM(STR(ni))
 		If _IsControlDefined ( cName, Parent )
 			_ReleaseControl ( cName , Parent )
 		EndIf
 	Next
 
 	For ni := 0 To 15
-		cName := "xNVal_Name_"+LTrim(Str(ni))
+		cName := "xNVal_Name_"+LTRIM(STR(ni))
 		If _IsControlDefined ( cName, Parent )
 			_ReleaseControl ( cName , Parent )
 		EndIf
 	Next
 
 	For ni := 1 To 16
-		cName := "yVal_Name_"+LTrim(Str(ni))
+		cName := "yVal_Name_"+LTRIM(STR(ni))
 		If _IsControlDefined ( cName, Parent )
 			_ReleaseControl ( cName , Parent )
 		EndIf
@@ -280,7 +280,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
 
 	FOR nI := 1 TO HMG_LEN(aData[1])
 		FOR nJ := 1 TO HMG_LEN(aSeries)
-			cName := "Data_Name_"+LTrim(Str(nI))+LTrim(Str(nJ))
+			cName := "Data_Name_"+LTRIM(STR(nI))+LTRIM(STR(nJ))
 			If _IsControlDefined ( cName, Parent )
 				_ReleaseControl ( cName , Parent )
 			EndIf
@@ -311,7 +311,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
    //
    IF ! lNoborder
 	   DrawWindowBoxIn( parent, Max(1,nTop-44), Max(1,nLeft-80-nBarD), nHeight-1, nWidth-1 )
-   ENDIF
+   ENDIF	
 
    // Back area
    //
@@ -378,7 +378,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
       nPos := nTop
       FOR nI := 1 TO HMG_LEN(aSeries)
          DrawBar( parent, nRight+(8*nResH), nPos+(9*nResV), 8*nResH, 7*nResV, l3D, 1, aColors[nI] )
-         cName := "Ser_Name_"+LTrim( Str( nI ) )
+         cName := "Ser_Name_"+LTRIM( STR( nI ) )
          @ nPos, nRight+(20*nResH) LABEL &cName OF &parent ;
 		VALUE aSeries[nI] AUTOSIZE ;
 		FONTCOLOR BLACK ;
@@ -405,7 +405,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
    nXMin := IF( nMin < 0, DetMaxVal( nMin ), 0 )
    nHigh := nXMax + nXMin
    nMax  := Max( nXMax, nXMin )
-
+   
    nRel  := ( nMaxBar / nHigh )
    nMaxBar := nMax * nRel
 
@@ -431,7 +431,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
    FOR nI := 0 TO nXRanges
       IF lxVal
          IF nRange*nI <= nXMax
-            cName := "xPVal_Name_"+LTrim(Str(nI))
+            cName := "xPVal_Name_"+LTRIM(STR(nI))
             @ nRPos, nLeft-nDeep-70 LABEL &cName OF &parent ;
 			VALUE Transform(nRange*nI, cPicture) ;
 			WIDTH 60 ;
@@ -439,7 +439,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
 			FONTCOLOR BLUE FONT "Arial" SIZE 8 TRANSPARENT RIGHTALIGN
          ENDIF
          IF nRange*(-nI) >= nXMin*(-1)
-            cName := "xNVal_Name_"+LTrim(Str(nI))
+            cName := "xNVal_Name_"+LTRIM(STR(nI))
             @ nRNeg, nLeft-nDeep-70 LABEL &cName OF &parent ;
 			VALUE Transform(nRange*-nI, cPicture) ;
 			WIDTH 60 ;
@@ -495,13 +495,13 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
    nMin := nMax / nMaxBar
 
    nPos := nLeft + ( ( nWide + nSep ) / 2 )            // first point graph
-   // nRange := ( ( nWide + nSep ) * HMG_LEN(aSeries) ) / 2  //  Variable 'NRANGE' is assigned but not used in function
+   nRange := ( ( nWide + nSep ) * HMG_LEN(aSeries) ) / 2
 
    IF lyVal .AND. HMG_LEN(aYVals) > 0                // Show yLabels
       nWideB  := ( nRight - nLeft ) / ( nMax(aData) + 1 )
       nI := nLeft + nWideB
       FOR nJ := 1 TO nMax(aData)
-         cName := "yVal_Name_"+LTrim(Str(nJ))
+         cName := "yVal_Name_"+LTRIM(STR(nJ))
          @ nBottom + 8, nI - nDeep - IF(l3D, 0, 8) LABEL &cName OF &parent ;
 		VALUE aYVals[nJ] AUTOSIZE ;
 		FONTCOLOR BLUE ;
@@ -514,7 +514,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
 
    // Bars
    //
-
+	
 	IF nType == BARS
 		if nMin <> 0
 			nPos := nLeft + ( ( nWide + nSep ) / 2 )
@@ -585,7 +585,7 @@ Procedure GraphShow(parent,nTop,nLeft,nBottom,nRight,nHeight,nWidth,aData,cTitle
       ENDIF
       FOR nI := 1 TO HMG_LEN(aData[1])
          FOR nJ := 1 TO HMG_LEN(aSeries)
-            cName := "Data_Name_"+LTrim(Str(nI))+LTrim(Str(nJ))
+            cName := "Data_Name_"+LTRIM(STR(nI))+LTRIM(STR(nJ))
             @ nZero - ( aData[nJ,nI] / nMin + nDeep ), IF(nType == BARS, nPos - IF(l3D, 8, 10), nPos + 10) ;
 			LABEL &cName OF &parent ;
 			VALUE Transform(aData[nJ,nI], cPicture) AUTOSIZE ;
@@ -835,7 +835,7 @@ RETURN { Int( nR * 255 ), Int( nG * 255 ), Int( nB * 255 ) }
 
 function DrawWindowBoxIn(window,row,col,rowr,colr)
    Local i := GetFormIndex ( Window )
-   Local FormHandle := _HMG_SYSDATA [ 67  ] [i]
+   Local FormHandle := _HMG_SYSDATA [ 67  ] [i] 
    Local hDC := GetDC( FormHandle )
 
    WndBoxIn( hDC, row, col, rowr, colr )
@@ -843,34 +843,34 @@ function DrawWindowBoxIn(window,row,col,rowr,colr)
    ReleaseDC( FormHandle, hDC )
 
 return nil
-
+		
 
 function drawpiegraph(windowname,fromrow,fromcol,torow,tocol,series,aname,colors,ctitle,depth,l3d,lxval,lsleg,lnoborder)
-local topleftrow
-local topleftcol
-local toprightrow
-local toprightcol
-local bottomrightrow
-local bottomrightcol
-local bottomleftrow
-local bottomleftcol
-
-local middletopcol
-local middleleftrow
-local middleleftcol
-
-local middlebottomcol
-local middlerightrow
-local middlerightcol
-local fromradialrow
-local fromradialcol
-local toradialrow
-local toradialcol
+local topleftrow := fromrow
+local topleftcol := fromcol
+local toprightrow := fromrow
+local toprightcol := tocol
+local bottomrightrow := torow
+local bottomrightcol := tocol
+local bottomleftrow := torow
+local bottomleftcol := fromcol
+local middletoprow := fromrow
+local middletopcol := fromcol + int(tocol - fromcol) / 2
+local middleleftrow := fromrow + int(torow - fromrow) / 2
+local middleleftcol := fromcol
+local middlebottomrow := torow
+local middlebottomcol := fromcol + int(tocol - fromcol) / 2
+local middlerightrow := fromrow + int(torow - fromrow) / 2
+local middlerightcol := tocol
+local fromradialrow := 0
+local fromradialcol := 0
+local toradialrow := 0
+local toradialcol := 0
 local degrees := {}
 local cumulative := {}
 local j,i,sum := 0
-local cname
-local shadowcolor
+local cname := ""
+local shadowcolor := {}
 local previos_cumulative
 
 _HMG_SYSDATA [ 108 ] [ GetFormIndex (windowname) ] := { fromrow , fromcol , tocol - fromcol , torow - fromrow }
@@ -885,7 +885,7 @@ if ! lnoborder
 	DrawLine(windowname, fromrow+1,fromcol+1,fromrow+1,tocol-2,GRAY )
 	DrawLine(windowname, fromrow  ,tocol  ,torow  ,tocol  ,WHITE)
 	DrawLine(windowname, fromrow  ,tocol-1,torow-1,tocol-1,GRAY )
-
+   
 endif
 
 if HMG_LEN(ALLTRIM(ctitle)) > 0
@@ -906,7 +906,7 @@ if HMG_LEN(ALLTRIM(ctitle)) > 0
 	transparent .t.
    end label
    fromrow := fromrow + 40
-endif
+endif   
 
 if lsleg
    if HMG_LEN(aname) * 20 > (torow - fromrow)
@@ -936,11 +936,11 @@ bottomrightrow := torow
 bottomrightcol := tocol
 bottomleftrow := torow
 bottomleftcol := fromcol
-
+middletoprow := fromrow
 middletopcol := fromcol + int(tocol - fromcol) / 2
 middleleftrow := fromrow + int(torow - fromrow) / 2
 middleleftcol := fromcol
-
+middlebottomrow := torow
 middlebottomcol := fromcol + int(tocol - fromcol) / 2
 middlerightrow := fromrow + int(torow - fromrow) / 2
 middlerightcol := tocol
@@ -957,7 +957,7 @@ for i := 1 to HMG_LEN(series)
    sum := sum + series[i]
 next i
 for i := 1 to HMG_LEN(series)
-   aadd(degrees,Round(series[i]/sum * 360,0))
+   aadd(degrees,round(series[i]/sum * 360,0))
 next i
 sum := 0
 for i := 1 to HMG_LEN(degrees)
@@ -990,64 +990,64 @@ for i := 1 to HMG_LEN(cumulative)
    do case
       case cumulative[i] <= 45
          toradialcol := middlerightcol
-         toradialrow := middlerightrow - Round(cumulative[i] / 45 * (middlerightrow - toprightrow),0)
+         toradialrow := middlerightrow - round(cumulative[i] / 45 * (middlerightrow - toprightrow),0)
          drawpie(windowname,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,colors[i])
          fromradialrow := toradialrow
          fromradialcol := toradialcol
       case cumulative[i] <= 90 .and. cumulative[i] > 45
          toradialrow := toprightrow
-         toradialcol := toprightcol - Round((cumulative[i] - 45) / 45 * (toprightcol - middletopcol),0)
+         toradialcol := toprightcol - round((cumulative[i] - 45) / 45 * (toprightcol - middletopcol),0)
          drawpie(windowname,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,colors[i])
          fromradialrow := toradialrow
          fromradialcol := toradialcol
-      case cumulative[i] <= 135 .and. cumulative[i] > 90
+      case cumulative[i] <= 135 .and. cumulative[i] > 90          
          toradialrow := topleftrow
-         toradialcol := middletopcol - Round((cumulative[i] - 90) / 45 * (middletopcol - topleftcol),0)
+         toradialcol := middletopcol - round((cumulative[i] - 90) / 45 * (middletopcol - topleftcol),0)
          drawpie(windowname,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,colors[i])
          fromradialrow := toradialrow
          fromradialcol := toradialcol
-      case cumulative[i] <= 180 .and. cumulative[i] > 135
+      case cumulative[i] <= 180 .and. cumulative[i] > 135          
          toradialcol := topleftcol
-         toradialrow := topleftrow + Round((cumulative[i] - 135) / 45 * (middleleftrow - topleftrow),0)
+         toradialrow := topleftrow + round((cumulative[i] - 135) / 45 * (middleleftrow - topleftrow),0)
          drawpie(windowname,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,colors[i])
          fromradialrow := toradialrow
          fromradialcol := toradialcol
-      case cumulative[i] <= 225 .and. cumulative[i] > 180
+      case cumulative[i] <= 225 .and. cumulative[i] > 180          
          toradialcol := topleftcol
-         toradialrow := middleleftrow + Round((cumulative[i] - 180) / 45 * (bottomleftrow - middleleftrow),0)
+         toradialrow := middleleftrow + round((cumulative[i] - 180) / 45 * (bottomleftrow - middleleftrow),0)
          if l3d
             for j := 1 to depth
                drawarc(windowname,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
             next j
-         endif
+         endif   
          drawpie(windowname,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,colors[i])
          fromradialrow := toradialrow
          fromradialcol := toradialcol
-      case cumulative[i] <= 270 .and. cumulative[i] > 225
+      case cumulative[i] <= 270 .and. cumulative[i] > 225          
          toradialrow := bottomleftrow
-         toradialcol := bottomleftcol + Round((cumulative[i] - 225) / 45 * (middlebottomcol - bottomleftcol),0)
+         toradialcol := bottomleftcol + round((cumulative[i] - 225) / 45 * (middlebottomcol - bottomleftcol),0)
          if l3d
             for j := 1 to depth
                drawarc(windowname,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
             next j
-         endif
+         endif   
          drawpie(windowname,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,colors[i])
          fromradialrow := toradialrow
          fromradialcol := toradialcol
-      case cumulative[i] <= 315 .and. cumulative[i] > 270
+      case cumulative[i] <= 315 .and. cumulative[i] > 270          
          toradialrow := bottomleftrow
-         toradialcol := middlebottomcol + Round((cumulative[i] - 270) / 45 * (bottomrightcol - middlebottomcol),0)
+         toradialcol := middlebottomcol + round((cumulative[i] - 270) / 45 * (bottomrightcol - middlebottomcol),0)
          if l3d
             for j := 1 to depth
                drawarc(windowname,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
             next j
-         endif
+         endif   
          drawpie(windowname,fromrow,fromcol,torow,tocol,fromradialrow,fromradialcol,toradialrow,toradialcol,,,colors[i])
          fromradialrow := toradialrow
          fromradialcol := toradialcol
       case cumulative[i] <= 360 .and. cumulative[i] > 315
          toradialcol := bottomrightcol
-         toradialrow := bottomrightrow - Round((cumulative[i] - 315) / 45 * (bottomrightrow - middlerightrow),0)
+         toradialrow := bottomrightrow - round((cumulative[i] - 315) / 45 * (bottomrightrow - middlerightrow),0)
          if l3d
             for j := 1 to depth
                drawarc(windowname,fromrow + j,fromcol,torow+j,tocol,fromradialrow+j,fromradialcol,toradialrow+j,toradialcol,shadowcolor)
@@ -1057,7 +1057,7 @@ for i := 1 to HMG_LEN(cumulative)
          fromradialrow := toradialrow
          fromradialcol := toradialcol
       endcase
-   if l3d
+   if l3d            
       drawline(windowname,middleleftrow,middleleftcol,middleleftrow+depth,middleleftcol)
       drawline(windowname,middlerightrow,middlerightcol,middlerightrow+depth,middlerightcol)
       drawarc(windowname,fromrow + depth,fromcol,torow + depth,tocol,middleleftrow+depth,middleleftcol,middlerightrow+depth,middlerightcol)
@@ -1066,10 +1066,10 @@ next i
 if lsleg
    fromrow := torow + 20 + iif(l3d,depth,0)
    for i := 1 to HMG_LEN(aname)
-      if _iscontroldefined("pielegend_"+ALLTRIM(Str(i,3,0)),windowname)
-         _releasecontrol("pielegend_"+ALLTRIM(Str(i,3,0)),windowname)
+      if _iscontroldefined("pielegend_"+ALLTRIM(STR(i,3,0)),windowname)
+         _releasecontrol("pielegend_"+ALLTRIM(STR(i,3,0)),windowname)
       endif
-      cname := "pielegend_"+ALLTRIM(Str(i,3,0))
+      cname := "pielegend_"+ALLTRIM(STR(i,3,0))
       drawrect(windowname,fromrow,fromcol,fromrow + 15,fromcol + 15,{0,0,0},1,colors[i])
       define label &cname
          parent &windowname
@@ -1078,13 +1078,13 @@ if lsleg
          fontname "Arial"
          fontsize 8
          autosize .t.
-         value aname[i]+iif(lxval," - "+ALLTRIM(Str(series[i],19,2))+" ("+ALLTRIM(Str(degrees[i] / 360 * 100,6,2))+" %)","")
+         value aname[i]+iif(lxval," - "+ALLTRIM(STR(series[i],19,2))+" ("+ALLTRIM(STR(degrees[i] / 360 * 100,6,2))+" %)","")
          fontcolor colors[i]
 	transparent .t.
       end label
       fromrow := fromrow + 20
    next i
-endif
+endif   
 return nil
 
 Function printgraph ( cWindowName , lPreview , lDialog )
@@ -1112,7 +1112,7 @@ local aLocation
 		lDialog := .F.
 	endif
 
-	aLocation := _HMG_SYSDATA [ 108 ] [ GetFormIndex (cWindowName ) ]
+	aLocation := _HMG_SYSDATA [ 108 ] [ GetFormIndex (cWindowName ) ] 
 
 	PrintWindow ( cWindowName , lPreview , lDialog , aLocation [1] , aLocation [2] , aLocation [3] , aLocation [4] )
 

@@ -46,7 +46,7 @@ FUNCTION BeginIni(name, cIniFile )
     name := Nil
     *
 
-    if hb_UAt("\",cIniFile)==0
+    if HB_UAT("\",cIniFile)==0
        cIniFile := ".\"+cIniFile
     endif
 
@@ -62,7 +62,7 @@ FUNCTION BeginIni(name, cIniFile )
     EndIf
 
     If FError() != 0
-       MsgInfo( "Error opening a file INI. DOS ERROR: " + Str( FError(), 2, 0 ) )
+       MsgInfo( "Error opening a file INI. DOS ERROR: " + STR( FError(), 2, 0 ) )
        Return ""
     else
        _HMG_SYSDATA [ 219 ] := cIniFile
@@ -77,8 +77,8 @@ Return Nil
 Function _GetIni( cSection, cEntry, cDefault, uVar )
     Local cFile, cVar :=''
  
-    If !Empty(_HMG_SYSDATA [ 219 ])
-      if ValType(cDefault) == 'U'
+    If !empty(_HMG_SYSDATA [ 219 ])
+      if valtype(cDefault) == 'U'
         cDefault:=cVar
       endif
       cFile:=_HMG_SYSDATA [ 219 ]
@@ -94,7 +94,7 @@ Return uVar
 
 Function _SetIni( cSection, cEntry, cValue )
     Local ret:=.f., cFile
-    If !Empty(_HMG_SYSDATA [ 219 ])
+    If !empty(_HMG_SYSDATA [ 219 ])
         cFile:= _HMG_SYSDATA [ 219 ]
         ret :=WritePrivateProfileString( cSection, cEntry, xChar(cValue), cFile )
     endif 
@@ -103,7 +103,7 @@ Return ret
 
 Function  _DelIniEntry( cSection, cEntry )
     Local ret:=.f., cFile
-    If !Empty(_HMG_SYSDATA [ 219 ])
+    If !empty(_HMG_SYSDATA [ 219 ])
         cFile:= _HMG_SYSDATA [ 219 ]
         ret := DelIniEntry( cSection, cEntry, cFile )
     endif 
@@ -112,7 +112,7 @@ Return ret
 
 Function  _DelIniSection( cSection )
     Local ret:=.f., cFile
-    If !Empty(_HMG_SYSDATA [ 219 ])
+    If !empty(_HMG_SYSDATA [ 219 ])
         cFile:= _HMG_SYSDATA [ 219 ]
         ret := DelIniSection( cSection, cFile )
     endif 
@@ -132,7 +132,7 @@ FUNCTION xChar( xValue )
    LOCAL cValue := "", nDecimals := Set( _SET_DECIMALS)
    DO CASE
       CASE cType $  "CM";  cValue := xValue
-//    CASE cType == "N" ;  cValue := LTrim( Str( xValue, 20, nDecimals ) )
+//    CASE cType == "N" ;  cValue := LTRIM( STR( xValue, 20, nDecimals ) )
       CASE cType == "N" ;  nDecimals := IIF( xValue == Int( xValue ), 0, nDecimals ) ; cValue := LTrim( Str( xValue, 20, nDecimals ) )
       CASE cType == "D" ;  cValue := DToS( xValue )
       CASE cType == "L" ;  cValue := IIF( xValue, "T", "F" )
@@ -165,25 +165,25 @@ FUNCTION AToC( aArray )
       IF ( cType := ValType( aArray[ i ] ) ) == "A"
          cArray += cElement
       ELSE
-         cArray += hb_ULeft( cType, 1) + Str( HMG_LEN( cElement ),4 ) + cElement
+         cArray += HB_ULEFT( cType, 1) + STR( HMG_LEN( cElement ),4 ) + cElement
       ENDIF
    ENDFOR
-RETURN "A" + Str( HMG_LEN( cArray ),4 ) + cArray
+RETURN "A" + STR( HMG_LEN( cArray ),4 ) + cArray
 
 
 FUNCTION CToA( cArray )
    LOCAL cType, nLen, aArray := {}
 
-   cArray := hb_USubStr( cArray, 6 )    // strip off array and length
+   cArray := HB_USUBSTR( cArray, 6 )    // strip off array and length
 
      WHILE HMG_LEN( cArray ) > 0
-      nLen := Val( hb_USubStr( cArray, 2, 4 ) )
-      IF ( cType := hb_ULeft( cArray, 1 ) ) == "A"
-          AAdd( aArray, CToA( hb_USubStr( cArray, 1, nLen + 5 ) ) )
+      nLen := Val( HB_USUBSTR( cArray, 2, 4 ) )
+      IF ( cType := HB_ULEFT( cArray, 1 ) ) == "A"
+          AAdd( aArray, CToA( HB_USUBSTR( cArray, 1, nLen + 5 ) ) )
       ELSE
-          AAdd( aArray, xValue( hb_USubStr( cArray, 6, nLen ), cType ) )
+          AAdd( aArray, xValue( HB_USUBSTR( cArray, 6, nLen ), cType ) )
       ENDIF
-      cArray := hb_USubStr( cArray, 6 + nLen )
+      cArray := HB_USUBSTR( cArray, 6 + nLen )
    END
 RETURN aArray
 

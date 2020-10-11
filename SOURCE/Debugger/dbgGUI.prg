@@ -83,7 +83,7 @@ LOCAL i, nRet, cText := ""
    FOR i = 1 TO PCount()
        cText := cText + Iif( ValType( PValue( i ) ) == "A", hb_ValToExp( PValue( i ) ), hb_ValToStr( PValue( i ) ) ) + Space( 1 )
    NEXT
-   nRet := MessageBoxIndirect( NIL, cText, _HMG_DEBUGGER_NAME_, hb_bitOr( MB_SYSTEMMODAL, MB_OKCANCEL ), _HMG_DEBUGGER_ICON_ )
+   nRet := MessageBoxIndirect( NIL, cText, _HMG_DEBUGGER_NAME_, hb_bitOR( MB_SYSTEMMODAL, MB_OKCANCEL ), _HMG_DEBUGGER_ICON_ )
    IF nRet == IDCANCEL
       IF MsgYesNo ( "Are you sure you want to EXIT the program ?", _HMG_DEBUGGER_NAME_ ) == .T.
          ReleaseAllWindows()
@@ -148,7 +148,7 @@ LOCAL aFiles, lOldMainFirst
 
       lOldMainFirst := HMG_ActivateMainWindowFirst( .F. )
 
-#define _HMG_DEBUGGER_MSG_   "Wait while the debugger is loaded ..." + hb_eol()
+#define _HMG_DEBUGGER_MSG_   "Wait while the debugger is loaded ..." + hb_Eol()
 HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + "( DEFINE WINDOW )" )
 
       SET FONT TO "Calibri", 11
@@ -513,7 +513,7 @@ LOCAL cText := ""
    cText := cText + "Ctrl+F5" +Chr( 9 )+ "Next Routine" + hb_eol()
    cText := cText + "Ctrl+F3" +Chr( 9 )+ "Pause"        + hb_eol()
    cText := cText + "F9"      +Chr( 9 )+ "BreakPoint"   + hb_eol()
-   MessageBoxIndirect( NIL, cText, _HMG_DEBUGGER_NAME_ + " - Help", hb_bitOr( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
+   MessageBoxIndirect( NIL, cText, _HMG_DEBUGGER_NAME_ + " - Help", hb_bitOR( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
    lEntry := .F.
 RETURN
 
@@ -817,7 +817,7 @@ PROCEDURE Quit
 __THREAD STATIC lEntry := .F.
 LOCAL nRet
    IFENTRY( lEntry )
-   nRet := MessageBoxIndirect( NIL, "Are you sure you want to EXIT the program ?", _HMG_DEBUGGER_NAME_, hb_bitOr( MB_SYSTEMMODAL, MB_OKCANCEL ), _HMG_DEBUGGER_ICON_ )
+   nRet := MessageBoxIndirect( NIL, "Are you sure you want to EXIT the program ?", _HMG_DEBUGGER_NAME_, hb_bitOR( MB_SYSTEMMODAL, MB_OKCANCEL ), _HMG_DEBUGGER_ICON_ )
    IF nRet == IDOK
       HMG_Debugger():Quit()
    ENDIF
@@ -840,7 +840,7 @@ LOCAL cMsg
    IFENTRY( lEntry )
    IF _HMG_FormDebugger.Tab_1.VALUE <> TAB_CODE
       _HMG_FormDebugger.Tab_1.VALUE := TAB_CODE
-      MessageBoxIndirect( NIL, "Toggle BreakPoint : First select the line in the source code.", _HMG_DEBUGGER_NAME_, hb_bitOr( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
+      MessageBoxIndirect( NIL, "Toggle BreakPoint : First select the line in the source code.", _HMG_DEBUGGER_NAME_, hb_bitOR( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
    ELSEIF HMG_Debugger():IsValidStopLine( cFileName, nLine )
       HMG_Debugger():BreakPointToggle( cFileName, nLine )
       RepaintGridRow( "_HMG_FormDebugger", aGrid_SourceCode[i][1], nLine )
@@ -848,11 +848,11 @@ LOCAL cMsg
       cMsg := "Toggle BreakPoint : Invalid line of code ( # "+ hb_ntos(nLine) +" )"
       i := HMG_Debugger():GetNextValidStopLineEx( cFileName, nLine )
       IF HMG_Debugger():IsValidStopLine( cFileName, i )
-         cMsg = cMsg + Repl( hb_osNewLine(), 2 ) + "The next valid line of code is ( # "+ hb_ntos(i) +" )"
+         cMsg = cMsg + Repl( HB_OSNewLine(), 2 ) + "The next valid line of code is ( # "+ hb_ntos(i) +" )"
       ELSE
-         cMsg = cMsg + Repl( hb_osNewLine(), 2 ) + "It does not exist next valid line of code in this file"
+         cMsg = cMsg + Repl( HB_OSNewLine(), 2 ) + "It does not exist next valid line of code in this file"
       ENDIF
-      MessageBoxIndirect( NIL, cMsg, _HMG_DEBUGGER_NAME_, hb_bitOr( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
+      MessageBoxIndirect( NIL, cMsg, _HMG_DEBUGGER_NAME_, hb_bitOR( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
    ENDIF
    lEntry := .F.
 RETURN
@@ -889,11 +889,11 @@ LOCAL cMsg
       cMsg := "To Cursor : Invalid line of code ( # "+ hb_ntos(nLine) +" )"
       i := HMG_Debugger():GetNextValidStopLineEx( cFileName, nLine )
       IF HMG_Debugger():IsValidStopLine( cFileName, i )
-         cMsg = cMsg + Repl( hb_osNewLine(), 2 ) + "The next valid line of code is ( # "+ hb_ntos(i) +" )"
+         cMsg = cMsg + Repl( HB_OSNewLine(), 2 ) + "The next valid line of code is ( # "+ hb_ntos(i) +" )"
       ELSE
-         cMsg = cMsg + Repl( hb_osNewLine(), 2 ) + "It does not exist next valid line of code in this file"
+         cMsg = cMsg + Repl( HB_OSNewLine(), 2 ) + "It does not exist next valid line of code in this file"
       ENDIF
-      MessageBoxIndirect( NIL, cMsg, _HMG_DEBUGGER_NAME_, hb_bitOr( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
+      MessageBoxIndirect( NIL, cMsg, _HMG_DEBUGGER_NAME_, hb_bitOR( MB_SYSTEMMODAL, MB_OK ), _HMG_DEBUGGER_ICON_ )
    ENDIF
    lEntry := .F.
 RETURN
@@ -952,7 +952,7 @@ LOCAL hWnd := GetFocus()
                _PushKey (VK_END)
             ENDIF
          ELSEIF nVKey == VK_DELETE .AND. _HMG_FormDebugger.Grid_Watch.CellRowFocused > 0
-            nRet := MessageBoxIndirect( NIL, "Are sure you want to DELETE the item # "+ hb_ntos( _HMG_FormDebugger.Grid_Watch.CellRowFocused ) +" ?", _HMG_DEBUGGER_NAME_, hb_bitOr( MB_SYSTEMMODAL, MB_OKCANCEL ), _HMG_DEBUGGER_ICON_ )
+            nRet := MessageBoxIndirect( NIL, "Are sure you want to DELETE the item # "+ hb_ntos( _HMG_FormDebugger.Grid_Watch.CellRowFocused ) +" ?", _HMG_DEBUGGER_NAME_, hb_bitOR( MB_SYSTEMMODAL, MB_OKCANCEL ), _HMG_DEBUGGER_ICON_ )
             IF nRet == IDOK
                HMG_Debugger():WatchDelete( _HMG_FormDebugger.Grid_Watch.CellRowFocused )
                _HMG_FormDebugger.Grid_Watch.DeleteItem( _HMG_FormDebugger.Grid_Watch.CellRowFocused )
@@ -1464,7 +1464,7 @@ LOCAL i, cFormName
       SetForegroundWindow( _HMG_FormDebugger.HANDLE )
       lTop_HMG_FormDebugger := HMG_IsWindowStyle ( _HMG_FormDebugger.HANDLE, WS_EX_TOPMOST, .T. )
       lTop_HMG_FormDebugger := .NOT.( lTop_HMG_FormDebugger )
-      SetWindowPos( _HMG_FormDebugger.HANDLE, Iif( lTop_HMG_FormDebugger, HWND_TOPMOST, HWND_NOTOPMOST ), 0, 0, 0, 0, hb_bitOr( SWP_NOMOVE, SWP_NOSIZE ) )
+      SetWindowPos( _HMG_FormDebugger.HANDLE, Iif( lTop_HMG_FormDebugger, HWND_TOPMOST, HWND_NOTOPMOST ), 0, 0, 0, 0, hb_bitOR( SWP_NOMOVE, SWP_NOSIZE ) )
    ENDIF
 
 

@@ -62,7 +62,7 @@ local j := 0
 local oRes := nil
 local aMetaData := {}
 local cDate := ""
-if Empty(dbo1)
+if empty(dbo1)
    msgstop("Database Connection Error!")
    return tablearr
 endif
@@ -85,7 +85,7 @@ else
                     HMG_UPPER(aMetaData[j,2]) == "DECIMAL".or. ;
                     HMG_UPPER(aMetaData[j,2]) == "REAL".or. ;
                     HMG_UPPER(aMetaData[j,2]) == "SMALLINT"
-                  aadd(rowarr,Val(alltrim(aTable[i,j])))
+                  aadd(rowarr,val(alltrim(aTable[i,j])))
                case HMG_UPPER(aMetaData[j,2]) == "CHAR".or. ;
                     HMG_UPPER(aMetaData[j,2]) == "CHARACTER VARYING".or. ;
                     HMG_UPPER(aMetaData[j,2]) == "CHARACTER".or. ;
@@ -94,8 +94,8 @@ else
                case HMG_UPPER(aMetaData[j,2]) == "BOOLEAN"
                   aadd(rowarr,iif(aTable[i,j]=="t",.t.,.f.))
                case HMG_UPPER(aMetaData[j,2]) == "DATE"
-                  cDate := hb_USubStr(aTable[i,j],1,4)+hb_USubStr(aTable[i,j],6,2)+hb_USubStr(aTable[i,j],9,2)
-                  aadd(rowarr,SToD(cDate))
+                  cDate := HB_USUBSTR(aTable[i,j],1,4)+HB_USUBSTR(aTable[i,j],6,2)+HB_USUBSTR(aTable[i,j],9,2)
+                  aadd(rowarr,stod(cDate))
                otherwise //bit, bit varying,interval
                   aadd(rowarr,aTable[i,j])
             endcase
@@ -110,7 +110,7 @@ return aclone(tablearr)
 
 function miscsql(dbo1,qstr)
 local oRes := nil
-if Empty(dbo1)
+if empty(dbo1)
    msgstop("Database Connection Error!")
    return .f.
 endif
@@ -136,26 +136,26 @@ return nil
 function C2SQL(Value)
 local cValue := ""
 local cdate := ""
-if ValType(value) == "C" .and. HMG_LEN(alltrim(value)) > 0
-   value := hb_utf8StrTran(value,"'","''")
+if valtype(value) == "C" .and. HMG_LEN(alltrim(value)) > 0
+   value := HB_UTF8STRTRAN(value,"'","''")
 endif
 do case
-   case ValType(Value) == "N"
+   case Valtype(Value) == "N"
       cValue := AllTrim(Str(Value))
-   case ValType(Value) == "D"
+   case Valtype(Value) == "D"
       if !Empty(Value)
-         cdate := DToS(value)
-         cValue := "'"+hb_USubStr(cDate,1,4)+"-"+hb_USubStr(cDate,5,2)+"-"+hb_USubStr(cDate,7,2)+"'"
+         cdate := dtos(value)
+         cValue := "'"+HB_USUBSTR(cDate,1,4)+"-"+HB_USUBSTR(cDate,5,2)+"-"+HB_USUBSTR(cDate,7,2)+"'"
       else
          cValue := "''"
       endif
-   case ValType(Value) $ "CM"
+   case Valtype(Value) $ "CM"
       IF Empty( Value)
          cValue="''"
       ELSE
          cValue := "'" + value + "'"
       ENDIF
-   case ValType(Value) == "L"
+   case Valtype(Value) == "L"
       cValue := AllTrim(Str(iif(Value == .F., '0', '1')))
    otherwise
       cValue := "''"       // NOTE: Here we lose values we cannot convert

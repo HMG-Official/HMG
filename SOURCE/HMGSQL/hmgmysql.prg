@@ -61,7 +61,7 @@ local table := nil
 local currow := nil
 local tablearr := {}
 local rowarr := {}
-local curdateformat := Set(_SET_DATEFORMAT)
+local curdateformat := set(_SET_DATEFORMAT)
 local i := 0
 local j := 0
 local aTinyIntFields := {}
@@ -71,7 +71,7 @@ table := dbo1:query(qstr)
 if table:neterr()
    msgstop(table:error())
    table:destroy()
-   Set(_SET_DATEFORMAT,curdateformat)
+   set(_SET_DATEFORMAT,curdateformat)
    return tablearr
 else
    if table:lastrec() > 0
@@ -100,18 +100,18 @@ else
       next i
    endif
    table:destroy()
-   Set(_SET_DATEFORMAT,curdateformat)
+   set(_SET_DATEFORMAT,curdateformat)
    return tablearr
 endif
 return tablearr
 
 function miscsql(dbo,qstr)
-local curdateformat := Set( _SET_DATEFORMAT)
+local curdateformat := set( _SET_DATEFORMAT)
 local table // ADD 
 
 set date ansi
 table := dbo:query(qstr)
-Set( _SET_DATEFORMAT,curdateformat)
+set( _SET_DATEFORMAT,curdateformat)
 if table:NetErr()
     msgstop(table:ERROR())
     table:destroy()
@@ -123,26 +123,26 @@ return .t.
 function C2SQL(Value)
 local cValue := ""
 local cdate := ""
-if ValType(value) == "C" .and. HMG_LEN(alltrim(value)) > 0
-   value := hb_utf8StrTran(value,"'","''")
+if valtype(value) == "C" .and. HMG_LEN(alltrim(value)) > 0
+   value := HB_UTF8STRTRAN(value,"'","''")
 endif
 do case
-   case ValType(Value) == "N"
+   case Valtype(Value) == "N"
       cValue := AllTrim(Str(Value))
-   case ValType(Value) == "D"
+   case Valtype(Value) == "D"
       if !Empty(Value)
-         cdate := DToS(value)
-         cValue := "'"+hb_USubStr(cDate,1,4)+"-"+hb_USubStr(cDate,5,2)+"-"+hb_USubStr(cDate,7,2)+"'"
+         cdate := dtos(value)
+         cValue := "'"+HB_USUBSTR(cDate,1,4)+"-"+HB_USUBSTR(cDate,5,2)+"-"+HB_USUBSTR(cDate,7,2)+"'"
       else
          cValue := "''"
       endif
-   case ValType(Value) $ "CM"
+   case Valtype(Value) $ "CM"
       IF Empty( Value)
          cValue="''"
       ELSE
          cValue := "'" + value + "'"
       ENDIF
-   case ValType(Value) == "L"
+   case Valtype(Value) == "L"
       cValue := AllTrim(Str(iif(Value == .F., 0, 1)))
    otherwise
       cValue := "''"       // NOTE: Here we lose values we cannot convert
