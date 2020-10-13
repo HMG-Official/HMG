@@ -5,27 +5,27 @@
  * (c) 2003 Grigory Filatov
  * (c) 2003 Janusz Pora
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this file.
 
- The exception is that, if you link this code with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link this code with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking  
+ Your use of that executable is in no way restricted on account of linking
  this code into it.
 
 */
@@ -76,7 +76,7 @@ Return Nil
 
 Function _GetIni( cSection, cEntry, cDefault, uVar )
     Local cFile, cVar :=''
- 
+
     If !empty(_HMG_SYSDATA [ 219 ])
       if valtype(cDefault) == 'U'
         cDefault:=cVar
@@ -84,10 +84,10 @@ Function _GetIni( cSection, cEntry, cDefault, uVar )
       cFile:=_HMG_SYSDATA [ 219 ]
       cVar := GetPrivateProfileString(cSection, cEntry, xChar( cDefault ), cFile )
     else
-      if cDefault != NIL 
+      if cDefault != NIL
           cVar := xChar( cDefault )
-      endif 
-    endif  
+      endif
+    endif
     uVar :=xValue(cVar,ValType( uVar))
 Return uVar
 
@@ -97,7 +97,7 @@ Function _SetIni( cSection, cEntry, cValue )
     If !empty(_HMG_SYSDATA [ 219 ])
         cFile:= _HMG_SYSDATA [ 219 ]
         ret :=WritePrivateProfileString( cSection, cEntry, xChar(cValue), cFile )
-    endif 
+    endif
 Return ret
 
 
@@ -106,7 +106,7 @@ Function  _DelIniEntry( cSection, cEntry )
     If !empty(_HMG_SYSDATA [ 219 ])
         cFile:= _HMG_SYSDATA [ 219 ]
         ret := DelIniEntry( cSection, cEntry, cFile )
-    endif 
+    endif
 Return ret
 
 
@@ -115,7 +115,7 @@ Function  _DelIniSection( cSection )
     If !empty(_HMG_SYSDATA [ 219 ])
         cFile:= _HMG_SYSDATA [ 219 ]
         ret := DelIniSection( cSection, cFile )
-    endif 
+    endif
 Return ret
 
 

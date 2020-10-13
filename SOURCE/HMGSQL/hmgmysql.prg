@@ -2,39 +2,39 @@
  HMG_SQL_Bridge - HMG -> SQL Bridges for MySQL,PostgreSQL and SQLite
 
  Copyright 2010 S. Rathinagiri <srgiri@dataone.in>
- 
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
  As a special exception, you have permission for additional uses of the text
  contained in this release of HMG_SQL_Bridge.
 
- The exception is that, if you link the HMG_SQL_Bridge library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG_SQL_Bridge library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG_SQL_Bridge library code into it.
 
  Parts of this project (especially hbmysql, hbpgsql and hbsqlit3 library contributions) are based upon:
 
 	"Harbour Project"
 	Copyright 1999-2008, http://www.harbour-project.org/
-	
+
   "HMG - Harbour Windows GUI"
   Copyright 2002-2010 Roberto Lopez <mail.box.hmg@gmail.com>,http://sites.google.com/site/hmgweb/
-	
+
 	"HBMYSQL"  - Luiz Rafael Culik - <culik@sl.conex.net>
 	"HBPGSQL"  - Rodrigo Moreno rodrigo_moreno@yahoo.com
 	"HBSQLIT3" - P.Chornyj <myorg63@mail.ru>
@@ -55,7 +55,7 @@ IF dbo:NetErr()
 ENDIF
 //msginfo("Successfully Connected to the MySQL Server")
 RETURN dbo
-	
+
 function sql(dbo1,qstr)
 local table := nil
 local currow := nil
@@ -84,9 +84,9 @@ else
       next j
       asize(tablearr,0)
       for i := 1 to table:lastrec()
-         asize(rowarr,0)     
+         asize(rowarr,0)
          currow := table:getrow(i)
-         for j := 1 to table:fcount()         
+         for j := 1 to table:fcount()
             aadd(rowarr,currow:fieldget(j))
          next j
          for j := 1 to HMG_LEN( aTinyIntFields )
@@ -107,7 +107,7 @@ return tablearr
 
 function miscsql(dbo,qstr)
 local curdateformat := set( _SET_DATEFORMAT)
-local table // ADD 
+local table // ADD
 
 set date ansi
 table := dbo:query(qstr)

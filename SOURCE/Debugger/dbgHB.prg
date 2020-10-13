@@ -2,31 +2,31 @@
 /*----------------------------------------------------------------------------
  HMG DEBUGGER - GUI Debugger for HMG
 
- Copyright 2015-2016 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2015-2016 by Dr. Claudio Soto (from Uruguay).
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301, USA
  (or visit their web site at http://www.gnu.org/).
- 
- As a special exception, you have permission for additional uses of the text 
+
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG DEBUGGER.
 
- The exception is that, if you link the HMG DEBUGGER library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG DEBUGGER library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG DEBUGGER library code into it.
 ----------------------------------------------------------------------------*/
 
@@ -85,7 +85,7 @@
 #define MAX_SCAN_LINES          1500
 
 
-#command IFFAIL(<r>) => IF t_oDebugger:pInfo == NIL; RETURN <r>; ENDIF 
+#command IFFAIL(<r>) => IF t_oDebugger:pInfo == NIL; RETURN <r>; ENDIF
 
 
 THREAD STATIC t_oDebugger
@@ -119,10 +119,10 @@ RETURN
 
 
 /*********************************************************************
-   Harbour Debugger .PRG Functions ( harbour\src\debug\dbgentry.c )   
+   Harbour Debugger .PRG Functions ( harbour\src\debug\dbgentry.c )
 *********************************************************************/
 /*
-__dbgSetEntry() 
+__dbgSetEntry()
 __dbgSetGo( pInfo )
 __dbgSetTrace( pInfo )
 __dbgSetCBTrace( pInfo, lCBTrace )
@@ -149,7 +149,7 @@ __dbgSendMsg( nProcLevel, pObject, Message, nParamOffset )
 
 
 /*************************************************************************************************************
-   HMGDebugger Class is an adaptation of the HBDebugger Class of Harbour ( harbour\src\debug\debugger.prg )   
+   HMGDebugger Class is an adaptation of the HBDebugger Class of Harbour ( harbour\src\debug\debugger.prg )
 *************************************************************************************************************/
 
 CLASS HMGDebugger
@@ -170,7 +170,7 @@ CLASS HMGDebugger
    VAR aPathForFiles     INIT {}
 
    VAR nTabWidth         INIT 4
-   
+
    VAR lAnimate          INIT .F.
    VAR lAnimateStopBP    INIT .T.
    VAR lAnimateStopTP    INIT .T.
@@ -190,7 +190,7 @@ CLASS HMGDebugger
    METHOD Animate()
    METHOD Pause()
    METHOD Trace()
-   METHOD SetCBTrace( lCBTrace ) 
+   METHOD SetCBTrace( lCBTrace )
    METHOD SetNextRoutine()
    METHOD GetSourceFiles()
    METHOD GetNextValidStopLine( nProcLevel )
@@ -310,7 +310,7 @@ METHOD HandleEvent() CLASS HMGDebugger
    LOCAL lTracePoint := .F., lBreakPoint := .F.
    LOCAL nLine, cFileName, cFuncName, cInfo, nProcLevel
    LOCAL nTimeIni := hb_MilliSeconds()
-   
+
    IFFAIL( NIL )
 
    nProcLevel := ::aCallStack[ 1 ][ CSTACK_LEVEL ]
@@ -356,7 +356,7 @@ METHOD HandleEvent() CLASS HMGDebugger
 
    ::GUIUpdateInfo()   // GUI: update info in window monitor
 
-   IF ::lAnimate .AND. ( ( ::lAnimateStopTP .AND. lTracePoint ) .OR. ( ::lAnimateStopBP .AND. lBreakPoint ) ) 
+   IF ::lAnimate .AND. ( ( ::lAnimateStopTP .AND. lTracePoint ) .OR. ( ::lAnimateStopBP .AND. lBreakPoint ) )
       ::Pause()
    ENDIF
 
@@ -376,12 +376,12 @@ METHOD HandleEvent() CLASS HMGDebugger
     -----------------------------------*/
 
    DO WHILE ! ::lExitLoop
-      ::GUIDoEvents()   // GUI: execute Do Events function 
+      ::GUIDoEvents()   // GUI: execute Do Events function
       hb_releaseCPU()
       IF ::lAnimate
          IF ::nSpeed != 0
             WHILE ( ( hb_MilliSeconds() - nTimeIni ) < ::nSpeed ) .AND. ( ! ::lExitLoop )
-               ::GUIDoEvents()   // GUI: execute Do Events function 
+               ::GUIDoEvents()   // GUI: execute Do Events function
                hb_releaseCPU()
             ENDDO
          ENDIF
@@ -462,7 +462,7 @@ LOCAL nLine
    cFileName := ProcFile( nProcLevel )
    nLine     := ProcLine( nProcLevel )
    FOR i := nLine + 1 TO nLine + MAX_SCAN_LINES + 1
-      IF __dbgIsValidStopLine( ::pInfo, cFileName, i ) 
+      IF __dbgIsValidStopLine( ::pInfo, cFileName, i )
          RETURN i
       ENDIF
    NEXT
@@ -475,7 +475,7 @@ LOCAL i
    hb_default( @cFileName, ProcFile( 1 ) )
    hb_default( @nLine,     ProcLine( 1 ) )
    FOR i := nLine + 1 TO nLine + MAX_SCAN_LINES + 1
-      IF __dbgIsValidStopLine( ::pInfo, cFileName, i ) 
+      IF __dbgIsValidStopLine( ::pInfo, cFileName, i )
          RETURN i
       ENDIF
    NEXT
@@ -583,7 +583,7 @@ METHOD GetExprValue( xExpr, lValid ) CLASS HMGDebugger   // CMD_CALC
    LOCAL bOldError, oErr
    IFFAIL( NIL )
    lValid := .F.
-   bOldError := Errorblock( {|oErr|Break(oErr)} ) 
+   bOldError := Errorblock( {|oErr|Break(oErr)} )
    BEGIN SEQUENCE
       xResult := __dbgGetExprValue( ::pInfo, xExpr, @lValid )
       IF ! lValid
@@ -902,7 +902,7 @@ METHOD SaveSettings( cFileName ) CLASS HMGDebugger
    IF ::nSpeed != 0
       cInfo += "Speed " + hb_ntos( ::nSpeed ) + hb_eol()
    ENDIF
-   
+
    hb_MemoWrit( cFileName, cInfo )
 
 RETURN NIL
@@ -987,8 +987,8 @@ LOCAL aAreas := {}
       Select( arr1[i] )
       AAdd ( aAreas, Array( WA_ITEMS ) )
       aAreas [i] [ 1] := Iif( arr1[i]==nAlias, "*", "" ) + Alias()
-      aAreas [i] [ 2] := hb_ntos( arr1[i] ) 
-      aAreas [i] [ 3] := rddname() 
+      aAreas [i] [ 2] := hb_ntos( arr1[i] )
+      aAreas [i] [ 3] := rddname()
       aAreas [i] [ 4] := hb_ntos( Reccount() )
       aAreas [i] [ 5] := hb_ntos( Recno() )
       aAreas [i] [ 6] := Iif( Bof(), "Yes", "No" )
@@ -1065,7 +1065,7 @@ RETURN arr
 
 
 METHOD GetObjectInfo( cObjName, oObject, aObjRawValue ) CLASS HMGDebugger
-LOCAL aVars, aMethods, i 
+LOCAL aVars, aMethods, i
 LOCAL xValue, cValType, cValue
 LOCAL arr := {}
    #define _OBJ_SEP_   ":"
@@ -1101,7 +1101,7 @@ FUNCTION __dbgValToStr( uVal )
    DO CASE
    CASE uVal == NIL  ; RETURN "NIL"
    CASE cType == "B" ; RETURN "{|| ... }"
-   CASE cType == "A" 
+   CASE cType == "A"
       s := ""
       nLen := Min( 8, Len( uVal ) )
       FOR i := 1 TO nLen
@@ -1151,7 +1151,7 @@ STATIC FUNCTION __dbgObjGetValue( oObject, cVar, lCanAcc )
 STATIC FUNCTION __dbgObjSetValue( oObject, cVar, xValue )
 
    LOCAL oErr
-   
+
    IFFAIL( NIL )
    BEGIN SEQUENCE WITH {|| Break() }
       __dbgSENDMSG( t_oDebugger:nProcLevel, oObject, "_" + cVar, xValue )
@@ -1202,12 +1202,12 @@ RETURN t_oDebugger
 *********************************************************************************/
 
 
-METHOD GetBreakPoints() CLASS HMGDebugger 
+METHOD GetBreakPoints() CLASS HMGDebugger
    IFFAIL( {} )
 RETURN __dbgGetBreakPoints( ::pInfo )
 
 
-METHOD GetWatch() CLASS HMGDebugger 
+METHOD GetWatch() CLASS HMGDebugger
    RETURN ::aWatch
 
 
@@ -1325,7 +1325,7 @@ AAdd( aVars[ n ], ::aProcStack[ n ][ CSTACK_LEVEL ] )
    ENDIF
 
   /*
-   * Creates an array with info of the variables: 
+   * Creates an array with info of the variables:
    *    { { cProcLevel, cType, cVarName, cValType, cValue }, ... }
    *
    * aBVars is useful for set/get the value of a variable:
@@ -1443,7 +1443,7 @@ HB_FUNC ( __DBGRESETRUNFLAGS )
    if( info )
    {  if( info->bToCursor )
           hb_xfree( info->szToCursorModule );
-      info->bGo          = HB_FALSE;      
+      info->bGo          = HB_FALSE;
       info->bTraceOver   = HB_FALSE;
       info->bNextRoutine = HB_FALSE;
       info->bToCursor    = HB_FALSE;
