@@ -30,10 +30,10 @@ DATA impreview          INIT .F. PROTECTED
 DATA cversion            INIT "V1.2" PROTECTED
 
 *-------------------------
-METHOD init()
+METHOD init(clibx)
 *-------------------------
 *-------------------------
-METHOD begindoc()
+METHOD begindoc(cdoc)
 *-------------------------
 *-------------------------
 METHOD enddoc()
@@ -55,7 +55,7 @@ METHOD endpage()
 METHOD release()
 *-------------------------
 *-------------------------
-METHOD printdata()
+METHOD printdata(nlin,ncol,data,cfont,nsize,lbold,acolor,calign,nlen)
 *-------------------------
 *-------------------------
 METHOD printimage
@@ -67,7 +67,7 @@ METHOD printline
 METHOD printrectangle
 *-------------------------
 
-METHOD selprinter()
+METHOD selprinter( lselect , lpreview, llandscape , npapersize ,cprinterx)
 *-------------------------
 *-------------------------
 
@@ -75,18 +75,18 @@ METHOD getdefprinter()
 *-------------------------
 
 *-------------------------
-METHOD setcolor()
+METHOD setcolor(atColor)
 *-------------------------
 
 *-------------------------
-METHOD setpreviewsize()
+METHOD setpreviewsize(ntam)
 *-------------------------
 
 *-------------------------
-METHOD setunits()   ////// mm o rowcol
+METHOD setunits(cunitsx)   ////// mm o rowcol
 *-------------------------
 
-METHOD printroundrectangle()
+METHOD printroundrectangle(nlin,ncol,nlinf,ncolf,atcolor,ntwpen )
 
 METHOD version()  INLINE ::cversion
 

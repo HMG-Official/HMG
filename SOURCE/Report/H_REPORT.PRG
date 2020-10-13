@@ -116,13 +116,13 @@ if ncpl=NIL
    ncpl:=80
 endif
 
-	ctitle1:=HMG_LOWER(HB_USUBSTR(ctitle,HB_UAT('|',ctitle)+1))+'...'
+  ctitle1:=HMG_LOWER(HB_USUBSTR(ctitle,HB_UAT('|',ctitle)+1))+'...'
 
-	cheader:=''
+  cheader:=''
 
-	_sw_report:=.F.
+  _sw_report:=.F.
 
-	action_timer(CTITLE,AHEADERS1,AHEADERS2,AFIELDS,AWIDTHS,ATOTALS,NLPP,LDOS,LPREVIEW,CGRAPHIC,NFI,NCI,NFF,NCF,LMUL,CGRPBY,CHDRGRP,LLANDSCAPE,NCPL,LSELECT,CALIAS,NLLMARGIN,AFORMATS,NPAPERSIZE,CHEADER,lnoprop)
+  action_timer(CTITLE,AHEADERS1,AHEADERS2,AFIELDS,AWIDTHS,ATOTALS,NLPP,LDOS,LPREVIEW,CGRAPHIC,NFI,NCI,NFF,NCF,LMUL,CGRPBY,CHDRGRP,LLANDSCAPE,NCPL,LSELECT,CALIAS,NLLMARGIN,AFORMATS,NPAPERSIZE,CHEADER,lnoprop)
 
 RETURN NIL
 
@@ -187,9 +187,9 @@ VAR nvfij     INIT 0
 
 VAR aline     INIT {}
 
-METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader)
+METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop)
 METHOD headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
-METHOD extreport1(cfilerep)
+METHOD extreport1(cfilerep,cheader)
 METHOD leadato(cName,cPropmet,cDefault)
 METHOD leaimage(cName,cPropmet,cDefault)
 METHOD leadatoh(cName,cPropmet,cDefault,npar)
@@ -202,7 +202,7 @@ ENDCLASS
 
 
 METHOD easyreport1(ctitle,aheaders1,aheaders2,afields,awidths,atotals,nlpp,ldos,lpreview,cgraphic,nfi,nci,nff,ncf,lmul,cgrpby,chdrgrp,llandscape,ncpl,lselect,calias,nllmargin,aformats,npapersize,cheader,lnoprop) CLASS _HMG_REPORT
-local nlin,i,ncol,aresul,lmode,swt:=0,grpby,k,ncvcopt
+local nlin,i,aresul,lmode,swt:=0,grpby,k  // ,ncvcopt,ncol
 private  wfield
 if nllmargin = NIL
    repobject:nlmargin:=0
@@ -245,37 +245,37 @@ oprint:=TPRINT()
 oprint:normaldos()
 do case
         case ncpl= 80
-            ncvcopt:=1
+            // ncvcopt:=1       Variable 'NCVCOPT' is assigned but not used in function
             repobject:nfsize:=12
             if lnoprop
                oprint:nfontsize:=12
             endif
          case ncpl= 96
-            ncvcopt:=2
+            // ncvcopt:=2       Variable 'NCVCOPT' is assigned but not used in function
             repobject:nfsize=10
             if lnoprop
                oprint:nfontsize:=10
             endif
          case ncpl= 120
-            ncvcopt:=3
+            // ncvcopt:=3    Variable 'NCVCOPT' is assigned but not used in function
             repobject:nfsize:=8
             if lnoprop
                oprint:nfontsize:=8
             endif
          case ncpl= 140
-            ncvcopt:=4
+            // ncvcopt:=4    Variable 'NCVCOPT' is assigned but not used in function
            repobject:nfsize:=7
            if lnoprop
               oprint:nfontsize:=7
            endif
          case ncpl= 160
-            ncvcopt:=5
+            // ncvcopt:=5     Variable 'NCVCOPT' is assigned but not used in function
             repobject:nfsize:=6
             if lnoprop
                 oprint:nfontsize:=6
             endif
          otherwise
-            ncvcopt:=1
+            // ncvcopt:=1 Variable 'NCVCOPT' is assigned but not used in function
             repobject:nfsize:=12
             if lnoprop
                 oprint:nfontsize:=12
@@ -437,14 +437,14 @@ if swmemo
           nlin:=1
           oprint:endpage()
           oprint:beginpage()
-	  if cgraphic<>NIL .and. lmul
+    if cgraphic<>NIL .and. lmul
              if .not. File(cgraphic)
-	         msgstop('graphic file not found','error')
+           msgstop('graphic file not found','error')
              else
                  oprint:printimage(nfi,nci+repobject:nlmargin,nff,repobject:nfc,cgraphic )
              endif
-	 endif
-	 nlin:=repobject:headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
+   endif
+   nlin:=repobject:headers(aheaders1,aheaders2,awidths,nlin,ctitle,lmode,grpby,chdrgrp,cheader)
        endif
     next k
 ////    nlin--
@@ -455,7 +455,7 @@ skip
 enddo
 
 if swt==1
-   ncol:=0+repobject:nlmargin
+   // ncol:=0+repobject:nlmargin  // Variable 'NCOL' is assigned but not used in function
    if grpby<>NIL
       if .not.(&grpby == crompe)
          if ascan(atotals,.T.)>0
@@ -520,7 +520,8 @@ for i:=1 to HMG_LEN(awidths)
     nsum:=nsum+awidths[i]
 next i
 npostitle:=HB_UAT('|',ctitle)
-ctitle1:=ctitle2:=''
+// ctitle1:=ctitle2:=''  Variable 'CTITLE1' is assigned but not used in function
+ctitle2:=''
 if npostitle>0
    ctitle1:=HB_ULEFT(ctitle,npostitle-1)
    ctitle2:=TRIM(HB_USUBSTR(ctitle,npostitle+1,HMG_LEN(ctitle)))
@@ -692,12 +693,12 @@ else
    if sw==1
       npos:=HB_UAT(HMG_UPPER(cPropmet)+' ',HMG_UPPER(repobject:aline[i]))
       if HMG_LEN(TRIM(repobject:aline[i]))==0
-         i=HMG_LEN(repobject:aline)+1
+         // i=HMG_LEN(repobject:aline)+1 // Variable 'I' is assigned but not used in function
          return cDefault
       endif
       if npos>0
          cfvalue:=HB_USUBSTR(repobject:aline[i],npos+HMG_LEN(Cpropmet),HMG_LEN(repobject:aline[i]))
-         i:=HMG_LEN(repobject:aline)+1
+         // i:=HMG_LEN(repobject:aline)+1  // Variable 'I' is assigned but not used in function ?
          cfvalue:=TRIM(cfvalue)
          if HB_URIGHT(cfvalue,1)=';'
             cfvalue:=HB_USUBSTR(cfvalue,1,HMG_LEN(cfvalue)-1)
@@ -768,7 +769,7 @@ else
          return .T.
       endif
       if HMG_LEN(TRIM(repobject:aline[i]))==0
-         i=HMG_LEN(repobject:aline)+1
+         // i=HMG_LEN(repobject:aline)+1 // Variable 'I' is assigned but not used in function
          return cDefault
       endif
    endif

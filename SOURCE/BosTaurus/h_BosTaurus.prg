@@ -372,7 +372,7 @@ Return Width
 
 
 Function BT_DesktopHeight ()
-  LOCAL Win := BT_GetDesktopHandle ()
+  // LOCAL Win := BT_GetDesktopHandle ()   Variable 'WIN' is assigned but not used in function
   LOCAL Height := BT_SCR_GETINFO (0, BT_SCR_DESKTOP, BT_SCR_INFO_HEIGHT)
 Return Height
 

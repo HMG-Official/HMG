@@ -173,7 +173,7 @@ MEMVAR _HMG_CMACROTEMP
 
 // Declaración de definiciones.------------------------------------------------
 // Generales.
-#define ABM_CRLF                HB_OsNewLine()
+#define ABM_CRLF                hb_osNewLine()
 
 // Estructura de la etiquetas.
 #define ABM_LBL_LEN             5
@@ -293,11 +293,11 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
 
 
 ////////// Gusrdar estado actual de SET DELETED y activarlo
-        _BackDeleted := set( _SET_DELETED )
+        _BackDeleted := Set( _SET_DELETED )
         SET DELETED ON
 
 ////////// Inicialización del soporte multilenguaje.---------------------------
-	InitMessages()
+    InitMessages()
 
 ////////// Desactivación de SET NAVIGATION.------------------------------------
         _BakExtendedNavigation := _HMG_SYSDATA [ 255 ]
@@ -320,7 +320,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
         if ( cTitulo == NIL )
                 _cTitulo := _cArea
         else
-                if ( Valtype( cTitulo ) != "C" )
+                if ( ValType( cTitulo ) != "C" )
                         _cTitulo := _cArea
                 else
                         _cTitulo := cTitulo
@@ -348,8 +348,8 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
         else
                 _aNombreCampo := {}
                 for i := 1 to HMG_LEN( _aEstructura )
-                        aAdd( _aNombreCampo, HMG_UPPER( HB_ULEFT( _aEstructura[i,DBS_NAME], 1 ) ) + ;
-                                             HMG_LOWER( HB_USUBSTR( _aEstructura[i,DBS_NAME], 2 ) ) )
+                        aAdd( _aNombreCampo, HMG_UPPER( hb_ULeft( _aEstructura[i,DBS_NAME], 1 ) ) + ;
+                                             HMG_LOWER( hb_USubStr( _aEstructura[i,DBS_NAME], 2 ) ) )
                 next
         endif
 
@@ -362,7 +362,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
                         lSalida := .f.
                 else
                         for i := 1 to HMG_LEN( aAvisoCampo )
-                                if Valtype( aAvisoCampo[i] ) != "C"
+                                if ValType( aAvisoCampo[i] ) != "C"
                                         lSalida := .f.
                                         exit
                                 endif
@@ -391,7 +391,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
 
         // Campos visibles en la tabla de la ventana de visualización de registros.
         lSalida := .t.
-        if ( Valtype( aVisibleEnTabla ) != "A" )
+        if ( ValType( aVisibleEnTabla ) != "A" )
                 lSalida := .f.
         else
                 if HMG_LEN( aVisibleEnTabla ) != HMG_LEN( _aEstructura )
@@ -441,27 +441,27 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
 
 **** JK 104
 
-	// Opciones del usuario.
-	lSalida := .t.
+    // Opciones del usuario.
+    lSalida := .t.
 
-	if ValType( aOpciones ) != "A"
-		lSalida := .f.
-	elseif HMG_LEN(aOpciones)<1
-		lSalida := .f.
-	elseif HMG_LEN( aOpciones[1] ) != 2
-		lSalida := .f.
-	else
-		for i := 1 to HMG_LEN( aOpciones )
-			if ValType( aOpciones [i,ABM_OPC_TEXTO] ) != "C"
-				lSalida := .f.
-				exit
-			endif
-			if ValType( aOpciones [i,ABM_OPC_BLOQUE] ) != "B"
-				lSalida := .f.
-				exit
-			endif
-		next
-	endif
+    if ValType( aOpciones ) != "A"
+        lSalida := .f.
+    elseif HMG_LEN(aOpciones)<1
+        lSalida := .f.
+    elseif HMG_LEN( aOpciones[1] ) != 2
+        lSalida := .f.
+    else
+        for i := 1 to HMG_LEN( aOpciones )
+            if ValType( aOpciones [i,ABM_OPC_TEXTO] ) != "C"
+                lSalida := .f.
+                exit
+            endif
+            if ValType( aOpciones [i,ABM_OPC_BLOQUE] ) != "B"
+                lSalida := .f.
+                exit
+            endif
+        next
+    endif
 
 **** END JK 104
 
@@ -526,7 +526,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
                         cClave := HMG_UPPER( (_cArea)->( ordKey( k ) ) )
                         for i := 1 to HMG_LEN( _aEstructura )
                                 if nVeces <= 1
-                                        nInicio := HB_UAT( _aEstructura[i,DBS_NAME], cClave )
+                                        nInicio := hb_UAt( _aEstructura[i,DBS_NAME], cClave )
                                         if  nInicio != 0
                                                 aAdd( _aIndiceCampo, i )
                                                 nVeces++
@@ -561,14 +561,14 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
                                        HMG_LEN( _aNombreCampo[i] ) * 9 )
         next
         for i := 1 to HMG_LEN( _aEstructura )
-                _aEtiqueta[i,ABM_LBL_NAME]   := "ABM2Etiqueta" + ALLTRIM( STR( i ,4,0) )
+                _aEtiqueta[i,ABM_LBL_NAME]   := "ABM2Etiqueta" + ALLTRIM( Str( i ,4,0) )
                 _aEtiqueta[i,ABM_LBL_ROW]    := nFila
                 _aEtiqueta[i,ABM_LBL_COL]    := nColumna
                 _aEtiqueta[i,ABM_LBL_WIDTH]  := HMG_LEN( _aNombreCampo[i] ) * 9
                 _aEtiqueta[i,ABM_LBL_HEIGHT] := 25
                 do case
                         case _aEstructura[i,DBS_TYPE] == "C"
-                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( STR( i ,4,0) )
+                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( Str( i ,4,0) )
                                 _aControl[i,ABM_CON_ROW]    := nFila
                                 _aControl[i,ABM_CON_COL]    := nColumna + nAnchoEtiqueta + 20
                                 _aControl[i,ABM_CON_WIDTH]  := iif( ( _aEstructura[i,DBS_LEN] * 10 ) < 50, 50, _aEstructura[i,DBS_LEN] * 10 )
@@ -577,7 +577,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
                                 _aControl[i,ABM_CON_TYPE]   := ABM_TEXTBOXC
                                 nFila += 35
                         case _aEstructura[i,DBS_TYPE] == "D"
-                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( STR( i ,4,0) )
+                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( Str( i ,4,0) )
                                 _aControl[i,ABM_CON_ROW]    := nFila
                                 _aControl[i,ABM_CON_COL]    := nColumna + nAnchoEtiqueta + 20
                                 _aControl[i,ABM_CON_WIDTH]  := _aEstructura[i,DBS_LEN] * 10
@@ -586,7 +586,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
                                 _aControl[i,ABM_CON_TYPE]   := ABM_DATEPICKER
                                 nFila += 35
                         case _aEstructura[i,DBS_TYPE] == "N"
-                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( STR( i ,4,0) )
+                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( Str( i ,4,0) )
                                 _aControl[i,ABM_CON_ROW]    := nFila
                                 _aControl[i,ABM_CON_COL]    := nColumna + nAnchoEtiqueta + 20
                                 _aControl[i,ABM_CON_WIDTH]  := iif( ( _aEstructura[i,DBS_LEN] * 10 ) < 50, 50, _aEstructura[i,DBS_LEN] * 10 )
@@ -595,7 +595,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
                                 _aControl[i,ABM_CON_TYPE]   := ABM_TEXTBOXN
                                 nFila += 35
                         case _aEstructura[i,DBS_TYPE] == "L"
-                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( STR( i ,4,0) )
+                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( Str( i ,4,0) )
                                 _aControl[i,ABM_CON_ROW]    := nFila
                                 _aControl[i,ABM_CON_COL]    := nColumna + nAnchoEtiqueta + 20
                                 _aControl[i,ABM_CON_WIDTH]  := 25
@@ -604,7 +604,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
                                 _aControl[i,ABM_CON_TYPE]   := ABM_CHECKBOX
                                 nFila += 35
                         case _aEstructura[i,DBS_TYPE] == "M"
-                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( STR( i ,4,0) )
+                                _aControl[i,ABM_CON_NAME]   := "ABM2Control" + ALLTRIM( Str( i ,4,0) )
                                 _aControl[i,ABM_CON_ROW]    := nFila
                                 _aControl[i,ABM_CON_COL]    := nColumna + nAnchoEtiqueta + 20
                                 _aControl[i,ABM_CON_WIDTH]  := 300
@@ -765,7 +765,7 @@ function ABM2( cArea, cTitulo, aNombreCampo, ;
 
 ////////// Restaurar SET DELETED a su valor inicial
 
-        set( _SET_DELETED , _BackDeleted  )
+        Set( _SET_DELETED , _BackDeleted  )
 
 return NIL
 
@@ -789,7 +789,7 @@ STATIC function ABM2salir( nRegistro, cIndiceActivo, cFiltroAnt, nArea )
                            &("{||" + cFiltroAnt + "}") )
 
 ////////// Restaura el area de la bdd inicial.---------------------------------
-        (_cArea)->( dbGoTo( nRegistro ) )
+        (_cArea)->( dbGoto( nRegistro ) )
         (_cArea)->( ordSetFocus( cIndiceActivo ) )
         (_cArea)->( dbSetFilter( bFiltroAnt, cFiltroAnt ) )
         dbSelectArea( nArea )
@@ -830,8 +830,8 @@ STATIC function ABM2Redibuja( lTabla )
         wndABM2Edit.StatusBar.Item( 1 ) := _HMG_SYSDATA [ 129 ][19] + _cFiltro
         wndABM2Edit.StatusBar.Item( 2 ) := _HMG_SYSDATA [ 129 ][20] + iif( _lFiltro, _HMG_SYSDATA [ 130 ][29], _HMG_SYSDATA [ 130 ][30] )
         wndABM2Edit.StatusBar.Item( 3 ) := _HMG_SYSDATA [ 129 ][2] + ': '+                                  ;
-                                           ALLTRIM( STR( (_cArea)->( RecNo() ) ) ) + "/" + ;
-                                           ALLTRIM( STR( (_cArea)->( RecCount() ) ) )
+                                           ALLTRIM( Str( (_cArea)->( RecNo() ) ) ) + "/" + ;
+                                           ALLTRIM( Str( (_cArea)->( RecCount() ) ) )
 
 
 ////////// Refresca el browse si se indica.
@@ -858,12 +858,12 @@ return NIL
 STATIC function ABM2CambiarOrden()
 
 ////////// Declaración de variables locales.-----------------------------------
-        local cIndice as character              // Nombre del indice.
+       // local cIndice as character              // Nombre del indice.
         local nIndice as numeric                // Número del indice.
 
 ////////// Inicializa las variables.-------------------------------------------
         nIndice := wndABM2Edit.cbIndices.Value
-        cIndice := wndABM2Edit.cbIndices.Item( nIndice )
+       // cIndice := wndABM2Edit.cbIndices.Item( nIndice ) //Variable 'CINDICE' is assigned but not used in function. asistex
 
 ////////// Cambia el orden del area de trabajo.--------------------------------
         nIndice--
@@ -928,7 +928,7 @@ STATIC function ABM2Editar( lNuevo )
         local nAltoSplit     as numeric         // Alto de la ventana Split.
         local cTitulo        as character       // Título de la ventana.
         local cMascara       as array           // Máscara de edición de los controles numéricos.
-	local NANCHOCONTROL
+    local NANCHOCONTROL
 
 ////////// Control de parámetros.----------------------------------------------
         if ( ValType( lNuevo ) != "L" )
@@ -1045,7 +1045,7 @@ STATIC function ABM2Editar( lNuevo )
                                         height _aControl[i,ABM_CON_HEIGHT]              ;
                                         width _aControl[i,ABM_CON_WIDTH] + 25           ;
                                         font "arial" size 9                             ;
-					SHOWNONE 					;
+                    SHOWNONE                    ;
                                         on gotfocus ABM2ConFoco()                       ;
                                         on lostfocus ABM2SinFoco()
                         case _aControl[i,ABM_CON_TYPE] == ABM_TEXTBOXN
@@ -1065,10 +1065,10 @@ STATIC function ABM2Editar( lNuevo )
                                                 on enter ABM2AlEntrar()
                                 else
                                         cMascara := ""
-                                        cMascara := REPLICATE( "9", _aEstructura[i,DBS_LEN] -   ;
+                                        cMascara := Replicate( "9", _aEstructura[i,DBS_LEN] -   ;
                                                             ( _aEstructura[i,DBS_DEC] + 1 ) )
                                         cMascara += "."
-                                        cMascara += REPLICATE( "9", _aEstructura[i,DBS_DEC] )
+                                        cMascara += Replicate( "9", _aEstructura[i,DBS_DEC] )
                                         _HMG_cMacroTemp := _aControl[i,ABM_CON_NAME]
                                         @ _aControl[i,ABM_CON_ROW], _aControl[i,ABM_CON_COL]    ;
                                                 textbox &_HMG_cMacroTemp              ;
@@ -1259,7 +1259,7 @@ STATIC function ABM2EditarGuardar( lNuevo )
                         (_cArea)->( dbAppend() )
                 endif
 
-                if (_cArea)->(rlock())
+                if (_cArea)->(RLock())
 
                     for i := 1 to HMG_LEN( _aEstructura )
                             _HMG_cMacroTemp := _aControl[i,ABM_CON_NAME]
@@ -1377,7 +1377,7 @@ STATIC function ABM2Seleccionar()
         activate window wndSeleccionar
 
 ////////// Restuara el puntero de registro.------------------------------------
-        (_cArea)->( dbGoTo( nRegistro ) )
+        (_cArea)->( dbGoto( nRegistro ) )
 
 return ( nReg )
 
@@ -1405,7 +1405,7 @@ STATIC function ABM2EditarCopiar()
 ////////// Actualiza los controles de edición.---------------------------------
         if nReg != 0
                 nRegistro := (_cArea)->( RecNo() )
-                (_cArea)->( dbGoTo( nReg ) )
+                (_cArea)->( dbGoto( nReg ) )
                 for i := 1 to HMG_LEN( _aControl )
                         if _aEditable[i]
                                 _HMG_cMacroTemp := _aControl[i,ABM_CON_NAME]
@@ -1413,7 +1413,7 @@ STATIC function ABM2EditarCopiar()
                                         (_cArea)->( FieldGet( i ) )
                         endif
                 next
-                (_cArea)->( dbGoTo( nRegistro ) )
+                (_cArea)->( dbGoto( nRegistro ) )
         endif
 
 return NIL
@@ -1435,15 +1435,15 @@ function ABM2Borrar()
 ////////// Borra el registro si se acepta.-------------------------------------
 
         if MsgOKCancel( _HMG_SYSDATA [ 130 ][8], _HMG_SYSDATA [ 129 ][16] )
-                if (_cArea)->( rlock() )
+                if (_cArea)->( RLock() )
                    (_cArea)->( dbDelete() )
                    (_cArea)->( dbCommit() )
-                   (_cArea)->( dbunlock() )
-                   if .not. set( _SET_DELETED )
+                   (_cArea)->( dbUnlock() )
+                   if .not. Set( _SET_DELETED )
                       set deleted on
                    endif
                    (_cArea)->( dbSkip() )
-                   if (_cArea)->( eof() )
+                   if (_cArea)->( Eof() )
                       (_cArea)->( dbGoBottom() )
                    endif
                    ABM2Redibuja( .t. )
@@ -1583,10 +1583,10 @@ STATIC function ABM2Buscar()
 
                                 // Con decimales.
                                 cMascara := ""
-                                cMascara := REPLICATE( "9", _aEstructura[nControl,DBS_LEN] - ;
+                                cMascara := Replicate( "9", _aEstructura[nControl,DBS_LEN] - ;
                                                        ( _aEstructura[nControl,DBS_DEC] + 1 ) )
                                 cMascara += "."
-                                cMascara += REPLICATE( "9", _aEstructura[nControl,DBS_DEC] )
+                                cMascara += Replicate( "9", _aEstructura[nControl,DBS_DEC] )
                                 @ 75, 20 textbox conBuscar                              ;
                                         of wndABMBuscar                                    ;
                                         value ""                                        ;
@@ -1615,7 +1615,7 @@ STATIC function ABM2Buscar()
                 lResultado := (_cArea)->( dbSeek( xValor ) )
                 if !lResultado
                         msgExclamation( _HMG_SYSDATA [ 130 ][11], _cTitulo )
-                        (_cArea)->( dbGoTo( nRegistro ) )
+                        (_cArea)->( dbGoto( nRegistro ) )
                 else
                         ABM2Redibuja( .t. )
                 endif
@@ -1822,10 +1822,10 @@ STATIC function ABM2ControlFiltro()
 
                                 // Con decimales.
                                 cMascara := ""
-                                cMascara := REPLICATE( "9", _aEstructura[nControl,DBS_LEN] - ;
+                                cMascara := Replicate( "9", _aEstructura[nControl,DBS_LEN] - ;
                                                        ( _aEstructura[nControl,DBS_DEC] + 1 ) )
                                 cMascara += "."
-                                cMascara += REPLICATE( "9", _aEstructura[nControl,DBS_DEC] )
+                                cMascara += Replicate( "9", _aEstructura[nControl,DBS_DEC] )
                                 @ 226, 20 textbox conValor                                      ;
                                         of wndABM2Filtro                                        ;
                                         value ""                                                ;
@@ -1886,7 +1886,7 @@ STATIC function ABM2EstableceFiltro()
 ////////// Inicialización de variables.----------------------------------------
         nCompara  := wndABM2Filtro.lbxCompara.Value
         nCampo    := wndABM2Filtro.lbxCampos.Value
-        cValor    := HB_ValToStr( wndABM2Filtro.conValor.Value )
+        cValor    := hb_ValToStr( wndABM2Filtro.conValor.Value )
         aOperador := { "=", "<>", ">", "<", ">=", "<=" }
 
 ////////// Comprueba que se puede filtrar.-------------------------------------
@@ -1986,7 +1986,7 @@ STATIC function ABM2Imprimir()
         local cRegistro1    as character        // Valor del registro inicial.
         local cRegistro2    as character        // Valor del registro final.
         local aImpresoras   as array            // Impresoras disponibles.
-	local NIMPLEN
+    local NIMPLEN
         private hbprn
 
 ////////// Comprueba si se ha pasado la clausula ON PRINT.---------------------
@@ -2019,10 +2019,10 @@ STATIC function ABM2Imprimir()
         // Registro inicial y final.
         nCampo := _aIndiceCampo[_nIndiceActivo]
         ( _cArea)->( dbGoTop() )
-        cRegistro1 := HB_ValToStr( (_cArea)->( FieldGet( nCampo ) ) )
+        cRegistro1 := hb_ValToStr( (_cArea)->( FieldGet( nCampo ) ) )
         ( _cArea)->( dbGoBottom() )
-        cRegistro2 := HB_ValToStr( (_cArea)->( FieldGet( nCampo ) ) )
-        (_cArea)->( dbGoTo( nRegistro ) )
+        cRegistro2 := hb_ValToStr( (_cArea)->( FieldGet( nCampo ) ) )
+        (_cArea)->( dbGoto( nRegistro ) )
 
 ////////// Definición de la ventana de formato de listado.---------------------
         define window wndABM2Listado            ;
@@ -2199,7 +2199,7 @@ STATIC function ABM2Imprimir()
         activate window wndABM2Listado
 
 ////////// Restaura.-----------------------------------------------------------
-        (_cArea)->( dbGoTo( nRegistro ) )
+        (_cArea)->( dbGoto( nRegistro ) )
         ABM2Redibuja( .f. )
 
 return NIL
@@ -2224,17 +2224,17 @@ STATIC function ABM2DefinirRegistro( nAccion )
 
 ////////// Inicializa las variables.-------------------------------------------
         nRegistro := (_cArea)->( RecNo() )
-        cValor    := ""
+
 
 ////////// Selecciona el registro.---------------------------------------------
         nReg := ABM2Seleccionar()
         if nReg == 0
-                (_cArea)->( dbGoTo( nRegistro ) )
+                (_cArea)->( dbGoto( nRegistro ) )
                 return NIL
         else
-                (_cArea)->( dbGoTo( nReg ) )
+                (_cArea)->( dbGoto( nReg ) )
                 nCampo := _aIndiceCampo[_nIndiceActivo]
-                cValor := HB_ValToStr( (_cArea)->( FieldGet( nCampo ) ) )
+                cValor := hb_ValToStr( (_cArea)->( FieldGet( nCampo ) ) )
         endif
 
 ////////// Actualiza según la acción.------------------------------------------
@@ -2246,7 +2246,7 @@ STATIC function ABM2DefinirRegistro( nAccion )
         endcase
 
 ////////// Restaura el registro.
-        (_cArea)->( dbGoTo( nRegistro ) )
+        (_cArea)->( dbGoto( nRegistro ) )
 
 return NIL
 
@@ -2268,7 +2268,7 @@ STATIC function ABM2DefinirColumnas( nAccion )
         local aCampoListado as array            // * Campos del listado.
         local i             as numeric          // * Indice de iteración.
         local nItem         as numeric          // * Numero del item seleccionado.
-	local cvalor
+    local cvalor
 
 ////////// Inicialización de variables.----------------------------------------
         aCampoBase  := {}
@@ -2395,10 +2395,10 @@ STATIC function ABM2Listado( aImpresoras )
         local cRegistro2    as character        // * Valor del registro final.
         local xRegistro1                        // * Valor de comparación.
         local xRegistro2                        // * Valor de comparación.
-	local lSuccess
-	local HBPRNMAXCOL	:= 100
-	LOCAL RF		:= 4
-	LOCAL CF		:= 2
+    local lSuccess
+    local HBPRNMAXCOL   := 100
+    LOCAL RF        := 4
+    LOCAL CF        := 2
 
 ////////// Inicialización de variables.----------------------------------------
         // Previsualizar.
@@ -2507,66 +2507,66 @@ STATIC function ABM2Listado( aImpresoras )
                         nPaginas := Int( nTotales / 55 ) + 1
                 endif
         endif
-        (_cArea)->( dbGoTo( nPrimero ) )
+        (_cArea)->( dbGoto( nPrimero ) )
 
 ////////// Inicializa el listado.----------------------------------------------
 
-	// Opciones de la impresión.
-	if lPrevio
+    // Opciones de la impresión.
+    if lPrevio
 
-		if lOrientacion
+        if lOrientacion
 
-			SELECT PRINTER cImpresora ;
-				TO lSuccess ;
-				ORIENTATION PRINTER_ORIENT_LANDSCAPE ;
-				PAPERSIZE PRINTER_PAPER_A4 ;
-				PREVIEW
+            SELECT PRINTER cImpresora ;
+                TO lSuccess ;
+                ORIENTATION PRINTER_ORIENT_LANDSCAPE ;
+                PAPERSIZE PRINTER_PAPER_A4 ;
+                PREVIEW
 
-		else
+        else
 
-			SELECT PRINTER cImpresora ;
-				TO lSuccess ;
-				ORIENTATION PRINTER_ORIENT_PORTRAIT ;
-				PAPERSIZE PRINTER_PAPER_A4 ;
-				PREVIEW
-
-                endif
-
-	else
-
-		if lOrientacion
-
-			SELECT PRINTER cImpresora ;
-				TO lSuccess ;
-				ORIENTATION PRINTER_ORIENT_LANDSCAPE ;
-				PAPERSIZE PRINTER_PAPER_A4
-
-		else
-
-			SELECT PRINTER cImpresora ;
-				TO lSuccess ;
-				ORIENTATION PRINTER_ORIENT_PORTRAIT ;
-				PAPERSIZE PRINTER_PAPER_A4
+            SELECT PRINTER cImpresora ;
+                TO lSuccess ;
+                ORIENTATION PRINTER_ORIENT_PORTRAIT ;
+                PAPERSIZE PRINTER_PAPER_A4 ;
+                PREVIEW
 
                 endif
 
-	 endif
+    else
 
-	// Control de errores.
-	if lSuccess == .F.
-		msgExclamation( _HMG_SYSDATA [ 130 ][25], _cTitulo )
-		return nil
-	endif
+        if lOrientacion
 
-	// Inicio del listado.
-	lCabecera := .t.
-	lSalida   := .t.
-	nFila     := 13
-	nPagina   := 1
+            SELECT PRINTER cImpresora ;
+                TO lSuccess ;
+                ORIENTATION PRINTER_ORIENT_LANDSCAPE ;
+                PAPERSIZE PRINTER_PAPER_A4
 
-	START PRINTDOC
+        else
 
-		START PRINTPAGE
+            SELECT PRINTER cImpresora ;
+                TO lSuccess ;
+                ORIENTATION PRINTER_ORIENT_PORTRAIT ;
+                PAPERSIZE PRINTER_PAPER_A4
+
+                endif
+
+     endif
+
+    // Control de errores.
+    if lSuccess == .F.
+        msgExclamation( _HMG_SYSDATA [ 130 ][25], _cTitulo )
+        return nil
+    endif
+
+    // Inicio del listado.
+    lCabecera := .t.
+    lSalida   := .t.
+    nFila     := 13
+    nPagina   := 1
+
+    START PRINTDOC
+
+        START PRINTPAGE
 
                         do while lSalida
 
@@ -2576,15 +2576,15 @@ STATIC function ABM2Listado( aImpresoras )
                                         @ 5*RF, (HBPRNMAXCOL-HMG_LEN(_cTitulo)-6)*CF PRINT _cTitulo  FONT "COURIER NEW" SIZE 12 BOLD
                                         @ (6*RF) + 1 , 10*CF PRINT LINE TO (6*RF) + 1 , (HBPRNMAXCOL-5)*CF PENWIDTH 0.2
 
-                                        @ 7*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ] [26]	FONT "COURIER NEW" SIZE 9 BOLD
-                                        @ 8*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][27]	FONT "COURIER NEW" SIZE 9 BOLD
-                                        @ 9*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][28]	FONT "COURIER NEW" SIZE 9 BOLD
-                                        @ 10*RF	, 11*CF PRINT _HMG_SYSDATA [ 130 ][33]	FONT "COURIER NEW" SIZE 9 BOLD
+                                        @ 7*RF  , 11*CF PRINT _HMG_SYSDATA [ 130 ] [26] FONT "COURIER NEW" SIZE 9 BOLD
+                                        @ 8*RF  , 11*CF PRINT _HMG_SYSDATA [ 130 ][27]  FONT "COURIER NEW" SIZE 9 BOLD
+                                        @ 9*RF  , 11*CF PRINT _HMG_SYSDATA [ 130 ][28]  FONT "COURIER NEW" SIZE 9 BOLD
+                                        @ 10*RF , 11*CF PRINT _HMG_SYSDATA [ 130 ][33]  FONT "COURIER NEW" SIZE 9 BOLD
 
-                                        @ 7*RF	, 23*CF PRINT (_cArea)->( ordName() )	FONT "COURIER NEW" SIZE 9
-                                        @ 8*RF	, 23*CF PRINT cRegistro1		FONT "COURIER NEW" SIZE 9
-                                        @ 9*RF	, 23*CF PRINT cRegistro2		FONT "COURIER NEW" SIZE 9
-                                        @ 10*RF	, 23*CF PRINT _cFiltro			FONT "COURIER NEW" SIZE 9
+                                        @ 7*RF  , 23*CF PRINT (_cArea)->( ordName() )   FONT "COURIER NEW" SIZE 9
+                                        @ 8*RF  , 23*CF PRINT cRegistro1        FONT "COURIER NEW" SIZE 9
+                                        @ 9*RF  , 23*CF PRINT cRegistro2        FONT "COURIER NEW" SIZE 9
+                                        @ 10*RF , 23*CF PRINT _cFiltro          FONT "COURIER NEW" SIZE 9
 
                                         nColumna := 10
 
@@ -2613,7 +2613,7 @@ STATIC function ABM2Listado( aImpresoras )
 
                                                 case _aEstructura[nCampo,DBS_TYPE] == "M"
 
-                                                        @ nFila*RF, ( nColumna + 1 )  *CF PRINT HB_USUBSTR( (_cArea)->( FieldGet( aNumeroCampo[i] ) ), 1, 20 ) FONT "COURIER NEW" SIZE 8
+                                                        @ nFila*RF, ( nColumna + 1 )  *CF PRINT hb_USubStr( (_cArea)->( FieldGet( aNumeroCampo[i] ) ), 1, 20 ) FONT "COURIER NEW" SIZE 8
 
                                                 otherwise
 
@@ -2631,7 +2631,7 @@ STATIC function ABM2Listado( aImpresoras )
                                 if (_cArea)->( RecNo() ) == nUltimo
                                         lSalida := .f.
                                 endif
-                                if (_cArea)->( EOF())
+                                if (_cArea)->( Eof())
                                         lSalida := .f.
                                 endif
                                 (_cArea)->( dbSkip( 1 ) )
@@ -2642,15 +2642,15 @@ STATIC function ABM2Listado( aImpresoras )
 
                                                 @ (46*RF) - 1 , 10 *CF  PRINT LINE TO (46*RF)-1, ( HBPRNMAXCOL - 5 ) *CF PENWIDTH 0.2
 
-                                                cPie := HB_ValToStr( Date() ) + " " + Time()
+                                                cPie := hb_ValToStr( Date() ) + " " + Time()
 
                                                 @ 46*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
 
                                                 cPie := "Pagina:" + " " +          ;
-                                                        ALLTRIM( STR( nPagina) ) +      ;
+                                                        ALLTRIM( Str( nPagina) ) +      ;
                                                         "/" +                           ;
-                                                        ALLTRIM( STR( nPaginas ) )
+                                                        ALLTRIM( Str( nPaginas ) )
 
                                                 @ 46*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
@@ -2668,14 +2668,14 @@ STATIC function ABM2Listado( aImpresoras )
 
                                                 @ (68*RF)-1, 10 *CF  PRINT LINE TO (68*RF)-1, ( HBPRNMAXCOL- 5 )  *CF PENWIDTH 0.2
 
-                                                cPie := HB_ValToStr( Date() ) + " " + Time()
+                                                cPie := hb_ValToStr( Date() ) + " " + Time()
 
                                                 @ 68*RF, 10 *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                                                 cPie := "Pagina: " +                    ;
-                                                        ALLTRIM( STR( nPagina) ) +      ;
+                                                        ALLTRIM( Str( nPagina) ) +      ;
                                                         "/" +                           ;
-                                                        ALLTRIM( STR( nPaginas ) )
+                                                        ALLTRIM( Str( nPaginas ) )
 
                                                 @ 68*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
@@ -2697,35 +2697,35 @@ STATIC function ABM2Listado( aImpresoras )
 
                         @ (46*RF)-1, 10 *CF  PRINT LINE TO (46*RF)-1, ( HBPRNMAXCOL - 5 )  *CF PENWIDTH 0.2
 
-                        cPie := HB_ValToStr( Date() ) + " " + Time()
+                        cPie := hb_ValToStr( Date() ) + " " + Time()
                         @ 46*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                         cPie := "Página: " +                    ;
-                                ALLTRIM( STR( nPagina) ) +      ;
+                                ALLTRIM( Str( nPagina) ) +      ;
                                 "/" +                           ;
-                                ALLTRIM( STR( nPaginas ) )
+                                ALLTRIM( Str( nPaginas ) )
                         @ 46*RF, ( HBPRNMAXCOL -HMG_LEN(cPie)-5 )  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
                 else
 
                         @ (68*RF)-1, 10  *CF PRINT LINE TO (68*RF)-1, ( HBPRNMAXCOL - 5 ) *CF PENWIDTH 0.2
-                        cPie := HB_ValToStr( Date() ) + " " + Time()
+                        cPie := hb_ValToStr( Date() ) + " " + Time()
                         @ 68*RF, 10 *CF  PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                         cPie := "Página: " +                    ;
-                                ALLTRIM( STR( nPagina) ) +      ;
+                                ALLTRIM( Str( nPagina) ) +      ;
                                 "/" +                           ;
-                                ALLTRIM( STR( nPaginas ) )
+                                ALLTRIM( Str( nPaginas ) )
                         @ 68*RF, ( HBPRNMAXCOL - HMG_LEN(cPie)-5)  *CF PRINT cPie FONT "COURIER NEW" SIZE 9 BOLD
 
                 endif
 
 
-		END PRINTPAGE
+        END PRINTPAGE
 
-	END PRINTDOC
+    END PRINTDOC
 
 ////////// Cierra la ventana.--------------------------------------------------
-        (_cArea)->( dbGoTo( nRegistro ) )
+        (_cArea)->( dbGoto( nRegistro ) )
         wndABM2Listado.Release
 
 return NIL
