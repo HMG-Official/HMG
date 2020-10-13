@@ -5,19 +5,20 @@ These scripts are to compile HMG official 32bit unicode with MinGW 9.30
   - 2020-10-11  hb32_mgw930_32b.yml
 
   - 2020-10-11  hmg34offi_hb32_mgw930_32b_uni.yml
-    Output= HMG library.
+  
+      Output= HMG library.
 
   - 2020-10-11  hmg34offi_all_hb32_mgw930_32b_uni.yml
-    Output= All HMG libraries.
-
-  - 2020-10-11  hmg34offi_full_hb32_mgw930_32b_uni.yml
-    Output= All HMG libraries, Harbour and Mingw 9.30 binaries.
+  
+      Output= All HMG libraries.
 
   - 2020-10-11  hmg34_hb32_mgw930_32b_uni.yml
-    Output= Harbour binaries
+  
+      Output= Harbour binaries
 
   - 2020-10-11  hb32_mgw930_32b_2020_10_11.zip
-    Harbour binaries already to compile.
+  
+      Harbour binaries compiled, ziped.
 
 #### Compile HMG on different forks
 
