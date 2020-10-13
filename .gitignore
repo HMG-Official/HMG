@@ -4,16 +4,12 @@
 *.o
 
 # build generated files
-workflows/*/
-bak/*/
-lib/*/
-obj/*/
-bin/*/
+samples/*
+bak/*
+obj/*
+bin/*
 # *.zip
 *.7z
-*.dic
-*.lst
-*.log
 
 # installed binaries
 *.exe
@@ -23,3 +19,4 @@ bin/*/
 # misc junk
 *.bak
 license.txt
+SAMPLES/Basics/Hello_World/hello.prg

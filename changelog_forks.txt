@@ -34,3 +34,33 @@
     + readme.md
 
     + hb32_mgw930_32b_2020_10_11.zip
+
+2020-10-11 Carlos Britos asistex /at/ yahoo.com.ar
+  * source\BosTaurus\*.prg ; *.c
+  * source\Class\*.prg ; *.c
+  * source\Crypt\*.prg ; *.c
+  * source\Debugger\*.prg ; *.c
+  * source\Edit\*.prg ; *.c
+  * source\EditEx\*.prg ; *.c
+  * source\Graph\*.prg ; *.c
+  * source\hbvpdf\*.prg ; *.c
+  * source\HMGSQL\*.prg ; *.c
+  * source\Ini\*.prg ; *.c
+  * source\Report\*.prg ; *.c
+    * revert changes
+
+2020-10-13 Carlos Britos asistex /at/ yahoo.com.ar
+  * source\BosTaurus\*.prg ; *.c
+  * source\Class\*.prg ; *.c
+  * source\Crypt\*.prg ; *.c
+  * source\Debugger\*.prg ; *.c
+  * source\Edit\*.prg ; *.c
+  * source\EditEx\*.prg ; *.c
+  * source\Graph\*.prg ; *.c
+  * source\hbvpdf\*.prg ; *.c
+  * source\HMGSQL\*.prg ; *.c
+  * source\Ini\*.prg ; *.c
+  * source\Report\*.prg ; *.c
+    * removed prg warnings
+    * removed ending spaces
+
