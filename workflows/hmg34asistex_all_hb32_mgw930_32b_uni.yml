@@ -49,5 +49,5 @@ jobs:
         TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-        name: hmg34asistex_all_hb32_mgw930_uni_${{ env.TIME }}_${{ env.GITHUB_RUN_NUMBER }}
+        name: hmg34asistex_all_hb32_mgw930_uni_${{ env.TIME }}
         path: output
