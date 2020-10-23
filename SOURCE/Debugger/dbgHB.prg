@@ -28,6 +28,9 @@
  executable to be covered by the GNU General Public License.
  Your use of that executable is in no way restricted on account of linking the
  HMG DEBUGGER library code into it.
+ 
+ add
+ GUIDoEvents() : instead INLINE now Method with Errorblock
 ----------------------------------------------------------------------------*/
 
 
@@ -240,6 +243,7 @@ METHOD GetNextValidStopLineEx( cFileName, nLine )
    METHOD GetWatch()
    METHOD GetVars( aRawVars, nStackLevel, lShowPublics, lShowPrivates, lShowStatics, lShowLocals )   // updates monitored variables
    METHOD GetProcStack()
+METHOD GUIDoEvents() // Jimmy
 
    // Code Blocks that call the GUI functions
    VAR bGUICreateFormDebugger  INIT {|| ProcInitGUIDebugger( .T. ) }
@@ -253,7 +257,7 @@ METHOD GetNextValidStopLineEx( cFileName, nLine )
    METHOD GUICreateFormDebugger()    INLINE   EVAL( ::bGUICreateFormDebugger )
    METHOD GUIReleaseFormDebugger()   INLINE   EVAL( ::bGUIReleaseFormDebugger )
    METHOD GUIUpdateInfo()            INLINE   EVAL( ::bGUIUpdateInfo )
-   METHOD GUIDoEvents()              INLINE   EVAL( ::bGUIDoEvents )
+*   METHOD GUIDoEvents()              INLINE   EVAL( ::bGUIDoEvents ) // Jimmy
    METHOD GUIReleaseAllWindows()     INLINE   EVAL( ::bGUIReleaseAllWindows )
    METHOD GUIMessageBox( ... )       INLINE   Iif( ::lGUIShowMessageBox, EVAL( ::bGUIMessageBox, ... ), NIL )
 
@@ -1093,6 +1097,16 @@ LOCAL arr := {}
 RETURN arr
 
 
+METHOD GUIDoEvents() CLASS HMGDebugger // Jimmy
+LOCAL bOldError
+
+   bOldError := Errorblock( {||Break()} )
+   BEGIN SEQUENCE
+      EVAL( ::bGUIDoEvents )
+   END SEQUENCE
+   Errorblock( bOldError )
+
+RETURN Self
 
 FUNCTION __dbgValToStr( uVal )
 
