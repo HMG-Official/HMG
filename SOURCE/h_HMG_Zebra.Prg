@@ -169,7 +169,10 @@ LOCAL x1:= 0, y1 := 0, nBarWidth := 0, nBarHeight := 0
       RETURN HB_ZEBRA_ERROR_INVALIDZEBRA
    ENDIF
 // hb_zebra_draw ( hZebra,   bCodeBlock,                                            dX, dY,     dWidth,     dHeight, iFlags )
-   hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=x+w-x1, nBarHeight:=y+h-y1 }, x1, y1, nLineWidth, nLineHeight, iFlags )
+//   hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=x+w-x1, nBarHeight:=y+h-y1 }, x1, y1, nLineWidth, nLineHeight, iFlags )
+//REPORT BUG FOR EDK
+hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=MAX(x+w-x1, nBarWidth), nBarHeight:=MAX(y+h-y1, nBarHeight) }, x1, y1, nLineWidth, nLineHeight, iFlags )
+
 RETURN nBarWidth
 
 
@@ -182,6 +185,8 @@ LOCAL x1:= 0, y1 := 0, nBarWidth := 0, nBarHeight := 0
       RETURN HB_ZEBRA_ERROR_INVALIDZEBRA
    ENDIF
 // hb_zebra_draw ( hZebra,   bCodeBlock,                                            dX, dY,     dWidth,     dHeight, iFlags )
-   hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=x+w-x1, nBarHeight:=y+h-y1 }, x1, y1, nLineWidth, nLineHeight, iFlags )
+//   hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=x+w-x1, nBarHeight:=y+h-y1 }, x1, y1, nLineWidth, nLineHeight, iFlags )
+//REPORT BUG FOR EDK
+   hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=MAX(x+w-x1, nBarWidth), nBarHeight:=MAX(y+h-y1, nBarHeight) }, x1, y1, nLineWidth, nLineHeight, iFlags )
 RETURN nBarHeight
 
