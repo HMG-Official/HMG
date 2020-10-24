@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> h_GridEx.prg  
+ HMG Source File --> h_GridEx.prg
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -42,7 +42,7 @@ MEMVAR _HMG_SYSDATA
 
 
 // CONSTANTS (nControl)
-********************************************************************************** 
+**********************************************************************************
 * _HMG_SYSDATA [ nControl ] [i]
 *
 * #define _GRID_COLUMN_HEADER_             7
@@ -94,7 +94,7 @@ FUNCTION _GridEx_ColumnCount (cControlName , cParentForm)
 #if 1
    LOCAL  i:= GetControlIndex (cControlName , cParentForm)
    RETURN (HMG_LEN(_HMG_SYSDATA [ 7 ] [i]))   // Length of aColumnHeader
-#else   // this way produce a bug ( Bound error: array access ) when call DeleteColumn( 1 ) with a Grid with only one column 
+#else   // this way produce a bug ( Bound error: array access ) when call DeleteColumn( 1 ) with a Grid with only one column
    LOCAL hWnd := GetControlHandle (cControlName , cParentForm)
    RETURN ListView_GetColumnCount( hWnd )
 #endif
@@ -105,27 +105,27 @@ FUNCTION _GridEx_GetColumnControl (cControlName , cParentForm, nControl, nColInd
 // cCAPTION, nWIDTH, nJUSTIFY, aCOLUMNCONTROL, bDYNAMICBACKCOLOR, bDYNAMICFORECOLOR, bCOLUMNWHEN, bCOLUMNVALID, bONHEADCLICK
 LOCAL Length, i, Data := NIL
   i := GetControlIndex(cControlName,cParentForm)
-  IF (nControl = _GRID_COLUMN_ONHEADCLICK_) .OR. (nControl = _GRID_COLUMN_HEADER_) .OR. (nControl = _GRID_COLUMN_JUSTIFY_) 
-     Length := HMG_LEN(_HMG_SYSDATA [ nControl ] [i])      
-     IF nColIndex > 0 .AND. nColIndex <= Length 
+  IF (nControl = _GRID_COLUMN_ONHEADCLICK_) .OR. (nControl = _GRID_COLUMN_HEADER_) .OR. (nControl = _GRID_COLUMN_JUSTIFY_)
+     Length := HMG_LEN(_HMG_SYSDATA [ nControl ] [i])
+     IF nColIndex > 0 .AND. nColIndex <= Length
         Data := _HMG_SYSDATA [ nControl ] [i] [nColIndex]
      ELSE
         MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")
-     ENDIF        
+     ENDIF
   ELSE
      IF Valtype (_HMG_SYSDATA [ 40 ] [ i ] [ nControl ]) == "A"
-       
+
         Length := HMG_LEN(_HMG_SYSDATA [ 40 ] [ i ] [ nControl ])
-        IF nColIndex > 0 .AND. nColIndex <= Length 
+        IF nColIndex > 0 .AND. nColIndex <= Length
            Data := _HMG_SYSDATA [ 40 ] [ i ] [ nControl ] [nColIndex]
-           IF nControl = _GRID_COLUMN_WIDTH_ 
+           IF nControl = _GRID_COLUMN_WIDTH_
               // Low-level function in C native of HMG (source c_grid.c)
               Data := LISTVIEW_GETCOLUMNWIDTH (GetControlHandle (cControlName, cParentForm), nColIndex-1)
            ENDIF
         ELSE
            MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")
-        ENDIF                   
-     ENDIF       
+        ENDIF
+     ENDIF
   ENDIF
 RETURN Data
 
@@ -138,7 +138,7 @@ LOCAL Length, nColumnCount, i, lGridEnableUpdate
 
   nColumnCount := _GridEx_ColumnCount(cControlName,cParentForm)
   i := GetControlIndex(cControlName,cParentForm)
-  
+
   IF Valtype (lRefresh) <> "L"
      lRefresh := .T.
   ENDIF
@@ -151,11 +151,11 @@ LOCAL Length, nColumnCount, i, lGridEnableUpdate
 
      _GridEx_SET_DEFAULT_COLUMN_CONTROL (cControlName , cParentForm, nControl)
 
-     IF nColIndex > 0 .AND. nColIndex <= nColumnCount        
+     IF nColIndex > 0 .AND. nColIndex <= nColumnCount
         _HMG_SYSDATA [ nControl ] [i] [nColIndex] := Data
         DO CASE
            CASE nControl = _GRID_COLUMN_HEADER_
-                _HMG_SYSDATA [ _GRID_COLUMN_HEADER2_ ] [i] := _HMG_SYSDATA [ _GRID_COLUMN_HEADER_ ] [i] 
+                _HMG_SYSDATA [ _GRID_COLUMN_HEADER2_ ] [i] := _HMG_SYSDATA [ _GRID_COLUMN_HEADER_ ] [i]
                 SETGRIDCOLOMNHEADER (GetControlHandle(cControlName, cParentForm), nColIndex, Data)   // Low-level function in C native of HMG (source c_grid.c)
            CASE nControl = _GRID_COLUMN_JUSTIFY_
                 LISTVIEW_SETCOLUMNJUSTIFY (GetControlHandle(cControlName, cParentForm), nColIndex-1, Data)   // Low-level function in C (source c_GridEx.c)
@@ -164,28 +164,28 @@ LOCAL Length, nColumnCount, i, lGridEnableUpdate
         MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")
      ENDIF
 
-  ELSE     
+  ELSE
      IF Valtype (_HMG_SYSDATA [ 40 ] [ i ] [ nControl ]) <> "A"
         _HMG_SYSDATA [ 40 ] [ i ] [ nControl ] := {}
      ENDIF
 
      Length := HMG_LEN(_HMG_SYSDATA [ 40 ] [ i ] [ nControl ])
-     IF Length < nColumnCount           
+     IF Length < nColumnCount
         ASIZE (_HMG_SYSDATA [ 40 ] [ i ] [ nControl ], nColumnCount)
      ENDIF
 
     _GridEx_SET_DEFAULT_COLUMN_CONTROL (cControlName , cParentForm, nControl)
 
-    IF nColIndex > 0 .AND. nColIndex <= nColumnCount           
-       _HMG_SYSDATA [ 40 ] [ i ] [ nControl ] [nColIndex] := Data 
+    IF nColIndex > 0 .AND. nColIndex <= nColumnCount
+       _HMG_SYSDATA [ 40 ] [ i ] [ nControl ] [nColIndex] := Data
 
        IF nControl = _GRID_COLUMN_WIDTH_
           // Low-level function in C native of HMG (source c_grid.c)
-          LISTVIEW_SETCOLUMNWIDTH (GetControlHandle (cControlName, cParentForm), nColIndex-1, Data) 
+          LISTVIEW_SETCOLUMNWIDTH (GetControlHandle (cControlName, cParentForm), nColIndex-1, Data)
        ENDIF
     ELSE
        MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")
-    ENDIF       
+    ENDIF
   ENDIF
 
   IF nControl = _GRID_COLUMN_CONTROL_ .AND. lRefresh == .T.
@@ -194,40 +194,40 @@ LOCAL Length, nColumnCount, i, lGridEnableUpdate
      *******************************************************
      _GridEx_UpdateCellValue (cControlName, cParentForm, nColIndex)   // Force the rewrite the all items of the Column(nColumnIndex)
   ENDIF
-  
+
   lGridEnableUpdate := _HMG_SYSDATA [ 40 ] [ i ] [ 33 ]
   IF lRefresh == .T. .AND. lGridEnableUpdate == .T.
      DoMethod (cParentForm, cControlName, "Refresh")
   ENDIF
-  
+
 RETURN NIL
 
 
 *-----------------------------------------------------------------------------------------*
 FUNCTION _GridEx_GetColumnDisplayPosition (cControlName, cParentForm, nColIndex)
 *-----------------------------------------------------------------------------------------*
-LOCAL nPos, nColumnCount, ArrayOrder := {}
+LOCAL nPos, nColumnCount, ArrayOrder
    nColumnCount := _GridEx_ColumnCount (cControlName, cParentForm)
    ArrayOrder := LISTVIEW_GETCOLUMNORDERARRAY (GetControlHandle (cControlName, cParentForm), nColumnCount) // Low-level function in C (source c_GridEx.c)
-   nPos := ASCAN (ArrayOrder, nColIndex)    
+   nPos := ASCAN (ArrayOrder, nColIndex)
 RETURN nPos
 
 
 *------------------------------------------------------------------------------------------------*
 FUNCTION _GridEx_SetColumnDisplayPosition (cControlName, cParentForm, nColIndex, nPos_Display)
 *------------------------------------------------------------------------------------------------*
-LOCAL nOld_Pos, ArrayOrder := {}
+LOCAL nOld_Pos, ArrayOrder
 LOCAL nColumnCount := _GridEx_ColumnCount (cControlName, cParentForm)
 LOCAL lGridEnableUpdate, i
 
    // Low-level function in C (source c_GridEx.c)
-   ArrayOrder := LISTVIEW_GETCOLUMNORDERARRAY (GetControlHandle (cControlName, cParentForm), nColumnCount)          
-   nOld_Pos := ASCAN (ArrayOrder, nColIndex)  
-     
+   ArrayOrder := LISTVIEW_GETCOLUMNORDERARRAY (GetControlHandle (cControlName, cParentForm), nColumnCount)
+   nOld_Pos := ASCAN (ArrayOrder, nColIndex)
+
    IF nOld_pos >= 1 .AND. nPos_Display <> nOld_Pos
       ADEL (ArrayOrder, nOld_Pos)
       AINS (ArrayOrder, nPos_Display)
-      ArrayOrder [nPos_Display] := nColIndex 
+      ArrayOrder [nPos_Display] := nColIndex
 
       // Low-level function in C (source c_GridEx.c)
       LISTVIEW_SETCOLUMNORDERARRAY (GetControlHandle (cControlName, cParentForm), nColumnCount, ArrayOrder)
@@ -263,7 +263,7 @@ RETURN aBKIMAGEinfo
 *---------------------------------------------------------------------------------------------------*
 FUNCTION  _GridEx_GetCellValue (cControlName, cParentForm, nRowIndex, nColIndex)
 *---------------------------------------------------------------------------------------------------*
-LOCAL AEDITCONTROLS, XRES, AEC, CTYPE, CINPUTMASK, CFORMAT, AITEMS, ARANGE, DTYPE, ALABELS, X, Z
+LOCAL AEDITCONTROLS, XRES, AEC, CTYPE, CFORMAT, AITEMS, ALABELS, X, Z
 LOCAL xData := NIL
 
 LOCAL cItemCell := LISTVIEW_GETITEMTEXT (GetControlHandle (cControlName, cParentForm), nRowIndex-1, nColIndex-1)
@@ -274,14 +274,14 @@ LOCAL cItemCell := LISTVIEW_GETITEMTEXT (GetControlHandle (cControlName, cParent
 
    AEC         := XRES [1]
    CTYPE       := HMG_UPPER( XRES [2] )
-   CINPUTMASK  := XRES [3]
+// unused   CINPUTMASK  := XRES [3] // asistex
    CFORMAT     := XRES [4]
    AITEMS      := XRES [5]
-   ARANGE      := XRES [6]
-   DTYPE       := XRES [7]
+// unused   ARANGE      := XRES [6] // asistex
+// unused   DTYPE       := XRES [7] // asistex
    ALABELS     := XRES [8]
 
-   IF AEC == 'TEXTBOX' 
+   IF AEC == 'TEXTBOX'
       IF CTYPE == 'NUMERIC'
          IF CFORMAT = 'E'
             xData := GetNumFromCellTextSp (cItemCell)
@@ -298,13 +298,13 @@ LOCAL cItemCell := LISTVIEW_GETITEMTEXT (GetControlHandle (cControlName, cParent
 
    ELSEIF AEC == 'DATEPICKER'
           xData := CTOD (cItemCell)
-   
+
    ELSEIF AEC == 'EDITBOX'    // By Pablo on February, 2015
           xData := cItemCell
- 
+
    ELSEIF AEC == 'TIMEPICKER'
           xData := cItemCell
- 
+
    ELSEIF AEC == 'COMBOBOX'
           Z := 0
           FOR X := 1 TO HMG_LEN (AITEMS)
@@ -317,7 +317,7 @@ LOCAL cItemCell := LISTVIEW_GETITEMTEXT (GetControlHandle (cControlName, cParent
 
    ELSEIF AEC == 'SPINNER'
          xData := VAL (cItemCell)
-         
+
    ELSEIF AEC == 'CHECKBOX'
          IF ALLTRIM(HMG_UPPER(cItemCell)) == ALLTRIM(HMG_UPPER(ALABELS [1]))
             xData := .T.
@@ -332,7 +332,7 @@ RETURN xData
 *---------------------------------------------------------------------------------------------------*
 FUNCTION  _GridEx_SetCellValue (cControlName, cParentForm, nRowIndex, nColIndex, xData)
 *---------------------------------------------------------------------------------------------------*
-LOCAL AEDITCONTROLS, XRES, AEC, CTYPE, CINPUTMASK, CFORMAT, AITEMS, ARANGE, DTYPE, ALABELS, aux
+LOCAL AEDITCONTROLS, XRES, AEC, CTYPE, CINPUTMASK, CFORMAT, AITEMS, ALABELS, aux
 LOCAL cItemCell := ""
 
    AEDITCONTROLS := ARRAY (1)
@@ -344,8 +344,8 @@ LOCAL cItemCell := ""
    CINPUTMASK  := XRES [3]
    CFORMAT     := XRES [4]
    AITEMS      := XRES [5]
-   ARANGE      := XRES [6]
-   DTYPE       := XRES [7]
+// unused   ARANGE      := XRES [6] // asistex
+// unused   DTYPE       := XRES [7] // asistex
    ALABELS     := XRES [8]
 
 
@@ -377,7 +377,7 @@ LOCAL cItemCell := ""
           SET CENTURY ON
           cItemCell := DTOC (xData)
           SET (_SET_DATEFORMAT, aux)
-   
+
    ELSEIF AEC == 'EDITBOX'    // By Pablo on February, 2015
           cItemCell := xData
 
@@ -388,7 +388,7 @@ LOCAL cItemCell := ""
           IF xData == 0
              cItemCell := ''
           ELSE
-             cItemCell := AITEMS [ xData ] 
+             cItemCell := AITEMS [ xData ]
           ENDIF
 
    ELSEIF AEC == 'SPINNER'
@@ -419,12 +419,12 @@ MEMVAR _HMG_GRID_SELECTEDROW_DISPLAYCOLOR
 MEMVAR _HMG_GRID_SELECTEDCELL_DISPLAYCOLOR
 LOCAL  aRGB_old, aRGB
 
-   IF nIndex == _SELECTEDROW_DISPLAYCOLOR .AND. ValType (xData) == "L" 
+   IF nIndex == _SELECTEDROW_DISPLAYCOLOR .AND. ValType (xData) == "L"
       _HMG_GRID_SELECTEDROW_DISPLAYCOLOR := xData
       RETURN NIL
    ENDIF
-   
-   IF nIndex == _SELECTEDCELL_DISPLAYCOLOR .AND. ValType (xData) == "L" 
+
+   IF nIndex == _SELECTEDCELL_DISPLAYCOLOR .AND. ValType (xData) == "L"
       _HMG_GRID_SELECTEDCELL_DISPLAYCOLOR := xData
       RETURN NIL
    ENDIF
@@ -544,7 +544,7 @@ LOCAL nColumnCount := _GridEx_ColumnCount(cControlName,cParentForm)
                 _HMG_SYSDATA [ 40 ] [ i ] [ nControl ] [k] := DefaultData
              ENDIF
          NEXT
-      ENDIF       
+      ENDIF
    ENDIF
 
 RETURN NIL
@@ -555,25 +555,25 @@ RETURN NIL
 FUNCTION _GridEx_DELETE_COLUMN_CONTROL (cControlName , cParentForm, nControl, nColIndex, nColumnCount)
 *---------------------------------------------------------------------------------------------------------*
 LOCAL i := GetControlIndex(cControlName,cParentForm)
-  
+
   IF nControl == _GRID_COLUMN_ONHEADCLICK_ .OR. nControl == _GRID_COLUMN_HEADER_ .OR. nControl == _GRID_COLUMN_HEADER2_ .OR. nControl == _GRID_COLUMN_HEADERIMAGE_ .OR. nControl == _GRID_COLUMN_JUSTIFY_
      IF Valtype (_HMG_SYSDATA [ nControl ] [i]) == "A"
-        IF nColIndex > 0 .AND. nColIndex <= nColumnCount 
+        IF nColIndex > 0 .AND. nColIndex <= nColumnCount
            ADEL  (_HMG_SYSDATA [ nControl ] [i], nColIndex)
            ASIZE (_HMG_SYSDATA [ nControl ] [i], nColumnCount-1)
         ELSE
-           MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")           
-        ENDIF   
+           MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")
+        ENDIF
      ENDIF
   ELSE
      IF Valtype (_HMG_SYSDATA [ 40 ] [ i ] [ nControl ]) == "A"
-        IF nColIndex > 0 .AND. nColIndex <= nColumnCount 
+        IF nColIndex > 0 .AND. nColIndex <= nColumnCount
            ADEL  (_HMG_SYSDATA [ 40 ] [ i ] [ nControl ], nColIndex)
            ASIZE (_HMG_SYSDATA [ 40 ] [ i ] [ nControl ], nColumnCount-1)
         ELSE
            MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")
-        ENDIF                   
-     ENDIF       
+        ENDIF
+     ENDIF
   ENDIF
 
   _GridEx_SET_DEFAULT_COLUMN_CONTROL (cControlName , cParentForm, nControl)
@@ -593,7 +593,7 @@ LOCAL i := GetControlIndex(cControlName,cParentForm)
            AINS  (_HMG_SYSDATA [ nControl ] [i], nColIndex)
         ELSE
            MsgHMGError ("Grid: Invalid nColIndex. Program Terminated")
-        ENDIF   
+        ENDIF
      ENDIF
   ELSE
      IF Valtype (_HMG_SYSDATA [ 40 ] [ i ] [ nControl ]) == "A"
@@ -605,9 +605,9 @@ LOCAL i := GetControlIndex(cControlName,cParentForm)
         ENDIF
      ENDIF
   ENDIF
-  
+
   _GridEx_SET_DEFAULT_COLUMN_CONTROL (cControlName , cParentForm, nControl)
-  
+
 RETURN NIL
 
 
@@ -626,7 +626,7 @@ LOCAL nRow, nCol, xCellValue
 
    FOR nRow = 1 TO GetProperty (cParentForm, cControlName, "ItemCount")
        FOR nCol = nColFirst TO nColEnd
-           xCellValue := _GridEx_GetCellValue (cControlName, cParentForm, nRow, nCol) // Get Grid xData 
+           xCellValue := _GridEx_GetCellValue (cControlName, cParentForm, nRow, nCol) // Get Grid xData
            _GridEx_SetCellValue (cControlName, cParentForm, nRow, nCol, xCellValue)   // Transforms xData into the new format if necessary and rewrites in cell
        NEXT
    NEXT
@@ -676,12 +676,12 @@ LOCAL aDynamicBackColor := _HMG_SYSDATA [40] [i] [ _GRID_COLUMN_DYNAMICBACKCOLOR
 LOCAL aDynamicForeColor := _HMG_SYSDATA [40] [i] [ _GRID_COLUMN_DYNAMICFORECOLOR_ ]
 LOCAL nRGB_BackColor, nRGB_ForeColor, aRGB
 LOCAL CallThisData := .F.
-LOCAL hFont := 0
+LOCAL hFont
 
    IF ValType (BackColor) == "A"
       DefaultBackColor := RGB (BackColor[1], BackColor[2], BackColor[3])
    ENDIF
-   
+
    IF ValType (FontColor) == "A"
       DefaultForeColor := RGB (FontColor[1], FontColor[2], FontColor[3])
    ENDIF
@@ -708,7 +708,7 @@ LOCAL hFont := 0
          _GridEx_SetThisGridData (i, nRow, nCol)
       ENDIF
       IF ValType (aDynamicForeColor [nCol]) == "B"
-         aRGB := EVAL( aDynamicForeColor [nCol] )
+         aRGB := Eval( aDynamicForeColor [nCol] )
       ELSE
          aRGB := HMG_DoProc( aDynamicForeColor [nCol] )
       ENDIF
@@ -747,7 +747,7 @@ LOCAl DefaultFontHandle := _HMG_SYSDATA [36] [i]
             ASIZE (DynamicData, 6 )   // { cFontName, nFontSize, [ lBold, lItalic, lUnderline, lStrikeOut ] }
          ENDIF
 
-         IF ValType (DynamicData [1]) == "C" .AND. .NOT. EMPTY(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
+         IF ValType (DynamicData [1]) == "C" .AND. .NOT. Empty(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
             cFontName  := DynamicData [1]
             nFontSize  := DynamicData [2]
             lBold      := DynamicData [3]
@@ -780,10 +780,10 @@ LOCAL xThisValue ,cControlName, cParentForm
       xThisValue   := _GridEx_GetCellVirtualValueByIndex ( i, nRow , nCol )
    ELSE
       cControlName := _HMG_SYSDATA [ 2 ]  [ i ]
-      cParentForm  := _HMG_SYSDATA [ 40 ] [ i ] [ 40 ] 
+      cParentForm  := _HMG_SYSDATA [ 40 ] [ i ] [ 40 ]
       xThisValue   := _GridEx_GetCellValue (cControlName, cParentForm, nRow, nCol)
    ENDIF
-   
+
    _HMG_SYSDATA [ 195 ] := nRow         // This.CellRowIndex
    _HMG_SYSDATA [ 196 ] := nCol         // This.CellColIndex
    _HMG_SYSDATA [ 318 ] := xThisValue   // This.CellValue
@@ -797,7 +797,7 @@ Function _GridEx_GetCellVirtualValueByIndex ( i, nRow , nCol )
    _HMG_SYSDATA [ 201 ] := nRow        // This.QueryRowIndex
    _HMG_SYSDATA [ 202 ] := nCol        // This.QueryColIndex
 
-   IF ValType ( _HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' .AND. USED() == .T.   // RecordSource
+   IF ValType ( _HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' .AND. Used() == .T.   // RecordSource
       GetDataGridCellData (i, .T.)   // ADD    March 2015
    ELSEIF ValType (_HMG_SYSDATA [6] [i]) == 'B'
       EVAL (_HMG_SYSDATA [6] [i])      // OnQueryData Event
@@ -813,12 +813,10 @@ Function _GridEx_DoHeaderCustomDraw ( i, lParam, nCol )
 #define COLOR_BTNFACE   15   // ok
 Local DefaultBackColor := GetSysColor ( COLOR_BTNFACE )
 Local DefaultForeColor := RGB (  0,   0,   0)   // BLACK
-Local BackColor  := _HMG_SYSDATA [40] [i] [28]
-Local FontColor  := _HMG_SYSDATA [40] [i] [29]
 LOCAL aHeaderBackColor := _HMG_SYSDATA [40] [i] [ _GRID_COLUMN_HEADERBACKCOLOR_ ]   // Not work
 LOCAL aHeaderForeColor := _HMG_SYSDATA [40] [i] [ _GRID_COLUMN_HEADERFORECOLOR_ ]
 LOCAL nRGB_BackColor, nRGB_ForeColor, aRGB
-LOCAL hFont := 0
+LOCAL hFont
 
    _HMG_SYSDATA [ 195 ] := 0      // This.CellRowIndex
    _HMG_SYSDATA [ 196 ] := nCol   // This.CellColIndex
@@ -842,7 +840,7 @@ LOCAL hFont := 0
    ENDIF
 
    hFont := _GridEx_DoHeaderCustomDrawFont ( i, lParam, nCol )
- 
+
 Return HEADER_SetFont (lParam , nRGB_BackColor, nRGB_ForeColor, hFont)
 
 
@@ -857,13 +855,13 @@ LOCAl DefaultFontHandle := _HMG_SYSDATA [36] [i]
 
    IF ValType (aHeaderFont) == "A" .AND. ValType (aHeaderFont [nCol]) == "B"
       DynamicData := EVAL (aHeaderFont [nCol])
-         
+
       IF ValType (DynamicData) == "A"
          IF HMG_LEN (DynamicData) < 6
             ASIZE (DynamicData, 6 )   // { cFontName, nFontSize, [ lBold, lItalic, lUnderline, lStrikeOut ] }
          ENDIF
 
-         IF ValType (DynamicData [1]) == "C" .AND. .NOT. EMPTY(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
+         IF ValType (DynamicData [1]) == "C" .AND. .NOT. Empty(DynamicData [1]) .AND. ValType (DynamicData [2]) == "N" .AND. DynamicData [2] > 0
             cFontName  := DynamicData [1]
             nFontSize  := DynamicData [2]
             lBold      := DynamicData [3]
@@ -894,7 +892,7 @@ LOCAL i, OldValue := _HMG_SYSDATA [ 514 ]
       _HMG_SYSDATA [ 514 ] := lValue
       i := ASCAN ( _HMG_SYSDATA [ 3 ], GetFocus () )
       IF i > 0 .AND. ( _HMG_SYSDATA [ 1 ] [ i ] == 'GRID' .OR. _HMG_SYSDATA [ 1 ] [ i ] == 'MULTIGRID' )
-         SetEventProcessHMGWindowsMessage ( .NOT. lValue ) 
+         SetEventProcessHMGWindowsMessage ( .NOT. lValue )
       ENDIF
    ENDIF
 RETURN OldValue

@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -80,8 +80,8 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 			invisible , notabstop , disabledbackcolor , disabledfontcolor )
 *--------------------------------------------------------*
 
-	local nParentForm := 0
-	local nControlHandle := 0
+	local nParentForm
+	local nControlHandle
 	local mVar
 	Local FontHandle
 	Local WorkArea
@@ -113,7 +113,7 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 
 
 	If ValType ( Field ) != 'U'
-		if  HB_UAT ( '>', Field ) == 0 
+		if  HB_UAT ( '>', Field ) == 0
 			MsgHMGError ("Control: " + cControlName + " Of " + cParentForm + " : You must specify a fully qualified field name. Program Terminated")
 		Else
 			WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
@@ -136,9 +136,9 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 	if _HMG_SYSDATA [ 183 ] > 0
 		IF _HMG_SYSDATA [ 240 ] == .F.
 		nx 	:= nx + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-		ny 	:= ny + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] 
+		ny 	:= ny + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
 		cParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-		cParentTabName := _HMG_SYSDATA [ 225 ] 
+		cParentTabName := _HMG_SYSDATA [ 225 ]
 		ENDIF
 	EndIf
 
@@ -160,10 +160,10 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 	nControlHandle := InitTextBox( nParentForm, 0, nx, ny, nWidth, nHeight, '', 0, nMaxLength, ;
                                  lUpper, lLower, .f., lPassword , RIGHT , readonly , invisible , notabstop )
 
-	if valtype(cfontname) != "U" .and. valtype(nfontsize) != "U"
+	if ValType(cfontname) != "U" .and. ValType(nfontsize) != "U"
 		FontHandle := _SetFont (nControlHandle,cFontName,nFontSize,bold,italic,underline,strikeout)
 	Else
-		FontHandle := _SetFont (nControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)		
+		FontHandle := _SetFont (nControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
 	endif
 
 	If _HMG_SYSDATA [ 265 ] = .T.
@@ -179,44 +179,44 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 
 	Public &mVar. := k
 
-	_HMG_SYSDATA [1] [k] := if( lNumeric, "NUMTEXT", "TEXT" ) 
-	_HMG_SYSDATA [2]  [k] :=  cControlName 
-	_HMG_SYSDATA [3]  [k] :=  nControlHandle 
-	_HMG_SYSDATA [4]  [k] :=  nParentForm 
-	_HMG_SYSDATA [  5 ]  [k] :=  0 
-	_HMG_SYSDATA [  6 ]  [k] :=  "" 
-	_HMG_SYSDATA [  7 ]  [k] :=  Field 
-	_HMG_SYSDATA [  8 ]  [k] :=  nil 
-	_HMG_SYSDATA [  9 ]  [k] :=  "" 
-	_HMG_SYSDATA [  10 ] [k] :=   uLostFocus 
-	_HMG_SYSDATA [ 11 ]  [k] := uGotFocus 
+	_HMG_SYSDATA [1] [k] := if( lNumeric, "NUMTEXT", "TEXT" )
+	_HMG_SYSDATA [2]  [k] :=  cControlName
+	_HMG_SYSDATA [3]  [k] :=  nControlHandle
+	_HMG_SYSDATA [4]  [k] :=  nParentForm
+	_HMG_SYSDATA [  5 ]  [k] :=  0
+	_HMG_SYSDATA [  6 ]  [k] :=  ""
+	_HMG_SYSDATA [  7 ]  [k] :=  Field
+	_HMG_SYSDATA [  8 ]  [k] :=  nil
+	_HMG_SYSDATA [  9 ]  [k] :=  ""
+	_HMG_SYSDATA [  10 ] [k] :=   uLostFocus
+	_HMG_SYSDATA [ 11 ]  [k] := uGotFocus
 	_HMG_SYSDATA [ 12 ]  [k] :=  uChange
-	_HMG_SYSDATA [ 13 ]  [k] :=  .F. 
-	_HMG_SYSDATA [ 14 ]  [k] :=  backcolor 
-	_HMG_SYSDATA [ 15 ] [k] :=   fontcolor 
-	_HMG_SYSDATA [ 16 ]  [k] :=  uEnter 
-	_HMG_SYSDATA [ 17 ]  [k] :=  {} 
-	_HMG_SYSDATA [ 18 ]  [k] :=  ny 
-	_HMG_SYSDATA [ 19 ]  [k] :=  nx 
-	_HMG_SYSDATA [ 20 ]   [k] := nwidth 
-	_HMG_SYSDATA [ 21 ]   [k] := nheight 
-	_HMG_SYSDATA [ 22 ]  [k] :=  0 
-	_HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 25 ]  [k] :=  "" 
-	_HMG_SYSDATA [ 26 ]  [k] :=  0 
-	_HMG_SYSDATA [ 27 ]  [k] :=  cfontname 
-	_HMG_SYSDATA [ 28 ]  [k] :=  nfontsize 
-	_HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout} 
-	_HMG_SYSDATA [ 30 ]  [k] :=   ctooltip  
+	_HMG_SYSDATA [ 13 ]  [k] :=  .F.
+	_HMG_SYSDATA [ 14 ]  [k] :=  backcolor
+	_HMG_SYSDATA [ 15 ] [k] :=   fontcolor
+	_HMG_SYSDATA [ 16 ]  [k] :=  uEnter
+	_HMG_SYSDATA [ 17 ]  [k] :=  {}
+	_HMG_SYSDATA [ 18 ]  [k] :=  ny
+	_HMG_SYSDATA [ 19 ]  [k] :=  nx
+	_HMG_SYSDATA [ 20 ]   [k] := nwidth
+	_HMG_SYSDATA [ 21 ]   [k] := nheight
+	_HMG_SYSDATA [ 22 ]  [k] :=  0
+	_HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 25 ]  [k] :=  ""
+	_HMG_SYSDATA [ 26 ]  [k] :=  0
+	_HMG_SYSDATA [ 27 ]  [k] :=  cfontname
+	_HMG_SYSDATA [ 28 ]  [k] :=  nfontsize
+	_HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout}
+	_HMG_SYSDATA [ 30 ]  [k] :=   ctooltip
 	_HMG_SYSDATA [ 31 ]  [k] :=   cParentTabName
-	_HMG_SYSDATA [ 32 ]  [k] :=   0  
-	_HMG_SYSDATA [ 33 ]  [k] :=   ''  
-	_HMG_SYSDATA [ 34 ]  [k] :=  .Not.  invisible 
-	_HMG_SYSDATA [ 35 ]  [k] :=   HelpId 
-	_HMG_SYSDATA [ 36 ]  [k] :=   FontHandle 
-	_HMG_SYSDATA [ 37 ]  [k] :=   0 
-	_HMG_SYSDATA [ 38 ]  [k] :=   .T. 
+	_HMG_SYSDATA [ 32 ]  [k] :=   0
+	_HMG_SYSDATA [ 33 ]  [k] :=   ''
+	_HMG_SYSDATA [ 34 ]  [k] :=  .Not.  invisible
+	_HMG_SYSDATA [ 35 ]  [k] :=   HelpId
+	_HMG_SYSDATA [ 36 ]  [k] :=   FontHandle
+	_HMG_SYSDATA [ 37 ]  [k] :=   0
+	_HMG_SYSDATA [ 38 ]  [k] :=   .T.
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -227,10 +227,10 @@ function _DefineTextBox( cControlName, cParentForm, nx, ny, nWidth, nHeight, ;
 
 	// With NUMERIC clause, transform numeric value into a string.
 	if ( lNumeric )
-		If Valtype(cValue) != 'C'
-			cValue := ALLTRIM( STR( cValue ) )
+		If ValType(cValue) != 'C'
+			cValue := ALLTRIM( Str( cValue ) )
 		EndIf
-	EndIf		
+	EndIf
 
 	// Fill the TEXTBOX with the text given.
 	if ( HMG_LEN( cValue ) > 0 )
@@ -245,7 +245,7 @@ return nil
 *-----------------------------------------------------------------------------*
 Function _DefineMaskedTextbox ( ControlName, ParentForm, x, y, inputmask , width , value , fontname, fontsize , tooltip , lostfocus ,gotfocus , change , height , enter , rightalign  , HelpId , Format , bold, italic, underline, strikeout , field  , backcolor , fontcolor , readonly  , invisible , notabstop  , disabledbackcolor , disabledfontcolor )
 *-----------------------------------------------------------------------------*
-Local i, cParentForm ,c,mVar , WorkArea , k := 0
+Local i, cParentForm ,c,mVar , WorkArea , k
 Local ControlHandle
 Local FontHandle
 Local cParentTabName
@@ -264,7 +264,7 @@ RightAlign := NIL
 
 
 	If ValType ( Field ) != 'U'
-		if  HB_UAT ( '>', Field ) == 0 
+		if  HB_UAT ( '>', Field ) == 0
 			MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated" )
 		Else
 			WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
@@ -274,7 +274,7 @@ RightAlign := NIL
 		EndIf
 	EndIf
 
-	if valtype(Format) == "U"
+	if ValType(Format) == "U"
 		Format := ""
 	endif
 
@@ -296,37 +296,37 @@ RightAlign := NIL
 
 		c := HB_USUBSTR ( Format , i , 1 )
 
-        	if c!='C' .and. c!='X' .and. c!= '('  .and. c!= 'E' 
+        	if c!='C' .and. c!='X' .and. c!= '('  .and. c!= 'E'
 			MsgHMGError("@...TEXTBOX: Wrong Format Definition" )
 		EndIf
 
 	Next i
 
-	if valtype(change) == "U"
+	if ValType(change) == "U"
 		change := ""
 	endif
 
-	if valtype(gotfocus) == "U"
+	if ValType(gotfocus) == "U"
 		gotfocus := ""
 	endif
 
-	if valtype(enter) == "U"
+	if ValType(enter) == "U"
 		enter := ""
 	endif
 
-	if valtype(lostfocus) == "U"
+	if ValType(lostfocus) == "U"
 		lostfocus := ""
 	endif
 
-	if valtype(Width) == "U"
+	if ValType(Width) == "U"
 		Width := 120
 	endif
 
-	if valtype(height) == "U"
+	if ValType(height) == "U"
 		height := 24
 	endif
 
-	if valtype(Value) == "U"
+	if ValType(Value) == "U"
 		Value := ""
 	endif
 
@@ -336,7 +336,7 @@ RightAlign := NIL
 
 	InputMask :=  Format + ' ' + InputMask
 
-	Value := Transform ( value , InputMask ) 
+	Value := Transform ( value , InputMask )
 
 	if _HMG_SYSDATA [ 264 ] = .T.
 		ParentForm := _HMG_SYSDATA [ 223 ]
@@ -350,9 +350,9 @@ RightAlign := NIL
 	if _HMG_SYSDATA [ 183 ] > 0
 		IF _HMG_SYSDATA [ 240 ] == .F.
 		x 	:= x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-		y 	:= y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] 
+		y 	:= y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
 		ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-		cParentTabName := _HMG_SYSDATA [ 225 ] 
+		cParentTabName := _HMG_SYSDATA [ 225 ]
 		ENDIF
 	EndIf
 
@@ -371,17 +371,17 @@ RightAlign := NIL
 	ParentForm = GetFormHandle (ParentForm)
 
 	ControlHandle := InitMaskedTextBox ( ParentForm, 0, x, y, width , '' , 0  , 255 , .f. , .f. , height , .t. , readonly  , invisible , notabstop )
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
-		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)		
+		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
 	endif
 
 	If _HMG_SYSDATA [ 265 ] = .T.
 		aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 	        SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -389,44 +389,44 @@ RightAlign := NIL
 
 	Public &mVar. := k
 
-	_HMG_SYSDATA [1] [k] := "MASKEDTEXT" 
-	_HMG_SYSDATA [2]  [k] :=  ControlName 
-	_HMG_SYSDATA [3] [k] :=   ControlHandle 
+	_HMG_SYSDATA [1] [k] := "MASKEDTEXT"
+	_HMG_SYSDATA [2]  [k] :=  ControlName
+	_HMG_SYSDATA [3] [k] :=   ControlHandle
 	_HMG_SYSDATA [4] [k] :=   ParentForm
 	_HMG_SYSDATA [  5 ]  [k] :=  0
-	_HMG_SYSDATA [  6 ]  [k] :=  "" 
+	_HMG_SYSDATA [  6 ]  [k] :=  ""
 	_HMG_SYSDATA [  7 ] [k] :=   InputMask
-	_HMG_SYSDATA [  8 ]  [k] :=  Nil 
-	_HMG_SYSDATA [  9 ]  [k] :=  GetNumMask ( InputMask ) 
-	_HMG_SYSDATA [ 10 ]  [k] :=  lostfocus 
-	_HMG_SYSDATA [ 11 ]  [k] :=  gotfocus 
-	_HMG_SYSDATA [ 12 ]  [k] :=  Change 
-	_HMG_SYSDATA [ 13 ]  [k] :=  .F. 
-	_HMG_SYSDATA [ 14 ]  [k] :=  backcolor 
-	_HMG_SYSDATA [ 15 ]  [k] :=  fontcolor 
-	_HMG_SYSDATA [ 16 ]  [k] :=  enter 
-	_HMG_SYSDATA [ 17 ]  [k] :=  Field 
-	_HMG_SYSDATA [ 18 ]  [k] :=  y 
-	_HMG_SYSDATA [ 19 ]  [k] :=  x 
-	_HMG_SYSDATA [ 20 ]  [k] :=  width 
-	_HMG_SYSDATA [ 21 ]  [k] :=  height 
-	_HMG_SYSDATA [ 22 ]  [k] :=  .F. 
-	_HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 25 ]   [k] := "" 
-	_HMG_SYSDATA [ 26 ]  [k] :=  0 
-	_HMG_SYSDATA [ 27 ]  [k] :=  fontname 
-	_HMG_SYSDATA [ 28 ]  [k] :=  fontsize 
-	_HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout} 
-	_HMG_SYSDATA [ 30 ]   [k] :=  tooltip  
+	_HMG_SYSDATA [  8 ]  [k] :=  Nil
+	_HMG_SYSDATA [  9 ]  [k] :=  GetNumMask ( InputMask )
+	_HMG_SYSDATA [ 10 ]  [k] :=  lostfocus
+	_HMG_SYSDATA [ 11 ]  [k] :=  gotfocus
+	_HMG_SYSDATA [ 12 ]  [k] :=  Change
+	_HMG_SYSDATA [ 13 ]  [k] :=  .F.
+	_HMG_SYSDATA [ 14 ]  [k] :=  backcolor
+	_HMG_SYSDATA [ 15 ]  [k] :=  fontcolor
+	_HMG_SYSDATA [ 16 ]  [k] :=  enter
+	_HMG_SYSDATA [ 17 ]  [k] :=  Field
+	_HMG_SYSDATA [ 18 ]  [k] :=  y
+	_HMG_SYSDATA [ 19 ]  [k] :=  x
+	_HMG_SYSDATA [ 20 ]  [k] :=  width
+	_HMG_SYSDATA [ 21 ]  [k] :=  height
+	_HMG_SYSDATA [ 22 ]  [k] :=  .F.
+	_HMG_SYSDATA [ 23 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 24 ]  [k] :=  iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 25 ]   [k] := ""
+	_HMG_SYSDATA [ 26 ]  [k] :=  0
+	_HMG_SYSDATA [ 27 ]  [k] :=  fontname
+	_HMG_SYSDATA [ 28 ]  [k] :=  fontsize
+	_HMG_SYSDATA [ 29 ]  [k] :=  {bold,italic,underline,strikeout}
+	_HMG_SYSDATA [ 30 ]   [k] :=  tooltip
 	_HMG_SYSDATA [ 31 ]  [k] :=   cParentTabName
-	_HMG_SYSDATA [ 32 ]  [k] :=   0  
-	_HMG_SYSDATA [ 33 ]  [k] :=   ''  
-	_HMG_SYSDATA [ 34 ]  [k] :=  .Not.  invisible 
-	_HMG_SYSDATA [ 35 ]  [k] :=   HelpId 
-	_HMG_SYSDATA [ 36 ]  [k] :=   FontHandle 
-	_HMG_SYSDATA [ 37 ]   [k] :=  0 
-	_HMG_SYSDATA [ 38 ]  [k] :=   .T. 
+	_HMG_SYSDATA [ 32 ]  [k] :=   0
+	_HMG_SYSDATA [ 33 ]  [k] :=   ''
+	_HMG_SYSDATA [ 34 ]  [k] :=  .Not.  invisible
+	_HMG_SYSDATA [ 35 ]  [k] :=   HelpId
+	_HMG_SYSDATA [ 36 ]  [k] :=   FontHandle
+	_HMG_SYSDATA [ 37 ]   [k] :=  0
+	_HMG_SYSDATA [ 38 ]  [k] :=   .T.
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -449,8 +449,8 @@ Local x , c , s
 	s := ''
 
 	For x := 1 To HMG_LEN ( Text )
-		
-		c := HB_USUBSTR(Text,x,1)
+
+		c := hb_USubStr(Text,x,1)
 
 		If c='0' .or. c='1' .or. c='2' .or. c='3' .or. c='4' .or. c='5' .or. c='6' .or. c='7' .or. c='8' .or. c='9' .or. c='.' .or. c='-'
 			s := s + c
@@ -472,10 +472,10 @@ Local i , c , s
 	s := ''
 
 	For i := 1 To HMG_LEN ( Text )
-		
-		c := HB_USUBSTR(Text,i,1)
 
-		If c='9' .or. c='.' 
+		c := hb_USubStr(Text,i,1)
+
+		If c='9' .or. c='.'
 			s := s + c
 		EndIf
 
@@ -490,15 +490,15 @@ Return s
 *-----------------------------------------------------------------------------*
 Function _DefineCharMaskTextbox ( ControlName, ParentForm, x, y, inputmask , width , value , fontname, fontsize , tooltip , lostfocus ,gotfocus , change , height , enter , rightalign  , HelpId , bold, italic, underline, strikeout , field  , backcolor , fontcolor , date , readonly  , invisible , notabstop , disabledbackcolor , disabledfontcolor )
 *-----------------------------------------------------------------------------*
-Local cParentForm, mVar, WorkArea , dateformat , k := 0
+Local cParentForm, mVar, WorkArea , dateformat , k
 Local ControlHandle
 Local FontHandle
 Local cParentTabName
-   
+
    DEFAULT invisible  TO .F.
-   
+
 	If ValType ( Field ) != 'U'
-		if  HB_UAT ( '>', Field ) == 0 
+		if  HB_UAT ( '>', Field ) == 0
 			MsgHMGError ("Control: " + ControlName + " Of " + ParentForm + " : You must specify a fully qualified field name. Program Terminated" )
 		Else
 			WorkArea := HB_ULEFT ( Field , HB_UAT ( '>', Field ) - 2 )
@@ -508,42 +508,42 @@ Local cParentTabName
 		EndIf
 	EndIf
 
-	if valtype(date) == "U"
+	if ValType(date) == "U"
 		date := .F.
 	endif
 
-	if valtype(change) == "U"
+	if ValType(change) == "U"
 		change := ""
 	endif
 
-	if valtype(gotfocus) == "U"
+	if ValType(gotfocus) == "U"
 		gotfocus := ""
 	endif
 
-	if valtype(enter) == "U"
+	if ValType(enter) == "U"
 		enter := ""
 	endif
 
-	if valtype(lostfocus) == "U"
+	if ValType(lostfocus) == "U"
 		lostfocus := ""
 	endif
 
-	if valtype(Width) == "U"
+	if ValType(Width) == "U"
 		Width := 120
 	endif
 
-	if valtype(height) == "U"
+	if ValType(height) == "U"
 		height := 24
 	endif
 
-	if valtype(Value) == "U"
+	if ValType(Value) == "U"
 		if date == .F.
 			Value := ""
 		else
 			Value := ctod ('  /  /  ')
 		endif
 	endif
-	
+
 	dateformat := set ( _SET_DATEFORMAT )
 
 	if date == .t.
@@ -592,9 +592,9 @@ Local cParentTabName
 	if _HMG_SYSDATA [ 183 ] > 0
 		IF _HMG_SYSDATA [ 240 ] == .F.
 		x 	:= x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-		y 	:= y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] 
+		y 	:= y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
 		ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-		cParentTabName := _HMG_SYSDATA [ 225 ] 
+		cParentTabName := _HMG_SYSDATA [ 225 ]
 		ENDIF
 	EndIf
 
@@ -613,17 +613,17 @@ Local cParentTabName
 	ParentForm = GetFormHandle (ParentForm)
 
 	ControlHandle := InitCharMaskTextBox ( ParentForm, 0, x, y, width , '' , 0  , 255 , .f. , .f. , height , rightalign , readonly  , invisible , notabstop )
-	if valtype(fontname) != "U" .and. valtype(fontsize) != "U"
+	if ValType(fontname) != "U" .and. ValType(fontsize) != "U"
 		FontHandle := _SetFont (ControlHandle,FontName,FontSize,bold,italic,underline,strikeout)
 	Else
-		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)		
+		FontHandle := _SetFont (ControlHandle,_HMG_SYSDATA [ 342 ],_HMG_SYSDATA [ 343 ],bold,italic,underline,strikeout)
 	endif
 
 	If _HMG_SYSDATA [ 265 ] = .T.
 		aAdd ( _HMG_SYSDATA [ 142 ] , ControlHandle )
 	EndIf
 
-	if valtype(tooltip) != "U"
+	if ValType(tooltip) != "U"
 	        SetToolTip ( ControlHandle , tooltip , GetFormToolTipHandle (cParentForm) )
 	endif
 
@@ -631,44 +631,44 @@ Local cParentTabName
 
 	Public &mVar. := k
 
-	_HMG_SYSDATA [1] [k] := "CHARMASKTEXT" 
-	_HMG_SYSDATA [2] [k] := ControlName 
-	_HMG_SYSDATA [3] [k] := ControlHandle 
-	_HMG_SYSDATA [4] [k] := ParentForm 
-	_HMG_SYSDATA [  5 ] [k] := 0 
-	_HMG_SYSDATA [  6 ] [k] := "" 
-	_HMG_SYSDATA [  7 ] [k] := Field 
-	_HMG_SYSDATA [  8 ] [k] := Nil 
-	_HMG_SYSDATA [  9 ] [k] := InputMask 
-	_HMG_SYSDATA [ 10 ] [k] := lostfocus 
-	_HMG_SYSDATA [ 11 ] [k] := gotfocus 
-	_HMG_SYSDATA [ 12 ] [k] := Change 
-	_HMG_SYSDATA [ 13 ] [k] := .F. 
-	_HMG_SYSDATA [ 14 ] [k] := backcolor 
-	_HMG_SYSDATA [ 15 ] [k] := fontcolor 
-	_HMG_SYSDATA [ 16 ] [k] := enter 
-	_HMG_SYSDATA [ 17 ]  [k] :=date 
-	_HMG_SYSDATA [ 18 ] [k] := y 
-	_HMG_SYSDATA [ 19 ] [k] := x 
-	_HMG_SYSDATA [ 20 ] [k] := width 
-	_HMG_SYSDATA [ 21 ] [k] := height 
-	_HMG_SYSDATA [ 22 ] [k] := 0 
-	_HMG_SYSDATA [ 23 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )  
-	_HMG_SYSDATA [ 24 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-	_HMG_SYSDATA [ 25 ] [k] := "" 
-	_HMG_SYSDATA [ 26 ] [k] := 0 
-	_HMG_SYSDATA [ 27 ] [k] := fontname 
-	_HMG_SYSDATA [ 28 ] [k] := fontsize 
-	_HMG_SYSDATA [ 29 ] [k] := {bold,italic,underline,strikeout} 
-	_HMG_SYSDATA [ 30 ]  [k] := tooltip  
+	_HMG_SYSDATA [1] [k] := "CHARMASKTEXT"
+	_HMG_SYSDATA [2] [k] := ControlName
+	_HMG_SYSDATA [3] [k] := ControlHandle
+	_HMG_SYSDATA [4] [k] := ParentForm
+	_HMG_SYSDATA [  5 ] [k] := 0
+	_HMG_SYSDATA [  6 ] [k] := ""
+	_HMG_SYSDATA [  7 ] [k] := Field
+	_HMG_SYSDATA [  8 ] [k] := Nil
+	_HMG_SYSDATA [  9 ] [k] := InputMask
+	_HMG_SYSDATA [ 10 ] [k] := lostfocus
+	_HMG_SYSDATA [ 11 ] [k] := gotfocus
+	_HMG_SYSDATA [ 12 ] [k] := Change
+	_HMG_SYSDATA [ 13 ] [k] := .F.
+	_HMG_SYSDATA [ 14 ] [k] := backcolor
+	_HMG_SYSDATA [ 15 ] [k] := fontcolor
+	_HMG_SYSDATA [ 16 ] [k] := enter
+	_HMG_SYSDATA [ 17 ]  [k] :=date
+	_HMG_SYSDATA [ 18 ] [k] := y
+	_HMG_SYSDATA [ 19 ] [k] := x
+	_HMG_SYSDATA [ 20 ] [k] := width
+	_HMG_SYSDATA [ 21 ] [k] := height
+	_HMG_SYSDATA [ 22 ] [k] := 0
+	_HMG_SYSDATA [ 23 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 24 ] [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+	_HMG_SYSDATA [ 25 ] [k] := ""
+	_HMG_SYSDATA [ 26 ] [k] := 0
+	_HMG_SYSDATA [ 27 ] [k] := fontname
+	_HMG_SYSDATA [ 28 ] [k] := fontsize
+	_HMG_SYSDATA [ 29 ] [k] := {bold,italic,underline,strikeout}
+	_HMG_SYSDATA [ 30 ]  [k] := tooltip
 	_HMG_SYSDATA [ 31 ] [k] :=  cParentTabName
-	_HMG_SYSDATA [ 32 ] [k] :=  0  
-	_HMG_SYSDATA [ 33 ] [k] :=  ''  
-	_HMG_SYSDATA [ 34 ] [k] := .Not.  invisible 
-	_HMG_SYSDATA [ 35 ]  [k] := HelpId 
-	_HMG_SYSDATA [ 36 ] [k] :=  FontHandle 
-	_HMG_SYSDATA [ 37 ]  [k] := 0 
-	_HMG_SYSDATA [ 38 ] [k] :=  .T. 
+	_HMG_SYSDATA [ 32 ] [k] :=  0
+	_HMG_SYSDATA [ 33 ] [k] :=  ''
+	_HMG_SYSDATA [ 34 ] [k] := .Not.  invisible
+	_HMG_SYSDATA [ 35 ]  [k] := HelpId
+	_HMG_SYSDATA [ 36 ] [k] :=  FontHandle
+	_HMG_SYSDATA [ 37 ]  [k] := 0
+	_HMG_SYSDATA [ 38 ] [k] :=  .T.
 	_HMG_SYSDATA [ 39 ] [k] := 0
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
@@ -696,9 +696,9 @@ Local pc := 0
 Local fnb := 0
 Local dc := 0
 Local pFlag := .F.
-Local ncp := 0
+Local ncp
 Local NegativeZero := .F.
-Local Output := ''
+Local Output
 Local ol := 0
 
 * Unused Parameters
@@ -707,7 +707,7 @@ d := Nil
 
 	If ValType (_HMG_SYSDATA [ 22 ] [i] ) == 'L'
 		If _HMG_SYSDATA [ 22 ] [i] == .F.
-			Return		
+			Return
 		EndIf
 	EndIf
 
@@ -715,7 +715,7 @@ d := Nil
 
 	// Store Initial CaretPos
 
-	icp := HiWord ( SendMessage( _HMG_SYSDATA [3] [i] , EM_GETSEL , 0 , 0 ) ) 
+	icp := HiWord ( SendMessage( _HMG_SYSDATA [3] [i] , EM_GETSEL , 0 , 0 ) )
 
 	// Get Current Content
 
@@ -730,20 +730,20 @@ d := Nil
 
 	//
 
-	If Pcount() > 1
+	If PCount() > 1
 
-		// Point Count For Numeric InputMask 
+		// Point Count For Numeric InputMask
 
-		For x := 1 To HMG_LEN ( InBuffer )		
-			CB := HB_USUBSTR (InBuffer , x , 1 ) 
-			If CB == '.' .or. ; 
+		For x := 1 To HMG_LEN ( InBuffer )
+			CB := HB_USUBSTR (InBuffer , x , 1 )
+			If CB == '.' .or. ;
             CB == ","   // MOL, April 2016
 			     pc++
 			EndIf
 		Next x
 
-		// RL 89	
-		If HB_ULEFT (InbuFfer,1) == '.' .or. ; 
+		// RL 89
+		If HB_ULEFT (InbuFfer,1) == '.' .or. ;
          HB_ULEFT (InbuFfer,1) == ','   // MOL, April 2016
 			pFlag := .T.
 		EndIf
@@ -751,17 +751,17 @@ d := Nil
 
 		// Find First Non-Blank Position
 
-		For x := 1 To HMG_LEN ( InBuffer )		
-			CB := HB_USUBSTR (InBuffer , x , 1 ) 
+		For x := 1 To HMG_LEN ( InBuffer )
+			CB := HB_USUBSTR (InBuffer , x , 1 )
 			If CB != ' '
 				fnb := x
-				Exit								
+				Exit
 			EndIf
 		Next x
 
 	EndIf
 
-	// 
+	//
 
 	BackInBuffer := InBuffer
 
@@ -797,8 +797,8 @@ d := Nil
 
 	For x := 1 To HMG_LEN (Mask)
 
-		CB := HB_USUBSTR (InBuffer , x , 1 ) 
-		CM := HB_USUBSTR (Mask , x , 1 ) 
+		CB := HB_USUBSTR (InBuffer , x , 1 )
+		CM := HB_USUBSTR (Mask , x , 1 )
 
 		Do Case
 
@@ -806,13 +806,13 @@ d := Nil
 
 				OutBuffer := OutBuffer + HMG_UPPER(CB)
 
-			Case (CM) == 'A' 
+			Case (CM) == 'A'
 
 			        If HMG_ISALPHA ( CB ) .Or. CB == ' '
 
 					OutBuffer := OutBuffer + CB
 
-				Else	
+				Else
 
 					if x == icp
 						BadEntry := .T.
@@ -825,11 +825,11 @@ d := Nil
 
 			Case CM == '9'
 
-				If HMG_ISDIGIT ( CB ) .Or. CB == ' ' .Or. ( CB == '-' .And. x == fnb .And. Pcount() > 1 )
+				If HMG_ISDIGIT ( CB ) .Or. CB == ' ' .Or. ( CB == '-' .And. x == fnb .And. PCount() > 1 )
 
 					OutBuffer := OutBuffer + CB
-		
-				Else	
+
+				Else
 
 					if x == icp
 						BadEntry := .T.
@@ -845,8 +845,8 @@ d := Nil
 				If CB == ' '
 
 					OutBuffer := OutBuffer + CB
-		
-				Else	
+
+				Else
 
 					if x == icp
 						BadEntry := .T.
@@ -864,12 +864,12 @@ d := Nil
 
 		End Case
 
-	Next x	
+	Next x
 
 	// Replace Content
 
 	If ! ( BackInBuffer == OutBuffer )
-		SetWindowText ( _HMG_SYSDATA [3] [i] , OutBuffer ) 
+		SetWindowText ( _HMG_SYSDATA [3] [i] , OutBuffer )
 	EndIf
 
 	If pc > 1
@@ -885,12 +885,12 @@ d := Nil
 			// Replace Text
 
 			SetWindowText ( _HMG_SYSDATA [3] [i] , Output )
-		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , HB_UAT('.',OutBuffer) + dc , HB_UAT('.',OutBuffer) + dc )				
+		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , hb_UAt('.',OutBuffer) + dc , hb_UAt('.',OutBuffer) + dc )
 
 		Else
 
 			SetWindowText ( _HMG_SYSDATA [3] [i] , Transform ( GetNumFromText ( GetWindowText ( _HMG_SYSDATA [3] [i] ) , i ) , Mask ) )
-		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , HB_UAT('.',OutBuffer) + dc , HB_UAT('.',OutBuffer) + dc )				
+		      	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , hb_UAt('.',OutBuffer) + dc , hb_UAt('.',OutBuffer) + dc )
 
 		EndIf
 
@@ -904,7 +904,7 @@ d := Nil
 
 			// Restore Initial CaretPos
 
-			If BadEntry 
+			If BadEntry
 	      			icp--
 			EndIf
 
@@ -917,7 +917,7 @@ d := Nil
 				CB := HB_USUBSTR ( OutBuffer , icp+x , 1 )
 				CM := HB_USUBSTR ( Mask , icp+x , 1 )
 
-				If ( .Not. HMG_ISDIGIT(CB) ) .And. ( .Not. HMG_ISALPHA(CB) ) .And. ( ( .Not. CB = ' ' ) .or. ( CB == ' ' .and. CM == ' ' ) ) 
+				If ( .Not. HMG_ISDIGIT(CB) ) .And. ( .Not. HMG_ISALPHA(CB) ) .And. ( ( .Not. CB = ' ' ) .or. ( CB == ' ' .and. CM == ' ' ) )
 			      		SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , icp+x , icp+x )
 				Else
 					Exit
@@ -929,7 +929,7 @@ d := Nil
 
 	EndIf
 
-RETURN 
+RETURN
 // JK
 
 *------------------------------------------------------------------------------*
@@ -938,24 +938,24 @@ Function CharMaskTekstOK(cString,cMask)
 
 Local lPassed:=.f.,CB,CM,x
 
-For x := 1 To min(HMG_LEN(cString),HMG_LEN(cMask))
+For x := 1 To Min(HMG_LEN(cString),HMG_LEN(cMask))
 
 	CB := HB_USUBSTR ( cString , x , 1 )
 	CM := HB_USUBSTR ( cMask , x , 1 )
 
 	Do Case
 
-		Case (CM) == '!' 
+		Case (CM) == '!'
 
 		        If HMG_ISUPPER ( CB ) .Or. CB == ' '
 				lPassed:=.t.
 			EndIf
 
-		Case (CM) == 'A' 
+		Case (CM) == 'A'
 
 		        If HMG_ISALPHA ( CB ) .Or. CB == ' '
 				lPassed:=.t.
-			Else	
+			Else
 			        lPassed:=.f.
 				Return lPassed
 			EndIf
@@ -964,7 +964,7 @@ For x := 1 To min(HMG_LEN(cString),HMG_LEN(cMask))
 
 			If HMG_ISDIGIT ( CB ) .Or. CB == ' '
 				lPassed:=.t.
-			Else	
+			Else
 				lPassed:=.f.
 				Return lPassed
 			EndIf
@@ -973,7 +973,7 @@ For x := 1 To min(HMG_LEN(cString),HMG_LEN(cMask))
 
 			If CB == ' '
 				lPassed:=.t.
-			Else	
+			Else
 			        lPassed:=.f.
 				Return lPassed
 			EndIf
@@ -999,18 +999,18 @@ Local Field
 	EndIf
 
 	If Type ( Field ) == 'C'
-		_SetValue ( '' , '' , RTRIM( &(Field)) , i ) 
+		_SetValue ( '' , '' , RTrim( &(Field)) , i )
 	Else
-		_SetValue ( '' , '' , &(Field) , i ) 
+		_SetValue ( '' , '' , &(Field) , i )
 	EndIf
 
 Return
 *------------------------------------------------------------------------------*
 Procedure _DataTextBoxSave ( ControlName , ParentForm)
 *------------------------------------------------------------------------------*
-Local Field , i 
+Local Field , i
 
-	i := GetControlIndex ( ControlName , ParentForm)	
+	i := GetControlIndex ( ControlName , ParentForm)
 
 	If _HMG_SYSDATA [1] [i] == "MASKEDTEXT"
 		Field		:= _HMG_SYSDATA [ 17 ] [i]
@@ -1018,7 +1018,7 @@ Local Field , i
 		Field		:= _HMG_SYSDATA [  7 ] [i]
 	EndIf
 
-	&(Field) := _GetValue ( Controlname , ParentForm ) 
+	&(Field) := _GetValue ( Controlname , ParentForm )
 
 Return
 *------------------------------------------------------------------------------*
@@ -1027,7 +1027,7 @@ PROCEDURE ProcessNumText ( i )
 Local InBuffer , OutBuffer := '' , icp , x , CB , BackInBuffer , BadEntry := .F. , fnb
 
 	// Store Initial CaretPos
-	icp := HiWord ( SendMessage( _HMG_SYSDATA [3] [i] , EM_GETSEL , 0 , 0 ) ) 
+	icp := HiWord ( SendMessage( _HMG_SYSDATA [3] [i] , EM_GETSEL , 0 , 0 ) )
 
 	// Get Current Content
 
@@ -1037,11 +1037,11 @@ Local InBuffer , OutBuffer := '' , icp , x , CB , BackInBuffer , BadEntry := .F.
 
 	// Find First Non-Blank Position
 
-	For x := 1 To HMG_LEN ( InBuffer )		
-		CB := HB_USUBSTR (InBuffer , x , 1 ) 
+	For x := 1 To HMG_LEN ( InBuffer )
+		CB := HB_USUBSTR (InBuffer , x , 1 )
 		If CB != ' '
 			fnb := x
-			Exit								
+			Exit
 		EndIf
 	Next x
 
@@ -1049,17 +1049,17 @@ Local InBuffer , OutBuffer := '' , icp , x , CB , BackInBuffer , BadEntry := .F.
 
 	For x := 1 To HMG_LEN(InBuffer)
 
-		CB := HB_USUBSTR(InBuffer , x , 1 ) 
+		CB := hb_USubStr(InBuffer , x , 1 )
 
-		If HMG_ISDIGIT ( CB ) .Or. ( CB == '-' .And. x == fnb ) .or. (CB == '.' .and. HB_UAT (CB, OutBuffer) == 0)  .or. ; 
+		If HMG_ISDIGIT ( CB ) .Or. ( CB == '-' .And. x == fnb ) .or. (CB == '.' .and. HB_UAT (CB, OutBuffer) == 0)  .or. ;
          (CB == ',' .and. HB_UAT ('.', OutBuffer) == 0)   // MOL, April 2016
-         
+
 			OutBuffer := OutBuffer + CB
 		Else
 			BadEntry  := .t.
-		EndIf		
+		EndIf
 
-	Next x	
+	Next x
 
 	If BadEntry
 	      	icp--
@@ -1068,14 +1068,14 @@ Local InBuffer , OutBuffer := '' , icp , x , CB , BackInBuffer , BadEntry := .F.
 	// JK Replace Content
 
 	If ! ( BackInBuffer == OutBuffer )
-		SetWindowText ( _HMG_SYSDATA [3] [i] , OutBuffer ) 
+		SetWindowText ( _HMG_SYSDATA [3] [i] , OutBuffer )
 	EndIf
 
 	// Restore Initial CaretPos
 
       	SendMessage( _HMG_SYSDATA [3] [i] , EM_SETSEL , icp , icp )
 
-RETURN 
+RETURN
 
 *------------------------------------------------------------------------------*
 Function GETNumFromTextSP(Text,i)
@@ -1085,15 +1085,15 @@ Local x , c , s
 	s := ''
 
 	For x := 1 To HMG_LEN ( Text )
- 
-		c := HB_USUBSTR(Text,x,1)
+
+		c := hb_USubStr(Text,x,1)
 
 		If c='0' .or. c='1' .or. c='2' .or. c='3' .or. c='4' .or. c='5' .or. c='6' .or. c='7' .or. c='8' .or. c='9' .or. c=',' .or. c='-' .or. c = '.'
 
 			if c == '.'
 				c :=''
-			endif  
- 
+			endif
+
 			IF C == ','
 				C:= '.'
 			ENDIF

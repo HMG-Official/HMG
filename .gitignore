@@ -1,0 +1,22 @@
+
+*.log
+*.dbi
+*.o
+
+# build generated files
+samples/*
+bak/*
+obj/*
+bin/*
+# *.zip
+*.7z
+
+# installed binaries
+*.exe
+*.dll
+*.lib
+
+# misc junk
+*.bak
+license.txt
+SAMPLES/Basics/Hello_World/hello.prg

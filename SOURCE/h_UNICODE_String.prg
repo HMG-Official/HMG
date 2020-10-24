@@ -21,24 +21,24 @@
 
 UNICODE/ANSI                 ANSI Only
 ------------                 ---------
-HMG_LEN()               <=>   LEN()
-HMG_LOWER()             <=>   LOWER()
-HMG_UPPER()             <=>   UPPER()
-HMG_PADC()              <=>   PADC()
-HMG_PADL()              <=>   PADL()
-HMG_PADR()              <=>   PADR()
-HMG_ISALPHA()           <=>   ISALPHA()
-HMG_ISDIGIT()           <=>   ISDIGIT()
-HMG_ISLOWER()           <=>   ISLOWER()
-HMG_ISUPPER()           <=>   ISUPPER()
-HMG_ISALPHANUMERIC()    <=>   RETURN (ISALPHA(c) .OR. ISDIGIT(c)) 
+HMG_LEN()               <=>   Len()
+HMG_LOWER()             <=>   Lower()
+HMG_UPPER()             <=>   Upper()
+HMG_PADC()              <=>   PadC()
+HMG_PADL()              <=>   PadL()
+HMG_PADR()              <=>   PadR()
+HMG_ISALPHA()           <=>   IsAlpha()
+HMG_ISDIGIT()           <=>   IsDigit()
+HMG_ISLOWER()           <=>   IsLower()
+HMG_ISUPPER()           <=>   IsUpper()
+HMG_ISALPHANUMERIC()    <=>   RETURN (IsAlpha(c) .OR. IsDigit(c)) 
 
-HB_USUBSTR()            <=>   SUBSTR()
-HB_ULEFT()              <=>   LEFT()
-HB_URIGHT()             <=>   RIGHT()
-HB_UAT()                <=>   AT()
-HB_UTF8RAT()            <=>   RAT()
-HB_UTF8STUFF()          <=>   STUFF()
+hb_USubStr()            <=>   SubStr()
+hb_ULeft()              <=>   Left()
+hb_URight()             <=>   Right()
+hb_UAt()                <=>   AT()
+hb_utf8RAt()            <=>   RAt()
+hb_utf8Stuff()          <=>   Stuff()
 
 */
 
@@ -134,15 +134,15 @@ HB_UTF8STUFF()          <=>   STUFF()
    FUNCTION HMG_LOWER(c); RETURN LOWER (c)
    FUNCTION HMG_UPPER(c); RETURN UPPER (c)
 
-   FUNCTION HMG_PADC(x,n,c); RETURN PADC(x,n,c)
-   FUNCTION HMG_PADL(x,n,c); RETURN PADL(x,n,c)
-   FUNCTION HMG_PADR(x,n,c); RETURN PADR(x,n,c)
+   FUNCTION HMG_PADC(x,n,c); RETURN PadC(x,n,c)
+   FUNCTION HMG_PADL(x,n,c); RETURN PadL(x,n,c)
+   FUNCTION HMG_PADR(x,n,c); RETURN PadR(x,n,c)
 
-   FUNCTION HMG_ISALPHA(c); RETURN ISALPHA(c)
-   FUNCTION HMG_ISDIGIT(c); RETURN ISDIGIT(c)
-   FUNCTION HMG_ISLOWER(c); RETURN ISLOWER(c)
-   FUNCTION HMG_ISUPPER(c); RETURN ISUPPER(c)
-   FUNCTION HMG_ISALPHANUMERIC(c); RETURN (ISALPHA(c) .OR. ISDIGIT(c))
+   FUNCTION HMG_ISALPHA(c); RETURN IsAlpha(c)
+   FUNCTION HMG_ISDIGIT(c); RETURN IsDigit(c)
+   FUNCTION HMG_ISLOWER(c); RETURN IsLower(c)
+   FUNCTION HMG_ISUPPER(c); RETURN IsUpper(c)
+   FUNCTION HMG_ISALPHANUMERIC(c); RETURN (IsAlpha(c) .OR. IsDigit(c))
 
 #endif
 
@@ -175,7 +175,7 @@ RETURN HB_StrIsUTF8 ( cString )
 
 
 /*
-FUNCTION HMG_IsUTF8 ( cString )   // code from Harbour Project, now is implemented as HB_StrIsUTF8()
+FUNCTION HMG_IsUTF8 ( cString )   // code from Harbour Project, now is implemented as hb_StrIsUTF8()
 LOCAL lASCII := .T.
 LOCAL nOctets := 0
 LOCAL nChar
@@ -183,7 +183,7 @@ LOCAL tmp
 
    FOR EACH tmp IN cString
 
-      nChar := HB_BCODE( tmp )
+      nChar := hb_BCode( tmp )
 
       IF HB_bitAND ( nChar, 0x80 ) != 0
          lASCII := .F.

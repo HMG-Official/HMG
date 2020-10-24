@@ -71,7 +71,7 @@ METHOD hObj( xOle ) CLASS TOLEAUTO
       IF ISNUMBER( xOle )
          xOle := __OLEPDISP( xOle )
       ENDIF
-      IF hb_isPointer( xOle )
+      IF HB_ISPOINTER( xOle )
          ::__hObj := xOle
       ENDIF
    ENDIF
@@ -86,7 +86,7 @@ METHOD New( xOle, cClass ) CLASS TOLEAUTO
       xOle := __OLEPDISP( xOle )
    ENDIF
 
-   IF hb_isPointer( xOle )
+   IF HB_ISPOINTER( xOle )
       ::__hObj := xOle
       IF ISCHARACTER( cClass )
          ::cClassName := cClass
@@ -104,7 +104,7 @@ METHOD New( xOle, cClass ) CLASS TOLEAUTO
          oError:CanDefault    := .F.
          oError:CanRetry      := .F.
          oError:CanSubstitute := .T.
-         oError:Description   := win_OleErrorText()
+         oError:Description   := win_oleErrorText()
          oError:GenCode       := EG_OLEEXCEPTION
          oError:Operation     := ProcName()
          oError:Severity      := ES_ERROR
@@ -129,7 +129,7 @@ FUNCTION GetActiveObject( xOle, cClass )
       xOle := __OLEPDISP( xOle )
    ENDIF
 
-   IF hb_isPointer( xOle )
+   IF HB_ISPOINTER( xOle )
       o:__hObj := xOle
       IF ISCHARACTER( cClass )
          o:cClassName := cClass
@@ -147,7 +147,7 @@ FUNCTION GetActiveObject( xOle, cClass )
          oError:CanDefault    := .F.
          oError:CanRetry      := .F.
          oError:CanSubstitute := .T.
-         oError:Description   := win_OleErrorText()
+         oError:Description   := win_oleErrorText()
          oError:GenCode       := EG_OLEEXCEPTION
          oError:Operation     := ProcName()
          oError:Severity      := ES_ERROR

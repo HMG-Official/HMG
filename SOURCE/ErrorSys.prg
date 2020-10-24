@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -107,7 +107,7 @@ STATIC FUNCTION DefError( oError )
    HtmArch := Html_ErrorLog()
    cMessage := ErrorMessage( oError )
    IF ! Empty( oError:osCode )
-      cDOSError := "(DOS Error " + LTRIM( STR( oError:osCode ) ) + ")"
+      cDOSError := "(DOS Error " + LTrim( Str( oError:osCode ) ) + ")"
    ENDIF
 
    // "Quit" selected
@@ -115,12 +115,12 @@ STATIC FUNCTION DefError( oError )
    IF ! Empty( oError:osCode )
       cMessage += " " + cDOSError
    ENDIF
-   Html_LineText(HtmArch, '<p class="updated">Date:' + Dtoc(Date()) + "  " + "Time: " + Time() )
+   Html_LineText(HtmArch, '<p class="updated">Date:' + DToC(Date()) + "  " + "Time: " + Time() )
    Html_LineText(HtmArch, cMessage + "</p>" )
    n := 2
    ai = cmessage + CHR(13) + CHR (10) + CHR(13) + CHR (10)
    WHILE ! Empty( ProcName( n ) )
-      xText := "Called from " + ProcName( n ) + "(" + ALLTRIM( STR( ProcLine( n++ ) ) ) + ")" +CHR(13) +CHR(10)
+      xText := "Called from " + ProcName( n ) + "(" + ALLTRIM( Str( ProcLine( n++ ) ) ) + ")" +CHR(13) +CHR(10)
       ai = ai + xText
       Html_LineText(HtmArch,xText)
    ENDDO
@@ -149,7 +149,7 @@ STATIC FUNCTION ErrorMessage( oError )
 
    // add subsystem's error code if available
    IF ISNUMBER( oError:subCode )
-      cMessage += "/" + LTRIM( STR( oError:subCode ) )
+      cMessage += "/" + LTrim( Str( oError:subCode ) )
    ELSE
       cMessage += "/???"
    ENDIF
@@ -176,7 +176,7 @@ Function ShowError ( ErrorMesssage )
 
 	UnloadAllDll()
 
-	dbcloseall()
+	dbCloseAll()
 
 	C_MSGSTOP ( ErrorMesssage , 'Program Error' )
 
@@ -192,12 +192,12 @@ Return Nil
 *------------------------------------------------------------------------------
 FUNCTION HTML_ERRORLOG
 *---------------------
-    Local HtmArch := 0
+    Local HtmArch
     If .Not. File("\"+CurDir()+"\ErrorLog.Htm")
         HtmArch := HtmL_Ini("\"+CurDir()+"\ErrorLog.Htm","HMG Errorlog File")
         Html_Line(HtmArch)
     Else
-        HtmArch := FOPEN("\"+CurDir()+"\ErrorLog.Htm",2)
+        HtmArch := FOpen("\"+CurDir()+"\ErrorLog.Htm",2)
         FSeek(HtmArch,0,2)    //End Of File
     EndIf
 RETURN (HtmArch)
@@ -239,9 +239,9 @@ FUNCTION HTML_INI(ARCH,TIT)
                     "}"                             +;
                     "</style>"
 
-    HTMARCH := FCREATE(ARCH)
-    FWRITE(HTMARCH,"<HTML><HEAD><TITLE>"+TIT+"</TITLE></HEAD>" + cStilo +"<BODY>"+CHR(13)+CHR(10))
-    FWRITE(HTMARCH,'<H1 Align=Center>'+TIT+'</H1><BR>'+CHR(13)+CHR(10))
+    HTMARCH := FCreate(ARCH)
+    FWrite(HTMARCH,"<HTML><HEAD><TITLE>"+TIT+"</TITLE></HEAD>" + cStilo +"<BODY>"+CHR(13)+CHR(10))
+    FWrite(HTMARCH,'<H1 Align=Center>'+TIT+'</H1><BR>'+CHR(13)+CHR(10))
 RETURN (HTMARCH)
 
 *------------------------------------------------------------------------------
@@ -251,7 +251,7 @@ RETURN (HTMARCH)
 *------------------------------------------------------------------------------
 FUNCTION HTML_LINETEXT(HTMARCH,LINEA)
 *-----------------------------------
-    FWRITE(HTMARCH, RTRIM( LINEA ) + "<BR>"+CHR(13)+CHR(10))
+    FWrite(HTMARCH, RTrim( LINEA ) + "<BR>"+CHR(13)+CHR(10))
 RETURN (.T.)
 
 *------------------------------------------------------------------------------
@@ -261,7 +261,7 @@ RETURN (.T.)
 *------------------------------------------------------------------------------
 FUNCTION HTML_LINE(HTMARCH)
 *-------------------------
-    FWRITE(HTMARCH,"<HR>"+CHR(13)+CHR(10))
+    FWrite(HTMARCH,"<HR>"+CHR(13)+CHR(10))
 RETURN (.T.)
 
 

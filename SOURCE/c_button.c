@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -54,9 +54,9 @@
 ---------------------------------------------------------------------------*/
 
 
-/* 
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
+/*
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -100,7 +100,7 @@ void HMG_GrayBitmap (HBITMAP hBitmap, int Transparent)
    {   for (x=0; x < Bmp.bmWidth; x++)
        {   RGBcolor = GetPixel (memDC, x, y);
            if ((Transparent != 1) || (RGBcolor != TransRGB))
-           {   
+           {
                #define RGB_TO_GRAY(R,G,B) (BYTE)(INT)((FLOAT)R * 0.299 + (FLOAT)G * 0.587 + (FLOAT)B * 0.114)
                Gray = RGB_TO_GRAY(GetRValue(RGBcolor), GetGValue(RGBcolor), GetBValue(RGBcolor));
                SetPixel (memDC, x, y, RGB (Gray, Gray, Gray));
@@ -127,7 +127,7 @@ HIMAGELIST HMG_SetButtonImageList (HWND hButton, TCHAR *FileName, int Transparen
        return NULL;
 
    GetObject (hBitmap, sizeof(BITMAP), &Bmp);
-   
+
    TCHAR TempPathFileName [MAX_PATH];
    GetTempPath (MAX_PATH, TempPathFileName);
    lstrcat (TempPathFileName, _TEXT("_HMG_tmp.BMP"));
@@ -201,7 +201,7 @@ HB_FUNC ( INITIMAGEBUTTON )
    HIMAGELIST hImageList;
    BOOL _IsAppThemed = (BOOL) hb_parl (13);
    TCHAR *FileName = (TCHAR *) HMG_parc (8);
-   
+
    int Style = BS_NOTIFY | BS_BITMAP | WS_CHILD | BS_PUSHBUTTON;
 
    if ( hb_parl (9) )
@@ -226,15 +226,15 @@ HB_FUNC ( INITIMAGEBUTTON )
                            NULL ) ;
 
    int Transparent = hb_parl(10) ? 0 : 1;
-   
+
    if ( _IsAppThemed == FALSE )
    {                                                     //    ScaleStretch, Transparent, BackgroundColor,  AdjustImage,   TransparentColor
       hBitmap = HMG_LoadPicture ( FileName, -1, -1, NULL,                 0, Transparent,              -1,            0,                 -1 );
- 
+
       SendMessage ( hButton, (UINT) BM_SETIMAGE, (WPARAM) IMAGE_BITMAP, (LPARAM) hBitmap);
 
       hb_reta (2);
-      HMG_storvnl ((LONG_PTR) hButton,  -1, 1); 
+      HMG_storvnl ((LONG_PTR) hButton,  -1, 1);
       HMG_storvnl ((LONG_PTR) hBitmap , -1, 2);
    }
    else
@@ -243,7 +243,7 @@ HB_FUNC ( INITIMAGEBUTTON )
 
       hb_reta (2);
       HMG_storvnl ((LONG_PTR) hButton,      -1, 1);
-      HMG_storvnl ((LONG_PTR) hImageList,   -1, 2); 
+      HMG_storvnl ((LONG_PTR) hImageList,   -1, 2);
    }
 }
 
@@ -280,14 +280,14 @@ HB_FUNC( INITMIXEDBUTTON )
                            (HMENU) HMG_parnl(3) ,
                            GetModuleHandle(NULL) ,
                            NULL ) ;
- 
+
    int Transparent = hb_parl(16) ? 0 : 1;
 
    hImageList = HMG_SetButtonImageList (hButton, FileName, Transparent, hb_parni(14), FALSE);
 
    hb_reta (2);
    HMG_storvnl ((LONG_PTR) hButton,      -1, 1);
-   HMG_storvnl ((LONG_PTR) hImageList,   -1, 2); 
+   HMG_storvnl ((LONG_PTR) hImageList,   -1, 2);
 }
 
 
@@ -322,6 +322,6 @@ HB_FUNC( _SETMIXEDBTNPICTURE)
 
    hImageList = HMG_SetButtonImageList (hButton, FileName, Transparent, hb_parni(3), SetGray);
 
-   HMG_retnl ((LONG_PTR) hImageList); 
+   HMG_retnl ((LONG_PTR) hImageList);
 }
 
