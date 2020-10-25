@@ -95,6 +95,18 @@ _hmg_hpdf_enddoc()
 _hmg_hpdf_abortdoc()
 
 #xcommand @ <Row> , <Col> HPDFPRINT [ DATA ] <cText> ;
+	[ <lfont : FONT> <cFontName> ] ;
+	[ <lsize : SIZE> <nFontSize> ] ;
+	[ <bold : BOLD> ] ;
+	[ <italic : ITALIC> ] ;
+	[ <underline : UNDERLINE> ] ;
+	[ <strikeout : STRIKEOUT> ] ;
+	[ <lcolor : COLOR> <aColor> ] ;
+	[ <align:CENTER,RIGHT> ] ;
+	=> ;
+	_HMG_HPDF_PRINT ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) 
+
+#xcommand @ <Row> , <Col> HPDFPRINT [ DATA ] <cText> ;
 	TO <ToRow> , <ToCol> ;
 	[ <lfont : FONT> <cFontName> ] ;
 	[ <lsize : SIZE> <nFontSize> ] ;
