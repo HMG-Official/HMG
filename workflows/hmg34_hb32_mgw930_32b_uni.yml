@@ -20,7 +20,7 @@ jobs:
       run: |
         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
         Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
-        (new-object System.Net.WebClient).DownloadFile('https://github.com/asistex/HMG/raw/master/workflows/hb32_mgw930_32b_2020_10_11.zip', 'C:\temp\harbour.zip')
+        (new-object System.Net.WebClient).DownloadFile('https://github.com/asistex/HMG/raw/master/workflows/hb32_mgw930_32b_2020_10_27.zip', 'C:\temp\harbour.zip')
         Expand-Archive -LiteralPath C:\temp\harbour.zip -DestinationPath C:\harbour -Force         
         gcc --version
 

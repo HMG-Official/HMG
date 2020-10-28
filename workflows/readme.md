@@ -16,7 +16,7 @@ These scripts are to compile HMG official 32bit unicode with MinGW 9.30
   
       Output= Harbour binaries
 
-  - 2020-10-11  hb32_mgw930_32b_2020_10_11.zip
+  - 2020-10-27  hb32_mgw930_32b_2020_10_27.zip
   
       Harbour binaries compiled, ziped.
 
@@ -63,7 +63,21 @@ replace
   https://github.com/HMG-Official/HMG
 
 ### harbour source
-  https://github.com/asistex/HMG/raw/master/workflows/hb32_mgw930_32b_2020_10_11.zip
+  https://github.com/asistex/HMG/raw/master/workflows/hb32_mgw930_32b_2020_10_27.zip
+  * set HB_BUILD_MODE=c
+  * set HB_USER_PRGFLAGS=-l-
+  * set HB_BUILD_PARTS=all
+  * set HB_BUILD_CONTRIBS= 
+  * set HB_WITH_OPENSSL=C:\OpenSSL\include
+  * set HB_WITH_CURL=C:\curl\include
+  * set HB_WITH_ADS=C:\acesdk 
+  * set HB_STATIC_OPENSSL=yes
+  * set HB_STATIC_CURL=yes       
+  * set HB_COMPILER=mingw
+  * set HB_BUILD_CONTRIB_DYN=no
+  * set HB_BUILD_DYN=no
+  * set HB_WITH_LIBHARU=c:\harbour\contrib\hbhpdf
+
 
 ### mingw source
   https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip
