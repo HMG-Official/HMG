@@ -1,4 +1,4 @@
-name: HMG HMG-Official all libs 32bit MinGW 930 unicode
+name: HMG official all libs 32bit MinGW 930 unicode
 
 on:
     push:
@@ -6,10 +6,10 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
+
     if: github.actor == github.event.repository.owner.login
-    
-    steps:    
+
+    steps:
     - name: Checkout HMG-Official repo
       uses: actions/checkout@v2
       with:
@@ -19,9 +19,9 @@ jobs:
     - name: Install dependencies
       run: |
         (new-object System.Net.WebClient).DownloadFile('https://bitbucket.org/lorenzodla/mod_harbour_actions_resources/downloads/mingw32.zip', 'C:\temp\mingw32.zip')
-        Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force         
+        Expand-Archive -LiteralPath C:\temp\mingw32.zip -DestinationPath C:\mingw32 -Force
         (new-object System.Net.WebClient).DownloadFile('https://github.com/asistex/HMG/raw/master/workflows/hb32_mgw930_32b_2020_10_27.zip', 'C:\temp\harbour.zip')
-        Expand-Archive -LiteralPath C:\temp\harbour.zip -DestinationPath C:\harbour -Force         
+        Expand-Archive -LiteralPath C:\temp\harbour.zip -DestinationPath C:\harbour -Force
         gcc --version
 
     - name: Building lib HMG
@@ -35,15 +35,42 @@ jobs:
       shell: cmd
       run: |
         mkdir output
-        robocopy HMG-Official\hmg\ output\ /E
+
+        robocopy HMG-Official\hmg\source output\source /E
         if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\lib output\lib /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\include output\include /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\doc output\doc /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\samples output\samples /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\hfsl output\hfsl /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\resources output\resources /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\workflows output\workflows /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        robocopy HMG-Official\hmg\harbour output\harbour /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
+
+        copy HMG-Official\hmg\*.* output\
 
     - name: Get current time
       uses: srfrnk/current-time@master
       id: current-time
       with:
         format: YYYY_MM_DD
- 
+
     - name: Create artifact
       env:
         TIME: "${{ steps.current-time.outputs.formattedTime }}"
