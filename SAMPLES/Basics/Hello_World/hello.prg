@@ -3,7 +3,12 @@
 * (c) 2002-2009 Roberto Lopez <mail.box.hmg@gmail.com>
 */
 
+// remove the console window in the back
+
+
 #include "hmg.ch"
+REQUEST HB_GT_NUL_DEFAULT
+// REQUEST HB_GT_CGI_DEFAULT
 
 Function Main
 
@@ -13,8 +18,8 @@ Function Main
 		COL 0 ;
 		WIDTH 400 ;
 		HEIGHT 400 ;
-		TITLE 'Hello World!' ;
-		WINDOWTYPE MAIN  
+		TITLE hb_gtVersion() ;
+		WINDOWTYPE MAIN
 
 	END WINDOW
 
@@ -23,5 +28,4 @@ Function Main
 	Win_1.Activate
 
 Return
-
 

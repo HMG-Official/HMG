@@ -2,27 +2,30 @@
 
 These scripts are to compile HMG official 32bit unicode with MinGW 9.30
 
-  - 2020-10-11  hb32_mgw930_32b.yml
-
-  - 2020-10-11  hmg34offi_hb32_mgw930_32b_uni.yml
+  - 2020-10-27  hmg34offi_libhmg_hb32_mgw930_32b_uni.yml
   
       Output= HMG library.
 
-  - 2020-10-11  hmg34offi_all_hb32_mgw930_32b_uni.yml
+  - 2020-10-27  hmg34offi_all_hb32_mgw930_32b_uni.yml
   
       Output= All HMG libraries.
-
-  - 2020-10-11  hmg34_hb32_mgw930_32b_uni.yml
-  
-      Output= Harbour binaries
 
   - 2020-10-27  hb32_mgw930_32b_2020_10_27.zip
   
       Harbour binaries compiled, ziped.
 
-#### Compile HMG on different forks
+  - 2020-10-27  hmg34asistex_all_hb32_mgw930_32b_uni.yml
+  
+      Output= All HMG libraries. with asistex sources
 
- To compile your fork you should replace the lines where exist "HMG-Official/HMG" in scripts and put your github fork site.
+### Compile HMG on different forks
+
+ To compile your fork you should replace the lines where exist "HMG-Official/HMG" in yaml scripts and put your github fork site.
+
+ **Avoid to change this line unless you have a different source of harbour binaries**
+
+         (new-object System.Net.WebClient).DownloadFile('https://github.com/asistex/HMG/raw/master/workflows/hb32_mgw930_32b_2020_10_27.zip', 'C:\temp\harbour.zip')
+
 
 replace
  ```
@@ -30,29 +33,26 @@ replace
       uses: actions/checkout@v2
       with:
         repository: HMG-Official/HMG
-       path: HMG-Official/HMG
-    to
-
+        path: HMG-Official/HMG
+  to
     - name: Checkout hmg repo
       uses: actions/checkout@v2
       with:
         repository: asistex/HMG
-       path: asistex/HMG
-
+        path: asistex/HMG
 
 
       run: |
         cd HMG-Official\hmg
-    to
+  to
       run: |
         cd asistex\hmg
-
 
 
       run: |
         mkdir output
         robocopy HMG-Official\hmg\ output\ /E
-    to
+  to
       run: |
         mkdir output
         robocopy asistex\hmg\ output\ /E
@@ -99,4 +99,3 @@ replace
 
      This build was compiled with GCC 9.3.0 on 2020-04-29.
      Please check out http://winlibs.com/ for the latest personal build.
-
