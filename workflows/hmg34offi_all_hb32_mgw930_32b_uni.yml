@@ -1,4 +1,4 @@
-name: HMG official all libs 32bit MinGW 930 unicode
+name: HMG HMG-Official all libs 32bit MinGW 930 unicode
 
 on:
     push:
@@ -10,7 +10,7 @@ jobs:
     if: github.actor == github.event.repository.owner.login
     
     steps:    
-    - name: Checkout hmg repo
+    - name: Checkout HMG-Official repo
       uses: actions/checkout@v2
       with:
        repository: HMG-Official/HMG
@@ -28,7 +28,7 @@ jobs:
       shell: cmd
       run: |
         cd HMG-Official\hmg
-        set path=c:\mingw32\bin;c:\harbour\bin;%path%
+        set path=c:\mingw32\mingw32\bin;c:\harbour\bin;%path%
         BuildAllLib32.bat
 
     - name: Create output folders...
@@ -46,8 +46,8 @@ jobs:
  
     - name: Create artifact
       env:
-         TIME: "${{ steps.current-time.outputs.formattedTime }}"
+        TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hmg34offi_all_hb32_mgw930_uni_${{ env.TIME }}
-       path: output
+        name: hmg34offi_all_hb32_mgw930_uni_${{ env.TIME }}
+        path: output

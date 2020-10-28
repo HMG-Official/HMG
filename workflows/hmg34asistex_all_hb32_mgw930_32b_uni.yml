@@ -10,7 +10,7 @@ jobs:
     if: github.actor == github.event.repository.owner.login
     
     steps:    
-    - name: Checkout hmg repo
+    - name: Checkout asistex repo
       uses: actions/checkout@v2
       with:
        repository: asistex/HMG
@@ -28,7 +28,7 @@ jobs:
       shell: cmd
       run: |
         cd asistex\hmg
-        :: set path=c:\mingw32\mingw32\bin;c:\harbour\bin;%path%
+        set path=c:\mingw32\mingw32\bin;c:\harbour\bin;%path%
         BuildAllLib32.bat
 
     - name: Create output folders...

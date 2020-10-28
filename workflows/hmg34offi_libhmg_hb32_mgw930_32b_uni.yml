@@ -1,4 +1,4 @@
-name: HMG 32bit MinGW 930 unicode
+name: HMG official 32bit MinGW 930 unicode
 
 on:
     push:
@@ -10,7 +10,7 @@ jobs:
     if: github.actor == github.event.repository.owner.login
     
     steps:    
-    - name: Checkout hmg repo
+    - name: Checkout HMG-Official repo
       uses: actions/checkout@v2
       with:
        repository: HMG-Official/HMG
@@ -28,17 +28,15 @@ jobs:
       shell: cmd
       run: |
         cd HMG-Official\hmg
-        set path=c:\mingw32\bin;c:\harbour\bin;%path%
+        set path=c:\mingw32\mingw32\bin;c:\harbour\bin;%path%
         BuildLib32.bat
 
     - name: Create output folders...
       shell: cmd
       run: |
         mkdir output
-        mkdir output\lib
-        mkdir output\include
-        dir output
-        copy hmg\lib\*.a output\lib 
+        robocopy HMG-Official\hmg\lib\ output\ /E
+        if %ERRORLEVEL% EQU 1 set ERRORLEVEL=0
 
     - name: Get current time
       uses: srfrnk/current-time@master
@@ -51,5 +49,5 @@ jobs:
          TIME: "${{ steps.current-time.outputs.formattedTime }}"
       uses: actions/upload-artifact@v2
       with:
-       name: hmg34_hb32_mgw930_uni_${{ env.TIME }}
+       name: hmg34offi_libhmg_hb32_mgw930_uni_${{ env.TIME }}
        path: output
