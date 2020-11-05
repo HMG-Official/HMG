@@ -77,7 +77,7 @@ background:#339966'>
 lang=EN-US style='font-size:14.0pt'>RangeMax Property</span></b><b><span lang=EN-US
 style='font-size:12.0pt;background:#339966'><br>
   </span></b><b><i><span lang=EN-US>Specifies the maximun value that can be
-entered in a Spinner control</span></i></b></p>
+entered in a MonthCalendar, ProgressBar, Slider, or Spinner control</span></i></b></p>
   <p class=MsoPlainText1 style='background:#339966;color:white;border:none;padding:0cm'>&nbsp;</p>
 </div>
 <div class=Section1>
@@ -85,10 +85,52 @@ entered in a Spinner control</span></i></b></p>
   <p class=MsoPlainText2><span lang=EN-US>&nbsp;</span><span lang=EN-US>&nbsp;</span></p>
   <p class=MsoPlainText2><strong><span lang=EN-US>Syntax:</span></strong></p>
   <p class=MsoPlainText2>&nbsp;</p>
+  <p class=MsoPlainText2>&nbsp;&nbsp;In a ProgressBar, Slider, or Spinner control:</p>
+  <p class=MsoPlainText2>&nbsp;</p>
   <blockquote>
-    <p class="MsoPlainText2">RangeMax &lt;nValue&gt;	</p>
+    <p class="MsoPlainText2">RangeMax &lt;nValue&gt; (Control Definition) </p>
     <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.RangeMax := nValue</p>
     <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.RangeMax --&gt; nValue</p>
+    <p class="MsoPlainText2">&nbsp;</p>
+  </blockquote>
+  <p class=MsoPlainText2>&nbsp;&nbsp;In a MonthCalendar control:</p>
+  <blockquote>
+    <p class="MsoPlainText2">RangeMax &lt;dValue&gt; (Control Definition) </p>
+    <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.RangeMax := dValue</p>
+    <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">&lt;WindowName&gt;.&lt;ControlName&gt;.RangeMax --&gt; dValue</p>
+    <p class="MsoPlainText2">&nbsp;</p>
+  </blockquote>
+  <p class=MsoPlainText2><strong><span lang=EN-US>Notes:</span></strong></p>
+  <p class=MsoPlainText2>&nbsp;</p>
+  <p class=MsoPlainText2>&nbsp;&nbsp;In a Spinner control:</p>
+  <blockquote>
+    <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">The default value is 0x7FFFFFFF = 2147483647.</p>
+    <p class="MsoPlainText2">&nbsp;</p>
+  </blockquote>
+  <p class=MsoPlainText2>&nbsp;&nbsp;In a Slider control:</p>
+  <blockquote>
+    <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">There is no default value. Both RangeMax and RangeMin values must be set.</p>
+    <p class="MsoPlainText2">&nbsp;</p>
+  </blockquote>
+  <p class=MsoPlainText2>&nbsp;&nbsp;In a ProgressBar control:</p>
+  <blockquote>
+    <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">The default value is 100.</p>
+    <p class="MsoPlainText2">&nbsp;</p>
+  </blockquote>
+  <p class=MsoPlainText2>&nbsp;&nbsp;In a MonthCalendar control:</p>
+  <blockquote>
+    <p class="MsoPlainText2">&nbsp;</p>
+    <p class="MsoPlainText2">
+    <p class="MsoPlainText2">The default value is no maximum, which is returned as the empty date</p>
+    <p class="MsoPlainText2">(d"0000-00-00"). At most one range limit can be set, either RangeMax </p>
+    <p class="MsoPlainText2">or RangeMin or neither, but not both.  Setting one releases the other.</p>
     <p class="MsoPlainText2">&nbsp;</p>
   </blockquote>
 </div>

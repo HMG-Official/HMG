@@ -30,6 +30,8 @@ HB_FUNC (HMG_MSGINFOUNICODE)
 }
 
 
+/*
+
 //       HMG_GetUnicodeValue (cText) --> return { n1, n2,..., nn }
 HB_FUNC (HMG_GETUNICODEVALUE)
 {  INT i, nLen;
@@ -65,6 +67,7 @@ HB_FUNC (HMG_GETUNICODECHARACTER)
    HMG_retc (cText);
 }
 
+*/
 
 //       HMG_UNICODE_TO_ANSI (cTextUNICODE) --> cTextANSI
 HB_FUNC (HMG_UNICODE_TO_ANSI)

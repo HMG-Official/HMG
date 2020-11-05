@@ -16,7 +16,7 @@
 ----------------------------------------------------------------------------*/
 
 
-#xtranslate UTF8_BOM => (HB_BCHAR (0xEF) + HB_BCHAR (0xBB) + HB_BCHAR (0xBF))
+#xtranslate UTF8_BOM => E"\xEF\xBB\xBF" // HB_UTF8CHR(0xFEFF)
 
 
 #xtranslate IF HMG SUPPORT UNICODE STOP   => IF ( HMG_SupportUnicode() == .T., MsgHMGError ("This program requires a HMG library compiled with support only for ANSI character set. Program Terminated"), NIL)
@@ -32,3 +32,15 @@
 
 // #xtranslate SET EVENT REENTRY OFF   =>   _HMG_AvoidReentryEventProcedure := .T. 
 // #xtranslate SET EVENT REENTRY ON    =>   _HMG_AvoidReentryEventProcedure := .F. 
+
+#translate U(<c>) => ;
+  IF(<c> \< 0x80   , CHR(    <c>                  ), ;
+  IF(<c> \< 0x0800 , CHR(INT(<c> / 0x40)    + 0xC0) + CHR(    <c>           % 0x40 + 0x80), ;
+  IF(<c> \< 0x10000, CHR(INT(<c> / 0x1000)  + 0xE0) + CHR(INT(<c> / 0x40)   % 0x40 + 0x80) + CHR(    <c>         % 0x40 + 0x80), ;
+                     CHR(INT(<c> / 0x40000) + 0xF0) + CHR(INT(<c> / 0x1000) % 0x40 + 0x80) + CHR(INT(<c> / 0x40) % 0x40 + 0x80) + CHR(    <c>         % 0x40 + 0x80))))
+
+#translate W(<c>) => ;
+  IF(<c> \< 0x80   , CHR(    <c>                  ), ;
+  IF(<c> \< 0x0800 , CHR(INT(<c> / 0x40)    + 0xC0) + CHR(    <c>           % 0x40 + 0x80), ;
+  IF(<c> \< 0x10000, CHR(INT(<c> / 0x1000)  + 0xE0) + CHR(INT(<c> / 0x40)   % 0x40 + 0x80) + CHR(    <c>         % 0x40 + 0x80), ;
+                     CHR(0xED) + CHR(INT(<c> / 0x10000) - 1 + 0xA0) + CHR(INT(<c> / 0x400) % 0x40 + 0x80) + CHR(0xED) + CHR(INT(<c> / 0x40) % 0x10 + 0xB0) + CHR(<c> % 0x40 + 0x80))))

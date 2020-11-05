@@ -132,6 +132,18 @@ MONTHCALENDAR &lt;ControlName&gt; </span></p>
 [ VALUE &lt;dValue&gt; ] </span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ RANGEMIN &lt;dRangeMinimum&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ RANGEMAX &lt;dRangeMaximum&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ WIDTH &lt;nWidth&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ HEIGHT &lt;nHeight&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [ FONT &lt;cFontName&gt; ] </span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -141,7 +153,28 @@ MONTHCALENDAR &lt;ControlName&gt; </span></p>
 [ BOLD ] [ ITALIC ] [ UNDERLINE ] [ STRIKEOUT ]</span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ FONTCOLOR &lt;aColor&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ TRAILINGFONTCOLOR &lt;aColor&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ BACKCOLOR &lt;aColor&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ BORDERCOLOR &lt;aColor&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ TITLEFONTCOLOR &lt;aColor&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ TITLEBACKCOLOR &lt;aColor&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [ TOOLTIP &lt;cTooltip&gt; ] </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ VIEW &lt;nView&gt; ] </span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [ NOTODAY ] </span></p>
@@ -159,7 +192,10 @@ MONTHCALENDAR &lt;ControlName&gt; </span></p>
 [ NOTABSTOP ]</span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[ ON CHANGE &lt;OnChangeProcedure&gt; | &lt;bBlock&gt; ]&nbsp; </span></p>
+[ ON CHANGE &lt;OnChangeProcedure&gt; | &lt;bOnChangeBlock&gt; ]&nbsp; </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[ ON GETBOLDDAYS &lt;bOnGetBoldDaysBlock&gt; ]&nbsp; </span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [ HELPID &lt;nHelpId&gt; ]</span></p>
@@ -178,8 +214,16 @@ MONTHCALENDAR &lt;ControlName&gt;</span></p>
   ROW &lt;nValue&gt;&nbsp; </span></p>
 <p class=MsoPlainText12><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   COL &lt;nValue&gt;</span></p>
+<p class=MsoPlainText12><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  WIDTH &lt;nWidth&gt;</span></p>
+<p class=MsoPlainText12><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  HEIGHT &lt;nHeight&gt;</span></p>
 <p class=MsoPlainText12><span lang=EN-US></span><span class="MsoPlainText1"><span lang=EN-US></span></span><span lang=EN-US></span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   VALUE &lt;dValue&gt;</span></p>
+<p class=MsoPlainText12><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  RANGEMIN &lt;dRangeMinimum&gt;</span></p>
+<p class=MsoPlainText12><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  RANGEMAX &lt;dRangeMaximum&gt;</span></p>
 <p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   FONTNAME &lt;cValue&gt;</span></p>
 <p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -192,6 +236,20 @@ MONTHCALENDAR &lt;ControlName&gt;</span></p>
   FONTUNDERLINE &lt;lValue&gt; </span></p>
 <p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   FONTSTRIKEOUT</span> &lt;lValue&gt; </p>
+<p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  FONTCOLOR &lt;aColor&gt; </span></p>
+<p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TRAILINGFONTCOLOR &lt;aColor&gt; </span></p>
+<p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  BACKCOLOR &lt;aColor&gt; </span></p>
+<p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  BORDERCOLOR &lt;aColor&gt; </span></p>
+<p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TITLEFONTCOLOR &lt;aColor&gt; </span></p>
+<p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TITLEBACKCOLOR &lt;aColor&gt; </span></p>
+<p class=MsoPlainText11><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  VIEW &lt;nView&gt;</span></p>
 <p class=MsoPlainText11><span lang=EN-US></span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   TOOLTIP &lt;cValue&gt;</span></p>
 <p class=MsoPlainText11><span lang=EN-US></span><span lang=EN-US></span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -207,6 +265,8 @@ MONTHCALENDAR &lt;ControlName&gt;</span></p>
 <p class=MsoPlainText1><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   ONCHANGE &lt;OnChangeProcedure&gt;</span></p>
 <p class=MsoPlainText1><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  ONGETBOLDDAYS &lt;bOnGetBoldDaysBlock&gt;</span></p>
+<p class=MsoPlainText1><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   HELPID &lt;nHelpId&gt;</span></p>
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; END MONTHCALENDAR</span></p>
 <p class=MsoPlainText>&nbsp;</p>
@@ -217,6 +277,12 @@ MONTHCALENDAR &lt;ControlName&gt;</span></p>
 <p class=MsoPlainText><span lang=EN-US>&nbsp;</span></p>
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
 href="value.htm">Value</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="rangemin.htm">RangeMin</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="rangemax.htm">RangeMax</a></span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
 href="enabled.htm">Enabled</a></span></p>
@@ -237,10 +303,10 @@ href="width.htm">Width</a></span></p>
 href="height.htm">Height</a></span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
-href="fontname.htm">FontName</a></span></p>
+href="fontname.htm">FontName</a></span> (R)</p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
-href="fontsize.htm">FontSize</a></span></p>
+href="fontsize.htm">FontSize</a></span> (R)</p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
 href="fontbold.htm">FontBold</a></span></p>
@@ -253,6 +319,33 @@ href="fontunderline.htm">FontUnderline</a></span></p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
 href="fontstrikeout.htm">FontStrikeout</a> </span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="fontcolor.htm">FontColor</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="outerfontcolor.htm">OuterFontColor</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="backcolor.htm">BackColor</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="bordercolor.htm">BorderColor</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="titlefontcolor.htm">TitleFontColor</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="titlebackcolor.htm">TitleBackColor</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="view.htm">View</a></span></p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="visiblemin.htm">VisibleMin</a></span> (R)</p>
+
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="visiblemax.htm">VisibleMax</a></span> (R)</p>
 
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
 href="tooltip.htm">ToolTip</a></span></p>
@@ -295,6 +388,9 @@ Read-Only</span></p>
 <p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
 href="onchange.htm">OnChange</a></span></p>
 
+<p class=MsoPlainText><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <a
+href="ongetbolddays.htm">OnGetBoldDays</a></span></p>
+
 <p class=MsoPlainText><span lang=EN-US>&nbsp;</span></p>
 
 <p class=MsoPlainText>&nbsp;</p>
@@ -317,7 +413,22 @@ href="refresh.htm">Refresh</a></span></p>
 href="release.htm">Release</a></span></p>
 
 <p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoPlainText>&nbsp;</p>
+<p class=MsoPlainText><b><span lang=EN-US> Remarks:</span></b></p>
+<p class=MsoPlainText>&nbsp;</p>
+<blockquote>
+  <p class=MsoPlainText>Clicking on the title moves the view up one level, from month view to year view, or year view to decade view, or decade view to century view. </p>
+  <p class=MsoPlainText>&nbsp;</p>
+  <p class=MsoPlainText>Clicking on the left and right arrows moves between items at the same view level.</p>
+  <p class=MsoPlainText>&nbsp;</p>
+  <p class=MsoPlainText>If the &ldquo;Today&rdquo; item is shown at the bottom, clicking it selects today's date.</p>
+  <p class=MsoPlainText>&nbsp;</p>
+  <p class=MsoPlainText>The default width and height of the control with the default font and size shows one month in the month view.  Setting a sufficiently large width or height can show multiple months, up to a maximum of 12.</p>
+</blockquote>
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
 <p class=MsoNormal>&nbsp;</p>
+
 </div>
 
 </body>
