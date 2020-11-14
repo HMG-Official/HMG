@@ -110,28 +110,40 @@ _hmg_hpdf_abortdoc()
 	TO <ToRow> , <ToCol> ;
 	[ <lfont : FONT> <cFontName> ] ;
 	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
+	[ <bold : BOLD> [ IF <lBold> ] ] ;
+	[ <italic : ITALIC> [ IF <lItalic> ] ] ;
+	[ <underline : UNDERLINE> [ IF <lUnderline> ] ] ;
+	[ <strikeout : STRIKEOUT> [ IF <lStrikeout> ] ] ;
 	[ <lcolor : COLOR> <aColor> ] ;
 	[ <align:CENTER,RIGHT,JUSTIFY> ] ;
+	[ <wrap : WRAP> ] ;
+	[ <fit : FONTSIZEFIT,HEIGHTFIT> ] ;
+	[ <lGetBottom : GETBOTTOM> <xVariable> ] ;
 	=> ;
-	_HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) 
-
+	_HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , ;
+		<.bold.> .AND. iif( HB_IsLogical(<lBold>), <lBold>, HB_IsNil(<lBold>) ) ,; 
+		<.italic.> .AND. iif( HB_IsLogical(<lItalic>), <lItalic>, HB_IsNil(<lItalic>) ) ,;
+		<.underline.> .AND. iif( HB_IsLogical(<lUnderline>), <lUnderline>, HB_IsNil(<lUnderline>) ) ,;
+		<.strikeout.> .AND. iif( HB_IsLogical(<lStrikeout>), <lStrikeout>, HB_IsNil(<lStrikeout>) ) ,;
+		<.lcolor.> , <.lfont.> , <.lsize.> , <"align">, <.wrap.>, <"fit">, <xVariable> ) 
 
 #xcommand @ <Row> , <Col> HPDFPRINT UNICODE [ DATA ] <cText> ;
 	TO <ToRow> , <ToCol> ;
 	[ <lfont : FONT> <cFontName> ] ;
 	[ <lsize : SIZE> <nFontSize> ] ;
-	[ <bold : BOLD> ] ;
-	[ <italic : ITALIC> ] ;
-	[ <underline : UNDERLINE> ] ;
-	[ <strikeout : STRIKEOUT> ] ;
+    [ <bold : BOLD> [ IF <lBold> ] ] ;
+	[ <italic : ITALIC> [ IF <lItalic> ] ] ;
+	[ <underline : UNDERLINE> [ IF <lUnderline> ] ] ;
+	[ <strikeout : STRIKEOUT> [ IF <lStrikeout> ] ] ;
 	[ <lcolor : COLOR> <aColor> ] ;
 	[ <align:CENTER,RIGHT,JUSTIFY> ] ;
 	=> ;
-	_HMG_HPDF_MULTILINE_PRINT_UNICODE ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>, <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) 
+	_HMG_HPDF_MULTILINE_PRINT_UNICODE ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>, <cText> , ;
+		<.bold.> .AND. iif( HB_IsLogical(<lBold>), <lBold>, HB_IsNil(<lBold>) ) ,; 
+		<.italic.> .AND. iif( HB_IsLogical(<lItalic>), <lItalic>, HB_IsNil(<lItalic>) ) ,;
+		<.underline.> .AND. iif( HB_IsLogical(<lUnderline>), <lUnderline>, HB_IsNil(<lUnderline>) ) ,;
+		<.strikeout.> .AND. iif( HB_IsLogical(<lStrikeout>), <lStrikeout>, HB_IsNil(<lStrikeout>) ) ,; 
+		<.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) 
 
 #xcommand @ <nRow> , <nCol> HPDFPRINT IMAGE <cImage> ;
 	WIDTH <nWidth> ;
@@ -242,7 +254,77 @@ _hmg_hpdf_abortdoc()
 #xcommand SET HPDFDOC PAGENUMBERING [ FROM <nPage> ] [ STYLE <cStyle:DECIMAL,ROMAN,LETTERS> ] [ <cCase:UPPER,LOWER> ] [ PREFIX <cPrefix> ] => _HMG_HPDF_SetPageLabel( <nPage>, <"cStyle">, <"cCase">, <cPrefix> )
 
 #xcommand SET HPDFPAGE LINESPACING TO <nSpacing> => _HMG_HPDF_SetLineSpacing( <nSpacing> )
-   
+
+#xcommand SET HPDFDOC FONT SIZE TO [ <nFontSize> ] => _HMG_HPDF_SetFontSize( <nFontSize> )
+
+#xcommand SET HPDFDOC FONT NAME TO [ <cFontName> ] => _HMG_HPDF_SetFontName( <cFontName> )   
+
+
+************* This part of the code can be placed in hmg_hpdf.ch **************
+
+#xcommand @ <Row> , <Col> HPDFPRINT SKEW <cText> ;
+	[ <lfont : FONT> <cFontName> ] ;
+	[ <lsize : SIZE> <nFontSize> ] ;
+	[ <bold : BOLD> [ IF <lBold> ] ] ;
+	[ <italic : ITALIC> [ IF <lItalic> ] ] ;
+	[ <lcolor : COLOR> <aColor> ] ;
+	[ <align : CENTER,RIGHT> ] ;
+	[ <langle : ANGLE> <nAngle> ] ;
+	[ <langle2: SKEW> <nAngle2> ] ;
+	=> ;
+	HPDF_SkewText ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> ,;
+		<.bold.> .AND. iif( HB_IsLogical(<lBold>), <lBold>, HB_IsNil(<lBold>) ) ,; 
+		<.italic.> .AND. iif( HB_IsLogical(<lItalic>), <lItalic>, HB_IsNil(<lItalic>) ) ,;
+		<.lcolor.> , <.lfont.> , <.lsize.> , <"align"> , <nAngle> , <nAngle2> ) 
+
+		
+#xcommand @ <Row> , <Col> HPDFPRINT SCALE <cText> ;
+	[ <lfont : FONT> <cFontName> ] ;
+	[ <lsize : SIZE> <nFontSize> ] ;
+	[ <bold : BOLD> [ IF <lBold> ] ] ;
+	[ <italic : ITALIC> [ IF <lItalic> ] ] ;
+	[ <lcolor : COLOR> <aColor> ] ;
+	[ <align : CENTER,RIGHT> ] ;
+	[ <lxscale : XSCALE> <nxscale> ] ;
+	[ <lyscale : YSCALE> <nyscale> ] ;
+	=> ;
+	HPDF_ScaleText ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> ,;
+		<.bold.> .AND. iif( HB_IsLogical(<lBold>), <lBold>, HB_IsNil(<lBold>) ) ,; 
+		<.italic.> .AND. iif( HB_IsLogical(<lItalic>), <lItalic>, HB_IsNil(<lItalic>) ) ,;
+		<.lcolor.> , <.lfont.> , <.lsize.> , <"align"> , <nxscale> , <nyscale> ) 
+
+
+#xcommand @ <Row> , <Col> HPDFPRINT RENDER <cText> ;
+	[ <lfont : FONT> <cFontName> ] ;
+	[ <lsize : SIZE> <nFontSize> ] ;
+	[ <bold : BOLD> [ IF <lBold> ] ] ;
+	[ <italic : ITALIC> [ IF <lItalic> ] ] ;
+	[ <lcolor : COLOR> <aColor> ] ;
+	[ <align : CENTER,RIGHT> ] ;
+	[ <mode : FILL, STROKE, FILL_THEN_STROKE, FILL_CLIPPING, STROKE_CLIPPING, FILL_STROKE_CLIPPING> ] ; 
+	[ <lrim: RIM> <nrim> ] ;
+	=> ;
+	HPDF_RenderText ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> ,;
+		<.bold.> .AND. iif( HB_IsLogical(<lBold>), <lBold>, HB_IsNil(<lBold>) ) ,; 
+		<.italic.> .AND. iif( HB_IsLogical(<lItalic>), <lItalic>, HB_IsNil(<lItalic>) ) ,;
+		<.lcolor.> , <.lfont.> , <.lsize.> , <"align"> , HPDF_<mode> , <nrim> ) 
+
+
+#xcommand @ <Row> , <Col> HPDFPRINT CIRCLED TEXT <cText> ;
+	[ <lfont : FONT> <cFontName> ] ;
+	[ <lsize : SIZE> <nFontSize> ] ;
+	[ <bold : BOLD> [ IF <lBold> ] ] ;
+	[ <italic : ITALIC> [ IF <lItalic> ] ] ;
+	[ <lcolor : COLOR> <aColor> ] ;
+ 	[ <lrad : RADIUS> <nRad> ] ;
+	[ <lrims: RIMS> ] ;
+	=> ;
+	HPDF_CircleText ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> ,;
+		<.bold.> .AND. iif( HB_IsLogical(<lBold>), <lBold>, HB_IsNil(<lBold>) ) ,; 
+		<.italic.> .AND. iif( HB_IsLogical(<lItalic>), <lItalic>, HB_IsNil(<lItalic>) ) ,;
+		<.lcolor.> , <.lfont.> , <.lsize.> , <nRad> , <.lrims.> ) 
+
+***************  The end of this part of the code. *********************
 ///////////////////////////////////////////////////////////////////////////////
 // PDF CONFIGURATION CONSTANTS
 ///////////////////////////////////////////////////////////////////////////////
