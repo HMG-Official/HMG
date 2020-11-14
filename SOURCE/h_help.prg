@@ -50,7 +50,7 @@
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
-
+//teste git  2020
 ---------------------------------------------------------------------------*/
 MEMVAR _HMG_SYSDATA
 #include "hmg.ch"
