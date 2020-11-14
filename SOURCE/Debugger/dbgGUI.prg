@@ -28,6 +28,9 @@
  executable to be covered by the GNU General Public License.
  Your use of that executable is in no way restricted on account of linking the
  HMG DEBUGGER library code into it.
+ 
+ add 2004-10-24 by Jimmy
+ ON DBLCLICK : Grid ENTER = VK_RETURN
 ----------------------------------------------------------------------------*/
 
 #pragma DEBUGINFO=OFF
@@ -278,6 +281,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Source" ) >>> ' + 
                      FONTCOLOR COLOR_DarkGreen;
                      DYNAMICBACKCOLOR { bBackColor, bBackColor };
                      DYNAMICFORECOLOR { {|| GetForeColorSourceCode() }, {|| GetForeColorSourceCode() } };
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy
                      NOLINES
 
                      SetProperty( "_HMG_FormDebugger", aGrid_SourceCode[i][1], "ColumnDYNAMICFONT", 1, {|| GetFontSourceCode() } )
@@ -306,6 +310,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Stack" )' )
                   FONTCOLOR COLOR_NavyBlue;
                   DYNAMICFORECOLOR { bForeColor, bForeColor, bForeColor, bForeColor };
                   NOLINES;
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy
                   TOOLTIP "Press ENTER to see the source code"
 
                   _HMG_FormDebugger.Grid_CallStack.PaintDoubleBuffer := .T.
@@ -324,6 +329,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Watch" )' )
                   FONTCOLOR COLOR_NavyBlue;
                   DYNAMICFORECOLOR { {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()} };
                   NOLINES;
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
                   TOOLTIP "Press ENTER to edit the expression and press DELETE to delete item"
 
                   _HMG_FormDebugger.Grid_Watch.PaintDoubleBuffer := .T.
@@ -359,6 +365,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Evaluate" )' )
                   BACKCOLOR COLOR_Gainsboro;
                   FONTCOLOR COLOR_NavyBlue;
                   NOLINES;
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
                   TOOLTIP "Press ENTER to copy expression for evaluate and press DELETE to delete item"
 
                   _HMG_FormDebugger.Grid_Calc.PaintDoubleBuffer := .T.
@@ -386,6 +393,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Variables" )' )
                   FONTCOLOR COLOR_NavyBlue;
                   DYNAMICFORECOLOR { {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()} };
                   NOLINES;
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
                   TOOLTIP "Press ENTER for inspect the value of variables"
 
                   _HMG_FormDebugger.Grid_Vars.PaintDoubleBuffer := .T.
@@ -405,6 +413,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Areas" )' )
                   FONTCOLOR COLOR_NavyBlue;
                   NOLINES;
                   TOOLTIP "Available work areas";
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
                   ON CHANGE ( UpdateGridRec() , _HMG_FormDebugger.Grid_Areas.SETFOCUS )
 
                   _HMG_FormDebugger.Grid_Areas.PaintDoubleBuffer := .T.
@@ -419,6 +428,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Areas" )' )
                   BACKCOLOR COLOR_Gainsboro;
                   FONTCOLOR COLOR_DarkGreen;
                   NOLINES;
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
                   TOOLTIP "Value of current RECORD in the selected work area"
 
                   _HMG_FormDebugger.Grid_Rec.PaintDoubleBuffer := .T.
@@ -670,6 +680,7 @@ LOCAL nCol, lOldMainFirst
             FONTCOLOR COLOR_NavyBlue;
             DYNAMICFORECOLOR { {|| aColor }, {|| aColor }, {|| aColor } };
             NOLINES;
+ON DBLCLICK OnKeyPress_DisplayVars( VK_RETURN, cFormName, cGridName, xVarValue, aObjRawValue, aColor ) ;			
             TOOLTIP "Press ENTER for inspect the value of variables"
 
          ON KEY RETURN ACTION OnKeyPress_DisplayVars( VK_RETURN, cFormName, cGridName, xVarValue, aObjRawValue, aColor )
