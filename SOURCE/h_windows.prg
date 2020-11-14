@@ -222,13 +222,6 @@ MEMVAR _HMG_This_TreeItem_Value
 #define DLGC_WANTCHARS   128    // ok
 #define DLGC_WANTMESSAGE  4     // ok
 
-#define MCN_FIRST           -750  // ok
-#define MCN_LAST            -759  // ok
-#define MCN_SELCHANGE       (MCN_FIRST + 1) // ok
-#define MCN_SELECT          (MCN_FIRST + 4) // ok
-// #define MCN_SELCHANGE  (-749)  // ok (MinGW)
-// #define MCN_SELECT     (-746)  // ok (MinGW)
-
 #define WM_HELP            83   // ok
 #define STN_CLICKED         0    // ok
 #define STN_DBLCLK          1    // ok
@@ -2313,1157 +2306,1143 @@ EndIf
    case nMsg == WM_NOTIFY
         ***********************************************************************
 
-      * Process ToolTip Custom Draw, by Dr. Claudio Soto (December 2014)
+    * Process ToolTip Custom Draw, by Dr. Claudio Soto (December 2014)
 
-      xRetVal := ToolTipCustomDrawEvent (lParam)
-      IF ValType (xRetVal) == "N"
-         SetNewBehaviorWndProc (.T.)
-         Return xRetVal
-      ENDIF
+    xRetVal := ToolTipCustomDrawEvent (lParam)
+    IF ValType (xRetVal) == "N"
+      SetNewBehaviorWndProc (.T.)
+      Return xRetVal
+    ENDIF
 
+    * Process ToolBar ToolTip .....................................
 
-		* Process ToolBar ToolTip .....................................
+    If GetNotifyCode ( lParam ) == TTN_NEEDTEXT
+      i := aScan ( _HMG_SYSDATA [  5 ] , GetToolButtonId(lParam) )
+      if i > 0
+        if ValType ( _HMG_SYSDATA [ 30 ] [i] ) == 'C'
+          ShowToolButtonTip ( lParam , _HMG_SYSDATA [ 30 ] [i] )
+        endif
+      endif
+    EndIf
 
-		If GetNotifyCode ( lParam ) == TTN_NEEDTEXT
-			i := aScan ( _HMG_SYSDATA [  5 ] , GetToolButtonId(lParam) )
-			if i > 0
-				if ValType ( _HMG_SYSDATA [ 30 ] [i] ) == 'C'
-					ShowToolButtonTip ( lParam , _HMG_SYSDATA [ 30 ] [i] )
-				endif
-			endif
-		EndIf
+    ********************************************************************
+    * GRID HEAD Custom Draw   // by Dr. Claudio Soto, September 2014
+    ********************************************************************
 
-      ********************************************************************
-      * GRID HEAD Custom Draw   // by Dr. Claudio Soto, September 2014
-      ********************************************************************
+    IF GetNotifyCode (lParam) == NM_CUSTOMDRAW
+      i := Ascan ( _HMG_SYSDATA [5] , GetHwndFrom (lParam) )
+      if i > 0
+        if (_HMG_SYSDATA [1] [i] == "GRID" .OR. _HMG_SYSDATA [1] [i] == "MULTIGRID")
+          SetNewBehaviorWndProc (.T.)   // ADD2, December 2014
+          r := HEADER_CUSTOMDRAW_GetAction ( lParam )
+          if r <> -1
+            Return r   // return CDRF_NOTIFYITEMDRAW or CDRF_DODEFAULT
+          endif
+          Return _GridEx_DoHeaderCustomDraw ( i , lParam , Header_CustomDraw_GetItem (lParam) + 1 )   // return CDRF_NEWFONT
+        endif
+      endif
+    ENDIF
 
-      IF GetNotifyCode (lParam) == NM_CUSTOMDRAW
-         i := Ascan ( _HMG_SYSDATA [5] , GetHwndFrom (lParam) )
-         if i > 0
-            if (_HMG_SYSDATA [1] [i] == "GRID" .OR. _HMG_SYSDATA [1] [i] == "MULTIGRID")
-               SetNewBehaviorWndProc (.T.)   // ADD2, December 2014
-               r := HEADER_CUSTOMDRAW_GetAction ( lParam )
-               if r <> -1
-                  Return r   // return CDRF_NOTIFYITEMDRAW or CDRF_DODEFAULT
-               endif
-               Return _GridEx_DoHeaderCustomDraw ( i , lParam , Header_CustomDraw_GetItem (lParam) + 1 )   // return CDRF_NEWFONT
+    * MonthCalendar Bold Days Change ......................
+
+    If GetNotifyCode ( lParam ) = MCN_GETDAYSTATE
+      i := Ascan ( _HMG_SYSDATA [3] , GetHwndFrom (lParam) )
+      if i > 0
+        SetMonthCalendarBoldDays ( i, lParam )
+      endif
+    EndIf
+
+    i := Ascan ( _HMG_SYSDATA [3] , GetHwndFrom (lParam) )
+
+    if i > 0
+
+      * Process StatusBar Single Click ...................
+
+      if _HMG_SYSDATA [1] [i] = "STATUSBAR"
+
+        * StatusBar Single Click
+
+        If GetNotifyCode ( lParam ) == NM_CLICK
+
+          x := GetStatusBarItemPos( lParam) + 1
+
+          if x > 0
+            if valtype ( _HMG_SYSDATA ) = 'A'
+              if HMG_LEN ( _HMG_SYSDATA ) >= 6
+                if valtype ( _HMG_SYSDATA [  6 ] ) = 'A'
+                  if HMG_LEN ( _HMG_SYSDATA [  6 ] ) >= i
+                    if valtype ( _HMG_SYSDATA [  6 ] [i] ) = 'A'
+                      if HMG_LEN ( _HMG_SYSDATA [  6 ] [i] ) >= x
+                        if valtype ( _HMG_SYSDATA [  6 ] [i] [x] ) = 'B'
+                          if _DoControlEventProcedure ( _HMG_SYSDATA [  6 ] [i] [x] , i  )
+                            Return 0
+                          EndIf
+                        endif
+                      endif
+                    endif
+                  endif
+                endif
+              endif
             endif
-         endif
-      ENDIF
+          endif
+
+        EndIf
+
+      EndIf
+
+      * Process Browse .....................................
+
+      #ifdef COMPILEBROWSE
+
+      if (_HMG_SYSDATA [1] [i] = "BROWSE")
+
+        If  GetNotifyCode ( lParam ) == NM_RCLICK
+
+          If LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) > 0
+            DeltaSelect := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) - ascan ( _HMG_SYSDATA [ 32 ] [i] , _HMG_SYSDATA [  8 ] [i] )
+            _HMG_SYSDATA [  8 ] [i] :=  _HMG_SYSDATA [ 32 ] [i] [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
+            _BrowseVscrollFastUpdate ( i , DeltaSelect )
+            _BrowseOnChange (i)
+          EndIf
+
+          Return 0
+
+        EndIf
+
+        * Browse Refresh On Column Size ..............
+
+        If  GetNotifyCode ( lParam ) == -12
+
+          hws := 0
+          hwm := .F.
+          For x := 1 To HMG_LEN ( _HMG_SYSDATA [  6 ] [i] )
+            hws := hws + ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , x - 1 )
+            If _HMG_SYSDATA [  6 ] [i] [x] != ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , x - 1 )
+              hwm := .T.
+              _HMG_SYSDATA [  6 ] [i] [x] := ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , x - 1 )
+              _BrowseRefresh('','',i)
+            EndIf
+          Next x
+
+          * Browse ReDraw Vertical ScrollBar If Needed ...
+
+          If _HMG_SYSDATA [  5 ] [i] != 0 .and. hwm == .T.
+            if hws > _HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() - 4
+              MoveWindow ( _HMG_SYSDATA [  5 ] [i] , _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] , GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 21 ][i] - GETHSCROLLBARHEIGHT() , .t. )
+              MoveWindow ( _HMG_SYSDATA [ 39 ] [i] [1], _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] + _HMG_SYSDATA [ 21 ][i] - GETHSCROLLBARHEIGHT() , GETVSCROLLBARWIDTH() , GETHSCROLLBARHEIGHT() , .t. )
+            Else
+              MoveWindow ( _HMG_SYSDATA [  5 ] [i] , _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] , GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 21 ][i] , .t. )
+              MoveWindow ( _HMG_SYSDATA [ 39 ] [i] [1], _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] + _HMG_SYSDATA [ 21 ][i] - GETHSCROLLBARHEIGHT() , 0 , 0 , .t. )
+            EndIf
+          EndIf
+
+        EndIf
+
+        If GetNotifyCode ( lParam ) = NM_CUSTOMDRAW
 
+          // r := GetDs ( lParam )
+          r := LISTVIEW_CUSTOMDRAW_GetAction ( lParam )
+          if r <> -1
+            Return r
+          else
+            a := LISTVIEW_CUSTOMDRAW_GetRowCol (lParam)
 
-		i := Ascan ( _HMG_SYSDATA [3] , GetHwndFrom (lParam) )
+            MaxBrowseRows := HMG_LEN ( _HMG_SYSDATA [ 32 ] [i] )
+            MaxBrowseCols := HMG_LEN ( _HMG_SYSDATA [ 31 ] [i] )
 
-		if i > 0
+            if a[1] >= 1 .and. a[1] <= MaxBrowseRows .and. a[2] >= 1 .and. a[2] <= MaxBrowseCols
+              aTemp := _HMG_SYSDATA [40] [I] [6]
+              aTemp2 := _HMG_SYSDATA [40] [I] [7]
 
-			* Process StatusBar Single Click ...................
+              if valtype ( aTemp ) = 'A' .and. valtype ( aTemp2 ) <> 'A'
+                if HMG_LEN ( aTemp ) >= a[1]
+                  if aTemp [a[1]] [a[2]] <> -1
+                    Return SetBCFC ( lParam , aTemp [a[1]] [a[2]] , RGB(0,0,0) )
+                  else
+                    Return SetBCFC_Default(LpARAM)
+                  endif
+                else
+                  Return SetBCFC_Default(LpARAM)
+                endif
+              elseif valtype ( aTemp ) <> 'A' .and. valtype ( aTemp2 ) = 'A'
+                if HMG_LEN ( aTemp2 ) >= a[1]
+                  if aTemp2 [a[1]] [a[2]] <> -1
+                    Return SetBCFC ( lParam , RGB(255,255,255) , aTemp2 [a[1]] [a[2]] )
+                  else
+                    Return SetBCFC_Default(LpARAM)
+                  endif
+                else
+                  Return SetBCFC_Default(LpARAM)
+                endif
+              elseif valtype ( aTemp ) = 'A' .and. valtype ( aTemp2 ) = 'A'
+                if HMG_LEN ( aTemp ) >= a[1] .and. HMG_LEN ( aTemp2 ) >= a[1]
+                  if aTemp [a[1]] [a[2]] <> -1
+                    Return SetBCFC ( lParam , aTemp [a[1]] [a[2]] , aTemp2 [a[1]] [a[2]] )
+                  else
+                    Return SetBCFC_Default(LpARAM)
+                  endif
+                else
+                  Return SetBCFC_Default(LpARAM)
+                endif
+              endif
 
-			if _HMG_SYSDATA [1] [i] = "STATUSBAR"
+            else
+              Return SetBCFC_Default(LpARAM)
+            endif
 
-				* StatusBar Single Click
+          endif
 
-				If GetNotifyCode ( lParam ) == NM_CLICK
+        EndIf
 
-					x := GetStatusBarItemPos( lParam) + 1
+        * Browse Click ................................
 
-					if x > 0
+        If  GetNotifyCode ( lParam ) == NM_CLICK  .or. ;
+          GetNotifyCode ( lParam ) == LVN_BEGINDRAG
 
-					if valtype ( _HMG_SYSDATA ) = 'A'
+          If LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) > 0
+            DeltaSelect := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) - ascan ( _HMG_SYSDATA [ 32 ] [i] , _HMG_SYSDATA [  8 ] [i] )
+            _HMG_SYSDATA [  8 ] [i] :=  _HMG_SYSDATA [ 32 ] [i] [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
+            _BrowseVscrollFastUpdate ( i , DeltaSelect )
+            _BrowseOnChange (i)
+          EndIf
 
-						if HMG_LEN ( _HMG_SYSDATA ) >= 6
+          Return 0
 
-							if valtype ( _HMG_SYSDATA [  6 ] ) = 'A'
+        EndIf
 
-								if HMG_LEN ( _HMG_SYSDATA [  6 ] ) >= i
+        * Browse Key Handling .........................
 
-									if valtype ( _HMG_SYSDATA [  6 ] [i] ) = 'A'
+        If GetNotifyCode ( lParam ) = LVN_KEYDOWN
 
-										if HMG_LEN ( _HMG_SYSDATA [  6 ] [i] ) >= x
+          Do Case
 
-											if valtype ( _HMG_SYSDATA [  6 ] [i] [x] ) = 'B'
-												if _DoControlEventProcedure ( _HMG_SYSDATA [  6 ] [i] [x] , i  )
-													Return 0
-												EndIf
+          Case GetGridvKey(lParam) == 65 // A
 
-											endif
+            if  GetAltState() == -127 ;
+              .or.;
+              GetAltState() == -128 // ALT
 
-										endif
+              if _HMG_SYSDATA [ 39 ] [i] [2] == .T.
+                _BrowseEdit ( _HMG_SYSDATA [3][i] , _HMG_SYSDATA [ 39 ] [i] [4] , _HMG_SYSDATA [ 39 ] [i] [5] , _HMG_SYSDATA [ 39 ] [i] [3] , _HMG_SYSDATA [  9 ] [i] , .t. , _HMG_SYSDATA [ 15 ] [i] , _HMG_SYSDATA [ 39 ] [i] [7] )
+              EndIf
 
-									endif
+            EndIf
 
+          Case GetGridvKey(lParam) == 46 // DEL
 
-								endif
+            If _HMG_SYSDATA [ 25 ] [i] == .t.
+              If MsgYesNo (_HMG_SYSDATA [ 137 ] [1] , _HMG_SYSDATA [ 137 ] [2] ) == .t.
+                _BrowseDelete('','',i)
+              EndIf
+            EndIf
 
-							endif
+          Case GetGridvKey(lParam) == 36 // HOME
 
-						endif
+            _BrowseHome('','',i)
+            Return 1
 
-					endif
+          Case GetGridvKey(lParam) == 35 // END
 
-					endif
+            _BrowseEnd('','',i)
+            Return 1
 
-				EndIf
+          Case GetGridvKey(lParam) == 33 // PGUP
 
-			EndIf
+            _BrowsePrior('','',i)
+            Return 1
 
-			* Process Browse .....................................
+          Case GetGridvKey(lParam) == 34 // PGDN
 
-			#ifdef COMPILEBROWSE
+            _BrowseNext('','',i)
+            Return 1
 
-			if (_HMG_SYSDATA [1] [i] = "BROWSE")
+          Case GetGridvKey(lParam) == 38 // UP
 
-				If	GetNotifyCode ( lParam ) == NM_RCLICK
+            _BrowseUp('','',i)
+            Return 1
 
-					If LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) > 0
-						DeltaSelect := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) - ascan ( _HMG_SYSDATA [ 32 ] [i] , _HMG_SYSDATA [  8 ] [i] )
-						_HMG_SYSDATA [  8 ] [i] :=  _HMG_SYSDATA [ 32 ] [i] [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
-						_BrowseVscrollFastUpdate ( i , DeltaSelect )
-						_BrowseOnChange (i)
-					EndIf
+          Case GetGridvKey(lParam) == 40 // DOWN
 
-					Return 0
+            _BrowseDown('','',i)
+            Return 1
 
-				EndIf
+          EndCase
 
- 				* Browse Refresh On Column Size ..............
+          Return 0
 
-				If	GetNotifyCode ( lParam ) == -12
+        EndIf
 
-					hws := 0
-					hwm := .F.
-					For x := 1 To HMG_LEN ( _HMG_SYSDATA [  6 ] [i] )
-						hws := hws + ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , x - 1 )
-						If _HMG_SYSDATA [  6 ] [i] [x] != ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , x - 1 )
-							hwm := .T.
-							_HMG_SYSDATA [  6 ] [i] [x] := ListView_GetColumnWidth ( _HMG_SYSDATA [3] [i] , x - 1 )
-							_BrowseRefresh('','',i)
-						EndIf
-					Next x
+        * Browse Double Click .........................
 
-					* Browse ReDraw Vertical ScrollBar If Needed ...
+        If GetNotifyCode ( lParam ) == NM_DBLCLK
 
-					If _HMG_SYSDATA [  5 ] [i] != 0 .and. hwm == .T.
-						if hws > _HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() - 4
-							MoveWindow ( _HMG_SYSDATA [  5 ] [i] , _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] , GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 21 ][i] - GETHSCROLLBARHEIGHT() , .t. )
-							MoveWindow ( _HMG_SYSDATA [ 39 ] [i] [1], _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] + _HMG_SYSDATA [ 21 ][i] - GETHSCROLLBARHEIGHT() , GETVSCROLLBARWIDTH() , GETHSCROLLBARHEIGHT() , .t. )
-						Else
-							MoveWindow ( _HMG_SYSDATA [  5 ] [i] , _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] , GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 21 ][i] , .t. )
-							MoveWindow ( _HMG_SYSDATA [ 39 ] [i] [1], _HMG_SYSDATA [ 19 ][i]+_HMG_SYSDATA [ 20 ][i] - GETVSCROLLBARWIDTH() , _HMG_SYSDATA [ 18 ][i] + _HMG_SYSDATA [ 21 ][i] - GETHSCROLLBARHEIGHT() , 0 , 0 , .t. )
-						EndIf
-					EndIf
-
-				EndIf
-
-				If GetNotifyCode ( lParam ) = NM_CUSTOMDRAW
-
-               // r := GetDs ( lParam )
-               r := LISTVIEW_CUSTOMDRAW_GetAction ( lParam )
-					if r <> -1
-						Return r
-					else
-						a := LISTVIEW_CUSTOMDRAW_GetRowCol (lParam)
-
-						MaxBrowseRows := HMG_LEN ( _HMG_SYSDATA [ 32 ] [i] )
-						MaxBrowseCols := HMG_LEN ( _HMG_SYSDATA [ 31 ] [i] )
+          _PushEventInfo()
+          _HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )
+          _HMG_SYSDATA [ 231 ] := 'C'
+          _HMG_SYSDATA [ 203 ] := i
+          _HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]
+          _HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]
 
-						if a[1] >= 1 .and. a[1] <= MaxBrowseRows .and. a[2] >= 1 .and. a[2] <= MaxBrowseCols
-							aTemp := _HMG_SYSDATA [40] [I] [6]
-							aTemp2 := _HMG_SYSDATA [40] [I] [7]
+          r := ListView_HitTest ( _HMG_SYSDATA [3] [i] , GetCursorRow() - GetWindowRow ( _HMG_SYSDATA [3] [i] )  , GetCursorCol() - GetWindowCol ( _HMG_SYSDATA [3] [i] ) )
+          If r [2] == 1
+            ListView_Scroll( _HMG_SYSDATA [3] [i] , -10000  , 0 )
+            r := ListView_HitTest ( _HMG_SYSDATA [3] [i] , GetCursorRow() - GetWindowRow ( _HMG_SYSDATA [3] [i] )  , GetCursorCol() - GetWindowCol ( _HMG_SYSDATA [3] [i] ) )
+          Else
+            r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , r[1] - 1 , r[2] - 1 )
 
-							if valtype ( aTemp ) = 'A' .and. valtype ( aTemp2 ) <> 'A'
-								if HMG_LEN ( aTemp ) >= a[1]
-									if aTemp [a[1]] [a[2]] <> -1
-										Return SetBCFC ( lParam , aTemp [a[1]] [a[2]] , RGB(0,0,0) )
-									else
-										Return SetBCFC_Default(LpARAM)
-									endif
-								else
-									Return SetBCFC_Default(LpARAM)
-								endif
-							elseif valtype ( aTemp ) <> 'A' .and. valtype ( aTemp2 ) = 'A'
-								if HMG_LEN ( aTemp2 ) >= a[1]
-									if aTemp2 [a[1]] [a[2]] <> -1
-										Return SetBCFC ( lParam , RGB(255,255,255) , aTemp2 [a[1]] [a[2]] )
-									else
-										Return SetBCFC_Default(LpARAM)
-									endif
-								else
-									Return SetBCFC_Default(LpARAM)
-								endif
-							elseif valtype ( aTemp ) = 'A' .and. valtype ( aTemp2 ) = 'A'
-								if HMG_LEN ( aTemp ) >= a[1] .and. HMG_LEN ( aTemp2 ) >= a[1]
-									if aTemp [a[1]] [a[2]] <> -1
-										Return SetBCFC ( lParam , aTemp [a[1]] [a[2]] , aTemp2 [a[1]] [a[2]] )
-									else
-										Return SetBCFC_Default(LpARAM)
-									endif
-								else
-									Return SetBCFC_Default(LpARAM)
-								endif
-							endif
+                                                      * CellCol       CellWidth
+            xs := ( ( _HMG_SYSDATA [ 19 ] [i] + r [2] ) +( r[3] ))  -  ( _HMG_SYSDATA [ 19 ] [i] + _HMG_SYSDATA [ 20 ] [i] )
+            xd := 20
+            If xs > -xd
+              ListView_Scroll( _HMG_SYSDATA [3] [i] , xs + xd , 0 )
+            Else
+              If r [2] < 0
+                ListView_Scroll( _HMG_SYSDATA [3] [i] , r[2]  , 0 )
+              EndIf
+            EndIf
 
-						else
-							Return SetBCFC_Default(LpARAM)
-						endif
+            r := ListView_HitTest ( _HMG_SYSDATA [3] [i] , GetCursorRow() - GetWindowRow ( _HMG_SYSDATA [3] [i] )  , GetCursorCol() - GetWindowCol ( _HMG_SYSDATA [3] [i] ) )
 
-					endif
+          EndIf
 
-				EndIf
+          _HMG_SYSDATA [ 195 ] := r[1]
+          _HMG_SYSDATA [ 196 ] := r[2]
+          If r [2] == 1
+            r := LISTVIEW_GETITEMRECT ( _HMG_SYSDATA [3] [i]  , r[1] - 1 )
+          Else
+            r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , r[1] - 1 , r[2] - 1 )
+          EndIf
+          _HMG_SYSDATA [ 197 ] := _HMG_SYSDATA [ 18 ] [i] + r [1]
+          _HMG_SYSDATA [ 198 ] := _HMG_SYSDATA [ 19 ] [i] + r [2]
+          _HMG_SYSDATA [ 199 ] := r[3]
+          _HMG_SYSDATA [ 200 ] := r[4]
 
-				* Browse Click ................................
+          if _HMG_SYSDATA [ 39 ] [i] [6] == .T.
+            _BrowseEdit ( _HMG_SYSDATA [3][i] , _HMG_SYSDATA [ 39 ] [i] [4] , _HMG_SYSDATA [ 39 ] [i] [5] , _HMG_SYSDATA [ 39 ] [i] [3] , _HMG_SYSDATA [  9 ] [i] , .f. , _HMG_SYSDATA [ 15 ] [i] , _HMG_SYSDATA [ 39 ] [i] [7] )
+          Else
+            if valtype(_HMG_SYSDATA [ 16 ] [i]  )=='B'
+              Eval( _HMG_SYSDATA [ 16 ] [i]  )
+            EndIf
 
-				If	GetNotifyCode ( lParam ) == NM_CLICK  .or. ;
-					GetNotifyCode ( lParam ) == LVN_BEGINDRAG
+          Endif
 
-					If LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) > 0
-						DeltaSelect := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) - ascan ( _HMG_SYSDATA [ 32 ] [i] , _HMG_SYSDATA [  8 ] [i] )
-						_HMG_SYSDATA [  8 ] [i] :=  _HMG_SYSDATA [ 32 ] [i] [ LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [3] [i] ) ]
-						_BrowseVscrollFastUpdate ( i , DeltaSelect )
-						_BrowseOnChange (i)
-					EndIf
+          _PopEventInfo()
+          _HMG_SYSDATA [ 195 ] := 0
+          _HMG_SYSDATA [ 196 ] := 0
+          _HMG_SYSDATA [ 197 ] := 0
+          _HMG_SYSDATA [ 198 ] := 0
+          _HMG_SYSDATA [ 199 ] := 0
+          _HMG_SYSDATA [ 200 ] := 0
 
-					Return 0
+        EndIf
 
-				EndIf
+        * Browse LostFocus ............................
 
+        If GetNotifyCode ( lParam ) = NM_KILLFOCUS
 
-				* Browse Key Handling .........................
+          // by Dr. Claudio Soto, December 2014
+          IF IsGridCustomDrawNewBehavior() == .T.
+            SetEventProcessHMGWindowsMessage (.T.)
+          ENDIF
 
-				If GetNotifyCode ( lParam ) = LVN_KEYDOWN
-
-					Do Case
+          _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
+          Return 0
+        EndIf
 
-					Case GetGridvKey(lParam) == 65 // A
-
-						if	GetAltState() == -127 ;
-							.or.;
-							GetAltState() == -128	// ALT
-
-							if _HMG_SYSDATA [ 39 ] [i] [2] == .T.
-       								_BrowseEdit ( _HMG_SYSDATA [3][i] , _HMG_SYSDATA [ 39 ] [i] [4] , _HMG_SYSDATA [ 39 ] [i] [5] , _HMG_SYSDATA [ 39 ] [i] [3] , _HMG_SYSDATA [  9 ] [i] , .t. , _HMG_SYSDATA [ 15 ] [i] , _HMG_SYSDATA [ 39 ] [i] [7] )
-							EndIf
-
-						EndIf
-
-					Case GetGridvKey(lParam) == 46 // DEL
-
-						If _HMG_SYSDATA [ 25 ] [i] == .t.
-						        If MsgYesNo (_HMG_SYSDATA [ 137 ] [1] , _HMG_SYSDATA [ 137 ] [2] ) == .t.
-								_BrowseDelete('','',i)
-							EndIf
-						EndIf
-
-					Case GetGridvKey(lParam) == 36 // HOME
-
-						_BrowseHome('','',i)
-						Return 1
-
-					Case GetGridvKey(lParam) == 35 // END
-
-						_BrowseEnd('','',i)
-						Return 1
-
-					Case GetGridvKey(lParam) == 33 // PGUP
-
-						_BrowsePrior('','',i)
-						Return 1
+        * Browse GotFocus ..............................
 
-					Case GetGridvKey(lParam) == 34 // PGDN
-
-						_BrowseNext('','',i)
-						Return 1
+        If GetNotifyCode ( lParam ) = NM_SETFOCUS
 
-					Case GetGridvKey(lParam) == 38 // UP
-
-						_BrowseUp('','',i)
-						Return 1
-
-					Case GetGridvKey(lParam) == 40 // DOWN
+          // by Dr. Claudio Soto, December 2014
+          IF IsGridCustomDrawNewBehavior() == .T.
+             SetEventProcessHMGWindowsMessage (.F.)
+          ENDIF
 
-						_BrowseDown('','',i)
-						Return 1
-
-					EndCase
-
-					Return 0
-
-				EndIf
-
-				* Browse Double Click .........................
-
-				If GetNotifyCode ( lParam ) == NM_DBLCLK
-
-					_PushEventInfo()
-					_HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )
-					_HMG_SYSDATA [ 231 ] := 'C'
-					_HMG_SYSDATA [ 203 ] := i
-					_HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]
-					_HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]
+          VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
+          Return 0
+        EndIf
 
-					r := ListView_HitTest ( _HMG_SYSDATA [3] [i] , GetCursorRow() - GetWindowRow ( _HMG_SYSDATA [3] [i] )  , GetCursorCol() - GetWindowCol ( _HMG_SYSDATA [3] [i] ) )
-					If r [2] == 1
-						ListView_Scroll( _HMG_SYSDATA [3] [i] ,	-10000  , 0 )
-						r := ListView_HitTest ( _HMG_SYSDATA [3] [i] , GetCursorRow() - GetWindowRow ( _HMG_SYSDATA [3] [i] )  , GetCursorCol() - GetWindowCol ( _HMG_SYSDATA [3] [i] ) )
-					Else
-						r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , r[1] - 1 , r[2] - 1 )
+        * Browse Header Click .........................
 
-                                                      *	CellCol				CellWidth
-						xs :=	( ( _HMG_SYSDATA [ 19 ] [i] + r [2] ) +( r[3] ))  -  ( _HMG_SYSDATA [ 19 ] [i] + _HMG_SYSDATA [ 20 ] [i] )
-						xd := 20
-						If xs > -xd
-							ListView_Scroll( _HMG_SYSDATA [3] [i] ,	xs + xd , 0 )
-						Else
-							If r [2] < 0
-								ListView_Scroll( _HMG_SYSDATA [3] [i] , r[2]	, 0 )
-							EndIf
-					EndIf
-							r := ListView_HitTest ( _HMG_SYSDATA [3] [i] , GetCursorRow() - GetWindowRow ( _HMG_SYSDATA [3] [i] )  , GetCursorCol() - GetWindowCol ( _HMG_SYSDATA [3] [i] ) )
-				EndIf
+        If GetNotifyCode ( lParam ) =  LVN_COLUMNCLICK
+          if ValType ( _HMG_SYSDATA [ 17 ] [i] ) == 'A'
+            lvc := GetGridColumn(lParam) + 1
+            if HMG_LEN (_HMG_SYSDATA [ 17 ] [i]) >= lvc
+              _DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [lvc] , i )
+            EndIf
+          EndIf
+          Return 0
+        EndIf
 
-						_HMG_SYSDATA [ 195 ] := r[1]
-						_HMG_SYSDATA [ 196 ] := r[2]
-						If r [2] == 1
-							r := LISTVIEW_GETITEMRECT ( _HMG_SYSDATA [3] [i]  , r[1] - 1 )
-						Else
-							r := LISTVIEW_GETSUBITEMRECT ( _HMG_SYSDATA [3] [i]  , r[1] - 1 , r[2] - 1 )
-						EndIf
-						_HMG_SYSDATA [ 197 ] := _HMG_SYSDATA [ 18 ] [i] + r [1]
-						_HMG_SYSDATA [ 198 ] := _HMG_SYSDATA [ 19 ] [i] + r [2]
-						_HMG_SYSDATA [ 199 ] := r[3]
-						_HMG_SYSDATA [ 200 ] := r[4]
+      EndIf
 
-						if _HMG_SYSDATA [ 39 ] [i] [6] == .T.
-							_BrowseEdit ( _HMG_SYSDATA [3][i] , _HMG_SYSDATA [ 39 ] [i] [4] , _HMG_SYSDATA [ 39 ] [i] [5] , _HMG_SYSDATA [ 39 ] [i] [3] , _HMG_SYSDATA [  9 ] [i] , .f. , _HMG_SYSDATA [ 15 ] [i] , _HMG_SYSDATA [ 39 ] [i] [7] )
-						Else
-							if ValType(_HMG_SYSDATA [ 16 ] [i]  )=='B'
-								Eval( _HMG_SYSDATA [ 16 ] [i]  )
-							EndIf
-						Endif
+      #endif
 
-						_PopEventInfo()
-						_HMG_SYSDATA [ 195 ] := 0
-						_HMG_SYSDATA [ 196 ] := 0
-						_HMG_SYSDATA [ 197 ] := 0
-						_HMG_SYSDATA [ 198 ] := 0
-						_HMG_SYSDATA [ 199 ] := 0
-						_HMG_SYSDATA [ 200 ] := 0
+      * ToolBar DropDown Button Click .......................
 
-				EndIf
+      If GetNotifyCode ( lParam ) == TBN_DROPDOWN
 
-				* Browse LostFocus ............................
+        x  := Ascan ( _HMG_SYSDATA [  5 ] , GetToolButtonDDId( lParam) )
 
-				If GetNotifyCode ( lParam ) = NM_KILLFOCUS
+        if x > 0 .And. _HMG_SYSDATA [1] [x] = "TOOLBUTTON"
+          aPos:= {0,0,0,0}
+          GetWindowRect(_HMG_SYSDATA [3] [i],aPos)
+          aSize := GetToolButtonSize ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [  8 ] [ x ] - 1 )
+          TrackPopupMenu ( _HMG_SYSDATA [ 32 ] [x] , aPos[1] + aSize [1] , aPos[2] + aSize [2] + ( aPos[4] - aPos[2] - aSize [2] ) / 2 , hWnd )
+        EndIf
 
-               // by Dr. Claudio Soto, December 2014
-               IF IsGridCustomDrawNewBehavior() == .T.
-                  SetEventProcessHMGWindowsMessage (.T.)
-               ENDIF
+      EndIf
 
-					_DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
-					Return 0
-				EndIf
+      * MonthCalendar Selection Change ......................
 
-				* Browse GotFocus ..............................
+      if _HMG_SYSDATA [1] [i] = "MONTHCAL"
 
-				If GetNotifyCode ( lParam ) = NM_SETFOCUS
+        If GetNotifyCode ( lParam ) = MCN_SELECT
 
-               // by Dr. Claudio Soto, December 2014
-               IF IsGridCustomDrawNewBehavior() == .T.
-                  SetEventProcessHMGWindowsMessage (.F.)
-               ENDIF
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+          Return 0
 
-					VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
-					_DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
-					Return 0
-				EndIf
+        EndIf
 
-				* Browse Header Click .........................
+      EndIf
 
-				If GetNotifyCode ( lParam ) =  LVN_COLUMNCLICK
-					if ValType ( _HMG_SYSDATA [ 17 ] [i] ) == 'A'
-						lvc := GetGridColumn(lParam) + 1
-						if HMG_LEN (_HMG_SYSDATA [ 17 ] [i]) >= lvc
-							_DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [lvc] , i )
-						EndIf
-					EndIf
-					Return 0
-				EndIf
+      * Grid Processing .....................................
 
-			EndIf
+      if (_HMG_SYSDATA [1] [i] = "GRID") .Or. (_HMG_SYSDATA [1] [i] = "MULTIGRID")
 
-			#endif
+        IF _HMG_SYSDATA [32] [i] == .T.
 
-			* ToolBar DropDown Button Click .......................
+            * Grid Key Handling .........................
 
-			If GetNotifyCode ( lParam ) == TBN_DROPDOWN
+          If GetNotifyCode ( lParam ) = LVN_KEYDOWN
 
-		    		x  := Ascan ( _HMG_SYSDATA [  5 ] , GetToolButtonDDId( lParam) )
+              Do Case
 
-		    		if x > 0 .And. _HMG_SYSDATA [1] [x] = "TOOLBUTTON"
-					aPos:= {0,0,0,0}
-					GetWindowRect(_HMG_SYSDATA [3] [i],aPos)
-					aSize := GetToolButtonSize ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [  8 ] [ x ] - 1 )
-					TrackPopupMenu ( _HMG_SYSDATA [ 32 ] [x] , aPos[1] + aSize [1] , aPos[2] + aSize [2] + ( aPos[4] - aPos[2] - aSize [2] ) / 2 , hWnd )
-			    	EndIf
+              Case GetGridvKey (lParam) == 37 // LEFT
 
-			EndIf
+                IF _HMG_SYSDATA [ 15 ] [i]  > 1
 
-			* MonthCalendar Selection Change ......................
-
-			if _HMG_SYSDATA [1] [i] = "MONTHCAL"
-				If GetNotifyCode ( lParam ) = MCN_SELECT
-					_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-					Return 0
-				EndIf
-			EndIf
-
-			* Grid Processing .....................................
-
-			if (_HMG_SYSDATA [1] [i] = "GRID") .Or. (_HMG_SYSDATA [1] [i] = "MULTIGRID")
-
-				IF _HMG_SYSDATA [32] [i] == .T.
-
-  					* Grid Key Handling .........................
-
-					If GetNotifyCode ( lParam ) = LVN_KEYDOWN
-
-							Do Case
-
-							Case GetGridvKey (lParam) == 37 // LEFT
-
-								IF _HMG_SYSDATA [ 15 ] [i]  > 1
-
-									_HMG_SYSDATA [ 15 ] [i]  --
+                  _HMG_SYSDATA [ 15 ] [i]  --
 
 **************************************************************************************************************************************
 
-									nDestinationColumn	:= _HMG_SYSDATA [ 15 ] [i]
-									nFrozenColumnCount	:= _HMG_SYSDATA [ 40 ] [ i ] [ 32 ]
-									anOriginalColumnWidths	:= _HMG_SYSDATA [ 40 ] [ i ] [ 31 ]
+                  nDestinationColumn  := _HMG_SYSDATA [ 15 ] [i]
+                  nFrozenColumnCount  := _HMG_SYSDATA [ 40 ] [ i ] [ 32 ]
+                  anOriginalColumnWidths  := _HMG_SYSDATA [ 40 ] [ i ] [ 31 ]
 
-									If nFrozenColumnCount > 0
+                  If nFrozenColumnCount > 0
 
-										If nDestinationColumn >= nFrozenColumnCount + 1
+                    If nDestinationColumn >= nFrozenColumnCount + 1
 
-											* Set Destination Column Width To Original
+                      * Set Destination Column Width To Original
 
-											LISTVIEW_SETCOLUMNWIDTH ( _HMG_SYSDATA [ 3 ] [i] , nDestinationColumn - 1 , anOriginalColumnWidths [ nDestinationColumn ] )
+                      LISTVIEW_SETCOLUMNWIDTH ( _HMG_SYSDATA [ 3 ] [i] , nDestinationColumn - 1 , anOriginalColumnWidths [ nDestinationColumn ] )
 
-										EndIf
+                    EndIf
 
-									EndIf
-
-**************************************************************************************************************************************
-
-									_HMG_GRID_KBDSCROLL(I)
-
-									LISTVIEW_REDRAWITEMS ( _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] - 1 , _HMG_SYSDATA [ 39 ] [i] - 1 )
-
-									_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-
-								ENDIF
-
-							Case GetGridvKey (lParam) == 39 // RIGHT
-
-								IF _HMG_SYSDATA [ 15 ] [i]  < HMG_LEN ( _HMG_SYSDATA [ 33 ] [i] )
-
-									_HMG_SYSDATA [ 15 ] [i]  ++
-
-									nDestinationColumn	:= _HMG_SYSDATA [ 15 ] [i]
-									nFrozenColumnCount	:= _HMG_SYSDATA [ 40 ] [ i ] [ 32 ]
-
-									FOR J := nDestinationColumn TO HMG_LEN( _HMG_SYSDATA [ 33 ] [ i ] ) - 1
-
-        	 							IF LISTVIEW_GETCOLUMNWIDTH ( _HMG_SYSDATA [ 3 ] [i] , J - 1 ) == 0
-											_HMG_SYSDATA [ 15 ] [i] ++
-										ENDIF
-
-									NEXT J
-
-									If nFrozenColumnCount > 0
-
-										If nDestinationColumn > nFrozenColumnCount + 1
-
-											* Set Current Column Width To 0
-
-											LISTVIEW_SETCOLUMNWIDTH ( _HMG_SYSDATA [ 3 ] [i] , nDestinationColumn - 2 , 0 )
-
-										EndIf
-
-									EndIf
+                  EndIf
 
 **************************************************************************************************************************************
-									_HMG_GRID_KBDSCROLL(I)
 
-									LISTVIEW_REDRAWITEMS ( _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] - 1 , _HMG_SYSDATA [ 39 ] [i] - 1 )
+                  _HMG_GRID_KBDSCROLL(I)
 
-									_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+                  LISTVIEW_REDRAWITEMS ( _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] - 1 , _HMG_SYSDATA [ 39 ] [i] - 1 )
 
-								ENDIF
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
 
+                ENDIF
 
-							Case GetGridvKey (lParam) == 38 // UP
+              Case GetGridvKey (lParam) == 39 // RIGHT
 
-								IF _HMG_SYSDATA [ 15 ] [i]  == 0
-									_HMG_SYSDATA [ 15 ] [i]  := 1
-								ENDIF
+                IF _HMG_SYSDATA [ 15 ] [i]  < HMG_LEN ( _HMG_SYSDATA [ 33 ] [i] )
 
-								IF _HMG_SYSDATA [ 39 ] [i] > 1
+                  _HMG_SYSDATA [ 15 ] [i]  ++
 
-									_HMG_SYSDATA [ 39 ] [i]--
+                  nDestinationColumn  := _HMG_SYSDATA [ 15 ] [i]
+                  nFrozenColumnCount  := _HMG_SYSDATA [ 40 ] [ i ] [ 32 ]
 
-									_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+                  FOR J := nDestinationColumn TO HMG_LEN( _HMG_SYSDATA [ 33 ] [ i ] ) - 1
 
-								ENDIF
+                    IF LISTVIEW_GETCOLUMNWIDTH ( _HMG_SYSDATA [ 3 ] [i] , J - 1 ) == 0
+                      _HMG_SYSDATA [ 15 ] [i] ++
+                    ENDIF
 
-							Case GetGridvKey (lParam) == 40 // DOWN
+                  NEXT J
 
-								IF _HMG_SYSDATA [ 15 ] [i]  == 0
-									_HMG_SYSDATA [ 15 ] [i]  := 1
-								ENDIF
+                  If nFrozenColumnCount > 0
 
-								IF _HMG_SYSDATA [ 39 ] [i] < ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
+                    If nDestinationColumn > nFrozenColumnCount + 1
 
-									_HMG_SYSDATA [ 39 ] [i]++
+                      * Set Current Column Width To 0
 
-									_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+                      LISTVIEW_SETCOLUMNWIDTH ( _HMG_SYSDATA [ 3 ] [i] , nDestinationColumn - 2 , 0 )
 
-								ENDIF
+                    EndIf
 
-							Case GetGridvKey (lParam) == 33 // PGUP
+                  EndIf
 
-								_GridInitValue := _HMG_SYSDATA [ 39 ] [i]
+**************************************************************************************************************************************
+                  _HMG_GRID_KBDSCROLL(I)
 
-								IF _HMG_SYSDATA [ 39 ] [i] == SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + 1
+                  LISTVIEW_REDRAWITEMS ( _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] - 1 , _HMG_SYSDATA [ 39 ] [i] - 1 )
 
-									_HMG_SYSDATA [ 39 ] [i] -= SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 ) - 1
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
 
-								ELSE
+                ENDIF
 
-									_HMG_SYSDATA [ 39 ] [i] := SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + 1
+              Case GetGridvKey (lParam) == 38 // UP
 
-								ENDIF
+                IF _HMG_SYSDATA [ 15 ] [i]  == 0
+                  _HMG_SYSDATA [ 15 ] [i]  := 1
+                ENDIF
 
-								IF _HMG_SYSDATA [ 39 ] [i] < 1
+                IF _HMG_SYSDATA [ 39 ] [i] > 1
 
-									_HMG_SYSDATA [ 39 ] [i]  := 1
+                  _HMG_SYSDATA [ 39 ] [i]--
 
-								ENDIF
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
 
-								IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
+                ENDIF
 
-									_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+              Case GetGridvKey (lParam) == 40 // DOWN
 
-								ENDIF
+                IF _HMG_SYSDATA [ 15 ] [i]  == 0
+                  _HMG_SYSDATA [ 15 ] [i]  := 1
+                ENDIF
 
-							Case GetGridvKey (lParam) == 34 // PGDOWN
+                IF _HMG_SYSDATA [ 39 ] [i] < ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
 
-								_GridInitValue := _HMG_SYSDATA [ 39 ] [i]
+                  _HMG_SYSDATA [ 39 ] [i]++
 
-								IF _HMG_SYSDATA [ 39 ] [i] == SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 )
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
 
-									_HMG_SYSDATA [ 39 ] [i] += SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 ) - 1
+                ENDIF
 
-								ELSE
+              Case GetGridvKey (lParam) == 33 // PGUP
 
-									_HMG_SYSDATA [ 39 ] [i]  := SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 )
+                _GridInitValue := _HMG_SYSDATA [ 39 ] [i]
 
-								ENDIF
+                IF _HMG_SYSDATA [ 39 ] [i] == SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + 1
 
-								IF _HMG_SYSDATA [ 39 ] [i] > ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
+                  _HMG_SYSDATA [ 39 ] [i] -= SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 ) - 1
 
-									_HMG_SYSDATA [ 39 ] [i]  := ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
+                ELSE
 
-								ENDIF
+                  _HMG_SYSDATA [ 39 ] [i] := SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + 1
 
-                        IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
-                           _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-                        ENDIF
+                ENDIF
+
+                IF _HMG_SYSDATA [ 39 ] [i] < 1
+
+                  _HMG_SYSDATA [ 39 ] [i]  := 1
+
+                ENDIF
+
+                IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
+
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+
+                ENDIF
+
+              Case GetGridvKey (lParam) == 34 // PGDOWN
+
+                _GridInitValue := _HMG_SYSDATA [ 39 ] [i]
+
+                IF _HMG_SYSDATA [ 39 ] [i] == SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 )
+
+                  _HMG_SYSDATA [ 39 ] [i] += SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 ) - 1
+
+                ELSE
+
+                  _HMG_SYSDATA [ 39 ] [i]  := SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETTOPINDEX , 0 , 0 ) + SendMessage ( _HMG_SYSDATA [ 3 ] [i] , LVM_GETCOUNTPERPAGE , 0 , 0 )
+
+                ENDIF
+
+                IF _HMG_SYSDATA [ 39 ] [i] > ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
+
+                  _HMG_SYSDATA [ 39 ] [i]  := ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
+
+                ENDIF
+
+                IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+                ENDIF
 
 //ListView_Scroll ( _HMG_SYSDATA [ 3 ] [i] , 0, (_HMG_SYSDATA [ 39 ] [i] - _GridInitValue) * LISTVIEW_GETITEMRECT ( _HMG_SYSDATA [3] [i]  , _HMG_SYSDATA [ 39 ] [i] ) [4])
 //return 0
 
+              Case GetGridvKey (lParam) == 35 // END
 
-							Case GetGridvKey (lParam) == 35 // END
+                _GridInitValue := _HMG_SYSDATA [ 39 ] [i]
 
-								_GridInitValue := _HMG_SYSDATA [ 39 ] [i]
+                _HMG_SYSDATA [ 39 ] [i]  := ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
 
-								_HMG_SYSDATA [ 39 ] [i]  := ListView_GetItemCount( _HMG_SYSDATA [ 3 ] [i] )
+                IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
 
-								IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
 
-									_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+                ENDIF
 
-								ENDIF
+              Case GetGridvKey (lParam) == 36 // HOME
 
-							Case GetGridvKey (lParam) == 36 // HOME
+                _GridInitValue := _HMG_SYSDATA [ 39 ] [i]
 
-								_GridInitValue := _HMG_SYSDATA [ 39 ] [i]
+                _HMG_SYSDATA [ 39 ] [i]  := 1
 
-								_HMG_SYSDATA [ 39 ] [i]  := 1
+                IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
 
-								IF _GridInitValue <> _HMG_SYSDATA [ 39 ] [i]
+                  _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
 
-									_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+                ENDIF
 
-								ENDIF
+              Case GetGridvKey (lParam) == 65  // A
+                if GetAltState() == -127 .or. GetAltState() == -128   // ALT
+                  IF _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .AND. VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
+                    DataGridAppend(i)
+                  ENDIF
+                Else
+                  // Return 1
+                EndIf
 
+              Case GetGridvKey (lParam) == 68 // D
+                if GetAltState() == -127 .or. GetAltState() == -128   // ALT
+                  IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
+                    DataGridDelete(i)
+                  ENDIF
+                Else
+                  // Return 1
+                EndIf
 
-                     Case GetGridvKey (lParam) == 65  // A
-                        if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .AND. ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
-                              DataGridAppend(i)
-                           ENDIF
-                        Else
-                           // Return 1
-                        EndIf
+              Case GetGridvKey (lParam) == 82 // R
+                if GetAltState() == -127 .or. GetAltState() == -128   // ALT
+                  IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
+                    DataGridReCall(i)
+                  ENDIF
+                Else
+                  // Return 1
+                EndIf
 
+              Case GetGridvKey (lParam) == 83 // S
+                if GetAltState() == -127 .or. GetAltState() == -128   // ALT
+                  IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
+                       _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
+                       _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
+                       ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
+                    DataGridSave(i)
+                  ENDIF
+                Else
+                  // Return 1
+                EndIf
 
-                     Case GetGridvKey (lParam) == 68 // D
-                        if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
-                              DataGridDelete(i)
-                           ENDIF
-                        Else
-                           // Return 1
-                        EndIf
+              Case GetGridvKey (lParam) == 85 // U
+                if GetAltState() == -127 .or. GetAltState() == -128   // ALT
+                  IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
+                       _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
+                       _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
+                       ( VALTYPE(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
+                    DataGridClearBuffer(i)
+                  ENDIF
+                Else
+                  // Return 1
+                EndIf
 
+              OtherWise
 
-                     Case GetGridvKey (lParam) == 82 // R
-                        if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .AND. ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
-                              DataGridReCall(i)
-                           ENDIF
-                        Else
-                           // Return 1
-                        EndIf
+                // Return 1   // Remove, december 2014
 
+              EndCase
 
-                     Case GetGridvKey (lParam) == 83 // S
-                        if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
-                                _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
-                                _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
-                                ( ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
-                              DataGridSave(i)
-                           ENDIF
-                        Else
-                           // Return 1
-                        EndIf
+              Return 0   // ADD, december 2014
 
+          EndIf
 
-                     Case GetGridvKey (lParam) == 85 // U
-                        if GetAltState() == -127 .or. GetAltState() == -128   // ALT
-                           IF ( _HMG_SYSDATA [ 40 ] [ i ] [ 12 ] == .T. .OR. ;      // allowAppend
-                                _HMG_SYSDATA [ 40 ] [ i ] [ 17 ] == .T. .OR. ;      // allowDelete
-                                _HMG_SYSDATA [ 40 ] [ i ] [ 1 ] == .T. ) .AND. ;    // allowEdit inplace
-                                ( ValType(_HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C' )
-                              DataGridClearBuffer(i)
-                           ENDIF
-                        Else
-                           // Return 1
-                        EndIf
-
-
-							OtherWise
-
-								// Return 1   // Remove, december 2014
-
-							EndCase
-
-                     Return 0   // ADD, december 2014
-
-					EndIf
-
-				EndIf
+        EndIf
 
 /*
-            // by Dr. Claudio Soto, December 2014
-            If GetNotifyCode (lParam) = LVN_BEGINSCROLL
-               Return 0
-            ENDIF
+        // by Dr. Claudio Soto, December 2014
+        If GetNotifyCode (lParam) = LVN_BEGINSCROLL
+           Return 0
+        ENDIF
 
-            If GetNotifyCode (lParam) = LVN_ENDSCROLL
-               Return 0
-            ENDIF
+        If GetNotifyCode (lParam) = LVN_ENDSCROLL
+           Return 0
+        ENDIF
 */
 
-            If GetNotifyCode (lParam) = NM_CUSTOMDRAW
+        If GetNotifyCode (lParam) = NM_CUSTOMDRAW
 
-               SetNewBehaviorWndProc (.T.)   // ADD2, December 2014
+          SetNewBehaviorWndProc (.T.)   // ADD2, December 2014
 
-               IF _HMG_SYSDATA [32] [i] == .T.   // CellNavigation == .T.
-                  // r := GetDsx ( lParam , _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] )
-                  r := LISTVIEW_CUSTOMDRAW_GetAction ( lParam, .T., _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] )
-               ELSE
-                  // r := GetDs ( lParam )   // CellNavigation == .F.
-                  r := LISTVIEW_CUSTOMDRAW_GetAction ( lParam )
-               ENDIF
+          IF _HMG_SYSDATA [32] [i] == .T.   // CellNavigation == .T.
+            // r := GetDsx ( lParam , _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] )
+            r := LISTVIEW_CUSTOMDRAW_GetAction ( lParam, .T., _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] )
+          ELSE
+            // r := GetDs ( lParam )   // CellNavigation == .F.
+            r := LISTVIEW_CUSTOMDRAW_GetAction ( lParam )
+          ENDIF
 
-               if r <> -1
-                  Return r   // return CDRF_NOTIFYITEMDRAW, CDRF_NOTIFYSUBITEMDRAW or CDRF_DODEFAULT
-               else
+          if r <> -1
+            Return r   // return CDRF_NOTIFYITEMDRAW, CDRF_NOTIFYSUBITEMDRAW or CDRF_DODEFAULT
+          else
 
-                  a := LISTVIEW_CUSTOMDRAW_GetRowCol (lParam)   //  get nROW and nCOL of the cell draw
+            a := LISTVIEW_CUSTOMDRAW_GetRowCol (lParam)   //  get nROW and nCOL of the cell draw
 
-                  *  a [1] --> nRow draw
-                  *  a [2] --> nCow draw
-                  *  _HMG_SYSDATA [ 39 ] [i] --> nRow of the selected cell
-                  *  _HMG_SYSDATA [ 15 ] [i] --> nCol of the selected cell
+            *  a [1] --> nRow draw
+            *  a [2] --> nCow draw
+            *  _HMG_SYSDATA [ 39 ] [i] --> nRow of the selected cell
+            *  _HMG_SYSDATA [ 15 ] [i] --> nCol of the selected cell
 
-                  IF _HMG_SYSDATA [32] [i] == .T.  // CellNavigation == .T.
+            IF _HMG_SYSDATA [32] [i] == .T.  // CellNavigation == .T.
 
-                     if a [1] == _HMG_SYSDATA [ 39 ] [i]  .and. a [2] == _HMG_SYSDATA [ 15 ] [i] .AND. _HMG_GRID_SELECTEDCELL_DISPLAYCOLOR == .T.   // ADD
-                        hFont := _GridEx_DoGridCustomDrawFont ( i, a, lParam, .F. )
-                        r := GRID_SetBCFC ( lParam , RGB( _HMG_SYSDATA[351][1] ,_HMG_SYSDATA[351][2],_HMG_SYSDATA[351][3] ) , RGB( _HMG_SYSDATA[350][1] , _HMG_SYSDATA[350][2] , _HMG_SYSDATA[350][3] ) , hFont )
+              if a [1] == _HMG_SYSDATA [ 39 ] [i]  .and. a [2] == _HMG_SYSDATA [ 15 ] [i] .AND. _HMG_GRID_SELECTEDCELL_DISPLAYCOLOR == .T.   // ADD
+                hFont := _GridEx_DoGridCustomDrawFont ( i, a, lParam, .F. )
+                r := GRID_SetBCFC ( lParam , RGB( _HMG_SYSDATA[351][1] ,_HMG_SYSDATA[351][2],_HMG_SYSDATA[351][3] ) , RGB( _HMG_SYSDATA[350][1] , _HMG_SYSDATA[350][2] , _HMG_SYSDATA[350][3] ) , hFont )
 
-                     elseif a [1] == _HMG_SYSDATA [ 39 ] [i]  .and. a [2] <> _HMG_SYSDATA [ 15 ] [i] .AND. _HMG_GRID_SELECTEDROW_DISPLAYCOLOR == .T.   // ADD
-                        hFont := _GridEx_DoGridCustomDrawFont ( i, a, lParam, .F. )
-                        r := GRID_SetBCFC ( lParam , RGB( _HMG_SYSDATA[349][1] ,_HMG_SYSDATA[349][2],_HMG_SYSDATA[349][3] ) , RGB( _HMG_SYSDATA[348][1] , _HMG_SYSDATA[348][2] , _HMG_SYSDATA[348][3] ) , hFont )
+              elseif a [1] == _HMG_SYSDATA [ 39 ] [i]  .and. a [2] <> _HMG_SYSDATA [ 15 ] [i] .AND. _HMG_GRID_SELECTEDROW_DISPLAYCOLOR == .T.   // ADD
+                hFont := _GridEx_DoGridCustomDrawFont ( i, a, lParam, .F. )
+                r := GRID_SetBCFC ( lParam , RGB( _HMG_SYSDATA[349][1] ,_HMG_SYSDATA[349][2],_HMG_SYSDATA[349][3] ) , RGB( _HMG_SYSDATA[348][1] , _HMG_SYSDATA[348][2] , _HMG_SYSDATA[348][3] ) , hFont )
 
-                     else
-                        r := _GridEx_DoGridCustomDraw ( i , a , lParam )   // ADD2
-                     endif
+              else
+                r := _GridEx_DoGridCustomDraw ( i , a , lParam )   // ADD2
+              endif
 
-                  ELSE
-                     r := _GridEx_DoGridCustomDraw ( i , a , lParam )   // ADD2
-                  ENDIF
+            ELSE
+               r := _GridEx_DoGridCustomDraw ( i , a , lParam )   // ADD2
+            ENDIF
 
-                  Return r   // return CDRF_NEWFONT
+            Return r   // return CDRF_NEWFONT
 
-               endif
+          endif
 
-            EndIf
+        EndIf
 
 *******************************************************************************
-				If GetNotifyCode ( lParam ) = -181
-					redrawwindow (_HMG_SYSDATA [3] [i])
-				endif
+        If GetNotifyCode ( lParam ) = -181
+          redrawwindow (_HMG_SYSDATA [3] [i])
+        endif
 *******************************************************************************
 
-            * Grid OnQueryData ............................
+        * Grid OnQueryData ............................
 
-            If GetNotifyCode ( lParam ) = LVN_GETDISPINFO
+        If GetNotifyCode ( lParam ) = LVN_GETDISPINFO
 
-               _PushEventInfo()
-               _HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )
-               _HMG_SYSDATA [ 231 ] := 'C'
-               _HMG_SYSDATA [ 203 ] := i
-               _HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]
-               _HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]
-               _ThisQueryTemp  := GETGRIDDISPINFOINDEX ( lParam )
-               _HMG_SYSDATA [ 201 ]  := _ThisQueryTemp [1]   // This.QueryRowIndex
-               _HMG_SYSDATA [ 202 ]  := _ThisQueryTemp [2]   // This.QueryColIndex
+          _PushEventInfo()
+          _HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )
+          _HMG_SYSDATA [ 231 ] := 'C'
+          _HMG_SYSDATA [ 203 ] := i
+          _HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]
+          _HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]
+          _ThisQueryTemp  := GETGRIDDISPINFOINDEX ( lParam )
+          _HMG_SYSDATA [ 201 ]  := _ThisQueryTemp [1]   // This.QueryRowIndex
+          _HMG_SYSDATA [ 202 ]  := _ThisQueryTemp [2]   // This.QueryColIndex
 
-               IF valtype ( _HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
-                  IF USED ()                                           // ADD
-                     GetDataGridCellData ( i , .F. )
-                  ENDIF
-               ELSE
-                  IF ValType (_HMG_SYSDATA [ 6 ] [i]) == "B"          // ADD
-                     Eval( _HMG_SYSDATA [ 6 ] [i]  )   // OnQueryData Event
-                  ENDIF
-               ENDIF
+          IF valtype ( _HMG_SYSDATA [ 40 ] [ i ] [ 10 ] ) == 'C'
+            IF USED ()                                           // ADD
+              GetDataGridCellData ( i , .F. )
+            ENDIF
+          ELSE
+            IF ValType (_HMG_SYSDATA [ 6 ] [i]) == "B"          // ADD
+              Eval( _HMG_SYSDATA [ 6 ] [i]  )   // OnQueryData Event
+            ENDIF
+          ENDIF
 
-               if HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0 .And. _HMG_SYSDATA [ 202 ] == 1
-                  SetGridQueryImage ( lParam , _HMG_SYSDATA [ 230 ] )
-               Else
-                  xTemp := _HMG_SYSDATA [ 230 ]   // This.QueryData
+          if HMG_LEN ( _HMG_SYSDATA [ 14 ] [i] ) > 0 .And. _HMG_SYSDATA [ 202 ] == 1
+            SetGridQueryImage ( lParam , _HMG_SYSDATA [ 230 ] )
+          Else
+            xTemp := _HMG_SYSDATA [ 230 ]   // This.QueryData
 
-                  if valtype ( xTemp ) == 'C'
-                     cTemp := RTrim(xTemp)
-                  elseif valtype ( xTemp ) == 'N'
-                     cTemp := Str(xTemp)
-                  elseif valtype ( xTemp ) == 'D'
-                     cTemp := DToC(xTemp)
-                  elseif valtype ( xTemp ) == 'L'
-                     cTemp := if ( xTemp , '.T.' , '.F.' )
-                  else
-                     cTemp := ''
-                  endif
+            if valtype ( xTemp ) == 'C'
+              cTemp := RTRIM(xTemp)
+            elseif valtype ( xTemp ) == 'N'
+              cTemp := STR(xTemp)
+            elseif valtype ( xTemp ) == 'D'
+              cTemp := dtoc(xTemp)
+            elseif valtype ( xTemp ) == 'L'
+              cTemp := if ( xTemp , '.T.' , '.F.' )
+            else
+              cTemp := ''
+            endif
 
-                  SetGridQueryData ( lParam , cTemp )
-               EndIf
+            SetGridQueryData ( lParam , cTemp )
+          EndIf
 
-               _HMG_SYSDATA [ 201 ]  := 0   // This.QueryRowIndex
-               _HMG_SYSDATA [ 202 ]  := 0   // This.QueryColIndex
-               _HMG_SYSDATA [ 230 ] := ""   // This.QueryData
-               _PopEventInfo()
-               Return 0   // ADD
+          _HMG_SYSDATA [ 201 ]  := 0   // This.QueryRowIndex
+          _HMG_SYSDATA [ 202 ]  := 0   // This.QueryColIndex
+          _HMG_SYSDATA [ 230 ] := ""   // This.QueryData
+          _PopEventInfo()
+          Return 0   // ADD
+
+        EndIf
+
+        * Grid LostFocus ..............................
+
+        If GetNotifyCode ( lParam ) = NM_KILLFOCUS
+
+          // by Dr. Claudio Soto, December 2014
+          IF IsGridCustomDrawNewBehavior() == .T.
+            SetEventProcessHMGWindowsMessage (.T.)
+          ENDIF
+
+          _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
+          Return 0
+
+        EndIf
+
+        * Grid GotFocus ...............................
+
+        If GetNotifyCode ( lParam ) = NM_SETFOCUS
+
+          // by Dr. Claudio Soto, December 2014
+          IF IsGridCustomDrawNewBehavior() == .T.
+            SetEventProcessHMGWindowsMessage (.F.)
+          ENDIF
+
+          VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
+          Return 0
+
+        EndIf
+
+        * Grid Change .................................
+
+        If GetNotifyCode ( lParam ) = LVN_ITEMCHANGED
+
+          //   OnCheckBoxClicked   (by Dr. Claudio Soto, December 2014)
+          #define LVIS_UNCHECKED 0x1000
+          #define LVIS_CHECKED   0x2000
+          IF GetGridNewState(lParam) == LVIS_UNCHECKED .OR. GetGridNewState(lParam) == LVIS_CHECKED
+            xTemp := { NIL, NIL }
+            xTemp[1] := _HMG_SYSDATA [ 40 ] [ i ] [ 37 ] [ 1 ]   // This.CellRowClicked
+            IF ( xTemp[1] > 0 .AND. xTemp[1] <=  ListView_GetItemCount (_HMG_SYSDATA [ 3 ] [ i ]) ) .OR. ;
+               ( HMG_GetLastVirtualKeyDown( @xTemp[2] ) == VK_SPACE .AND. xTemp[2] == _HMG_SYSDATA [ 3 ] [ i ] ) .OR. ;
+               ( HMG_GetLastMouseMessage( @xTemp[2] ) == WM_LBUTTONDOWN .AND. xTemp[2] == _HMG_SYSDATA [ 3 ] [ i ] )   // ADD, March 2016
+              IF HMG_GetLastVirtualKeyDown() == VK_SPACE .OR. HMG_GetLastMouseMessage() == WM_LBUTTONDOWN
+                _HMG_SYSDATA [ 40 ] [ i ] [ 37 ] [ 1 ] := GETGRIDROW ( lParam ) + 1  // CellRowClicked
+                _HMG_SYSDATA [ 40 ] [ i ] [ 37 ] [ 2 ] := 0                          // CellColClicked
+              ENDIF
+              _DoControlEventProcedure ( _HMG_SYSDATA [ 40 ] [ i ] [ 46 ] , i )   // OnCheckBoxClicked
+              Return 0
+            ENDIF
+          ENDIF
+
+          If GetGridOldState(lParam) == 0 .and. GetGridNewState(lParam) <> 0
+            IF _HMG_SYSDATA [32] [i] == .T.
+              _HMG_SYSDATA [ 39 ] [i] := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [ 3 ] [i] )
+            ELSE
+              _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+            ENDIF
+            Return 0
+          EndIf
+
+        EndIf
+
+        * Grid Header Click ..........................
+
+        If GetNotifyCode ( lParam ) =  LVN_COLUMNCLICK
+          if ValType ( _HMG_SYSDATA [ 17 ] [i] ) == 'A'
+            lvc := GetGridColumn(lParam) + 1
+            if HMG_LEN (_HMG_SYSDATA [ 17 ] [i]) >= lvc
+              _DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [lvc] , i )
+              Return 0
             EndIf
+          EndIf
+        EndIf
 
+        * Grid Click ...........................
 
-            * Grid LostFocus ..............................
+        If GetNotifyCode ( lParam ) == NM_CLICK
+          IF _HMG_SYSDATA [32] [i] == .T.
 
-            If GetNotifyCode ( lParam ) = NM_KILLFOCUS
+            aCellData := _GetGridCellData(i)
 
-               // by Dr. Claudio Soto, December 2014
-               IF IsGridCustomDrawNewBehavior() == .T.
-                  SetEventProcessHMGWindowsMessage (.T.)
-               ENDIF
+            IF aCellData [2] > 0
 
-               _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
-               Return 0
-
-            EndIf
-
-
-            * Grid GotFocus ...............................
-
-            If GetNotifyCode ( lParam ) = NM_SETFOCUS
-
-               // by Dr. Claudio Soto, December 2014
-               IF IsGridCustomDrawNewBehavior() == .T.
-                  SetEventProcessHMGWindowsMessage (.F.)
-               ENDIF
-
-               VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
-               _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
-               Return 0
-            EndIf
-
-
-				* Grid Change .................................
-
-				If GetNotifyCode ( lParam ) = LVN_ITEMCHANGED
-
-               //   OnCheckBoxClicked   (by Dr. Claudio Soto, December 2014)
-               #define LVIS_UNCHECKED 0x1000
-               #define LVIS_CHECKED   0x2000
-               IF GetGridNewState(lParam) == LVIS_UNCHECKED .OR. GetGridNewState(lParam) == LVIS_CHECKED
-                  xTemp := { NIL, NIL }
-                  xTemp[1] := _HMG_SYSDATA [ 40 ] [ i ] [ 37 ] [ 1 ]   // This.CellRowClicked
-                  IF ( xTemp[1] > 0 .AND. xTemp[1] <=  ListView_GetItemCount (_HMG_SYSDATA [ 3 ] [ i ]) ) .OR. ;
-                     ( HMG_GetLastVirtualKeyDown( @xTemp[2] ) == VK_SPACE .AND. xTemp[2] == _HMG_SYSDATA [ 3 ] [ i ] ) .OR. ;
-                     ( HMG_GetLastMouseMessage( @xTemp[2] ) == WM_LBUTTONDOWN .AND. xTemp[2] == _HMG_SYSDATA [ 3 ] [ i ] )   // ADD, March 2016
-                     IF HMG_GetLastVirtualKeyDown() == VK_SPACE .OR. HMG_GetLastMouseMessage() == WM_LBUTTONDOWN
-                        _HMG_SYSDATA [ 40 ] [ i ] [ 37 ] [ 1 ] := GETGRIDROW ( lParam ) + 1  // CellRowClicked
-                        _HMG_SYSDATA [ 40 ] [ i ] [ 37 ] [ 2 ] := 0                          // CellColClicked
-                     ENDIF
-                     _DoControlEventProcedure ( _HMG_SYSDATA [ 40 ] [ i ] [ 46 ] , i )   // OnCheckBoxClicked
-                     Return 0
-                  ENDIF
-               ENDIF
-
-					If GetGridOldState(lParam) == 0 .and. GetGridNewState(lParam) <> 0
-						IF _HMG_SYSDATA [32] [i] == .T.
-							_HMG_SYSDATA [ 39 ] [i] := LISTVIEW_GETFIRSTITEM ( _HMG_SYSDATA [ 3 ] [i] )
-						ELSE
-							_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-						ENDIF
-						Return 0
-					EndIf
-
-				EndIf
-
-				* Grid Header Click ..........................
-
-				If GetNotifyCode ( lParam ) =  LVN_COLUMNCLICK
-					if ValType ( _HMG_SYSDATA [ 17 ] [i] ) == 'A'
-						lvc := GetGridColumn(lParam) + 1
-						if HMG_LEN (_HMG_SYSDATA [ 17 ] [i]) >= lvc
-							_DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [lvc] , i )
-							Return 0
-						EndIf
-					EndIf
-				EndIf
-
-				* Grid Click ...........................
-
-				If GetNotifyCode ( lParam ) == NM_CLICK
-					IF _HMG_SYSDATA [32] [i] == .T.
-
-						aCellData := _GetGridCellData(i)
-
-						IF aCellData [2] > 0
-
-							_HMG_SYSDATA [ 15 ] [i]  := aCellData [2]
-
-						ENDIF
-
-						LISTVIEW_REDRAWITEMS ( _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] - 1 , _HMG_SYSDATA [ 39 ] [i] - 1 )
-
-						_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-
-					ENDIF
-               Return 0   // ADD2
-				EndIf
-
-				* Grid Double Click ...........................
-
-				If GetNotifyCode ( lParam ) == NM_DBLCLK
-
-					IF _HMG_SYSDATA [ 40 ] [ I ] [ 1 ]  == .T.
-
-							_PushEventInfo()
-							_HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )   // Parent Index
-							_HMG_SYSDATA [ 231 ] := 'C'
-							_HMG_SYSDATA [ 203 ] := i                                                      // Control Index
-							_HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]         // Parent Name
-							_HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]               // Control Name
-							aCellData := _GetGridCellData(i)
-							_HMG_SYSDATA [ 195 ] := aCellData [1]
-							_HMG_SYSDATA [ 196 ] := aCellData [2]
-							_HMG_SYSDATA [ 197 ] := aCellData [3]
-							_HMG_SYSDATA [ 198 ] := aCellData [4]
-							_HMG_SYSDATA [ 199 ] := aCellData [5]
-							_HMG_SYSDATA [ 200 ] := aCellData [6]
-
-							_HMG_GRIDINPLACEEDIT(i)
-
-							_PopEventInfo()
-							_HMG_SYSDATA [ 195 ] := 0
-							_HMG_SYSDATA [ 196 ] := 0
-							_HMG_SYSDATA [ 197 ] := 0
-							_HMG_SYSDATA [ 198 ] := 0
-							_HMG_SYSDATA [ 199 ] := 0
-							_HMG_SYSDATA [ 200 ] := 0
-
-                     // Return 0
-
-					Else
-
-						if ValType(_HMG_SYSDATA [ 16 ] [i]  )=='B'
-
-								_PushEventInfo()
-								_HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )
-								_HMG_SYSDATA [ 231 ] := 'C'
-								_HMG_SYSDATA [ 203 ] := i
-								_HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]
-								_HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]
-
-								aCellData := _GetGridCellData(i)
-
-								_HMG_SYSDATA [ 195 ] := aCellData [1]
-								_HMG_SYSDATA [ 196 ] := aCellData [2]
-								_HMG_SYSDATA [ 197 ] := aCellData [3]
-								_HMG_SYSDATA [ 198 ] := aCellData [4]
-								_HMG_SYSDATA [ 199 ] := aCellData [5]
-								_HMG_SYSDATA [ 200 ] := aCellData [6]
-
-								Eval( _HMG_SYSDATA [ 16 ] [i]  )
-								_PopEventInfo()
-
-								_HMG_SYSDATA [ 195 ] := 0
-								_HMG_SYSDATA [ 196 ] := 0
-								_HMG_SYSDATA [ 197 ] := 0
-								_HMG_SYSDATA [ 198 ] := 0
-								_HMG_SYSDATA [ 199 ] := 0
-								_HMG_SYSDATA [ 200 ] := 0
-
-                        // Return 0
-
-	 					EndIf
-
-					EndIf
-
-					Return 0
-
-				EndIf
-
-			EndIf
-
-         * DatePicker Process ..................................
-
-         if _HMG_SYSDATA [1] [i] = "DATEPICK"
-
-            * DatePicker Change ............................
-
-            If ( GetNotifyCode ( lParam ) == DTN_DATETIMECHANGE .and. SendMessage( _HMG_SYSDATA [ 3 ] [i] ,DTM_GETMONTHCAL,0,0 ) == 0 ) .OR. ( GetNotifyCode ( lParam ) == DTN_CLOSEUP )
-               _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-               Return 0
-            EndIf
-
-            * DatePicker LostFocus ........................
-
-            If GetNotifyCode ( lParam ) = NM_KILLFOCUS
-               _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
-               Return 0
-            EndIf
-
-            * DatePicker GotFocus .........................
-
-            If GetNotifyCode ( lParam ) = NM_SETFOCUS
-               VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
-               _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
-               Return 0
-            EndIf
-
-         EndIf
-
-
-
-         * TimePicker Process ( Dr. Claudio Soto, April 2013 ) ..................................
-
-         if _HMG_SYSDATA [1] [i] = "TIMEPICK"
-
-            * TimePicker Change ............................
-
-            If ( GetNotifyCode ( lParam ) == DTN_DATETIMECHANGE )
-               _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-               Return 0
-            EndIf
-
-            * TimePicker LostFocus ........................
-
-            If GetNotifyCode ( lParam ) = NM_KILLFOCUS
-               _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
-               Return 0
-            EndIf
-
-            * TimePicker GotFocus .........................
-
-            If GetNotifyCode ( lParam ) = NM_SETFOCUS
-               VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
-               _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
-               Return 0
-            EndIf
-
-         EndIf
-
-
-         // by Dr. Claudio Soto, January 2014
-         * RichEditBox Processing ......................................
-
-         if _HMG_SYSDATA [1] [i] = "RICHEDIT"
-
-            * RichEditBox Selelection Change ..................................
-
-            If GetNotifyCode ( lParam ) = EN_SELCHANGE
-               _DoControlEventProcedure ( _HMG_SYSDATA [ 22 ] [i] , i )
-               Return 0
-            EndIf
-
-            If GetNotifyCode ( lParam ) = EN_LINK
-               // GetNotifyLink ( lParam , @Link_wParam , @Link_lParam , @Link_cpMin         , @Link_cpMax         )   -> return Link_nMsg
-
-               If GetNotifyLink ( lParam , NIL          , NIL          , @_HMG_CharRange_Min , @_HMG_CharRange_Max ) = WM_LBUTTONDOWN
-                  _DoControlEventProcedure ( _HMG_SYSDATA [ 31 ] [i] , i )
-                  _HMG_CharRange_Min := 0
-                  _HMG_CharRange_Max := 0
-                  Return 0
-               EndIf
-
-            EndIf
-
-         EndIf
-
-
-			* Tab Processing ......................................
-
-			if _HMG_SYSDATA [1] [i] = "TAB"
-
-				* Tab Change ..................................
-
-				If GetNotifyCode ( lParam ) = TCN_SELCHANGE
-					if HMG_LEN (_HMG_SYSDATA [  7 ] [i]) > 0
-					        UpdateTab (i)
-					EndIf
-					_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-					Return 0
-				EndIf
-
-			EndIf
-
-			* Tree Processing .....................................
-
-			if _HMG_SYSDATA [1] [i] = "TREE"
-
-				* Tree LostFocus .............................
-
-				If GetNotifyCode ( lParam ) = NM_KILLFOCUS
-					_DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
-					Return 0
-				EndIf
-
-				* Tree GotFocus ..............................
-
-				If GetNotifyCode ( lParam ) = NM_SETFOCUS
-					VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
-					_DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
-					Return 0
-				EndIf
-
-				* Tree Change ................................
-
-				If GetNotifyCode ( lParam ) = TVN_SELCHANGED
-					_DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
-					Return 0
-				EndIf
-
-				* Tree Double Click .........................
-
-				If GetNotifyCode ( lParam ) == NM_DBLCLK
-					_DoControlEventProcedure ( _HMG_SYSDATA [ 16 ] [i] , i )
-					Return 0
-				EndIf
-
-            * Tree OnExpand and OnCollapse ......................... (Dr. Claudio Soto, July 2014)
-
-            IF GetNotifyCode ( lParam ) == TVN_ITEMEXPANDING   /*TVN_ITEMEXPANDED*/
-
-               _HMG_ret := NOTIFY_TREEVIEW_ITEMEXPAND ( lParam )
-               _HMG_This_TreeItem_Value := NIL
-
-               If _HMG_SYSDATA [9] [i] == .F.
-                  _HMG_This_TreeItem_Value := ASCAN ( _HMG_SYSDATA [7] [i], _HMG_ret [2] )
-               Else
-                  _HMG_This_TreeItem_Value := TREEITEM_GETID ( _HMG_SYSDATA [3] [i], _HMG_ret [2] )
-               EndIf
-
-               IF _HMG_ret [1] == TVE_EXPAND
-                  _DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [1], i )
-                  _HMG_This_TreeItem_Value := NIL
-                  Return 0
-               ENDIF
-
-               IF _HMG_ret [1] == TVE_COLLAPSE
-                  _DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [2], i )
-                  _HMG_This_TreeItem_Value := NIL
-                  Return 0
-               ENDIF
+              _HMG_SYSDATA [ 15 ] [i]  := aCellData [2]
 
             ENDIF
 
-            * Tree Dynamic ForeColor, BackColor and Font   ......................... (Dr. Claudio Soto, July 2014)
+            LISTVIEW_REDRAWITEMS ( _HMG_SYSDATA [ 3 ] [i] , _HMG_SYSDATA [ 39 ] [i] - 1 , _HMG_SYSDATA [ 39 ] [i] - 1 )
 
-            IF GetNotifyCode (lParam) == NM_CUSTOMDRAW
+            _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
 
-               IF ValType (_HMG_SYSDATA [40] [i] [1]) == "B" .OR. ;   // DynamicBackColor
-                  ValType (_HMG_SYSDATA [40] [i] [2]) == "B" .OR. ;   // DynamicForeColor
-                  ValType (_HMG_SYSDATA [40] [i] [3]) == "B"          // DynamicFont
+          ENDIF
+          Return 0   // ADD2
+        EndIf
 
-                  SetNewBehaviorWndProc (.T.)   // ADD2, December 2014
+        * Grid Double Click ...........................
 
-                  r := TREEVIEW_CUSTOMDRAW_GetAction ( lParam )
+        If GetNotifyCode ( lParam ) == NM_DBLCLK
 
-                  if r <> -1
-                     Return R   // return CDRF_NOTIFYITEMDRAW or CDRF_DODEFAULT
-                  endif
+          IF _HMG_SYSDATA [ 40 ] [ I ] [ 1 ]  == .T.
 
-                  _HMG_This_TreeItem_Value := NIL
+              _PushEventInfo()
+              _HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )   // Parent Index
+              _HMG_SYSDATA [ 231 ] := 'C'
+              _HMG_SYSDATA [ 203 ] := i                                                      // Control Index
+              _HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]         // Parent Name
+              _HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]               // Control Name
+              aCellData := _GetGridCellData(i)
+              _HMG_SYSDATA [ 195 ] := aCellData [1]
+              _HMG_SYSDATA [ 196 ] := aCellData [2]
+              _HMG_SYSDATA [ 197 ] := aCellData [3]
+              _HMG_SYSDATA [ 198 ] := aCellData [4]
+              _HMG_SYSDATA [ 199 ] := aCellData [5]
+              _HMG_SYSDATA [ 200 ] := aCellData [6]
 
-                  _HMG_ret := ASCAN ( _HMG_SYSDATA [7] [i], TREEVIEW_CUSTOMDRAW_GETITEMHANDLE (lParam) )
+              _HMG_GRIDINPLACEEDIT(i)
 
-                  IF _HMG_ret > 0
+              _PopEventInfo()
+              _HMG_SYSDATA [ 195 ] := 0
+              _HMG_SYSDATA [ 196 ] := 0
+              _HMG_SYSDATA [ 197 ] := 0
+              _HMG_SYSDATA [ 198 ] := 0
+              _HMG_SYSDATA [ 199 ] := 0
+              _HMG_SYSDATA [ 200 ] := 0
 
-                     If _HMG_SYSDATA [9] [i] == .F.
-                        _HMG_This_TreeItem_Value := _HMG_ret
-                     ELSE
-                        _HMG_This_TreeItem_Value := _HMG_SYSDATA [25] [i] [ _HMG_ret ]
-                     EndIf
+              // Return 0
 
-                     Return _DoTreeCustomDraw ( i , lParam )   // return CDRF_NEWFONT
+          Else
 
-                  ENDIF
+            if valtype(_HMG_SYSDATA [ 16 ] [i]  )=='B'
 
-               ENDIF
+                _PushEventInfo()
+                _HMG_SYSDATA [ 194 ] := ascan ( _HMG_SYSDATA [ 67  ] , _HMG_SYSDATA [4][i] )
+                _HMG_SYSDATA [ 231 ] := 'C'
+                _HMG_SYSDATA [ 203 ] := i
+                _HMG_SYSDATA [ 316 ] :=  _HMG_SYSDATA [  66 ] [ _HMG_SYSDATA [ 194 ] ]
+                _HMG_SYSDATA [ 317 ] :=  _HMG_SYSDATA [2] [_HMG_SYSDATA [ 203 ]]
+
+                aCellData := _GetGridCellData(i)
+
+                _HMG_SYSDATA [ 195 ] := aCellData [1]
+                _HMG_SYSDATA [ 196 ] := aCellData [2]
+                _HMG_SYSDATA [ 197 ] := aCellData [3]
+                _HMG_SYSDATA [ 198 ] := aCellData [4]
+                _HMG_SYSDATA [ 199 ] := aCellData [5]
+                _HMG_SYSDATA [ 200 ] := aCellData [6]
+
+                Eval( _HMG_SYSDATA [ 16 ] [i]  )
+                _PopEventInfo()
+
+                _HMG_SYSDATA [ 195 ] := 0
+                _HMG_SYSDATA [ 196 ] := 0
+                _HMG_SYSDATA [ 197 ] := 0
+                _HMG_SYSDATA [ 198 ] := 0
+                _HMG_SYSDATA [ 199 ] := 0
+                _HMG_SYSDATA [ 200 ] := 0
+
+                // Return 0
+
+            EndIf
+
+          EndIf
+
+          Return 0
+
+        EndIf
+
+      EndIf
+
+      * DatePicker Process ..................................
+
+      if _HMG_SYSDATA [1] [i] = "DATEPICK"
+
+        * DatePicker Change ............................
+
+        If ( GetNotifyCode ( lParam ) == DTN_DATETIMECHANGE .and. SendMessage( _HMG_SYSDATA [ 3 ] [i] ,DTM_GETMONTHCAL,0,0 ) == 0 ) .OR. ( GetNotifyCode ( lParam ) == DTN_CLOSEUP )
+           _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+          Return 0
+        EndIf
+
+        * DatePicker LostFocus ........................
+
+        If GetNotifyCode ( lParam ) = NM_KILLFOCUS
+          _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
+          Return 0
+        EndIf
+
+        * DatePicker GotFocus .........................
+
+        If GetNotifyCode ( lParam ) = NM_SETFOCUS
+          VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
+          Return 0
+        EndIf
+
+      EndIf
+
+
+
+      * TimePicker Process ( Dr. Claudio Soto, April 2013 ) ..................................
+
+      if _HMG_SYSDATA [1] [i] = "TIMEPICK"
+
+        * TimePicker Change ............................
+
+        If ( GetNotifyCode ( lParam ) == DTN_DATETIMECHANGE )
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+          Return 0
+        EndIf
+
+        * TimePicker LostFocus ........................
+
+        If GetNotifyCode ( lParam ) = NM_KILLFOCUS
+          _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
+          Return 0
+        EndIf
+
+        * TimePicker GotFocus .........................
+
+        If GetNotifyCode ( lParam ) = NM_SETFOCUS
+          VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
+          Return 0
+        EndIf
+
+      EndIf
+
+      // by Dr. Claudio Soto, January 2014
+      * RichEditBox Processing ......................................
+
+      if _HMG_SYSDATA [1] [i] = "RICHEDIT"
+
+        * RichEditBox Selelection Change ..................................
+
+        If GetNotifyCode ( lParam ) = EN_SELCHANGE
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 22 ] [i] , i )
+          Return 0
+        EndIf
+
+        If GetNotifyCode ( lParam ) = EN_LINK
+          // GetNotifyLink ( lParam , @Link_wParam , @Link_lParam , @Link_cpMin         , @Link_cpMax         )   -> return Link_nMsg
+
+          If GetNotifyLink ( lParam , NIL          , NIL          , @_HMG_CharRange_Min , @_HMG_CharRange_Max ) = WM_LBUTTONDOWN
+            _DoControlEventProcedure ( _HMG_SYSDATA [ 31 ] [i] , i )
+            _HMG_CharRange_Min := 0
+            _HMG_CharRange_Max := 0
+            Return 0
+          EndIf
+
+        EndIf
+
+      EndIf
+
+      * Tab Processing ......................................
+
+      if _HMG_SYSDATA [1] [i] = "TAB"
+
+        * Tab Change ..................................
+
+        If GetNotifyCode ( lParam ) = TCN_SELCHANGE
+          if HMG_LEN (_HMG_SYSDATA [  7 ] [i]) > 0
+            UpdateTab (i)
+          EndIf
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+          Return 0
+        EndIf
+
+      EndIf
+
+      * Tree Processing .....................................
+
+      if _HMG_SYSDATA [1] [i] = "TREE"
+
+        * Tree LostFocus .............................
+
+        If GetNotifyCode ( lParam ) = NM_KILLFOCUS
+          _DoControlEventProcedure ( _HMG_SYSDATA [10] [i] , i )
+          Return 0
+        EndIf
+
+        * Tree GotFocus ..............................
+
+        If GetNotifyCode ( lParam ) = NM_SETFOCUS
+          VirtualChildControlFocusProcess ( _HMG_SYSDATA [3] [i] , _HMG_SYSDATA [4] [i] )
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 11 ] [i] , i )
+          Return 0
+        EndIf
+
+        * Tree Change ................................
+
+        If GetNotifyCode ( lParam ) = TVN_SELCHANGED
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 12 ] [i] , i )
+          Return 0
+        EndIf
+
+        * Tree Double Click .........................
+
+        If GetNotifyCode ( lParam ) == NM_DBLCLK
+          _DoControlEventProcedure ( _HMG_SYSDATA [ 16 ] [i] , i )
+          Return 0
+        EndIf
+
+        * Tree OnExpand and OnCollapse ......................... (Dr. Claudio Soto, July 2014)
+
+        IF GetNotifyCode ( lParam ) == TVN_ITEMEXPANDING   /*TVN_ITEMEXPANDED*/
+
+          _HMG_ret := NOTIFY_TREEVIEW_ITEMEXPAND ( lParam )
+          _HMG_This_TreeItem_Value := NIL
+
+          If _HMG_SYSDATA [9] [i] == .F.
+            _HMG_This_TreeItem_Value := ASCAN ( _HMG_SYSDATA [7] [i], _HMG_ret [2] )
+          Else
+            _HMG_This_TreeItem_Value := TREEITEM_GETID ( _HMG_SYSDATA [3] [i], _HMG_ret [2] )
+          EndIf
+
+          IF _HMG_ret [1] == TVE_EXPAND
+            _DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [1], i )
+            _HMG_This_TreeItem_Value := NIL
+            Return 0
+          ENDIF
+
+          IF _HMG_ret [1] == TVE_COLLAPSE
+            _DoControlEventProcedure ( _HMG_SYSDATA [ 17 ] [i] [2], i )
+            _HMG_This_TreeItem_Value := NIL
+            Return 0
+          ENDIF
+
+        ENDIF
+
+        * Tree Dynamic ForeColor, BackColor and Font   ......................... (Dr. Claudio Soto, July 2014)
+
+        IF GetNotifyCode (lParam) == NM_CUSTOMDRAW
+
+          IF ValType (_HMG_SYSDATA [40] [i] [1]) == "B" .OR. ;   // DynamicBackColor
+             ValType (_HMG_SYSDATA [40] [i] [2]) == "B" .OR. ;   // DynamicForeColor
+             ValType (_HMG_SYSDATA [40] [i] [3]) == "B"          // DynamicFont
+
+            SetNewBehaviorWndProc (.T.)   // ADD2, December 2014
+
+            r := TREEVIEW_CUSTOMDRAW_GetAction ( lParam )
+
+            if r <> -1
+              Return R   // return CDRF_NOTIFYITEMDRAW or CDRF_DODEFAULT
+            endif
+
+            _HMG_This_TreeItem_Value := NIL
+
+            _HMG_ret := ASCAN ( _HMG_SYSDATA [7] [i], TREEVIEW_CUSTOMDRAW_GETITEMHANDLE (lParam) )
+
+            IF _HMG_ret > 0
+
+              If _HMG_SYSDATA [9] [i] == .F.
+                _HMG_This_TreeItem_Value := _HMG_ret
+              ELSE
+                _HMG_This_TreeItem_Value := _HMG_SYSDATA [25] [i] [ _HMG_ret ]
+              EndIf
+
+              Return _DoTreeCustomDraw ( i , lParam )   // return CDRF_NEWFONT
 
             ENDIF
 
-			EndIf
+          ENDIF
 
-		EndIf
+        ENDIF
+
+      EndIf
+
+    EndIf
 
 
         ***********************************************************************

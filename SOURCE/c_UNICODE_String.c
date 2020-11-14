@@ -27,8 +27,8 @@
 
 #ifdef COMPILE_HMG_UNICODE
 
-   HB_FUNC (HMG_LOWER)
-   {
+   HB_FUNC (HMG_LOWER_BMP)
+   {  
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -50,8 +50,8 @@
    }
 
 
-   HB_FUNC (HMG_UPPER)
-   {
+   HB_FUNC (HMG_UPPER_BMP)
+   {  
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -73,35 +73,35 @@
    }
 
 
-   HB_FUNC (HMG_ISALPHA)
+   HB_FUNC (HMG_ISALPHA_BMP)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) IsCharAlpha ((TCHAR)Text[0]));
    }
 
 
-   HB_FUNC (HMG_ISDIGIT)
+   HB_FUNC (HMG_ISDIGIT_BMP)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) ( IsCharAlphaNumeric((TCHAR)Text[0]) && !IsCharAlpha((TCHAR)Text[0]) ));
    }
 
 
-   HB_FUNC (HMG_ISLOWER)
+   HB_FUNC (HMG_ISLOWER_BMP)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) IsCharLower ((TCHAR)Text[0]));
    }
 
 
-   HB_FUNC (HMG_ISUPPER)
+   HB_FUNC (HMG_ISUPPER_BMP)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) IsCharUpper ((TCHAR)Text[0]));
    }
 
 
-   HB_FUNC (HMG_ISALPHANUMERIC)
+   HB_FUNC (HMG_ISALPHANUMERIC_BMP)
    {
       TCHAR *Text = (TCHAR*) HMG_parc(1);
       hb_retl ((BOOL) IsCharAlphaNumeric((TCHAR)Text[0]));
@@ -110,9 +110,8 @@
 #endif
 
 
-
-//       HMG_StrCmp ( Text1 , Text2 , [ lCaseSensitive ] ) --> CmpValue
-HB_FUNC (HMG_STRCMP)
+//       HMG_StrCmp_BMP ( Text1 , Text2 , [ lCaseSensitive ] ) --> CmpValue
+HB_FUNC (HMG_STRCMP_BMP)
 {
    TCHAR *Text1 = (TCHAR *) HMG_parc (1);
    TCHAR *Text2 = (TCHAR *) HMG_parc (2);
