@@ -36,6 +36,13 @@ hbmk2 hbvpdf.hbp -i%hmgpath%\include
 echo.
 
 cd..\..
+cd source\HMGSQL
+hbmk2 mysqlbridge.hbp -i%hmgpath%\include
+hbmk2 pgsqlbridge.hbp -i%hmgpath%\include
+hbmk2 sqlitebridge.hbp -i%hmgpath%\include
+echo.
+
+cd..\..
 cd source\ini
 hbmk2 ini.hbp -i%hmgpath%\include
 echo.
