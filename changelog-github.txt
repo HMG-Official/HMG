@@ -2,9 +2,9 @@
   HMG modifications through Github
   Encoding: UTF-8 (No BOM)  
   Notation:
-   * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
+    * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
   Entries should be in reverse chronological order, with most recent change 
-  on top. 
+    on top. 
 */
 
 2020-11-16 Kevin Carmody i /at/ kevincarmody.com
