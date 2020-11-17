@@ -1,4 +1,4 @@
-﻿﻿/*
+/*
   - by S. Rathinagiri on October 22nd, 2012
   
   - The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
