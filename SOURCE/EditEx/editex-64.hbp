@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/editex
+-o../../lib-64/editex-64
 
 -Iinclude
 

@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/report
+-o../../lib-64/report-64
 
 -Iinclude
 

@@ -1,8 +1,8 @@
 -hblib
 
--o../../lib/${hb_plat}/${hb_comp}/ini
+-o../../lib/ini
 
-../../hmg.hbc
+-Iinclude
 
 -D__HBIDE__
 

@@ -1,14 +1,8 @@
-# HMG Flags
-
-#{mingw} for gcc.exe link pthread library in static mode
-
-ldflags=-pthread -static-libgcc -static-libstdc++ -static -lpthread -mt
-
 # paths
 
 incpaths=/.
-incpaths=./include
-libpaths=../lib/${hb_plat}/${hb_comp}
+incpaths=include
+libpaths=lib
 
 # main hmg libs
 
@@ -58,5 +52,5 @@ libs=hbzebra
 
 # link compiled resources
 
-#sources=${hb_curdir}_temp.o
+sources=${hb_curdir}_temp.o
 

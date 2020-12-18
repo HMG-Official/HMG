@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/editex
+-o../../lib-64/hmgmysql-64
 
 -Iinclude
 
@@ -8,4 +8,4 @@
 
 -w2 -es2
 
-h_edit_ex.prg
+hmgmysql.prg

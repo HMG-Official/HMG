@@ -1,10 +1,8 @@
 -hblib
 
--o../../lib/${hb_plat}/${hb_comp}/hmgsqlite
+-o../../lib/hmgsqlite
 
--inc
-
-../../hmg.hbc
+-Iinclude
 
 -D__HBIDE__
 

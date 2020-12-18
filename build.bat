@@ -12,7 +12,7 @@ rem
 rem
 rem   This batch file passes information to hbmk2 to make possible an easy (zero
 rem   configuration build of HMG applications).
-rem
+rem 
 rem   You can achieve a customized build passing parameters directly to hbmk2.
 rem   Please, take a look at hbmk2 help:
 rem
@@ -42,10 +42,15 @@ rem Using %~dp0 the HMGPATH is automatically set to current (HMG) folder making 
 rem portable (zero config)
 
 SET HMGPATH=%~dp0
+
+rem ******************************************************************************
+rem SET BINARIES PATHS
+rem ******************************************************************************
+
 SET PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
 
 rem *******************************************************************************
-rem PROCESS PARAMETERS
+rem PROCESS PARAMETERS 
 rem *******************************************************************************
 rem
 rem /n   no run after build
@@ -90,15 +95,15 @@ rem ****************************************************************************
 
 if exist build.log del build.log
 
-echo #define HMGRPATH %HMGPATH%\RESOURCES > _hmg_resconfig.h
+echo #define HMGRPATH %HmgPath%\RESOURCES > _hmg_resconfig.h
 COPY /b %HMGPATH%\resources\hmg32.rc+"%~n1.rc"+%HMGPATH%\resources\filler _temp.rc >NUL
 WINDRES -i _temp.rc -o _temp.o >windres.log 2>&1
 
 rem *******************************************************************************
-rem SET PROJECT OUTPUT FILE NAME
+rem SET PROJECT OUTPUT FILE NAME 
 rem *******************************************************************************
 rem
-rem The first parameter sent to hbmk2 is -o%~n1.exe. I've added to it create the
+rem The first parameter sent to hbmk2 is -o%~n1.exe. I've added to it create the 
 rem application with the project basename (<projectname.hbp> specified by the user.
 
 rem *******************************************************************************

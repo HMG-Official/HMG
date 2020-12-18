@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/graph
+-o../../lib-64/graph-64
 
 -Iinclude
 

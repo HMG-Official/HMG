@@ -1,5 +1,5 @@
 -hblib
--o../../lib/hfcl
+-o../../lib-64/hfcl-64
 
 -Iinclude
 -I../include

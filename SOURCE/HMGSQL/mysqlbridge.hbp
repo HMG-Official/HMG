@@ -1,8 +1,8 @@
 -hblib
 
--o../../lib/${hb_plat}/${hb_comp}/hmgmysql
+-o../../lib/hmgmysql
 
-../../hmg.hbc
+-Iinclude
 
 -D__HBIDE__
 

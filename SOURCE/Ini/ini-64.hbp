@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/editex
+-o../../lib-64/ini-64
 
 -Iinclude
 
@@ -8,4 +8,5 @@
 
 -w2 -es2
 
-h_edit_ex.prg
+h_ini.prg
+c_ini.c

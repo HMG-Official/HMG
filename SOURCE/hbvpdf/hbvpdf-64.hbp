@@ -7,7 +7,9 @@
 -hblib
 
 
--o../../lib/hbvpdf
+
+
+-o../../lib-64/hbvpdf-64
 
 
 
