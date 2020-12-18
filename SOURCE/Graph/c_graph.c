@@ -286,4 +286,3 @@ HB_FUNC ( RELEASEDC )
 {
    hb_retl( ReleaseDC( (HWND) HMG_parnl (1), (HDC) HMG_parnl (2) ) ) ;
 }
-

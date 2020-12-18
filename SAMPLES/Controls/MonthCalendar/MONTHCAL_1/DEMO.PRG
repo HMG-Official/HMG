@@ -15,7 +15,7 @@ Function Main
 		TITLE "Month Calendar Control Demo" ;
 		ICON "DEMO.ICO" ;
 		MAIN ;
-		FONT "Arial" SIZE 10 
+		FONT "Arial" SIZE 10
 
 		@ 10,10 MONTHCALENDAR Month_1 ;
 		VALUE date() ;
@@ -25,11 +25,11 @@ Function Main
 
 		@ 10,300 BUTTON Button_1 ;
 		CAPTION "SET DATE" ;
-		ACTION Form_1.Month_1.Value := date() 
+		ACTION Form_1.Month_1.Value := date()
 
    	@ 50,300 BUTTON Button_2 ;
 		CAPTION "GET DATE" ;
-		ACTION MsgInfo ( GetDate ( Form_1.Month_1.Value ) ) 
+		ACTION MsgInfo ( GetDate ( Form_1.Month_1.Value ) )
 
 		@ 210,10 MONTHCALENDAR Month_2 ;
 		VALUE CTOD("01/01/2001") ;
@@ -45,7 +45,7 @@ Function Main
 
    	@ 250,300 BUTTON Button_4 ;
 		CAPTION "GET DATE" ;
-  		ACTION MsgInfo ( GetDate ( Form_1.Month_2.Value ) ) 
+  		ACTION MsgInfo ( GetDate ( Form_1.Month_2.Value ) )
 
 	END WINDOW
 
@@ -66,5 +66,3 @@ cRet += "Month: "+StrZero(nMonth,2)
 cRet += space(2)
 cRet += "Year: "+StrZero(nYear,4)
 Return cRet
-
-

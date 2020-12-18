@@ -176,7 +176,7 @@ private aArray := {{"One","Two","Three"},;
                    {"One","Two","Three"},;
                    {"One","Two","Three"},;
                    {"One","Two","Three"}}
-                   
+
 define window sample at 0,0 width 400 height 300 main
    define grid grid1
       row 10

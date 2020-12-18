@@ -14,13 +14,13 @@ Function Main
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG SplitBox Demo' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP '&File'
-				ITEM 'Get EditBox Value'	ACTION MsgInfo ( Form_1.SplitBox.Edit_1.Value ) 
-				ITEM 'Get Grid Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.Grid_1.Value ) ) 
-				ITEM 'Get List Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.List_1.Value ) ) 
+				ITEM 'Get EditBox Value'	ACTION MsgInfo ( Form_1.SplitBox.Edit_1.Value )
+				ITEM 'Get Grid Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.Grid_1.Value ) )
+				ITEM 'Get List Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.List_1.Value ) )
 				SEPARATOR	
 				ITEM 'Set EditBox Value'	ACTION Form_1.SplitBox.Edit_1.Value := 'New Value'
 				ITEM 'Set Grid Value'	ACTION Form_1.SplitBox.Grid_1.Value := 2
@@ -37,7 +37,7 @@ Function Main
 				ITEM 'Exit'		ACTION Form_1.Release
 			END POPUP
 			POPUP '&Help'
-				ITEM 'About'		ACTION MsgInfo ("HMG SplitBox Demo","A COOL Feature ;)") 
+				ITEM 'About'		ACTION MsgInfo ("HMG SplitBox Demo","A COOL Feature ;)")
 			END POPUP
 		END MENU
 	
@@ -48,7 +48,7 @@ Function Main
 			HEIGHT 100 ;
 			ITEMS {'Item 1','Item 2','Item 3','Item 4','Item 5'} ;
 			VALUE 3  ;
-			TOOLTIP 'ListBox 1' 
+			TOOLTIP 'ListBox 1'
 
 			GRID Grid_1 ;
 			WIDTH 630 ;
@@ -63,7 +63,7 @@ Function Main
 			HEIGHT 100 ;
 			VALUE 'EditBox!!' ;
 			TOOLTIP 'EditBox' ;
-			MAXLENGTH 255 
+			MAXLENGTH 255
 
 		END SPLITBOX
 
@@ -74,4 +74,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return Nil
-

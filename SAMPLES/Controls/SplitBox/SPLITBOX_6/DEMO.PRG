@@ -14,10 +14,10 @@ Function Main
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG SplitBox Demo' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
 		DEFINE STATUSBAR
-			STATUSITEM 'HMG Power Ready - Click / Drag Grippers And Enjoy !' 
+			STATUSITEM 'HMG Power Ready - Click / Drag Grippers And Enjoy !'
 		END STATUSBAR
 	
 		DEFINE MAIN MENU
@@ -27,7 +27,7 @@ Function Main
 			END POPUP
 		END MENU
 
-		DEFINE SPLITBOX 
+		DEFINE SPLITBOX
 
 			DEFINE TREE Tree_1 WIDTH 200 HEIGHT 400 VALUE 10 BREAK
 
@@ -54,12 +54,12 @@ Function Main
 			END TREE
 
 			DEFINE GRID Grid_1
-				WIDTH 200 
-				HEIGHT 400 
-				HEADERS {'Last Name','First Name'} 
+				WIDTH 200
+				HEIGHT 400
+				HEADERS {'Last Name','First Name'}
 				WIDTHS {100,100}
-				ITEMS { {'Simpson','Homer'} , {'Mulder','Fox'} } 
-				VALUE 1 
+				ITEMS { {'Simpson','Homer'} , {'Mulder','Fox'} }
+				VALUE 1
 				TOOLTIP 'Grid Control'
                         END GRID
 
@@ -72,4 +72,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return Nil
-

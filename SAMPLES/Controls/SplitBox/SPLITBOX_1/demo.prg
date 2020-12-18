@@ -14,21 +14,21 @@ Function Main
 		WIDTH 800 HEIGHT 600 ;
 		TITLE 'HMG SplitBox Demo' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
 		DEFINE STATUSBAR
-			STATUSITEM 'HMG Power Ready - Click / Drag Grippers And Enjoy !' 
+			STATUSITEM 'HMG Power Ready - Click / Drag Grippers And Enjoy !'
 		END STATUSBAR
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP '&File'
 				ITEM '&Disable ToolBar Button'		ACTION Form_1.SplitBox.ToolBar_1.Button_1.Enabled := .F.
 				ITEM '&Enable ToolBar Button'		ACTION Form_1.SplitBox.ToolBar_1.Button_1.Enabled := .T.
 				ITEM 'Get ToolBar Button Caption'	ACTION MsgInfo ( Form_1.SplitBox.ToolBar_1.Button_1.Caption )
 				SEPARATOR
-				ITEM 'Get EditBox Value'	ACTION MsgInfo ( Form_1.SplitBox.Edit_1.Value ) 
-				ITEM 'Get Grid Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.Grid_1.Value ) ) 
-				ITEM 'Get List Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.List_1.Value ) ) 
+				ITEM 'Get EditBox Value'	ACTION MsgInfo ( Form_1.SplitBox.Edit_1.Value )
+				ITEM 'Get Grid Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.Grid_1.Value ) )
+				ITEM 'Get List Value'		ACTION MsgInfo ( Str ( Form_1.SplitBox.List_1.Value ) )
 				SEPARATOR	
 				ITEM 'Set EditBox Value'	ACTION Form_1.SplitBox.Edit_1.Value := 'New Value'
 				ITEM 'Set Grid Value'	ACTION Form_1.SplitBox.Grid_1.Value := 2
@@ -48,11 +48,11 @@ Function Main
 				ITEM 'Exit'		ACTION Form_1.Release
 			END POPUP
 			POPUP '&Help'
-				ITEM 'About'		ACTION MsgInfo ("HMG SplitBox Demo","A COOL Feature ;)") 
+				ITEM 'About'		ACTION MsgInfo ("HMG SplitBox Demo","A COOL Feature ;)")
 			END POPUP
 		END MENU
 	
-		DEFINE SPLITBOX 
+		DEFINE SPLITBOX
 
 			DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 85,85 FLAT
 
@@ -69,7 +69,7 @@ Function Main
 				HEIGHT 400 ;
 				ITEMS {'Item 1','Item 2','Item 3','Item 4','Item 5'} ;
 				VALUE 3  ;
-				TOOLTIP 'ListBox 1' 
+				TOOLTIP 'ListBox 1'
 
 			GRID Grid_1 ;
 				WIDTH 200 ;
@@ -84,7 +84,7 @@ Function Main
 				HEIGHT 400 ;
 				VALUE 'EditBox!!' ;
 				TOOLTIP 'EditBox' ;
-				MAXLENGTH 255 
+				MAXLENGTH 255
 
 		END SPLITBOX
 
@@ -95,4 +95,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return Nil
-

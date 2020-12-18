@@ -19,7 +19,7 @@ Function Main
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG Demo' ;
-		MAIN 
+		MAIN
 
 		@ 10,10 TEXTBOX Text_1 ;
 			VALUE 11 ;
@@ -51,10 +51,9 @@ Function _DoValid ( Expression , Message )
 		EndIf
 
 		_HMG_IsValidInProgres := .T.
-		If ( Expression , Nil , ( MsgStop (Message,'') , This.SetFocus  ) ) 
+		If ( Expression , Nil , ( MsgStop (Message,'') , This.SetFocus  ) )
 		_HMG_IsValidInProgres := .F.
 
 	EndIf
 
 Return Nil
-

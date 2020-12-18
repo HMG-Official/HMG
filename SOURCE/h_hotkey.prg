@@ -198,5 +198,3 @@ LOCAL i, aVK := {}
    NEXT
 
 RETURN aVK
-
-

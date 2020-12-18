@@ -14,26 +14,26 @@ Function Main
 		WIDTH 600 HEIGHT 400 ;
 		TITLE 'HMG StatusBar Demo' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP '&StatusBar Test'
 				ITEM 'Set StatusBar Item 1'	ACTION Form_1.StatusBar.Item(1) := "New value 1"
 				ITEM 'Set StatusBar Item 3'	ACTION Form_1.StatusBar.Item(3) := "New value 3"
-				ITEM 'Set StatusBar Item Icon'	ACTION Form_1.StatusBar.Icon (3) := 'New.iCO' 
+				ITEM 'Set StatusBar Item Icon'	ACTION Form_1.StatusBar.Icon (3) := 'New.iCO'
 				ITEM 'Open Other Window...'	ACTION Modal_Click()
                         END POPUP
 			POPUP '&Help'
-				ITEM '&About'		ACTION MsgInfo ("HMG StatusBar Demo") 
+				ITEM '&About'		ACTION MsgInfo ("HMG StatusBar Demo")
 			END POPUP
 		END MENU
 
-		DEFINE STATUSBAR 
-			STATUSITEM "Item 1" 	ACTION MsgInfo('Click! 1') RAISED 
-			STATUSITEM "Item 2" 	WIDTH 100 ACTION MsgInfo('Click! 2') 
-			STATUSITEM 'A Car!'	WIDTH 100 ICON 'Car.Ico'  
-			CLOCK 
-			DATE 
+		DEFINE STATUSBAR
+			STATUSITEM "Item 1" 	ACTION MsgInfo('Click! 1') RAISED
+			STATUSITEM "Item 2" 	WIDTH 100 ACTION MsgInfo('Click! 2')
+			STATUSITEM 'A Car!'	WIDTH 100 ICON 'Car.Ico'
+			CLOCK
+			DATE
 		END STATUSBAR
 
 	END WINDOW
@@ -54,9 +54,9 @@ Procedure Modal_CLick
 		TITLE 'StatusBar Test'  ;
 		MODAL NOSIZE
 
-		DEFINE STATUSBAR 
+		DEFINE STATUSBAR
 
-			STATUSITEM "Modal 1" 	WIDTH 100 ACTION MsgInfo('Click! 1') 
+			STATUSITEM "Modal 1" 	WIDTH 100 ACTION MsgInfo('Click! 1')
 			STATUSITEM "Modal 2" 	WIDTH 100 ACTION MsgInfo('Click! 2')
 
 		END STATUSBAR
@@ -68,5 +68,3 @@ Procedure Modal_CLick
 	Form_2.Activate
 
 Return Nil
-
-

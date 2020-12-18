@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-   <assemblyIdentity 
-      processorArchitecture="amd64" 
-      version="1.0.0.0" 
-      type="win32" 
+   <assemblyIdentity
+      processorArchitecture="amd64"
+      version="1.0.0.0"
+      type="win32"
       name="HMG.app.exe"/>
    <description>Windows Shell</description>
    <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
@@ -18,7 +18,7 @@
    <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
       <application>
         <!--This Id value indicates the application supports WINDOWS VISTA functionality -->
-         <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"/> 
+         <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"/>
         <!--This Id value indicates the application supports WINDOWS 7 functionality-->
          <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>
         <!--This Id value indicates the application supports WINDOWS 8 functionality-->

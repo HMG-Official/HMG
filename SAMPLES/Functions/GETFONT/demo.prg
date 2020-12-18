@@ -13,9 +13,9 @@ Function Main
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG Demo' ;
-		MAIN 
+		MAIN
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP 'Common &Dialog Functions'
 				ITEM 'GetFont()'	ACTION GetFont_Click()
 			END POPUP

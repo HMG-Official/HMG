@@ -12,7 +12,7 @@
 
 #define BLUE { 0, 0, 128 }
 
-Function Main()         
+Function Main()
 Local i := 0
 
 SET DELETED ON
@@ -20,23 +20,23 @@ SET CENTURY ON
 
 Private lNovo := .F.
 
-AgendaOpen()   
+AgendaOpen()
 
 DEFINE WINDOW Form_1   ;
     AT 0,0                ;
-    WIDTH 480   ; 
+    WIDTH 480   ;
     HEIGHT 470  ;
-    TITLE "Agenda de Contatos";     
-    MAIN                  ;     
+    TITLE "Agenda de Contatos";
+    MAIN                  ;
     ICON "AGENDA"   ;
     NOMAXIMIZE  ;
-    NOSIZE      ;       
+    NOSIZE      ;
     ON RELEASE Finaliza_Sistema() ;
     BACKCOLOR BLUE
-   
-    @ 010,415 Grid GIndice Of Form_1 WIDTH 48 HEIGHT 360 HEADERS {""} WIDTHS { 28 } ;                                           
+
+    @ 010,415 Grid GIndice Of Form_1 WIDTH 48 HEIGHT 360 HEADERS {""} WIDTHS { 28 } ;
               FONT "Arial" SIZE 09 BOLD ;
-              TOOLTIP "Click na Letra Desejada"  ;                                                                     
+              TOOLTIP "Click na Letra Desejada"  ;
               ON CLICK Pesquisa_Agenda()
 
     @ 010,010 GRID Grid_Agenda      ;
@@ -49,7 +49,7 @@ DEFINE WINDOW Form_1   ;
 
     @ 385,010 BUTTON Btn_Novo Of Form_1 ;
               CAPTION '&Novo'       ;
-              ACTION Novo_Registro(.T.)     ;       
+              ACTION Novo_Registro(.T.)     ;
               WIDTH 120 HEIGHT 27       ;
               FONT "Arial" SIZE 09      ;
               TOOLTIP "Novo Registro"       ;
@@ -57,15 +57,15 @@ DEFINE WINDOW Form_1   ;
 
     @ 385,165 BUTTON Btn_Imprimir Of Form_1 ;
               CAPTION '&Imprimir'       ;
-              ACTION Imprimir()     ;       
+              ACTION Imprimir()     ;
               WIDTH 120 HEIGHT 27       ;
               FONT "Arial" SIZE 09      ;
               TOOLTIP "Imprime Contatos"    ;
               FLAT
-           
+
     @ 385,318 BUTTON Btn_Sair Of Form_1  ;
               CAPTION '&Sair'       ;
-              ACTION Form_1.Release       ;       
+              ACTION Form_1.Release       ;
               WIDTH 120 HEIGHT 27     ;
               FONT "Arial" SIZE 09      ;
               TOOLTIP "Finalizar Sistema"   ;
@@ -78,7 +78,7 @@ DEFINE WINDOW Form_1   ;
 
 END WINDOW
 For i := 1 To 26
-    ADD ITEM { CHR(i+64) } TO GIndice OF Form_1   
+    ADD ITEM { CHR(i+64) } TO GIndice OF Form_1
 Next
 MODIFY CONTROL GIndice OF Form_1 VALUE 1
 
@@ -88,16 +88,16 @@ CENTER WINDOW   Form_1
 ACTIVATE WINDOW Form_1
 Return
 
-Function Pesquisa_Agenda() 
+Function Pesquisa_Agenda()
 cPesq := ValorDaColuna( "GIndice" ,  "Form_1" , 1 )
 
-cPesq := IIf( Empty(cPesq), "A" , cPesq )   
+cPesq := IIf( Empty(cPesq), "A" , cPesq )
 
 Agenda->(DBSetOrder(2))
 Agenda->(DBSeek(cPesq,.T.))
 DELETE ITEM ALL FROM Grid_Agenda OF Form_1
 Do While ! Agenda->(Eof())
-   If Substr(Agenda->Nome,1,1) == cPesq       
+   If Substr(Agenda->Nome,1,1) == cPesq
       ADD ITEM {Agenda->Codigo,Agenda->Nome} TO Grid_Agenda OF Form_1
    Else
       EXIT
@@ -118,12 +118,12 @@ Local cFone1    := ""
 Local cFone2    := ""
 Local cEmail    := ""
 
-Form_1.Btn_Novo.Enabled := .F. 
-Form_1.Btn_Sair.Enabled := .F.     
+Form_1.Btn_Novo.Enabled := .F.
+Form_1.Btn_Sair.Enabled := .F.
 
 lNovo := lNovo_Registro
 
-If ! lNovo     
+If ! lNovo
    cCodigo := ValorDaColuna( "Grid_Agenda" ,  "Form_1" , 1 )
    Agenda->(DBSetOrder(1))
    If ! Agenda->(DBSeek( cCodigo  ))
@@ -138,18 +138,18 @@ If ! lNovo
    cEstado  := AllTrim( Agenda->Estado)
    cFone1       := AllTrim( Agenda->Fone1)
    cFone2       := AllTrim( Agenda->Fone2)
-   cEmail       := AllTrim( Agenda->EMail) 
-EndIf   
+   cEmail       := AllTrim( Agenda->EMail)
+EndIf
 
 DEFINE WINDOW Form_2   ;
     AT 0,0               ;
-    WIDTH 490  ; 
+    WIDTH 490  ;
     HEIGHT 300 ;
-    TITLE "Agenda de Contatos - "+Iif( lNovo , "Novo Registro" , "Alterando Registro");   
+    TITLE "Agenda de Contatos - "+Iif( lNovo , "Novo Registro" , "Alterando Registro");
     ICON "AGENDA"  ;
-    MODAL      ;                                         
-    NOSIZE     ;     
-    ON RELEASE  {|| Form_1.Btn_Novo.Enabled := .T. , Form_1.Btn_Sair.Enabled := .T. , Form_2.Btn_Excluir.Enabled := .T. , Agenda->(DBSetOrder(2)) , Pesquisa_Agenda() , Form_1.Grid_Agenda.SetFocus() } ;                 
+    MODAL      ;
+    NOSIZE     ;
+    ON RELEASE  {|| Form_1.Btn_Novo.Enabled := .T. , Form_1.Btn_Sair.Enabled := .T. , Form_2.Btn_Excluir.Enabled := .T. , Agenda->(DBSetOrder(2)) , Pesquisa_Agenda() , Form_1.Grid_Agenda.SetFocus() } ;
     BACKCOLOR WHITE
 
     @ 10,10 LABEL Label_Codigo ;
@@ -237,7 +237,7 @@ DEFINE WINDOW Form_2   ;
         VALUE cCodigo      ;
         TOOLTIP 'Código do Contato'
 
-    @ 43,70 TEXTBOX T_Nome      ;   
+    @ 43,70 TEXTBOX T_Nome      ;
         OF Form_2     ;
         WIDTH 400     ;
         VALUE cNome       ;
@@ -256,22 +256,22 @@ DEFINE WINDOW Form_2   ;
         ON GOTFOCUS Form_2.Btn_Salvar.Enabled := .T.  ;
         ON ENTER Form_2.T_Bairro.SetFocus
 
-    @ 103,70 TEXTBOX T_Bairro     ;   
+    @ 103,70 TEXTBOX T_Bairro     ;
         OF Form_2      ;
         WIDTH 250     ;
         VALUE cBairro     ;
         TOOLTIP 'Bairro do Contato'   ;
         MAXLENGTH 25      ;
         UPPERCASE     ;
-        ON ENTER Form_2.T_Cep.SetFocus         
+        ON ENTER Form_2.T_Cep.SetFocus
 
     @ 103,390 TEXTBOX T_Cep       ;
-        OF Form_2     ;   
+        OF Form_2     ;
         WIDTH 80      ;
         VALUE cCep        ;
         TOOLTIP 'Cep do Contato'  ;
         MAXLENGTH 08      ;
-        UPPERCASE     ;   
+        UPPERCASE     ;
         ON ENTER Form_2.T_Cidade.SetFocus
 
     @ 133,70 TEXTBOX T_Cidade     ;
@@ -281,7 +281,7 @@ DEFINE WINDOW Form_2   ;
         TOOLTIP 'Bairro do Contato'   ;
         MAXLENGTH 25      ;
         UPPERCASE     ;
-        ON ENTER Form_2.T_Estado.SetFocus           
+        ON ENTER Form_2.T_Estado.SetFocus
 
     @ 133,390 TEXTBOX T_Estado    ;
         OF Form_2     ;
@@ -298,7 +298,7 @@ DEFINE WINDOW Form_2   ;
         VALUE cFone1      ;
         TOOLTIP 'Telefone do Contato';
         MAXLENGTH 10      ;
-        UPPERCASE     ;   
+        UPPERCASE     ;
         ON ENTER Form_2.T_Fone2.SetFocus
 
     @ 163,390 TEXTBOX T_Fone2 ;
@@ -307,7 +307,7 @@ DEFINE WINDOW Form_2   ;
         VALUE cFone2      ;
         TOOLTIP 'Telefone do Contato';
         MAXLENGTH 10      ;
-        UPPERCASE     ;   
+        UPPERCASE     ;
         ON ENTER Form_2.T_Email.SetFocus
 
     @ 193,70 TEXTBOX T_Email      ;
@@ -321,15 +321,15 @@ DEFINE WINDOW Form_2   ;
 
     @ 232,70 BUTTON Btn_Salvar Of Form_2   ;
         CAPTION '&Salvar'     ;
-        ACTION Salvar_Registro()        ;       
+        ACTION Salvar_Registro()        ;
         WIDTH 120 HEIGHT 27     ;
         FONT "Arial" SIZE 09      ;
         TOOLTIP "Salvar Registro" ;
-        FLAT       
+        FLAT
 
     @ 232,210  BUTTON Btn_Excluir Of Form_2   ;
         CAPTION '&Deletar'        ;
-        ACTION Excluir_Registro()   ;       
+        ACTION Excluir_Registro()   ;
         WIDTH 120 HEIGHT 27     ;
         FONT "Arial" SIZE 09      ;
         TOOLTIP "Excluir Registro"    ;
@@ -337,7 +337,7 @@ DEFINE WINDOW Form_2   ;
 
     @ 232,346  BUTTON Btn_Cancelar Of Form_2  ;
         CAPTION '&Cancelar'       ;
-        ACTION Sair_do_Form2()      ;       
+        ACTION Sair_do_Form2()      ;
         WIDTH 120 HEIGHT 27     ;
         FONT "Arial" SIZE 09      ;
         TOOLTIP "Cancelar Operação" ;
@@ -348,7 +348,7 @@ Form_2.T_Codigo.Enabled := .F.
 
 If lNovo
    Form_2.Btn_Salvar.Enabled := .F.
-   Form_2.Btn_Excluir.Enabled := .F.   
+   Form_2.Btn_Excluir.Enabled := .F.
 EndIf
 
 CENTER WINDOW   Form_2
@@ -363,20 +363,20 @@ If Empty( Form_2.T_Nome.Value )
    MsgINFO( "Nome não foi Informado!!" , "Agenda" )
    Form_2.T_Nome.SetFocus
    Return Nil
-EndIf       
+EndIf
 
-If lNovo     
+If lNovo
    Agenda->(DBSetOrder(1))
    Agenda->(DBGoBottom())
    ProximoCodigo := StrZero(  Val( Agenda->Codigo ) + 1 , 4 )
    Agenda->(DBAppend())
-   Agenda->Codigo := ProximoCodigo   
-   Agenda->Nome := Form_2.T_Nome.Value 
+   Agenda->Codigo := ProximoCodigo
+   Agenda->Nome := Form_2.T_Nome.Value
    Agenda->Endereco := Form_2.T_Endereco.Value
              Agenda->Bairro := Form_2.T_Bairro.Value
-   Agenda->Cep  := Form_2.T_Cep.Value   
-   Agenda->Cidade   := Form_2.T_Cidade.Value   
-   Agenda->Estado   := Form_2.T_Estado.Value   
+   Agenda->Cep  := Form_2.T_Cep.Value
+   Agenda->Cidade   := Form_2.T_Cidade.Value
+   Agenda->Estado   := Form_2.T_Estado.Value
    Agenda->Fone1    := Form_2.T_Fone1.Value
    Agenda->Fone2    := Form_2.T_Fone2.Value
    Agenda->EMail    := Form_2.T_Email   .Value
@@ -391,14 +391,14 @@ Else
       Agenda->Nome  := Form_2.T_Nome.Value
       Agenda->Endereco    := Form_2.T_Endereco.Value
       Agenda->Bairro  := Form_2.T_Bairro.Value
-      Agenda->Cep       := Form_2.T_Cep.Value   
-      Agenda->Cidade    := Form_2.T_Cidade.Value   
-      Agenda->Estado    := Form_2.T_Estado.Value   
+      Agenda->Cep       := Form_2.T_Cep.Value
+      Agenda->Cidade    := Form_2.T_Cidade.Value
+      Agenda->Estado    := Form_2.T_Estado.Value
       Agenda->Fone1 := Form_2.T_Fone1.Value
       Agenda->Fone2 := Form_2.T_Fone2.Value
       Agenda->EMail := Form_2.T_Email.Value
       Agenda->(DBUnlock())
-   EndIf   
+   EndIf
 EndIf
 MsgInfo( "Registo "+Iif( lNovo , "Incluído" ,"Alterado!!" )  )
 PosicionaIndice( Left( Agenda->Nome , 1 ) )
@@ -407,21 +407,21 @@ Form_2.Release
 Return Nil
 
 Function Sair_do_Form2()
-Form_1.Btn_Novo.Enabled := .T. 
+Form_1.Btn_Novo.Enabled := .T.
 Form_1.Btn_Sair.Enabled := .T.
-Form_2.Btn_Excluir.Enabled := .T.       
-Form_2.Release   
+Form_2.Btn_Excluir.Enabled := .T.
+Form_2.Release
 Agenda->(DBSetOrder(2))
 Pesquisa_Agenda()
 Form_1.Grid_Agenda.SetFocus()
 Return Nil
 
-Function Excluir_Registro()                     
+Function Excluir_Registro()
 If MsgOkCancel ("Confirma Exclusão do Registro??", "Excluir "+AllTrim(Agenda->Nome))
    If BloqueiaRegistroNaRede( "Agenda" )
       Agenda->(DBDelete())
       Agenda->(DBUnlock())
-      MsgINFO("Registro Excluído!!","Agenda")   
+      MsgINFO("Registro Excluído!!","Agenda")
       Sair_do_Form2()
    EndIf
 EndIf
@@ -431,10 +431,10 @@ Return Nil
 Function Finaliza_Sistema()
 Agenda->(DBCloseArea())
 Return Nil
-   
+
 Function AgendaOpen()
 Local nArea    := Select( 'Agenda' )
-Local aarq := {}       
+Local aarq := {}
 Local aDados   := {}
 
 If nArea == 0
@@ -449,7 +449,7 @@ If nArea == 0
       Aadd( aArq , { 'FONE1'       , 'C'   , 10    , 0 } )
       Aadd( aArq , { 'FONE2'       , 'C'   , 10    , 0 } )
       Aadd( aArq , { 'EMAIL'       , 'C'   , 40    , 0 } )
-      DBCreate( "AGENDA.DBF" , aArq  )     
+      DBCreate( "AGENDA.DBF" , aArq  )
    EndIf
    Use AGENDA Alias Agenda new shared
    If ! File( 'Agenda1.ntx' )
@@ -461,7 +461,7 @@ If nArea == 0
    Agenda->(DBCLearIndex())
    Agenda->(DBSetIndex( 'Agenda1'))
    Agenda->(DBSetIndex( 'Agenda2'))
-Endif 
+Endif
 Return Nil
 
 Function ValorDaColuna( ControlName, ParentForm , nCol )
@@ -469,10 +469,10 @@ Local aRet := {}
 If GetControlType (ControlName,ParentForm) != "GRID"
    MsgBox( "Objeto não é um Grid!!")
    Return( aRet )
-EndIf   
+EndIf
 nCol := Iif( nCol == Nil .Or. nCol == 0 , 1 , nCol )
 aRet := GetProperty (  ParentForm  , ControlName , 'Item' , GetProperty( ParentForm , ControlName , 'Value' ) )
-Return( aRet[ nCol ] ) 
+Return( aRet[ nCol ] )
 
 Function BloqueiaRegistroNaRede( cArea )
 Do While ! (cArea)->(RLock())
@@ -509,19 +509,19 @@ Set Console OFF
 cLetra := ValorDaColuna( "GIndice" ,  "Form_1" , 1 )
 
 Agenda->(DBSetOrder(2))
-Agenda->(DBSeek(cLetra,.T.))   
+Agenda->(DBSeek(cLetra,.T.))
 Do While ! Agenda->(Eof())
    If Substr(Agenda->Nome,1,1) == cLetra
       If nLinha == 0
          ? PadC("     Agenda de Contatos",78)
          ? PadC("Contatos Cadastrados com letra "+cLetra,78)
-         ? "Código  Nome"           
+         ? "Código  Nome"
          ? Replicate("-",78)
       EndIf
       nLinha += 1
       nReg += 1
       ?   "  "+Agenda->Codigo +   "   "
-      ?? Agenda->Nome                             
+      ?? Agenda->Nome
    Else
       EXIT
    Endif
@@ -544,7 +544,7 @@ DEFINE WINDOW Form_3;
     ICON "AGENDA";
     CHILD ;
     NOSYSMENU;
-    NOSIZE       ;       
+    NOSIZE       ;
     BACKCOLOR WHITE
 
     @ 20,-1 EDITBOX Edit_1 ;
@@ -552,7 +552,7 @@ DEFINE WINDOW Form_3;
         HEIGHT 510 ;
         VALUE cArquivo ;
         TOOLTIP "Contatos Cadastrados com Letra "+cLetra ;
-        MAXLENGTH 255               
+        MAXLENGTH 255
 
     @ 01,01 BUTTON Bt_Zoom_Mais  ;
         CAPTION '&Zoom(+)'             ;
@@ -573,12 +573,12 @@ DEFINE WINDOW Form_3;
         FONT "MS Sans Serif" SIZE 09 FLAT
 
 END WINDOW
-MODIFY CONTROL Edit_1 OF Form_3 FONTSIZE nFont 
+MODIFY CONTROL Edit_1 OF Form_3 FONTSIZE nFont
 Center Window Form_3
 Activate Window Form_3
 Return Nil
 
-Function ZoomLabel(nmm)         
+Function ZoomLabel(nmm)
 If nmm == 1
    nFont++
 Else

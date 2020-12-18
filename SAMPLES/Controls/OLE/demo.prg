@@ -23,7 +23,7 @@ PROCEDURE MAIN()
 
 		END MENU
 
-	END WINDOW 
+	END WINDOW
 
 	Main_form.center
 	Main_form.activate
@@ -91,7 +91,7 @@ STATIC PROCEDURE MsWord()
 	oTexto:Font:Bold := .T.
 
 	oWord:Visible := .T.
-	oWord:WindowState := 1 
+	oWord:WindowState := 1
 
 RETURN
 

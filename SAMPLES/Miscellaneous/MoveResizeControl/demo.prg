@@ -6,11 +6,11 @@
 FUNCTION MAIN
 local i, cLabelName
 
-   Define window Form_1; 
-          At 0,0; 
-          width 700; 
+   Define window Form_1;
+          At 0,0;
+          width 700;
           height 400;
-          title "Move and Resize Control With Cursor"; 
+          title "Move and Resize Control With Cursor";
           main
 
       @ 300, 10 LABEL Label_0 VALUE "Put the cursor over control and press F3 (Info), F5 (Move) or F9 (Resize), while Move or Resize ESC -> Undo" AUTOSIZE
@@ -27,8 +27,8 @@ local i, cLabelName
 
       for i := 1 to 3
          cLabelName := "Label_"+HB_NTOS(i,1)
-         
-         define label &cLabelName 
+
+         define label &cLabelName
                PARENT Form_1
                row 20
                col 120*(i-1) + 40
@@ -41,8 +41,8 @@ local i, cLabelName
                BackColor {255,255,0}
                TabStop .t.
          end label
-         
-      next i 
+
+      next i
 
 End window
 
@@ -60,14 +60,14 @@ LOCAL aRows
 IF IsWindowDefined (Form_2) == .F.
    aRows := ARRAY (9)
    aRows [1]   := {'Simpson','Homer','555-5555'}
-   aRows [2]   := {'Mulder','Fox','324-6432'} 
-   aRows [3]   := {'Smart','Max','432-5892'} 
-   aRows [4]   := {'Grillo','Pepe','894-2332'} 
-   aRows [5]   := {'Kirk','James','346-9873'} 
-   aRows [6]   := {'Barriga','Carlos','394-9654'} 
-   aRows [7]   := {'Flanders','Ned','435-3211'} 
-   aRows [8]   := {'Smith','John','123-1234'} 
-   aRows [9]   := {'Pedemonti','Flavio','000-0000'} 
+   aRows [2]   := {'Mulder','Fox','324-6432'}
+   aRows [3]   := {'Smart','Max','432-5892'}
+   aRows [4]   := {'Grillo','Pepe','894-2332'}
+   aRows [5]   := {'Kirk','James','346-9873'}
+   aRows [6]   := {'Barriga','Carlos','394-9654'}
+   aRows [7]   := {'Flanders','Ned','435-3211'}
+   aRows [8]   := {'Smith','John','123-1234'}
+   aRows [9]   := {'Pedemonti','Flavio','000-0000'}
 
    DEFINE WINDOW Form_2 ;
       AT 0,0 ;
@@ -75,7 +75,7 @@ IF IsWindowDefined (Form_2) == .F.
       HEIGHT 600 ;
       TITLE "Form2" ;
       WINDOWTYPE STANDARD
-      
+
       @ 100,100 GRID Grid_1 ;
          WIDTH 400 ;
          HEIGHT 300 ;
@@ -206,6 +206,3 @@ HB_FUNC ( HMG_INTERACTIVESIZE )
 }
 
 #pragma ENDDUMP
-
-
-

@@ -28,7 +28,7 @@
 #ifdef COMPILE_HMG_UNICODE
 
    HB_FUNC (HMG_LOWER_BMP)
-   {  
+   {
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -51,7 +51,7 @@
 
 
    HB_FUNC (HMG_UPPER_BMP)
-   {  
+   {
       TCHAR *Text   = (TCHAR*)  HMG_parc(1);
 
       if (Text == NULL)
@@ -125,5 +125,3 @@ HB_FUNC (HMG_STRCMP_BMP)
 
    hb_retni ((int) CmpValue);
 }
-
-

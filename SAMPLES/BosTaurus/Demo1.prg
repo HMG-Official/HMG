@@ -13,7 +13,7 @@ Resource definition.
 The Resources File (.RC) has a format:
 <cResourceName> <cResourseType> <cResourceFullFileName>
 
-Example: MyApplication.RC 
+Example: MyApplication.RC
 BosTaurus_Logo1 BITMAP BosTaurus_Logo.BMP
 BosTaurus_Logo2 JPG    BosTaurus_Logo.JPG
 BosTaurus_Logo3 GIF    BosTaurus_Logo.GIF
@@ -27,7 +27,7 @@ BosTaurus_Logo5 TIF    BosTaurus_Logo.TIF
 
 FUNCTION MAIN
 
-PRIVATE hBitmap := 0 
+PRIVATE hBitmap := 0
 
      DEFINE WINDOW Win1;
             AT 0,0;
@@ -38,7 +38,7 @@ PRIVATE hBitmap := 0
             ON INIT     Proc_ON_INIT ();
             ON RELEASE  Proc_ON_RELEASE ();
             ON PAINT    Proc_ON_PAINT ()
-        
+
             @  500, 280 BUTTON Button_1 CAPTION "Click" ACTION MsgInfo (BT_InfoName() + Space(3) + BT_InfoVersion() + CRLF + BT_InfoAuthor (), "Info")
 
     END WINDOW
@@ -68,5 +68,3 @@ LOCAL hDC, BTstruct
       BT_DrawBitmap (hDC, 30, 150, 400, 400, BT_COPY, hBitmap)
    BT_DeleteDC (BTstruct)
 RETURN
-
-

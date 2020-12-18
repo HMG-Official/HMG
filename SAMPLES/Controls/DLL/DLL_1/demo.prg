@@ -11,7 +11,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 	
 		DEFINE MAIN MENU
 			DEFINE POPUP 'Test'
@@ -24,4 +24,3 @@ Function Main
 	ACTIVATE WINDOW Win_1
 
 Return
-

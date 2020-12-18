@@ -103,4 +103,3 @@ HB_FUNC ( RELEASEHOTKEY )
    );
 
 }
-

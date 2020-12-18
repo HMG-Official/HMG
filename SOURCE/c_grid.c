@@ -797,5 +797,3 @@ HB_FUNC ( SETBCFC_DEFAULT )   // Set DefaultDynamicBackColor and  Set DefaultDyn
    lplvcd->clrTextBk = RGB (255,255,255);   // WHITE
    hb_retni ( CDRF_NEWFONT );
 }
-
-

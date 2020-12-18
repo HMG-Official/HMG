@@ -1,4 +1,4 @@
-﻿/**
+/**
  *
  * WordScribe
  *
@@ -73,7 +73,7 @@ STATIC nPrintLeft       := 0
 STATIC nPrintTop        := 0
 STATIC nPrintRight      := 0
 STATIC nPrintBottom     := 0
-STATIC nPrintRow        := 10   
+STATIC nPrintRow        := 10
 STATIC nPrintCol        := 10
 STATIC lPrintHead       := .N.
 STATIC lPrintNumHead    := .Y.
@@ -100,7 +100,7 @@ STATIC aNumStyleLabel   := { ;
   'Period'           , ; // RTF_PERIOD
   'No punctuation'   , ; // RTF_PLAIN
   'Hidden number'      } // RTF_NONUMBER
-  
+
 STATIC cFileName        := ''
 STATIC cFileFolder      := ''
 STATIC cFileBase        := ''
@@ -175,7 +175,7 @@ DEFINE WINDOW wMain ;
 
   DefineMenu()
 
-  DEFINE CONTEXT MENU  
+  DEFINE CONTEXT MENU
 
     ITEM '&Copy'               ACTION Copy()
     ITEM 'C&ut'                ACTION Cut()
@@ -212,7 +212,7 @@ DEFINE WINDOW wMain ;
 
       BUTTON btSave ;
         TOOLTIP 'Save' ;
-        PICTURE 'Save' ; 
+        PICTURE 'Save' ;
         ACTION SaveFile() ;
         SEPARATOR
 
@@ -285,7 +285,7 @@ DEFINE WINDOW wMain ;
 
       BUTTON btRepl ;
         TOOLTIP 'Replace' ;
-        PICTURE 'Replace' ; 
+        PICTURE 'Replace' ;
         ACTION ReplaceText() ;
         SEPARATOR
 
@@ -310,7 +310,7 @@ DEFINE WINDOW wMain ;
                  wMain.ebDoc.SETFOCUS()) ;
       ON CANCEL (wMain.ebDoc.SETFOCUS())
 
-    DEFINE TOOLBAR tlText BUTTONSIZE 23,23 SIZE 8  FLAT 
+    DEFINE TOOLBAR tlText BUTTONSIZE 23,23 SIZE 8  FLAT
 
       BUTTON btBold ;
         TOOLTIP 'Bold' ;
@@ -334,7 +334,7 @@ DEFINE WINDOW wMain ;
         TOOLTIP 'Strikeout' ;
         PICTURE 'Strike' ;
         ACTION Strikethrough() ;
-        CHECK ;    
+        CHECK ;
         SEPARATOR
 
       BUTTON btSubScript ;
@@ -359,7 +359,7 @@ DEFINE WINDOW wMain ;
 
       BUTTON btFontColor ;
         TOOLTIP 'Set font foreground color' ;
-        PICTURE 'FontColor' ; 
+        PICTURE 'FontColor' ;
         ACTION FontForeColor()
 
       BUTTON btFontBackColor ;
@@ -396,7 +396,7 @@ DEFINE WINDOW wMain ;
         PICTURE 'Justify' ;
         ACTION AlignJustify() ;
         CHECK GROUP ;
-        SEPARATOR 
+        SEPARATOR
 
       BUTTON btBulleted ;
         TOOLTIP 'Bulleted paragraphs' ;
@@ -413,13 +413,13 @@ DEFINE WINDOW wMain ;
         TOOLTIP 'Increase indent' ;
         PICTURE 'Indent1' ;
         ACTION IndentRight()
-    
+
       BUTTON btLineSpacing ;
         TOOLTIP 'Line spacing' ;
         PICTURE 'ParaLineSpacing' ;
         ACTION NIL ;
         WHOLEDROPDOWN ;
-        SEPARATOR 
+        SEPARATOR
 
       DEFINE DROPDOWN MENU BUTTON btLineSpacing
         ITEM '1.0 ' ACTION wMain.ebDoc.PARALINESPACING := 1.0
@@ -468,7 +468,7 @@ INIT PROCEDURE MainInit
 
 LOCAL nPos
 
-SELECT PRINTER DEFAULT   
+SELECT PRINTER DEFAULT
 
 cFileFolder := GETMYDOCUMENTSFOLDER()
 
@@ -780,7 +780,7 @@ BEGIN SEQUENCE
     IF !EX.wMain.ebDoc.SAVEFILE(cTempFile, .N., RICHEDITFILEEX_RTF)
       BREAK
     END
-    wMain.ebDoc.RELEASE 
+    wMain.ebDoc.RELEASE
   END
 
   DEFINE RICHEDITBOX ebDoc
@@ -934,7 +934,7 @@ DO CASE
 CASE HMG_LOWER(HB_USUBSTR(cLink,1,7)) == 'http://' .OR. ;
   HMG_LOWER(HB_USUBSTR(cLink,1,8)) == 'https://' .OR. ;
   HMG_LOWER(HB_USUBSTR(cLink,1,6)) == 'ftp://' .OR. ;
-  HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.' 
+  HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.'
   SHELLEXECUTE(NIL, 'Open', cLink, NIL, NIL, SW_SHOWNORMAL)
 CASE '@' $ cLink .AND. '.' $ cLink .AND. .NOT.(' ' $ cLink)
   SHELLEXECUTE(NIL, 'Open', 'rundll32.exe', 'url.dll,FileProtocolHandler mailto:' + cLink, NIL, SW_SHOWNORMAL)
@@ -1144,7 +1144,7 @@ RETURN // WriteFile
 
 STATIC PROCEDURE Print(lPreview)
 
-LOCAL aSelect   := {0, -1}  
+LOCAL aSelect   := {0, -1}
 LOCAL cPreHead  := IF(EMPTY(cPrintPreHead), '', cPrintPreHead + ' ')
 LOCAL cPostHead := IF(EMPTY(cPrintPostHead), '', ' ' + cPrintPostHead)
 LOCAL lPrint    := .N.
@@ -1196,9 +1196,9 @@ DEFINE WINDOW wPageSetup;
     wPageSetup.tbHeaderPostText.ENABLED := lSet
     RETURN NIL
     }
-  bPrint := {|| 
+  bPrint := {||
     SELECT PRINTER DIALOG
-    wPageSetup.tbPrinterName.VALUE  := OPENPRINTERGETNAME() 
+    wPageSetup.tbPrinterName.VALUE  := OPENPRINTERGETNAME()
     wPageSetup.tbPageHeight.VALUE   := OPENPRINTERGETPAGEHEIGHT()
     wPageSetup.tbPageWidth.VALUE    := OPENPRINTERGETPAGEWIDTH()
     wPageSetup.tbPrintHeight.VALUE  := GETPRINTABLEAREAHEIGHT()
@@ -1213,7 +1213,7 @@ DEFINE WINDOW wPageSetup;
              WIDTH 310 HEIGHT 355
 
   @  40, 110 BUTTON btPrint ;
-             CAPTION 'Select printer' ;  
+             CAPTION 'Select printer' ;
              ACTION bPrint:EVAL() ;
              WIDTH 100 HEIGHT 25
 
@@ -1298,7 +1298,7 @@ DEFINE WINDOW wPageSetup;
 
   @  60, 530 TEXTBOX tbRightMargin ;
              WIDTH 40 ;
-             VALUE nPrintRight ; 
+             VALUE nPrintRight ;
              NUMERIC INPUTMASK '999'
 
   @  90, 340 LABEL laTopMargin ;
@@ -1307,7 +1307,7 @@ DEFINE WINDOW wPageSetup;
 
   @  90, 530 TEXTBOX tbTopMargin ;
              WIDTH 40 ;
-             VALUE nPrintTop ; 
+             VALUE nPrintTop ;
              NUMERIC INPUTMASK '999'
 
   @ 120, 340 LABEL laBottomMargin ;
@@ -1316,13 +1316,13 @@ DEFINE WINDOW wPageSetup;
 
   @ 120, 530 TEXTBOX tbBottomMargin ;
              WIDTH 40 ;
-             VALUE nPrintBottom ; 
+             VALUE nPrintBottom ;
              NUMERIC INPUTMASK '999'
 
   @ 155, 330 FRAME frHeader ;
              CAPTION 'Header' ;
              WIDTH 255 HEIGHT 205
-                      
+
   @ 180, 340 CHECKBOX cbHeader ;
              CAPTION 'Include header' ;
              WIDTH 210 HEIGHT 23 ;
@@ -1335,7 +1335,7 @@ DEFINE WINDOW wPageSetup;
 
   @ 210, 530 TEXTBOX tbHeaderRow ;
              WIDTH 40 ;
-             VALUE nPrintRow ; 
+             VALUE nPrintRow ;
              TOOLTIP 'Distance of center of header from top side of page' ;
              NUMERIC INPUTMASK '999'
 
@@ -1345,7 +1345,7 @@ DEFINE WINDOW wPageSetup;
 
   @ 240, 530 TEXTBOX tbHeaderCol ;
              WIDTH 40 ;
-             VALUE nPrintCol ; 
+             VALUE nPrintCol ;
              TOOLTIP 'Distance of center of header from left side of page' ;
              NUMERIC INPUTMASK '999'
 
@@ -1360,36 +1360,36 @@ DEFINE WINDOW wPageSetup;
 
   @ 300, 440 TEXTBOX tbHeaderPreText ;
              WIDTH 130 ;
-             VALUE cPrintPreHead ; 
+             VALUE cPrintPreHead ;
              MAXLENGTH 40 ;
-               TOOLTIP 'Header text before page number; max 40 characters' 
+               TOOLTIP 'Header text before page number; max 40 characters'
 
   @ 330, 340 LABEL laHeaderPostText ;
              VALUE 'Header post text' ;
              AUTOSIZE
-      
+
   @ 330, 440 TEXTBOX tbHeaderPostText ;
              WIDTH 130 ;
-             VALUE cPrintPostHead ; 
+             VALUE cPrintPostHead ;
              MAXLENGTH 40 ;
              TOOLTIP 'Header text after page number; max 40 characters'
 
   @ 370, 215 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION PageSetupSave() ;
              WIDTH 80 HEIGHT 25
 
-  @ 370, 305 BUTTON btCancel ; 
-             CAPTION 'Cancel' ;  
-             ACTION wPageSetup.RELEASE ; 
+  @ 370, 305 BUTTON btCancel ;
+             CAPTION 'Cancel' ;
+             ACTION wPageSetup.RELEASE ;
              WIDTH 80 HEIGHT 25
 
   bHeader:EVAL(lPrintHead)
   ON KEY RETURN ACTION PageSetupSave()
   ON KEY ESCAPE ACTION wPageSetup.RELEASE
 
-END WINDOW 
-  
+END WINDOW
+
 ACTIVATE WINDOW wPageSetup
 
 RETURN // PageSetup
@@ -1419,10 +1419,10 @@ STATIC PROCEDURE Associations
 
 LOCAL lDeskShort, lMenuShort, lRtfAssoc, lTxtAssoc
 
-DEFINE WINDOW wAssoc ; 
+DEFINE WINDOW wAssoc ;
   AT wMain.ROW + 160, wMain.COL + 40 ;
-  WIDTH 440 HEIGHT 240 ; 
-  TITLE 'Shortcuts and file associations' ; 
+  WIDTH 440 HEIGHT 240 ;
+  TITLE 'Shortcuts and file associations' ;
   MODAL NOSIZE ;
   ON INIT AssocInit(@lDeskShort, @lMenuShort, @lRtfAssoc, @lTxtAssoc)
 
@@ -1451,19 +1451,19 @@ DEFINE WINDOW wAssoc ;
              VALUE .N.
 
   @ 170, 135 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION AssocSet(lDeskShort, lMenuShort, lRtfAssoc, lTxtAssoc) ;
              WIDTH 80 HEIGHT 25
 
-  @ 170, 225 BUTTON btCancel ; 
-             CAPTION 'Cancel' ;  
+  @ 170, 225 BUTTON btCancel ;
+             CAPTION 'Cancel' ;
              ACTION wAssoc.RELEASE ;
              WIDTH 80 HEIGHT 25
 
   ON KEY RETURN ACTION AssocSet(lDeskShort, lMenuShort, lRtfAssoc, lTxtAssoc)
   ON KEY ESCAPE ACTION wAssoc.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wAssoc
 
@@ -1489,7 +1489,7 @@ BEGIN SEQUENCE
   END
   cData := WIN_REGREAD('HKLM\Software\Classes\WordScribe.rtf\shell\open\command\')
   IF HB_ISSTRING(cData) .AND. HMG_UPPER(cThisExe) $ HMG_UPPER(cData)
-    lRtfAssoc := .Y.    
+    lRtfAssoc := .Y.
     BREAK
   END
   lRtfAssoc := .N.
@@ -1503,7 +1503,7 @@ BEGIN SEQUENCE
   END
   cData := WIN_REGREAD('HKLM\Software\Classes\WordScribe.txt\shell\open\command\')
   IF HB_ISSTRING(cData) .AND. HMG_UPPER(cThisExe) $ HMG_UPPER(cData)
-    lTxtAssoc := .Y.    
+    lTxtAssoc := .Y.
     BREAK
   END
   lTxtAssoc := .N.
@@ -1906,10 +1906,10 @@ RETURN // FontFormat
 
 STATIC PROCEDURE TextFormat
 
-DEFINE WINDOW wText ; 
+DEFINE WINDOW wText ;
   AT wMain.ROW + 160, wMain.COL + 40 ;
-  WIDTH 340 HEIGHT 160 ; 
-  TITLE 'Text' ; 
+  WIDTH 340 HEIGHT 160 ;
+  TITLE 'Text' ;
   MODAL NOSIZE ;
   ON INIT TextInit()
 
@@ -1919,10 +1919,10 @@ DEFINE WINDOW wText ;
              HEIGHT 110
 
   @  25,  15 RADIOGROUP rgScript ;
-             OPTIONS aScriptLabel ;  
-             VALUE 1 ;  
+             OPTIONS aScriptLabel ;
+             VALUE 1 ;
              WIDTH 90 ;
-             SPACING 25 
+             SPACING 25
 
   @   5, 115 FRAME frIndent ;
              CAPTION 'Attributes' ;
@@ -1935,19 +1935,19 @@ DEFINE WINDOW wText ;
              VALUE .N.
 
   @  25, 240 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION TextSet() ;
              WIDTH 80 HEIGHT 25
 
-  @  55, 240 BUTTON btCancel ; 
-             CAPTION 'Cancel' ;  
+  @  55, 240 BUTTON btCancel ;
+             CAPTION 'Cancel' ;
              ACTION wText.Release ;
              WIDTH 80 HEIGHT 25
 
   ON KEY RETURN ACTION TextSet()
   ON KEY ESCAPE ACTION wText.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wText
 
@@ -1979,10 +1979,10 @@ STATIC PROCEDURE ParagraphFormat
 LOCAL lNum
 LOCAL xNew, xOld
 
-DEFINE WINDOW wPar ; 
+DEFINE WINDOW wPar ;
   AT wMain.ROW + 160, wMain.COL + 40 ;
-  WIDTH 370 HEIGHT 440 ; 
-  TITLE 'Paragraph' ; 
+  WIDTH 370 HEIGHT 440 ;
+  TITLE 'Paragraph' ;
   MODAL NOSIZE ;
   ON INIT ParagraphInit()
 
@@ -1992,35 +1992,35 @@ DEFINE WINDOW wPar ;
              HEIGHT 135
 
   @  25,  15 RADIOGROUP rgAlign ;
-             OPTIONS aAlignLabel ;  
-             VALUE 1 ;  
+             OPTIONS aAlignLabel ;
+             VALUE 1 ;
              WIDTH 60 ;
-             SPACING 25 
+             SPACING 25
 
   @   5,  85 FRAME frIndent ;
              CAPTION 'Spacing' ;
              WIDTH 175 ;
              HEIGHT 135
 
-  @  30,  95 LABEL laLeftIndent ; 
+  @  30,  95 LABEL laLeftIndent ;
              VALUE 'Left indent (mm)' ;
              AUTOSIZE
 
   @  30, 195 TEXTBOX tbLeftIndent ;
-             WIDTH 40 ;  
+             WIDTH 40 ;
              VALUE 1 ;
              NUMERIC INPUTMASK '999'
 
-  @  60,  95 LABEL laLeftOffset ; 
+  @  60,  95 LABEL laLeftOffset ;
              VALUE 'Left offset (mm)' ;
              AUTOSIZE
 
   @  60, 195 TEXTBOX tbLeftOffset ;
-             WIDTH 40 ;  
+             WIDTH 40 ;
              VALUE 1 ;
              NUMERIC INPUTMASK '999'
 
-  @  90,  95 LABEL laLineSpace ; 
+  @  90,  95 LABEL laLineSpace ;
              VALUE 'Line spacing' ;
              AUTOSIZE
 
@@ -2041,8 +2041,8 @@ DEFINE WINDOW wPar ;
              HEIGHT 250
 
   @ 165,  15 RADIOGROUP rgNumFormat ;
-             OPTIONS aNumFormatLabel ;  
-             VALUE 1 ;  
+             OPTIONS aNumFormatLabel ;
+             VALUE 1 ;
              WIDTH 185 ;
              SPACING 25 ;
              ON CHANGE (lNum := (wPar.rgNumFormat.VALUE >= RTF_ARABICNUMBER), ;
@@ -2051,12 +2051,12 @@ DEFINE WINDOW wPar ;
                         wPar.tbNumStart.ENABLED := lNum  )
 
   @ 165, 210 RADIOGROUP rgNumStyle ;
-             OPTIONS aNumStyleLabel ;  
-             VALUE 1 ;  
+             OPTIONS aNumStyleLabel ;
+             VALUE 1 ;
              WIDTH 185 ;
-             SPACING 25 
+             SPACING 25
 
-  @ 360,  15 LABEL laNumStart ; 
+  @ 360,  15 LABEL laNumStart ;
              VALUE 'Starting number' ;
              AUTOSIZE
 
@@ -2066,19 +2066,19 @@ DEFINE WINDOW wPar ;
              NUMERIC INPUTMASK '999'
 
   @  25, 270 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION ParagraphSet() ;
              WIDTH 80 HEIGHT 25
 
-  @  55, 270 BUTTON btCancel ; 
-             CAPTION 'Cancel' ;  
+  @  55, 270 BUTTON btCancel ;
+             CAPTION 'Cancel' ;
              ACTION wPar.Release ;
              WIDTH 80 HEIGHT 25
 
   ON KEY RETURN ACTION ParagraphSet()
   ON KEY ESCAPE ACTION wPar.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wPar
 
@@ -2143,9 +2143,9 @@ RETURN // ParagraphSet
 
 STATIC PROCEDURE Zoom
 
-DEFINE WINDOW wZoom ; 
+DEFINE WINDOW wZoom ;
   AT wMain.ROW + 160, wMain.COL + 40 ;
-  WIDTH 220 HEIGHT 310 ; 
+  WIDTH 220 HEIGHT 310 ;
   TITLE 'Zoom' ;
   MODAL NOSIZE ;
   ON INIT ZoomInit()
@@ -2155,25 +2155,25 @@ DEFINE WINDOW wZoom ;
              WIDTH 195 HEIGHT 235
 
   @  30,  90 RADIOGROUP rgZoom ;
-             OPTIONS aZoomLabel ;  
-             VALUE 1 ;  
+             OPTIONS aZoomLabel ;
+             VALUE 1 ;
              WIDTH 110 ;
              SPACING 25
 
   @ 250,  25 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION ZoomSave() ;
              WIDTH 80 HEIGHT 25
 
-  @ 250, 115 BUTTON btCancel ; 
-             CAPTION 'Cancel' ;  
-             ACTION wZoom.RELEASE ; 
+  @ 250, 115 BUTTON btCancel ;
+             CAPTION 'Cancel' ;
+             ACTION wZoom.RELEASE ;
              WIDTH 80 HEIGHT 25
 
   ON KEY RETURN ACTION ZoomSave()
   ON KEY ESCAPE ACTION wZoom.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wZoom
 
@@ -2419,4 +2419,3 @@ END
 RETURN // MsgDbg
 
 //***************************************************************************
-

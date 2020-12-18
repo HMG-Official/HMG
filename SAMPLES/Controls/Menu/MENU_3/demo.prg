@@ -14,7 +14,7 @@ LOCAL m_executar
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN  
+		MAIN
 
 		DEFINE MAIN MENU
 		    POPUP "&Option"
@@ -41,4 +41,3 @@ Return
 Procedure act_03()
 	MsgInfo ('Action 03')
 Return
-

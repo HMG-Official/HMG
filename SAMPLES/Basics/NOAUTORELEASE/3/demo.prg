@@ -7,19 +7,19 @@
 
 * NoAutoRelease Style Demo
 
-* Using this style speed up application execution, since the forms are 
-* loaded / created / activated only once (at program startup). Later you 
+* Using this style speed up application execution, since the forms are
+* loaded / created / activated only once (at program startup). Later you
 * only must show or hide them as needed.
 *
-* NOAUTORELEASE clause, makes that, when the user closes the windows 
-* interactively they are hide instead released from memory, then, there is 
+* NOAUTORELEASE clause, makes that, when the user closes the windows
+* interactively they are hide instead released from memory, then, there is
 * no need to reload / redefine prior to show it again.
 *
 * NOSHOW clause makes that the windows be not displayed at activation.
 
 #include "hmg.ch"
 
-// DECLARE WINDOW is required, since the windows are referred from code, 
+// DECLARE WINDOW is required, since the windows are referred from code,
 // using semi-oop syntax, prior its definition in code (main window menu)
 
 DECLARE WINDOW Std_Form
@@ -48,6 +48,3 @@ Function Main
 			Main_Form
 
 Return Nil
-
-
-

@@ -12,7 +12,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Clipboard Test' ;
-		MAIN 
+		MAIN
 
 		DEFINE BUTTON b1
 			ROW	10
@@ -56,7 +56,6 @@ Function Main
 
 	END WINDOW
 
-	ACTIVATE WINDOW Win_1 
+	ACTIVATE WINDOW Win_1
 
 Return
-

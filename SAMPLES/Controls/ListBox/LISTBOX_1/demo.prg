@@ -12,7 +12,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE LISTBOX LIST1
 			ROW	10
@@ -32,7 +32,7 @@ Function Main
 
 	END WINDOW
 
-	ACTIVATE WINDOW Win1 
+	ACTIVATE WINDOW Win1
 
 Return
 

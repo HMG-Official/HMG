@@ -3,7 +3,7 @@
 
 
 #define USR_COMP_PROC_FLAG	63
- 
+
 *------------------------------------------------------------------------------*
 Init Procedure _InitPDFGrid
 *------------------------------------------------------------------------------*
@@ -67,127 +67,127 @@ private lHorLines := .f.
 private nTopMargin := 0.0
 private nBottomMargin := 0.0
 private nLeftMargin := 0.0
-private nRightMargin := 0.0 
+private nRightMargin := 0.0
 private cPDFFileName := ''
 private papernames := {;
-   "Letter 8 1/2 x 11 in",;               
-   "Letter Small 8 1/2 x 11 in",;         
-   "Tabloid 11 x 17 in",;                 
-   "Ledger 17 x 11 in",;                  
-   "Legal 8 1/2 x 14 in",;                
-   "Statement 5 1/2 x 8 1/2 in",;         
-   "Executive 7 1/4 x 10 1/2 in",;      
-   "A3 297 x 420 mm",;                    
-   "A4 210 x 297 mm",;                    
-   "A4 Small 210 x 297 mm",;              
-   "A5 148 x 210 mm",;                    
+   "Letter 8 1/2 x 11 in",;
+   "Letter Small 8 1/2 x 11 in",;
+   "Tabloid 11 x 17 in",;
+   "Ledger 17 x 11 in",;
+   "Legal 8 1/2 x 14 in",;
+   "Statement 5 1/2 x 8 1/2 in",;
+   "Executive 7 1/4 x 10 1/2 in",;
+   "A3 297 x 420 mm",;
+   "A4 210 x 297 mm",;
+   "A4 Small 210 x 297 mm",;
+   "A5 148 x 210 mm",;
    "B4 (JIS) 250 x 354",;
-   "B5 (JIS) 182 x 257 mm",;              
-   "Folio 8 1/2 x 13 in",;                
-   "Quarto 215 x 275 mm",;                
-   "10x14 in",;                           
-   "11x17 in",;                           
-   "Note 8 1/2 x 11 in",;                 
-   "Envelope #9 3 7/8 x 8 7/8",;          
-   "Envelope #10 4 1/8 x 9 1/2",;         
-   "Envelope #11 4 1/2 x 10 3/8",;        
-   "Envelope #12 4 \276 x 11",;           
-   "Envelope #14 5 x 11 1/2",;            
-   "C size sheet",;                       
-   "D size sheet",;                       
-   "E size sheet",;                       
-   "Envelope DL 110 x 220mm",;            
-   "Envelope C5 162 x 229 mm",;           
-   "Envelope C3  324 x 458 mm",;          
-   "Envelope C4  229 x 324 mm",;          
-   "Envelope C6  114 x 162 mm",;          
-   "Envelope C65 114 x 229 mm",;          
-   "Envelope B4  250 x 353 mm",;          
-   "Envelope B5  176 x 250 mm",;          
-   "Envelope B6  176 x 125 mm",;          
-   "Envelope 110 x 230 mm",;              
-   "Envelope Monarch 3.875 x 7.5 in",;    
-   "6 3/4 Envelope 3 5/8 x 6 1/2 in",;    
-   "US Std Fanfold 14 7/8 x 11 in",;      
+   "B5 (JIS) 182 x 257 mm",;
+   "Folio 8 1/2 x 13 in",;
+   "Quarto 215 x 275 mm",;
+   "10x14 in",;
+   "11x17 in",;
+   "Note 8 1/2 x 11 in",;
+   "Envelope #9 3 7/8 x 8 7/8",;
+   "Envelope #10 4 1/8 x 9 1/2",;
+   "Envelope #11 4 1/2 x 10 3/8",;
+   "Envelope #12 4 \276 x 11",;
+   "Envelope #14 5 x 11 1/2",;
+   "C size sheet",;
+   "D size sheet",;
+   "E size sheet",;
+   "Envelope DL 110 x 220mm",;
+   "Envelope C5 162 x 229 mm",;
+   "Envelope C3  324 x 458 mm",;
+   "Envelope C4  229 x 324 mm",;
+   "Envelope C6  114 x 162 mm",;
+   "Envelope C65 114 x 229 mm",;
+   "Envelope B4  250 x 353 mm",;
+   "Envelope B5  176 x 250 mm",;
+   "Envelope B6  176 x 125 mm",;
+   "Envelope 110 x 230 mm",;
+   "Envelope Monarch 3.875 x 7.5 in",;
+   "6 3/4 Envelope 3 5/8 x 6 1/2 in",;
+   "US Std Fanfold 14 7/8 x 11 in",;
    "German Std Fanfold 8 1/2 x 12 in",;
-   "German Legal Fanfold 8 1/2 x 13 in",; 
-   "B4 (ISO) 250 x 353 mm",;              
-   "Japanese Postcard 100 x 148 mm",;     
-   "9 x 11 in",;                          
-   "10 x 11 in",;                         
-   "15 x 11 in",;                         
-   "Envelope Invite 220 x 220 mm",;       
-   "RESERVED--DO NOT USE",;               
-   "RESERVED--DO NOT USE",;               
-   "Letter Extra 9 \275 x 12 in",;        
-   "Legal Extra 9 \275 x 15 in",;         
-   "Tabloid Extra 11.69 x 18 in",;        
-   "A4 Extra 9.27 x 12.69 in",;           
-   "Letter Transverse 8 \275 x 11 in",;   
-   "A4 Transverse 210 x 297 mm",;         
-   "Letter Extra Transverse 9\275 x 12 in",; 
-   "SuperA/SuperA/A4 227 x 356 mm",;      
-   "SuperB/SuperB/A3 305 x 487 mm",;      
-   "Letter Plus 8.5 x 12.69 in",;         
-   "A4 Plus 210 x 330 mm",;               
-   "A5 Transverse 148 x 210 mm",;         
-   "B5 (JIS) Transverse 182 x 257 mm",;   
-   "A3 Extra 322 x 445 mm",;              
-   "A5 Extra 174 x 235 mm",;              
-   "B5 (ISO) Extra 201 x 276 mm",;        
-   "A2 420 x 594 mm",;                    
-   "A3 Transverse 297 x 420 mm",;         
-   "A3 Extra Transverse 322 x 445 mm",;   
-   "Japanese Double Postcard 200 x 148 mm",; 
-   "A6 105 x 148 mm",;                 
-   "Japanese Envelope Kaku #2",;       
-   "Japanese Envelope Kaku #3",;       
-   "Japanese Envelope Chou #3",;       
-   "Japanese Envelope Chou #4",;       
-   "Letter Rotated 11 x 8 1/2 11 in",; 
-   "A3 Rotated 420 x 297 mm",;         
-   "A4 Rotated 297 x 210 mm",;         
-   "A5 Rotated 210 x 148 mm",;         
-   "B4 (JIS) Rotated 364 x 257 mm",;   
-   "B5 (JIS) Rotated 257 x 182 mm",;   
-   "Japanese Postcard Rotated 148 x 100 mm",; 
-   "Double Japanese Postcard Rotated 148 x 200 mm",; 
-   "A6 Rotated 148 x 105 mm",;         
-   "Japanese Envelope Kaku #2 Rotated",; 
-   "Japanese Envelope Kaku #3 Rotated",; 
-   "Japanese Envelope Chou #3 Rotated",; 
-   "Japanese Envelope Chou #4 Rotated",; 
-   "B6 (JIS) 128 x 182 mm",;           
-   "B6 (JIS) Rotated 182 x 128 mm",;   
-   "12 x 11 in",;                      
-   "Japanese Envelope You #4",;        
+   "German Legal Fanfold 8 1/2 x 13 in",;
+   "B4 (ISO) 250 x 353 mm",;
+   "Japanese Postcard 100 x 148 mm",;
+   "9 x 11 in",;
+   "10 x 11 in",;
+   "15 x 11 in",;
+   "Envelope Invite 220 x 220 mm",;
+   "RESERVED--DO NOT USE",;
+   "RESERVED--DO NOT USE",;
+   "Letter Extra 9 \275 x 12 in",;
+   "Legal Extra 9 \275 x 15 in",;
+   "Tabloid Extra 11.69 x 18 in",;
+   "A4 Extra 9.27 x 12.69 in",;
+   "Letter Transverse 8 \275 x 11 in",;
+   "A4 Transverse 210 x 297 mm",;
+   "Letter Extra Transverse 9\275 x 12 in",;
+   "SuperA/SuperA/A4 227 x 356 mm",;
+   "SuperB/SuperB/A3 305 x 487 mm",;
+   "Letter Plus 8.5 x 12.69 in",;
+   "A4 Plus 210 x 330 mm",;
+   "A5 Transverse 148 x 210 mm",;
+   "B5 (JIS) Transverse 182 x 257 mm",;
+   "A3 Extra 322 x 445 mm",;
+   "A5 Extra 174 x 235 mm",;
+   "B5 (ISO) Extra 201 x 276 mm",;
+   "A2 420 x 594 mm",;
+   "A3 Transverse 297 x 420 mm",;
+   "A3 Extra Transverse 322 x 445 mm",;
+   "Japanese Double Postcard 200 x 148 mm",;
+   "A6 105 x 148 mm",;
+   "Japanese Envelope Kaku #2",;
+   "Japanese Envelope Kaku #3",;
+   "Japanese Envelope Chou #3",;
+   "Japanese Envelope Chou #4",;
+   "Letter Rotated 11 x 8 1/2 11 in",;
+   "A3 Rotated 420 x 297 mm",;
+   "A4 Rotated 297 x 210 mm",;
+   "A5 Rotated 210 x 148 mm",;
+   "B4 (JIS) Rotated 364 x 257 mm",;
+   "B5 (JIS) Rotated 257 x 182 mm",;
+   "Japanese Postcard Rotated 148 x 100 mm",;
+   "Double Japanese Postcard Rotated 148 x 200 mm",;
+   "A6 Rotated 148 x 105 mm",;
+   "Japanese Envelope Kaku #2 Rotated",;
+   "Japanese Envelope Kaku #3 Rotated",;
+   "Japanese Envelope Chou #3 Rotated",;
+   "Japanese Envelope Chou #4 Rotated",;
+   "B6 (JIS) 128 x 182 mm",;
+   "B6 (JIS) Rotated 182 x 128 mm",;
+   "12 x 11 in",;
+   "Japanese Envelope You #4",;
    "Japanese Envelope You #4 Rotated",;
-   "PRC 16K 146 x 215 mm",;            
-   "PRC 32K 97 x 151 mm",;             
-   "PRC 32K(Big) 97 x 151 mm",;        
-   "PRC Envelope #1 102 x 165 mm",;    
-   "PRC Envelope #2 102 x 176 mm",;    
-   "PRC Envelope #3 125 x 176 mm",;    
-   "PRC Envelope #4 110 x 208 mm",;    
-   "PRC Envelope #5 110 x 220 mm",;    
-   "PRC Envelope #6 120 x 230 mm",;    
-   "PRC Envelope #7 160 x 230 mm",;    
-   "PRC Envelope #8 120 x 309 mm",;    
-   "PRC Envelope #9 229 x 324 mm",;    
-   "PRC Envelope #10 324 x 458 mm",;   
-   "PRC 16K Rotated",;                 
-   "PRC 32K Rotated",;                 
-   "PRC 32K(Big) Rotated",;            
-   "PRC Envelope #1 Rotated 165 x 102 mm",; 
-   "PRC Envelope #2 Rotated 176 x 102 mm",; 
-   "PRC Envelope #3 Rotated 176 x 125 mm",; 
-   "PRC Envelope #4 Rotated 208 x 110 mm",; 
-   "PRC Envelope #5 Rotated 220 x 110 mm",; 
-   "PRC Envelope #6 Rotated 230 x 120 mm",; 
-   "PRC Envelope #7 Rotated 230 x 160 mm",; 
-   "PRC Envelope #8 Rotated 309 x 120 mm",; 
-   "PRC Envelope #9 Rotated 324 x 229 mm",; 
-   "PRC Envelope #10 Rotated 458 x 324 mm",; 
+   "PRC 16K 146 x 215 mm",;
+   "PRC 32K 97 x 151 mm",;
+   "PRC 32K(Big) 97 x 151 mm",;
+   "PRC Envelope #1 102 x 165 mm",;
+   "PRC Envelope #2 102 x 176 mm",;
+   "PRC Envelope #3 125 x 176 mm",;
+   "PRC Envelope #4 110 x 208 mm",;
+   "PRC Envelope #5 110 x 220 mm",;
+   "PRC Envelope #6 120 x 230 mm",;
+   "PRC Envelope #7 160 x 230 mm",;
+   "PRC Envelope #8 120 x 309 mm",;
+   "PRC Envelope #9 229 x 324 mm",;
+   "PRC Envelope #10 324 x 458 mm",;
+   "PRC 16K Rotated",;
+   "PRC 32K Rotated",;
+   "PRC 32K(Big) Rotated",;
+   "PRC Envelope #1 Rotated 165 x 102 mm",;
+   "PRC Envelope #2 Rotated 176 x 102 mm",;
+   "PRC Envelope #3 Rotated 176 x 125 mm",;
+   "PRC Envelope #4 Rotated 208 x 110 mm",;
+   "PRC Envelope #5 Rotated 220 x 110 mm",;
+   "PRC Envelope #6 Rotated 230 x 120 mm",;
+   "PRC Envelope #7 Rotated 230 x 160 mm",;
+   "PRC Envelope #8 Rotated 309 x 120 mm",;
+   "PRC Envelope #9 Rotated 324 x 229 mm",;
+   "PRC Envelope #10 Rotated 458 x 324 mm",;
    "User Defined",;
 }
 private papersizes := {{216,279},{216,355.6},{184.1,266.7},{297,420},{210,297},{216,279}}
@@ -245,7 +245,7 @@ lHorLines := lHorizontalLines
 nTopMargin := nTop
 nBottomMargin := nBottom
 nLeftMargin := nLeft
-nRightMargin := nRight 
+nRightMargin := nRight
 cPDFFileName := iif( hmg_len( alltrim( cPDFFile ) ) == 0, cWindow + '_' + cGrid + '.pdf', cPDFFile )
 
 
@@ -256,7 +256,7 @@ do case
       curpagesize := 119 //len(papernames)
    otherwise
       curpagesize := nPaperSize
-endcase      
+endcase
 pdfinit_messages()
 
 do case
@@ -284,8 +284,8 @@ if hmg_len(aData) > 0 // array
 else // grid
    lines := getproperty(windowname,gridname,"itemcount")
    lArrayMode := .f.
-endif   
-   
+endif
+
 IF lines == 0
    msginfo(msgarr[1])
    RETURN nil
@@ -306,18 +306,18 @@ IF fontnumber == 0
 ENDIF
 if lArrayMode
    linedata := aData[1]
-else   
+else
    linedata := getproperty(windowname,gridname,"item",1)
-endif   
+endif
 asize(sizes,0)
 for count1 := 1 to hmg_len(linedata)
-   aadd(sizes,0)   
+   aadd(sizes,0)
    aadd(headersizes,0)
    if lArrayMode
       aadd(headerarr,aDataHeaders[count1])
    else
       aadd(headerarr,getproperty(windowname,gridname,"header",count1))
-   endif   
+   endif
    aadd(totalarr,0.0)
 next count1
 
@@ -330,7 +330,7 @@ else
 
    aJustify := _HMG_SYSDATA [ 37 ] [i]
 endif
-   
+
 
 FOR count1 := 1 TO hmg_len(headerarr)
    AAdd(columnarr,{1,headerarr[count1],sizes[count1],ajustify[count1]})
@@ -348,13 +348,13 @@ ENDIF
 if hmg_len(sumarr) > 0
    for i := 1 to hmg_len(sumarr)
       aadd(_asum,0.0)
-   next i   
+   next i
    for count1 := 1 to lines
       if lArrayMode
          linedata := aData[count1]
       else
          linedata := getproperty(windowname,gridname,"item",count1)
-      endif   
+      endif
       for count2 := 1 to hmg_len(linedata)
          if sumarr[count2,1]
             do case
@@ -370,7 +370,7 @@ if hmg_len(sumarr) > 0
                      ENDIF
                   else
                      cPrintdata := LTrim( Str( linedata[count2] ) )
-			      endif                     
+			      endif
                case ValType(linedata[count2]) == "D"
                   cPrintdata := dtoc( linedata[count2])
                case ValType(linedata[count2]) == "L"
@@ -385,7 +385,7 @@ if hmg_len(sumarr) > 0
                      endif
                   else
                      cPrintdata := iif(linedata[count2],"T","F")
-				  endif                      
+				  endif
                otherwise
                   cPrintdata := linedata[count2]
             endcase
@@ -393,13 +393,13 @@ if hmg_len(sumarr) > 0
          endif
       next count2
    next count1
-   
-endif   
+
+endif
 
 
 
 
-   define window pdfgrid at 0,0 width 700 height 440 title msgarr[4] modal noshow nosize nosysmenu on init initpdfgrid() 
+   define window pdfgrid at 0,0 width 700 height 440 title msgarr[4] modal noshow nosize nosysmenu on init initpdfgrid()
       define tab tab1 at 10,10 width 285 height 335
          define page msgarr[5]
             define grid columns
@@ -562,7 +562,7 @@ endif
                width 60
                on change pdfspreadchanged()
                caption msgarr[55]
-            END checkbox            
+            END checkbox
          end page
          define page msgarr[30]
             define label orientationlabel
@@ -749,7 +749,7 @@ endif
 //               picture "delitem"
                action pdfdelmergeheadrow()
             end button
-            
+
          end page
       end tab
       define button browseprint1
@@ -781,7 +781,7 @@ endif
 if nPaperSize == 256 // custom
    pdfgrid.width.value := nCustomPaperWidth
    pdfgrid.height.value := nCustomPaperHeight
-endif   
+endif
 pdfgrid.spread.value := .f.
 pdfgrid.selectfontsize.value := fontnumber
 pdfgrid.pagesizes.value := curpagesize
@@ -802,7 +802,7 @@ pdfgrid.paperorientation.value := IIf(orientation == "P",2,1)
 for count1 := 1 to hmg_len(mergehead)
    if mergehead[count1,2] >= mergehead[count1,1] .and. iif(count1 > 1,mergehead[count1,1] > mergehead[count1-1,2],.t.)
       pdfgrid.merge.additem({mergehead[count1,1],mergehead[count1,2],mergehead[count1,3]})
-   endif 
+   endif
 next count1
 if pdfgrid.merge.itemcount > 0
    pdfgrid.merge.value := 1
@@ -815,7 +815,7 @@ pdfcalculatecolumnsizes()
 pdfprintcoltally()
 if pdfgrid.columns.itemcount > 0
    pdfgrid.columns.value := 1
-endif 
+endif
 pdfgridpreview()
 pdfgrid.center
 pdfgrid.activate()
@@ -864,7 +864,7 @@ if pdfgrid.spread.value
          count2 := count2 + 1
       endif
    next count1
-   if col < maxcol2 
+   if col < maxcol2
       totcol := col - (count2 * 2)
       for count1 := 1 to hmg_len(columnarr)
          IF columnarr[count1,1] == 1
@@ -872,7 +872,7 @@ if pdfgrid.spread.value
          endif
       next count1
       col := maxcol2 - 5
-   endif 
+   endif
 else
    for count1 := 1 to hmg_len(columnarr)
       IF columnarr[count1,1] == 1
@@ -894,7 +894,7 @@ ELSE
 endif
 for count1 := 1 to hmg_len(columnarr)
     pdfgrid.columns.item(count1) := {columnarr[count1,2],columnarr[count1,3],columnarr[count1,1]}
-next count1    
+next count1
 return nil
 
 function pdffontsizechanged
@@ -921,7 +921,7 @@ if hmg_len(aColWidths) > 0
    endif
    if hmg_len(linedata) <> hmg_len(aColWidths)
       return nil // Error!
-   endif   
+   endif
    asize(sizes,0)
    for count1 := 1 to hmg_len(linedata)
       aadd(sizes,aColWidths[count1])
@@ -929,7 +929,7 @@ if hmg_len(aColWidths) > 0
          columnarr[count1,1] := 2
       else
          columnarr[count1,1] := 1
-      endif       
+      endif
       columnarr[count1,3] := aColWidths[count1]
    next count1
 else
@@ -939,11 +939,11 @@ else
          linedata := aData[1]
       else
          linedata := getproperty(windowname,gridname,"item",1)
-      endif   
+      endif
       asize(sizes,0)
       asize(headersizes,0)
       for count1 := 1 to hmg_len(linedata)
-         aadd(sizes,0)   
+         aadd(sizes,0)
          aadd(headersizes,0)
       next count1
       for count1 := 1 to lines
@@ -951,7 +951,7 @@ else
             linedata := aData[count1]
          else
             linedata := getproperty(windowname,gridname,"item",count1)
-         endif   
+         endif
          for count2 := 1 to hmg_len(linedata)
             do case
                case ValType(linedata[count2]) == "N"
@@ -966,7 +966,7 @@ else
                      ENDIF
                   else
                      cPrintdata := LTrim( Str( linedata[count2] ) )
-                  endif   
+                  endif
                case ValType(linedata[count2]) == "D"
                   cPrintdata := dtoc( linedata[count2])
                case ValType(linedata[count2]) == "L"
@@ -981,7 +981,7 @@ else
                      endif
                   else
                      cPrintdata := iif(linedata[count2],"T","F")
-                  endif   
+                  endif
                otherwise
                   cPrintdata := linedata[count2]
             endcase
@@ -1051,9 +1051,9 @@ wait window 'Please wait while exporting to PDF' nowait
 
 if lArrayMode
    totrows := hmg_len(aData)
-else   
+else
    totrows := getproperty(windowname,gridname,"itemcount")
-endif   
+endif
 
 IF pdfgrid.printers.value > 0
    printername := AllTrim(pdfgrid.printers.item(pdfgrid.printers.value))
@@ -1074,9 +1074,9 @@ if pdfgrid.pagesizes.value == pdfgrid.pagesizes.itemcount // custom
 	_HMG_HPDF_INIT ( cPDFFileName, if ( pdfgrid.paperorientation.value == 1	, 2	, 1 ) , 255 , ;
                if(pdfgrid.paperorientation.value == 1,pdfgrid.width.value,pdfgrid.height.value) ,;
                if(pdfgrid.paperorientation.value == 1,pdfgrid.height.value,pdfgrid.width.value) )
-   
+
 else
-	_HMG_HPDF_INIT ( cPDFFileName, if ( pdfgrid.paperorientation.value == 1	, 2	, 1 ) , papersize , -999 , -999	) 
+	_HMG_HPDF_INIT ( cPDFFileName, if ( pdfgrid.paperorientation.value == 1	, 2	, 1 ) , papersize , -999 , -999	)
 
 endif
 IF .not. psuccess
@@ -1094,7 +1094,7 @@ if .not. lArrayMode
       for count1 := 1 to pdfgrid.columns.itemcount
          aadd(gridprintdata[1],pdfgrid.columns.item(count1))
       next count1
-   // headers  
+   // headers
       gridprintdata[2] := {}
       aadd(gridprintdata[2],pdfgrid.header1.value)
       aadd(gridprintdata[2],pdfgrid.header2.value)
@@ -1178,28 +1178,28 @@ _hmg_hpdf_startpage()
 pageno := 1
 IF pdfgrid.pageno.value == 2
 //   @ Row,(col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) print msgarr[49]+alltrim(str(pageno,10,0)) font fontname size size1
-   _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" ) 
+   _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
    row := row + lh
 ENDIF
 IF hmg_len(AllTrim(pdfgrid.header1.value)) > 0
-   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
 //   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header1.value) font fontname size size1+2 center
    row := row + lh + lh
 ENDIF
 IF hmg_len(AllTrim(pdfgrid.header2.value)) > 0
-   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header2.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header2.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
 //   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header2.value) font fontname size size1+2 center
    row := row + lh + lh
 ENDIF
 IF hmg_len(AllTrim(pdfgrid.header3.value)) > 0
-   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header3.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header3.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
 //   @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header3.value) font fontname size size1+2 center
    row := row + lh + lh
 ENDIF
 
 
 if hmg_len(mergehead) > 0
-	_HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+	_HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
 
 //   @ Row - lh + nPrintGap ,Col-1  print line TO Row - lh + nPrintGap,col+maxcol1-1 penwidth 0.25
    for count1 := 1 to hmg_len(mergehead)
@@ -1212,8 +1212,8 @@ if hmg_len(mergehead) > 0
          if count2 < startcol
             IF columnarr[count2,1] == 1
                printpdfstart := printpdfstart + columnarr[count2,3] + 2
-            endif    
-         endif   
+            endif
+         endif
          IF columnarr[count2,1] == 1
             printend := printend + columnarr[count2,3] + 2
          endif
@@ -1225,12 +1225,12 @@ if hmg_len(mergehead) > 0
                count3 := count3 - 1
             enddo
          ENDIF
-         _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
-        	_HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. ) 
-      endif    
+         _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+        	_HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. )
+      endif
    next count1
- 	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. ) 
-  	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. ) 
+ 	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. )
+  	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. )
    IF pdfgrid.collines.value
       colcount := 0
       for count2 := 1 to hmg_len(columnarr)
@@ -1241,8 +1241,8 @@ if hmg_len(mergehead) > 0
             for count3 := 1 to hmg_len(mergehead)
                startcol := mergehead[count3,1]
                endcol := mergehead[count3,2]
-               if count2 >= startcol 
-                  if count2 < endcol 
+               if count2 >= startcol
+                  if count2 < endcol
                      if columnarr[endcol,1] == 1
                         colreqd := .f.
                      else
@@ -1255,17 +1255,17 @@ if hmg_len(mergehead) > 0
                   else
                      colreqd := .t.
                   endif
-               endif   
+               endif
             next count3
-            if colreqd    
-            	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. ) 
+            if colreqd
+            	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
             endif
          ENDIF
       next count2
    ENDIF
    row := row + lh
 else
-  	_HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+  	_HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
 endif
 
 
@@ -1297,13 +1297,13 @@ FOR count1 := 1 TO hmg_len(columnarr)
 NEXT count1
 pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1)
 row := row + lh
-_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
 FOR count1 := 1 TO totrows
    if lArrayMode
       linedata := aData[count1]
    else
       linedata := getproperty(windowname,gridname,"item",count1)
-   endif   
+   endif
    ASize(printdata,0)
    asize(nextline,0)
    FOR count2 := 1 TO hmg_len(columnarr)
@@ -1322,7 +1322,7 @@ FOR count1 := 1 TO totrows
                   ENDIF
                else
                   cPrintdata := LTrim( Str( linedata[count2] ) )
-               endif   
+               endif
             case ValType(linedata[count2]) == "D"
                cPrintdata := dtoc( linedata[count2])
             case ValType(linedata[count2]) == "L"
@@ -1337,7 +1337,7 @@ FOR count1 := 1 TO totrows
                   endif
                else
                   cPrintdata := iif(linedata[count2],"T","F")
-		       endif                  
+		       endif
             otherwise
                cPrintdata := linedata[count2]
          endcase
@@ -1345,13 +1345,13 @@ FOR count1 := 1 TO totrows
             if sumarr[count2,1]
                cPrintdata := transform(val(stripcomma(cPrintdata,".",",")),sumarr[count2,2])
             endif
-         endif   
+         endif
          data1 := cPrintdata
          if hmg_len(sumarr) > 0
             if sumarr[count2,1]
                totalarr[count2] := totalarr[count2] + val(stripcomma(cPrintdata,".",","))
-            endif   
-         endif 
+            endif
+         endif
          IF pdfprintlen(AllTrim(data1),size1,fontname) <= size
             aadd(printdata,alltrim(data1))
             aadd(nextline,0)
@@ -1377,7 +1377,7 @@ FOR count1 := 1 TO totrows
             ENDIF
          ENDIF
       else
-         aadd(nextline,0)   
+         aadd(nextline,0)
       ENDIF
    NEXT count2
    pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
@@ -1428,10 +1428,10 @@ FOR count1 := 1 TO totrows
    enddo
 
    IF Row+iif(hmg_len(sumarr)>0,(3*lh),lh)+iif(hmg_len(alltrim(pdfgrid.footer1.value))>0,lh,0) >= maxrow1 // 2 lines for total & 1 line for footer
-     	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+     	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
       if hmg_len(sumarr) > 0
          row := row + lh
-       	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+       	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
          ASize(printdata,0)
          FOR count5 := 1 TO hmg_len(columnarr)
             IF columnarr[count5,1] == 1
@@ -1440,62 +1440,62 @@ FOR count1 := 1 TO totrows
                   cPrintdata := alltrim(transform(totalarr[count5],sumarr[count5,2]))
                else
                   cPrintdata := ""
-               endif   
+               endif
                aadd(printdata,alltrim(cPrintdata))
             ENDIF
          NEXT count5
-         pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)      
+         pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
          Row := Row + lh
-       	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+       	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
       else
-       	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
-      endif   
+       	_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+      endif
       lastrow := Row
       totcol := 0
-     	_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , Col-1 , lastrow-lh+ nPrintGap , Col-1 , 0.25 , , , , .t. , .f. ) 
+     	_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , Col-1 , lastrow-lh+ nPrintGap , Col-1 , 0.25 , , , , .t. , .f. )
       IF pdfgrid.collines.value
          colcount := 0
          for count2 := 1 to hmg_len(columnarr)
             IF columnarr[count2,1] == 1
                   totcol := totcol + columnarr[count2,3]
                   colcount := colcount + 1
-                  _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , lastrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. ) 
+                  _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , lastrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
             ENDIF
          next count2
       ENDIF
-      _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+maxcol1-1 , lastrow-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+      _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+maxcol1-1 , lastrow-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
       IF hmg_len(AllTrim(pdfgrid.footer1.value)) > 0
-         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1+2 + 1 , ,  , , AllTrim(pdfgrid.footer1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1+2 + 1 , ,  , , AllTrim(pdfgrid.footer1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
          row := row + lh + lh
       ENDIF
       IF pdfgrid.pageno.value == 3
          Row := Row + lh
-         _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1+2 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" ) 
+         _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1+2 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
       ENDIF
       _hmg_hpdf_endpage()
       pageno := pageno + 1
       row := pdfgrid.top.value
       _hmg_hpdf_startpage()
       IF pdfgrid.pageno.value == 2
-         _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" ) 
+         _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
          row := row + lh
       ENDIF
       IF hmg_len(AllTrim(pdfgrid.header1.value)) > 0
-         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
          row := row + lh + lh
       ENDIF
       IF hmg_len(AllTrim(pdfgrid.header2.value)) > 0
-         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header2.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header2.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
 //         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header2.value) font fontname size size1+2 center
          row := row + lh + lh
       ENDIF
       IF hmg_len(AllTrim(pdfgrid.header3.value)) > 0
-         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header3.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+         _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1 + 1 , ,  , , AllTrim(pdfgrid.header3.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
 //         @ Row+(lh/2),col+Int(maxcol1/2) print AllTrim(pdfgrid.header3.value) font fontname size size1+2 center
          row := row + lh + lh
       ENDIF
       if hmg_len(mergehead) > 0
-         _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+         _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
          for count4 := 1 to hmg_len(mergehead)
             startcol := mergehead[count4,1]
             endcol := mergehead[count4,2]
@@ -1506,8 +1506,8 @@ FOR count1 := 1 TO totrows
                if count5 < startcol
                   IF columnarr[count5,1] == 1
                      printpdfstart := printpdfstart + columnarr[count5,3] + 2
-                  endif    
-               endif   
+                  endif
+               endif
                IF columnarr[count5,1] == 1
                   printend := printend + columnarr[count5,3] + 2
                endif
@@ -1519,15 +1519,15 @@ FOR count1 := 1 TO totrows
                      count6 := count6 - 1
                   enddo
                ENDIF
-               _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
-               _HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. ) 
+               _HMG_HPDF_PRINT ( Row , col+printpdfstart+int((printend-printpdfstart)/2) , fontname , size1 + 1 , ,  , , headdata , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
+               _HMG_HPDF_LINE ( Row+ nPrintGap , col-1+printpdfstart , Row+ nPrintGap , col-1+printend , 0.25 , , , , .t. , .f. )
                && @ Row,col+printpdfstart+int((printend-printpdfstart)/2) print headdata font fontname size size1 center
                && @ Row+ nPrintGap,col-1+printpdfstart print line TO Row + nPrintGap,col-1+printend penwidth 0.25
-            endif    
+            endif
          next count4
-         _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. ) 
-         _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. ) 
-         
+         _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1 , Row+ nPrintGap , col-1 , 0.25 , , , , .t. , .f. )
+         _HMG_HPDF_LINE ( row-lh+ nPrintGap , col-1+maxcol1 , row+ nPrintGap , col-1+maxcol1 , 0.25 , , , , .t. , .f. )
+
          && @ row-lh+ nPrintGap,col-1 print line to row+ nPrintGap,col-1 penwidth 0.25
          && @ row-lh+ nPrintGap,col-1+maxcol1 print line to row+ nPrintGap,col-1+maxcol1 penwidth 0.25
          totcol := 0
@@ -1541,8 +1541,8 @@ FOR count1 := 1 TO totrows
                   for count6 := 1 to hmg_len(mergehead)
                      startcol := mergehead[count6,1]
                      endcol := mergehead[count6,2]
-                     if count5 >= startcol 
-                        if count5 < endcol 
+                     if count5 >= startcol
+                        if count5 < endcol
                            if columnarr[endcol,1] == 1
                               colreqd := .f.
                            else
@@ -1555,10 +1555,10 @@ FOR count1 := 1 TO totrows
                         else
                            colreqd := .t.
                         endif
-                     endif   
+                     endif
                   next count6
-                  if colreqd    
-                  	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. ) 
+                  if colreqd
+                  	_HMG_HPDF_LINE ( row-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , row+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
                      && @ row-lh+ nPrintGap,col+totcol+(colcount * 2)-1 print line TO row+ nPrintGap,col+totcol+(colcount * 2)-1 penwidth 0.25
                   endif
                ENDIF
@@ -1566,8 +1566,8 @@ FOR count1 := 1 TO totrows
          ENDIF
          row := row + lh
       else
-         _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
-         && @ Row - lh+ nPrintGap ,Col-1  print line TO Row -lh+ nPrintGap,col+maxcol1-1 penwidth 0.25   
+         _HMG_HPDF_LINE ( Row - lh + nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         && @ Row - lh+ nPrintGap ,Col-1  print line TO Row -lh+ nPrintGap,col+maxcol1-1 penwidth 0.25
       endif
       firstrow := Row
       ASize(printdata,0)
@@ -1602,23 +1602,23 @@ FOR count1 := 1 TO totrows
                   cPrintdata := alltrim(transform(totalarr[count5],sumarr[count5,2]))
                else
                   cPrintdata := ""
-               endif   
+               endif
                aadd(printdata,alltrim(cPrintdata))
             ENDIF
          NEXT count5
          pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
-         Row := Row + lh 
-         _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
-         Row := Row + lh 
-         _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
-      endif   
+         Row := Row + lh
+         _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+         Row := Row + lh
+         _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+      endif
    ELSE
       IF pdfgrid.rowlines.value
-         _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+         _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
       ENDIF
    ENDIF
 NEXT count1
-_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+_HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
 if hmg_len(sumarr) > 0
    ASize(printdata,0)
    FOR count5 := 1 TO hmg_len(columnarr)
@@ -1628,35 +1628,35 @@ if hmg_len(sumarr) > 0
             cPrintdata := alltrim(transform(totalarr[count5],sumarr[count5,2]))
          else
             cPrintdata := ""
-         endif   
+         endif
          aadd(printdata,alltrim(cPrintdata))
       ENDIF
    NEXT count5
-   pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)      
+   pdfprintline(row,col,printdata,justifyarr,sizesarr,fontname,size1,lh)
    Row := Row + lh
-   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
-endif   
+   _HMG_HPDF_LINE ( Row-lh+ nPrintGap , Col-1 , Row - lh + nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
+endif
 lastrow := Row
 totcol := 0
 colcount := 0
-_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , Col-1 , lastrow-lh+ nPrintGap , Col-1 , 0.25 , , , , .t. , .f. ) 
+_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , Col-1 , lastrow-lh+ nPrintGap , Col-1 , 0.25 , , , , .t. , .f. )
 IF pdfgrid.collines.value
    for count1 := 1 to hmg_len(columnarr)
       IF columnarr[count1,1] == 1
          totcol := totcol + columnarr[count1,3]
          colcount := colcount + 1
-         _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , lastrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. ) 
+         _HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , lastrow-lh+ nPrintGap , col+totcol+(colcount * 2)-1 , 0.25 , , , , .t. , .f. )
       ENDIF
    next count2
 ENDIF
-_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+maxcol1-1 , lastrow-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. ) 
+_HMG_HPDF_LINE ( firstrow-lh+ nPrintGap , col+maxcol1-1 , lastrow-lh+ nPrintGap , col+maxcol1-1 , 0.25 , , , , .t. , .f. )
 IF hmg_len(AllTrim(pdfgrid.footer1.value)) > 0
-   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1+2 + 1 , ,  , , AllTrim(pdfgrid.footer1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+   _HMG_HPDF_PRINT ( Row+(lh/2) , col+Int(maxcol1/2) , fontname , size1+2 + 1 , ,  , , AllTrim(pdfgrid.footer1.value) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
    row := row + lh + lh
 ENDIF
 IF pdfgrid.pageno.value == 3
    Row := Row + lh
-   _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1+2 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" ) 
+   _HMG_HPDF_PRINT ( Row , (col+maxcol1 - pdfprintlen(msgarr[49]+alltrim(str(pageno,10,0)),size1,fontname) - 5) , fontname , size1+2 + 1 , ,  , , msgarr[49]+alltrim(str(pageno,10,0)) , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
 ENDIF
 
 _hmg_hpdf_endpage()
@@ -1675,8 +1675,8 @@ if this.cellvalue == 1
 else
    if this.cellvalue == 2
       columnarr[lineno,1] := 2
-   endif 
-endif   
+   endif
+endif
 refreshpdfgrid()
 RETURN .t.
 
@@ -1684,7 +1684,7 @@ FUNCTION pdfeditcoldetails
 LOCAL lineno := pdfgrid.columns.value
 LOCAL columnsize := 0
 IF lineno > 0
-   pdfgrid.size.value := columnarr[lineno,3] 
+   pdfgrid.size.value := columnarr[lineno,3]
    if ajustify[lineno] == 0 .or. ajustify[lineno] == 2
       return .t.
    else
@@ -1706,11 +1706,11 @@ for count1 := 1 to hmg_len(aitems)
    njustify := ajustify[count1]
    do case
       case njustify == 0 //left
-         _HMG_HPDF_PRINT ( Row , tempcol , fontname , size1, ,  , , aitems[count1] , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" ) 
+         _HMG_HPDF_PRINT ( Row , tempcol , fontname , size1, ,  , , aitems[count1] , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "LEFT" )
       case njustify == 1 //right
-         _HMG_HPDF_PRINT ( Row , tempcol+sizesarr[count1] , fontname , size1, ,  , , aitems[count1] , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "RIGHT" ) 
+         _HMG_HPDF_PRINT ( Row , tempcol+sizesarr[count1] , fontname , size1, ,  , , aitems[count1] , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "RIGHT" )
       case njustify == 2 // center
-         _HMG_HPDF_PRINT ( Row , tempcol+(sizesarr[count1]/2) , fontname , size1, ,  , , aitems[count1] , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" ) 
+         _HMG_HPDF_PRINT ( Row , tempcol+(sizesarr[count1]/2) , fontname , size1, ,  , , aitems[count1] , .f. , .f. , .f. , .f. , .f. , .f. , .t. , "CENTER" )
    end case
    tempcol := tempcol + sizesarr[count1] + 2
 next count1
@@ -1729,16 +1729,16 @@ function pdfprintlen( cString,fontsize,fontname)
    if oFont <> nil
       HPDF_Page_SetFontAndSize( oTempPage, oFont, FontSize )
       nLength := _HMG_HPDF_Pixel2MM( HPDF_Page_TextWidth( oTempPage, cString ) )
-   endif      
+   endif
    HPDF_Free( oTempDoc )
 return nLength
 
 function pdfpagesizechanged
 if iscontroldefined(browseprintcancel,pdfgrid)
    maxcol2 := pdfgrid.width.value - pdfgrid.left.value - pdfgrid.right.value
-   pdfgrid.statusbar.item(2) := msgarr[10]+" "+alltrim(str(curcol1,12,2))+" "+msgarr[11]+" "+alltrim(str(maxcol2,12,2))   
+   pdfgrid.statusbar.item(2) := msgarr[10]+" "+alltrim(str(curcol1,12,2))+" "+msgarr[11]+" "+alltrim(str(maxcol2,12,2))
    refreshpdfgrid()
-endif    
+endif
 return nil
 
 
@@ -1787,7 +1787,7 @@ if papersize <> 256 // not custom
    VO := GETPRINTABLEAREAVERTICALOFFSET()
 
    pdfgrid.width.value := GETPRINTABLEAREAWIDTH() + ( HO * 2 )
-   pdfgrid.height.value := GETPRINTABLEAREAHEIGHT() + ( VO * 2 ) 
+   pdfgrid.height.value := GETPRINTABLEAREAHEIGHT() + ( VO * 2 )
 endif
 
 if pdfgrid.pagesizes.value > 0
@@ -1799,9 +1799,9 @@ if pdfgrid.pagesizes.value > 0
       pdfgrid.width.value := papersizes[pdfgrid.pagesizes.value,2]
       pdfgrid.height.value := papersizes[pdfgrid.pagesizes.value,1]
    endif
-  */ 
+  */
    maxcol2 := pdfgrid.width.value - pdfgrid.left.value - pdfgrid.right.value
-   pdfgrid.statusbar.item(2) := msgarr[10]+" "+alltrim(str(curcol1,12,2))+" "+msgarr[11]+" "+alltrim(str(maxcol2,12,2))   
+   pdfgrid.statusbar.item(2) := msgarr[10]+" "+alltrim(str(curcol1,12,2))+" "+msgarr[11]+" "+alltrim(str(maxcol2,12,2))
 endif
 if pdfgrid.pagesizes.value == pdfgrid.pagesizes.itemcount // custom
    pdfgrid.width.readonly := .f.
@@ -1821,7 +1821,7 @@ local endx := 360
 local endy := 690
 local maxwidth := endy - starty - (10 * 2) // 10 for each side
 local maxheight := endx - startx - (10 * 2)
-local width := 0.0 
+local width := 0.0
 local height := 0.0
 local resize := 1
 local curx := 0
@@ -1857,7 +1857,7 @@ if lArrayMode
    totrows := hmg_len(aData)
 else
    totrows := getproperty(windowname,gridname,"itemcount")
-endif   
+endif
 
 if .not. iscontroldefined(browseprintcancel,pdfgrid)
    return nil
@@ -1926,8 +1926,8 @@ if hmg_len(mergehead) > 0
          if count2 < startcol
             IF columnarr[count2,1] == 1
                printpdfstart := printpdfstart + columnarr[count2,3] + 2
-            endif    
-         endif   
+            endif
+         endif
          IF columnarr[count2,1] == 1
             printend := printend + columnarr[count2,3] + 2
          endif
@@ -1939,10 +1939,10 @@ if hmg_len(mergehead) > 0
                count3 := count3 - 1
             enddo
          ENDIF
-         pl := pdfprintlen(AllTrim(headdata),size1,fontname) 
+         pl := pdfprintlen(AllTrim(headdata),size1,fontname)
          draw line in window pdfgrid at curx+(lh/2),cury + (printpdfstart * resize) + ((((printend-printpdfstart) - pl)/2)*resize) to curx+(lh/2),cury + (printpdfstart * resize) + ((((printend-printpdfstart) - pl)/2)*resize)+(pl*resize)
          draw line in window pdfgrid at curx+lh,cury+(printpdfstart*resize) TO curx+lh,cury+(printend*resize)
-      endif    
+      endif
    next count1
    draw line in window pdfgrid at curx,cury to curx+lh,cury
    draw line in window pdfgrid at curx,cury+maxcol1-(1*resize) to curx+lh,cury+maxcol1-(1*resize)
@@ -1956,8 +1956,8 @@ if hmg_len(mergehead) > 0
             for count3 := 1 to hmg_len(mergehead)
                startcol := mergehead[count3,1]
                endcol := mergehead[count3,2]
-               if count2 >= startcol 
-                  if count2 < endcol 
+               if count2 >= startcol
+                  if count2 < endcol
                      if columnarr[endcol,1] == 1
                         colreqd := .f.
                      else
@@ -1970,9 +1970,9 @@ if hmg_len(mergehead) > 0
                   else
                      colreqd := .t.
                   endif
-               endif   
+               endif
             next count3
-            if colreqd    
+            if colreqd
                draw line in window pdfgrid at curx,cury-1+((totcol+(colcount * 2)) * resize) to curx+lh,cury-1+((totcol+(colcount * 2)) * resize)
             endif
          ENDIF
@@ -2015,7 +2015,7 @@ FOR count1 := 1 TO totrows
       linedata := aData[count1]
    else
       linedata := getproperty(windowname,gridname,"item",count1)
-   endif   
+   endif
    ASize(printdata,0)
    asize(nextline,0)
    FOR count2 := 1 TO hmg_len(columnarr)
@@ -2034,7 +2034,7 @@ FOR count1 := 1 TO totrows
                   ENDIF
                else
                   cPrintdata := LTrim( Str( linedata[count2] ) )
-			   endif                     
+			   endif
             case ValType(linedata[count2]) == "D"
                cPrintdata := dtoc( linedata[count2])
             case ValType(linedata[count2]) == "L"
@@ -2047,7 +2047,7 @@ FOR count1 := 1 TO totrows
                   else
                      cPrintdata := iif(linedata[count2],"T","F")
                   endif
-               endif   
+               endif
             otherwise
                cPrintdata := linedata[count2]
          endcase
@@ -2077,7 +2077,7 @@ FOR count1 := 1 TO totrows
             ENDIF
          ENDIF
       else
-         aadd(nextline,0)   
+         aadd(nextline,0)
       ENDIF
    NEXT count2
    pdfprintpreviewline(curx+(lh/2),cury,printdata,justifyarr,sizesarr,fontname,size1,resize)
@@ -2226,7 +2226,7 @@ IF lineno > 0
       else
          columnarr[lineno,3] := this.cellvalue
          return .t.
-      endif   
+      endif
    endif
 ENDIF
 return .t.
@@ -2280,9 +2280,9 @@ for count1 := 1 to pdfgrid.merge.itemcount
    linedetails := pdfgrid.merge.item(count1)
    if linedetails[2] >= linedetails[1] .and. iif((count1 > 1 .and. hmg_len(mergehead) > 0),linedetails[1] > mergehead[count1-1,2],.t.)
       aadd(mergehead,{linedetails[1],linedetails[2],linedetails[3]})
-   else 
+   else
       msgstop(msgarr[65]+alltrim(str(count1)))
-   endif 
+   endif
 next count1
 pdfgridpreview()
 return nil
@@ -2318,7 +2318,7 @@ if lineno > 0
    pdfmergeheaderschanged()
 endif
 return nil
-  
+
 
 function pdfstripcomma(string,decimalsymbol,commasymbol)
 LOCAL xValue := ""
@@ -2364,7 +2364,7 @@ gridprintdata[17] := 0.0
 gridprintdata[18] := 0.0
 gridprintdata[19] := 0.0
 gridprintdata[20] := {}
-if .not. file("reports.cfg") .or. hmg_len(aColWidths) > 0 
+if .not. file("reports.cfg") .or. hmg_len(aColWidths) > 0
    return nil
 endif
 begin ini file "reports.cfg"
@@ -2400,10 +2400,10 @@ begin ini file "reports.cfg"
          linedata := gridprintdata[1,count1]
          aadd(columnarr,{int(linedata[3]),linedata[1],linedata[2],ajustify[count1]})
          pdfgrid.columns.additem({linedata[1],linedata[2],int(linedata[3])})
-      next count1   
+      next count1
       if pdfgrid.columns.itemcount > 0
          pdfgrid.columns.value := 1
-      endif         
+      endif
       // headers
       pdfgrid.header1.value := iif(hmg_len(alltrim(header1)) == 0,gridprintdata[2,1],header1)
       pdfgrid.header2.value := iif(hmg_len(alltrim(header2)) == 0,gridprintdata[2,2],header2)
@@ -2450,7 +2450,7 @@ begin ini file "reports.cfg"
       next count1
       if pdfgrid.merge.itemcount > 0
          pdfgrid.merge.value := 1
-      endif         
+      endif
       pdfprintcoltally()
       pdfgridpreview()
    endif
@@ -2482,7 +2482,7 @@ if msgyesno(msgarr[67])
    for count1 := 1 to hmg_len(mergehead)
       if mergehead[count1,2] >= mergehead[count1,1] .and. iif(count1 > 1,mergehead[count1,1] > mergehead[count1-1,2],.t.)
          pdfgrid.merge.additem({mergehead[count1,1],mergehead[count1,2],mergehead[count1,3]})
-      endif 
+      endif
    next count1
    if pdfgrid.merge.itemcount > 0
       pdfgrid.merge.value := 1
@@ -2602,7 +2602,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -2674,7 +2674,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -2746,7 +2746,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -2818,7 +2818,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -2890,7 +2890,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -2962,7 +2962,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -3034,7 +3034,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -3179,7 +3179,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -3251,7 +3251,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -3396,7 +3396,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -3468,7 +3468,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -3540,7 +3540,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33
@@ -3612,7 +3612,7 @@ do case
                    "Row",; //27
                    "Page Center",; //28
                    "Vertical",; //29
-                   "Page/Printer",; //30 
+                   "Page/Printer",; //30
                    "Orientation",; //31
                    "Landscape",; //32
                    "Portrait",; //33

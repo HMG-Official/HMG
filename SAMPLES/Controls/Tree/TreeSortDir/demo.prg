@@ -13,12 +13,12 @@ PUBLIC nItemID := NIL
 
    SET FONT TO "Tahoma", 9
 
-   DEFINE WINDOW Form_1; 
-      AT 0 , 0; 
-      WIDTH 560 HEIGHT 600; 
+   DEFINE WINDOW Form_1;
+      AT 0 , 0;
+      WIDTH 560 HEIGHT 600;
       TITLE "Sort Tree Directory";
-      MAIN; 
-      NOMAXIMIZE; 
+      MAIN;
+      NOMAXIMIZE;
       NOSIZE
 
       DEFINE STATUSBAR
@@ -34,19 +34,19 @@ PUBLIC nItemID := NIL
       @ 60, 70 TEXTBOX Text_1  WIDTH 120  HEIGHT 24  VALUE "*.*"
 
       @ 60, 210 CHECKBOX Check_1 CAPTION "Include hidden folders and files"  WIDTH 190  HEIGHT 24  VALUE .T.
-     
+
       @ 60, 435 BUTTON ButtonScan  CAPTION "Scan" ACTION  BuildTree()
 
-      DEFINE TREE Tree_1; 
-             AT 110, 5; 
-             WIDTH 540; 
-             HEIGHT 255;      
+      DEFINE TREE Tree_1;
+             AT 110, 5;
+             WIDTH 540;
+             HEIGHT 255;
              NODEIMAGES { "folder.bmp" } ;
              ITEMIMAGES { "documents.bmp" };
              ON DBLCLICK MsgInfo ({" Value          = ",Form_1.Tree_1.Value, HB_OsNewLine(),;
                                    " Item           = ",Form_1.Tree_1.Item (Form_1.Tree_1.Value), HB_OsNewLine(),;
-                                   " IsTrueNode     = ",Form_1.Tree_1.IsTrueNode (Form_1.Tree_1.Value), HB_OsNewLine(),; 
-                                   " FlagNode       = ",Form_1.Tree_1.NodeFlag (Form_1.Tree_1.Value), HB_OsNewLine(),; 
+                                   " IsTrueNode     = ",Form_1.Tree_1.IsTrueNode (Form_1.Tree_1.Value), HB_OsNewLine(),;
+                                   " FlagNode       = ",Form_1.Tree_1.NodeFlag (Form_1.Tree_1.Value), HB_OsNewLine(),;
                                    " ImageIndex     = ",HB_VALTOEXP(Form_1.Tree_1.ImageIndex (Form_1.Tree_1.Value)), HB_OsNewLine(),;
                                    " RootValue      = ",Form_1.Tree_1.RootValue, HB_OsNewLine(),;
                                    " FirstItemValue = ",Form_1.Tree_1.FirstItemValue, HB_OsNewLine(),;
@@ -68,8 +68,8 @@ PUBLIC nItemID := NIL
       @ 400, 30 CHECKBOX CheckSort1 CAPTION "Recuesive(Sub-folders)" WIDTH 150 VALUE .T.
       @ 425, 30 CHECKBOX CheckSort2 CAPTION "CaseSensitive"          WIDTH 150 VALUE .F.
       @ 450, 30 CHECKBOX CheckSort3 CAPTION "Ascending Order"        WIDTH 150 VALUE .T.
-      
-      @ 400, 250 RADIOGROUP RadioGroupSort OPTIONS {"Nodes First","Nodes Last","Nodes Mix"} VALUE 3 TRANSPARENT 
+
+      @ 400, 250 RADIOGROUP RadioGroupSort OPTIONS {"Nodes First","Nodes Last","Nodes Mix"} VALUE 3 TRANSPARENT
 
       @ 425, 435 BUTTON ButtonSort  CAPTION "Sort"  ACTION Proc_Sort ()
 
@@ -79,9 +79,9 @@ PUBLIC nItemID := NIL
       @ 490, 175 BUTTON ButtonCollapse  CAPTION "Collapse"  ACTION  Form_1.Tree_1.Collapse ( Form_1.Tree_1.Value , Form_1.CheckExpand.Value )
 
       @ 490, 400 BUTTON ButtonUpdateFlags CAPTION "Update Images" ACTION  Proc_UpdateFlags()
-      
+
    END WINDOW
-  
+
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
 
@@ -107,8 +107,8 @@ LOCAL aNodePosition := { TREESORTNODE_FIRST, TREESORTNODE_LAST, TREESORTNODE_MIX
       WaitWindow("Wait...", .T.)
       Form_1.Tree_1.DisableUpdate
 
-      TREESORT Tree_1 OF Form_1 ; 
-          ITEM           Form_1.Tree_1.Value ; 
+      TREESORT Tree_1 OF Form_1 ;
+          ITEM           Form_1.Tree_1.Value ;
           RECURSIVE      Form_1.CheckSort1.Value ;
           CASESENSITIVE  Form_1.CheckSort2.Value ;
           ASCENDINGORDER Form_1.CheckSort3.Value ;
@@ -127,8 +127,8 @@ PROCEDURE Proc_Expand
 *********************************************************
    IF Form_1.Tree_1.ItemCount > 0
       WaitWindow("Wait...", .T.)
-      Form_1.Tree_1.DisableUpdate 
-      Form_1.Tree_1.Expand ( Form_1.Tree_1.Value , Form_1.CheckExpand.Value ) 
+      Form_1.Tree_1.DisableUpdate
+      Form_1.Tree_1.Expand ( Form_1.Tree_1.Value , Form_1.CheckExpand.Value )
       Form_1.Tree_1.EnableUpdate
       WaitWindow()
    ENDIF
@@ -143,9 +143,9 @@ STATIC lSetImage := .F., nImageIndex := 0
 LOCAL i, aAllValue, iSel, iUnsel, nValue
 
    IF Form_1.Tree_1.ItemCount > 0
-      
+
       EnableButtons ( .F. )
-      
+
       IF lSetImage == .F.   // avoid multiple add in TreeView the same image
          lSetImage := .T.
          Form_1.Tree_1.AddImage := "folder_empty.bmp"
@@ -158,7 +158,7 @@ LOCAL i, aAllValue, iSel, iUnsel, nValue
 
       FOR i = 1 TO Form_1.Tree_1.ItemCount
           nValue := aAllValue [i]
-          
+
           IF Form_1.Tree_1.IsTrueNode ( nValue ) == .F. .AND. Form_1.Tree_1.NodeFlag ( nValue ) == .T.
              // Form_1.Tree_1.NodeFlag ( nValue )   := .F.
              Form_1.Tree_1.ImageIndex ( nValue ) := { iUnSelect , iSelect }
@@ -180,7 +180,7 @@ PRIVATE lBreak := .F.
 
    Form_1.ButtonScan.Caption := "Press Esc Stop"
    EnableButtons ( .F. )
-   
+
    ON KEY ESCAPE OF Form_1 ACTION lBreak := MsgYesNo( "Stop Scan?", "Confirm action")
 
    IF .NOT.( EMPTY( cPath ) )
@@ -188,18 +188,18 @@ PRIVATE lBreak := .F.
       Form_1.Tree_1.DeleteAllItems
       Form_1.Tree_1.DisableUpdate
       nItemID := _ID_INI_
-      
+
       DEFINE NODE cPath  IMAGES { "structure.bmp" }   ID nItemID++
          ScanDir( cPath )
       END NODE
-      
+
       Form_1.Tree_1.Expand ( Form_1.Tree_1.RootValue )
       Form_1.Tree_1.EnableUpdate
-      
+
       Form_1.StatusBar.Item( 1 ) := HB_NTOS (Form_1.Tree_1.ItemCount) + " files/folders"
-      
+
       Form_1.Tree_1.Value := Form_1.Tree_1.FirstItemValue // Form_1.Tree_1.RootValue
-      
+
       Form_1.Tree_1.SetFocus
 
    ENDIF
@@ -219,7 +219,7 @@ LOCAL cMask     := AllTrim( Form_1.Text_1.Value )
 LOCAL cAttr     := IIF ( Form_1.Check_1.Value, "H", "" )
 LOCAL i, aDir, aFiles, xItem
 
-   IF HB_URIGHT ( cPath, 1 ) <> "\" 
+   IF HB_URIGHT ( cPath, 1 ) <> "\"
       cPath = cPath + "\"
    ENDIF
 
@@ -227,22 +227,22 @@ LOCAL i, aDir, aFiles, xItem
    BEGIN SEQUENCE
 
       aDir := DIRECTORY( cPath, ( "D" + cAttr ) )
-      
+
       FOR i = 1 TO HMG_LEN (aDir)
          xItem := aDir [i]
-         
+
          IF ( "D" $ xItem[ F_ATTR ] ) .AND. ( xItem[ F_NAME ] <> "." ) .AND. ( xItem[ F_NAME ] <> ".." )
-         
+
             DEFINE NODE xItem [ F_NAME ]   IMAGES Nil   ID nItemID++
                ScanDir( cPath + xItem [ F_NAME ] )
             END NODE
-         
-         ENDIF 
+
+         ENDIF
 
          DO EVENTS
          IF lBreak == .T.
             BREAK
-         ENDIF 
+         ENDIF
       NEXT
 
 
@@ -250,20 +250,17 @@ LOCAL i, aDir, aFiles, xItem
 
       FOR i = 1 TO HMG_LEN (aFiles)
          xItem := aFiles [i]
-         
+
          TREEITEM xItem [ F_NAME ]   IMAGES Nil   ID nItemID++
-         
+
          Form_1.StatusBar.Item( 1 ) := "Scan " + HB_NTOS (Form_1.Tree_1.ItemCount) + " files/folders [ " +  cPath + xItem[ F_NAME ] + "]"
-         
+
          DO EVENTS
          IF lBreak == .T.
             BREAK
-         ENDIF   
+         ENDIF
       NEXT
-   
+
    END
- 
+
 RETURN
-
-
-

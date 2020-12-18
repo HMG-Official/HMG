@@ -1,13 +1,13 @@
 /* SetCueBanner Demo2.prg which works in ANSI and UNICODE
-   
+
      Author: Carlos Britos
 Contributor: Pablo César
-   
+
   Important: SetCueBanner() does not show aAnything in Win XP (any Service Pack).
              On some configurations of WinXP, there is a known problem with SetCueBanner().
 
    Solution: In the Control Panel/Regional and Language Options (On the Languages tab)
-         
+
              The removal of Operating System support for Complex Scripts
              The removal of Operating System support for East Asian languages
 */
@@ -70,7 +70,7 @@ SetCueBanner(GetControlHandle("Text_1","Form_1"),"Enter your name here",.t.) // 
 SetCueBanner(GetControlHandle("Text_2","Form_1"),"Enter address here",.t.)
 SetCueBanner(GetControlHandle("Spinner_1","Form_1")[1],"Spinner CueBanner",.t.)
 SetCueBanner(FindWindowEx(GetControlHandle("Combo_1","Form_1"),0,"Edit",Nil),"ComboBox CueBanner",.t.)
-     
+
 SetCueBanner(GetControlHandle("Edit_1","Form_1"),"EditBox CueBanner",.t.)
 SetCueBanner(GetControlHandle("RichEdit_1","Form_1"),"RichEditBox CueBanner",.t.)
 Form_1.center

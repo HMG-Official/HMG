@@ -99,5 +99,3 @@ HB_FUNC ( KILLTIMER )
 		    (UINT) hb_parni(2) );      	// timer identifier
 
 }
-
-

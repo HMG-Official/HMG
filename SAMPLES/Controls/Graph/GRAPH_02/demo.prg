@@ -542,7 +542,7 @@ define window x at 0,0 width 640 height 480 title "Shapes" main
             caption "Draw"
             action drawpie1()
          end button
-      end page   
+      end page
       define page "Colours"
          define label pencolorlabel
             row 60
@@ -551,10 +551,10 @@ define window x at 0,0 width 640 height 480 title "Shapes" main
          end label
          define label penrlabel
             row 60
-            col 100 
+            col 100
             value "Red"
             width 50
-         end label   
+         end label
          define textbox penr
             row 60
             col 160
@@ -565,10 +565,10 @@ define window x at 0,0 width 640 height 480 title "Shapes" main
          end textbox
          define label penglabel
             row 60
-            col 200 
+            col 200
             value "Green"
             width 50
-         end label   
+         end label
          define textbox peng
             row 60
             col 260
@@ -579,10 +579,10 @@ define window x at 0,0 width 640 height 480 title "Shapes" main
          end textbox
          define label penblabel
             row 60
-            col 300 
+            col 300
             value "Blue"
             width 50
-         end label   
+         end label
          define textbox penb
             row 60
             col 360
@@ -612,10 +612,10 @@ define window x at 0,0 width 640 height 480 title "Shapes" main
          end label
          define label fillrlabel
             row 90
-            col 100 
+            col 100
             value "Red"
             width 50
-         end label   
+         end label
          define textbox fillr
             row 90
             col 160
@@ -626,10 +626,10 @@ define window x at 0,0 width 640 height 480 title "Shapes" main
          end textbox
          define label fillglabel
             row 90
-            col 200 
+            col 200
             value "Green"
             width 50
-         end label   
+         end label
          define textbox fillg
             row 90
             col 260
@@ -640,10 +640,10 @@ define window x at 0,0 width 640 height 480 title "Shapes" main
          end textbox
          define label fillblabel
             row 90
-            col 300 
+            col 300
             value "Blue"
             width 50
-         end label   
+         end label
          define textbox fillb
             row 90
             col 360
@@ -678,7 +678,7 @@ draw ellipse in window y at z.ellipserow1.value,z.ellipsecol1.value to z.ellipse
 return nil
 
 function drawarc1
-draw arc in window y at z.arcrow1.value,z.arccol1.value to z.arcrow2.value,z.arccol2.value from radial z.arcrow3.value,z.arccol3.value to radial z.arcrow4.value,z.arccol4.value pencolor {z.penr.value,z.peng.value,z.penb.value} penwidth z.penwidth.value 
+draw arc in window y at z.arcrow1.value,z.arccol1.value to z.arcrow2.value,z.arccol2.value from radial z.arcrow3.value,z.arccol3.value to radial z.arcrow4.value,z.arccol4.value pencolor {z.penr.value,z.peng.value,z.penb.value} penwidth z.penwidth.value
 return nil
 
 function drawpie1

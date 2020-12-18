@@ -13,24 +13,24 @@ Function Main
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'Main Window' ;
-		MAIN 
+		MAIN
 
 		@ 100,250 SPINNER Spinner_1 ;
 		RANGE 0,10 ;
 		VALUE 5 ;
 		WIDTH 100 ;
-		TOOLTIP 'Range 0,10' ; 
-		ON CHANGE PlayBeep() 
+		TOOLTIP 'Range 0,10' ;
+		ON CHANGE PlayBeep()
 
 		@ 150,250 SPINNER Spinner_2 ;
 		RANGE 0,10 ;
 		VALUE 15 ;
 		WIDTH 100 ;
-		TOOLTIP 'Range 0,10' 
+		TOOLTIP 'Range 0,10'
 
 		@ 10,10 BUTTON Button_1 ;
 		CAPTION 'Set value' ;
-		ACTION ( Form_Main.Spinner_1.Value := 1 , Form_Main.Spinner_2.Value := 2 ) 
+		ACTION ( Form_Main.Spinner_1.Value := 1 , Form_Main.Spinner_2.Value := 2 )
 
 		@ 50,10 BUTTON Button_2 ;
 		CAPTION 'Get value' ;
@@ -44,4 +44,3 @@ Function Main
 	ACTIVATE WINDOW Form_Main
 
 Return Nil
-

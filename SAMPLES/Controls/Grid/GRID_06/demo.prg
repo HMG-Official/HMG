@@ -5,7 +5,7 @@
 
 #include "hmg.ch"
 
-* When using virtual Grids you must avoid to use Item property and additem 
+* When using virtual Grids you must avoid to use Item property and additem
 * method. It can generate unexpected results.
 
 Function Main
@@ -15,7 +15,7 @@ Function Main
 		WIDTH 450 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP 'File'

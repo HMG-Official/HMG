@@ -14,7 +14,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 200 ;
 		TITLE 'Custom Component Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP 'Test'
@@ -31,7 +31,7 @@ Function Main
 		@ 10 , 10 MYBUTTON test ;
 			OF Win1 ;
 			CAPTION 'Custom Button' ;
-			ACTION MsgInfo('Click!') 
+			ACTION MsgInfo('Click!')
 
 	END WINDOW
 
@@ -40,4 +40,3 @@ Function Main
 	ACTIVATE WINDOW Win1
 
 Return
-

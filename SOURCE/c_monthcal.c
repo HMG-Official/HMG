@@ -389,4 +389,3 @@ HB_FUNC ( DATETIME_SETMONTHCALFONT )
    BOOL  lRedraw = (BOOL)  hb_parl  (3);
    DateTime_SetMonthCalFont (hWnd, hFont, lRedraw);
 }
-

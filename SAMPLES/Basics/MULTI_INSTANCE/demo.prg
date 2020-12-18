@@ -12,7 +12,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 200 ;
 		TITLE 'Multi-Instance Demo' ;
-		MAIN 
+		MAIN
 
 	END WINDOW
 
@@ -43,4 +43,3 @@ Function Main
 	ACTIVATE WINDOW Form_Main , Form_1 , Form_2 , Form_3 , Form_4 , Form_5
 
 Return
-

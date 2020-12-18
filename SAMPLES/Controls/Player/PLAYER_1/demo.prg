@@ -7,7 +7,7 @@ Function main()
 		WIDTH 550 ;
 		HEIGHT 400 ;
 		TITLE 'Media Test' ;
-		MAIN 
+		MAIN
 
 		@ 200,0 PLAYER Player_1 ;
 			WIDTH 100 ;
@@ -51,23 +51,23 @@ Function main()
 
 		@ 0,0 BUTTON Button_D1 ;
 			CAPTION "Play AVI" ;
-			ACTION Media_Test.Player_1.Play() 
+			ACTION Media_Test.Player_1.Play()
 
 		@ 30,0 BUTTON Button_D2 ;
 			CAPTION "Play MP3" ;
-			ACTION Media_Test.Player_2.Play() 
+			ACTION Media_Test.Player_2.Play()
 
 		@ 60,0 BUTTON Button_D3 ;
 			CAPTION "Play Wave" ;
-			ACTION Media_Test.Player_3.Play() 
+			ACTION Media_Test.Player_3.Play()
 
 		@ 90,0 BUTTON Button_D4 ;
 			CAPTION "Play Mid" ;
-			ACTION Media_Test.Player_4.Play() 
+			ACTION Media_Test.Player_4.Play()
 
 		@ 120,0 BUTTON Button_D5 ;
 			CAPTION "Play wmv" ;
-			ACTION Media_Test.Player_5.Play() 
+			ACTION Media_Test.Player_5.Play()
 
 		@ 0,100 BUTTON Button_A1 ;
 			CAPTION "Pause AVI" ;
@@ -83,11 +83,11 @@ Function main()
 
 		@ 90,100 BUTTON Button_A4 ;
 			CAPTION "Pause Mid" ;
-			ACTION Media_Test.Player_4.Pause() 
+			ACTION Media_Test.Player_4.Pause()
 
 		@ 120,100 BUTTON Button_A5 ;
 			CAPTION "Pause wmv" ;
-			ACTION Media_Test.Player_5.Pause() 
+			ACTION Media_Test.Player_5.Pause()
 
 		@ 0,200 BUTTON Button_R1 ;
 			CAPTION "Resume AVI" ;
@@ -133,10 +133,6 @@ Function main()
 
 	CENTER WINDOW Media_Test
 
-	ACTIVATE WINDOW Media_Test 
+	ACTIVATE WINDOW Media_Test
 
 Return
-
-
-
-

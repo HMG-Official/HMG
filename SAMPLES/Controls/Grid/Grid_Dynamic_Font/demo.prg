@@ -17,7 +17,7 @@ Function Main
       AT 0,0 ;
       WIDTH 600 ;
       HEIGHT 400 ;
-      MAIN 
+      MAIN
 
       @ 10,10 GRID Grid_1 ;
          WIDTH 550 ;
@@ -28,7 +28,7 @@ Function Main
          EDIT;
          CELLNAVIGATION;
          COLUMNCONTROLS { NIL, {'TEXTBOX','NUMERIC'}, NIL }
-         
+
          Form_1.Grid_1.ColumnJUSTIFY (2) := GRID_JTFY_RIGHT
          Form_1.Grid_1.ColumnJUSTIFY (3) := GRID_JTFY_CENTER
 
@@ -40,7 +40,7 @@ Function Main
          // Dynamic Header
          Form_1.Grid_1.HeaderDYNAMICFONT (1) := {|| ARRAY FONT "Arial"   SIZE 12 ITALIC UNDERLINE }
          Form_1.Grid_1.HeaderDYNAMICFONT (3) := {|| ARRAY FONT "Calibri" SIZE 12 BOLD   }
-         
+
          Form_1.Grid_1.HeaderDYNAMICFORECOLOR (1) := {|| HeaderForeColor() }
          Form_1.Grid_1.HeaderDYNAMICFORECOLOR (2) := {|| HeaderForeColor() }
          Form_1.Grid_1.HeaderDYNAMICFORECOLOR (3) := {|| HeaderForeColor() }

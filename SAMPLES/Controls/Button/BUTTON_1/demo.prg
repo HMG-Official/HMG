@@ -26,7 +26,7 @@ set date ital
       END MENU
 
       @ 30,70 BUTTON Button_1 PICTURE "button.bmp" WIDTH 50 HEIGHT 50 ACTION getprinter()
-      @ 100,70 textbox t1 value date() date 
+      @ 100,70 textbox t1 value date() date
 
    END WINDOW
 

@@ -10,10 +10,10 @@ Function Main
 Local aRows [20] [3]
 
 	aRows [1]	:= {'Simpson','Homer','555-5555'}
-	aRows [2]	:= {'Mulder','Fox','324-6432'} 
-	aRows [3]	:= {'Smart','Max','432-5892'} 
-	aRows [4]	:= {'Grillo','Pepe','894-2332'} 
-	aRows [5]	:= {'Kirk','James','346-9873'} 
+	aRows [2]	:= {'Mulder','Fox','324-6432'}
+	aRows [3]	:= {'Smart','Max','432-5892'}
+	aRows [4]	:= {'Grillo','Pepe','894-2332'}
+	aRows [5]	:= {'Kirk','James','346-9873'}
 
 	SET SCROLLSTEP TO 10
 
@@ -23,7 +23,7 @@ Local aRows [20] [3]
 		WIDTH 800 ;
 		HEIGHT 500 ;
 		TITLE 'HMG Panel Window Demo' ;
-		WINDOWTYPE MAIN  
+		WINDOWTYPE MAIN
 
 
 		DEFINE TAB Tab_1 ;
@@ -31,9 +31,9 @@ Local aRows [20] [3]
 			WIDTH 600 ;
 			HEIGHT 400 ;
 			VALUE 1 ;
-			TOOLTIP 'Tab Control' 
+			TOOLTIP 'Tab Control'
 
-			PAGE 'Page 1' 
+			PAGE 'Page 1'
 				
 				DEFINE WINDOW Win_2 ;
 					ROW 50 ;
@@ -61,7 +61,7 @@ Local aRows [20] [3]
 
 			END PAGE
 
-			PAGE 'Page &2' 
+			PAGE 'Page &2'
 
 				DEFINE RADIOGROUP R1
 					ROW	100
@@ -72,18 +72,18 @@ Local aRows [20] [3]
 
 			END PAGE
 
-			PAGE 'Page 3' 
+			PAGE 'Page 3'
 
 				@ 100,250 SPINNER Spinner_1 ;
 				RANGE 0,10 ;
 				VALUE 5 ;
 				WIDTH 100 ;
-				TOOLTIP 'Range 0,10' ; 
-				ON CHANGE PlayBeep() 
+				TOOLTIP 'Range 0,10' ;
+				ON CHANGE PlayBeep()
 
 			END PAGE
 
-			PAGE 'Page 4' 
+			PAGE 'Page 4'
 
 				@ 50,50 GRID Grid_1 ;
 					WIDTH 200 ;
@@ -91,7 +91,7 @@ Local aRows [20] [3]
 					HEADERS {'Last Name','First Name','Phone'} ;
 					WIDTHS {140,140,140};
 					ITEMS aRows ;
-					VALUE 1 
+					VALUE 1
 
 			END PAGE
 
@@ -105,8 +105,6 @@ Local aRows [20] [3]
 	// Panel windows are automatically activated through its parent
 	// so, only Win_1 must be activated.
 
-	Activate Window Win_1 
+	Activate Window Win_1
 
 Return
-
-

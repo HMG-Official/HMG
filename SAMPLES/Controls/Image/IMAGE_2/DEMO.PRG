@@ -33,6 +33,3 @@ Function Main
         ACTIVATE WINDOW Win_1
 
 Return Nil
-
-
-

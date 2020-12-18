@@ -8,11 +8,11 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Timer Test' ;
-		MAIN 
+		MAIN
 
 		DEFINE TIMER Timer_1 ;
 		INTERVAL 10000 ;
-		ACTION TimerTest() 
+		ACTION TimerTest()
 
 	END WINDOW
 

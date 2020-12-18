@@ -513,4 +513,3 @@ HB_FUNC( SETTOOLBUTTONCAPTION )
 	SendMessage( (HWND) HMG_parnl (1), TB_SETBUTTONINFO, (WPARAM) hb_parni(2) , (LPARAM)&tbinfo) ;
 
 }
-

@@ -7,5 +7,3 @@ Function Main
         Main.Activate
 
 Return
-
-

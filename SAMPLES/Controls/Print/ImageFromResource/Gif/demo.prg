@@ -31,9 +31,9 @@ Function Main()
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'MiniPrint Library Test' ;
-		MAIN 
+		MAIN
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			DEFINE POPUP 'File'
 				MENUITEM 'Default Printer' ACTION PrintTest1()
 				MENUITEM 'User Selected Printer' ACTION PrintTest2()
@@ -52,12 +52,12 @@ Return
 *------------------------------------------------------------------------------*
 Procedure PrintTest1()
 *------------------------------------------------------------------------------*
-Local i 
+Local i
 
 	SELECT PRINTER DEFAULT ;
 		ORIENTATION	PRINTER_ORIENT_PORTRAIT ;
 		PAPERSIZE	PRINTER_PAPER_LETTER ;
-		QUALITY		PRINTER_RES_MEDIUM 
+		QUALITY		PRINTER_RES_MEDIUM
 
 	PrintDoc()
 
@@ -67,7 +67,7 @@ Return
 *------------------------------------------------------------------------------*
 Procedure PrintTest2()
 *------------------------------------------------------------------------------*
-Local i 
+Local i
 Local cPrinter
 
 	cPrinter := GetPrinter()
@@ -89,12 +89,12 @@ Return
 *------------------------------------------------------------------------------*
 Procedure PrintTest3()
 *------------------------------------------------------------------------------*
-Local i 
+Local i
 Local lSuccess
 
 	// Measure Units Are Millimeters
 
-	SELECT PRINTER DIALOG TO lSuccess 
+	SELECT PRINTER DIALOG TO lSuccess
 
 	If lSuccess == .T.
 		PrintDoc()
@@ -105,7 +105,7 @@ Return
 *------------------------------------------------------------------------------*
 Procedure PrintTest4()
 *------------------------------------------------------------------------------*
-Local i 
+Local i
 Local lSuccess
 
 	SELECT PRINTER DIALOG TO lSuccess PREVIEW
@@ -135,7 +135,7 @@ Local i
 
 				@ 25,25 PRINT IMAGE "hmg" ;
 					WIDTH 20 ;
-					HEIGHT 20 
+					HEIGHT 20
 
 				@ 30,85 PRINT "PRINT DEMO" ;
 					FONT "Courier New" ;

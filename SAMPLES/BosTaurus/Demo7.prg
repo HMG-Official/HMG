@@ -37,8 +37,8 @@ SET CODEPAGE TO SPANISH
         END STATUSBAR
 
 
-        @   30, 300 LABEL  Label_1  VALUE " " AUTOSIZE 
-        @   80, 300 LABEL  Label_2  VALUE " " AUTOSIZE TRANSPARENT FONTCOLOR BLACK 
+        @   30, 300 LABEL  Label_1  VALUE " " AUTOSIZE
+        @   80, 300 LABEL  Label_2  VALUE " " AUTOSIZE TRANSPARENT FONTCOLOR BLACK
 
         @  435, 410 BUTTON Button_1 CAPTION "Maximize" ACTION Win1.Maximize
         @  435, 280 BUTTON Button_2 CAPTION "Click"    ACTION MsgInfo ("Hello")
@@ -51,7 +51,7 @@ SET CODEPAGE TO SPANISH
 RETURN Nil
 
 
-PROCEDURE Proc_ON_PAINT    
+PROCEDURE Proc_ON_PAINT
 LOCAL Width  := BT_ClientAreaWidth  ("Win1")
 LOCAL Height := BT_ClientAreaHeight ("Win1") - BT_StatusBarHeight ("Win1")
 LOCAL hDC, BTstruct
@@ -101,4 +101,3 @@ RETURN
 #define GRAY    { 128,  128,  128 }
 #define BLUE    {   0,    0,  255 }
 */
-

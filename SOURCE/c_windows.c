@@ -1964,6 +1964,3 @@ HB_FUNC ( GETDESKTOPWINDOW )
    HWND hWnd = GetDesktopWindow();
    HMG_retnl ((LONG_PTR) hWnd );
 }
-
-
-

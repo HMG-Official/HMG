@@ -7,7 +7,7 @@ Function Main
         WIDTH 400 ;
         HEIGHT 200 ;
         TITLE 'Tutor 03 - Label Test' ;
-        MAIN 
+        MAIN
 
         @ 100,10 LABEL Label_1 VALUE 'This is a Label!'
 
@@ -16,4 +16,3 @@ Function Main
     ACTIVATE WINDOW Win_1
 
 Return
-

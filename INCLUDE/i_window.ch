@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
    Copyright 1999-2003, http://www.harbour-project.org/
 
    "WHAT32"
-   Copyright 2002 AJ Wos <andrwos@aust1.net> 
+   Copyright 2002 AJ Wos <andrwos@aust1.net>
 
    "HWGUI"
    Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -169,7 +169,7 @@
 #xtranslate <w>. \<c\> . \<p:SetDefaultAllNodeFlag> => Domethod ( <"w">, \<"c"\> , \<"p"\>) ;;
 #xtranslate <w>. \<c\> . \<p:Sort\> (\<a1\> , \<a2\> , \<a3\> , \<a4\> , \<a5\> ) => Domethod ( <"w">, \<"c"\> , \<"p"\> , \<a1\> , \<a2\> , \<a3\> , \<a4\> , \<a5\> ) ;;
 ;;
-;;   // RichEditBox 
+;;   // RichEditBox
 #xtranslate <w>. \<c\> . \<p:FontName,FontSize,FontBold,FontItalic,FontUnderline,FontStrikeOut,FontColor,FontBackColor,FontScript,Link\>          => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;
 #xtranslate <w>. \<c\> . \<p:FontName,FontSize,FontBold,FontItalic,FontUnderline,FontStrikeOut,FontColor,FontBackColor,FontScript,Link\> := \<n\> => SetProperty ( <"w">, \<"c"\> , \<"p"\> , \<n\> ) ;;
 #xtranslate <w>. \<c\> . \<p:RTFTextMode,AutoURLDetect,Zoom,SelectRange,CaretPos,Value,GetSelectText,GetTextLength,ViewRect\> => GetProperty ( <"w">, \<"c"\> , \<"p"\> ) ;;
@@ -202,8 +202,8 @@
 			[ COL <col> ] ;
 			[ WIDTH <wi> ];
 			[ HEIGHT <h> ];
-			[ VIRTUAL WIDTH <vWidth> ] ;                             
-			[ VIRTUAL HEIGHT <vHeight> ] ;                             
+			[ VIRTUAL WIDTH <vWidth> ] ;
+			[ VIRTUAL HEIGHT <vHeight> ] ;
 			[ TITLE <title> ] ;
 			[ ICON <icon> ] ;
 			[ <main:  MAIN> ] ;
@@ -215,8 +215,8 @@
 			[ <nominimize: NOMINIMIZE> ] ;
 			[ <nomaximize: NOMAXIMIZE> ] ;
 			[ <nosize: NOSIZE> ] ;
-			[ <nosysmenu: NOSYSMENU> ] ;                             
-			[ <nocaption: NOCAPTION> ] ;                             
+			[ <nosysmenu: NOSYSMENU> ] ;
+			[ <nocaption: NOCAPTION> ] ;
 			[ CURSOR <cursor> ] ;
 			[ ON INIT <InitProcedure> ] ;
 			[ ON RELEASE <ReleaseProcedure> ] ;
@@ -256,7 +256,7 @@
 	=>;
 	DECLARE WINDOW <w>  ;;
 	DECLARE CUSTOM COMPONENTS <w> ;;
-	_DefineWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, <.nominimize.>, <.nomaximize.>, <.nosize.>, <.nosysmenu.>, <.nocaption.>,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}>, <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, <backcolor> , <{PaintProcedure}> , <.noshow.> , <.topmost.> , <.main.> , <icon> , <.child.> , <FontName> , <FontSize>, <NotifyIcon> , <NotifyIconTooltip> , <{NotifyLeftClick}>  , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight> , <vWidth> , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <{MaximizeProcedure}> , <{MinimizeProcedure}> , <cursor> , <.noautorelease.> , <{interactivecloseprocedure}> , <visible> , <autorelease> , <minbutton> , <maxbutton> , <sizable> , <sysmenu> , <titlebar> , <"parent"> , <.panel.> )  
+	_DefineWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, <.nominimize.>, <.nomaximize.>, <.nosize.>, <.nosysmenu.>, <.nocaption.>,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}>, <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, <backcolor> , <{PaintProcedure}> , <.noshow.> , <.topmost.> , <.main.> , <icon> , <.child.> , <FontName> , <FontSize>, <NotifyIcon> , <NotifyIconTooltip> , <{NotifyLeftClick}>  , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight> , <vWidth> , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <{MaximizeProcedure}> , <{MinimizeProcedure}> , <cursor> , <.noautorelease.> , <{interactivecloseprocedure}> , <visible> , <autorelease> , <minbutton> , <maxbutton> , <sizable> , <sysmenu> , <titlebar> , <"parent"> , <.panel.> )
 
 
 	***********************************************************************
@@ -271,8 +271,8 @@
 			[ COL <col> ] ;
 			[ WIDTH <wi> ];
 			[ HEIGHT <h> ];
-			[ VIRTUALWIDTH <vWidth> ] ;                             
-			[ VIRTUALHEIGHT <vHeight> ] ;                             
+			[ VIRTUALWIDTH <vWidth> ] ;
+			[ VIRTUALHEIGHT <vHeight> ] ;
 			[ TITLE <title> ] ;
 			[ ICON <icon> ] ;
 			WINDOWTYPE ;
@@ -285,8 +285,8 @@
 			[ <nominimize: NOMINIMIZE> ] ;
 			[ <nomaximize: NOMAXIMIZE> ] ;
 			[ <nosize: NOSIZE> ] ;
-			[ <nosysmenu: NOSYSMENU> ] ;                             
-			[ <nocaption: NOCAPTION> ] ;                             
+			[ <nosysmenu: NOSYSMENU> ] ;
+			[ <nocaption: NOCAPTION> ] ;
 			[ CURSOR <cursor> ] ;
 			[ ONINIT <InitProcedure> ] ;
 			[ ONRELEASE <ReleaseProcedure> ] ;
@@ -326,11 +326,11 @@
 	=>;
 	DECLARE WINDOW <w>  ;;
 	DECLARE CUSTOM COMPONENTS <w> ;;
-	_DefineWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, <.nominimize.>, <.nomaximize.>, <.nosize.>, <.nosysmenu.>, <.nocaption.>,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}>, <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, <backcolor> , <{PaintProcedure}> , <.noshow.> , <.topmost.> , <.main.> , <icon> , <.child.> , <FontName> , <FontSize>, <NotifyIcon> , <NotifyIconTooltip> , <{NotifyLeftClick}>  , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight> , <vWidth> , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <{MaximizeProcedure}> , <{MinimizeProcedure}> , <cursor> , <.noautorelease.> , <{interactivecloseprocedure}> , <visible> , <autorelease> , <minbutton> , <maxbutton> , <sizable> , <sysmenu> , <titlebar> , <"parent"> , <.panel.> )  
+	_DefineWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, <.nominimize.>, <.nomaximize.>, <.nosize.>, <.nosysmenu.>, <.nocaption.>,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}>, <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, <backcolor> , <{PaintProcedure}> , <.noshow.> , <.topmost.> , <.main.> , <icon> , <.child.> , <FontName> , <FontSize>, <NotifyIcon> , <NotifyIconTooltip> , <{NotifyLeftClick}>  , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight> , <vWidth> , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <{MaximizeProcedure}> , <{MinimizeProcedure}> , <cursor> , <.noautorelease.> , <{interactivecloseprocedure}> , <visible> , <autorelease> , <minbutton> , <maxbutton> , <sizable> , <sysmenu> , <titlebar> , <"parent"> , <.panel.> )
 
 
 	***********************************************************************
-	* Modal 
+	* Modal
 	***********************************************************************
 
 
@@ -340,16 +340,16 @@
 			[ COL <col> ] ;
 			[ WIDTH <wi> ];
 			[ HEIGHT <h> ];
-			[ VIRTUAL WIDTH <vWidth> ] ;                             
-			[ VIRTUAL HEIGHT <vHeight> ] ;                             
+			[ VIRTUAL WIDTH <vWidth> ] ;
+			[ VIRTUAL HEIGHT <vHeight> ] ;
 			[ TITLE <title> ] ;
 			[ ICON <icon> ] ;
 			MODAL ;
 			[ <noshow: NOSHOW> ] ;
 			[ <noautorelease: NOAUTORELEASE> ] ;
 			[ <nosize: NOSIZE> ] ;
-			[ <nosysmenu: NOSYSMENU> ] ;                             
-			[ <nocaption: NOCAPTION> ] ;                             
+			[ <nosysmenu: NOSYSMENU> ] ;
+			[ <nocaption: NOCAPTION> ] ;
 			[ CURSOR <cursor> ] ;
 			[ ON INIT <InitProcedure> ] ;
 			[ ON RELEASE <ReleaseProcedure> ] ;
@@ -379,7 +379,7 @@
 			[ <shorttitlebar: SHORTTITLEBAR> ] ;
 	=>;
 	DECLARE WINDOW <w> ;;
-       _DefineModalWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, "" , <.nosize.>, <.nosysmenu.>, <.nocaption.> ,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}> , <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>]  , <{PaintProcedure}> , <icon> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}>  , <.helpbutton.> , <cursor> , <.noshow.>  , <.noautorelease.>  , <{interactivecloseprocedure}> , <visible> , <autorelease> , <sizable> , <sysmenu> , <titlebar> , <.shorttitlebar.> ) 
+       _DefineModalWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, "" , <.nosize.>, <.nosysmenu.>, <.nocaption.> ,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}> , <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>]  , <{PaintProcedure}> , <icon> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}>  , <.helpbutton.> , <cursor> , <.noshow.>  , <.noautorelease.>  , <{interactivecloseprocedure}> , <visible> , <autorelease> , <sizable> , <sysmenu> , <titlebar> , <.shorttitlebar.> )
 
 
 	***********************************************************************
@@ -393,16 +393,16 @@
 			[ COL <col> ] ;
 			[ WIDTH <wi> ];
 			[ HEIGHT <h> ];
-			[ VIRTUALWIDTH <vWidth> ] ;                             
-			[ VIRTUALHEIGHT <vHeight> ] ;                             
+			[ VIRTUALWIDTH <vWidth> ] ;
+			[ VIRTUALHEIGHT <vHeight> ] ;
 			[ TITLE <title> ] ;
 			[ ICON <icon> ] ;
 			WINDOWTYPE MODAL ;
 			[ <noshow: NOSHOW> ] ;
 			[ <noautorelease: NOAUTORELEASE> ] ;
 			[ <nosize: NOSIZE> ] ;
-			[ <nosysmenu: NOSYSMENU> ] ;                             
-			[ <nocaption: NOCAPTION> ] ;                             
+			[ <nosysmenu: NOSYSMENU> ] ;
+			[ <nocaption: NOCAPTION> ] ;
 			[ CURSOR <cursor> ] ;
 			[ ONINIT <InitProcedure> ] ;
 			[ ONRELEASE <ReleaseProcedure> ] ;
@@ -432,7 +432,7 @@
 			[ <shorttitlebar: SHORTTITLEBAR> ] ;
 	=>;
 	DECLARE WINDOW <w> ;;
-       _DefineModalWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, "" , <.nosize.>, <.nosysmenu.>, <.nocaption.> ,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}> , <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>]  , <{PaintProcedure}> , <icon> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}>  , <.helpbutton.> , <cursor> , <.noshow.>  , <.noautorelease.>  , <{interactivecloseprocedure}> , <visible> , <autorelease> , <sizable> , <sysmenu> , <titlebar> , <.shorttitlebar.> ) 
+       _DefineModalWindow ( <"w">, <title>, <col>, <row>, <wi>, <h>, "" , <.nosize.>, <.nosysmenu.>, <.nocaption.> ,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}> , <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>]  , <{PaintProcedure}> , <icon> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}>  , <.helpbutton.> , <cursor> , <.noshow.>  , <.noautorelease.>  , <{interactivecloseprocedure}> , <visible> , <autorelease> , <sizable> , <sysmenu> , <titlebar> , <.shorttitlebar.> )
 
 
 	***********************************************************************
@@ -443,8 +443,8 @@
 	#xcommand  DEFINE WINDOW <w> ;
 		[ WIDTH <wi> ];
 		[ HEIGHT <h> ];
-		[ VIRTUAL WIDTH <vWidth> ] ;                             
-		[ VIRTUAL HEIGHT <vHeight> ] ;                             
+		[ VIRTUAL WIDTH <vWidth> ] ;
+		[ VIRTUAL HEIGHT <vHeight> ] ;
 		[ TITLE <title> ] ;
 		SPLITCHILD ;
 		[ <nocaption: NOCAPTION> ] ;
@@ -477,8 +477,8 @@
 	#xcommand  DEFINE WINDOW <w> ;
 		[ WIDTH <wi> ];
 		[ HEIGHT <h> ];
-		[ VIRTUALWIDTH <vWidth> ] ;                             
-		[ VIRTUALHEIGHT <vHeight> ] ;                             
+		[ VIRTUALWIDTH <vWidth> ] ;
+		[ VIRTUALHEIGHT <vHeight> ] ;
 		[ TITLE <title> ] ;
 		WINDOWTYPE SPLITCHILD ;
 		[ <nocaption: NOCAPTION> ] ;
@@ -505,19 +505,19 @@
 
 
 
-	#xcommand LOAD WINDOW <w> ; 
+	#xcommand LOAD WINDOW <w> ;
 	=> ;
 	DECLARE WINDOW <w> ;;
 	_HMG_SYSDATA \[ 214 \] := <"w"> ;;
-	#include \<<w>.fmg\> 
+	#include \<<w>.fmg\>
 
-	#xcommand LOAD WINDOW <ww> AS <w> ; 
+	#xcommand LOAD WINDOW <ww> AS <w> ;
 	=> ;
 	DECLARE WINDOW <w> ;;
 	_HMG_SYSDATA \[ 214 \] := <"w"> ; #include \<<ww>.fmg\>
 
 
-	#xcommand LOAD WINDOW <n> AT <r> , <c> WIDTH <w> HEIGHT <h> ; 
+	#xcommand LOAD WINDOW <n> AT <r> , <c> WIDTH <w> HEIGHT <h> ;
 	=> ;
 	DECLARE WINDOW <n> ;;
 	_HMG_SYSDATA \[ 214 \] := <"n"> ;;
@@ -525,7 +525,7 @@
 	_HMG_SYSDATA \[ 236 \] := <c> ;;
 	_HMG_SYSDATA \[ 237 \] := <w> ;;
 	_HMG_SYSDATA \[ 238 \] := <h> ;;
-	#include \<<n>.fmg\> 
+	#include \<<n>.fmg\>
 
 
 
@@ -571,7 +571,7 @@
 
 #xcommand MAXIMIZE WINDOW <name> ;
 	=>;
-	DoMethod ( <"name"> , 'Maximize' ) 
+	DoMethod ( <"name"> , 'Maximize' )
 
 #xcommand MINIMIZE WINDOW <name> ;
 	=>;
@@ -609,8 +609,8 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <Arg3> )
 			[ AT <row>,<col> ];
 			[ WIDTH <wi> ];
 			[ HEIGHT <h> ];
-			[ VIRTUAL WIDTH <vWidth> ] ;                             
-			[ VIRTUAL HEIGHT <vHeight> ] ;                             
+			[ VIRTUAL WIDTH <vWidth> ] ;
+			[ VIRTUAL HEIGHT <vHeight> ] ;
 			[ TITLE <title> ] ;
 			[ ICON <icon> ] ;
 			[ <main:  MAIN> ] ;
@@ -622,8 +622,8 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <Arg3> )
 			[ <nominimize: NOMINIMIZE> ] ;
 			[ <nomaximize: NOMAXIMIZE> ] ;
 			[ <nosize: NOSIZE> ] ;
-			[ <nosysmenu: NOSYSMENU> ] ;                             
-			[ <nocaption: NOCAPTION> ] ;                             
+			[ <nosysmenu: NOSYSMENU> ] ;
+			[ <nocaption: NOCAPTION> ] ;
 			[ CURSOR <cursor> ] ;
 			[ ON INIT <InitProcedure> ] ;
 			[ ON RELEASE <ReleaseProcedure> ] ;
@@ -657,23 +657,23 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <Arg3> )
 			[ SYSMENU <sysmenu> ] ;
 			[ TITLEBAR <titlebar> ] ;
 	=>;
-	_DefineWindow ( , <title>, <col>, <row>, <wi>, <h>, <.nominimize.>, <.nomaximize.>, <.nosize.>, <.nosysmenu.>, <.nocaption.>,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}>, <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>] , <{PaintProcedure}> , <.noshow.> , <.topmost.> , <.main.> , <icon> , <.child.> , <FontName> , <FontSize>, <NotifyIcon> , <NotifyIconTooltip> , <{NotifyLeftClick}>  , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight> , <vWidth> , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <{MaximizeProcedure}> , <{MinimizeProcedure}> , <cursor>  , <.noautorelease.> , <{interactivecloseprocedure}> , <visible> , <autorelease> , <minbutton> , <maxbutton> , <sizable> , <sysmenu> , <titlebar> , <"parent"> , <.panel.> ) 
+	_DefineWindow ( , <title>, <col>, <row>, <wi>, <h>, <.nominimize.>, <.nomaximize.>, <.nosize.>, <.nosysmenu.>, <.nocaption.>,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}>, <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>] , <{PaintProcedure}> , <.noshow.> , <.topmost.> , <.main.> , <icon> , <.child.> , <FontName> , <FontSize>, <NotifyIcon> , <NotifyIconTooltip> , <{NotifyLeftClick}>  , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight> , <vWidth> , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <{MaximizeProcedure}> , <{MinimizeProcedure}> , <cursor>  , <.noautorelease.> , <{interactivecloseprocedure}> , <visible> , <autorelease> , <minbutton> , <maxbutton> , <sizable> , <sysmenu> , <titlebar> , <"parent"> , <.panel.> )
 
 
 #xcommand DEFINE WINDOW TEMPLATE ;
 			[ AT <row>,<col> ];
 			[ WIDTH <wi> ];
 			[ HEIGHT <h> ];
-			[ VIRTUAL WIDTH <vWidth> ] ;                             
-			[ VIRTUAL HEIGHT <vHeight> ] ;                             
+			[ VIRTUAL WIDTH <vWidth> ] ;
+			[ VIRTUAL HEIGHT <vHeight> ] ;
 			[ TITLE <title> ] ;
 			[ ICON <icon> ] ;
 			MODAL ;
 			[ <noshow: NOSHOW> ] ;
 			[ <noautorelease: NOAUTORELEASE> ] ;
 			[ <nosize: NOSIZE> ] ;
-			[ <nosysmenu: NOSYSMENU> ] ;                             
-			[ <nocaption: NOCAPTION> ] ;                             
+			[ <nosysmenu: NOSYSMENU> ] ;
+			[ <nocaption: NOCAPTION> ] ;
 			[ CURSOR <cursor> ] ;
 			[ ON INIT <InitProcedure> ] ;
 			[ ON RELEASE <ReleaseProcedure> ] ;
@@ -695,14 +695,14 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <Arg3> )
 			[ ON VSCROLLBOX <vScrollBox> ] ;
 			[ <helpbutton:  HELPBUTTON> ] ;
 	=>;
-	_DefineModalWindow ( , <title>, <col>, <row>, <wi>, <h>, "" , <.nosize.>, <.nosysmenu.>, <.nocaption.> ,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}> , <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>]  , <{PaintProcedure}> , <icon> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <cursor> , <.noshow.>  , <.noautorelease.>  , <{interactivecloseprocedure}> )   
+	_DefineModalWindow ( , <title>, <col>, <row>, <wi>, <h>, "" , <.nosize.>, <.nosysmenu.>, <.nocaption.> ,.F., '',<{InitProcedure}>, <{ReleaseProcedure}> , <{MouseDragProcedure}> , <{SizeProcedure}> , <{ClickProcedure}> , <{MouseMoveProcedure}>, [<backcolor>]  , <{PaintProcedure}> , <icon> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <.helpbutton.> , <cursor> , <.noshow.>  , <.noautorelease.>  , <{interactivecloseprocedure}> )
 
 
 #xcommand  DEFINE WINDOW TEMPLATE ;
 		[ WIDTH <wi> ];
 		[ HEIGHT <h> ];
-		[ VIRTUAL WIDTH <vWidth> ] ;                             
-		[ VIRTUAL HEIGHT <vHeight> ] ;                             
+		[ VIRTUAL WIDTH <vWidth> ] ;
+		[ VIRTUAL HEIGHT <vHeight> ] ;
 		[ TITLE <title> ] ;
 		SPLITCHILD ;
 		[ <nocaption: NOCAPTION> ] ;
@@ -724,7 +724,7 @@ SetProperty ( <"Arg1"> , <"Arg2"> , <Arg3> )
 	_DefineSplitChildWindow ( , <wi>, <h> , <.break.> , <grippertext> , <.nocaption.> , <title> , <FontName> , <FontSize> , <{GotFocusProcedure}>, <{LostFocusProcedure}> , <vHeight>  , <vWidth> , <.focused.>  , <{scrollleft}> , <{scrollright}> , <{scrollup}> , <{scrolldown}> , <{hScrollBox}> , <{vScrollBox}> , <cursor>, NIL,  , <{PaintProcedure}>  ) ;;
 
 
-   
+
 #xtranslate WAIT WINDOW <message>         => WaitWindow ( <message> , .F. )
 #xtranslate WAIT WINDOW <message> NOWAIT  => WaitWindow ( <message> , .T. )
 #xtranslate WAIT CLEAR                    => WaitWindow ()
@@ -807,13 +807,13 @@ SetLayeredWindowAttributes (GetFormHandle(<"FormName">), RGB(<aColor>\[1\], <aCo
 #define FLASHW_ALL (FLASHW_CAPTION + FLASHW_TRAY)
 
 #xtranslate FLASH WINDOW <FormName> CAPTION COUNT <nTimes> INTERVAL <nMilliseconds> =>;
-FlashWindowEx (GetFormHandle(<"FormName">), FLASHW_CAPTION, <nTimes>, <nMilliseconds>) 
+FlashWindowEx (GetFormHandle(<"FormName">), FLASHW_CAPTION, <nTimes>, <nMilliseconds>)
 
 #xtranslate FLASH WINDOW <FormName> TASKBAR COUNT <nTimes> INTERVAL <nMilliseconds> =>;
-FlashWindowEx (GetFormHandle(<"FormName">), FLASHW_TRAY, <nTimes>, <nMilliseconds>) 
+FlashWindowEx (GetFormHandle(<"FormName">), FLASHW_TRAY, <nTimes>, <nMilliseconds>)
 
 #xtranslate FLASH WINDOW <FormName> [ ALL ] COUNT <nTimes> INTERVAL <nMilliseconds> =>;
-FlashWindowEx (GetFormHandle(<"FormName">), FLASHW_ALL, <nTimes>, <nMilliseconds>) 
+FlashWindowEx (GetFormHandle(<"FormName">), FLASHW_ALL, <nTimes>, <nMilliseconds>)
 
 
 // ANIMATE WINDOW MODE <nFlags>

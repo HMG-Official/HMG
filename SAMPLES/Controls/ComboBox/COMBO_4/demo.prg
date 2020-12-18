@@ -12,15 +12,15 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 200 ;
 		TITLE 'ComboBox Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP 'Test'
 				MENUITEM 'Get Value' ACTION MsgInfo(Str(Form_1.Combo_1.Value))
 				MENUITEM 'Set Value' ACTION Form_1.Combo_1.Value := 1
 				MENUITEM 'Get DisplayValue' ACTION MsgInfo( Form_1.Combo_1.DisplayValue )
-				MENUITEM 'Set DisplayValue' ACTION Form_1.Combo_1.DisplayValue := 'New Text' 
-				MENUITEM 'Set Item' ACTION Form_1.Combo_1.Item (3) := 'New Text' 
+				MENUITEM 'Set DisplayValue' ACTION Form_1.Combo_1.DisplayValue := 'New Text'
+				MENUITEM 'Set Item' ACTION Form_1.Combo_1.Item (3) := 'New Text'
 				MENUITEM 'Get Item' ACTION MsgInfo ( Form_1.Combo_1.Item (3) )
 			END POPUP
 		END MENU
@@ -30,7 +30,7 @@ Function Main
 			ITEMS { 'A' , 'B' , 'C' } ;
 			VALUE 1 ;
 			DISPLAYEDIT ;
-			ON DISPLAYCHANGE PlayBeep() 
+			ON DISPLAYCHANGE PlayBeep()
 
 	END WINDOW
 
@@ -39,5 +39,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return
-
-

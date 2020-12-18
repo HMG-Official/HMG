@@ -182,4 +182,3 @@ Function _BeginFrame( name , parent , row , col , w , h , caption , fontname , f
 	_DefineFrame ( name , parent , col , row , w , h , caption , fontname , fontsize , opaque , bold, italic, underline, strikeout , backcolor , fontcolor , transparent )
 
 Return Nil
-

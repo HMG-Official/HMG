@@ -17,13 +17,13 @@
     This function skips over byte order marks in Unicode text files.
     This function does not directly support UTF-16 BE text files.
     RichEditBox_LoadFileEx() supports it by using HMG_UTF16ByteSwap() to
-    first convert a UTF-16 BE file to UTF-16 LE and then calling this 
+    first convert a UTF-16 BE file to UTF-16 LE and then calling this
     function on the UTF-16 LE file.
 */
 DWORD CALLBACK EditStreamCallbackReadEx (DWORD_PTR dwCookie, LPBYTE lpBuff, LONG cb, LONG *pcb)
 {
     HANDLE hFile = (HANDLE)dwCookie;
-    if ( ReadFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) ) 
+    if ( ReadFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) )
        return  0;
     else
        return -1;
@@ -35,8 +35,8 @@ HB_FUNC ( RICHEDITBOX_STREAMINEX )
    BOOL       lSelection  = (BOOL)   hb_parl  (3);
    LONG       nDataFormat = (LONG)   hb_parnl (4);
    HANDLE     hFile;
-   BYTE       bUtf8Bom[3]; 
-   BYTE       bUtf16Bom[2]; 
+   BYTE       bUtf8Bom[3];
+   BYTE       bUtf16Bom[2];
    DWORD      dwRead;
    EDITSTREAM es;
    LONG       Format;
@@ -61,7 +61,7 @@ HB_FUNC ( RICHEDITBOX_STREAMINEX )
    switch( nDataFormat )
    {
       case 1:   break;
-      case 2:   
+      case 2:
          if ( ! ReadFile (hFile, bUtf8Bom, 3, &dwRead, NULL) ) // read past BOM if present
             hb_retl (FALSE);
          if ( ! ( dwRead == 3 && bUtf8Bom[0] == 0xEF && bUtf8Bom[1] == 0xBB && bUtf8Bom[2] == 0xBF ) )
@@ -104,7 +104,7 @@ HB_FUNC ( RICHEDITBOX_STREAMINEX )
 DWORD CALLBACK EditStreamCallbackWriteEx (DWORD_PTR dwCookie, LPBYTE lpBuff, LONG cb, LONG *pcb)
 {
     HANDLE hFile = (HANDLE) dwCookie;
-    if ( WriteFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) ) 
+    if ( WriteFile (hFile, (LPVOID) lpBuff, (DWORD) cb, (LPDWORD) pcb, NULL) )
        return  0;
     else
        return -1;
@@ -117,7 +117,7 @@ HB_FUNC ( RICHEDITBOX_STREAMOUTEX )
    LONG       nDataFormat = (LONG)   hb_parnl (4);
    HANDLE     hFile;
    BYTE       bUtf8Bom[3]  = {0xEF, 0xBB, 0xBF};
-   BYTE       bUtf16Bom[2] = {0xFF, 0xFE}; 
+   BYTE       bUtf16Bom[2] = {0xFF, 0xFE};
    DWORD      dwWritten;
    EDITSTREAM es;
    LONG       Format;
@@ -152,7 +152,7 @@ HB_FUNC ( RICHEDITBOX_STREAMOUTEX )
    es.dwError     = 0;
 
    SendMessage ( hWndControl, EM_STREAMOUT, (WPARAM) Format, (LPARAM) &es );
-   
+
    CloseHandle (hFile);
 
    if( es.dwError )
@@ -166,45 +166,44 @@ HB_FUNC ( _HMG_PRINTER_PRINTDIALOG_EX )
    PRINTDLG pd ;
    LPDEVMODE   pDevMode;
 
-   pd.lStructSize = sizeof(PRINTDLG); 
-   pd.hDevMode = (HANDLE) NULL; 
-   pd.hDevNames = (HANDLE) NULL; 
-   pd.Flags = PD_RETURNDC | PD_PRINTSETUP ; 
+   pd.lStructSize = sizeof(PRINTDLG);
+   pd.hDevMode = (HANDLE) NULL;
+   pd.hDevNames = (HANDLE) NULL;
+   pd.Flags = PD_RETURNDC | PD_PRINTSETUP ;
    pd.hwndOwner = HB_ISNIL(1) ? GetActiveWindow() : (HWND) HMG_parnl (1) ;
-   pd.hDC = NULL; 
-   pd.nFromPage = 1; 
-   pd.nToPage = 1; 
-   pd.nMinPage = 0; 
-   pd.nMaxPage = 0; 
-   pd.nCopies = 1; 
-   pd.hInstance = (HANDLE) NULL; 
-   pd.lCustData = 0L; 
-   pd.lpfnPrintHook = (LPPRINTHOOKPROC) NULL; 
-   pd.lpfnSetupHook = (LPSETUPHOOKPROC) NULL; 
-   pd.lpPrintTemplateName = NULL; 
-   pd.lpSetupTemplateName = NULL; 
-   pd.hPrintTemplate = (HANDLE) NULL; 
-   pd.hSetupTemplate = (HANDLE) NULL; 
- 
-   if ( PrintDlg(&pd) ) 
+   pd.hDC = NULL;
+   pd.nFromPage = 1;
+   pd.nToPage = 1;
+   pd.nMinPage = 0;
+   pd.nMaxPage = 0;
+   pd.nCopies = 1;
+   pd.hInstance = (HANDLE) NULL;
+   pd.lCustData = 0L;
+   pd.lpfnPrintHook = (LPPRINTHOOKPROC) NULL;
+   pd.lpfnSetupHook = (LPSETUPHOOKPROC) NULL;
+   pd.lpPrintTemplateName = NULL;
+   pd.lpSetupTemplateName = NULL;
+   pd.hPrintTemplate = (HANDLE) NULL;
+   pd.hSetupTemplate = (HANDLE) NULL;
+
+   if ( PrintDlg(&pd) )
    {
       pDevMode = (LPDEVMODE) GlobalLock(pd.hDevMode);
 
       hb_reta (4);
-      HMG_storvnl ((LONG_PTR) pd.hDC,                      -1, 1 ); 
-      HMG_storvc  ((const TCHAR *) pDevMode->dmDeviceName, -1, 2 ); 
-      hb_storvni  ( pDevMode->dmCopies,                    -1, 3 ); 
-      hb_storvni  ( pDevMode->dmCollate,                   -1, 4 ); 
+      HMG_storvnl ((LONG_PTR) pd.hDC,                      -1, 1 );
+      HMG_storvc  ((const TCHAR *) pDevMode->dmDeviceName, -1, 2 );
+      hb_storvni  ( pDevMode->dmCopies,                    -1, 3 );
+      hb_storvni  ( pDevMode->dmCollate,                   -1, 4 );
 
       GlobalUnlock(pd.hDevMode);
    }
    else
    {
       hb_reta (4);
-      hb_storvnl ( 0,         -1, 1 ); 
-      HMG_storvc ( _TEXT(""), -1, 2 ); 
-      hb_storvni ( 0,         -1, 3 ); 
-      hb_storvni ( 0,         -1, 4 ); 
+      hb_storvnl ( 0,         -1, 1 );
+      HMG_storvc ( _TEXT(""), -1, 2 );
+      hb_storvni ( 0,         -1, 3 );
+      hb_storvni ( 0,         -1, 4 );
    }
 }
-

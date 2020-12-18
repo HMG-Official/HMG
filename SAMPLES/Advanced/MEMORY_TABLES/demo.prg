@@ -17,13 +17,13 @@ REQUEST HB_MEMIO
 Function Main()
 *--------------------------------------------------------*
 
-OpenTable() 
+OpenTable()
 
    DEFINE WINDOW Form_1 ;
       AT 0,0 ;
       WIDTH 640 HEIGHT 480 ;
       TITLE 'Memory File System Demo' ;
-      MAIN NOMAXIMIZE 
+      MAIN NOMAXIMIZE
 
       DEFINE MAIN MENU
          DEFINE POPUP 'Test'
@@ -33,12 +33,12 @@ OpenTable()
 
       @ 10,10 GRID grid_1   ;
          WIDTH 610   ;
-         HEIGHT 390   ;   
+         HEIGHT 390   ;
          HEADERS { 'Code' , 'Name' , 'Residents' } ;
          WIDTHS { 50 , 160 , 100 } ;
          ROWSOURCE "memarea" ;
          COLUMNFIELDS { 'Code' , 'Name' , 'Residents' } ;
-         JUSTIFY { GRID_JTFY_LEFT, GRID_JTFY_LEFT, GRID_JTFY_RIGHT } 
+         JUSTIFY { GRID_JTFY_LEFT, GRID_JTFY_LEFT, GRID_JTFY_RIGHT }
 
    END WINDOW
 

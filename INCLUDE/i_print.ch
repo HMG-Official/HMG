@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text 
+ As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2003, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net> 
+	Copyright 2002 AJ Wos <andrwos@aust1.net>
 
 	"HWGUI"
   	Copyright 2001-2007 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -98,7 +98,7 @@
 	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
 	_HMG_SYSDATA \[ 375 \] := <cPrinter> ;;
 	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
+	_HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 
 #xtranslate _HMG_PrinterMetaFileDC => _HMG_SYSDATA \[ 502 \]
@@ -158,7 +158,7 @@
 	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
 	_HMG_SYSDATA \[ 375 \] := <cPrinter> ;;
 	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
+	_HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 
 #xcommand SELECT PRINTER DEFAULT ;
@@ -204,7 +204,7 @@
 	_hmg_printer_InitUserMessages() ;;
 	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
 	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
+	_HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 
 #xcommand SELECT PRINTER DEFAULT TO <lSuccess> ;
@@ -251,7 +251,7 @@
 	_hmg_printer_InitUserMessages() ;;
 	_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) ;;
 	_HMG_SYSDATA \[ 286 \] := <.lCopies.> ;;
-	_HMG_SYSDATA \[ 287 \] := <.lCollate.> 
+	_HMG_SYSDATA \[ 287 \] := <.lCollate.>
 
 
 #xcommand SELECT PRINTER DIALOG ;
@@ -273,7 +273,7 @@ _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
 _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
 _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
 _hmg_printer_InitUserMessages()					;;
-_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) 
+_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
 
 #xcommand SELECT PRINTER DIALOG TO <lSuccess> ;
 	[ <Preview  : PREVIEW> ] ;
@@ -295,7 +295,7 @@ _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
 _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
 _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
 _hmg_printer_InitUserMessages() ;;
-_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) 
+_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
 
 
 #xcommand SELECT PRINTER PDF <cPDFFile> ;
@@ -306,7 +306,7 @@ _HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
    [ <lLog            : LOG> ] ;
 => ;
    _HMG_SYSDATA \[ 513 \] := .t. ;;
-	_HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ), <.lLog.> ) 
+	_HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ), <.lLog.> )
 
 #xcommand SELECT PRINTER PDF <cPDFFile> TO <lSuccess> ;
 	[ <lOrientation 	: ORIENTATION>		<nOrientation> ] ;
@@ -316,7 +316,7 @@ _HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
    [ <lLog            : LOG> ] ;
 => ;
    _HMG_SYSDATA \[ 513 \] := .t. ;;
-	<lSuccess> := _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ), <.lLog.> ) 
+	<lSuccess> := _HMG_HPDF_INIT ( <cPDFFile>, if ( <.lOrientation.>	, <nOrientation>	, 1 ) , if ( <.lPaperSize.>	, <nPaperSize>		, 1 ) , if ( <.lPaperLength.>	, <nPaperLength>	, -999 ) , if ( <.lPaperWidth.>	, <nPaperWidth>		, -999 ), <.lLog.> )
 
 
 
@@ -336,9 +336,9 @@ _HMG_SYSDATA \[ 516 \] := <"aJobData">;;
 
 
 #xcommand START PRINTPAGE ;
-=> iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_startpage(),IF ( _HMG_SYSDATA \[ 378 \],;  
+=> iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_startpage(),IF ( _HMG_SYSDATA \[ 378 \],;
       ( _HMG_SYSDATA \[ 374 \] := _HMG_PRINTER_STARTPAGE_PREVIEW ( _HMG_SYSDATA \[ 372 \] , GetTempFolder() + _HMG_SYSDATA \[ 379 \] + "_hmg_print_preview_" +  alltrim(strzero(++_HMG_SYSDATA \[ 380 \],4)) + ".Emf" ) ,;
-        _HMG_PrinterMetaFileDC := _HMG_SYSDATA \[ 374 \] ),; 
+        _HMG_PrinterMetaFileDC := _HMG_SYSDATA \[ 374 \] ),;
       ( _HMG_PrinterMetaFileDC := 0, _HMG_PRINTER_StartPage ( _HMG_SYSDATA \[ 374 \] ) ) )  )
 
 
@@ -367,8 +367,8 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 	[ <align:CENTER,RIGHT> ] ;
    [ ANGLE <nAngleInDegrees> ] ;
 	=> ;
-   iif( _HMG_SYSDATA \[ 513 \],; 
-        _HMG_HPDF_PRINT ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),; 
+   iif( _HMG_SYSDATA \[ 513 \],;
+        _HMG_HPDF_PRINT ( <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),;
         _HMG_PRINTER_H_PRINT ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> , <nAngleInDegrees> ) )
 
 #xtranslate @ <Row> , <Col> PRINT [ DATA ] <cText> ;
@@ -383,7 +383,7 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 	[ <align:CENTER,RIGHT> ] ;
 	=> ;
    iif( _HMG_SYSDATA \[ 513 \],;
-        _HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),; 
+        _HMG_HPDF_MULTILINE_PRINT ( <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ),;
         _HMG_PRINTER_H_MULTILINE_PRINT ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <cFontName> , <nFontSize> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <cText> , <.bold.> , <.italic.> , <.underline.> , <.strikeout.> , <.lcolor.> , <.lfont.> , <.lsize.> , <"align"> ) )
 
 #xtranslate @ <nRow> , <nCol> PRINT IMAGE <cImage> ;
@@ -405,20 +405,20 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 #xtranslate @ <Row> , <Col> PRINT RECTANGLE TO <ToRow> , <ToCol> ;
 	[ <lwidth : PENWIDTH> <Width> ] ;
 	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lfilled: FILLED> ]; 
+	[ <lfilled: FILLED> ];
 	=> ;
    iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_RECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.> ,<.lfilled.>), _HMG_PRINTER_H_RECTANGLE ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.> ,<.lfilled.>) )
 
 #xtranslate @ <Row> , <Col> PRINT RECTANGLE TO <ToRow> , <ToCol> ;
 	[ <lwidth : PENWIDTH> <Width> ] ;
 	[ <lcolor : COLOR> <aColor> ] ;
-	[ <lfilled: FILLED> ]; 
+	[ <lfilled: FILLED> ];
 	ROUNDED ;
    [ CURVE <nCurve> ];
 	=> ;
 	iif( _HMG_SYSDATA \[ 513 \],_HMG_HPDF_ROUNDRECTANGLE ( <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.>, <nCurve> ), _HMG_PRINTER_H_ROUNDRECTANGLE ( _HMG_SYSDATA \[ 374 \] , <Row> , <Col> , <ToRow> , <ToCol> , <Width> , <aColor>\[1\] , <aColor>\[2\] , <aColor>\[3\] , <.lwidth.> , <.lcolor.>, <.lfilled.> ) )
-   
-   
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // PRINTER CONFIGURATION CONSTANTS
@@ -447,14 +447,14 @@ iif( _HMG_SYSDATA \[ 513 \],_hmg_hpdf_abortdoc(), _HMG_PRINTER_ABORTDOC ( _HMG_S
 #define PRINTER_BIN_CASSETTE      14
 #define PRINTER_BIN_FORMSOURCE    15
 #define PRINTER_BIN_LAST          DMBIN_FORMSOURCE
-#define PRINTER_BIN_USER          256    
+#define PRINTER_BIN_USER          256
 
 * Orientation
 
 #define PRINTER_ORIENT_PORTRAIT   1
 #define PRINTER_ORIENT_LANDSCAPE  2
 
-* Color 
+* Color
 
 #define PRINTER_COLOR_MONOCHROME  1
 #define PRINTER_COLOR_COLOR       2

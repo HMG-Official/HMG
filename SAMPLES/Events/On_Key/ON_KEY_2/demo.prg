@@ -13,13 +13,13 @@ Function Main
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG Demo' ;
-		MAIN 
+		MAIN
 
 		ON KEY F2 ACTION MsgInfo ( ThisWindow.FocusedControl )
 
-		@ 10,10 TEXTBOX Text_1 
-		@ 50,10 TEXTBOX Text_2 
-		@ 90,10 TEXTBOX Text_3 
+		@ 10,10 TEXTBOX Text_1
+		@ 50,10 TEXTBOX Text_2
+		@ 90,10 TEXTBOX Text_3
 
       Define statusbar
           statusitem "Select Texbox and press F2"
@@ -31,4 +31,3 @@ Function Main
 	Form_1.Activate
 
 Return Nil
-

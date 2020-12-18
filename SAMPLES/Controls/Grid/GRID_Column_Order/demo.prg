@@ -4,7 +4,7 @@ Function Main
 
 Local aRows [20] [3]
 
-   Private fColor := { || if ( This.CellRowIndex/2 == int(This.CellRowIndex/2) , { 0,0,255 } , { 0,255,0 } ) }   
+   Private fColor := { || if ( This.CellRowIndex/2 == int(This.CellRowIndex/2) , { 0,0,255 } , { 0,255,0 } ) }
 
    DEFINE WINDOW Form_1 ;
       AT 0,0 ;

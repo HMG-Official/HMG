@@ -23,7 +23,7 @@ DEFINE WINDOW Form_1 ;
     MAIN FONT 'Arial' SIZE 10 BACKCOLOR BLUE
 
    ON KEY ESCAPE ACTION ThisWindow.Release()
-    
+
    @  50,25 BUTTON Button_1 CAPTION "InputWindow (Old version)"        WIDTH 200 ACTION Prepare_InputWindow(1)
    @  90,25 BUTTON Button_2 CAPTION "InputWindow (New version)"        WIDTH 200 ACTION Prepare_InputWindow(2)
 END WINDOW
@@ -43,7 +43,7 @@ Local aGridWidths:={80,80,80}
 Public nEventIdx                                                           // In case is need to CREATE EVENT
 
 cTitle      := 'InputWindow Test '+If(nOption=1,"(Old version)","(New version)")
-aLabels     := { 'Field 1 (TextBox for text)', 'Field 2 (CheckBox):', 'Field 3 (ComboBox)', ; 
+aLabels     := { 'Field 1 (TextBox for text)', 'Field 2 (CheckBox):', 'Field 3 (ComboBox)', ;
                  'Field 4 (DatePicker)', 'Field 5 (Numeric masked TextBox)', ;
                  'Field 6 (Numeric TextBox for integers)', 'Field 7 (EditBox)', ;
                  'Field 8 (Grid)', 'Field 9 (PassWord)', HMG_PadC(' Field 10 (Label) ',35,"─") }
@@ -65,7 +65,7 @@ aFormats    := { 20, Nil, {'Option 1','Option 2'}, Nil, '99.99', 10, 50, {aGridH
  | EditBox                 |  Dbf Memo field  |                      |
  | Grid                    |       {{}}       | {{headers},{Widths}} |
  +-------------------------+------------------+----------------------+ */
- 
+
 /* From hereunder, it's with new features. */
 
 nRow           := (Form_1.Row)+(Form_1.Button_2.Row)+35                    // Optional
@@ -80,7 +80,7 @@ aHotKeys       := { { 0, VK_ESCAPE, {|| ThisWindow.Release() } }, ;        // Op
 
 /*         This must obey the same settings and sequences that are
            described in i_keybd.ch. For example ALT+A must be like this:
-                                    { { MOD_ALT, VK_A, <{|| action } > } } 
+                                    { { MOD_ALT, VK_A, <{|| action } > } }
            Others codeblocks can be added, having many HotKeys             */
 
 nLabelWidth    := 260                                              // Optional. Forcing width sizes
@@ -93,14 +93,14 @@ If nOption = 2
 Else
    xControlWidth  := 250                                           // Optional
 Endif
-/* Forcing width sizes. xControlWidth can be a fixed value of a 
+/* Forcing width sizes. xControlWidth can be a fixed value of a
    variable or an array containing each width size of each control */
 
 lControlBold   := .T.                                              // Optional
-               
+
 aStyles        := {{nLabelWidth,lLabelBold,aLabelFColor,nAlign},;  // Need to be declared Bidimensional {{},{}}
                    {xControlWidth,lControlBold}}
-               
+
 bCode          := {|| My_UDF()}                                    // Optional. Good to insert UDFs
 
 Do Case

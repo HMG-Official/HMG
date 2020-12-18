@@ -14,7 +14,7 @@ Function Main
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'Main Window' ;
 		MAIN ;
-		NOSHOW 
+		NOSHOW
 
 	END WINDOW
 
@@ -29,7 +29,7 @@ Function Main
 		@ 70,10 LABEL Label_1 ;
 		WIDTH 500 HEIGHT 40 ;
 		VALUE 'Splash WIndow (Wait a Moment)' ;
-		FONT 'Arial' SIZE 24 
+		FONT 'Arial' SIZE 24
 
 	END WINDOW
 
@@ -51,4 +51,3 @@ Local iTime
 	Form_Splash.Release
 
 Return
-

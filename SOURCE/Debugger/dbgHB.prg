@@ -28,7 +28,7 @@
  executable to be covered by the GNU General Public License.
  Your use of that executable is in no way restricted on account of linking the
  HMG DEBUGGER library code into it.
- 
+
  add
  GUIDoEvents() : instead INLINE now Method with Errorblock
 ----------------------------------------------------------------------------*/

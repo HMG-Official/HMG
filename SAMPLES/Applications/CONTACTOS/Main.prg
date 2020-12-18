@@ -1,7 +1,7 @@
-﻿/*
+/*
 * Contactos
 * (C) 2003 Roberto Lopez <mail.box.hmg@gmail.com>
-* 
+*
 * Contribuciones de mejoramiento del código: Javier Tovar y Pablo César
 *
 */
@@ -40,17 +40,17 @@ DEFINE WINDOW Principal ;
     DEFINE WINDOW:  Inicia la definicion de la ventana. Debe indicarse un
             nombre de ventana que sera unico para todo el programa.
             (Puede usarse en codigo el mismo nombre mas de una vez
-            pero solo una puede estar activa al mismo tiempo)   
-    AT:     Indica Fila,Columna del angulo superior izquierdo de la 
+            pero solo una puede estar activa al mismo tiempo)
+    AT:     Indica Fila,Columna del angulo superior izquierdo de la
             ventana (medida en pixels)
     WIDTH:      Ancho de la ventaba medido en pixels.
     HEIGHT:     Altura de la ventana medida en pixels.
-    TITLE:      Titulo de la ventana        
-    MAIN:       Indica que se esta definiendo la ventana principal del 
+    TITLE:      Titulo de la ventana
+    MAIN:       Indica que se esta definiendo la ventana principal del
             programa.
     */
 
-    // Definicion del menu principal 
+    // Definicion del menu principal
     // Cada menu puede tener multiples POPUPs (submenus)
     // Los popups pueden anidarse sin limites.
     // A continuacion de DEFINE POPUP se indica la etiqueta.
@@ -59,10 +59,10 @@ DEFINE WINDOW Principal ;
     // Cada item de menu se define mediante MENUITEM.
     // La clausula ACTION, indica el procedimiento a ejecutarse
     // cuando el usuario selecciona el item.
-    // SEPARATOR Incluye una linea horizontal, usada para separar 
+    // SEPARATOR Incluye una linea horizontal, usada para separar
     // items.
 
-    DEFINE MAIN MENU 
+    DEFINE MAIN MENU
         DEFINE POPUP '&Archivo'
             MENUITEM '&Contactos'         ACTION AdministradorDeContactos()
             MENUITEM '&Tipos de Contacto' ACTION AdministradorDeTipos()
@@ -76,9 +76,9 @@ DEFINE WINDOW Principal ;
         END POPUP
     END MENU
 
-    // Fin de la definicion del menu principal 
+    // Fin de la definicion del menu principal
 
-    // El control TOOLBAR puede contener multiples botones de 
+    // El control TOOLBAR puede contener multiples botones de
     // comando.
     // El tamaño de estos botones es definido por medio de la
     // clausula BUTTONSIZE <Ancho>,<Alto>
@@ -107,8 +107,8 @@ DEFINE WINDOW Principal ;
             CAPTION 'Re-Index' ;
             PICTURE 'Construccion' ;
             ACTION ReindexaIndices(.T.,.T.)
-            
-            
+
+
         BUTTON Button_4 ;
             CAPTION 'Ayuda' ;
             PICTURE 'ayuda' ;
@@ -116,38 +116,38 @@ DEFINE WINDOW Principal ;
 
     END TOOLBAR
 
-    
+
     @ 320,410 PROGRESSBAR Progress_1     ;
         RANGE 0 , 1000                   ;
         WIDTH 300                        ;
         HEIGHT 26                        ;
         TOOLTIP "ProgressBar Horizontal" ;
         BACKCOLOR GREEN FORECOLOR RED
-    
+
     // La barra de estado aparece en la parte inferior de la ventana.
     // Puede tener multiples secciones definidas por medio de STATUSITEM
-    // Existen dos secciones (opcionales) predefinidas, llamadas 
+    // Existen dos secciones (opcionales) predefinidas, llamadas
     // CLOCK y DATE (muestran un reloj y la fecha respectivamente)
 
-    DEFINE STATUSBAR 
-        STATUSITEM "(c) 2013 Roberto Lopez - Version 1.1" 
-        CLOCK 
-        DATE 
+    DEFINE STATUSBAR
+        STATUSITEM "(c) 2013 Roberto Lopez - Version 1.1"
+        CLOCK
+        DATE
     END STATUSBAR
 
 // Fin de la definicion de la ventana
 END WINDOW
-// maximizar la ventana 
-MAXIMIZE WINDOW Principal 
+// maximizar la ventana
+MAXIMIZE WINDOW Principal
 // Activar la ventana
 
 Principal.Progress_1.Hide
 
 ACTIVATE WINDOW Principal
-// El comando ACTIVATE WINDOW genera un estado de espera. 
+// El comando ACTIVATE WINDOW genera un estado de espera.
 // El programa estara detenido en este punto hasta que la ventana
 // sea cerrada interactiva o programaticamente. Solo se ejecutaran
-// los procedimientos de evento asociados a sus controles (o a la 
+// los procedimientos de evento asociados a sus controles (o a la
 // ventana misma)
 Return Nil
 
@@ -158,7 +158,7 @@ Local lDbf1:=.F., lDbf2:=.F.
 nArea := SELECT('Tipos')
 IF nArea == 0
    IF !FILE('Tipos.DBF' )
-      aMidb:= {{ "Cod_Tipo"   , "N", 03, 0}, ; 
+      aMidb:= {{ "Cod_Tipo"   , "N", 03, 0}, ;
                { "Desc"       , "C", 32, 0}}
       DBCREATE('Tipos.DBF', aMidb )
    ENDIF
@@ -170,7 +170,7 @@ ENDIF
 nArea := SELECT('Contactos')
 IF nArea == 0
    IF !FILE('Contactos.DBF' )
-      aMidb:= {{ "Apellido"   , "C", 25, 0}, ; 
+      aMidb:= {{ "Apellido"   , "C", 25, 0}, ;
                { "Nombres"    , "C", 25, 0}, ;
                { "Calle"      , "C", 25, 0}, ;
                { "Numero"     , "N", 10, 0}, ;
@@ -228,7 +228,7 @@ If lArea2
    INDEX ON Cod_Tipo TAG Cod_Tipo
    REINDEX EVAL {|| InProgress(nLastRec) } EVERY 10
    Contactos->(DBCLOSEAREA())
-Endif     
+Endif
 Principal.Progress_1.Hide
 AbrirTablas()
 Return Nil

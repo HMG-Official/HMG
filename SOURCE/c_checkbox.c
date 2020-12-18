@@ -199,4 +199,3 @@ HB_FUNC( INITIMAGECHECKBUTTON )
       HMG_storvnl ((LONG_PTR) hImageList,   -1, 2);
    }
 }
-

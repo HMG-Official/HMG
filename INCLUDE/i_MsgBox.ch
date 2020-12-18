@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Header File --> i_MsgBox.ch  
+ HMG Header File --> i_MsgBox.ch
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -76,5 +76,3 @@
 
 #xtranslate DEBUGINFO STOREIN <cVar> [TITLE <xTitle>] [TYPE <nTypeIconButton>] [TIMEOUT <nMilliseconds>] [PARAMETERS] <xData1,...>  => ;
             MsgDebugTitle(<xTitle>); MsgDebugType(<nTypeIconButton>); MsgDebugTimeOut(<nMilliseconds>); <cVar> := MsgDebug (<xData1>)
-
-

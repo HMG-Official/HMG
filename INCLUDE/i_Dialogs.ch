@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Header File --> i_Dialogs.ch  
+ HMG Header File --> i_Dialogs.ch
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -26,7 +26,7 @@
            [ CHECKMATCHCASE <CheckMatchCase> ] ;
            [ CHECKWHOLEWORD <CheckWholeWord> ] ;
            [ TITLE <cTitle> ] ;
-=> FindTextDlg ( <{action}>, <cFind>, <.NoUpDown.>, <.NoMatchCase.>, <.NoWholeWord.>, <CheckDown>, <CheckMatchCase>, <CheckWholeWord>, <cTitle> ) 
+=> FindTextDlg ( <{action}>, <cFind>, <.NoUpDown.>, <.NoMatchCase.>, <.NoWholeWord.>, <CheckDown>, <CheckMatchCase>, <CheckWholeWord>, <cTitle> )
 
 
 #xtranslate REPLACETEXTDIALOG ;
@@ -38,7 +38,7 @@
            [ CHECKMATCHCASE <CheckMatchCase> ] ;
            [ CHECKWHOLEWORD <CheckWholeWord> ] ;
            [ TITLE <cTitle> ] ;
-=> ReplaceTextDlg ( <{action}>, <cFind>, <cReplace>, <.NoMatchCase.>, <.NoWholeWord.>, <CheckMatchCase>, <CheckWholeWord> , <cTitle> ) 
+=> ReplaceTextDlg ( <{action}>, <cFind>, <cReplace>, <.NoMatchCase.>, <.NoWholeWord.>, <CheckMatchCase>, <CheckWholeWord> , <cTitle> )
 
 
 
@@ -132,4 +132,3 @@
 #xtranslate VirtualKeyboard.COL    := <arg> => _SetWindowSizePos ( VirtualKeyboard.HANDLE,      , <arg>,      ,       )
 #xtranslate VirtualKeyboard.WIDTH  := <arg> => _SetWindowSizePos ( VirtualKeyboard.HANDLE,      ,      , <arg>,       )
 #xtranslate VirtualKeyboard.HEIGHT := <arg> => _SetWindowSizePos ( VirtualKeyboard.HANDLE,      ,      ,      , <arg> )
-

@@ -151,5 +151,3 @@ HB_FUNC ( SETSLIDERRANGE )
 {
 	SendMessage( (HWND) HMG_parnl (1), TBM_SETRANGE, (WPARAM) TRUE, (LPARAM) MAKELONG(hb_parni(2),hb_parni(3)));
 }
-
-

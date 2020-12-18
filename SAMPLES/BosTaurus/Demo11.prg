@@ -14,7 +14,7 @@
 
 FUNCTION MAIN
 
-PRIVATE hBitmap := 0 
+PRIVATE hBitmap := 0
 
      DEFINE WINDOW Win1;
             AT 0,0;
@@ -27,7 +27,7 @@ PRIVATE hBitmap := 0
             ON PAINT    Proc_ON_PAINT ()
 
             @  200, 190 LABEL Label1 Value "Save Image as ..." FONT "Times New Roman" SIZE 14 BOLD AUTOSIZE
-            
+
             @  250, 100 BUTTON Button1 CAPTION "BMP"  ACTION Proc_Save_Image (1)
             @  250, 210 BUTTON Button2 CAPTION "JPG"  ACTION Proc_Save_Image (2)
             @  250, 320 BUTTON Button3 CAPTION "GIF"  ACTION Proc_Save_Image (3)
@@ -52,7 +52,7 @@ RETURN
 
 
 PROCEDURE Proc_ON_PAINT
-LOCAL hDC, BTstruct     
+LOCAL hDC, BTstruct
   hDC := BT_CreateDC ("Win1", BT_HDC_INVALIDCLIENTAREA, @BTstruct)
      BT_DrawBitmap (hDC,  30,  180, 300, 200, BT_COPY,  hBitmap)
   BT_DeleteDC (BTstruct)
@@ -62,7 +62,7 @@ RETURN
 
 PROCEDURE Proc_Save_Image (nAction)
 LOCAL Ret, Button
-   DO CASE       
+   DO CASE
       CASE nAction == 1
            Ret:= BT_BitmapSaveFile (hBitmap, "LOGO_BMP.bmp") // or BT_BitmapSaveFile (hBitmap, "LOGO_BMP.bmp", BT_FILEFORMAT_BMP)
       CASE nAction == 2
@@ -74,10 +74,10 @@ LOCAL Ret, Button
       CASE nAction == 5
            Ret:= BT_BitmapSaveFile (hBitmap, "LOGO_PNG.png", BT_FILEFORMAT_PNG)
    ENDCASE
-   
+
    IF Ret == .T.
       Button := "Button"+ALLTRIM(STR(nAction))
-      SetProperty ("Win1", Button, "Enabled", .F.) 
+      SetProperty ("Win1", Button, "Enabled", .F.)
    ENDIF
    MsgInfo ("Save Image: "+IF(Ret,"OK","Fail"))
 RETURN
@@ -86,24 +86,24 @@ RETURN
 
 FUNCTION Proc_Create_Logo
 LOCAL hDC, BTstruct
-LOCAL hBitmap, hBitmap_aux 
+LOCAL hBitmap, hBitmap_aux
 LOCAL aRGBcolor := {153,217,234}
 
    // Create bitmap in memory
    hBitmap := BT_BitmapCreateNew (150, 100, aRGBcolor)
 
    // Create hDC to a bitmap
-   hDC := BT_CreateDC (hBitmap, BT_HDC_BITMAP, @BTstruct)     
-     
+   hDC := BT_CreateDC (hBitmap, BT_HDC_BITMAP, @BTstruct)
+
      // Paint Gradient
-     BT_DrawGradientFillVertical (hDC,  0,  0,  150,  100, aRGBcolor, BLACK)                 
-     
+     BT_DrawGradientFillVertical (hDC,  0,  0,  150,  100, aRGBcolor, BLACK)
+
      // Draw Text
-     nTypeText    := BT_TEXT_TRANSPARENT + BT_TEXT_BOLD    
+     nTypeText    := BT_TEXT_TRANSPARENT + BT_TEXT_BOLD
      nAlingText   := BT_TEXT_LEFT + BT_TEXT_TOP
      nOrientation := BT_TEXT_NORMAL_ORIENTATION
      BT_DrawText (hDC, 10, 20, "HMG Casino", "Times New Roman", 14, BLACK, WHITE, nTypeText, nAlingText, nOrientation)
-      
+
      // Draw Rectangle
      BT_DrawRectangle (hDC, 5, 5, 140, 90, BLUE, 2)
 
@@ -112,8 +112,8 @@ LOCAL aRGBcolor := {153,217,234}
      hBitmap_aux := BT_BitmapLoadFile ("imgPNG")  // load from resource
         BT_DrawBitmapTransparent (hDC, 30, 30, 100, 100, BT_SCALE, hBitmap_aux, NIL)
      BT_BitmapRelease (hBitmap_aux)
-  
-  // Release hDC bitmap  
-  BT_DeleteDC (BTstruct)   
+
+  // Release hDC bitmap
+  BT_DeleteDC (BTstruct)
 
 Return hBitmap

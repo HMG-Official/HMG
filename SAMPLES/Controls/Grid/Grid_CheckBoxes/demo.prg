@@ -79,5 +79,3 @@ Local i, cList := ""
       MsgInfo ("CheckBoxEnabled is FALSE")
    ENDIF
 RETURN
-
-

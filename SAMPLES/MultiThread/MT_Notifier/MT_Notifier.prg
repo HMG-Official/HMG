@@ -2,7 +2,7 @@
 // Multi-Thread version of Win_Msg demo ( without INHERIT PUBLIC vars ), by Dr. Claudio Soto, March 2017
 
 
-/*  
+/*
   Win_Msg - A kind of Notification message so easy and friendly Demo
   Version.........: 1.1
   Created by......: Pablo César on February 9th, 2017
@@ -23,7 +23,7 @@ PRIVATE nThreadCount := 0
    ENDIF
 
    nMainThreadID := GetCurrentThreadID()
-   
+
    nMainThreadHandle := GetCurrentThreadHandle()
    SetThreadPriority( nMainThreadHandle, THREAD_PRIORITY_ABOVE_NORMAL )   // for default THREAD_PRIORITY_NORMAL
 
@@ -132,7 +132,7 @@ nTop  := hb_Random() * ( GetDesktopHeight() - nHeight - 10 )
          FONTBOLD    .F.
          BACKCOLOR   aBcolor
          FONTCOLOR   WHITE
-         CENTERALIGN .T. 
+         CENTERALIGN .T.
       END LABEL
 
    END WINDOW
@@ -172,4 +172,3 @@ SetFocus( hWinMain )
    SendMessage( hWnd, WM_SYSCOMMAND, SC_CLOSE, 0 )
 
 Return Nil
-

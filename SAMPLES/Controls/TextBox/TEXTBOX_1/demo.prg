@@ -13,7 +13,7 @@ Function Main
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG Demo' ;
-		MAIN 
+		MAIN
 
 		@ 10,10 TEXTBOX Text_1 ;
 			VALUE 123 ;
@@ -28,7 +28,7 @@ Function Main
 			VALUE 'Hi All' ;
 			TOOLTIP 'Character TextBox' ;
 			DISABLEDBACKCOLOR { 0,255,0 } ;
-			DISABLEDFONTCOLOR { 255,255,255 } 
+			DISABLEDFONTCOLOR { 255,255,255 }
 
 		DEFINE BUTTON C
 			ROW	250
@@ -54,4 +54,3 @@ Function Main
 	Form_1.Activate
 
 Return Nil
-

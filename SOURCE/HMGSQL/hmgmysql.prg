@@ -148,5 +148,3 @@ do case
       cValue := "''"       // NOTE: Here we lose values we cannot convert
 endcase
 return cValue
-
-

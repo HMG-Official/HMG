@@ -8,7 +8,7 @@ Function main()
 		HEIGHT 200 ;
 		TITLE 'PLAYWAVE' ;
 		MAIN ;
-		TOPMOST 
+		TOPMOST
 
 		@ 50 ,100 BUTTON Button_1 ;
 			CAPTION "Play Wave From File" ;
@@ -26,7 +26,6 @@ Return
 
 Procedure Play_Click
 
-	PLAY WAVE "sample.wav" 
+	PLAY WAVE "sample.wav"
 
 Return
-

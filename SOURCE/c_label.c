@@ -134,4 +134,3 @@ HB_FUNC( INITLABEL )
 
    HMG_retnl ((LONG_PTR) hWnd_Control);
 }
-

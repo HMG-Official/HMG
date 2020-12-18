@@ -14,7 +14,7 @@ Function Main
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'Main Window' ;
 		ICON 'WORLD' ;
-		MAIN 
+		MAIN
 
 		@ 200,140 BUTTON ImageButton_1 ;
 			PICTURE 'resbutton' ;
@@ -31,7 +31,7 @@ Function Main
 
 	END WINDOW
 
-	ACTIVATE WINDOW Form_Main 
+	ACTIVATE WINDOW Form_Main
 
 Return Nil
 
@@ -40,4 +40,3 @@ Procedure Play_Click
 	PLAY WAVE 'RESWAVE' FROM RESOURCE
 
 Return
-

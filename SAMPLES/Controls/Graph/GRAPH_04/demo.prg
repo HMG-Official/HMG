@@ -39,7 +39,7 @@ DRAW GRAPH IN WINDOW m AT 100,100;
 		SERIENAMES {"Product 1","Product 2","Product 3","Product 4","Product 5"};
 		COLORS {{255,0,0},{0,0,255},{255,255,0},{0,255,0},{255,128,64},{128,0,128}};
 		3DVIEW;
-		SHOWXVALUES; 
+		SHOWXVALUES;
 		SHOWLEGENDS NOBORDER
 
 return nil

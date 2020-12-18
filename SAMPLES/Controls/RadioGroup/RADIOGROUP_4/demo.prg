@@ -15,9 +15,9 @@ Function Main
 		TITLE 'HMG Demo' ;
 		ICON 'DEMO.ICO' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP 'M&isc'
 				ITEM 'Set RadioGroup Caption Property'	ACTION Form_1.Radio_1.Caption(1) := 'New Caption'
 				ITEM 'Get RadioGroup Caption Property'	ACTION MsgInfo ( Form_1.Radio_1.Caption (1) ,'Radio_1')
@@ -51,4 +51,3 @@ Function Main
 	Form_1.Activate
 
 Return Nil
-

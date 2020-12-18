@@ -7,19 +7,19 @@
 
 * NoAutoRelease Style Demo
 
-* Using this style speed up application execution, since the forms are 
-* loaded / created / activated only once (at program startup). Later you 
+* Using this style speed up application execution, since the forms are
+* loaded / created / activated only once (at program startup). Later you
 * only must show or hide them as needed.
 *
-* NOAUTORELEASE window clause, makes that, when the user closes the windows 
-* interactively they are hide instead released from memory, then, there is 
+* NOAUTORELEASE window clause, makes that, when the user closes the windows
+* interactively they are hide instead released from memory, then, there is
 * no need to reload / redefine / activate prior show it again.
 *
 * NOSHOW clause makes that the windows be not displayed at activation.
 
 #include "hmg.ch"
 
-// DECLARE WINDOW is required, since the windows are referred from code, 
+// DECLARE WINDOW is required, since the windows are referred from code,
 // using semi-oop syntax, prior its definition in code (main window menu)
 
 DECLARE WINDOW Std_Form
@@ -41,7 +41,7 @@ Function Main
 		MAIN ;
 		FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP '&File'
 				ITEM 'Show Standard Form' ACTION Std_Form.Show
 				ITEM 'Hide Standard Form' ACTION Std_Form.Hide
@@ -68,7 +68,7 @@ Function Main
 		HEIGHT 240 ;
 		TITLE 'Standard Form' ;
 		NOSHOW ;
-		NOAUTORELEASE 
+		NOAUTORELEASE
 
 		DEFINE BUTTON Button_1
 			ROW	10
@@ -88,7 +88,7 @@ Function Main
 		TITLE 'Child Form' ;
 		CHILD ;
 		NOSHOW ;
-		NOAUTORELEASE 
+		NOAUTORELEASE
 
 		DEFINE BUTTON Button_1
 			ROW	10
@@ -108,7 +108,7 @@ Function Main
 		TITLE 'Topmost Form' ;
 		TOPMOST ;
 		NOSHOW ;
-		NOAUTORELEASE 
+		NOAUTORELEASE
 
 		DEFINE BUTTON Button_1
 			ROW	10
@@ -128,7 +128,7 @@ Function Main
 		TITLE 'Modal Form' ;
 		MODAL ;
 		NOSHOW ;
-		NOAUTORELEASE 
+		NOAUTORELEASE
 
 		DEFINE BUTTON Button_1
 			ROW	10
@@ -150,6 +150,3 @@ Function Main
 			Main_Form
 
 Return Nil
-
-
-

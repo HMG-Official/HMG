@@ -62,7 +62,7 @@ Redo              BITMAP  Res\Home\Redo.bmp
 Find              BITMAP  Res\Home\Find.bmp
 Replace           BITMAP  Res\Home\Replace.bmp
 
-// View tab Colors frame 
+// View tab Colors frame
 
 DefFontBColor     BITMAP  Res\View\DefFontBColor.bmp
 SelFontBColor     BITMAP  Res\View\SelFontBColor.bmp
@@ -107,4 +107,3 @@ AlignLeftMin      BITMAP  Res\Context\AlignLeftMin.bmp
 AlignCenterMin    BITMAP  Res\Context\AlignCenterMin.bmp
 AlignRightMin     BITMAP  Res\Context\AlignRightMin.bmp
 AlignJustifyMin   BITMAP  Res\Context\AlignJustifyMin.bmp
-

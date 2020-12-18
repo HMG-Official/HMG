@@ -324,4 +324,3 @@ HB_FUNC( _SETMIXEDBTNPICTURE)
 
    HMG_retnl ((LONG_PTR) hImageList);
 }
-

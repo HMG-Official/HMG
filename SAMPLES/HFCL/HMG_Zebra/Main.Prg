@@ -11,7 +11,7 @@ Function Main
                          "Hello, World of Harbour!!! It's 2D barcode DataMatrix :)","http://harbour-project.org/"}
    PRIVATE aBarColor := { 0, 0, 0 }
    PRIVATE aBackColor := { 255, 255, 255 }
-   
+
    define window barcode at 0, 0 width 300 height 310 main title 'HMG - BarCode Generator'
       define label barcodetypelabel
          row 10
@@ -24,9 +24,9 @@ Function Main
          col 110
          width 100
          items aTypeItems
-         ON CHANGE barcode.code.value := aValues [ barcode.Type.value ]         
-      end Combobox           
-   
+         ON CHANGE barcode.code.value := aValues [ barcode.Type.value ]
+      end Combobox
+
       define label codelabel
          row 40
          col 10
@@ -103,7 +103,7 @@ Function Main
          col 10
          width 100
          fontcolor { 0, 0, 0 }
-         value 'Barcode Color' 
+         value 'Barcode Color'
          fontsize 16
          tooltip 'Click to change color!'
          action changebarcolor()
@@ -114,13 +114,13 @@ Function Main
          col 150
          width 100
          backcolor { 255, 255, 255 }
-         value 'Back Color' 
+         value 'Back Color'
          fontsize 16
          tooltip 'Click to change color!'
          action changebackcolor()
          alignment center
       end label
-      
+
       define button ok
          row 230
          col 60
@@ -135,7 +135,7 @@ Function Main
          caption 'Save to PNG'
          action createbarcodepng()
       end button
-      
+
    end window
    barcode.type.value := 1
    barcode.center
@@ -156,10 +156,10 @@ function CreateBarCode
                    aBackColor,;
                    barcode.checksum.value,;  // checksum
                    barcode.wide2_5.value,;  // wide2_5
-                   barcode.wide3.value )  // wide3                    
+                   barcode.wide3.value )  // wide3
    IF hBitMap == 0
       RETURN Nil
-   ENDIF      
+   ENDIF
 
    SET WINDOW barcode TRANSPARENT TO 150   // nAlphaBlend = 0 to 255 (completely transparent = 0, opaque = 255)
 
@@ -176,8 +176,8 @@ function CreateBarCode
    END WINDOW
    FLASH WINDOW Form1 COUNT 5 INTERVAL 50
    ACTIVATE WINDOW Form1
-         
-RETURN NIL   
+
+RETURN NIL
 
 
 function CreateBarCodepng
@@ -203,20 +203,20 @@ function CreateBarCodepng
                    aBackColor,;
                    barcode.checksum.value,;  // checksum
                    barcode.wide2_5.value,;  // wide2_5
-                   barcode.wide3.value )  // wide3                    
+                   barcode.wide3.value )  // wide3
    if file( cImageFileName )
       _Execute ( GetActiveWindow() , , cImageFileName, , , 5 )
-   endif         
-RETURN NIL 
+   endif
+RETURN NIL
 
 function changebarcolor
    local aColor := getcolor( barcode.barcolor.fontcolor )
    if valtype( acolor[ 1 ] ) == 'N'
       barcode.barcolor.fontcolor := aColor
       aBarColor := aColor
-   endif   
+   endif
 return nil
-   
+
 
 function changebackcolor
    local aColor := getcolor( barcode.backgroundcolor.backcolor )

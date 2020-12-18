@@ -26,8 +26,7 @@ Function Main
                 @ 10 ,410 BUTTON Button_5 CAPTION "Set CUR" ACTION Win_1.Image_1.Picture := "img.cur" WIDTH 100  HEIGHT 30
                 @ 10 ,510 BUTTON Button_6 CAPTION "Set BMP" ACTION Win_1.Image_1.Picture := "img.bmp" WIDTH 100  HEIGHT 30
                 @ 50 ,10  BUTTON Button_7 CAPTION "Set PNG" ACTION Win_1.Image_1.Picture := "img.png" WIDTH 100  HEIGHT 30
-                @ 50 ,110 BUTTON Button_8 CAPTION "Set TIF" ACTION Win_1.Image_1.Picture := "img.tif" WIDTH 100  HEIGHT 30                
+                @ 50 ,110 BUTTON Button_8 CAPTION "Set TIF" ACTION Win_1.Image_1.Picture := "img.tif" WIDTH 100  HEIGHT 30
         END WINDOW
         ACTIVATE WINDOW Win_1
 Return Nil
-

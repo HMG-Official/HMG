@@ -64,7 +64,7 @@ Function Main
 Return Nil
 
 Function AddText( t )
-Local a := FORM_MAIN.EDITBOX_1.VALUE 
+Local a := FORM_MAIN.EDITBOX_1.VALUE
 a := a + t + Chr(13) + Chr(10)
 	FORM_MAIN.EDITBOX_1.Value := a
 Return Nil
@@ -105,5 +105,3 @@ Function GetIp3
 Local a := FORM_MAIN.IPADDRESS_3.VALUE
 MsgInfo(StrZero(a[1],3)+"."+StrZero(a[2],3)+"."+StrZero(a[3],3)+"."+StrZero(a[4],3),"Info")
 Return Nil
-
-

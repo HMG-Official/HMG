@@ -7,7 +7,7 @@ Function main()
 		HEIGHT 480 ;
 		TITLE 'InputBox Demo' ;
 		MAIN ;
-		TOPMOST 
+		TOPMOST
 
 		@ 50 ,100 BUTTON Button_1 ;
 			CAPTION "InputBox Test" ;
@@ -52,4 +52,3 @@ Procedure TClick2
 	MsgInfo ( InputBox ( 'Enter text' , 'InputBox Demo' , 'Default Value' , 5000 , 'Timeout Value' ) )
 
 Return
-

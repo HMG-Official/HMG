@@ -8,11 +8,11 @@ Function Main
 		WIDTH 640 ;
 		HEIGHT 480 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			POPUP 'File'
-				ITEM 'Select Image' ACTION Form_1.Image_1.Picture := Getfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Select Image' ) 
+				ITEM 'Select Image' ACTION Form_1.Image_1.Picture := Getfile ( { {'jpg Files','*.jpg'} , {'gif Files','*.gif'} } , 'Select Image' )
 			END POPUP
 		END MENU
 
@@ -29,7 +29,6 @@ Function Main
 
 	CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1 
+	ACTIVATE WINDOW Form_1
 
 Return
-

@@ -13,7 +13,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'HMG Panel Window Demo' ;
-		WINDOWTYPE MAIN  
+		WINDOWTYPE MAIN
 
 		DEFINE BUTTON BUTTON_1
 			ROW		160
@@ -120,4 +120,3 @@ Procedure Test
 
 
 Return
-

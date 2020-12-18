@@ -8,7 +8,7 @@ Function Main
       WIDTH 800 ;
       HEIGHT 550 ;
       TITLE 'Grid Inplace Edit Event' ;
-      MAIN 
+      MAIN
 
       aItems := {}
       AADD (aItems, {"Carrot",        5, 30, DATE()+1 })
@@ -61,13 +61,13 @@ STATIC cControlName, cFormParentName
 
       CASE This.IsInplaceEditEventRun == .T.
 
-         Form_1.Label_3.VALUE := { "Last Key Press: ", HMG_GetLastVirtualKeyDown(),; 
-                                   "    Last Char Press: ", HMG_GetLastCharacter(),; 
+         Form_1.Label_3.VALUE := { "Last Key Press: ", HMG_GetLastVirtualKeyDown(),;
+                                   "    Last Char Press: ", HMG_GetLastCharacter(),;
                                    "    Current Value: ", GetProperty(cFormParentName, cControlName, "VALUE") }
 
       CASE This.IsInplaceEditEventFinish == .T.
 
-         Form_1.Label_1.VALUE := "" 
+         Form_1.Label_1.VALUE := ""
          Form_1.Label_2.VALUE := ""
          Form_1.Label_3.VALUE := ""
 
@@ -77,7 +77,7 @@ RETURN NIL
 
 
 FUNCTION ProcOnKeyEvent()
-   Form_1.Label_4.VALUE := "Last On Key Event is fired in: " + IF( This.IsInplaceEditEventRun == .F., "GRID Control", "Grid InplaceEdit Control" ) 
+   Form_1.Label_4.VALUE := "Last On Key Event is fired in: " + IF( This.IsInplaceEditEventRun == .F., "GRID Control", "Grid InplaceEdit Control" )
 RETURN NIL
 
 FUNCTION ProcOnClickEvent()

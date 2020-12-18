@@ -155,6 +155,3 @@ Function Main()
    ACTIVATE WINDOW Form_1
 
 Return
-
-
-

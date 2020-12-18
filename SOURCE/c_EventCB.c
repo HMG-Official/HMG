@@ -905,5 +905,3 @@ _THREAD_LOCK();
    hb_retl (lRet);
 _THREAD_UNLOCK();
 }
-
-

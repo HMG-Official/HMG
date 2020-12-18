@@ -29,7 +29,7 @@ table := sqlite3_get_table(dbo1,qstr)
 if sqlite3_errcode(dbo1) > 0 // error
    msgstop(sqlite3_errmsg(dbo1)+" Query is : "+qstr)
    return nil
-endif 
+endif
 stmt := sqlite3_prepare(dbo1,qstr)
 IF ! Empty( stmt )
    for i := 1 to sqlite3_column_count( stmt )
@@ -38,7 +38,7 @@ IF ! Empty( stmt )
          case type1 == "INTEGER" .or. type1 == "REAL" .or. type1 == "FLOAT"
             aadd(typesarr,"N")
          case type1 == "DATE"
-            aadd(typesarr,"D")   
+            aadd(typesarr,"D")
          otherwise
             aadd(typesarr,"C")
       endcase
@@ -57,7 +57,7 @@ if len(table) > 1
                rowarr[j] := stod(cDate)
             case typesarr[j] == "N"
                rowarr[j] := val(rowarr[j])
-         endcase      
+         endcase
       next j
       aadd(tablearr,aclone(rowarr))
    next i
@@ -73,7 +73,7 @@ sqlite3_exec(dbo1,qstr)
 if sqlite3_errcode(dbo1) > 0 // error
    msgstop(sqlite3_errmsg(dbo1)+" Query is : "+qstr)
    return .f.
-endif 
+endif
 return .t.
 
 function C2SQL(Value)

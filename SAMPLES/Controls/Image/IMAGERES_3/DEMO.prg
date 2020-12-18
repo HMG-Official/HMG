@@ -28,4 +28,3 @@ Function Main
         END WINDOW
         ACTIVATE WINDOW Win_1
 Return Nil
-

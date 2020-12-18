@@ -175,5 +175,3 @@ HB_FUNC ( SETTABSTOP )
     SetWindowLongPtr ( (HWND) HMG_parnl (1), GWL_STYLE, Style & (~ WS_TABSTOP) );
    }
 }
-
-

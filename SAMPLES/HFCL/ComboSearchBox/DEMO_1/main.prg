@@ -1,5 +1,5 @@
   /*
-     
+
 
       CSBox ( Combined Search Box ) try
 
@@ -15,18 +15,18 @@
     PROC Main()
 
        aCountries := HB_ATOKENS( MEMOREAD( "Countries.lst" ),   CRLF )
-       
+
        ASORT( aCountries )                    // This Array MUST be sorted
-           
+
        DEFINE WINDOW frmCSBTest ;
           AT 0,0 ;
           WIDTH 550 ;
           HEIGHT 300;
           TITLE 'CSBox ( Combined Search Box ) Test' ;
           MAIN
-         
+
           ON KEY ESCAPE ACTION frmCSBTest.Release
-          
+
 
           define label countries
              row 25
@@ -52,16 +52,16 @@
              rowoffset 50
              coloffset 0
           end combosearchbox
-            
 
-            
+
+
        END WINDOW // frmCSBTest
-       
+
        frmCSBTest.Center
 
 
 	* !!!!!!
-	* CombosearchBox already inherits all properties events 
+	* CombosearchBox already inherits all properties events
 	* and methods from TextBox!!!
 	* Test it uncommenting the following:
 	*
@@ -69,10 +69,8 @@
 	*
 	* !!!!!!
 
-       
+
        frmCSBTest.Activate
 
-         
+
     RETU // Main()
-
-

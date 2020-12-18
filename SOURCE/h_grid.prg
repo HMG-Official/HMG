@@ -2941,6 +2941,3 @@ Local nOldWorkArea
       nPhysicalRecord := &cRecordSource->( RecNo() )
    ENDIF
 RETURN nPhysicalRecord
-
-
-

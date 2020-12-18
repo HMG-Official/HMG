@@ -25,10 +25,10 @@ Function Main()
 
 	DEFINE WINDOW Form_1   ;
 	             AT 0,0	              ;
-	             WIDTH 510	;  
+	             WIDTH 510	;
 	             HEIGHT 350	;
 	             TITLE "Simples Exemplo (3) - Pedidos X Itens X Clientes";		
-	             MAIN	              ;      
+	             MAIN	              ;
 	             NOMAXIMIZE	;
 	             NOSIZE	
 
@@ -39,7 +39,7 @@ Function Main()
 				WIDTHS  {100}			;
 				FONT "Arial" SIZE 09		;
 				ON CHANGE 	( 		;
-					Mostra_Itens(),		; 
+					Mostra_Itens(),		;
 					Mostra_Cliente() 	;
 						)
 
@@ -91,14 +91,14 @@ Function Main()
                                     CAPTION '&Imprimir Pedido'	;
                                     WIDTH 120 HEIGHT 25		;
                                     ACTION Imprimir_Pedido()	;
-                                    FONT "MS Sans Serif" SIZE 09 FLAT 
+                                    FONT "MS Sans Serif" SIZE 09 FLAT
 
 	END WINDOW		
 	
-	/*  ENCHE GRID DOS PEDIDOS CADASTRADOS */ 
+	/*  ENCHE GRID DOS PEDIDOS CADASTRADOS */
               Pedidos->(DBGoTop()) 	 	
-	 Do While ! Pedidos->(Eof())    
-                     ADD ITEM { Pedidos->Pedido } TO Grid_Pedidos OF Form_1              
+	 Do While ! Pedidos->(Eof())
+                     ADD ITEM { Pedidos->Pedido } TO Grid_Pedidos OF Form_1
                      Pedidos->(DBSkip())
 	 EndDo
 
@@ -108,18 +108,18 @@ Function Main()
 	ACTIVATE WINDOW Form_1
 	Return
 
-/* 
+/*
 */
 Function Mostra_Itens()	
               Local cPedido	:= PegaValorDaColuna( "Grid_Pedidos" ,  "Form_1" , 1 )
 	Local nQuantItens	:= 0
 	Local nTotal	:= 0
 
-	 /*  ENCHE GRID DOS ITENS COM O PEDIDO ESCOLHIDO  */ 
+	 /*  ENCHE GRID DOS ITENS COM O PEDIDO ESCOLHIDO  */
 	 Itens->(DBSeek( cPedido ))	
 	 DELETE ITEM ALL FROM Grid_Itens OF Form_1
 	 Do While Itens->Pedido == cPedido .And. ! Itens->(Eof())
-                     ADD ITEM { Itens->Produto, Str(Itens->Quant,5), TransForm( Itens->Valor,"@R 999,999.99"), TransForm( Itens->Quant * Itens->Valor,"@R 999,999.99") } TO Grid_Itens OF Form_1  
+                     ADD ITEM { Itens->Produto, Str(Itens->Quant,5), TransForm( Itens->Valor,"@R 999,999.99"), TransForm( Itens->Quant * Itens->Valor,"@R 999,999.99") } TO Grid_Itens OF Form_1
 	       nQuantItens += 1
 	       nTotal +=  ( Itens->Quant * Itens->Valor )
                      Itens->(DBSkip())
@@ -130,12 +130,12 @@ Function Mostra_Itens()
 	
                Return Nil
 
-/* 
+/*
 */
 Function Mostra_Cliente()	
               Local cPedido	:= PegaValorDaColuna( "Grid_Pedidos" ,  "Form_1" , 1 )
- 
-	Pedidos->(DBSeek( cPedido ))                   && Posiciona no registro do Pedido 
+
+	Pedidos->(DBSeek( cPedido ))                   && Posiciona no registro do Pedido
 	Clientes->(DBSeek( Pedidos->Cliente ))      && Posiciona o Cliente	
 	
 	/* Coloca os dados do Cliente nos Respectivos Label's  */
@@ -155,10 +155,10 @@ Function PegaValorDaColuna( xObj, xForm, nCol)
 
 /*
 */
-Function Imprimir_Pedido()           
+Function Imprimir_Pedido()
 	Local nQuantItens	:= 0
 	Local nTotal	:= 0
-	Local cPedido := PegaValorDaColuna( "Grid_Pedidos" ,  "Form_1" , 1 ) 
+	Local cPedido := PegaValorDaColuna( "Grid_Pedidos" ,  "Form_1" , 1 )
 
 	If Empty( cPedido )
 	  MsgBox("Nenhum Pedido foi Selecionado!!")
@@ -168,13 +168,13 @@ Function Imprimir_Pedido()
               Form_1.Btn_Imprimir.Enabled := .F.
 
               Private nFont := 11
-              Private cArquivo := "" 
+              Private cArquivo := ""
 
               Set Printer TO REL.TMP
               Set Printer ON
               Set Console OFF
 	
-	Pedidos->(DBSeek( cPedido ))                   && Posiciona no registro do Pedido 
+	Pedidos->(DBSeek( cPedido ))                   && Posiciona no registro do Pedido
 	Clientes->(DBSeek( Pedidos->Cliente ))      && Posiciona o Cliente	
 
 	? "Pedido Número: "+cPedido
@@ -183,25 +183,25 @@ Function Imprimir_Pedido()
 	? "Endereço        : "+Clientes->Endereco
 	? "Cidade            : "+AllTrim(Clientes->Cidade)+"/"+Clientes->Estado 	
 	? " "
-	? "Produto                       Quant             Unitário                Total" 
+	? "Produto                       Quant             Unitário                Total"
 	? Replicate("-",78)
-	     
+	
 	Itens->(DBSeek( cPedido ))
               Do While Itens->Pedido == cPedido  .And. ! Pedidos->(Eof())
-                   ?    Itens->Produto        + Space(19) 
+                   ?    Itens->Produto        + Space(19)
 	     ??  StrZero(Itens->Quant,3) + Space(11)
-	     ??  TransForm( Itens->Valor,"@R 999,999.99") + Space(10)   
+	     ??  TransForm( Itens->Valor,"@R 999,999.99") + Space(10)
 	     ??  TransForm( Itens->Quant * Itens->Valor,"@R 999,999.99")
                    nQuantItens += 1
 	     nTotal +=  ( Itens->Quant * Itens->Valor )
                    Itens->(DBSkip())
 	 EndDo
-               ? Replicate("-",78)             
+               ? Replicate("-",78)
 
-              Set Printer TO 
+              Set Printer TO
               Set Printer OFF
               Set Console ON
-   
+
                cArquivo :=memoRead("REL.TMP")
 
                Define Window Form_3;
@@ -227,7 +227,7 @@ Function Imprimir_Pedido()
                                     CAPTION '&Zoom(+)'             ;
                                     WIDTH 120 HEIGHT 17    ;
                                     ACTION ZoomLabel(1);
-                                    FONT "MS Sans Serif" SIZE 09 FLAT 
+                                    FONT "MS Sans Serif" SIZE 09 FLAT
 
                        @ 01,125 BUTTON Bt_Zoom_menos  ;
                                      CAPTION '&Zoom(-)'             ;
@@ -243,7 +243,7 @@ Function Imprimir_Pedido()
 
                End window
 
-               MODIFY CONTROL Edit_1 OF Form_3 FONTSIZE nFont  
+               MODIFY CONTROL Edit_1 OF Form_3 FONTSIZE nFont
 
                Center Window Form_3
                Activate Window Form_3
@@ -251,7 +251,7 @@ Function Imprimir_Pedido()
 /*
 */
 Function ZoomLabel(nmm)       	
-	If nmm == 1 
+	If nmm == 1
                   nFont++
 	Else
 	    nFont--

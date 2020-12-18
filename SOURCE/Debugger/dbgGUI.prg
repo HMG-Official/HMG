@@ -28,7 +28,7 @@
  executable to be covered by the GNU General Public License.
  Your use of that executable is in no way restricted on account of linking the
  HMG DEBUGGER library code into it.
- 
+
  add 2004-10-24 by Jimmy
  ON DBLCLICK : Grid ENTER = VK_RETURN
 ----------------------------------------------------------------------------*/
@@ -329,7 +329,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Watch" )' )
                   FONTCOLOR COLOR_NavyBlue;
                   DYNAMICFORECOLOR { {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()}, {||GetForeColorWatch()} };
                   NOLINES;
-ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				
                   TOOLTIP "Press ENTER to edit the expression and press DELETE to delete item"
 
                   _HMG_FormDebugger.Grid_Watch.PaintDoubleBuffer := .T.
@@ -365,7 +365,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Evaluate" )' )
                   BACKCOLOR COLOR_Gainsboro;
                   FONTCOLOR COLOR_NavyBlue;
                   NOLINES;
-ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				
                   TOOLTIP "Press ENTER to copy expression for evaluate and press DELETE to delete item"
 
                   _HMG_FormDebugger.Grid_Calc.PaintDoubleBuffer := .T.
@@ -393,7 +393,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Variables" )' )
                   FONTCOLOR COLOR_NavyBlue;
                   DYNAMICFORECOLOR { {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()}, {||GetForeColorVars()} };
                   NOLINES;
-ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				
                   TOOLTIP "Press ENTER for inspect the value of variables"
 
                   _HMG_FormDebugger.Grid_Vars.PaintDoubleBuffer := .T.
@@ -413,7 +413,7 @@ HMG_DebuggerWaitMessage( _HMG_DEBUGGER_MSG_ + '( DEFINE PAGE "Areas" )' )
                   FONTCOLOR COLOR_NavyBlue;
                   NOLINES;
                   TOOLTIP "Available work areas";
-ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				
                   ON CHANGE ( UpdateGridRec() , _HMG_FormDebugger.Grid_Areas.SETFOCUS )
 
                   _HMG_FormDebugger.Grid_Areas.PaintDoubleBuffer := .T.
@@ -428,7 +428,7 @@ ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy
                   BACKCOLOR COLOR_Gainsboro;
                   FONTCOLOR COLOR_DarkGreen;
                   NOLINES;
-ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				  
+ON DBLCLICK OnKeyPress( VK_RETURN ); // Jimmy				
                   TOOLTIP "Value of current RECORD in the selected work area"
 
                   _HMG_FormDebugger.Grid_Rec.PaintDoubleBuffer := .T.
@@ -1605,4 +1605,3 @@ PROCEDURE HMG_DebuggerWaitMessage(); RETURN
 PROCEDURE HMG_DebuggerWaitMessage_SetProgressbar(); RETURN
 *------------------------------------------------------------*
 #endif
-

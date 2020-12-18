@@ -27,7 +27,7 @@ LOCAL hConn
 
 	IF RDDINFO(RDDI_CONNECT, {"MYSQL", "localhost", "root","1234", "test"}) == 0
 		MSGSTOP("Unable connect to the server")
-		RETURN 
+		RETURN
 	ENDIF
 
 	CreateTable()
@@ -40,7 +40,7 @@ LOCAL hConn
 		WIDTH 500 ;
 		HEIGHT 400 ;
 		TITLE 'RDD SQL' ;
-		WINDOWTYPE MAIN  
+		WINDOWTYPE MAIN
 
 		DEFINE GRID grid1
 			ROW 		10

@@ -1,5 +1,5 @@
 *******************************************************************************
-* MySql Harbour Contribution Library 
+* MySql Harbour Contribution Library
 *******************************************************************************
 
 -------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ CLASS TMySQLRow: Every single row of an answer
 
 	DATA  aOldValue		
 
-		If aDirty[n] is .T. aOldValue[n] keeps a copy of changed value 
+		If aDirty[n] is .T. aOldValue[n] keeps a copy of changed value
 		if aRow[n] is part of a primary	key
 
 	DATA  aOriValue		
@@ -39,7 +39,7 @@ CLASS TMySQLRow: Every single row of an answer
 
 	METHOD   FieldGet(cnField)
 
-		Same as clipper ones, but FieldGet() and FieldPut() accept a 
+		Same as clipper ones, but FieldGet() and FieldPut() accept a
 		string as
 
 	METHOD   FieldPut(cnField, Value)
@@ -64,7 +64,7 @@ CLASS TMySQLRow: Every single row of an answer
 
 	METHOD   MakePrimaryKeyWhere()
 
-		Returns a WHERE x=y statement which uses primary key (if 
+		Returns a WHERE x=y statement which uses primary key (if
 		available)
 
 -------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ CLASS TMySQLQuery: Every single query submitted to MySQL server
 
 	METHOD   Refresh()
 
-		ReExecutes the query (cQuery) so that changes to table are 
+		ReExecutes the query (cQuery) so that changes to table are
 		visible
 
 	METHOD   GetRow(nRow)
@@ -181,7 +181,7 @@ CLASS TMySQLQuery: Every single query submitted to MySQL server
 		Clipper type of field N
 
 -------------------------------------------------------------------------------
-CLASS TMySQLTable: A query without joins; Insert() e Delete() rows are allowed. 
+CLASS TMySQLTable: A query without joins; Insert() e Delete() rows are allowed.
 -------------------------------------------------------------------------------
 NOTE: it's always a SELECT result, so it will contain a full table only if
 SELECT * FROM ... was issued
@@ -202,7 +202,7 @@ SELECT * FROM ... was issued
 
 	METHOD   GoTop()
 	
-	METHOD   GoBottom() 
+	METHOD   GoBottom()
 
 	METHOD   GoTo(nRow)
 	
@@ -224,7 +224,7 @@ SELECT * FROM ... was issued
 		
 		Returns an empty row with all available fields empty
 
-	METHOD   SetBlankRow() 
+	METHOD   SetBlankRow()
 
 		Compatibility
 
@@ -238,7 +238,7 @@ SELECT * FROM ... was issued
 
 	METHOD   MakePrimaryKeyWhere()
 
-		Returns a WHERE x=y statement which uses primary key (if 
+		Returns a WHERE x=y statement which uses primary key (if
 		available)
 
 -------------------------------------------------------------------------------
@@ -292,7 +292,7 @@ CLASS TMySQLServer: Every available MySQL server
 
 	METHOD   TableStruct(cTable)
 
-		Returns a structure array compatible with clipper's dbStruct() 
+		Returns a structure array compatible with clipper's dbStruct()
 		ones
 
 	METHOD   CreateIndex(cName, cTable, aFNames, lUnique)
@@ -309,12 +309,12 @@ CLASS TMySQLServer: Every available MySQL server
 
 	METHOD   ListTables()
 
-		Returns an array with list of available tables in current 
+		Returns an array with list of available tables in current
 		database
 
 	METHOD   Query(cQuery)
 
-		Gets a textual query and returns a TMySQLQuery or TMySQLTable 
+		Gets a textual query and returns a TMySQLQuery or TMySQLTable
 		object
 
 	METHOD   NetErr() INLINE ::lError
@@ -340,4 +340,3 @@ CLASS TMySQLServer: Every available MySQL server
 	METHOD   sql_Version()
 
 	Server version as numeric
-

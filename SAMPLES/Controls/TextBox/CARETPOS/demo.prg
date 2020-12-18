@@ -1,6 +1,6 @@
 /*
 * HMG Demo
-* (c) 2003 Roberto Lopez 
+* (c) 2003 Roberto Lopez
 */
 
 #include "hmg.ch"
@@ -12,13 +12,13 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 200 ;
 		TITLE 'CaretPos Property Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 
 			POPUP 'CaretPos'
 
-				ITEM 'Set CaretPos Property'	ACTION Form_1.Text_1.CaretPos := 4 
+				ITEM 'Set CaretPos Property'	ACTION Form_1.Text_1.CaretPos := 4
 				ITEM 'Get CaretPos Property'	ACTION MsgInfo ( Str ( Form_1.Text_1.CaretPos ) )
 
 			END POPUP
@@ -34,4 +34,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return
-

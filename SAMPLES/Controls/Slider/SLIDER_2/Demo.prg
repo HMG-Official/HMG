@@ -174,5 +174,3 @@ Function Slider8_Change
    Form_1.TextBox_8.Value := Str(nValue,2)
 
 Return Nil
-
-

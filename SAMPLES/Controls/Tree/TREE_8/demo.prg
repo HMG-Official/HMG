@@ -7,7 +7,7 @@ Function main()
 		WIDTH 640 ;
 		HEIGHT 480 ;
 		TITLE 'TreeView Sample' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			POPUP '&File'
@@ -20,22 +20,22 @@ Function main()
 		NODEIMAGES { "doc_fl.bmp" };
 		ITEMIMAGES { "cl_fl.bmp", "op_fl.bmp" }
 //		NOROOTBUTTON
-		 
+		
 			NODE 'Root' IMAGES {'world.bmp'}
-				TREEITEM 'Item 1.1' 
-				TREEITEM 'Item 1.2' 
-				TREEITEM 'Item 1.3' 
+				TREEITEM 'Item 1.1'
+				TREEITEM 'Item 1.2'
+				TREEITEM 'Item 1.3'
 
-				NODE 'Docs' 
+				NODE 'Docs'
 					TREEITEM 'Docs 1' IMAGES {'varios.bmp'}
 				END NODE
 
 				NODE 'Notes' IMAGES {'varios.bmp'}
 					TREEITEM 'Notes 1'
-					TREEITEM 'Notes 2' 
-					TREEITEM 'Notes 3' 
-					TREEITEM 'Notes 4' 
-					TREEITEM 'Notes 5' 
+					TREEITEM 'Notes 2'
+					TREEITEM 'Notes 3'
+					TREEITEM 'Notes 4'
+					TREEITEM 'Notes 5'
 				END NODE
 						
 				NODE 'Books' IMAGES { "cl_fl.bmp", "op_fl.bmp" }
@@ -44,8 +44,8 @@ Function main()
 					TREEITEM 'Book 2' IMAGES {'doc.bmp'}
 	
 					NODE 'Book 3'IMAGES {'book.bmp'}
-						TREEITEM 'Book 3.1' 
-						TREEITEM 'Book 3.2' 
+						TREEITEM 'Book 3.1'
+						TREEITEM 'Book 3.2'
 					END NODE
 
 				END NODE
@@ -117,4 +117,3 @@ Function AddItemTest()
 	Form_1.Tree_1.AddItem( 'New Item 2.3' , 5, {'wd'} )
 
 Return Nil
-

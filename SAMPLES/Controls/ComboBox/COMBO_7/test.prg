@@ -5,7 +5,7 @@
 
 /*
 
-- 'Image' Property specify a character array containing image file names or 
+- 'Image' Property specify a character array containing image file names or
 resource names.
 
 When you add an item, must specify the image array index number (zero based)
@@ -13,17 +13,17 @@ and the text associated with it.
 
 When adding items at startup you must to use a two dimensional array.
 This array must have one row for each combo item and two columns.
-The first column must contain the image index and the second the text for 
+The first column must contain the image index and the second the text for
 the item.
 
-When using the additem or Item properties you must use a single array 
-containing two elements. The first, the image index item and the second, 
-the text for the item. 
+When using the additem or Item properties you must use a single array
+containing two elements. The first, the image index item and the second,
+the text for the item.
 
 When you retrieve the item, using the 'item' property, it will return a two
 elwments array containing the image index and the text of the item.
 
-When 'Image' and 'ItemSource' properties are used simultaneously, 
+When 'Image' and 'ItemSource' properties are used simultaneously,
 'ItemSource' must be specified as a list containing two field names.
 The first, the image index for the items, the second, the item text.
 
@@ -57,7 +57,7 @@ Local aRet := {}
 		WIDTH 400 ;
 		HEIGHT 200 ;
 		TITLE 'ComboBox Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP '&Test'
@@ -73,12 +73,12 @@ Local aRet := {}
 			END POPUP
 		END MENU
 
-		DEFINE COMBOBOX Combo_1 
+		DEFINE COMBOBOX Combo_1
 			ROW		10
 			COL		10
-			WIDTH		100 
-			ITEMS		aItems 
-			VALUE		1 
+			WIDTH		100
+			ITEMS		aItems
+			VALUE		1
 			IMAGE		aImages
 			DISPLAYEDIT	.T.
 			ONDISPLAYCHANGE	PLAYBEEP()
@@ -91,4 +91,3 @@ Local aRet := {}
 	ACTIVATE WINDOW Form_1
 
 Return
-

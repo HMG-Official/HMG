@@ -8,7 +8,7 @@ Local Botoes := {'1','2','3'} , i
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN  
+		MAIN
 
 		For i := 1 to 3
 

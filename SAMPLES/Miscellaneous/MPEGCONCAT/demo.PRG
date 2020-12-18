@@ -1,17 +1,17 @@
 /*
-* 
+*
 * Concatena Arquivos MPEG
 * Humberto Fornazier - Julho/2002
 * hfornazier@brfree.com.br
-* 
+*
 * xHarbour Compiler Build 0.73.5 (SimpLex )
 * Copyright 1999-2002, http://www.xharbour.org http://www.harbour-project.org/
-* 
+*
 * HMG - Harbour Win32 GUI library - Release 35
 * Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
 * http://www.hmgforum.com//
 *
-*/ 
+*/
 #include "hmg.ch"
 #Include "Fileio.CH"
 #Include "Directry.CH"
@@ -20,7 +20,7 @@
 /*
 */
 
-DECLARE WINDOW Frm_Principal 
+DECLARE WINDOW Frm_Principal
 
 Procedure Main()
 
@@ -40,10 +40,10 @@ Function Cria_FrmPrincipal()
 		TITLE "Anexador de Arquivos MPEG"      ;
 		ICON "HB_FILM"                         ;
                 MAIN                                   ;
-		NOMAXIMIZE			       
+		NOMAXIMIZE			
 
 		DEFINE STATUSBAR
-			STATUSITEM "Connect Sistemas de Informática - email: hfornazier@brfree.com.br" 
+			STATUSITEM "Connect Sistemas de Informática - email: hfornazier@brfree.com.br"
 		END STATUSBAR
 
 		*------------ Nome do Arquivo --------------------*
@@ -101,7 +101,7 @@ Function Cria_FrmPrincipal()
 			 WIDTH 300 ;
 			 HEIGHT 80 ;
 			 FILE 'HMG' AUTOPLAY
-        
+
 		DEFINE MAIN MENU
 		       POPUP "Sistema"
 			      ITEM "&Sair        " ACTION { || Frm_Principal.Release }
@@ -114,7 +114,7 @@ Function Cria_FrmPrincipal()
 		END MENU
 
 	 END WINDOW
-	 Return Nil    
+	 Return Nil
 /*
 */
 Function Sobre_o_Sistema()
@@ -160,12 +160,12 @@ Function Bt_Adcionar()
 */
 Function Bt_Limpar()
 	 Frm_Principal.Grid_Arquivos.DeleteAllItems()
-	 Frm_Principal.Tb_Nome_Arquivo.SetFocus  
+	 Frm_Principal.Tb_Nome_Arquivo.SetFocus
 	 Return Nil
 /*
 */
 Function Bt_Excluir()
-	 Local ni := Frm_Principal.Grid_Arquivos.Value 
+	 Local ni := Frm_Principal.Grid_Arquivos.Value
 	 If ni != 0
 	    Frm_Principal.Grid_Arquivos.DeleteItem( ni )
 	 EndIf
@@ -195,12 +195,12 @@ Function Bt_Gerar()
 	 If ! Empty( Novo_Arquivo ) .And. Right( Novo_Arquivo , 3 ) != "MPG"
 	    Novo_Arquivo += ".MPG"
 	 EndIf
-     
+
 	 arq1 := FCreate( Novo_Arquivo , FC_NORMAL )
 
 	 If ! File( Novo_Arquivo )
 	    MsgINFO("Arquivo << "+Novo_Arquivo+" >> não foi Criado..."+QUEBRA+"Verifique o Caminho Correto!!")
-	    Frm_Principal.Tb_Nome_Arquivo.SetFocus 
+	    Frm_Principal.Tb_Nome_Arquivo.SetFocus
 	    Return Nil
 	 EndIf
 
@@ -227,7 +227,7 @@ Function Bt_Gerar()
 
 	 FClose( arq1 )
 	 MSGINFO(" Arquivo "+Novo_Arquivo+" Gerado!!",SISTEMA)
-	 Frm_Principal.Tb_Nome_Arquivo.SetFocus   
+	 Frm_Principal.Tb_Nome_Arquivo.SetFocus
 	 Return Nil
 /*
 */

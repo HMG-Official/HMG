@@ -14,7 +14,7 @@ Function Main
 		WIDTH 365 HEIGHT 350 ;
 		TITLE "HMG ProgressBar Demo" ;
 		MAIN ;
-		FONT "Arial" SIZE 10 
+		FONT "Arial" SIZE 10
 
       @ 000,031 PROGRESSBAR Progress_1 ;
 		RANGE 0 , 100 		;
@@ -83,5 +83,3 @@ Function Slider_Change
 	Form_1.Progress_4.Value := nValue
 
 Return Nil
-
-

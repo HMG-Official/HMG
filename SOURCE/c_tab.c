@@ -291,4 +291,3 @@ HB_FUNC ( TABCTRL_GETITEMRECT )
    hb_storvnl (Rect.right,  -1, 3);
    hb_storvnl (Rect.bottom, -1, 4);
 }
-

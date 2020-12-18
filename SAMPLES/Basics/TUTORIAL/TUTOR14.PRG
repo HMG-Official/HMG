@@ -7,14 +7,14 @@ Function Main
         WIDTH 400 ;
         HEIGHT 200 ;
         TITLE 'Tutor 14 Image Test' ;
-        MAIN 
+        MAIN
 
         DEFINE MAIN MENU
            POPUP "First Popup"
              ITEM 'Change Image Content' ACTION  Win_1.Image_1.Picture := 'Open.Bmp'
              ITEM 'Retrieve Image Content' ACTION  MsgInfo ( Win_1.Image_1.Picture)
            END POPUP
-        END MENU 
+        END MENU
 
             @ 10,10 IMAGE Image_1 ;
             PICTURE 'Demo.Bmp' ;
@@ -26,4 +26,3 @@ Function Main
     ACTIVATE WINDOW Win_1
 
 Return
-

@@ -107,4 +107,3 @@ HB_FUNC( INITFRAME )
 
 	HMG_retnl ((LONG_PTR) hbutton);
 }
-

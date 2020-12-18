@@ -14,16 +14,16 @@ Function Main()
     FONT 'MS Sans Serif' SIZE 10 ;
     HELPBUTTON
 
-    SET HELPFILE TO 'HelpDemo.chm' 
+    SET HELPFILE TO 'HelpDemo.chm'
 
-    DEFINE MAIN MENU 
+    DEFINE MAIN MENU
       POPUP '&File'
         ITEM '&Open' ACTION MsgInfo('Clicked Open')
         SEPARATOR
         ITEM 'E&xit' ACTION Form_1.RELEASE
       END POPUP
       POPUP '&Help'
-        ITEM '&Help '   ACTION DISPLAY HELP MAIN 
+        ITEM '&Help '   ACTION DISPLAY HELP MAIN
         ITEM 'H&ypertext' ACTION DISPLAY HELP CONTEXT 'HelpDemo1.html'
         ITEM '&Graphics' ACTION DISPLAY HELP POPUP 'HelpDemo2.html'
         SEPARATOR
@@ -33,8 +33,8 @@ Function Main()
 
     DEFINE STATUSBAR FONT 'MS Sans Serif' SIZE 9
       STATUSITEM "F1 - Help" WIDTH 100
-      CLOCK 
-      DATE 
+      CLOCK
+      DATE
     END STATUSBAR
 
     @  50,100 LABEL Label ;

@@ -124,7 +124,7 @@ Local aRows [75] [5]
 			VALUE 1 ;
 			EDIT ;
 			COLUMNCONTROLS { {'COMBOBOX',{'One','Two','Three'}} , {'DATEPICKER','DROPDOWN'} ,{'TEXTBOX','NUMERIC','$ 999,999.99'}  , { 'SPINNER' , 1 , 20 } , { 'CHECKBOX' , 'Yes' , 'No' } } ;
-			DYNAMICFORECOLOR aColors // { fColor , fColor, fColor, fColor, fColor } 
+			DYNAMICFORECOLOR aColors // { fColor , fColor, fColor, fColor, fColor }
 			
 		DEFINE BUTTON BUTTON_1
 		   ROW 340
@@ -145,8 +145,8 @@ RETURN
 
 
 function doprint
-PRINT GRID grid_1 OF form_1 FONT "Arial" SIZE 12 ORIENTATION "P" HEADERS {"Header1","Header2"} MERGEHEADERS mergedheaders COLUMNSUM summation 
-//PRINT GRID grid_1 OF form_1 FONT "Arial" SIZE 12 ORIENTATION "P" 
+PRINT GRID grid_1 OF form_1 FONT "Arial" SIZE 12 ORIENTATION "P" HEADERS {"Header1","Header2"} MERGEHEADERS mergedheaders COLUMNSUM summation
+//PRINT GRID grid_1 OF form_1 FONT "Arial" SIZE 12 ORIENTATION "P"
 
 return nil
 
@@ -154,13 +154,13 @@ return nil
 PROCEDURE SETITEM()
 
 	// Form_1.Grid_1.Item (2) := { 123.45 , date() , 2 , 10 , .T. }
-    Form_1.Grid_1.Item (2) := {2, date(), 123.45, 2 , .T. } 
+    Form_1.Grid_1.Item (2) := {2, date(), 123.45, 2 , .T. }
 
 RETURN
 
 /*
 PROCEDURE GETITEM()
-   
+
 local a
 
 	a := Form_1.Grid_1.Item (2)
@@ -178,28 +178,28 @@ RETURN
 
 FUNC GetRowTruth( nItemNo )
 RETU Form_1.Grid_1.Cell( nItemNo, 5 )
-  
+
 *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
 
 
 /*
 
    Simplified version of MsgMulty()
-   
+
 */
 
 PROC MsM( xMesaj, cTitle  )
 
    LOCA cMessage := ""
-      
+
    IF VALTYPE( xMesaj  ) # "A"
       xMesaj := { xMesaj }
    ENDIF
-   
+
    AEVAL( xMesaj, { | x1, i1 | cMessage +=  Any2Strg( x1 ) + CRLF } )
-   
+
    MsgInfo( cMessage, cTitle )
-   
+
 RETU //  MsM()
 
 *-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
@@ -208,21 +208,20 @@ FUNC Any2Strg( xAny )
 
    LOCA cRVal  := '???',;
         nType  :=  0,;
-        aCases := { { "A", { | x | "{...}" } },;                
-                    { "B", { | x | "{||}" } },;                
+        aCases := { { "A", { | x | "{...}" } },;
+                    { "B", { | x | "{||}" } },;
                     { "C", { | x | x }},;
-                    { "M", { | x | x   } },;                   
-                    { "D", { | x | DTOC( x ) } },;             
-                    { "L", { | x | IF( x,"On","Off") } },;    
+                    { "M", { | x | x   } },;
+                    { "D", { | x | DTOC( x ) } },;
+                    { "L", { | x | IF( x,"On","Off") } },;
                     { "N", { | x | NTrim( x )  } },;
                     { "O", { | x | ":Object:" } },;
                     { "U", { | x | "<NIL>" } } }
-                    
+
    IF (nType := ASCAN( aCases, { | a1 | VALTYPE( xAny ) == a1[ 1 ] } ) ) > 0
       cRVal := EVAL( aCases[ nType, 2 ], xAny )
-   ENDIF    
-                   
-RETU cRVal // Any2Strg()
-          
-*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._
+   ENDIF
 
+RETU cRVal // Any2Strg()
+
+*-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._

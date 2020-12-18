@@ -117,4 +117,3 @@ HB_FUNC(RESOURCEFREE)//   hResource
 // For 32-64 bits Windows applications, it is not necessary to free the resources loaded using LoadResource.
    FreeResource( (HGLOBAL) HMG_parnl (1) );
 }
-

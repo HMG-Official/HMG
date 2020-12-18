@@ -8,8 +8,8 @@
 	InputMask String For numeric textBox
 
         9	Displays digits
-        $       Displays a dollar sign in place of a leading space 
-        *       Displays an asterisk in place of a leading space 
+        $       Displays a dollar sign in place of a leading space
+        *       Displays an asterisk in place of a leading space
         .       Specifies a decimal point position
         ,       Specifies a comma position
 
@@ -18,7 +18,7 @@
         C       Displays CR after positive numbers
         X       Displays DB after negative numbers
         (       Encloses negative numbers in parentheses
-	E	Displays points as thousand separator and comma as decimal 
+	E	Displays points as thousand separator and comma as decimal
 		separator.
 
 */
@@ -34,7 +34,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 500 ;
 		TITLE 'InputMask Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			POPUP 'Test'
@@ -46,12 +46,12 @@ Function Main
 
 		@ 10,10 TEXTBOX Text_1 ;
 		VALUE 1234567.12 ;
-		NUMERIC INPUTMASK "$9,999,999.99" 
+		NUMERIC INPUTMASK "$9,999,999.99"
 
 
 		@ 50,10 TEXTBOX Text_2 ;
 		VALUE 1234.56 ;
-		NUMERIC INPUTMASK "$9,999.99" FORMAT 'CX' 
+		NUMERIC INPUTMASK "$9,999.99" FORMAT 'CX'
 
 
 		@ 90,10 TEXTBOX Text_3 ;
@@ -68,23 +68,23 @@ Function Main
 
 		@ 210,10 TEXTBOX Text_6 ;
 		VALUE 1234.56 ;
-		NUMERIC INPUTMASK "$***,999.99" 
+		NUMERIC INPUTMASK "$***,999.99"
 
 		@ 250,10 TEXTBOX Text_7 ;
 		VALUE 12345678.12 ;
-		NUMERIC INPUTMASK "99999999.99" 
+		NUMERIC INPUTMASK "99999999.99"
 
 		@ 290,10 TEXTBOX Text_8 ;
 		VALUE 1.1 ;
-		NUMERIC INPUTMASK "9.9" 
+		NUMERIC INPUTMASK "9.9"
 
 		@ 330,10 TEXTBOX Text_9 ;
 		VALUE 1234567890.12 ;
-		NUMERIC INPUTMASK "$9999999999.99" 
+		NUMERIC INPUTMASK "$9999999999.99"
 
 		@ 370,10 TEXTBOX Text_10 ;
 		VALUE 123456 ;
-		NUMERIC INPUTMASK "$9999999" 
+		NUMERIC INPUTMASK "$9999999"
 
 		@ 410,10 TEXTBOX Text_11 ;
 			VALUE 1234.56 ;
@@ -97,4 +97,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return
-

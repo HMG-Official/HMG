@@ -7,7 +7,7 @@ PROCEDURE Main()
 		WIDTH 334 ;
 		HEIGHT 276 ;
 		TITLE 'Create Desktop Shortcut' ;
-		MAIN 
+		MAIN
 		
 		
 		DEFINE MAIN MENU
@@ -21,7 +21,7 @@ PROCEDURE Main()
 
 		END MENU
 
-	END WINDOW 
+	END WINDOW
 
 	Form_1.Center()
 	Form_1.Activate()

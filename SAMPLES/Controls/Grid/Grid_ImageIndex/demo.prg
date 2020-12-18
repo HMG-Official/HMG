@@ -18,7 +18,7 @@ Function Main
       AT 0,0 ;
       WIDTH 600 ;
       HEIGHT 400 ;
-      MAIN 
+      MAIN
 
       @ 10,10 GRID Grid_1 ;
          WIDTH 550 ;

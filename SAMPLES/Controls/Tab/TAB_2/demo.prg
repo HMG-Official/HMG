@@ -11,23 +11,23 @@ Function Main
 Local aRows [20] [3]
 
 	aRows [1]	:= {'Simpson','Homer','555-5555'}
-	aRows [2]	:= {'Mulder','Fox','324-6432'} 
-	aRows [3]	:= {'Smart','Max','432-5892'} 
-	aRows [4]	:= {'Grillo','Pepe','894-2332'} 
-	aRows [5]	:= {'Kirk','James','346-9873'} 
+	aRows [2]	:= {'Mulder','Fox','324-6432'}
+	aRows [3]	:= {'Smart','Max','432-5892'}
+	aRows [4]	:= {'Grillo','Pepe','894-2332'}
+	aRows [5]	:= {'Kirk','James','346-9873'}
 
 	DEFINE WINDOW Form_1 ;
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP 'Test'
-				MENUITEM 'Get Button Caption' ACTION MsgInfo ( Form_1.Tab_1(1).Button_1.Caption ) 
+				MENUITEM 'Get Button Caption' ACTION MsgInfo ( Form_1.Tab_1(1).Button_1.Caption )
 				MENUITEM 'Set Button Caption' ACTION Form_1.Tab_1(1).Button_1.Caption := 'New'
 				SEPARATOR
-				MENUITEM 'Get Grid Header' ACTION MsgInfo ( Form_1.Tab_1(4).Grid_1.Header(1) ) 
+				MENUITEM 'Get Grid Header' ACTION MsgInfo ( Form_1.Tab_1(4).Grid_1.Header(1) )
 				MENUITEM 'Set Grid Header' ACTION Form_1.Tab_1(4).Grid_1.Header(1) := 'New'
 				SEPARATOR
 				MENUITEM 'Set Grid Cell' ACTION Form_1.Tab_1(4).Grid_1.Cell(1,1) := 'New'
@@ -43,7 +43,7 @@ Local aRows [20] [3]
 			WIDTH 600 ;
 			HEIGHT 400 ;
 			VALUE 1 ;
-			TOOLTIP 'Tab Control' 
+			TOOLTIP 'Tab Control'
 
 			PAGE 'Page 1' IMAGE "exit.bmp"
 
@@ -68,8 +68,8 @@ Local aRows [20] [3]
 				RANGE 0,10 ;
 				VALUE 5 ;
 				WIDTH 100 ;
-				TOOLTIP 'Range 0,10' ; 
-				ON CHANGE PlayBeep() 
+				TOOLTIP 'Range 0,10' ;
+				ON CHANGE PlayBeep()
 
 			END PAGE
 
@@ -81,7 +81,7 @@ Local aRows [20] [3]
 					HEADERS {'Last Name','First Name','Phone'} ;
 					WIDTHS {140,140,140};
 					ITEMS aRows ;
-					VALUE 1 
+					VALUE 1
 
 			END PAGE
 
@@ -94,4 +94,3 @@ Local aRows [20] [3]
 	Form_1.Activate
 
 Return Nil
-

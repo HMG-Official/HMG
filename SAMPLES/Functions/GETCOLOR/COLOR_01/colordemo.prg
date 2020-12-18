@@ -17,16 +17,16 @@ Function Main
 
 		DEFINE MAIN MENU
 			POPUP 'Test'
-				ITEM 'Set Text_1 FontColor' ACTION Form_1.Text_1.FontColor := GetColor() 
+				ITEM 'Set Text_1 FontColor' ACTION Form_1.Text_1.FontColor := GetColor()
 				ITEM 'Set Label_1 FontColor' ACTION Form_1.Label_1.FontColor := GetColor()
-				ITEM 'Set Check_1 FontColor' ACTION Form_1.Check_1.FontColor := GetColor() 
+				ITEM 'Set Check_1 FontColor' ACTION Form_1.Check_1.FontColor := GetColor()
 				ITEM 'Set Radio_1 FontColor' ACTION Form_1.Radio_1.FontColor := GetColor()
 				ITEM 'Set Spinner_1 FontColor' ACTION Form_1.Spinner_1.FontColor := GetColor()
 				ITEM 'Set Edit_1 FontColor' ACTION Form_1.Edit_1.FontColor := GetColor()
 				ITEM 'Set List_1 FontColor' ACTION Form_1.List_1.FontColor := GetColor()
 				ITEM 'Set Grid_1 FontColor' ACTION Form_1.Grid_1.FontColor := GetColor()
 				SEPARATOR
-				ITEM 'Set Text_1 BackColor' ACTION Form_1.Text_1.BackColor := GetColor() 
+				ITEM 'Set Text_1 BackColor' ACTION Form_1.Text_1.BackColor := GetColor()
 				ITEM 'Set Label_1 BackColor' ACTION Form_1.Label_1.BackColor := GetColor()
 				ITEM 'Set Check_1 BackColor' ACTION Form_1.Check_1.BackColor := GetColor()
 				ITEM 'Set Radio_1 BackColor' ACTION Form_1.Radio_1.BackColor := GetColor()
@@ -63,13 +63,13 @@ Function Main
 		@ 220,10 FRAME Frame_1 CAPTION 'Frame_1' ;
 			WIDTH 130 ;
 			HEIGHT 110 ;
-			BACKCOLOR YELLOW 
+			BACKCOLOR YELLOW
 
 		@ 350,10 SLIDER Slider_1 ;
 			RANGE 1,10 ;
 			VALUE 5 ;
 			TOOLTIP 'Slider' ;
-			BACKCOLOR YELLOW 
+			BACKCOLOR YELLOW
 
 		@ 400,10 SPINNER Spinner_1 ;
 			RANGE 0,10 ;
@@ -104,7 +104,7 @@ Function Main
 			BACKCOLOR RED ;
 			FONTCOLOR YELLOW ;
 			ON HEADCLICK { {|| MsgInfo('Header 1 Clicked !')} , { || MsgInfo('Header 2 Clicked !')} } ;
-			ON DBLCLICK MsgInfo ('DoubleClick!','Grid') 
+			ON DBLCLICK MsgInfo ('DoubleClick!','Grid')
 
 	END WINDOW
 
@@ -113,4 +113,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return
-

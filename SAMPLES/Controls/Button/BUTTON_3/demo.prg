@@ -22,7 +22,7 @@ Function Main()
               END POPUP
       END MENU
 
-      @ 70,70 CHECKBUTTON Button_1 PICTURE "button.bmp" WIDTH 50 HEIGHT 50 
+      @ 70,70 CHECKBUTTON Button_1 PICTURE "button.bmp" WIDTH 50 HEIGHT 50
 
    END WINDOW
 

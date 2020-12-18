@@ -333,4 +333,3 @@ else if ( HB_ISNUM (4) )
 	SendMessage(hwnd,SB_SETICON,(WPARAM) hb_parnl(2), (LPARAM)hIcon );
 
 }
-

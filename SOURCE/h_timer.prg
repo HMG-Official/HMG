@@ -123,4 +123,3 @@ Local id
 	_HMG_SYSDATA [ 40 ] [k] := { NIL , NIL , NIL , NIL , NIL , NIL , NIL , NIL }
 
 Return Nil
-

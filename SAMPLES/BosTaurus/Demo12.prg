@@ -1,4 +1,4 @@
-﻿*******************************************************************************
+*******************************************************************************
 * PROGRAMA: Demo ON PAINT event
 * LENGUAJE: HMG
 * FECHA:    Setiembre 2012
@@ -37,8 +37,8 @@ PRIVATE Nihon_Karate_Kyokai := "日本空手協会"  //  JKA = Japan Karate Asso
       ON INIT     Proc_ON_INIT ();
       ON RELEASE  Proc_ON_RELEASE ();
       ON PAINT    Proc_ON_PAINT ()
-            
-    
+
+
    END WINDOW
 
    CENTER WINDOW Win1
@@ -60,12 +60,12 @@ RETURN
 
 PROCEDURE Proc_ON_PAINT
 PRIVATE hDC, BTstruct
-PRIVATE nTypeText, nAlingText 
-   
+PRIVATE nTypeText, nAlingText
+
    hDC := BT_CreateDC ("Win1", BT_HDC_INVALIDCLIENTAREA, @BTstruct)
-      
+
       BT_DrawBitmapTransparent (hDC, 0, 105, 506, 500, BT_SCALE, hBitmap)
-      
+
       nTypeText  := BT_TEXT_TRANSPARENT + BT_TEXT_BOLD
       nAlingText := BT_TEXT_LEFT + BT_TEXT_TOP
 
@@ -73,7 +73,7 @@ PRIVATE nTypeText, nAlingText
 
       CHARACTER_VERTICAL (70,  25, 120, Shotokan)
       CHARACTER_VERTICAL (70, 575, 120, KarateDo)
-      
+
    BT_DeleteDC (BTstruct)
 RETURN
 
@@ -86,4 +86,3 @@ LOCAL i, cChar
        BT_DrawText (hDC, (nRow + nInc*(i-1)), nCol, cChar, "MS GOTHIC", 80, BLACK, WHITE, nTypeText, nAlingText)
    NEXT
 RETURN
-

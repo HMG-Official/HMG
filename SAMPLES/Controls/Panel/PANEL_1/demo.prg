@@ -15,7 +15,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'HMG Panel Window Demo' ;
-		WINDOWTYPE MAIN  
+		WINDOWTYPE MAIN
 
 
 		DEFINE WINDOW Win_2 ;
@@ -93,13 +93,11 @@ Function Main
 	END WINDOW
 
 
-	Win_1.Center 
+	Win_1.Center
 
 	// Panel windows are automatically activated through its parent
 	// so, only Win_1 must be activated.
 
-	Activate Window Win_1 
+	Activate Window Win_1
 
 Return
-
-

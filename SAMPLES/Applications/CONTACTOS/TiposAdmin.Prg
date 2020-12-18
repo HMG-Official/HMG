@@ -1,4 +1,4 @@
-﻿#include 'hmg.ch'
+#include 'hmg.ch'
 
 Function AdministradorDeTipos
 DBSELECTAREA( 'Tipos')
@@ -28,27 +28,27 @@ DEFINE WINDOW Win_2               ;
         BUTTON ELIMINAR          ;
             CAPTION 'E&liminar'  ;
             PICTURE 'borrar' ;
-            ACTION Borrar() 
+            ACTION Borrar()
 
         BUTTON IMPRIMIR             ;
             CAPTION '&Imprimir'     ;
             PICTURE 'imprimir2' ;
-            ACTION Impresion() 
+            ACTION Impresion()
 
         BUTTON CERRAR             ;
             CAPTION '&Cerrar'     ;
             PICTURE 'cerrar'  ;
-            ACTION Win_2.release 
+            ACTION Win_2.release
 
     END TOOLBAR
 
-    DEFINE STATUSBAR 
-        STATUSITEM "" 
+    DEFINE STATUSBAR
+        STATUSITEM ""
     END STATUSBAR
 
     // Todos los controles @... tienen una sintaxis altena.
     // La ventaja principal de esta sintaxis es que las propiedades
-    // pueden incluirse en cualquier orden. 
+    // pueden incluirse en cualquier orden.
 
     DEFINE LABEL Label_1
         ROW 60
@@ -57,7 +57,7 @@ DEFINE WINDOW Win_2               ;
         WIDTH   40
     END LABEL
 
-    // La clausula ONENTER permite definir un procedimiento que se 
+    // La clausula ONENTER permite definir un procedimiento que se
     // ejecutara cuando el usuario presione enter mientras el control
     // tenga el foco.
 
@@ -68,13 +68,13 @@ DEFINE WINDOW Win_2               ;
         ROW     60
         COL     60
         WIDTH       195
-        ONENTER     If ( Busqueda() == .T. , ( Win_2.Grid_2.Value := 1 , Win_2.Grid_2.SetFocus ) , Nil ) 
+        ONENTER     If ( Busqueda() == .T. , ( Win_2.Grid_2.Value := 1 , Win_2.Grid_2.SetFocus ) , Nil )
         TOOLTIP     'Buscar (Ingrese "*" para todos los registros)'
         UPPERCASE   .T.
     END TEXTBOX
 
     // La clausula PICTURE permite definir un archivo de imagen
-    // que se asociara al control. 
+    // que se asociara al control.
 
     DEFINE BUTTON Button_1
         ROW 60
@@ -82,7 +82,7 @@ DEFINE WINDOW Win_2               ;
         WIDTH   25
         HEIGHT  25
         PICTURE 'buscar'
-        ACTION If ( Busqueda() == .T. , ( Win_2.Grid_2.Value := 1 , Win_2.Grid_2.SetFocus ) , Nil ) 
+        ACTION If ( Busqueda() == .T. , ( Win_2.Grid_2.Value := 1 , Win_2.Grid_2.SetFocus ) , Nil )
         TOOLTIP 'Buscar'
     END BUTTON
 
@@ -95,9 +95,9 @@ DEFINE WINDOW Win_2               ;
     DEFINE GRID Grid_2
         ROW 95
         COL 10
-        WIDTH 280               
-        HEIGHT 310                  
-        HEADERS { 'Codigo' , 'Descripcion' }    
+        WIDTH 280
+        HEIGHT 310
+        HEADERS { 'Codigo' , 'Descripcion' }
         WIDTHS { 60 , 220 }
         ROWSOURCE "Tipos"
         COLUMNFIELDS { 'Cod_Tipo' , 'Desc' }
@@ -107,7 +107,7 @@ DEFINE WINDOW Win_2               ;
         ALLOWDELETE .T.
 		CELLNAVIGATION .F.
     END GRID
-    
+
 END WINDOW
 Win_2.Text_1.SetFocus
 CENTER WINDOW Win_2
@@ -116,19 +116,19 @@ Return Nil
 
 Function Busqueda
 Local RetVal := .F. , nRecCount := 0
-     
-If Empty( Win_2.Text_1.Value ) 
+
+If Empty( Win_2.Text_1.Value )
     Return RetVal
 EndIf
 
 // GRID
 // ----
 
-// El metodo 'DeleteAllItems' se usa para eliminar todos los items de un 
+// El metodo 'DeleteAllItems' se usa para eliminar todos los items de un
 // control GRID
 
-// El metodo 'AddItem' se usa para agregar items a un control GRID. 
-// Su argumento debe ser un array de caracteres conteniendo tantos elementos 
+// El metodo 'AddItem' se usa para agregar items a un control GRID.
+// Su argumento debe ser un array de caracteres conteniendo tantos elementos
 // como columnas tenga el GRID.
 
 // STATUSBAR
@@ -137,7 +137,7 @@ EndIf
 // Cuando se define un STATUSBAR para una ventana, se le asigna
 // automaticamente el nombre de 'StausBar'.
 // Puede accederse a cada una de sus secciones por medio de la propiedad
-// 'Item', indicando como argumento, la posicion del mismo al 
+// 'Item', indicando como argumento, la posicion del mismo al
 // definirse el control. La propiedad 'Item' es de tipo caracter par el
 // control STATUSBAR.
 
@@ -178,7 +178,7 @@ Return RetVal
 Function Agregar
 Local cDesc
 
-// La funcion 'InputBox' crea una ventana que permite 
+// La funcion 'InputBox' crea una ventana que permite
 // ingresar un texto.
 // El primer parametro indica la etiqueta del texto que se desea ingresar
 // y el segundo parametro, el titulo.
@@ -186,7 +186,7 @@ Local cDesc
 // En el GRID, la propiedad 'Value' (numerica, lectura/escritura)
 // indica o permite establecer el item seleccionado.
 
-// La funcion 'MsgStop' muestra una venta con un mensaje (primer 
+// La funcion 'MsgStop' muestra una venta con un mensaje (primer
 // parametro) un titulo (segundo parametro) un icono de stop y
 // el boton aceptar.
 
@@ -197,7 +197,7 @@ If .Not. Empty ( cDesc )
    If flock()
        Go Bottom
        nCod_Tipo := Tipos->Cod_Tipo + 1
-       Append Blank 
+       Append Blank
        Tipos->Cod_Tipo := nCod_Tipo
        Tipos->Desc := cDesc
        If ( Busqueda() == .T. , ( Win_2.Grid_2.Value := 1 , Win_2.Grid_2.SetFocus ) , Nil )
@@ -211,7 +211,7 @@ Return
 Function Borrar
 Local nRecno:=Win_2.Grid_2.RecNo
 
-// Si la propiedad 'Value' en un GRID es cero, significa que no hay 
+// Si la propiedad 'Value' en un GRID es cero, significa que no hay
 // items seleccionados
 
 // La funcion 'MsgYestNo' muestra una ventana con un texto (primer parametro)
@@ -229,10 +229,10 @@ If MsgYesNo ( 'Esta Seguro' , 'Borrar Registro' )
    If rlock()
       DBSetOrder(3)
       If Contactos->(DbSeek(Tipos->Cod_Tipo))
-         MsgStop('Operacion cancelada: El registro esta asociado a uno o mas contactos. No puede eliminarse','Borrar registro')  
+         MsgStop('Operacion cancelada: El registro esta asociado a uno o mas contactos. No puede eliminarse','Borrar registro')
       Else
          Delete
-         If ( Busqueda() == .T. , ( Win_2.Grid_2.Value := 1 , Win_2.Grid_2.SetFocus ) , Nil ) 
+         If ( Busqueda() == .T. , ( Win_2.Grid_2.Value := 1 , Win_2.Grid_2.SetFocus ) , Nil )
       EndIf
    Else
       MsgStop('Operacion cancelada: El registro esta siendo editado por otro usuario. reintente mas tarde','Borrar registro')
@@ -245,7 +245,7 @@ Function Modificar
 Local nRecno:=Win_2.Grid_2.Recno
 Local cDesc
 
-// La propiedad 'Item' del control GRID retorna un array de caracteres con 
+// La propiedad 'Item' del control GRID retorna un array de caracteres con
 // tantos elementos como columnas tenga el control.
 
 If nRecno == 0
@@ -285,7 +285,7 @@ DO REPORT                                       ;
     LPP 50                                      ;
     CPL 80                                      ;
     LMARGIN 5                                   ;
-    PREVIEW                     
+    PREVIEW
 
 DBSetOrder(1)
 Return Nil

@@ -942,5 +942,3 @@ LOCAL i, aItemIndex := _GridEx_GroupGetAllItemIndex ( cControlName, cParentName,
       NEXT
    ENDIF
 RETURN
-
-

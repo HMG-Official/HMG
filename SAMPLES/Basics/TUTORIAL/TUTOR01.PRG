@@ -7,7 +7,7 @@ Function Main
         WIDTH 400 ;
         HEIGHT 200 ;
         TITLE 'Tutor 01 - Hello World!' ;
-        MAIN 
+        MAIN
 
     END WINDOW
 

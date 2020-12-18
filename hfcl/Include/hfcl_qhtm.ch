@@ -45,10 +45,8 @@ QHTM
 #define QHTM_GET_SCROLL_POS   ( WM_USER + 6 )
 #define QHTM_SET_SCROLL_POS   ( WM_USER + 7 )
 
-#xtranslate QHTM_GetScrollPos( <nHandle> )         => SendMessage( <nHandle>, QHTM_GET_SCROLL_POS, 0, 0 ) 
+#xtranslate QHTM_GetScrollPos( <nHandle> )         => SendMessage( <nHandle>, QHTM_GET_SCROLL_POS, 0, 0 )
 
 #xtranslate QHTM_SetScrollPos( <nHandle>, <nPos> ) => SendMessage( <nHandle>, QHTM_SET_SCROLL_POS, <nPos>, 0 )
 
 #xtranslate QHTM_SetZoomLevel( <hWnd>, <nLevel> )  => SendMessage (<hWnd>, QHTM_SET_OPTION, QHTM_OPT_ZOOMLEVEL, <nLevel>)   // nLevel = 0 ... 4
-
-

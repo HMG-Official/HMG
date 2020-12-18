@@ -12,7 +12,7 @@ Function Main
 		WIDTH 450 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP 'File'
@@ -28,7 +28,7 @@ Function Main
 		VIRTUAL ;
 		ITEMCOUNT 100000000 ;
 		ON QUERYDATA QueryTest() MULTISELECT ;
-		IMAGE {"br_no","br_ok"} 
+		IMAGE {"br_no","br_ok"}
 
 	END WINDOW
 

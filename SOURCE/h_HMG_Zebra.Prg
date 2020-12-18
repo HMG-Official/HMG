@@ -189,4 +189,3 @@ LOCAL x1:= 0, y1 := 0, nBarWidth := 0, nBarHeight := 0
 //REPORT BUG FOR EDK
    hb_zebra_draw ( hZebra, {| x, y, w, h | nBarWidth:=MAX(x+w-x1, nBarWidth), nBarHeight:=MAX(y+h-y1, nBarHeight) }, x1, y1, nLineWidth, nLineHeight, iFlags )
 RETURN nBarHeight
-

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * HMG - Harbour Win32 GUI library Demo
  *
  * Copyright 2002 Roberto Lopez <mail.box.hmg@gmail.com>
@@ -19,15 +19,15 @@ Function Main
 		TITLE 'வணக்கம். இது HMG' ;
 		ICON 'DEMO.ICO' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
 		DEFINE STATUSBAR
-			STATUSITEM 'உலக மொழிகளில் HMG!' 
+			STATUSITEM 'உலக மொழிகளில் HMG!'
 		END STATUSBAR
 
 		ON KEY ALT+A ACTION MsgInfo('Alt+A அழுத்தியுள்ளீர்கள்!')
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			DEFINE POPUP '&கோப்பு'
 				ITEM 'InputWindow சோதனை'	ACTION InputWindow_Click()
 				ITEM 'மேலதிக சோதனைகள்'	ACTION Modal_CLick()	NAME File_Modal
@@ -41,10 +41,10 @@ Function Main
 					ITEM 'உப தெரிவு 2'	ACTION MsgInfo( 'உபதெரிவு தேர்வு செய்யப்பட்டது' )
 				END POPUP
 				SEPARATOR	
-				ITEM 'ஒன்றுக்கும் அதிகமான சாளரங்கள் திறக்கும் சோதனை'	ACTION MultiWin_Click() 
+				ITEM 'ஒன்றுக்கும் அதிகமான சாளரங்கள் திறக்கும் சோதனை'	ACTION MultiWin_Click()
 				SEPARATOR	
-				ITEM 'படம் பிடிக்க (எந்த உள்ளடக்கமும் இன்றி)'	ACTION Form_1.Capture() 
-				ITEM 'படம் பிடிக்க (உள்ளடக்கங்களுடன்)'		ACTION Form_1.Capture( 'xxx.bmp' , 10,10,200,200 ) 
+				ITEM 'படம் பிடிக்க (எந்த உள்ளடக்கமும் இன்றி)'	ACTION Form_1.Capture()
+				ITEM 'படம் பிடிக்க (உள்ளடக்கங்களுடன்)'		ACTION Form_1.Capture( 'xxx.bmp' , 10,10,200,200 )
 				SEPARATOR	
 				ITEM 'வெளியேற'		ACTION Form_1.Release
 			END POPUP
@@ -54,7 +54,7 @@ Function Main
 				ITEM 'டாக்குமெண்ட்ஸ் அடைவு - GetMyDocumentsFolder()'	ACTION MsgInfo ( GetMyDocumentsFolder() )
 				ITEM 'டெஸ்க்டாப் அடைவு - GetDesktopFolder()'	ACTION MsgInfo ( GetDesktopFolder() )
 				ITEM 'செயலிகள் அடைவு - GetProgramFilesFolder()'	ACTION MsgInfo ( GetProgramFilesFolder())
-				ITEM 'தற்காலிக அடைவு - GetTempFolder()'		ACTION MsgInfo ( GetTempFolder() ) 
+				ITEM 'தற்காலிக அடைவு - GetTempFolder()'		ACTION MsgInfo ( GetTempFolder() )
 				SEPARATOR
 				ITEM 'அடைவு பெறுதல் - GetFolder()'		ACTION MsgInfo(GetFolder())
 			END POPUP
@@ -65,18 +65,18 @@ Function Main
 				ITEM 'வண்ணம் தேர்ந்தெடுக்க - GetColor()'	ACTION GetColor_Click()
 			END POPUP
 			DEFINE POPUP '&ஒலி சார்புகள்'
-				ITEM 'பீப் ஒலிக்க - PlayBeep()'	 ACTION PlayBeep() 
-				ITEM '* ஒலிக்க - PlayAsterisk()'	 ACTION PlayAsterisk() 
-				ITEM '! ஒலிக்க - PlayExclamation()' ACTION PlayExclamation() 
-				ITEM 'கைத்தட்டல் - PlayHand()'	 ACTION PlayHand() 
-				ITEM 'கேள்வி ஒலி - PlayQuestion()'	 ACTION PlayQuestion() 
-				ITEM 'ஒப்புக் கொள்ளும் ஒலி - PlayOk()'		 ACTION PlayOk() 
+				ITEM 'பீப் ஒலிக்க - PlayBeep()'	 ACTION PlayBeep()
+				ITEM '* ஒலிக்க - PlayAsterisk()'	 ACTION PlayAsterisk()
+				ITEM '! ஒலிக்க - PlayExclamation()' ACTION PlayExclamation()
+				ITEM 'கைத்தட்டல் - PlayHand()'	 ACTION PlayHand()
+				ITEM 'கேள்வி ஒலி - PlayQuestion()'	 ACTION PlayQuestion()
+				ITEM 'ஒப்புக் கொள்ளும் ஒலி - PlayOk()'		 ACTION PlayOk()
 			END POPUP
 			DEFINE POPUP '&இதர'
 				POPUP 'நினைவகம்...'
-               ITEM 'நினைவக நிலவரம் - MemoryStatus() Function (உபயம் -  Grigory Filatov)' ACTION MemoryTest() 
-               ITEM 'பற்றி ShellAbout() Function (உபயம் -  Manu Exposito' ACTION ShellAbout() 
-               ITEM 'பின்புல/முன்புல வண்ணம் (உபயம் - Ismael Dutra)' ACTION Color_CLick() 
+               ITEM 'நினைவக நிலவரம் - MemoryStatus() Function (உபயம் -  Grigory Filatov)' ACTION MemoryTest()
+               ITEM 'பற்றி ShellAbout() Function (உபயம் -  Manu Exposito' ACTION ShellAbout()
+               ITEM 'பின்புல/முன்புல வண்ணம் (உபயம் - Ismael Dutra)' ACTION Color_CLick()
    			END POPUP
 				POPUP 'கட்டுப்பாடு பண்பு பெற'
                ITEM 'கட்டுப்பாடு வரி பெற' 	ACTION 	MsgInfo ( Str ( ( Form_1.Button_1.Row     ) ) , 'பட்டன் வரி' )
@@ -112,7 +112,7 @@ Function Main
                ITEM 'கட்டுப்பாடு தலைப்பு பெற'		ACTION GetCaptionTest()
    			END POPUP
 				POPUP 'கட்டுப்பாடு் படம்'
-               ITEM 'கட்டுப்பாடு படம் பெற'		ACTION MsgInfo (  ( Form_1.Image_1.Picture ) , 'படம்_1' ) 
+               ITEM 'கட்டுப்பாடு படம் பெற'		ACTION MsgInfo (  ( Form_1.Image_1.Picture ) , 'படம்_1' )
    			END POPUP
 				POPUP 'கட்டுப்பாடு் உதவி'
                ITEM 'கட்டுப்பாடு உதவி மாற்ற'		ACTION Form_1.Button_1.ToolTip := 'புதிய உதவிச் செய்தி'
@@ -144,85 +144,85 @@ Function Main
    			END POPUP
 			END POPUP
 			DEFINE POPUP '&உதவி'
-				ITEM 'பற்றி'		ACTION MsgInfo ("வணக்கம். இது HMGன் ஒருங்குறி பதிப்பு","HMG பொது பதம்") 
+				ITEM 'பற்றி'		ACTION MsgInfo ("வணக்கம். இது HMGன் ஒருங்குறி பதிப்பு","HMG பொது பதம்")
 			END POPUP
 		END MENU
 
-		DEFINE CONTEXT MENU 
+		DEFINE CONTEXT MENU
 			ITEM 'தெரிவு செய் கோப்பு - மேலதிக சோதனைகள்'	ACTION Context1_Click()
-			ITEM 'தெரிவு செய்யாதே கோப்பு - மேலதிக சோதனைகள்'	ACTION Context2_Click() 
+			ITEM 'தெரிவு செய்யாதே கோப்பு - மேலதிக சோதனைகள்'	ACTION Context2_Click()
 			ITEM 'திடமாக்கு கோப்பு - எப்போதும் மேலிருக்கும் சாளரம்'	ACTION Context3_Click()
 			ITEM 'முடமாக்கு கோப்பு - எப்போதும் மேலிருக்கும் சாளரம்'	ACTION Context4_Click()
 			SEPARATOR	
-         ITEM 'பற்றி'		ACTION MsgInfo ("வணக்கம். இது HMGன் ஒருங்குறி பதிப்பு","HMG பொது பதம்") 
+         ITEM 'பற்றி'		ACTION MsgInfo ("வணக்கம். இது HMGன் ஒருங்குறி பதிப்பு","HMG பொது பதம்")
 		END MENU
 
 		DEFINE LABEL Label_Color
 			ROW	70
 			COL	10
-			VALUE 'சாளரத்தில் வலது கிளிக் செய்க' 
-			WIDTH 170 
-			HEIGHT 22 
-			FONTNAME 'Times New Roman' 
-			FONTSIZE 10 
+			VALUE 'சாளரத்தில் வலது கிளிக் செய்க'
+			WIDTH 170
+			HEIGHT 22
+			FONTNAME 'Times New Roman'
+			FONTSIZE 10
 			FONTCOLOR BLUE
 		END LABEL
 
 		DEFINE LABEL Label_Color_2
 			ROW	45
 			COL	10
-			VALUE 'ALT+A அழுத்தும் சோதனை' 
-			WIDTH 170 
-			HEIGHT 22 
+			VALUE 'ALT+A அழுத்தும் சோதனை'
+			WIDTH 170
+			HEIGHT 22
 			FONTNAME 'Times New Roman'
-			FONTSIZE 10 
+			FONTSIZE 10
 			FONTCOLOR RED
 		END LABEL
 
       DEFINE CHECKBOX Check_11
          ROW	125
          COL	10
-   		CAPTION 'செக் 1' 
-         VALUE .T. 
-         TOOLTIP 'செக்பாக்ஸ்' 
+   		CAPTION 'செக் 1'
+         VALUE .T.
+         TOOLTIP 'செக்பாக்ஸ்'
          ONCHANGE PLAYOK()
       END CHECKBOX
-      
+
       DEFINE RADIOGROUP Radio_11
          ROW	95
          COL	120
-         OPTIONS { 'ஒன்று' , 'இரண்டு' , 'மூன்று', 'நான்கு' } 
-         VALUE 1 
-         WIDTH 60 
+         OPTIONS { 'ஒன்று' , 'இரண்டு' , 'மூன்று', 'நான்கு' }
+         VALUE 1
+         WIDTH 60
          TOOLTIP 'ரேடியோ'
-         ONCHANGE PLAYOK() 
+         ONCHANGE PLAYOK()
       END RADIOGROUP
-      
+
 		DEFINE CHECKBUTTON CheckButton_1
 			ROW	200
 			COL	140
-			CAPTION 'செக்பட்டன்!' 
-			VALUE .T. 
-			TOOLTIP 'செக்பட்டன்!' 
+			CAPTION 'செக்பட்டன்!'
+			VALUE .T.
+			TOOLTIP 'செக்பட்டன்!'
 		END CHECKBUTTON	
 
 		DEFINE BUTTON ImageButton_1
 			ROW	200
 			COL	250
-			PICTURE 'button.bmp' 
-			ACTION MsgInfo('கிளிக்!') 
-			WIDTH 27 
-			HEIGHT 27 
-			TOOLTIP 'அச்சு முன்பார்வை' 
+			PICTURE 'button.bmp'
+			ACTION MsgInfo('கிளிக்!')
+			WIDTH 27
+			HEIGHT 27
+			TOOLTIP 'அச்சு முன்பார்வை'
 		END BUTTON
 
 		DEFINE CHECKBUTTON CheckButton_2
 			ROW	200
 			COL	285
 			PICTURE 'open.bmp'
-			WIDTH 27 
-			HEIGHT 27 
-			VALUE .F. 
+			WIDTH 27
+			HEIGHT 27
+			VALUE .F.
 			TOOLTIP 'வரைபட செக்பட்டன்'
 		END CHECKBUTTON
 
@@ -231,23 +231,23 @@ Function Main
 			WIDTH 430 ;
 			HEIGHT 180 ;
 			VALUE 1 ;
-			TOOLTIP 'பக்க கட்டுப்பாடு' 
+			TOOLTIP 'பக்க கட்டுப்பாடு'
 
 			DEFINE PAGE '&அட்டவணை'
 
 				DEFINE GRID Grid_1
 					ROW	30
 					COL	10
-					WIDTH 410 
-					HEIGHT 140 
-					HEADERS { '','கடைசி பெயர்','முதல் பெயர்'} 
+					WIDTH 410
+					HEIGHT 140
+					HEADERS { '','கடைசி பெயர்','முதல் பெயர்'}
 					WIDTHS { 0,220,220}
-					ITEMS { { 0,'ரத்தினகிரி','சுப்பையா'} , {1,'ராஜா','ரமேஷ்'} } 
-					VALUE 1 
-					TOOLTIP 'அட்டவணை கட்டுப்பாடு' 
-					ONHEADCLICK { {|| MsgInfo('தலைப்பு 1 கிளிக் செய்யப்பட்டது !')} , { || MsgInfo('தலைப்பு 2 க்ளிக் செய்யப்பட்டது !')} } 
-					IMAGE {"br_no","br_ok"} 
-					ONDBLCLICK MsgInfo ('இரட்டை கிளிக்!','அட்டவணை') 
+					ITEMS { { 0,'ரத்தினகிரி','சுப்பையா'} , {1,'ராஜா','ரமேஷ்'} }
+					VALUE 1
+					TOOLTIP 'அட்டவணை கட்டுப்பாடு'
+					ONHEADCLICK { {|| MsgInfo('தலைப்பு 1 கிளிக் செய்யப்பட்டது !')} , { || MsgInfo('தலைப்பு 2 க்ளிக் செய்யப்பட்டது !')} }
+					IMAGE {"br_no","br_ok"}
+					ONDBLCLICK MsgInfo ('இரட்டை கிளிக்!','அட்டவணை')
 				END GRID
 
 			END PAGE
@@ -264,17 +264,17 @@ Function Main
 				DEFINE LABEL Label_1
 					ROW 	55
 					COL	90
-					VALUE '&இது ஒரு லேபிள் !!!' 
-					WIDTH 100 
-					HEIGHT 27 
+					VALUE '&இது ஒரு லேபிள் !!!'
+					WIDTH 100
+					HEIGHT 27
 				END LABEL
 
 				DEFINE CHECKBOX Check_1
 					ROW	80
 					COL	90
-					CAPTION 'செக் 1' 
-					VALUE .T. 
-					TOOLTIP 'செக்பாக்ஸ்' 
+					CAPTION 'செக் 1'
+					VALUE .T.
+					TOOLTIP 'செக்பாக்ஸ்'
 					ONCHANGE PLAYOK()
 				END CHECKBOX
 
@@ -282,26 +282,26 @@ Function Main
 					ROW	115
 					COL	85
 					RANGEMIN 1
-					RANGEMAX 10 
-					VALUE 5 
+					RANGEMAX 10
+					VALUE 5
 					TOOLTIP 'ஸ்லைடர்'
 				END SLIDER
 				
 				DEFINE FRAME TabFrame_2
 					ROW	45
 					COL	240
-					WIDTH 125 
-					HEIGHT 110 
+					WIDTH 125
+					HEIGHT 110
 				END FRAME
 
 				DEFINE RADIOGROUP Radio_1
 					ROW	50
 					COL	260
-					OPTIONS { 'ஒன்று' , 'இரண்டு' , 'மூன்று', 'நான்கு' } 
-					VALUE 1 
-					WIDTH 100 
+					OPTIONS { 'ஒன்று' , 'இரண்டு' , 'மூன்று', 'நான்கு' }
+					VALUE 1
+					WIDTH 100
 					TOOLTIP 'ரேடியோ'
-					ONCHANGE PLAYOK() 
+					ONCHANGE PLAYOK()
 				END RADIOGROUP
 
 			END PAGE
@@ -311,11 +311,11 @@ Function Main
 				DEFINE EDITBOX 	Edit_1
 					ROW	30
 					COL	10
-					WIDTH 410 
-					HEIGHT 140 
-					VALUE 'எடிட்பாக்ஸ்!!' 
-					TOOLTIP 'எடிட்பாக்ஸ்' 
-					MAXLENGTH 255 
+					WIDTH 410
+					HEIGHT 140
+					VALUE 'எடிட்பாக்ஸ்!!'
+					TOOLTIP 'எடிட்பாக்ஸ்'
+					MAXLENGTH 255
 				END EDITBOX
 
 			END PAGE
@@ -332,10 +332,10 @@ Function Main
 				DEFINE BUTTON Btn_Prg
 					ROW	80
 					COL	250
-					CAPTION '<- !!!' 
-					ACTION Animate_CLick() 
-					WIDTH 50 
-					HEIGHT 28 
+					CAPTION '<- !!!'
+					ACTION Animate_CLick()
+					WIDTH 50
+					HEIGHT 28
 					TOOLTIP 'முன்னேற்ற அளவை இயக்கம்'
 				END BUTTON
 
@@ -346,188 +346,188 @@ Function Main
 		DEFINE DATEPICKER Date_1
 			ROW	10
 			COL	10
-			VALUE CTOD('  / /  ') 
-			TOOLTIP 'தேதி தேர்வு' 
+			VALUE CTOD('  / /  ')
+			TOOLTIP 'தேதி தேர்வு'
 			SHOWNONE .T.
 		END DATEPICKER
 
 		DEFINE BUTTON Button_1
 			ROW	200
 			COL	10
-			CAPTION 'முழு அளவு' 
-			ACTION Maximize_Click() 
+			CAPTION 'முழு அளவு'
+			ACTION Maximize_Click()
 			TOOLTIP 'முழு அளவுக்கு விரி'
 		END BUTTON
 
 		DEFINE BUTTON Button_2
 			ROW	230
 			COL	10
-			CAPTION 'சுருக்கு' 
-			ACTION Minimize_Click() 
+			CAPTION 'சுருக்கு'
+			ACTION Minimize_Click()
 		END BUTTON
 		
 		DEFINE BUTTON Button_3
 			ROW	260
 			COL	10
-			CAPTION 'மீளமைவு' 
+			CAPTION 'மீளமைவு'
 			ACTION Restore_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_4
 			ROW	290
 			COL	10
-			CAPTION '&மறை' 
+			CAPTION '&மறை'
 			ACTION Hide_Click()
 		END BUTTON
 		
 		DEFINE BUTTON Button_5
 			ROW	320
 			COL	10
-			CAPTION '&காட்டு' 
+			CAPTION '&காட்டு'
 			ACTION Show_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_6
 			ROW	350
 			COL	10
-			CAPTION 'ஃபோகஸ் செய்' 
+			CAPTION 'ஃபோகஸ் செய்'
 			ACTION Setfocus_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_7
 			ROW	230
 			COL	140
-			CAPTION 'மதிப்பு பெற' 
+			CAPTION 'மதிப்பு பெற'
 			ACTION GetValue_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_8
 			ROW	260
 			COL	140
-			CAPTION 'மதிப்பு மாற்ற' 
+			CAPTION 'மதிப்பு மாற்ற'
 			ACTION SetValue_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_9
 			ROW	290
 			COL	140
-			CAPTION 'திடமாக்கு' 
+			CAPTION 'திடமாக்கு'
 			ACTION Enable_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_10
 			ROW	320
 			COL	140
-			CAPTION 'முடமாக்கு' 
+			CAPTION 'முடமாக்கு'
 			ACTION Disable_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_11
 			ROW	350
 			COL	140
-			CAPTION 'அனைத்தையும் அழிக்க' 
+			CAPTION 'அனைத்தையும் அழிக்க'
 			ACTION DeleteAllItems_Click()
-			WIDTH 150 
+			WIDTH 150
 			HEIGHT 28
 		END BUTTON
 
 		DEFINE BUTTON Button_12
 			ROW	190
 			COL	510
-			CAPTION 'ஒரு வரி அழிக்க' 
+			CAPTION 'ஒரு வரி அழிக்க'
 			ACTION DeleteItem_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_13
 			ROW	220
 			COL	510
-			CAPTION 'வரி சேர்க்க' 
+			CAPTION 'வரி சேர்க்க'
 			ACTION AddItem_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_14
 			ROW	250
 			COL	510
-			CAPTION 'செய்திகள்' 
+			CAPTION 'செய்திகள்'
 			ACTION Msg_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_15
 			ROW	280
 			COL	510
-			CAPTION 'படம் மாற்ற' 
+			CAPTION 'படம் மாற்ற'
 			ACTION SetPict()
 		END BUTTON
 
 		DEFINE FRAME Frame_1	
 			ROW 	190
 			COL	315
-			CAPTION 'சட்டம்' 
-			WIDTH 170 
-			HEIGHT 200 
+			CAPTION 'சட்டம்'
+			WIDTH 170
+			HEIGHT 200
 		END FRAME
 
 		DEFINE COMBOBOX Combo_1
 			ROW	210
 			COL	335
-			ITEMS {'ஒன்று','இரண்டு','மூன்று'} 
-			VALUE 2 
-			TOOLTIP 'கோம்போ பாக்ஸ்' 
+			ITEMS {'ஒன்று','இரண்டு','மூன்று'}
+			VALUE 2
+			TOOLTIP 'கோம்போ பாக்ஸ்'
 		END COMBOBOX
 
 		DEFINE LISTBOX List_1	
 			ROW	240
 			COL	335
-			WIDTH 120 
-			HEIGHT 50 
-			ITEMS {'சித்திரை','வைகாசி','ஆனி','ஆடி','ஆவணி'} 
-			VALUE 2  
-			TOOLTIP 'பட்டியல் பாக்ஸ்' 
-			ONDBLCLICK 	MsgInfo('இரட்டை கிளிக்!','பட்டியல்') 
+			WIDTH 120
+			HEIGHT 50
+			ITEMS {'சித்திரை','வைகாசி','ஆனி','ஆடி','ஆவணி'}
+			VALUE 2
+			TOOLTIP 'பட்டியல் பாக்ஸ்'
+			ONDBLCLICK 	MsgInfo('இரட்டை கிளிக்!','பட்டியல்')
 		END LISTBOX
 
 		DEFINE TEXTBOX Text_pass
 			ROW	300
 			COL	335
-			VALUE 'Secret' 
+			VALUE 'Secret'
 			PASSWORD .T.
-			TOOLTIP 'கடவுச்சொல் பெட்டி' 
-			MAXLENGTH 16 
+			TOOLTIP 'கடவுச்சொல் பெட்டி'
+			MAXLENGTH 16
 			UPPERCASE .T.
 		END TEXTBOX
 		
 		DEFINE TEXTBOX Text_1
 			ROW	330
 			COL	335
-			WIDTH 50 
-			VALUE 'வணக்கம்!!!' 
-			TOOLTIP 'உரைப் பெட்டி' 
-			MAXLENGTH 16 
+			WIDTH 50
+			VALUE 'வணக்கம்!!!'
+			TOOLTIP 'உரைப் பெட்டி'
+			MAXLENGTH 16
 			LOWERCASE .T.
-			ONLOSTFOCUS MsgInfo('ஃபோகஸ் இழப்பு!') 
+			ONLOSTFOCUS MsgInfo('ஃபோகஸ் இழப்பு!')
 			ONENTER MsgInfo('எண்டர் அழுத்தப்பட்டது')
 		END TEXTBOX
 
 		DEFINE TEXTBOX MaskedText
 			ROW	330
 			COL	395
-			WIDTH 80 
-			VALUE 12345.12 
-			TOOLTIP "எண் மற்றும் உள்ளீட்டுப் போர்வையுடனான உரைப்பெட்டி" 
+			WIDTH 80
+			VALUE 12345.12
+			TOOLTIP "எண் மற்றும் உள்ளீட்டுப் போர்வையுடனான உரைப்பெட்டி"
 			NUMERIC .T.
-			INPUTMASK '99999.99' 
-			ONCHANGE PlayOk() 
-			ONENTER MsgInfo('எண்டர் அழுத்தப்பட்டது') 
+			INPUTMASK '99999.99'
+			ONCHANGE PlayOk()
+			ONENTER MsgInfo('எண்டர் அழுத்தப்பட்டது')
 			RIGHTALIGN .T.
 		END TEXTBOX
 
 		DEFINE TEXTBOX Text_2
 			ROW	360
 			COL	335
-			VALUE 123 
+			VALUE 123
 			NUMERIC .T.
-			TOOLTIP 'எண் உரைப்பெட்டி' 
-			MAXLENGTH 16 
+			TOOLTIP 'எண் உரைப்பெட்டி'
+			MAXLENGTH 16
 			RIGHTALIGN .T.
 		END TEXTBOX
 
@@ -535,9 +535,9 @@ Function Main
 			ROW	100
 			COL	10
 			RANGEMIN 0
-			RANGEMAX 10 
-			VALUE 5 
-			WIDTH 100 
+			RANGEMAX 10
+			VALUE 5
+			WIDTH 100
 			TOOLTIP 'வரையறை 1,65000'
 			FONTBOLD .T.
 		END SPINNER
@@ -545,7 +545,7 @@ Function Main
 		DEFINE LABEL Label_2
 			ROW	380
 			COL	15
-			VALUE 'கடிகார சோதனை:' 
+			VALUE 'கடிகார சோதனை:'
 		END LABEL
 		
 		DEFINE LABEL Label_3
@@ -555,13 +555,13 @@ Function Main
 
 		DEFINE TIMER Timer_1 ;
 		INTERVAL 1000 ;
-		ACTION Form_1.Label_3.Value := Time() 
+		ACTION Form_1.Label_3.Value := Time()
 		
 		DEFINE IMAGE Image_1
 			ROW	310
 			COL	510
-			PICTURE 'Demo.gif' 
-			WIDTH 90 
+			PICTURE 'Demo.gif'
+			WIDTH 90
 			HEIGHT 90
 		END IMAGE
 		
@@ -614,13 +614,13 @@ Return Nil
 Procedure ExecTest()
 *-----------------------------------------------------------------------------*
 
-	EXECUTE FILE "NOTEPAD.EXE" 
+	EXECUTE FILE "NOTEPAD.EXE"
 
 Return Nil
 *-----------------------------------------------------------------------------*
 Procedure InputWindow_Click
 *-----------------------------------------------------------------------------*
-Local Title , aLabels , aInitValues , aFormats , aResults 
+Local Title , aLabels , aInitValues , aFormats , aResults
 
 Title 		:= 'உள்ளீட்டுச் சாளரச் சோதனை'
 
@@ -652,43 +652,43 @@ Procedure EditGrid_Click
 Local aRows [20] [3]
 
 	aRows [1]	:= {'ராஜா','ராமன்','555-5555'}
-	aRows [2]	:= {'ராமன்','ரமணி','324-6432'} 
-	aRows [3]	:= {'ராகவன்','சந்திரன்','432-5892'} 
-	aRows [4]	:= {'ரமணி','சகாதேவன்','894-2332'} 
-	aRows [5]	:= {'சந்திரன்','பரணி','346-9873'} 
-	aRows [6]	:= {'சகாதேவன்','பரமேஸ்வரன்','394-9654'} 
-	aRows [7]	:= {'பரணி','சக்தி','435-3211'} 
-	aRows [8]	:= {'பரமேஸ்வரன்','சக்தி','123-1234'} 
-	aRows [9]	:= {'சக்தி','இந்திரன்','000-0000'} 
-	aRows [10]	:= {'இந்திரன்','அம்புலி','583-4832'} 
-	aRows [11]	:= {'அம்புலி','ஆதவன்','321-4332'} 
-	aRows [12]	:= {'ஆதவன்','அழகன்','326-9430'} 
-	aRows [13]	:= {'அழகன்','இனியன்','543-7898'} 
-	aRows [14]	:= {'இனியன்','முருகன்','437-8473'} 
-	aRows [15]	:= {'முருகன்','சண்முகன்','485-2843'} 
-	aRows [16]	:= {'சண்முகன்','கந்தன்','394-5983'} 
-	aRows [17]	:= {'ஜோசப்','அந்தோணி','534-7984'} 
-	aRows [18]	:= {'ஜான்','பிரிட்டோ','854-7873'} 
-	aRows [19]	:= {'முகமது','இப்ரஹீம்','???-????'} 
-	aRows [20]	:= {'அப்துல்','காதர்','432-5836'} 
+	aRows [2]	:= {'ராமன்','ரமணி','324-6432'}
+	aRows [3]	:= {'ராகவன்','சந்திரன்','432-5892'}
+	aRows [4]	:= {'ரமணி','சகாதேவன்','894-2332'}
+	aRows [5]	:= {'சந்திரன்','பரணி','346-9873'}
+	aRows [6]	:= {'சகாதேவன்','பரமேஸ்வரன்','394-9654'}
+	aRows [7]	:= {'பரணி','சக்தி','435-3211'}
+	aRows [8]	:= {'பரமேஸ்வரன்','சக்தி','123-1234'}
+	aRows [9]	:= {'சக்தி','இந்திரன்','000-0000'}
+	aRows [10]	:= {'இந்திரன்','அம்புலி','583-4832'}
+	aRows [11]	:= {'அம்புலி','ஆதவன்','321-4332'}
+	aRows [12]	:= {'ஆதவன்','அழகன்','326-9430'}
+	aRows [13]	:= {'அழகன்','இனியன்','543-7898'}
+	aRows [14]	:= {'இனியன்','முருகன்','437-8473'}
+	aRows [15]	:= {'முருகன்','சண்முகன்','485-2843'}
+	aRows [16]	:= {'சண்முகன்','கந்தன்','394-5983'}
+	aRows [17]	:= {'ஜோசப்','அந்தோணி','534-7984'}
+	aRows [18]	:= {'ஜான்','பிரிட்டோ','854-7873'}
+	aRows [19]	:= {'முகமது','இப்ரஹீம்','???-????'}
+	aRows [20]	:= {'அப்துல்','காதர்','432-5836'}
 
 	DEFINE WINDOW Form_Grid ;
 		AT 0,0 ;
 		WIDTH 430 HEIGHT 400 ;
 		TITLE 'திருத்தத்தக்க அட்டவணை சோதனை'  ;
 		MODAL NOSIZE ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
 		DEFINE GRID Grid_1
 			ROW	10
 			COL	10
-			WIDTH 405 
-			HEIGHT 330 
-			HEADERS {'இறுதிப் பெயர்','முதன்மைப் பெயர்','தொலைபேசி'} 
+			WIDTH 405
+			HEIGHT 330
+			HEADERS {'இறுதிப் பெயர்','முதன்மைப் பெயர்','தொலைபேசி'}
 			WIDTHS {140,140,140}
-			ITEMS aRows 
-			VALUE 1 
-			TOOLTIP 'திருத்தத்தக்க அட்டவணை' 
+			ITEMS aRows
+			VALUE 1
+			TOOLTIP 'திருத்தத்தக்க அட்டவணை'
 			ALLOWEDIT .T.
 		END GRID
 
@@ -773,14 +773,14 @@ Procedure MultiWin_Click
 			AT 100,100 ;
 			WIDTH 200 HEIGHT 150 ;
 			TITLE "சாளரம் 1" ;
-			TOPMOST 
+			TOPMOST
 
 		END WINDOW
 		DEFINE WINDOW Form_5 ;
 			AT 300,300 ;
 			WIDTH 200 HEIGHT 150 ;
 			TITLE "சாளரம் 2" ;
-			TOPMOST 
+			TOPMOST
 
 		END WINDOW
 
@@ -840,12 +840,12 @@ Procedure Modal_CLick
 		WIDTH 430 HEIGHT 400 ;
 		TITLE 'முன்னணிச் சாளரம் & பலமுகத் தேர்வு அட்டவணை/பட்டியல் சோதனை'  ;
 		MODAL ;
-		NOSIZE 
+		NOSIZE
 
 		DEFINE BUTTON BUTTON_1
 			ROW	10
 			COL	30
-			CAPTION 'பட்டியல் மதிப்பு பெற' 
+			CAPTION 'பட்டியல் மதிப்பு பெற'
          width 150
 			ACTION MultiTest_GetValue()
 		END BUTTON
@@ -854,15 +854,15 @@ Procedure Modal_CLick
 			ROW	40
 			COL	30
          width 150
-			CAPTION 'பட்டியல் மதிப்பு மாற்ற' 
-			ACTION Form_2.List_1.Value := { 1 , 3 } 
+			CAPTION 'பட்டியல் மதிப்பு மாற்ற'
+			ACTION Form_2.List_1.Value := { 1 , 3 }
 		END BUTTON
 		
 		DEFINE BUTTON BUTTON_3
 			ROW	70
 			COL	30
          width 150
-			CAPTION 'பட்டியல் வரி பெற' 
+			CAPTION 'பட்டியல் வரி பெற'
 			ACTION Multilist_GetItem()
 		END BUTTON
 
@@ -870,22 +870,22 @@ Procedure Modal_CLick
 			ROW	100
 			COL	30
          width 150
-			CAPTION 'பட்டியல் வரி மாற்ற' 
-			ACTION Form_2.List_1.Item ( 1 ) := 'புதிய வரி!!' 
+			CAPTION 'பட்டியல் வரி மாற்ற'
+			ACTION Form_2.List_1.Item ( 1 ) := 'புதிய வரி!!'
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_10
 			ROW	130
 			COL	30
          width 150
-			CAPTION 'எண்ணிக்கை பெற' 
+			CAPTION 'எண்ணிக்கை பெற'
 			ACTION MsgInfo ( Str ( ( Form_2.List_1.ItemCount ) ) )
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_5
 			ROW	10
 			COL	200
-			CAPTION 'அட்டவணை மதிப்பு பெற' 
+			CAPTION 'அட்டவணை மதிப்பு பெற'
          width 150
 			ACTION MultiGrid_GetValue()
 		END BUTTON
@@ -894,15 +894,15 @@ Procedure Modal_CLick
 			ROW	40
 			COL	200
          width 150
-			CAPTION 'அட்டவணை மதிப்பு மாற்ற' 
-			ACTION Form_2.Grid_1.Value := { 1 , 3 } 
+			CAPTION 'அட்டவணை மதிப்பு மாற்ற'
+			ACTION Form_2.Grid_1.Value := { 1 , 3 }
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_7
 			ROW	70
 			COL	200
          width 150
-			CAPTION 'அட்டவணை வரி பெற' 
+			CAPTION 'அட்டவணை வரி பெற'
 			ACTION MultiGrid_GetItem()
 		END BUTTON
 		
@@ -910,44 +910,44 @@ Procedure Modal_CLick
 			ROW	100
 			COL	200
          width 150
-			CAPTION 'அட்டவணை வரி மாற்ற' 
-			ACTION Form_2.Grid_1.Item(1) := {'அனைவருக்கும்','வணக்கம்'} 
+			CAPTION 'அட்டவணை வரி மாற்ற'
+			ACTION Form_2.Grid_1.Item(1) := {'அனைவருக்கும்','வணக்கம்'}
 		END BUTTON
 		
 		DEFINE BUTTON BUTTON_9
 			ROW	130
 			COL	200
          width 150
-			CAPTION 'அட்டவணை எண்ணிக்கை பெற' 
+			CAPTION 'அட்டவணை எண்ணிக்கை பெற'
 			ACTION MsgInfo ( Str ( ( Form_2.Grid_1.ItemCount ) ) )
 		END BUTTON
 
 		DEFINE LISTBOX List_1
 			ROW	180
 			COL	30
-			WIDTH 100 
-			HEIGHT 135 
-			ITEMS { 'வரி 1' , 'வரி 2' , 'வரி 3' , 'வரி 4' , 'வரி 5' } 
-			VALUE { 2 , 3 } 
-			FONTNAME 'Arial' 
-			FONTSIZE 10 
-			TOOLTIP 'ஒன்றுக்கும் மேற்பட்டன தெரிவுப் பட்டியல் (Ctrl+Click)' 
+			WIDTH 100
+			HEIGHT 135
+			ITEMS { 'வரி 1' , 'வரி 2' , 'வரி 3' , 'வரி 4' , 'வரி 5' }
+			VALUE { 2 , 3 }
+			FONTNAME 'Arial'
+			FONTSIZE 10
+			TOOLTIP 'ஒன்றுக்கும் மேற்பட்டன தெரிவுப் பட்டியல் (Ctrl+Click)'
 			MULTISELECT .T.
 		END LISTBOX
 		
 		DEFINE GRID Grid_1
 			ROW		180
 			COL		150
-			WIDTH		250 
-			HEIGHT		135 
-			HEADERS		{ 'இறுதிப் பெயர்' , 'முதன்மைப் பெயர்' } 
+			WIDTH		250
+			HEIGHT		135
+			HEADERS		{ 'இறுதிப் பெயர்' , 'முதன்மைப் பெயர்' }
 			WIDTHS		{ 120 , 120 }
-			ITEMS		{ { 'முருகன்' , 'சண்முகன்' } , { 'ஜான்' , 'ஜோசப்' } , { 'முகமது' , 'இப்ரஹிம்' } } 
-			VALUE		{ 2 , 3 } 
-			FONTNAME	'Arial' 
-			FONTSIZE	10 
-			TOOLTIP		'ஒன்றுக்கும் மேற்பட்டன தெரிவு செய்ய (Ctrl+Click)' 
-			ONCHANGE	PlayBeep() 
+			ITEMS		{ { 'முருகன்' , 'சண்முகன்' } , { 'ஜான்' , 'ஜோசப்' } , { 'முகமது' , 'இப்ரஹிம்' } }
+			VALUE		{ 2 , 3 }
+			FONTNAME	'Arial'
+			FONTSIZE	10
+			TOOLTIP		'ஒன்றுக்கும் மேற்பட்டன தெரிவு செய்ய (Ctrl+Click)'
+			ONCHANGE	PlayBeep()
 			MULTISELECT	.T.
 		END GRID
 
@@ -964,7 +964,7 @@ local a , i
 	a :=  ( Form_2.List_1.Value )
 
 	for i := 1 to len (a)
-		MsgInfo ( str( a[i] ) ) 
+		MsgInfo ( str( a[i] ) )
 	Next i
 
 	If Len(a) == 0
@@ -978,7 +978,7 @@ local a , i
 	a :=  ( Form_2.Grid_1.Value )
 
 	for i := 1 to len (a)
-		MsgInfo ( str( a[i] ) ) 
+		MsgInfo ( str( a[i] ) )
 	Next i
 
 	If Len(a) == 0
@@ -990,7 +990,7 @@ Return
 procedure multilist_getitem
 *-----------------------------------------------------------------------------*
 
-	MsgInfo (  ( Form_2.List_1.Item ( 1 ) ) ) 
+	MsgInfo (  ( Form_2.List_1.Item ( 1 ) ) )
 
 return
 *-----------------------------------------------------------------------------*
@@ -1001,7 +1001,7 @@ local a , i
 	a := ( Form_2.Grid_1.Item ( 1 ) )
 
 	for i := 1 to len (a)
-		MsgInfo ( a[i] ) 
+		MsgInfo ( a[i] )
 	Next i
 Return
 *-----------------------------------------------------------------------------*
@@ -1036,7 +1036,7 @@ Procedure Topmost_CLick
 			AT 100,100 ;
 			WIDTH 150 HEIGHT 150 ;
 			TITLE "முன்னணிச் சாளரம்" ;
-			TOPMOST 
+			TOPMOST
 
 		END WINDOW
 
@@ -1103,7 +1103,7 @@ s = s + "கடவுச்சொல் பெட்டி:    " +        Form_1
 s = s + "ஸ்லைடர்:	      " + Str (  Form_1.Tab_1(2).Slider_1.Value )	+ chr(13) + chr(10)	
 s = s + "ஸ்பின்னர்:             " + Str (  Form_1.Spinner_1.Value )	+ chr(13) + chr(10)
 s = s + "உள்ளீடு போர்வையுடனான உரைப்பெட்டி: " + Str (  Form_1.MaskedText.Value )	+ chr(13) + chr(10)
-s = s + "தேதித்தெரிவன்:          " + Dtoc(  ( Form_1.Date_1.Value )	) 
+s = s + "தேதித்தெரிவன்:          " + Dtoc(  ( Form_1.Date_1.Value )	)
 
 MsgInfo ( s , "கட்டுப்பாட்டு மதிப்புகள்" )
 
@@ -1112,50 +1112,50 @@ Return Nil
 Procedure SetValue_CLick
 *-----------------------------------------------------------------------------*
 
-	 Form_1.Tab_1(1).Grid_1.Value 	:= 2 
-	 Form_1.Text_1.Value 	:= "புதிய உரை" 
-	 Form_1.Tab_1(3).Edit_1.Value 	:= "புதிய மதிப்பு" 
+	 Form_1.Tab_1(1).Grid_1.Value 	:= 2
+	 Form_1.Text_1.Value 	:= "புதிய உரை"
+	 Form_1.Tab_1(3).Edit_1.Value 	:= "புதிய மதிப்பு"
 	 Form_1.Tab_1(2).Radio_1.Value 	:= 4
-	 Form_1.Tab_1.Value 	:= 2 
-	 Form_1.Tab_1(2).Check_1.Value 	:= .t. 
-	 Form_1.List_1.Value 	:= 1 
-	 Form_1.Combo_1.Value 	:= 1 
-	 Form_1.Date_1.Value 	:= CTOD("02/02/2002") 
-	 Form_1.Tab_1(2).Label_1.Value 	:= "புதிய லேபிள் மதிப்பு" 
-	 Form_1.Text_2.Value 	:= 999 
-	 Form_1.Timer_1.Value 	:= 500 
-	 Form_1.MaskedText.Value := 12.34 
+	 Form_1.Tab_1.Value 	:= 2
+	 Form_1.Tab_1(2).Check_1.Value 	:= .t.
+	 Form_1.List_1.Value 	:= 1
+	 Form_1.Combo_1.Value 	:= 1
+	 Form_1.Date_1.Value 	:= CTOD("02/02/2002")
+	 Form_1.Tab_1(2).Label_1.Value 	:= "புதிய லேபிள் மதிப்பு"
+	 Form_1.Text_2.Value 	:= 999
+	 Form_1.Timer_1.Value 	:= 500
+	 Form_1.MaskedText.Value := 12.34
 	 Form_1.Spinner_1.Value := 6
 Return Nil
 *-----------------------------------------------------------------------------*
 Procedure Enable_CLick
 *-----------------------------------------------------------------------------*
 
-	Form_1.Button_1.Enabled 	:= .T. 
-	Form_1.Button_2.Enabled 	:= .T. 
-	Form_1.Button_3.Enabled 	:= .T. 
-	Form_1.Button_4.Enabled 	:= .T. 
-	Form_1.Button_5.Enabled 	:= .T. 
-	Form_1.Button_6.Enabled 	:= .T. 
-	Form_1.Timer_1.Enabled 		:= .T. 
-	Form_1.Spinner_1.Enabled 	:= .T. 
-	Form_1.Tab_1(2).Radio_1.Enabled 		:= .T. 
-	Form_1.Tab_1.Enabled 		:= .T. 
+	Form_1.Button_1.Enabled 	:= .T.
+	Form_1.Button_2.Enabled 	:= .T.
+	Form_1.Button_3.Enabled 	:= .T.
+	Form_1.Button_4.Enabled 	:= .T.
+	Form_1.Button_5.Enabled 	:= .T.
+	Form_1.Button_6.Enabled 	:= .T.
+	Form_1.Timer_1.Enabled 		:= .T.
+	Form_1.Spinner_1.Enabled 	:= .T.
+	Form_1.Tab_1(2).Radio_1.Enabled 		:= .T.
+	Form_1.Tab_1.Enabled 		:= .T.
 Return Nil
 *-----------------------------------------------------------------------------*
 Procedure Disable_CLick
 *-----------------------------------------------------------------------------*
 
-	Form_1.Button_1.Enabled 	:= .F. 
-	Form_1.Button_2.Enabled 	:= .F. 
-	Form_1.Button_3.Enabled 	:= .F. 
-	Form_1.Button_4.Enabled 	:= .F. 
-	Form_1.Button_5.Enabled 	:= .F. 
-	Form_1.Button_6.Enabled 	:= .F. 
-	Form_1.Timer_1.Enabled 		:= .F. 
-	Form_1.Spinner_1.Enabled 	:= .F. 
-	Form_1.Tab_1(2).Radio_1.Enabled 		:= .F. 
-	Form_1.Tab_1.Enabled 		:= .F. 
+	Form_1.Button_1.Enabled 	:= .F.
+	Form_1.Button_2.Enabled 	:= .F.
+	Form_1.Button_3.Enabled 	:= .F.
+	Form_1.Button_4.Enabled 	:= .F.
+	Form_1.Button_5.Enabled 	:= .F.
+	Form_1.Button_6.Enabled 	:= .F.
+	Form_1.Timer_1.Enabled 		:= .F.
+	Form_1.Spinner_1.Enabled 	:= .F.
+	Form_1.Tab_1(2).Radio_1.Enabled 		:= .F.
+	Form_1.Tab_1.Enabled 		:= .F.
 
 Return Nil
 *-----------------------------------------------------------------------------*
@@ -1163,7 +1163,7 @@ Procedure DeleteAllItems_CLick
 *-----------------------------------------------------------------------------*
 
 	Form_1.Tab_1(1).Grid_1.DeleteAllItems
-	Form_1.List_1.DeleteAllItems 
+	Form_1.List_1.DeleteAllItems
 	Form_1.Combo_1.DeleteAllItems
 
 Return Nil
@@ -1221,26 +1221,26 @@ Procedure Color_CLick
 		DEFINE LABEL Label_9
 			ROW	10
 			COL	10
-			VALUE 'வண்ணப் பெயர் !!!' 
-			WIDTH 140 
-			HEIGHT 30 
-			FONTNAME 'Times New Roman' 
-			FONTSIZE 12 
-			BACKCOLOR RED 
-			FONTCOLOR YELLOW 
+			VALUE 'வண்ணப் பெயர் !!!'
+			WIDTH 140
+			HEIGHT 30
+			FONTNAME 'Times New Roman'
+			FONTSIZE 12
+			BACKCOLOR RED
+			FONTCOLOR YELLOW
 			FONTBOLD .T.
-		END LABEL 
+		END LABEL
 
 		DEFINE LABEL Label_99
 			ROW	60
 			COL	10
-			VALUE 'மற்றுமொரு வண்ண லேபிள் !!!' 
-			WIDTH 180 
-			HEIGHT 30 
-			FONTNAME 'Times New Roman' 
-			FONTSIZE 10 
-			BACKCOLOR WHITE 
-			FONTCOLOR RED 
+			VALUE 'மற்றுமொரு வண்ண லேபிள் !!!'
+			WIDTH 180
+			HEIGHT 30
+			FONTNAME 'Times New Roman'
+			FONTSIZE 10
+			BACKCOLOR WHITE
+			FONTCOLOR RED
 			FONTBOLD .T.
 		END LABEL
 	END WINDOW

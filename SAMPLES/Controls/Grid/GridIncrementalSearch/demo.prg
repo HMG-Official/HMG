@@ -1,4 +1,4 @@
-﻿
+
 
 #include "hmg.ch"
 
@@ -9,26 +9,26 @@ Function Main
    public aRows [21] [3]
 
    aRows [1]    := {'Simpson','Homer','555-5555'}
-   aRows [2]    := {'Mulder','Fox','324-6432'} 
-   aRows [3]    := {'Smart','Max','432-5892'} 
-   aRows [4]    := {'Grillo','Pepe','894-2332'} 
-   aRows [5]    := {'Kirk','James','346-9873'} 
-   aRows [6]    := {'Barriga','Carlos','394-9654'} 
-   aRows [7]    := {'Flanders','Ned','435-3211'} 
-   aRows [8]    := {'Smith','John','123-1234'} 
-   aRows [9]    := {'Pedemonti','Flavio','000-0000'} 
-   aRows [10]   := {'Gomez','Juan','583-4832'} 
-   aRows [11]   := {'Fernandez','Raul','321-4332'} 
-   aRows [12]   := {'Borges','Javier','326-9430'} 
-   aRows [13]   := {'Alvarez','Alberto','543-7898'} 
-   aRows [14]   := {'Gonzalez','Ambo','437-8473'} 
-   aRows [15]   := {'Batistuta','Gol','485-2843'} 
-   aRows [16]   := {'Vinazzi','Amigo','394-5983'} 
-   aRows [17]   := {'Pedemonti','Flavio','534-7984'} 
-   aRows [18]   := {'Samarbide','Armando','854-7873'} 
-   aRows [19]   := {'Pradon','Alejandra','???-????'} 
-   aRows [20]   := {'Reyes','Monica','432-5836'} 
-   aRows [21]   := {'Fernández','two','0000-0000'} 
+   aRows [2]    := {'Mulder','Fox','324-6432'}
+   aRows [3]    := {'Smart','Max','432-5892'}
+   aRows [4]    := {'Grillo','Pepe','894-2332'}
+   aRows [5]    := {'Kirk','James','346-9873'}
+   aRows [6]    := {'Barriga','Carlos','394-9654'}
+   aRows [7]    := {'Flanders','Ned','435-3211'}
+   aRows [8]    := {'Smith','John','123-1234'}
+   aRows [9]    := {'Pedemonti','Flavio','000-0000'}
+   aRows [10]   := {'Gomez','Juan','583-4832'}
+   aRows [11]   := {'Fernandez','Raul','321-4332'}
+   aRows [12]   := {'Borges','Javier','326-9430'}
+   aRows [13]   := {'Alvarez','Alberto','543-7898'}
+   aRows [14]   := {'Gonzalez','Ambo','437-8473'}
+   aRows [15]   := {'Batistuta','Gol','485-2843'}
+   aRows [16]   := {'Vinazzi','Amigo','394-5983'}
+   aRows [17]   := {'Pedemonti','Flavio','534-7984'}
+   aRows [18]   := {'Samarbide','Armando','854-7873'}
+   aRows [19]   := {'Pradon','Alejandra','???-????'}
+   aRows [20]   := {'Reyes','Monica','432-5836'}
+   aRows [21]   := {'Fernández','two','0000-0000'}
 
 
    DEFINE WINDOW Form_1 ;
@@ -36,7 +36,7 @@ Function Main
       WIDTH 800 ;
       HEIGHT 650 ;
       TITLE "Incremental search in grid" ;
-      MAIN 
+      MAIN
 
       @  10, 10 Label L1 ;
          width 80;
@@ -58,7 +58,7 @@ Function Main
          width 120;
          height 20;
          value ""
-      
+
       @ 80,10 GRID Grid_1 ;
          WIDTH 760 ;
          HEIGHT 500 ;
@@ -73,7 +73,7 @@ Function Main
    END WINDOW
 
    CENTER WINDOW Form_1
-   
+
    ACTIVATE WINDOW Form_1
 
 Return
@@ -85,8 +85,8 @@ Return
 ****************************************************************
    STATIC nRow := 0
    STATIC cPublicSearchString := ""
-   local ch, i, k, cLocalSearchString 
-   
+   local ch, i, k, cLocalSearchString
+
    ch := HMG_GetLastCharacter()
 
    if HMG_GetLastVirtualKeyDown() == VK_BACK   //   backspace
@@ -122,6 +122,3 @@ Return
 // Form_1.Grid_1.SetFocus
 
 return 1   // prevents the processing of the current message
-
-
- 

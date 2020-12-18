@@ -234,4 +234,3 @@ HB_FUNC ( HMG_CREATEFONT )
       ReleaseDC (GetDesktopWindow(), hDC);
 
 }
-

@@ -48,7 +48,7 @@ _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
 _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
 _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
 _hmg_printer_InitUserMessages()         ;;
-_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) 
+_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )
 
 #xcommand SELECT PRINTER DIALOG EX ;
    [ PARENT <parent> ] ;
@@ -72,6 +72,4 @@ _HMG_SYSDATA \[ 507 \] := HMG_IsNotDefParam ( <FullFileName>   , NIL );;
 _HMG_SYSDATA \[ 508 \] := <.Preview.> ;;
 _HMG_SYSDATA \[ 378 \] := if ( _HMG_SYSDATA \[ 507 \] <> NIL, .T., <.Preview.> ) ;;
 _hmg_printer_InitUserMessages() ;;
-_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 ) 
-
-
+_HMG_SYSDATA \[ 379 \] := strzero( Seconds() * 100 , 8 )

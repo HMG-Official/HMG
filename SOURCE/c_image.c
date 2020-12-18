@@ -376,4 +376,3 @@ void HMG_ImageListAdd (HIMAGELIST hImageList, TCHAR *FileName, int Transparent)
 
    DeleteObject (hBitmap);
 }
-

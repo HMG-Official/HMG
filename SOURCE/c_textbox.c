@@ -268,5 +268,3 @@ HB_FUNC( SETTEXTEDITREADONLY )
 {
 	SendMessage( (HWND) HMG_parnl (1), EM_SETREADONLY, (WPARAM)hb_parl(2), 0);
 }
-
-

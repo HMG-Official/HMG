@@ -3,19 +3,19 @@
 *	HMG MySql Access Sample.
 *	Code Contributed by;
 *		Mitja Podgornik		<yamamoto@rocketmail.com>
-* 
+*
 */
 
 #Include "hmg.ch"
 
-Procedure Main()             
+Procedure Main()
 
-Private oServer:= Nil 
+Private oServer:= Nil
 Private cHostName:= "localhost"
 Private cUser:= "root"
 Private cPassWord:= ""
-Private cDataBase:= "NAMEBOOK"                  
-Private lLogin:= .F.         
+Private cDataBase:= "NAMEBOOK"
+Private lLogin:= .F.
 
 DEFINE WINDOW Form_1 ;
   AT 5,5 ;
@@ -28,22 +28,22 @@ DEFINE WINDOW Form_1 ;
   ON INIT My_SQL_Login() ;
   ON RELEASE My_SQL_Logout()
 
-  DEFINE STATUSBAR 
+  DEFINE STATUSBAR
     STATUSITEM " "
   END STATUSBAR
 
   DEFINE MAIN MENU
     POPUP "Action"
       ITEM "&Connetct to MySql server, create Database 'NAMEBOOK' and table 'NAMES', insert records from 'Names.dbf'" ACTION Prepare_data()	
-      SEPARATOR	                                       			                                    
+      SEPARATOR	                                       			
       ITEM "&View/Edit data from MySql" ACTION Grid_edit()
     END POPUP				
-  END MENU                          
+  END MENU
 
 END WINDOW
 
 CENTER WINDOW Form_1
-ACTIVATE WINDOW Form_1 
+ACTIVATE WINDOW Form_1
 
 Return Nil
 
@@ -94,16 +94,16 @@ DEFINE WINDOW Grid_Names ;
     CAPTION '&Exit' ;
     ACTION Grid_exit()
 
-END WINDOW 
+END WINDOW
 
-Grid_Names.cSearch.Value:= "A" 
+Grid_Names.cSearch.Value:= "A"
 Grid_Names.cSearch.SetFocus
 
 My_SQL_Connect()
 My_SQL_Database_Connect( "NAMEBOOK" )
-              
+
 Grid_fill()
-             
+
 CENTER WINDOW Grid_Names
 ACTIVATE WINDOW Grid_Names
 
@@ -112,13 +112,13 @@ Return Nil
 
 
 *--------------------------------------------------------------*
-Function Grid_fill()                     
+Function Grid_fill()
 *--------------------------------------------------------------*
-Local cSearch:= ' "'+Upper(AllTrim(Grid_Names.cSearch.Value ))+'%" '           
+Local cSearch:= ' "'+Upper(AllTrim(Grid_Names.cSearch.Value ))+'%" '
 Local nCounter:= 0
 Local oRow:= {}
 Local i:= 0
-Local oQuery:= "" 
+Local oQuery:= ""
 Local GridMax:= iif(len(cSearch)== 0,  30, 1000000)
 
 DELETE ITEM ALL FROM Grid_1 Of Grid_Names
@@ -134,7 +134,7 @@ For i := 1 To oQuery:LastRec()
   nCounter++
   If nCounter ==  GridMax
     Exit
-  Endif                   
+  Endif
   oRow := oQuery:GetRow(i)
   ADD ITEM {  Str(oRow:fieldGet(1), 8), oRow:fieldGet(2) } TO Grid_1 Of Grid_Names
   oQuery:Skip(1)
@@ -142,43 +142,43 @@ Next
 
 oQuery:Destroy()
 
-Grid_Names.cSearch.SetFocus  
+Grid_Names.cSearch.SetFocus
 
 Return Nil
 
 
 
 *--------------------------------------------------------------*
-Function Grid_exit()                          
+Function Grid_exit()
 *--------------------------------------------------------------*
   Grid_Names.Release
-Return Nil   
+Return Nil
 
 
 
 *--------------------------------------------------------------*
-Function  Get_Fields( status )    
+Function  Get_Fields( status )
 *--------------------------------------------------------------*
-Local pCode:= AllTrim(GetColValue("Grid_1", "Grid_Names", 1 ))            
+Local pCode:= AllTrim(GetColValue("Grid_1", "Grid_Names", 1 ))
 Local cCode:= ""
 Local cName:= ""
 Local cEMail:= ""
-Local oQuery  
+Local oQuery
 Local oRow:= {}
-            
+
 If status == 2
   oQuery:= oServer:Query( "Select * From NAMES WHERE CODE = " + AllTrim(pCode))
   If oQuery:NetErr()												
     MsgInfo("SQL SELECT error: " + oQuery:Error())
     Return Nil
-  Endif               
+  Endif
   oRow:= oQuery:GetRow(1)
   cCode:=Alltrim(Str(oRow:fieldGet(1)))
   cName:= AllTrim(oRow:fieldGet(2))
-  cEMail:= AllTrim(oRow:fieldGet(3))                  
+  cEMail:= AllTrim(oRow:fieldGet(3))
   oQuery:Destroy()
-EndIf         
-              
+EndIf
+
 DEFINE WINDOW Form_4 ;
   AT 0,0 ;
   WIDTH 485 HEIGHT 240 ;
@@ -247,7 +247,7 @@ Function GetColValue( xObj, xForm, nCol)
 *--------------------------------------------------------------*
   Local nPos:= GetProperty(xForm, xObj, 'Value')
   Local aRet:= GetProperty(xForm, xObj, 'Item', nPos)
-Return aRet[nCol] 
+Return aRet[nCol]
 
 
 
@@ -258,8 +258,8 @@ Local gCode:= AllTrim(GetColValue("Grid_1", "Grid_Names", 1 ))
 Local cCode:= AllTrim(Form_4.p_Code.Value)
 Local cName:= AllTrim(Form_4.p_Name.Value)
 Local cEMail:= AllTrim(Form_4.p_EMail.Value)
-Local cQuery      
-Local oQuery      
+Local cQuery
+Local oQuery
 
 If status == 1
   cQuery := "INSERT INTO NAMES (Name, eMail)  VALUES ( '"+AllTrim(cName)+"' , '"+cEmail+ "' ) "
@@ -281,11 +281,11 @@ Form_4.Release
 
 Grid_Names.cSearch.Value:=Left(cName, 1)
 
-Grid_Names.cSearch.SetFocus  
+Grid_Names.cSearch.SetFocus
 
-Grid_fill() 
+Grid_fill()
 
-Return Nil           
+Return Nil
 
 
 
@@ -294,11 +294,11 @@ Function Delete_Record()
 *--------------------------------------------------------------*
 Local gCode:= AllTrim(GetColValue("Grid_1", "Grid_Names", 1 ))
 Local gName:= AllTrim(GetColValue("Grid_1", "Grid_Names", 2 ))
-Local cQuery      
-Local oQuery      
-                        
-If MsgYesNo( "Delete record: "+ gName+ "??" ) 
-  cQuery:= "DELETE FROM NAMES  WHERE CODE = " + AllTrim(gCode)         
+Local cQuery
+Local oQuery
+
+If MsgYesNo( "Delete record: "+ gName+ "??" )
+  cQuery:= "DELETE FROM NAMES  WHERE CODE = " + AllTrim(gCode)
   oQuery:=oServer:Query( cQuery )
   If oQuery:NetErr()												
     MsgInfo("SQL DELETE error: " + oQuery:Error())
@@ -306,14 +306,14 @@ If MsgYesNo( "Delete record: "+ gName+ "??" )
   EndIf
   oQuery:Destroy()			 																			
   MsgInfo("Record deleted!")
-  Grid_fill() 
+  Grid_fill()
 EndIf
-Return Nil           
+Return Nil
 
 
 
 *--------------------------------------------------------------*
-Function  My_SQL_Login() 
+Function  My_SQL_Login()
 *--------------------------------------------------------------*
 
 DEFINE WINDOW Form_0 ;
@@ -322,7 +322,7 @@ DEFINE WINDOW Form_0 ;
   TITLE 'Login MySql' ;
   NOSYSMENU ;
   FONT "Arial" SIZE 09
-                                                   
+
   @ 24,30 LABEL Label_HostName ;
     VALUE "HostName/IP" ;
     WIDTH 150 ;
@@ -342,8 +342,8 @@ DEFINE WINDOW Form_0 ;
     BOLD
 
   @ 20,120 TEXTBOX p_HostName ;
-    HEIGHT 25 ;      
-    VALUE cHostName ;                                      
+    HEIGHT 25 ;
+    VALUE cHostName ;
     WIDTH 120 ;			
     ON ENTER iif( !Empty(Form_0.p_HostName.Value),  Form_0.p_User.SetFocus, Form_0.p_HostName.SetFocus )
 
@@ -373,16 +373,16 @@ ACTIVATE WINDOW Form_0
 
 Return Nil
 
-              
+
 *--------------------------------------------------------------*
-Function SQL_Connect()                            
+Function SQL_Connect()
 *--------------------------------------------------------------*
 cHostName:= AllTrim(  Form_0.p_HostName.Value )
 cUser:= AllTrim( Form_0.p_User.Value )
 cPassWord:= AllTrim( Form_0.p_password.Value )
 
 oServer := TMySQLServer():New(cHostName, cUser, cPassWord )
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error connecting to SQL server: " + oServer:Error() )
   Release Window ALL
   Quit
@@ -394,69 +394,69 @@ lLogin := .T.
 
 Form_0.Release
 
-Return Nil                     
+Return Nil
 
 
 
 *--------------------------------------------------------------*
 Function Prepare_data()
 *--------------------------------------------------------------*
-My_SQL_Connect()                            
+My_SQL_Connect()
 My_SQL_Database_Create( "NAMEBOOK" )
 My_SQL_Database_Connect( "NAMEBOOK" )
 My_SQL_Table_Create( "NAMES" )
 My_SQL_Table_Insert( "NAMES" )
-My_SQL_Logout()     
+My_SQL_Logout()
 Return Nil
 
 
 
 *--------------------------------------------------------------*
-Function  My_SQL_Connect()                            
+Function  My_SQL_Connect()
 *--------------------------------------------------------------*
 If oServer != Nil
   Return Nil
 Endif
 oServer := TMySQLServer():New(cHostName, cUser, cPassWord )
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error connecting to SQL server: " + oServer:Error() )
   Release Window ALL
   Quit
-Endif 
-Return Nil 
+Endif
+Return Nil
 
 
 *--------------------------------------------------------------*
 Function  My_SQL_Database_Create( cDatabase )
 *--------------------------------------------------------------*
 Local i:= 0
-Local aDatabaseList:= {} 
+Local aDatabaseList:= {}
 
 cDatabase:=Lower(cDatabase)
 
-If oServer == Nil 
+If oServer == Nil
   MsgInfo("Not connected to SQL server!")
   Return Nil
 EndIf
 
 aDatabaseList:= oServer:ListDBs()
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error verifying database list: " + oServer:Error())
   Release Window ALL
   Quit
-Endif 
+Endif
 
 If AScan( aDatabaseList, Lower(cDatabase) ) != 0
   MsgINFO( "Database allready exists!")
   Return Nil
-EndIf 
+EndIf
 
 oServer:CreateDatabase( cDatabase )
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error creating database: " + oServer:Error() )
   Release Window ALL
   Quit
-Endif 
+Endif
 
 Return Nil
 
@@ -465,32 +465,32 @@ Return Nil
 Function My_SQL_Database_Connect( cDatabase )
 *--------------------------------------------------------------*
 Local i:= 0
-Local aDatabaseList:= {}                                           
+Local aDatabaseList:= {}
 
 cDatabase:= Lower(cDatabase)
-If oServer == Nil 
+If oServer == Nil
   MsgInfo("Not connected to SQL server!")
   Return Nil
 EndIf
 
 aDatabaseList:= oServer:ListDBs()
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error verifying database list: " + oServer:Error())
   Release Window ALL
   Quit
-Endif 
+Endif
 
 If AScan( aDatabaseList, Lower(cDatabase) ) == 0
   MsgINFO( "Database "+cDatabase+" doesn't exist!")
   Return Nil
-EndIf 
+EndIf
 
 oServer:SelectDB( cDatabase )
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error connecting to database "+cDatabase+": "+oServer:Error() )
   Release Window ALL
   Quit
-Endif 
+Endif
 
 Return Nil
 
@@ -499,53 +499,53 @@ Return Nil
 Function My_SQL_Table_Create( cTable )				
 *--------------------------------------------------------------*
 Local i:= 0
-Local aTableList:= {}                                           
-Local aStruc:= {}            
-Local cQuery 
+Local aTableList:= {}
+Local aStruc:= {}
+Local cQuery
 
 If oServer == Nil
   MsgInfo("Not connected to SQL Server...")
   Return Nil
 EndIf
-              
+
 aTableList:= oServer:ListTables()
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error getting table list: " + oServer:Error() )
   Release Window ALL
   Quit
-Endif 
+Endif
 
 If AScan( aTableList, Lower(cTable) ) != 0
   MsgINFO( "Table "+cTable+" allready exists!")
   Return Nil
-EndIf 
+EndIf
 
-cQuery:= "CREATE TABLE "+ cTable+" ( Code SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,  Name  VarChar(40) ,  eMail  VarChar(40) , PRIMARY KEY (Code) ) "  
+cQuery:= "CREATE TABLE "+ cTable+" ( Code SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,  Name  VarChar(40) ,  eMail  VarChar(40) , PRIMARY KEY (Code) ) "
 oQuery := oServer:Query( cQuery )											
-If oServer:NetErr() 
+If oServer:NetErr()
   MsGInfo("Error creating table "+cTable+": "+oServer:Error() )
   Release Window ALL		
   Quit
-Endif 
+Endif
 
-oQuery:Destroy()     
+oQuery:Destroy()
 							
 Return Nil
 
-            
+
 *--------------------------------------------------------------*
 Function My_SQL_Table_Insert( cTable )				
 *--------------------------------------------------------------*
-Local cQuery:= ""    
-Local NrReg:= 0            
+Local cQuery:= ""
+Local NrReg:= 0
 
-If ! MsgYesNo( "Import data from NAMES.DBF to table Names(MySql) ?" ) 
+If ! MsgYesNo( "Import data from NAMES.DBF to table Names(MySql) ?" )
   Return Nil
-EndIf                    
+EndIf
 
-Form_1.StatusBar.Item(1):= "Exporting from Names.DBF to Names(MySql) ..."                                        
-                
-If !File( "NAMES.DBF" ) 
+Form_1.StatusBar.Item(1):= "Exporting from Names.DBF to Names(MySql) ..."
+
+If !File( "NAMES.DBF" )
   MsgBox( "File Names.dbf doesn't exist!" )
   Return Nil
 EndIf
@@ -555,14 +555,14 @@ go top
 
 Do While !Eof()
 
-  cQuery := "INSERT INTO "+ cTable + " VALUES ( '"+Str(Names->Code,8)+"' , '"+ AllTrim(Names->Name)+"' , '"+Names->Email+ "' ) "   
+  cQuery := "INSERT INTO "+ cTable + " VALUES ( '"+Str(Names->Code,8)+"' , '"+ AllTrim(Names->Name)+"' , '"+Names->Email+ "' ) "
   oQuery := oServer:Query(  cQuery )
-  If oServer:NetErr() 
+  If oServer:NetErr()
     MsGInfo("Error executing Query "+cQuery+": "+oServer:Error() )
-    EXIT 
-  Endif 
+    EXIT
+  Endif
   oQuery:Destroy()
-                      
+
   NrReg++
 
   skip
@@ -571,15 +571,15 @@ EndDo
 use
 
 Form_1.StatusBar.Item(1):= " "
-MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable)       
+MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable)
 
 Return Nil
 
 
 *--------------------------------------------------------------*
-Function My_SQL_Logout()                              
+Function My_SQL_Logout()
 *--------------------------------------------------------------*
-  if oServer != Nil                     
+  if oServer != Nil
     oServer:Destroy()
     oServer := Nil
   EndIf

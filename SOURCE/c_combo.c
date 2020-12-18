@@ -307,5 +307,3 @@ HB_FUNC( GETDROPPEDSTATE )
 {
    hb_retni (SendMessage ((HWND) HMG_parnl(1), CB_GETDROPPEDSTATE, 0, 0));
 }
-
-

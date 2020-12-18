@@ -12,7 +12,7 @@ Local nTask
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			POPUP 'Common &Dialog Functions'
@@ -25,4 +25,3 @@ Local nTask
 	ACTIVATE WINDOW Win_1
 
 Return
-

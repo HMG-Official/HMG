@@ -44,4 +44,3 @@ Function Main
 	ACTIVATE WINDOW Form_Main
 
 Return Nil
-

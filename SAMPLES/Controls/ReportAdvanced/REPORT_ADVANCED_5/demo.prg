@@ -37,9 +37,9 @@ Function CreateReport
 
 		* Report Layout ***********************************************
 
-		BEGIN LAYOUT 
+		BEGIN LAYOUT
 			PAPERSIZE	PRINTER_PAPER_A4
-			ORIENTATION	PRINTER_ORIENT_PORTRAIT 
+			ORIENTATION	PRINTER_ORIENT_PORTRAIT
 		END LAYOUT
 
 		* Header Band *************************************************
@@ -70,7 +70,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 			BEGIN PICTURE
@@ -103,7 +103,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 			BEGIN TEXT
@@ -119,7 +119,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 			BEGIN TEXT
@@ -135,7 +135,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 			BEGIN TEXT
@@ -151,7 +151,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 			BEGIN TEXT
@@ -167,7 +167,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 			BEGIN TEXT
@@ -183,7 +183,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 		END DETAIL
@@ -216,7 +216,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 			BEGIN TEXT
@@ -232,7 +232,7 @@ Function CreateReport
 				FONTUNDERLINE	.F.
 				FONTSTRIKEOUT	.F.
 				FONTCOLOR	{ 0 , 0 , 0 }
-				ALIGNMENT	Left 
+				ALIGNMENT	Left
 			END TEXT
 
 		END FOOTER
@@ -240,4 +240,3 @@ Function CreateReport
 	END REPORT
 
 Return
-

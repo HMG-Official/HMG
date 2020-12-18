@@ -169,4 +169,3 @@ HB_FUNC( SETSPINNERINCREMENT )
    inc.nInc = hb_parnl(2);
  	SendMessage ( (HWND) HMG_parnl (1), UDM_SETACCEL, (WPARAM) 1 , (LPARAM) &inc ) ;
 }
-

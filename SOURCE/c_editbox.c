@@ -133,5 +133,3 @@ HB_FUNC( INITEDITBOX )
 	HMG_retnl ((LONG_PTR) hbutton);
 
 }
-
-

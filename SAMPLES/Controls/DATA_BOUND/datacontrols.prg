@@ -79,7 +79,7 @@ Function Main
 
 		@ 180,200 CHECKBOX CHECK_5 ;
 			CAPTION '' ;
-			FIELD Test->Married 
+			FIELD Test->Married
 
 		@ 210,200 EDITBOX EDIT_6 ;
 			WIDTH 150 ;
@@ -120,7 +120,7 @@ Procedure Save
 
 Return
 
-Procedure OpenTables 
+Procedure OpenTables
 
 	USE TEST
 

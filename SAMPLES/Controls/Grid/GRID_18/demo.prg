@@ -27,14 +27,14 @@ Function Main
 			END POPUP
 		END MENU
 
-		DEFINE GRID Grid_1 
+		DEFINE GRID Grid_1
 			ROW		10
 			COL		10
-			WIDTH		500 
-			HEIGHT		330 
-			HEADERS		{'Last Name','First Name','Phone'} 
+			WIDTH		500
+			HEIGHT		330
+			HEADERS		{'Last Name','First Name','Phone'}
 			WIDTHS		{140,140,140}
-			ITEMS		LoadItems() 
+			ITEMS		LoadItems()
 			VALUE		1
 			HEADERIMAGES	{ '00.bmp' , '01.bmp' , '02.bmp' }
 		END GRID
@@ -54,13 +54,13 @@ Local aRows [20] [3]
 	aRows [2]	:= {'Mulder','Fox','324-6432'}
 	aRows [3]	:= {'Smart','Max','432-5892'}
 	aRows [4]	:= {'Grillo','Pepe','894-2332'}
-	aRows [5]	:= {'Kirk','James','346-9873'} 
-	aRows [6]	:= {'Barriga','Carlos','394-9654'} 
-	aRows [7]	:= {'Flanders','Ned','435-3211'} 
-	aRows [8]	:= {'Smith','John','123-1234'} 
-	aRows [9]	:= {'Pedemonti','Flavio','000-0000'} 
-	aRows [10]	:= {'Gomez','Juan','583-4832'} 
-	aRows [11]	:= {'Fernandez','Raul','321-4332'} 
+	aRows [5]	:= {'Kirk','James','346-9873'}
+	aRows [6]	:= {'Barriga','Carlos','394-9654'}
+	aRows [7]	:= {'Flanders','Ned','435-3211'}
+	aRows [8]	:= {'Smith','John','123-1234'}
+	aRows [9]	:= {'Pedemonti','Flavio','000-0000'}
+	aRows [10]	:= {'Gomez','Juan','583-4832'}
+	aRows [11]	:= {'Fernandez','Raul','321-4332'}
 	aRows [12]	:= {'Borges','Javier','326-9430'}
 	aRows [13]	:= {'Alvarez','Alberto','543-7898'}
 	aRows [14]	:= {'Gonzalez','Ambo','437-8473'}
@@ -72,5 +72,3 @@ Local aRows [20] [3]
 	aRows [20]	:= {'Reyes','Monica','432-5836'}
 
 Return aRows
-
-

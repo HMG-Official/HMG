@@ -22,7 +22,7 @@ Function Main
 
 		@ 40,10 BUTTON Button_2 ;
 			CAPTION 'Release' ;
-			ACTION ThisWindow.Release 
+			ACTION ThisWindow.Release
 
 	END WINDOW
 

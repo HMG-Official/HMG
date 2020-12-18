@@ -3,13 +3,13 @@
 
 FUNCTION Main()
 
-    DEFINE WINDOW Win_1 ; 
-        AT 0,0 ; 
-        WIDTH 1000 ; 
-        HEIGHT 1000 ; 
-        TITLE 'Win_1' ; 
-        MAIN ; 
-        NOSIZE  
+    DEFINE WINDOW Win_1 ;
+        AT 0,0 ;
+        WIDTH 1000 ;
+        HEIGHT 1000 ;
+        TITLE 'Win_1' ;
+        MAIN ;
+        NOSIZE
 
         DEFINE MAIN MENU
           DEFINE POPUP 'Get'
@@ -50,12 +50,12 @@ FUNCTION Main()
           END POPUP
         END MENU
 
-        @ 10,10 MONTHCALENDAR CONTROL_1 ; 
-            OF Win_1 ; 
+        @ 10,10 MONTHCALENDAR CONTROL_1 ;
+            OF Win_1 ;
             RANGEMIN HB_DATE(YEAR(DATE()), MONTH(DATE()), 1) ;
             WIDTH 320 ;
             HEIGHT 230 ;
-            FONT 'Arial' ; 
+            FONT 'Arial' ;
             SIZE 12 ;
             FONTCOLOR NAVY ;
             OUTERFONTCOLOR BLUE ;

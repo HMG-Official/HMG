@@ -20,7 +20,7 @@ DEFINE WINDOW form_1 AT 100 , 700 WIDTH 200 HEIGHT 200 TITLE "Mixed Mode Demo" M
        CAPTION "Test Console"
        ACTION   TestConsole()
     END BUTTON
- 
+
     DEFINE TEXTBOX Text_1
        ROW    110
        COL    30

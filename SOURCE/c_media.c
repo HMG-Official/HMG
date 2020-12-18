@@ -258,4 +258,3 @@ HB_FUNC ( DESTROYANIMATE )
 {
   DestroyWindow( (HWND) HMG_parnl (1) );
 }
-

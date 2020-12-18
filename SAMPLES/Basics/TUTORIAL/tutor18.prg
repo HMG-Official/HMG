@@ -7,9 +7,9 @@ Function Main
         WIDTH 640 HEIGHT 480 ;
         TITLE 'Tutor 18: ToolBar Test' ;
         MAIN ;
-        FONT 'Arial' SIZE 10 
+        FONT 'Arial' SIZE 10
 
-        DEFINE MAIN MENU 
+        DEFINE MAIN MENU
             POPUP '&File'
                 ITEM '&Disable ToolBar Button' ACTION Win_1.Button_1.Enabled := .F.
                 ITEM '&Enable ToolBar Button' ACTION Win_1.Button_1.Enabled := .T.
@@ -44,4 +44,3 @@ Function Main
     ACTIVATE WINDOW Win_1
 
 Return Nil
-

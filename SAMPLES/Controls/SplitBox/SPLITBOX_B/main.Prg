@@ -10,7 +10,3 @@ Function Main()
 	Activate Window Main
 
 Return
-
-
-
-

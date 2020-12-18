@@ -9,9 +9,9 @@ MEMVAR _HMG_SYSDATA
 
 FUNCTION MAIN
 
-   DEFINE WINDOW Form_1; 
-      AT 0,0; 
-      WIDTH 1000; 
+   DEFINE WINDOW Form_1;
+      AT 0,0;
+      WIDTH 1000;
       HEIGHT 700;
       MAIN
 
@@ -21,7 +21,7 @@ FUNCTION MAIN
          WIDTH 150
          VALUE 'Select Graph Type'
       END LABEL
-      
+
       DEFINE COMBOBOX GraphType
          ROW   10
          COL   160
@@ -29,7 +29,7 @@ FUNCTION MAIN
          ITEMS { 'Bar', 'Lines', 'Points', 'Pie' }
          ONCHANGE ProcDrawGraph()
       END COMBOBOX
-      
+
       DEFINE CHECKBOX Enable3D
          ROW   10
          COL   280
@@ -37,7 +37,7 @@ FUNCTION MAIN
          CAPTION 'Enable 3D'
          ONCHANGE ProcDrawGraph()
       END CHECKBOX
-      
+
       DEFINE BUTTON Button_1
          ROW   10
          COL   400
@@ -51,12 +51,12 @@ FUNCTION MAIN
       END IMAGE
 
    END WINDOW
-   
+
    Form_1.GraphType.VALUE := 1
-   
+
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
-   
+
 RETURN NIL
 
 
@@ -69,8 +69,8 @@ LOCAL hBitmap      := 0
    IF Form_1.GraphType.VALUE > 0
 
       IF Form_1.GraphType.VALUE == 4   // PIE Graph
-         
-         GRAPH BITMAP PIE ; 
+
+         GRAPH BITMAP PIE ;
                SIZE        nImageWidth, nImageHeight ;
                SERIEVALUES { 1500,        1800,        200,         500,         800 } ;
                SERIENAMES  { "Product 1", "Product 2", "Product 3", "Product 4", "Product 5" } ;
@@ -79,8 +79,8 @@ LOCAL hBitmap      := 0
                TITLECOLOR  BLACK ;
                DEPTH       25 ;
                3DVIEW      Form_1.Enable3D.VALUE ;
-               SHOWXVALUES .T. ; 
-               SHOWLEGENDS .T. ; 
+               SHOWXVALUES .T. ;
+               SHOWLEGENDS .T. ;
                NOBORDER    .F. ;
                STOREIN     hBitmap
 
@@ -94,9 +94,9 @@ LOCAL hBitmap      := 0
                            {  8350,  10315,  15870,   5347,  12340 },;
                            { 12345,  -8945,  10560,  15600,  17610 } }
 
-         aSerieYNames :=   { "Jan",  "Feb",  "Mar",  "Apr",  "May" } 
+         aSerieYNames :=   { "Jan",  "Feb",  "Mar",  "Apr",  "May" }
 
-         GRAPH BITMAP      Form_1.GraphType.VALUE ;  // constants: BARS = 1, LINES = 2, POINTS = 3 are defined in i_graph.ch 
+         GRAPH BITMAP      Form_1.GraphType.VALUE ;  // constants: BARS = 1, LINES = 2, POINTS = 3 are defined in i_graph.ch
                SIZE        nImageWidth, nImageHeight ;
                SERIEVALUES aSerieValues ;
                SERIENAMES  { "Serie 1", "Serie 2", "Serie 3"} ;
@@ -106,7 +106,7 @@ LOCAL hBitmap      := 0
                TITLE       "Sample Graph" ;
                TITLECOLOR  BLACK ;
                HVALUES     5 ;
-               BARDEPTH    15 ; 
+               BARDEPTH    15 ;
                BARWIDTH    15 ;
                SEPARATION  0 ;
                LEGENDWIDTH 50 ;
@@ -116,10 +116,10 @@ LOCAL hBitmap      := 0
                SHOWYGRID   .T. ;
                SHOWVALUES  .T. ;
                SHOWXVALUES .T. ;
-               SHOWYVALUES .T. ;               
-               SHOWLEGENDS .T. ; 
+               SHOWYVALUES .T. ;
+               SHOWLEGENDS .T. ;
                NOBORDER    .F. ;
-               STOREIN     hBitmap 
+               STOREIN     hBitmap
 
       ENDIF
 

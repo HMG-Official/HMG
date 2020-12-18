@@ -8,7 +8,7 @@ Function Main()
       WIDTH 400 ;
       HEIGHT 400 ;
       TITLE 'MiniPrint Library Test: Insert Page Number' ;
-      MAIN 
+      MAIN
 
       @ 50, 50 BUTTON Button_1 CAPTION "Test" ACTION PrintTest()
 
@@ -36,7 +36,7 @@ LOCAL lSuccess, IsPreview
 
             @ 20,20 PRINT "Filled Rectangle Sample:" ;
                FONT "Arial" ;
-               SIZE 20 
+               SIZE 20
 
             @ 30,20 PRINT RECTANGLE ;
                TO 40,190 ;
@@ -69,7 +69,7 @@ LOCAL lSuccess, IsPreview
 
             @ 20,20 PRINT "Filled Rectangle Sample:" ;
                FONT "Arial" ;
-               SIZE 20 
+               SIZE 20
 
             @ 30,20 PRINT RECTANGLE ;
                TO 40,190 ;
@@ -93,7 +93,7 @@ LOCAL lSuccess, IsPreview
 
          END PRINTPAGE
 
-         // call this function after last END PRINTPAGE and before END PRINTDOC 
+         // call this function after last END PRINTPAGE and before END PRINTDOC
          ProcInsertPageNumber( OpenPrinterGetDC() )
 
       END PRINTDOC
@@ -111,12 +111,12 @@ LOCAL aFiles :=  DIRECTORY( cNamePrefix + "*.EMF" )
 LOCAL cFileNameOld, cFileNameNew, i
 PRIVATE nPageNumber := 1
 
-   FOR i := 1 TO HMG_LEN( aFiles ) 
+   FOR i := 1 TO HMG_LEN( aFiles )
       cFileNameOld := GetTempFolder() + aFiles [ i ] [ F_NAME ]
       cFileNameNew := GetTempFolder() + "New_" + aFiles [ i ] [ F_NAME ]
       nError := BT_DrawEMF( hDC, cFileNameOld, cFileNameNew, cFuncNameCallBack )
       IF nError == 0
-         FERASE( cFileNameOld ) 
+         FERASE( cFileNameOld )
          FRENAME( cFileNameNew, cFileNameOld )
       ELSE
          MsgStop("Error ("+ hb_NtoS( nError ) +") in write into EMF: " + cFileNameOld )
@@ -132,10 +132,8 @@ FUNCTION ProcDrawEMFCallBack( hDC, leftMM, topMM, rightMM, bottomMM, leftPx, top
 LOCAL Old_PageDC := OpenPrinterGetPageDC()
 
    OpenPrinterGetPageDC() := hDC
-   @ 180, 100 PRINT " Page Number: " + hb_NtoS( nPageNumber++ ) + " of " + hb_NtoS( _HMG_SYSDATA [ 380 ] ) FONT "Arial" SIZE 12 
+   @ 180, 100 PRINT " Page Number: " + hb_NtoS( nPageNumber++ ) + " of " + hb_NtoS( _HMG_SYSDATA [ 380 ] ) FONT "Arial" SIZE 12
    OpenPrinterGetPageDC() := Old_PageDC
 
    // MsgDebug( hDC, leftMM, topMM, rightMM, bottomMM, leftPx, topPx, rightPx, bottomPx, IsParamHDC )
 RETURN NIL
-
-

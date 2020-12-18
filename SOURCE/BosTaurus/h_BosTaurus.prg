@@ -786,6 +786,3 @@ LOCAL hWnd, k
       #undef _STM_SETIMAGE_
    ENDIF
 Return NIL
-
-
-

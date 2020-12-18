@@ -38,11 +38,11 @@ DEFINE WINDOW Form_1 ;
     HEIGHT 395 ;
     TITLE 'Grid Events Demo - ContextMenu for each column' ;
     MAIN NOSIZE
-   
+
    DEFINE STATUSBAR FONT "Courier New" SIZE 9
         STATUSITEM PadC("",75)
     END STATUSBAR
-   
+
     @ 10,10 GRID Grid_1 ;
         WIDTH 400 ;
         HEIGHT 330 ;
@@ -53,9 +53,9 @@ DEFINE WINDOW Form_1 ;
       ITEMS aRows ;
         VALUE {1,1} ;
         CELLNAVIGATION
-   
+
    Define_Control_Context_Menu("Form_1","Grid_1",1) // Needs to start definition for this control
-   
+
 END WINDOW
 // CREATE EVENT PROCNAME Check_Grid_Events HWND Form_1.Grid_1.HANDLE
 SET CONTROL Grid_1 OF Form_1 ONMOUSEEVENT Check_Grid_Events()

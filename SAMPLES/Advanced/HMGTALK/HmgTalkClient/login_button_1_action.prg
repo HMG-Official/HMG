@@ -3,7 +3,7 @@
 declare window Login
 
 Function login_button_1_action
-	Public c_Ip_Server := Login.Text_1.Value 
+	Public c_Ip_Server := Login.Text_1.Value
 	Public c_NickName  := Login.Text_2.Value
 	If Empty(Login.Text_1.Value)
 		MsgStop("Type the server IP in here...",c_W_Title)
@@ -16,4 +16,3 @@ Function login_button_1_action
 	Login.Release
 	Start_Conexion()
 Return Nil
-

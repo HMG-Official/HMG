@@ -13,7 +13,7 @@ Function Main
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'Main Window' ;
-		MAIN 
+		MAIN
 
 		@ 200,250 LABEL Label_1 ;
 		WIDTH 150 HEIGHT 40 ;
@@ -34,5 +34,4 @@ Function Main
 
 	ACTIVATE WINDOW Form_Main
 
-Return 
-
+Return

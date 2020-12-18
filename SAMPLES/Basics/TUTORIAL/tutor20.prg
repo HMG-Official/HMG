@@ -8,9 +8,9 @@ OpenTables()
         AT 0,0 ;
         WIDTH 640 HEIGHT 480 ;
         TITLE 'Tutor 20: GRID Test' ;
-        MAIN NOMAXIMIZE 
+        MAIN NOMAXIMIZE
 
-        DEFINE MAIN MENU 
+        DEFINE MAIN MENU
             POPUP 'File'
                 ITEM 'Set Grid RecNo' ACTION Win_1.Grid_1.Value := Val ( InputBox ('Set Grid RecNo','') )
                 ITEM 'Get Grid RecNo' ACTION MsgInfo ( Str ( Win_1.Grid_1.RecNo ) )
@@ -18,13 +18,13 @@ OpenTables()
                 ITEM 'Exit' ACTION Win_1.Release
             END POPUP
             POPUP 'Help'
-                ITEM 'About' ACTION MsgInfo ("Tutor 20: GRID Test") 
+                ITEM 'About' ACTION MsgInfo ("Tutor 20: GRID Test")
             END POPUP
         END MENU
 
         @ 10,10 GRID Grid_1 ;
             WIDTH 610 ;
-            HEIGHT 390 ; 
+            HEIGHT 390 ;
             HEADERS { 'Code' , 'First Name' , 'Last Name', 'Birth Date', 'Married' , 'Biography' } ;
             WIDTHS { 150 , 150 , 150 , 150 , 150 , 150 } ;
             ROWSOURCE "Test" ;
@@ -43,6 +43,5 @@ Return Nil
 
 Procedure OpenTables()
     Use Test
-//    Win_1.Grid_1.RecNo := RecNo() 
+//    Win_1.Grid_1.RecNo := RecNo()
 Return Nil
-

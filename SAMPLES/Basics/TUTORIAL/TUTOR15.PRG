@@ -7,13 +7,13 @@ Function Main
         WIDTH 400 ;
         HEIGHT 200 ;
         TITLE 'Tutor 15 Progressbar Test' ;
-        MAIN 
+        MAIN
 
         DEFINE MAIN MENU
            POPUP "First Popup"
              ITEM 'ProgressBar Test' ACTION  DoTest()
            END POPUP
-        END MENU 
+        END MENU
 
         @ 10,10 PROGRESSBAR Progress_1 ;
             RANGE 0 , 65535
@@ -32,4 +32,3 @@ Local i
     Next i
 
 Return
-

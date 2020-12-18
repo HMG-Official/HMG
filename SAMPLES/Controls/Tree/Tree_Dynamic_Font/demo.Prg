@@ -7,27 +7,27 @@ Function main()
 		WIDTH 640 ;
 		HEIGHT 480 ;
 		TITLE 'TreeView Sample' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			POPUP '&File'
-				ITEM 'Get Tree Value' ACTION MsgInfo( Str ( Form_1.Tree_1.Value ) ) 
+				ITEM 'Get Tree Value' ACTION MsgInfo( Str ( Form_1.Tree_1.Value ) )
 				ITEM 'Set Tree Value' ACTION Form_1.Tree_1.Value := val(inputbox('',''))
 				ITEM 'Collapse Item' ACTION Form_1.Tree_1.Collapse ( val(inputbox('','') ) )
 				ITEM 'Expand Item' ACTION Form_1.Tree_1.Expand ( val(inputbox('','') ) )
 			END POPUP
 		END MENU
 
-		DEFINE CONTEXT MENU 
-			ITEM 'About'				ACTION MsgInfo ("Free GUI Library For Harbour","HMG Tree Demo") 
+		DEFINE CONTEXT MENU
+			ITEM 'About'				ACTION MsgInfo ("Free GUI Library For Harbour","HMG Tree Demo")
 		END MENU
 
 		DEFINE TREE Tree_1 AT 10,10 WIDTH 400 HEIGHT 600 VALUE 15 FONT "ARIAL" SIZE 14;
-             ON DBLCLICK IF (Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .F. ,; 
+             ON DBLCLICK IF (Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .F. ,;
                              Form_1.Tree_1.Expand (Form_1.Tree_1.Value) ,;
                              Form_1.Tree_1.Collapse (Form_1.Tree_1.Value) );
 
-			NODE 'Item 1' 
+			NODE 'Item 1'
 				TREEITEM 'Item 1.1'
 				TREEITEM 'Item 1.2' ID 999
 				TREEITEM 'Item 1.3'
@@ -110,7 +110,7 @@ Function main()
 	END WINDOW
 
    MAXIMIZE WINDOW Form_1
-   
+
 	ACTIVATE WINDOW Form_1
 
 Return
@@ -143,7 +143,7 @@ STATIC LastOption := 0
 
 Local aColors := { YELLOW, GREEN, BLUE, PINK, FUCHSIA, BROWN, ORANGE, PURPLE, SILVER, MAROON, OLIVE, LGREEN, AQUA, NAVY, TEAL }
 Local nLen    := HMG_LEN (aColors)
-Local cFontName := "Calibri" 
+Local cFontName := "Calibri"
 Local aFont   := { ARRAY FONT cFontName SIZE 12 BOLD     ,;
                    ARRAY FONT cFontName SIZE 12 ITALIC    ,;
                    ARRAY FONT cFontName SIZE 12 UNDERLINE ,;
@@ -158,29 +158,29 @@ Local aFont   := { ARRAY FONT cFontName SIZE 12 BOLD     ,;
          Form_1.Tree_1.DynamicFont      := NIL
          Form_1.Tree_1.HasLines         := .T.
          Form_1.Tree_1.FullRowSelect    := .F.
-         Form_1.Tree_1.ChangeFontSize   := NIL   // Set default FontSize of the control 
+         Form_1.Tree_1.ChangeFontSize   := NIL   // Set default FontSize of the control
 
       CASE option == 1
          Form_1.Tree_1.DynamicForeColor := {|| IF ( Form_1.Tree_1.IsTrueNode (This.TreeItemValue), BLUE, NIL) }
          Form_1.Tree_1.DynamicBackColor := {|| IF (This.TreeItemValue == Form_1.Tree_1.Value, YELLOW, NIL) }
-         Form_1.Tree_1.DynamicFont      := {|| ARRAY FONT cFontName SIZE 24 BOLD }         
-         Form_1.Tree_1.ChangeFontSize   := 24   // Expand FontSize of the control 
+         Form_1.Tree_1.DynamicFont      := {|| ARRAY FONT cFontName SIZE 24 BOLD }
+         Form_1.Tree_1.ChangeFontSize   := 24   // Expand FontSize of the control
 
       CASE option == 2
          Form_1.Tree_1.DynamicForeColor := {|| IF (This.TreeItemValue == Form_1.Tree_1.Value, WHITE, aColors [ nLen + 1 - Form_1.Tree_1.GetDisplayLevel (This.TreeItemValue) ]) }
          Form_1.Tree_1.DynamicBackColor := {|| IF (This.TreeItemValue == Form_1.Tree_1.Value, BLACK, aColors [ Form_1.Tree_1.GetDisplayLevel (This.TreeItemValue) ]) }
          Form_1.Tree_1.DynamicFont      := {|| aFont [ Form_1.Tree_1.GetDisplayLevel (This.TreeItemValue) ] }
-         Form_1.Tree_1.ChangeFontSize   := NIL   // Set default FontSize of the control 
+         Form_1.Tree_1.ChangeFontSize   := NIL   // Set default FontSize of the control
 
       CASE option == 3 .AND. LastOption <> 0
-         Form_1.Tree_1.FullRowSelect := .NOT. Form_1.Tree_1.FullRowSelect 
+         Form_1.Tree_1.FullRowSelect := .NOT. Form_1.Tree_1.FullRowSelect
          Form_1.Tree_1.HasLines := .NOT. Form_1.Tree_1.HasLines
    ENDCASE
-   
+
    IF option <> 3
       LastOption := option
    ENDIF
-   
+
    Form_1.Tree_1.Redraw
    Form_1.Tree_1.SetFocus
 RETURN

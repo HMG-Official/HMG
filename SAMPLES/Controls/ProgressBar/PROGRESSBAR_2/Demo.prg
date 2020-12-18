@@ -52,4 +52,3 @@ Function Slider_Change
 	Form_1.Progress_1.Value := nValue
 
 Return Nil
-

@@ -1,19 +1,19 @@
-﻿
+
 // by Andrés González López, September 2014
 
 #include "hmg.ch"
 
 FUNCTION Main()
 
-   DEFINE WINDOW Form_1; 
-      AT 0,0; 
-      WIDTH 800; 
-      HEIGHT 600; 
-      NOSIZE; 
+   DEFINE WINDOW Form_1;
+      AT 0,0;
+      WIDTH 800;
+      HEIGHT 600;
+      NOSIZE;
       NOMAXIMIZE;
       ON GOTFOCUS Form_1.Tree_1.SetFocus;
       MAIN
-      
+
       ON KEY F1  OF Form_1 ACTION OnKeyFx (  2 )
       ON KEY F2  OF Form_1 ACTION OnKeyFx (  5 )
       ON KEY F3  OF Form_1 ACTION OnKeyFx (  8 )
@@ -21,43 +21,43 @@ FUNCTION Main()
       ON KEY F5  OF Form_1 ACTION OnKeyFx ( 22 )
 
       ON KEY F9  OF Form_1 ACTION ( Form_1.Tree_1.Value:= 1,;
-                                    IF ( Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .T.,; 
+                                    IF ( Form_1.Tree_1.IsExpand (Form_1.Tree_1.Value) == .T.,;
                                          Form_1.Tree_1.Collapse (Form_1.Tree_1.Value, .T.),;   // Collapse All
                                          Form_1.Tree_1.Expand   (Form_1.Tree_1.Value, .T.)))   // Expand All
 
       DEFINE TREE Tree_1;
-         AT 10,10; 
-         WIDTH 250; 
-         HEIGHT 550; 
-         VALUE 1; 
-         FONT "Calibri" SIZE 11; 
+         AT 10,10;
+         WIDTH 250;
+         HEIGHT 550;
+         VALUE 1;
+         FONT "Calibri" SIZE 11;
          ON CHANGE OnChangeTree (This.Value);
-         NODEIMAGES { "folder.gif", "folder_page.gif" }; 
-         ITEMIMAGES { "Page.gif",   "page_next.gif"   }; 
-         NOROOTBUTTON 
-         
+         NODEIMAGES { "folder.gif", "folder_page.gif" };
+         ITEMIMAGES { "Page.gif",   "page_next.gif"   };
+         NOROOTBUTTON
+
          NODE 'MY APP '
-            
+
             NODE 'BOOK      [F1]'
                TREEITEM 'Science'
-               TREEITEM 'Literature' 
+               TREEITEM 'Literature'
             END NODE
-            
+
             NODE 'MUSIC     [F2]'
-               TREEITEM 'Rock' 
+               TREEITEM 'Rock'
                TREEITEM 'Classic'
             END NODE
-            
+
             NODE 'VIDEOS    [F3]'
-               TREEITEM 'Documentary' 
+               TREEITEM 'Documentary'
                TREEITEM 'Series'
                TREEITEM 'Sports'
             END NODE
-            
+
             NODE 'EMAIL     [F4]'
-               TREEITEM 'Send' 
-               TREEITEM 'Inbox' 
-               TREEITEM 'Outbox' 
+               TREEITEM 'Send'
+               TREEITEM 'Inbox'
+               TREEITEM 'Outbox'
                TREEITEM 'Drafts'
                TREEITEM 'Spam'
                TREEITEM 'Sent Items'
@@ -66,10 +66,10 @@ FUNCTION Main()
                   TREEITEM 'Calendar'
                END NODE
             END NODE
-            
+
             NODE 'ABOUT...  [F5]'
             END NODE
-            
+
          END NODE
       END TREE
 
@@ -84,7 +84,7 @@ FUNCTION Main()
 
    CENTER WINDOW Form_1
    ACTIVATE WINDOW Form_1
-   
+
 Return nil
 
 
@@ -105,7 +105,7 @@ FUNCTION OnKeyFx ( nItem )
    Form_1.Tree_1.Value:= nItem
    IF Form_1.Tree_1.IsExpand( Form_1.Tree_1.Value )
       Form_1.Tree_1.Collapse( Form_1.Tree_1.Value )
-   ELSE   
+   ELSE
       Form_1.Tree_1.Expand( Form_1.Tree_1.Value )
    ENDIF
 RETURN nil
@@ -120,4 +120,3 @@ FUNCTION OnChangeTree ( nItem )
    ENDCASE
    Form_1.TITLE := "#"+HB_NTOS (nItem) + " --> " + HB_VALTOEXP ( Form_1.Tree_1.GetPathName (nItem) )
 RETURN nil
-

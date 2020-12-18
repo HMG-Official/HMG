@@ -12,21 +12,20 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'WAIT WINDOW DEMO 2' ;
-		MAIN 
+		MAIN
 
 	@ 70,70 BUTTON Button_1 CAPTION 'WAIT WINDOW "Press a key..."' ACTION Test1() WIDTH 250
 
 	END WINDOW
 
-	CENTER WINDOW Win_1 
+	CENTER WINDOW Win_1
 
-	ACTIVATE WINDOW Win_1 
+	ACTIVATE WINDOW Win_1
 
 Return
 
 procedure test1()
 
-	WAIT WINDOW "Press a key..." 
+	WAIT WINDOW "Press a key..."
 
 return
-

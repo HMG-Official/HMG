@@ -9,34 +9,34 @@ Local aRows
       WIDTH 800 ;
       HEIGHT 600 ;
       TITLE "Demo: GRID Group" ;
-      MAIN 
+      MAIN
 
       aRows := ARRAY (25)
       aRows [1]   := {'Simpson',    'Homer',       1}
-      aRows [2]   := {'Mulder',     'Fox',         1} 
-      aRows [3]   := {'Smart',      'Max',         1} 
-      aRows [4]   := {'Grillo',     'Pepe',        1} 
-      aRows [5]   := {'Kirk',       'James',       1} 
-      aRows [6]   := {'Barriga',    'Carlos',      1} 
-      aRows [7]   := {'Flanders',   'Ned',         1} 
-      aRows [8]   := {'Smith',      'John',        1} 
-      aRows [9]   := {'Pedemonti',  'Flavio',      1} 
-      aRows [10]  := {'Gomez',      'Juan',        1} 
-      aRows [11]  := {'Fernandez',  'Raul',        1} 
-      aRows [12]  := {'Borges',     'Javier',      1} 
-      aRows [13]  := {'Alvarez',    'Alberto',     1} 
-      aRows [14]  := {'Gonzalez',   'Ambo',        1} 
-      aRows [15]  := {'Gracie',     'Helio',       1} 
-      aRows [16]  := {'Vinazzi',    'Amigo',       1} 
-      aRows [17]  := {'Gracie',     'Royce',       1} 
-      aRows [18]  := {'Samarbide',  'Armando',     1} 
-      aRows [19]  := {'Pradon',     'Alejandra',   1} 
-      aRows [20]  := {'Reyes',      'Monica',      1} 
-      aRows [21]  := {'Silva',      'Anderson',    1} 
+      aRows [2]   := {'Mulder',     'Fox',         1}
+      aRows [3]   := {'Smart',      'Max',         1}
+      aRows [4]   := {'Grillo',     'Pepe',        1}
+      aRows [5]   := {'Kirk',       'James',       1}
+      aRows [6]   := {'Barriga',    'Carlos',      1}
+      aRows [7]   := {'Flanders',   'Ned',         1}
+      aRows [8]   := {'Smith',      'John',        1}
+      aRows [9]   := {'Pedemonti',  'Flavio',      1}
+      aRows [10]  := {'Gomez',      'Juan',        1}
+      aRows [11]  := {'Fernandez',  'Raul',        1}
+      aRows [12]  := {'Borges',     'Javier',      1}
+      aRows [13]  := {'Alvarez',    'Alberto',     1}
+      aRows [14]  := {'Gonzalez',   'Ambo',        1}
+      aRows [15]  := {'Gracie',     'Helio',       1}
+      aRows [16]  := {'Vinazzi',    'Amigo',       1}
+      aRows [17]  := {'Gracie',     'Royce',       1}
+      aRows [18]  := {'Samarbide',  'Armando',     1}
+      aRows [19]  := {'Pradon',     'Alejandra',   1}
+      aRows [20]  := {'Reyes',      'Monica',      1}
+      aRows [21]  := {'Silva',      'Anderson',    1}
       aRows [22]  := {'Machida',    'Lyoto',       1}
-      aRows [23]  := {'Nogueira',   'Rodrigo',     1} 
-      aRows [24]  := {'Belford',    'Victor',      1} 
-      aRows [25]  := {'Werdum',     'Fabricio',    1} 
+      aRows [23]  := {'Nogueira',   'Rodrigo',     1}
+      aRows [24]  := {'Belford',    'Victor',      1}
+      aRows [25]  := {'Werdum',     'Fabricio',    1}
 
 
       @ 50,10 GRID Grid_1 ;
@@ -44,11 +44,11 @@ Local aRows
          HEIGHT 340 ;
          HEADERS {'Last Name', 'First Name', 'Assistance'};
          WIDTHS  {140, 140, 140};
-         ITEMS aRows; 
+         ITEMS aRows;
          COLUMNCONTROLS { NIL, NIL, {'COMBOBOX',{'Confirmed','Unconfirmed'}} };
          COLUMNWHEN  { {||.F.}, {||.F.}, {|| .T. } };
          COLUMNVALID { {||.T.}, {||.T.}, {|| ChangeGroup() } };
-         VALUE 1; 
+         VALUE 1;
          EDIT;
          CELLNAVIGATION
 
@@ -131,5 +131,3 @@ Local i, cList := ""
    NEXT
    MsgInfo (cList, "Confirmed List")
 RETURN
-
-

@@ -10,5 +10,3 @@ Function Main
 	Activate Window Context
 
 Return
-
-

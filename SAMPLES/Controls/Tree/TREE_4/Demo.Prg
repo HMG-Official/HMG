@@ -7,19 +7,19 @@ Function main()
 		WIDTH 640 ;
 		HEIGHT 480 ;
 		TITLE 'TreeView Sample' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			POPUP '&File'
-				ITEM 'Get Tree Value' ACTION MsgInfo( Str ( Form_1.Tree_1.Value ) ) 
+				ITEM 'Get Tree Value' ACTION MsgInfo( Str ( Form_1.Tree_1.Value ) )
 				ITEM 'Set Tree Value' ACTION Form_1.Tree_1.Value := Val ( InputBox ('','') )
 				ITEM 'Collapse Item' ACTION Form_1.Tree_1.Collapse ( val(inputbox('','') ) )
 				ITEM 'Expand Item' ACTION Form_1.Tree_1.Expand ( val(inputbox('','') ) )
 			END POPUP
 		END MENU
 
-		DEFINE CONTEXT MENU 
-			ITEM 'About'				ACTION MsgInfo ("Free GUI Library For Harbour","HMG Tree Demo") 
+		DEFINE CONTEXT MENU
+			ITEM 'About'				ACTION MsgInfo ("Free GUI Library For Harbour","HMG Tree Demo")
 		END MENU
 
 		DEFINE TREE Tree_1 AT 10,30 WIDTH 200 HEIGHT 400 ITEMIDS
@@ -83,4 +83,3 @@ Function AddItemTest()
 	Form_1.Tree_1.AddItem( 'farm 11' , 0 , 3331 )
 
 Return Nil
-

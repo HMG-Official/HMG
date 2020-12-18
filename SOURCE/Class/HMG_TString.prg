@@ -84,4 +84,3 @@ CREATE CLASS HMG_TString   INHERIT HMG_TGeneral
       METHOD StrCmp( cString1, cString2, lCaseSensitive )   INLINE   HMG_StrCmp( cString1, cString2, lCaseSensitive )   // return -1, 0 , +1
 
 ENDCLASS
-

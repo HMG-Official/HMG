@@ -14,7 +14,7 @@ LOCAL m_executar
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN  
+		MAIN
 
 		DEFINE MAIN MENU
 		    POPUP "&Option"
@@ -44,4 +44,3 @@ Procedure MenuProc()
 	EndIf
 
 Return
-

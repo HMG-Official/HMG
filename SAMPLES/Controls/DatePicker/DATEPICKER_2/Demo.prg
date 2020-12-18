@@ -18,7 +18,7 @@ FUNCTION Main
 
     // True calendar datepicker
 
-    @  10, 10 DATEPICKER Date_1 WIDTH 270 ; 
+    @  10, 10 DATEPICKER Date_1 WIDTH 270 ;
               FONT "Arial" SIZE 12 ;
               TOOLTIP "DatePicker Control"
 
@@ -84,4 +84,3 @@ FUNCTION Main
 	ACTIVATE WINDOW Form_1
 
 RETURN NIL
-

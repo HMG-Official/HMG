@@ -10,15 +10,15 @@ Function Main
 		WIDTH 640 ;
 		HEIGHT 400 ;
 		TITLE 'Statusbar Keyboard Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE STATUSBAR FONT 'Arial' SIZE 9
 			STATUSITEM "Statusbar Demo"
 			KEYBOARD
-			DATE 
-			CLOCK 
+			DATE
+			CLOCK
 		END STATUSBAR
- 
+
 	END WINDOW
 
 	CENTER WINDOW Form_1
@@ -26,5 +26,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return
-
-

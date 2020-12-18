@@ -2,38 +2,38 @@
 /*----------------------------------------------------------------------------
  BOS TAURUS - Graphic Library for HMG
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301, USA
  (or visit their web site at http://www.gnu.org/).
- 
- As a special exception, you have permission for additional uses of the text 
+
+ As a special exception, you have permission for additional uses of the text
  contained in this release of BOS TAURUS.
 
- The exception is that, if you link the BOS TAURUS library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the BOS TAURUS library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  BOS TAURUS library code into it.
 ----------------------------------------------------------------------------*/
 
 
 ******************************************************************************
 * ARCHIVO:  BosTaurus.CH
-* LENGUAJE: HMG 
+* LENGUAJE: HMG
 * FECHA:    Setiembre 2012
 * AUTOR:    Dr. CLAUDIO SOTO
 * PAIS:     URUGUAY
@@ -41,7 +41,7 @@
 * BLOG:     http://srvet.blogspot.com
 ******************************************************************************
 
-// Bos Taurus: Minimum Requirements: Windows XP, HMG 3.0.43 or MiniGUI 2.1.5  
+// Bos Taurus: Minimum Requirements: Windows XP, HMG 3.0.43 or MiniGUI 2.1.5
 
 
 #define _BT_INFO_NAME_           "Bos Taurus"
@@ -135,39 +135,39 @@
    #define BT_DRAW_PIE     2
 
 
-// BT_DRAW_HDC_FILLEDOBJECT()   
+// BT_DRAW_HDC_FILLEDOBJECT()
    // Type
    #define BT_FILLRECTANGLE  1
    #define BT_FILLELLIPSE    2
    #define BT_FILLROUNDRECT  3  // RoundWidth , RoundHeight
    #define BT_FILLFLOOD      4
 
-   
+
 // BT_DRAW_HDC_BITMAP(), BT_BMP_PASTE ()
    // Action
    #define BT_BITMAP_OPAQUE        0
    #define BT_BITMAP_TRANSPARENT   1
 
-   
-// BT_DRAW_HDC_BITMAP(), BT_DRAW_HDC_BITMAPALPHABLEND () 
+
+// BT_DRAW_HDC_BITMAP(), BT_DRAW_HDC_BITMAPALPHABLEND ()
    // Mode_Stretch
    #define BT_SCALE   0
    #define BT_STRETCH 1
    #define BT_COPY    3
 
-   
-// BT_DRAW_HDC_BITMAPALPHABLEND ()   
+
+// BT_DRAW_HDC_BITMAPALPHABLEND ()
    // Alpha = 0 to 255
    #define BT_ALPHABLEND_TRANSPARENT   0
    #define BT_ALPHABLEND_OPAQUE      255
 
-   
-// BT_DRAW_HDC_GRADIENTFILL()
-   #define BT_GRADIENTFILL_HORIZONTAL 0   
-   #define BT_GRADIENTFILL_VERTICAL   1   
 
-   
-// BT_DRAW_HDC_TEXTOUT (), BT_DRAW_HDC_DRAWTEXT   
+// BT_DRAW_HDC_GRADIENTFILL()
+   #define BT_GRADIENTFILL_HORIZONTAL 0
+   #define BT_GRADIENTFILL_VERTICAL   1
+
+
+// BT_DRAW_HDC_TEXTOUT (), BT_DRAW_HDC_DRAWTEXT
    // Type
    #define BT_TEXT_OPAQUE      0
    #define BT_TEXT_TRANSPARENT 1
@@ -182,9 +182,9 @@
    #define BT_TEXT_CENTER      6
    #define BT_TEXT_RIGHT       2
 
-   #define BT_TEXT_TOP         0  
+   #define BT_TEXT_TOP         0
    #define BT_TEXT_BASELINE   24
-   #define BT_TEXT_BOTTOM      8 
+   #define BT_TEXT_BOTTOM      8
 
    // Orientation
    #define BT_TEXT_NORMAL_ORIENTATION      0
@@ -200,30 +200,30 @@
    #define BT_HDC_TRANSPARENT   1
 
 
-// BT_BMP_SAVEFILE() 
+// BT_BMP_SAVEFILE()
    // nTypePicture
    #define BT_FILEFORMAT_BMP   0
-   #define BT_FILEFORMAT_JPG   1 
+   #define BT_FILEFORMAT_JPG   1
    #define BT_FILEFORMAT_GIF   2
    #define BT_FILEFORMAT_TIF   3
    #define BT_FILEFORMAT_PNG   4
 
-   
+
 // BT_BMP_CAPTURESCR()
    // Mode
    #define BT_BITMAP_CAPTURE_DESKTOP    0
    #define BT_BITMAP_CAPTURE_WINDOW     1
-   #define BT_BITMAP_CAPTURE_CLIENTAREA 2 
+   #define BT_BITMAP_CAPTURE_CLIENTAREA 2
 
-   
-// BT_BMP_GETINFO ()   
-   // Info 
+
+// BT_BMP_GETINFO ()
+   // Info
    #define BT_BITMAP_INFO_WIDTH         0
    #define BT_BITMAP_INFO_HEIGHT        1
    #define BT_BITMAP_INFO_BITSPIXEL     2
    #define BT_BITMAP_INFO_GETCOLORPIXEL 3
 
-   
+
 // BT_BMP_PROCESS ()
    // Action                                       Value
    #define BT_BMP_PROCESS_INVERT        0          // NIL
@@ -243,13 +243,13 @@
    #define BT_BITMAP_LIGHT_WHITE 255
 
 
-// BT_BMP_TRANSFORM () 
+// BT_BMP_TRANSFORM ()
    // Mode
-   #define BT_BITMAP_REFLECT_HORIZONTAL 1 
+   #define BT_BITMAP_REFLECT_HORIZONTAL 1
    #define BT_BITMAP_REFLECT_VERTICAL   2
    #define BT_BITMAP_ROTATE             4   // Angle = 0 To 360º   &&  Color_Fill_Bk = color to fill the empty spaces the background
 
-   
+
 // BT_DRAW_HDC_PIXEL ()
    // Action
    #define BT_HDC_GETPIXEL   0
@@ -295,6 +295,3 @@
    #define BT_DIRECTORYINFO_INTERNALDATA_FOLDER         "D-"
    #define BT_DIRECTORYINFO_INTERNALDATA_HASSUBFOLDER   "D+"
    #define BT_DIRECTORYINFO_INTERNALDATA_NOFOLDER       "F"
-
-
-

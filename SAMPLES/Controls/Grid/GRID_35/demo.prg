@@ -47,10 +47,10 @@ Local aValue := { Nil , Nil }
 		WIDTH 800 ;
 		HEIGHT 510 ;
 		TITLE 'Multiple Index Test' ;
-		MAIN 
+		MAIN
 
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP 'Test'
 				ITEM 'Order Col.1 Ascending' ACTION Order1Ascending()
 				ITEM 'Order Col.2 Ascending' ACTION Order2Ascending()
@@ -71,7 +71,7 @@ Local aValue := { Nil , Nil }
 			WIDTHS {140,140,140,100,100,100};
 			VALUE { 1 , 1 } ;
 			ROWSOURCE "Test" ;
-			COLUMNFIELDS { 'Code' ,  'First' , 'Last' ,  'Birth' , 'Married' , 'Bio' } 
+			COLUMNFIELDS { 'Code' ,  'First' , 'Last' ,  'Birth' , 'Married' , 'Bio' }
 
 		
 	END WINDOW
@@ -147,6 +147,3 @@ Procedure Order4Descending
 	Form_1.Grid_1.Refresh
 
 Return
-
-
-

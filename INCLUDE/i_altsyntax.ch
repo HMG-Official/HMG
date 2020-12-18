@@ -2116,4 +2116,3 @@ Spinner
       _HMG_SYSDATA \[ 405 \] ,;
       _HMG_SYSDATA \[ 457 \],;
       _HMG_SYSDATA \[ 458 \])
-

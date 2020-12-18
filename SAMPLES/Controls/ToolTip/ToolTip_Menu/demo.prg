@@ -3,7 +3,7 @@
 Function main()
 
  SET TOOLTIPSTYLE BALLOON
- 
+
  SET TOOLTIPFORECOLOR TEAL
 
  SET TOOLTIPCUSTOMDRAW ON
@@ -11,12 +11,12 @@ Function main()
 
    DEFINE WINDOW Form_1 ;
       TITLE 'ToolTip Menu' ;
-      MAIN 
+      MAIN
 
       DEFINE MAIN MENU
 
          POPUP 'File'
-            ITEM 'Open'          ACTION MsgInfo ('File:Open') IMAGE 'Check.Bmp'  TOOLTIP "Open File" 
+            ITEM 'Open'          ACTION MsgInfo ('File:Open') IMAGE 'Check.Bmp'  TOOLTIP "Open File"
             ITEM 'Save'          ACTION MsgInfo ('File:Save') IMAGE 'Free.Bmp'   TOOLTIP "Save File"
             ITEM 'Print'         ACTION MsgInfo ('File:Print') IMAGE 'Info.Bmp'  TOOLTIP "Print File"
             ITEM 'Save As...'    ACTION MsgInfo ('File:Save As')                 TOOLTIP "Save As... File"
@@ -25,7 +25,7 @@ Function main()
             ITEM 'Exit'          ACTION MsgInfo ('File:Exit') IMAGE 'Exit.Bmp'   TOOLTIP "Exit App"
          END POPUP
 
-         POPUP 'Test' 
+         POPUP 'Test'
             ITEM 'Item 1'  ACTION MsgInfo ('Item 1')
             ITEM 'Item 2'  ACTION MsgInfo ('Item 2')   TOOLTIP "Menu ToolTip of Item 2"
 
@@ -47,10 +47,10 @@ Function main()
    END WINDOW
 
    Form_1.MenuItem33.ToolTip :=  "Menu ToolTip of Item 3.3"
-  
+
    aFont := ARRAY FONT "Times New Roman" SIZE 14 BOLD ITALIC
    SET TOOLTIPCUSTOMDRAW CONTROL MenuItem33 OF Form_1 FORECOLOR RED ARRAYFONT aFont  TITLE "Title ToolTip Menu" ICON "Tutor.ico"
-   
+
    SET TOOLTIPCUSTOMDRAW CONTROL MenuItemHMG OF Form_1 FORECOLOR RED ARRAYFONT aFont  BALLOON .F.
 
    ACTIVATE WINDOW Form_1

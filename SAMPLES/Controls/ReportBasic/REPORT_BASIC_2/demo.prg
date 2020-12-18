@@ -6,10 +6,10 @@ function main()
 		AT 0,0 ;
 		WIDTH 400 ;
 		HEIGHT 400 ;
-		TITLE 'hola' ; 
+		TITLE 'hola' ;
          main
 
-       @ 40,10 button b_2 caption 'Do External Report (.rpt)' action testrepo() WIDTH 150 
+       @ 40,10 button b_2 caption 'Do External Report (.rpt)' action testrepo() WIDTH 150
 
        end window
        activate window form_1
@@ -17,10 +17,9 @@ return
 
 function testrepo()
        wempresa:='sistemas c.v.c'
-       use mtiempo 
+       use mtiempo
        index on usuario to lista
        go top
        DO REPORT FORM repdemo
 	use
 return
-

@@ -2,12 +2,12 @@
 
 Function main()
 
-	DEFINE WINDOW form_1 ; 
+	DEFINE WINDOW form_1 ;
 		AT 114,218 ;
 		WIDTH 334 ;
-		HEIGHT 276 ; 
-		TITLE 'UNZIP TEST' ; 
-		MAIN 
+		HEIGHT 276 ;
+		TITLE 'UNZIP TEST' ;
+		MAIN
 
 		DEFINE MAIN MENU
 
@@ -22,7 +22,7 @@ Function main()
 		@ 120,120 LABEL label_1 VALUE ''
 
 
-	END WINDOW 
+	END WINDOW
 
 	form_1.center
 	form_1.activate
@@ -35,7 +35,7 @@ Function UnPackZip()
 *------------------------------------------------------------------------------*
 
 	UNCOMPRESS 'ZipTest.Zip' ;
-		BLOCK {|cFile,nPos| ProgressUpdate( nPos , cFile ) }  
+		BLOCK {|cFile,nPos| ProgressUpdate( nPos , cFile ) }
 
 Return nil
 
@@ -47,4 +47,3 @@ function ProgressUpdate(nPos , cFile )
 	Form_1.Label_1.Value := cFile
 
 Return Nil
-

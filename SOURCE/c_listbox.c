@@ -269,5 +269,3 @@ HB_FUNC ( LISTBOXGETITEMCOUNT )
 {
    HMG_retnl ( SendMessage( (HWND) HMG_parnl (1), LB_GETCOUNT , 0, 0 ) ) ;
 }
-
-

@@ -1,10 +1,10 @@
-/* 
+/*
   HMG modifications through Github
-  Encoding: UTF-8 (No BOM)  
+  Encoding: UTF-8 (No BOM)
   Notation:
     * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
-  Entries should be in reverse chronological order, with most recent change 
-    on top. 
+  Entries should be in reverse chronological order, with most recent change
+    on top.
 */
 
 2020-11-16 Kevin Carmody i /at/ kevincarmody.com
@@ -25,14 +25,14 @@
   ! IDE_ANSI\*.*
     ; restored file sets that were in HMG 3.4.4
 
-  ! lib\*.a 
+  ! lib\*.a
     ; added compiled HMG libraries
 
   * INCLUDE\MiniGUI.ch
     ; changed version constants so that HMGVersion() output changes
     ;   from "HMG 3.4.4 Stable (32 bits)"
     ;   to "HMG 3.5 Stable Patch 2020-11-16 (32 bits)"
-    ; future changes should update _HMG_VERSION_PATCH_ to the date of the 
+    ; future changes should update _HMG_VERSION_PATCH_ to the date of the
     ;   update
 
   ! SOURCE\h_HMG_HPDF.Prg
@@ -49,7 +49,7 @@
 
   - SAMPLES\HPDF\Demo3\demo3_new_fetures.prg
   + SAMPLES\HPDF\Demo3\demo.prg
-    ; renamed to remove misspelling of "features" 
+    ; renamed to remove misspelling of "features"
     ;   and to follow naming convention of other demos
 
 2020-11-05 Kevin Carmody i /at/ kevincarmody.com
@@ -64,11 +64,11 @@
     ; added RowsPerPage property to the Grid control
     ; added properties and events to the MonthCalendar control:
     ;   Length, Width, RangeMin, RangeMax, View, FontColor, OuterFontColor,
-    ;   BackColor, BorderColor, TitleFontColor, TitleBackColor, 
+    ;   BackColor, BorderColor, TitleFontColor, TitleBackColor,
     ;   VisibleMin, VisibleMax, OnGetBoldDays
 
   * SOURCE\c_winapimisc.c
-    ; fixed IsVista() function to correctly identify newer releases of 
+    ; fixed IsVista() function to correctly identify newer releases of
     ;   Windows 10
 
   * INCLUDE\i_UNICODE.ch
@@ -79,7 +79,7 @@
   * SOURCE\h_UNICODE_String.prg
     ; added support for Unicode supplemental plane characters:
     ;   revised HMG Unicode functions: HMG_Lower, HMG_Upper, HMG_IsAlpha,
-    ;     HMG_IsLower, HMG_IsUpper, HMG_IsDigit, HMG_IsAlphaNumeric, 
+    ;     HMG_IsLower, HMG_IsUpper, HMG_IsDigit, HMG_IsAlphaNumeric,
     ;     HMG_StrCmp, HMG_Len, HMG_PadC, HMG_PadL, HMG_PadR, HMG_Chr,
     ;     HMG_Asc, HMG_AscPos, HMG_At, HMG_Rat, HMG_Left, HMG_Right,
     ;     HMG_Substr, HMG_Stuff, HMG_IsUtf8WithBom, HMG_Utf8RemoveBom,
@@ -222,4 +222,3 @@
   * source\*.prg
     ; removed ending spaces
     ; pacified warnings. -w3
-

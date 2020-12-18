@@ -6,13 +6,13 @@ Function Main
  PRIVATE  lOnToolTipCustomDraw := .T.
 
  SET TOOLTIPSTYLE BALLOON
- 
+
  SET TOOLTIPFORECOLOR BLUE
 
  SET TOOLTIPCUSTOMDRAW TO lOnToolTipCustomDraw   // For default ToolTip Custom Draw is OFF
 
- 
-    DEFINE WINDOW Form_1 TITLE "ToolTip Custom Draw" MAIN 
+
+    DEFINE WINDOW Form_1 TITLE "ToolTip Custom Draw" MAIN
 
       @ 200,250 LABEL Label_1 ;
       AUTOSIZE ;
@@ -35,12 +35,12 @@ Function Main
 
    aFont := ARRAY FONT "Arial" SIZE 12 BOLD UNDERLINE
    SET TOOLTIPCUSTOMDRAW CONTROL Label_1 OF Form_1 FORECOLOR RED  ARRAYFONT aFont
-   
+
    aFont := ARRAY FONT "Times New Roman" SIZE 10 BOLD ITALIC
    SET TOOLTIPCUSTOMDRAW CONTROL Label_2 OF Form_1  ARRAYFONT aFont  BALLOON .F.  TITLE "Title Label"  ICON TOOLTIPICON_INFO_LARGE  // "Tutor.ico"
 
 // SET TOOLTIPCUSTOMDRAW CONTROL Label_1 OF Form_1   // Remove tooltip custom draw of the control
-   
+
    ACTIVATE WINDOW Form_1
 
 Return

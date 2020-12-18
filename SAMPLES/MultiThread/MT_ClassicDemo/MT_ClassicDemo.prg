@@ -70,7 +70,7 @@ DEFINE WINDOW Form_1 AT 301 , 503 WIDTH 550 HEIGHT 350 MAIN
         ACTION button_4_action()
         CAPTION "Terminate all Threads"
     END BUTTON
-    
+
 END WINDOW
 
 Form_1.Center
@@ -109,7 +109,7 @@ Return Nil
 
 FUNCTION button_4_action
 LOCAL i
-   FOR i := 1 TO HMG_LEN( aThread ) 
+   FOR i := 1 TO HMG_LEN( aThread )
       IF aThread[ i ] <> NIL
          hb_threadDetach( aThread[ i ] )   // close thread handle
          hb_threadQuitRequest( aThread[ i ] )   // terminate thread

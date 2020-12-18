@@ -14,10 +14,10 @@ Function Main
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG Demo' ;
 		ICON 'DEMO.ICO' ;
-		MAIN 
+		MAIN
 
 		DEFINE STATUSBAR
-			STATUSITEM 'HMG Power Ready!' 
+			STATUSITEM 'HMG Power Ready!'
 		END STATUSBAR
 
 		@ 30,10 EDITBOX Edit_1 ;
@@ -29,7 +29,7 @@ Function Main
 			ON CHANGE ShowRowCol() ;
 			DISABLEDBACKCOLOR { 0,0,255} ;
          nohscroll;
-			DISABLEDFONTCOLOR { 0,255,0 } 
+			DISABLEDFONTCOLOR { 0,255,0 }
 
 
 		DEFINE BUTTON B
@@ -65,7 +65,7 @@ Function Main
 Return Nil
 
 Procedure ShowRowCol
-Local s , c , i , e , q 
+Local s , c , i , e , q
 	
 	s := Form_1.Edit_1.Value
 	c := Form_1.Edit_1.CaretPos

@@ -17,15 +17,15 @@ Function Main
 		TITLE 'HMG Demo' ;
 		ICON 'DEMO.ICO' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
 		DEFINE STATUSBAR
-			STATUSITEM 'HMG Power Ready!' 
+			STATUSITEM 'HMG Power Ready!'
 		END STATUSBAR
 
 		ON KEY ALT+A ACTION MsgInfo('Alt+A Pressed')
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			DEFINE POPUP '&File'
 				ITEM 'InputWindow Test'	ACTION InputWindow_Click()
 				ITEM 'More Tests'	ACTION Modal_CLick()	NAME File_Modal
@@ -39,10 +39,10 @@ Function Main
 					ITEM 'SubItem 2'	ACTION MsgInfo( 'SubItem2 Clicked' )
 				END POPUP
 				SEPARATOR	
-				ITEM 'Multiple Window Activation'	ACTION MultiWin_Click() 
+				ITEM 'Multiple Window Activation'	ACTION MultiWin_Click()
 				SEPARATOR	
-				ITEM 'Capture (Without Arguments)'	ACTION Form_1.Capture() 
-				ITEM 'Capture (With Arguments)'		ACTION Form_1.Capture( 'xxx.bmp' , 10,10,200,200 ) 
+				ITEM 'Capture (Without Arguments)'	ACTION Form_1.Capture()
+				ITEM 'Capture (With Arguments)'		ACTION Form_1.Capture( 'xxx.bmp' , 10,10,200,200 )
 				SEPARATOR	
 				ITEM 'Exit'		ACTION Form_1.Release
 			END POPUP
@@ -52,7 +52,7 @@ Function Main
 				ITEM 'GetMyDocumentsFolder()'	ACTION MsgInfo ( GetMyDocumentsFolder() )
 				ITEM 'GetDesktopFolder()'	ACTION MsgInfo ( GetDesktopFolder() )
 				ITEM 'GetProgramFilesFolder()'	ACTION MsgInfo ( GetProgramFilesFolder())
-				ITEM 'GetTempFolder()'		ACTION MsgInfo ( GetTempFolder() ) 
+				ITEM 'GetTempFolder()'		ACTION MsgInfo ( GetTempFolder() )
 				SEPARATOR
 				ITEM 'GetFolder()'		ACTION MsgInfo(GetFolder())
 			END POPUP
@@ -63,17 +63,17 @@ Function Main
 				ITEM 'GetColor()'	ACTION GetColor_Click()
 			END POPUP
 			DEFINE POPUP 'Sound F&unctions'
-				ITEM 'PlayBeep()'	 ACTION PlayBeep() 
-				ITEM 'PlayAsterisk()'	 ACTION PlayAsterisk() 
-				ITEM 'PlayExclamation()' ACTION PlayExclamation() 
-				ITEM 'PlayHand()'	 ACTION PlayHand() 
-				ITEM 'PlayQuestion()'	 ACTION PlayQuestion() 
-				ITEM 'PlayOk()'		 ACTION PlayOk() 
+				ITEM 'PlayBeep()'	 ACTION PlayBeep()
+				ITEM 'PlayAsterisk()'	 ACTION PlayAsterisk()
+				ITEM 'PlayExclamation()' ACTION PlayExclamation()
+				ITEM 'PlayHand()'	 ACTION PlayHand()
+				ITEM 'PlayQuestion()'	 ACTION PlayQuestion()
+				ITEM 'PlayOk()'		 ACTION PlayOk()
 			END POPUP
 			DEFINE POPUP 'M&isc'
-				ITEM 'MemoryStatus() Function (Contributed by Grigory Filatov)' ACTION MemoryTest() 
-				ITEM 'ShellAbout() Function (Contributed by Manu Exposito' ACTION ShellAbout() 
-				ITEM 'BackColor / FontColor Clauses (Contributed by Ismael Dutra)' ACTION Color_CLick() 
+				ITEM 'MemoryStatus() Function (Contributed by Grigory Filatov)' ACTION MemoryTest()
+				ITEM 'ShellAbout() Function (Contributed by Manu Exposito' ACTION ShellAbout()
+				ITEM 'BackColor / FontColor Clauses (Contributed by Ismael Dutra)' ACTION Color_CLick()
 				SEPARATOR
 				ITEM 'Get Control Row Property' 	ACTION 	MsgInfo ( Str ( ( Form_1.Button_1.Row     ) ) , 'Maximize Button' )
 				ITEM 'Get Control Col Property' 	ACTION 	MsgInfo ( Str ( ( Form_1.Button_1.Col     ) ) , 'Maximize Button' )
@@ -103,7 +103,7 @@ Function Main
 				ITEM 'Set Caption Property'		ACTION SetCaptionTest()
 				ITEM 'Get Caption Property'		ACTION GetCaptionTest()
 				SEPARATOR
-				ITEM 'Get Picture Property'		ACTION MsgInfo (  ( Form_1.Image_1.Picture ) , 'Image_1' ) 
+				ITEM 'Get Picture Property'		ACTION MsgInfo (  ( Form_1.Image_1.Picture ) , 'Image_1' )
 				SEPARATOR
 				ITEM 'Set ToolTip Property'		ACTION Form_1.Button_1.ToolTip := 'New ToolTip'
 				ITEM 'Get ToolTip Property'		ACTION MsgInfo (  ( Form_1.Button_1.ToolTip ) , 'Maximize Button' )
@@ -131,66 +131,66 @@ Function Main
 
 			END POPUP
 			DEFINE POPUP 'H&elp'
-				ITEM 'About'		ACTION MsgInfo ("Free GUI Library For Harbour","HMG Main Demo") 
+				ITEM 'About'		ACTION MsgInfo ("Free GUI Library For Harbour","HMG Main Demo")
 			END POPUP
 		END MENU
 
-		DEFINE CONTEXT MENU 
+		DEFINE CONTEXT MENU
 			ITEM 'Check File - More Tests Item'	ACTION Context1_Click()
-			ITEM 'UnCheck File - More Test Item'	ACTION Context2_Click() 
+			ITEM 'UnCheck File - More Test Item'	ACTION Context2_Click()
 			ITEM 'Enable File - Topmost Window'	ACTION Context3_Click()
 			ITEM 'Disable File - Topmost Window'	ACTION Context4_Click()
 			SEPARATOR	
-			ITEM 'About'				ACTION MsgInfo ("Free GUI Library For Harbour","HMG Main Demo") 
+			ITEM 'About'				ACTION MsgInfo ("Free GUI Library For Harbour","HMG Main Demo")
 		END MENU
 
 		DEFINE LABEL Label_Color
 			ROW	5
 			COL	450
-			VALUE 'Right Click For Context Menu' 
-			WIDTH 170 
-			HEIGHT 22 
-			FONTNAME 'Times New Roman' 
-			FONTSIZE 10 
+			VALUE 'Right Click For Context Menu'
+			WIDTH 170
+			HEIGHT 22
+			FONTNAME 'Times New Roman'
+			FONTSIZE 10
 			FONTCOLOR BLUE
 		END LABEL
 
 		DEFINE LABEL Label_Color_2
 			ROW	45
 			COL	10
-			VALUE 'ALT+A HotKey Test' 
-			WIDTH 170 
-			HEIGHT 22 
+			VALUE 'ALT+A HotKey Test'
+			WIDTH 170
+			HEIGHT 22
 			FONTNAME 'Times New Roman'
-			FONTSIZE 10 
+			FONTSIZE 10
 			FONTCOLOR RED
 		END LABEL
 		
 		DEFINE CHECKBUTTON CheckButton_1
 			ROW	200
 			COL	140
-			CAPTION 'CheckButton!' 
-			VALUE .T. 
-			TOOLTIP 'CheckButton' 
+			CAPTION 'CheckButton!'
+			VALUE .T.
+			TOOLTIP 'CheckButton'
 		END CHECKBUTTON	
 
 		DEFINE BUTTON ImageButton_1
 			ROW	200
 			COL	250
-			PICTURE 'button.bmp' 
-			ACTION MsgInfo('Click!') 
-			WIDTH 27 
-			HEIGHT 27 
-			TOOLTIP 'Print Preview' 
+			PICTURE 'button.bmp'
+			ACTION MsgInfo('Click!')
+			WIDTH 27
+			HEIGHT 27
+			TOOLTIP 'Print Preview'
 		END BUTTON
 
 		DEFINE CHECKBUTTON CheckButton_2
 			ROW	200
 			COL	285
 			PICTURE 'open.bmp'
-			WIDTH 27 
-			HEIGHT 27 
-			VALUE .F. 
+			WIDTH 27
+			HEIGHT 27
+			VALUE .F.
 			TOOLTIP 'Graphical CheckButton'
 		END CHECKBUTTON
 
@@ -199,23 +199,23 @@ Function Main
 			WIDTH 430 ;
 			HEIGHT 180 ;
 			VALUE 1 ;
-			TOOLTIP 'Tab Control' 
+			TOOLTIP 'Tab Control'
 
 			DEFINE PAGE '&Grid'
 
 				DEFINE GRID Grid_1
 					ROW	30
 					COL	10
-					WIDTH 410 
-					HEIGHT 140 
-					HEADERS { '','Last Name','First Name'} 
+					WIDTH 410
+					HEIGHT 140
+					HEADERS { '','Last Name','First Name'}
 					WIDTHS { 0,220,220}
-					ITEMS { { 0,'Simpson','Homer'} , {1,'Mulder','Fox'} } 
-					VALUE 1 
-					TOOLTIP 'Grid Control' 
-					ONHEADCLICK { {|| MsgInfo('Header 1 Clicked !')} , { || MsgInfo('Header 2 Clicked !')} } 
-					IMAGE {"br_no","br_ok"} 
-					ONDBLCLICK MsgInfo ('DoubleClick!','Grid') 
+					ITEMS { { 0,'Simpson','Homer'} , {1,'Mulder','Fox'} }
+					VALUE 1
+					TOOLTIP 'Grid Control'
+					ONHEADCLICK { {|| MsgInfo('Header 1 Clicked !')} , { || MsgInfo('Header 2 Clicked !')} }
+					IMAGE {"br_no","br_ok"}
+					ONDBLCLICK MsgInfo ('DoubleClick!','Grid')
 				END GRID
 
 			END PAGE
@@ -232,17 +232,17 @@ Function Main
 				DEFINE LABEL Label_1
 					ROW 	55
 					COL	90
-					VALUE '&This is a Label !!!' 
-					WIDTH 100 
-					HEIGHT 27 
+					VALUE '&This is a Label !!!'
+					WIDTH 100
+					HEIGHT 27
 				END LABEL
 
 				DEFINE CHECKBOX Check_1
 					ROW	80
 					COL	90
-					CAPTION 'Check 1' 
-					VALUE .T. 
-					TOOLTIP 'CheckBox' 
+					CAPTION 'Check 1'
+					VALUE .T.
+					TOOLTIP 'CheckBox'
 					ONCHANGE PLAYOK()
 				END CHECKBOX
 
@@ -250,26 +250,26 @@ Function Main
 					ROW	115
 					COL	85
 					RANGEMIN 1
-					RANGEMAX 10 
-					VALUE 5 
+					RANGEMAX 10
+					VALUE 5
 					TOOLTIP 'Slider'
 				END SLIDER
 				
 				DEFINE FRAME TabFrame_2
 					ROW	45
 					COL	240
-					WIDTH 125 
-					HEIGHT 110 
+					WIDTH 125
+					HEIGHT 110
 				END FRAME
 
 				DEFINE RADIOGROUP Radio_1
 					ROW	50
 					COL	260
-					OPTIONS { 'One' , 'Two' , 'Three', 'Four' } 
-					VALUE 1 
-					WIDTH 100 
+					OPTIONS { 'One' , 'Two' , 'Three', 'Four' }
+					VALUE 1
+					WIDTH 100
 					TOOLTIP 'RadioGroup'
-					ONCHANGE PLAYOK() 
+					ONCHANGE PLAYOK()
 				END RADIOGROUP
 
 			END PAGE
@@ -279,11 +279,11 @@ Function Main
 				DEFINE EDITBOX 	Edit_1
 					ROW	30
 					COL	10
-					WIDTH 410 
-					HEIGHT 140 
-					VALUE 'EditBox!!' 
-					TOOLTIP 'EditBox' 
-					MAXLENGTH 255 
+					WIDTH 410
+					HEIGHT 140
+					VALUE 'EditBox!!'
+					TOOLTIP 'EditBox'
+					MAXLENGTH 255
 				END EDITBOX
 
 			END PAGE
@@ -300,10 +300,10 @@ Function Main
 				DEFINE BUTTON Btn_Prg
 					ROW	80
 					COL	250
-					CAPTION '<- !!!' 
-					ACTION Animate_CLick() 
-					WIDTH 50 
-					HEIGHT 28 
+					CAPTION '<- !!!'
+					ACTION Animate_CLick()
+					WIDTH 50
+					HEIGHT 28
 					TOOLTIP 'Animate Progressbar'
 				END BUTTON
 
@@ -314,188 +314,188 @@ Function Main
 		DEFINE DATEPICKER Date_1
 			ROW	10
 			COL	10
-			VALUE CTOD('  / /  ') 
-			TOOLTIP 'DatePicker Control' 
+			VALUE CTOD('  / /  ')
+			TOOLTIP 'DatePicker Control'
 			SHOWNONE .T.
 		END DATEPICKER
 
 		DEFINE BUTTON Button_1
 			ROW	200
 			COL	10
-			CAPTION 'Maximize' 
-			ACTION Maximize_Click() 
+			CAPTION 'Maximize'
+			ACTION Maximize_Click()
 			TOOLTIP 'Maximize'
 		END BUTTON
 
 		DEFINE BUTTON Button_2
 			ROW	230
 			COL	10
-			CAPTION 'Minimize' 
-			ACTION Minimize_Click() 
+			CAPTION 'Minimize'
+			ACTION Minimize_Click()
 		END BUTTON
 		
 		DEFINE BUTTON Button_3
 			ROW	260
 			COL	10
-			CAPTION 'Restore' 
+			CAPTION 'Restore'
 			ACTION Restore_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_4
 			ROW	290
 			COL	10
-			CAPTION '&Hide' 
+			CAPTION '&Hide'
 			ACTION Hide_Click()
 		END BUTTON
 		
 		DEFINE BUTTON Button_5
 			ROW	320
 			COL	10
-			CAPTION 'Sho&w' 
+			CAPTION 'Sho&w'
 			ACTION Show_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_6
 			ROW	350
 			COL	10
-			CAPTION 'SetFocus' 
+			CAPTION 'SetFocus'
 			ACTION Setfocus_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_7
 			ROW	230
 			COL	140
-			CAPTION 'GetValue' 
+			CAPTION 'GetValue'
 			ACTION GetValue_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_8
 			ROW	260
 			COL	140
-			CAPTION 'SetValue' 
+			CAPTION 'SetValue'
 			ACTION SetValue_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_9
 			ROW	290
 			COL	140
-			CAPTION 'Enable' 
+			CAPTION 'Enable'
 			ACTION Enable_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_10
 			ROW	320
 			COL	140
-			CAPTION 'Disable' 
+			CAPTION 'Disable'
 			ACTION Disable_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_11
 			ROW	350
 			COL	140
-			CAPTION 'Delete All Items' 
+			CAPTION 'Delete All Items'
 			ACTION DeleteAllItems_Click()
-			WIDTH 150 
+			WIDTH 150
 			HEIGHT 28
 		END BUTTON
 
 		DEFINE BUTTON Button_12
 			ROW	190
 			COL	510
-			CAPTION 'Delete Item' 
+			CAPTION 'Delete Item'
 			ACTION DeleteItem_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_13
 			ROW	220
 			COL	510
-			CAPTION 'Add Item' 
+			CAPTION 'Add Item'
 			ACTION AddItem_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_14
 			ROW	250
 			COL	510
-			CAPTION 'Messages' 
+			CAPTION 'Messages'
 			ACTION Msg_Click()
 		END BUTTON
 
 		DEFINE BUTTON Button_15
 			ROW	280
 			COL	510
-			CAPTION 'Change Image' 
+			CAPTION 'Change Image'
 			ACTION SetPict()
 		END BUTTON
 
 		DEFINE FRAME Frame_1	
 			ROW 	190
 			COL	315
-			CAPTION 'Frame' 
-			WIDTH 170 
-			HEIGHT 200 
+			CAPTION 'Frame'
+			WIDTH 170
+			HEIGHT 200
 		END FRAME
 
 		DEFINE COMBOBOX Combo_1
 			ROW	210
 			COL	335
-			ITEMS {'One','Two','Three'} 
-			VALUE 2 
-			TOOLTIP 'ComboBox' 
+			ITEMS {'One','Two','Three'}
+			VALUE 2
+			TOOLTIP 'ComboBox'
 		END COMBOBOX
 
 		DEFINE LISTBOX List_1	
 			ROW	240
 			COL	335
-			WIDTH 120 
-			HEIGHT 50 
-			ITEMS {'Andres','Analia','Item 3','Item 4','Item 5'} 
-			VALUE 2  
-			TOOLTIP 'ListBox' 
-			ONDBLCLICK 	MsgInfo('Double Click!','ListBox') 
+			WIDTH 120
+			HEIGHT 50
+			ITEMS {'Andres','Analia','Item 3','Item 4','Item 5'}
+			VALUE 2
+			TOOLTIP 'ListBox'
+			ONDBLCLICK 	MsgInfo('Double Click!','ListBox')
 		END LISTBOX
 
 		DEFINE TEXTBOX Text_pass
 			ROW	300
 			COL	335
-			VALUE 'Secret' 
+			VALUE 'Secret'
 			PASSWORD .T.
-			TOOLTIP 'Password TextBox' 
-			MAXLENGTH 16 
+			TOOLTIP 'Password TextBox'
+			MAXLENGTH 16
 			UPPERCASE .T.
 		END TEXTBOX
 		
 		DEFINE TEXTBOX Text_1
 			ROW	330
 			COL	335
-			WIDTH 50 
-			VALUE 'Hi!!!' 
-			TOOLTIP 'TextBox' 
-			MAXLENGTH 16 
+			WIDTH 50
+			VALUE 'Hi!!!'
+			TOOLTIP 'TextBox'
+			MAXLENGTH 16
 			LOWERCASE .T.
-			ONLOSTFOCUS MsgInfo('Focus Lost!') 
+			ONLOSTFOCUS MsgInfo('Focus Lost!')
 			ONENTER MsgInfo('Enter pressed')
 		END TEXTBOX
 
 		DEFINE TEXTBOX MaskedText
 			ROW	330
 			COL	395
-			WIDTH 80 
-			VALUE 12345.12 
-			TOOLTIP "TextBox With Numeric And InputMask Clauses" 
+			WIDTH 80
+			VALUE 12345.12
+			TOOLTIP "TextBox With Numeric And InputMask Clauses"
 			NUMERIC .T.
-			INPUTMASK '99999.99' 
-			ONCHANGE PlayOk() 
-			ONENTER MsgInfo('Enter pressed') 
+			INPUTMASK '99999.99'
+			ONCHANGE PlayOk()
+			ONENTER MsgInfo('Enter pressed')
 			RIGHTALIGN .T.
 		END TEXTBOX
 
 		DEFINE TEXTBOX Text_2
 			ROW	360
 			COL	335
-			VALUE 123 
+			VALUE 123
 			NUMERIC .T.
-			TOOLTIP 'Numeric TextBox' 
-			MAXLENGTH 16 
+			TOOLTIP 'Numeric TextBox'
+			MAXLENGTH 16
 			RIGHTALIGN .T.
 		END TEXTBOX
 
@@ -503,9 +503,9 @@ Function Main
 			ROW	100
 			COL	10
 			RANGEMIN 0
-			RANGEMAX 10 
-			VALUE 5 
-			WIDTH 100 
+			RANGEMAX 10
+			VALUE 5
+			WIDTH 100
 			TOOLTIP 'Range 1,65000'
 			FONTBOLD .T.
 		END SPINNER
@@ -513,7 +513,7 @@ Function Main
 		DEFINE LABEL Label_2
 			ROW	380
 			COL	15
-			VALUE 'Timer Test:' 
+			VALUE 'Timer Test:'
 		END LABEL
 		
 		DEFINE LABEL Label_3
@@ -523,13 +523,13 @@ Function Main
 
 		DEFINE TIMER Timer_1 ;
 		INTERVAL 1000 ;
-		ACTION Form_1.Label_3.Value := Time() 
+		ACTION Form_1.Label_3.Value := Time()
 		
 		DEFINE IMAGE Image_1
 			ROW	310
 			COL	510
-			PICTURE 'Demo.gif' 
-			WIDTH 90 
+			PICTURE 'Demo.gif'
+			WIDTH 90
 			HEIGHT 90
 		END IMAGE
 		
@@ -582,13 +582,13 @@ Return Nil
 Procedure ExecTest()
 *-----------------------------------------------------------------------------*
 
-	EXECUTE FILE "NOTEPAD.EXE" 
+	EXECUTE FILE "NOTEPAD.EXE"
 
 Return Nil
 *-----------------------------------------------------------------------------*
 Procedure InputWindow_Click
 *-----------------------------------------------------------------------------*
-Local Title , aLabels , aInitValues , aFormats , aResults 
+Local Title , aLabels , aInitValues , aFormats , aResults
 
 Title 		:= 'InputWindow Test'
 
@@ -620,43 +620,43 @@ Procedure EditGrid_Click
 Local aRows [20] [3]
 
 	aRows [1]	:= {'Simpson','Homer','555-5555'}
-	aRows [2]	:= {'Mulder','Fox','324-6432'} 
-	aRows [3]	:= {'Smart','Max','432-5892'} 
-	aRows [4]	:= {'Grillo','Pepe','894-2332'} 
-	aRows [5]	:= {'Kirk','James','346-9873'} 
-	aRows [6]	:= {'Barriga','Carlos','394-9654'} 
-	aRows [7]	:= {'Flanders','Ned','435-3211'} 
-	aRows [8]	:= {'Smith','John','123-1234'} 
-	aRows [9]	:= {'Lopez','Roberto','000-0000'} 
-	aRows [10]	:= {'Gomez','Juan','583-4832'} 
-	aRows [11]	:= {'Fernandez','Raul','321-4332'} 
-	aRows [12]	:= {'Borges','Javier','326-9430'} 
-	aRows [13]	:= {'Alvarez','Alberto','543-7898'} 
-	aRows [14]	:= {'Gonzalez','Ambo','437-8473'} 
-	aRows [15]	:= {'Batistuta','Gol','485-2843'} 
-	aRows [16]	:= {'Vinazzi','Amigo','394-5983'} 
-	aRows [17]	:= {'Pedemonti','Flavio','534-7984'} 
-	aRows [18]	:= {'Samarbide','Armando','854-7873'} 
-	aRows [19]	:= {'Pradon','Alejandra','???-????'} 
-	aRows [20]	:= {'Reyes','Monica','432-5836'} 
+	aRows [2]	:= {'Mulder','Fox','324-6432'}
+	aRows [3]	:= {'Smart','Max','432-5892'}
+	aRows [4]	:= {'Grillo','Pepe','894-2332'}
+	aRows [5]	:= {'Kirk','James','346-9873'}
+	aRows [6]	:= {'Barriga','Carlos','394-9654'}
+	aRows [7]	:= {'Flanders','Ned','435-3211'}
+	aRows [8]	:= {'Smith','John','123-1234'}
+	aRows [9]	:= {'Lopez','Roberto','000-0000'}
+	aRows [10]	:= {'Gomez','Juan','583-4832'}
+	aRows [11]	:= {'Fernandez','Raul','321-4332'}
+	aRows [12]	:= {'Borges','Javier','326-9430'}
+	aRows [13]	:= {'Alvarez','Alberto','543-7898'}
+	aRows [14]	:= {'Gonzalez','Ambo','437-8473'}
+	aRows [15]	:= {'Batistuta','Gol','485-2843'}
+	aRows [16]	:= {'Vinazzi','Amigo','394-5983'}
+	aRows [17]	:= {'Pedemonti','Flavio','534-7984'}
+	aRows [18]	:= {'Samarbide','Armando','854-7873'}
+	aRows [19]	:= {'Pradon','Alejandra','???-????'}
+	aRows [20]	:= {'Reyes','Monica','432-5836'}
 
 	DEFINE WINDOW Form_Grid ;
 		AT 0,0 ;
 		WIDTH 430 HEIGHT 400 ;
 		TITLE 'Editable Grid Test'  ;
 		MODAL NOSIZE ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
 		DEFINE GRID Grid_1
 			ROW	10
 			COL	10
-			WIDTH 405 
-			HEIGHT 330 
-			HEADERS {'Last Name','First Name','Phone'} 
+			WIDTH 405
+			HEIGHT 330
+			HEADERS {'Last Name','First Name','Phone'}
 			WIDTHS {140,140,140}
-			ITEMS aRows 
-			VALUE 1 
-			TOOLTIP 'Editable Grid Control' 
+			ITEMS aRows
+			VALUE 1
+			TOOLTIP 'Editable Grid Control'
 			ALLOWEDIT .T.
 		END GRID
 
@@ -741,14 +741,14 @@ Procedure MultiWin_Click
 			AT 100,100 ;
 			WIDTH 200 HEIGHT 150 ;
 			TITLE "Window 1" ;
-			TOPMOST 
+			TOPMOST
 
 		END WINDOW
 		DEFINE WINDOW Form_5 ;
 			AT 300,300 ;
 			WIDTH 200 HEIGHT 150 ;
 			TITLE "Window 2" ;
-			TOPMOST 
+			TOPMOST
 
 		END WINDOW
 
@@ -808,104 +808,104 @@ Procedure Modal_CLick
 		WIDTH 430 HEIGHT 400 ;
 		TITLE 'Modal Window & Multiselect Grid/List Test'  ;
 		MODAL ;
-		NOSIZE 
+		NOSIZE
 
 		DEFINE BUTTON BUTTON_1
 			ROW	10
 			COL	30
-			CAPTION 'List GetValue' 
+			CAPTION 'List GetValue'
 			ACTION MultiTest_GetValue()
 		END BUTTON
 		
 		DEFINE BUTTON BUTTON_2
 			ROW	40
 			COL	30
-			CAPTION 'List SetValue' 
-			ACTION Form_2.List_1.Value := { 1 , 3 } 
+			CAPTION 'List SetValue'
+			ACTION Form_2.List_1.Value := { 1 , 3 }
 		END BUTTON
 		
 		DEFINE BUTTON BUTTON_3
 			ROW	70
 			COL	30
-			CAPTION 'List GetItem' 
+			CAPTION 'List GetItem'
 			ACTION Multilist_GetItem()
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_4
 			ROW	100
 			COL	30
-			CAPTION 'List SetItem' 
-			ACTION Form_2.List_1.Item ( 1 ) := 'New Value!!' 
+			CAPTION 'List SetItem'
+			ACTION Form_2.List_1.Item ( 1 ) := 'New Value!!'
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_10
 			ROW	130
 			COL	30
-			CAPTION 'GetItemCount' 
+			CAPTION 'GetItemCount'
 			ACTION MsgInfo ( Str ( ( Form_2.List_1.ItemCount ) ) )
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_5
 			ROW	10
 			COL	150
-			CAPTION 'Grid GetValue' 
+			CAPTION 'Grid GetValue'
 			ACTION MultiGrid_GetValue()
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_6
 			ROW	40
 			COL	150
-			CAPTION 'Grid SetValue' 
-			ACTION Form_2.Grid_1.Value := { 1 , 3 } 
+			CAPTION 'Grid SetValue'
+			ACTION Form_2.Grid_1.Value := { 1 , 3 }
 		END BUTTON
 
 		DEFINE BUTTON BUTTON_7
 			ROW	70
 			COL	150
-			CAPTION 'Grid GetItem' 
+			CAPTION 'Grid GetItem'
 			ACTION MultiGrid_GetItem()
 		END BUTTON
 		
 		DEFINE BUTTON BUTTON_8
 			ROW	100
 			COL	150
-			CAPTION 'Grid SetItem' 
-			ACTION Form_2.Grid_1.Item(1) := {'Hi','All'} 
+			CAPTION 'Grid SetItem'
+			ACTION Form_2.Grid_1.Item(1) := {'Hi','All'}
 		END BUTTON
 		
 		DEFINE BUTTON BUTTON_9
 			ROW	130
 			COL	150
-			CAPTION 'GetItemCount' 
+			CAPTION 'GetItemCount'
 			ACTION MsgInfo ( Str ( ( Form_2.Grid_1.ItemCount ) ) )
 		END BUTTON
 
 		DEFINE LISTBOX List_1
 			ROW	180
 			COL	30
-			WIDTH 100 
-			HEIGHT 135 
-			ITEMS { 'Row 1' , 'Row 2' , 'Row 3' , 'Row 4' , 'Row 5' } 
-			VALUE { 2 , 3 } 
-			FONTNAME 'Arial' 
-			FONTSIZE 10 
-			TOOLTIP 'Multiselect ListBox (Ctrl+Click)' 
+			WIDTH 100
+			HEIGHT 135
+			ITEMS { 'Row 1' , 'Row 2' , 'Row 3' , 'Row 4' , 'Row 5' }
+			VALUE { 2 , 3 }
+			FONTNAME 'Arial'
+			FONTSIZE 10
+			TOOLTIP 'Multiselect ListBox (Ctrl+Click)'
 			MULTISELECT .T.
 		END LISTBOX
 		
 		DEFINE GRID Grid_1
 			ROW		180
 			COL		150
-			WIDTH		250 
-			HEIGHT		135 
-			HEADERS		{ 'Last Name' , 'First Name' } 
+			WIDTH		250
+			HEIGHT		135
+			HEADERS		{ 'Last Name' , 'First Name' }
 			WIDTHS		{ 120 , 120 }
-			ITEMS		{ { 'Simpson' , 'Homer' } , { 'Mulder' , 'Fox' } , { 'Smart' , 'Max' } } 
-			VALUE		{ 2 , 3 } 
-			FONTNAME	'Arial' 
-			FONTSIZE	10 
-			TOOLTIP		'Multiselect Grid Control (Ctrl+Click)' 
-			ONCHANGE	PlayBeep() 
+			ITEMS		{ { 'Simpson' , 'Homer' } , { 'Mulder' , 'Fox' } , { 'Smart' , 'Max' } }
+			VALUE		{ 2 , 3 }
+			FONTNAME	'Arial'
+			FONTSIZE	10
+			TOOLTIP		'Multiselect Grid Control (Ctrl+Click)'
+			ONCHANGE	PlayBeep()
 			MULTISELECT	.T.
 		END GRID
 
@@ -922,7 +922,7 @@ local a , i
 	a :=  ( Form_2.List_1.Value )
 
 	for i := 1 to len (a)
-		MsgInfo ( str( a[i] ) ) 
+		MsgInfo ( str( a[i] ) )
 	Next i
 
 	If Len(a) == 0
@@ -936,7 +936,7 @@ local a , i
 	a :=  ( Form_2.Grid_1.Value )
 
 	for i := 1 to len (a)
-		MsgInfo ( str( a[i] ) ) 
+		MsgInfo ( str( a[i] ) )
 	Next i
 
 	If Len(a) == 0
@@ -948,7 +948,7 @@ Return
 procedure multilist_getitem
 *-----------------------------------------------------------------------------*
 
-	MsgInfo (  ( Form_2.List_1.Item ( 1 ) ) ) 
+	MsgInfo (  ( Form_2.List_1.Item ( 1 ) ) )
 
 return
 *-----------------------------------------------------------------------------*
@@ -959,7 +959,7 @@ local a , i
 	a := ( Form_2.Grid_1.Item ( 1 ) )
 
 	for i := 1 to len (a)
-		MsgInfo ( a[i] ) 
+		MsgInfo ( a[i] )
 	Next i
 Return
 *-----------------------------------------------------------------------------*
@@ -994,7 +994,7 @@ Procedure Topmost_CLick
 			AT 100,100 ;
 			WIDTH 150 HEIGHT 150 ;
 			TITLE "Topmost Window" ;
-			TOPMOST 
+			TOPMOST
 
 		END WINDOW
 
@@ -1061,7 +1061,7 @@ s = s + "Password TextBox:    " +        Form_1.Text_Pass.Value	+ chr(13) + chr(
 s = s + "Slider:	      " + Str (  Form_1.Tab_1(2).Slider_1.Value )	+ chr(13) + chr(10)	
 s = s + "Spinner:             " + Str (  Form_1.Spinner_1.Value )	+ chr(13) + chr(10)
 s = s + "TextBox (InputMask): " + Str (  Form_1.MaskedText.Value )	+ chr(13) + chr(10)
-s = s + "DatePicker:          " + Dtoc(  ( Form_1.Date_1.Value )	) 
+s = s + "DatePicker:          " + Dtoc(  ( Form_1.Date_1.Value )	)
 
 MsgInfo ( s , "Get Control Values" )
 
@@ -1070,50 +1070,50 @@ Return Nil
 Procedure SetValue_CLick
 *-----------------------------------------------------------------------------*
 
-	 Form_1.Tab_1(1).Grid_1.Value 	:= 2 
-	 Form_1.Text_1.Value 	:= "New Text value" 
-	 Form_1.Tab_1(3).Edit_1.Value 	:= "New Edit Value" 
+	 Form_1.Tab_1(1).Grid_1.Value 	:= 2
+	 Form_1.Text_1.Value 	:= "New Text value"
+	 Form_1.Tab_1(3).Edit_1.Value 	:= "New Edit Value"
 	 Form_1.Tab_1(2).Radio_1.Value 	:= 4
-	 Form_1.Tab_1.Value 	:= 2 
-	 Form_1.Tab_1(2).Check_1.Value 	:= .t. 
-	 Form_1.List_1.Value 	:= 1 
-	 Form_1.Combo_1.Value 	:= 1 
-	 Form_1.Date_1.Value 	:= CTOD("02/02/2002") 
-	 Form_1.Tab_1(2).Label_1.Value 	:= "New Label Value" 
-	 Form_1.Text_2.Value 	:= 999 
-	 Form_1.Timer_1.Value 	:= 500 
-	 Form_1.MaskedText.Value := 12.34 
+	 Form_1.Tab_1.Value 	:= 2
+	 Form_1.Tab_1(2).Check_1.Value 	:= .t.
+	 Form_1.List_1.Value 	:= 1
+	 Form_1.Combo_1.Value 	:= 1
+	 Form_1.Date_1.Value 	:= CTOD("02/02/2002")
+	 Form_1.Tab_1(2).Label_1.Value 	:= "New Label Value"
+	 Form_1.Text_2.Value 	:= 999
+	 Form_1.Timer_1.Value 	:= 500
+	 Form_1.MaskedText.Value := 12.34
 	 Form_1.Spinner_1.Value := 6
 Return Nil
 *-----------------------------------------------------------------------------*
 Procedure Enable_CLick
 *-----------------------------------------------------------------------------*
 
-	Form_1.Button_1.Enabled 	:= .T. 
-	Form_1.Button_2.Enabled 	:= .T. 
-	Form_1.Button_3.Enabled 	:= .T. 
-	Form_1.Button_4.Enabled 	:= .T. 
-	Form_1.Button_5.Enabled 	:= .T. 
-	Form_1.Button_6.Enabled 	:= .T. 
-	Form_1.Timer_1.Enabled 		:= .T. 
-	Form_1.Spinner_1.Enabled 	:= .T. 
-	Form_1.Tab_1(2).Radio_1.Enabled 		:= .T. 
-	Form_1.Tab_1.Enabled 		:= .T. 
+	Form_1.Button_1.Enabled 	:= .T.
+	Form_1.Button_2.Enabled 	:= .T.
+	Form_1.Button_3.Enabled 	:= .T.
+	Form_1.Button_4.Enabled 	:= .T.
+	Form_1.Button_5.Enabled 	:= .T.
+	Form_1.Button_6.Enabled 	:= .T.
+	Form_1.Timer_1.Enabled 		:= .T.
+	Form_1.Spinner_1.Enabled 	:= .T.
+	Form_1.Tab_1(2).Radio_1.Enabled 		:= .T.
+	Form_1.Tab_1.Enabled 		:= .T.
 Return Nil
 *-----------------------------------------------------------------------------*
 Procedure Disable_CLick
 *-----------------------------------------------------------------------------*
 
-	Form_1.Button_1.Enabled 	:= .F. 
-	Form_1.Button_2.Enabled 	:= .F. 
-	Form_1.Button_3.Enabled 	:= .F. 
-	Form_1.Button_4.Enabled 	:= .F. 
-	Form_1.Button_5.Enabled 	:= .F. 
-	Form_1.Button_6.Enabled 	:= .F. 
-	Form_1.Timer_1.Enabled 		:= .F. 
-	Form_1.Spinner_1.Enabled 	:= .F. 
-	Form_1.Tab_1(2).Radio_1.Enabled 		:= .F. 
-	Form_1.Tab_1.Enabled 		:= .F. 
+	Form_1.Button_1.Enabled 	:= .F.
+	Form_1.Button_2.Enabled 	:= .F.
+	Form_1.Button_3.Enabled 	:= .F.
+	Form_1.Button_4.Enabled 	:= .F.
+	Form_1.Button_5.Enabled 	:= .F.
+	Form_1.Button_6.Enabled 	:= .F.
+	Form_1.Timer_1.Enabled 		:= .F.
+	Form_1.Spinner_1.Enabled 	:= .F.
+	Form_1.Tab_1(2).Radio_1.Enabled 		:= .F.
+	Form_1.Tab_1.Enabled 		:= .F.
 
 Return Nil
 *-----------------------------------------------------------------------------*
@@ -1121,7 +1121,7 @@ Procedure DeleteAllItems_CLick
 *-----------------------------------------------------------------------------*
 
 	Form_1.Tab_1(1).Grid_1.DeleteAllItems
-	Form_1.List_1.DeleteAllItems 
+	Form_1.List_1.DeleteAllItems
 	Form_1.Combo_1.DeleteAllItems
 
 Return Nil
@@ -1179,26 +1179,26 @@ Procedure Color_CLick
 		DEFINE LABEL Label_9
 			ROW	10
 			COL	10
-			VALUE 'A COLOR Label !!!' 
-			WIDTH 140 
-			HEIGHT 30 
-			FONTNAME 'Times New Roman' 
-			FONTSIZE 12 
-			BACKCOLOR RED 
-			FONTCOLOR YELLOW 
+			VALUE 'A COLOR Label !!!'
+			WIDTH 140
+			HEIGHT 30
+			FONTNAME 'Times New Roman'
+			FONTSIZE 12
+			BACKCOLOR RED
+			FONTCOLOR YELLOW
 			FONTBOLD .T.
-		END LABEL 
+		END LABEL
 
 		DEFINE LABEL Label_99
 			ROW	60
 			COL	10
-			VALUE 'Another COLOR Label !!!' 
-			WIDTH 180 
-			HEIGHT 30 
-			FONTNAME 'Times New Roman' 
-			FONTSIZE 10 
-			BACKCOLOR WHITE 
-			FONTCOLOR RED 
+			VALUE 'Another COLOR Label !!!'
+			WIDTH 180
+			HEIGHT 30
+			FONTNAME 'Times New Roman'
+			FONTSIZE 10
+			BACKCOLOR WHITE
+			FONTCOLOR RED
 			FONTBOLD .T.
 		END LABEL
 	END WINDOW

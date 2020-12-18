@@ -1,4 +1,4 @@
-﻿/**
+/**
  *
  * WordWriter
  *
@@ -13,7 +13,7 @@
  * Enhanced for HMG by Kevin Carmody, May 2016
  *
 */
- 
+
 //***************************************************************************
 
 #include "hmg.ch"
@@ -36,7 +36,7 @@ STATIC cTitle           := 'WordWriter'
 STATIC cVersion         := '2.5'
 STATIC cCopyright       := 'Copyright © 2003–2009 Janusz Pora' // U+00A9 COPYRIGHT SIGN / U+2013 EN DASH
 STATIC cByline2         := 'Adapted and enhanced by Dr. Claudio Soto, April 2014'
-STATIC cByline3         := 'Enhanced and skinned by Eduardo L. Azar, December 2014' 
+STATIC cByline3         := 'Enhanced and skinned by Eduardo L. Azar, December 2014'
 STATIC cByline4         := 'Enhanced by Kevin Carmody, May 2016'
 STATIC cInfoAddr        := 'http://sites.google.com/site/hmgweb/'
 STATIC cRegBase         := 'HKEY_CURRENT_USER\Software\WordWriter\'
@@ -82,7 +82,7 @@ STATIC nPrintLeft       := 0
 STATIC nPrintTop        := 0
 STATIC nPrintRight      := 0
 STATIC nPrintBottom     := 0
-STATIC nPrintRow        := 10   
+STATIC nPrintRow        := 10
 STATIC nPrintCol        := 10
 STATIC lPrintHead       := .N.
 STATIC lPrintNumHead    := .Y.
@@ -180,7 +180,7 @@ DEFINE WINDOW wMain ;
   ON MAXIMIZE MainSize(.Y.) ;
   ON RELEASE MainExit(.N.) ;
   MAIN
-  
+
   DEFINE STATUSBAR
     STATUSITEM ''          TOOLTIP 'Current file'
     STATUSITEM '' WIDTH 25 TOOLTIP 'Document modified'
@@ -198,7 +198,7 @@ DEFINE WINDOW wMain ;
       wMain.STATUSBAR.ITEM(5) := IF(ISINSERTACTIVE()  , 'INS', '')
       RETURN NIL
       }
-  
+
   ON KEY CONTROL+N        ACTION NewFile()
   ON KEY CONTROL+O        ACTION OpenFile()
   ON KEY CONTROL+S        ACTION SaveFile()
@@ -251,7 +251,7 @@ DEFINE WINDOW wMain ;
   ON KEY ALT+9      ACTION MainKey('9')
   ON KEY ESCAPE     ACTION MainKey('-')
 
-  DEFINE CONTEXT MENU  
+  DEFINE CONTEXT MENU
 
      ITEM 'Copy'              IMAGE 'CopyMin'          ACTION Copy()
      ITEM 'Paste'             IMAGE 'PasteMin'         ACTION Paste()
@@ -304,7 +304,7 @@ DEFINE WINDOW wMain ;
 
   @   8,  71 IMAGE imPrint ;
              PICTURE 'PrintMain' ;
-             ACTION Print(.N.) ;  
+             ACTION Print(.N.) ;
              TOOLTIP 'Print the document (Ctrl-P)'
 
   @  24,  71 LABEL laPrint ;
@@ -314,7 +314,7 @@ DEFINE WINDOW wMain ;
 
   @   8,  91 IMAGE imShortcuts ;
              PICTURE 'Shortcuts' ;
-             ACTION Shortcuts() ;  
+             ACTION Shortcuts() ;
              TOOLTIP 'Keyboard shortcuts (F1)'
 
   @  24,  91 LABEL laShortcuts ;
@@ -353,7 +353,7 @@ DEFINE WINDOW wMain ;
       @  92,   8 LABEL laClipboard ;
                  VALUE 'Clipboard' ;
                  WIDTH 107 CENTERALIGN ;
-                 TRANSPARENT 
+                 TRANSPARENT
 
       @  32,  11 IMAGE imPaste ;
                  PICTURE 'Paste' ;
@@ -409,11 +409,11 @@ DEFINE WINDOW wMain ;
                  WIDTH 1 HEIGHT 80 BORDER
 
       // Font frame
-        
+
       @  92, 120 LABEL laFont ;
                  VALUE 'Font' ;
                  WIDTH 179 CENTERALIGN ;
-                 TRANSPARENT 
+                 TRANSPARENT
 
       @  33, 123 COMBOBOX coFontName ;
                  ITEMS aFontList;
@@ -424,7 +424,7 @@ DEFINE WINDOW wMain ;
                  ON CHANGE (wMain.ebDoc.FONTNAME := (cFontName := wMain.coFontName.ITEM(wMain.coFontName.VALUE)), ;
                             wMain.ebDoc.SETFOCUS()) ;
                  ON CANCEL (wMain.ebDoc.SETFOCUS())
-            
+
       @  14, 181 LABEL laFontName ;
                  VALUE 'M' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -449,7 +449,7 @@ DEFINE WINDOW wMain ;
                  PICTURE 'BoldOff' ;
                  ACTION Bold() ;
                  TOOLTIP 'Bold (Ctrl-B)'
-    
+
       @  81, 127 LABEL laBold ;
                  VALUE 'B' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -469,7 +469,7 @@ DEFINE WINDOW wMain ;
                  PICTURE 'UnderlineOff' ;
                  ACTION Underline() ;
                  TOOLTIP 'Underline (Ctrl-U)'
-    
+
       @  81, 173 LABEL laUnderline ;
                  VALUE 'U' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -487,9 +487,9 @@ DEFINE WINDOW wMain ;
 
       @  57, 229 IMAGE imSubscript ;
                  PICTURE 'SubscriptOff' ;
-                 ACTION Subscript() ;  
+                 ACTION Subscript() ;
                  TOOLTIP 'Subscript'
-    
+
       @  81, 233 LABEL laSubscript ;
                  VALUE '2' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -497,7 +497,7 @@ DEFINE WINDOW wMain ;
 
       @  57, 254 IMAGE imSuperscript ;
                  PICTURE 'SuperscriptOff' ;
-                 ACTION Superscript() ; 
+                 ACTION Superscript() ;
                  TOOLTIP 'Superscript'
 
       @  81, 252 LABEL laSuperscript ;
@@ -507,9 +507,9 @@ DEFINE WINDOW wMain ;
 
       @  57, 285 IMAGE imFontOptions ;
                  PICTURE 'FontOptions' ;
-                 ACTION  Fontformat() ; 
+                 ACTION  Fontformat() ;
                  TOOLTIP 'Font options'
-        
+
       @  81, 285 LABEL laFontOptions ;
                  VALUE 'M' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -523,13 +523,13 @@ DEFINE WINDOW wMain ;
       @  92, 307 LABEL laParagraph ;
                  VALUE 'Paragraph' ;
                  WIDTH 147 CENTERALIGN ;
-                 TRANSPARENT 
+                 TRANSPARENT
 
       @  32, 310 IMAGE imListApply ;
                  PICTURE 'ListApply' ;
-                 ACTION ListApply() ; 
+                 ACTION ListApply() ;
                  TOOLTIP ListLabel()
-        
+
       @  14, 314 LABEL laListApply ;
                  VALUE 'A' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -537,9 +537,9 @@ DEFINE WINDOW wMain ;
 
       @  32, 333 IMAGE imListSet ;
                  PICTURE 'ListSet' ;
-                 ACTION ListFormat() ; 
+                 ACTION ListFormat() ;
                  TOOLTIP 'Select list type'
-        
+
       @  14, 331 LABEL laListSet ;
                  VALUE 'O' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -557,7 +557,7 @@ DEFINE WINDOW wMain ;
 
       @  32, 375 IMAGE imIndentOpt ;
                  PICTURE 'IndentOpt' ;
-                 ACTION IndentOffset() ;  
+                 ACTION IndentOffset() ;
                  TOOLTIP 'Indent options'
 
       @  14, 373 LABEL laIndentOpt ;
@@ -577,7 +577,7 @@ DEFINE WINDOW wMain ;
 
       @  32, 417 IMAGE imLineSpaceApply ;
                  PICTURE 'LineSpaceApply' ;
-                 ACTION LineSpaceApply() ;  
+                 ACTION LineSpaceApply() ;
                  TOOLTIP E"Apply line spacing\nLine spacing: " + HB_NTOS(nSpaceValue)
 
       @  14, 421 LABEL laLineSpaceApply ;
@@ -587,9 +587,9 @@ DEFINE WINDOW wMain ;
 
       @  32, 440 IMAGE imLineSpaceSet ;
                  PICTURE 'LineSpaceSet' ;
-                 ACTION LineSpace() ;  
+                 ACTION LineSpace() ;
                  TOOLTIP 'Select line spacing'
-        
+
       @  14, 438 LABEL laLineSpaceSet ;
                  VALUE 'N' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -653,11 +653,11 @@ DEFINE WINDOW wMain ;
       @  92, 462 LABEL laEditing ;
                  VALUE 'Editing' ;
                  WIDTH 61 CENTERALIGN ;
-                 TRANSPARENT 
+                 TRANSPARENT
 
       @  32, 469 IMAGE imUndo ;
                  PICTURE 'Undo' ;
-                 ACTION wMain.ebDoc.UNDO() ;  
+                 ACTION wMain.ebDoc.UNDO() ;
                  TOOLTIP 'Undo'
 
       @  14, 473 LABEL laUndo ;
@@ -689,7 +689,7 @@ DEFINE WINDOW wMain ;
                  PICTURE 'Replace' ;
                  ACTION ReplaceText() ;
                  TOOLTIP 'Find and replace (Ctrl-H)'
-        
+
       @  81, 501 LABEL laReplace ;
                  VALUE 'H' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -707,11 +707,11 @@ DEFINE WINDOW wMain ;
       @  92,   8 LABEL laColors ;
                  VALUE 'Colors' ;
                  WIDTH 81 CENTERALIGN ;
-                 TRANSPARENT 
+                 TRANSPARENT
 
       @  32,  11 IMAGE imDefFontFColor ;
                  PICTURE 'DefFontFColor' ;
-                 ACTION wMain.ebDoc.FONTCOLOR := -1 ;  
+                 ACTION wMain.ebDoc.FONTCOLOR := -1 ;
                  TOOLTIP 'Use default font color'
 
       @  14,  15 LABEL laDefFontFColor ;
@@ -731,7 +731,7 @@ DEFINE WINDOW wMain ;
 
       @  32,  50 IMAGE imDefFontBColor ;
                  PICTURE 'DefFontBColor' ;
-                 ACTION wMain.ebDoc.FONTBACKCOLOR := -1 ;  
+                 ACTION wMain.ebDoc.FONTBACKCOLOR := -1 ;
                  TOOLTIP 'Use default font background color'
 
       @  14,  54 LABEL laDefFontBColor ;
@@ -743,7 +743,7 @@ DEFINE WINDOW wMain ;
                  PICTURE 'SelFontBColor' ;
                  ACTION FontBackColor() ;
                  TOOLTIP 'Select font background color'
-       
+
       @  14,  71 LABEL laSelFontBColor ;
                  VALUE 'K' ;
                  WIDTH 16 HEIGHT 16 CENTERALIGN ;
@@ -751,7 +751,7 @@ DEFINE WINDOW wMain ;
 
       @  57,  30 IMAGE imDefBackColor ;
                  PICTURE 'DefBackColor' ;
-                 ACTION wMain.ebDoc.BACKGROUNDCOLOR := -1 ;  
+                 ACTION wMain.ebDoc.BACKGROUNDCOLOR := -1 ;
                  TOOLTIP 'Use default document background color'
 
       @  81,  34 LABEL laDefBackColor ;
@@ -761,7 +761,7 @@ DEFINE WINDOW wMain ;
 
       @  57,  53 IMAGE imSelBackColor ;
                  PICTURE 'SelBackColor' ;
-                 ACTION DocBackColor() ;  
+                 ACTION DocBackColor() ;
                  TOOLTIP 'Select document background color'
 
       @  81,  51 LABEL laSelBackColor ;
@@ -777,7 +777,7 @@ DEFINE WINDOW wMain ;
       @  92,  95 LABEL laWindow ;
                  VALUE 'Window' ;
                  WIDTH 91 CENTERALIGN ;
-                 TRANSPARENT 
+                 TRANSPARENT
 
       @  32,  98 COMBOBOX coZoom ;
                  ITEMS aZoomLabel ;
@@ -796,7 +796,7 @@ DEFINE WINDOW wMain ;
 
       @  57,  98 IMAGE imZoomIn ;
                  PICTURE 'ZoomIn' ;
-                 ACTION ZoomIn() ;  
+                 ACTION ZoomIn() ;
                  TOOLTIP 'Zoom in the document (Ctrl-Keypad-(+))'
 
       @  81, 102 LABEL laZoomIn ;
@@ -806,7 +806,7 @@ DEFINE WINDOW wMain ;
 
       @  57, 126 IMAGE imZoomOut ;
                  PICTURE 'ZoomOut' ;
-                 ACTION ZoomOut() ;  
+                 ACTION ZoomOut() ;
                  TOOLTIP 'Zoom out the document (Ctrl-Keypad-(-))'
 
       @  81, 130 LABEL laZoomOut ;
@@ -816,7 +816,7 @@ DEFINE WINDOW wMain ;
 
       @  32, 158 IMAGE imWordWrap ;
                  PICTURE 'WordWrapOff' ;
-                 ACTION WordWrap() ;  
+                 ACTION WordWrap() ;
                  TOOLTIP 'Switch word wrap on or off'
 
       @  14, 162 LABEL laWordWrap ;
@@ -842,7 +842,7 @@ DEFINE WINDOW wMain ;
   END TAB
 
   // Document
-                
+
   DefineDoc()
   wMain.taTop.VALUE := 2
 
@@ -866,9 +866,9 @@ INIT PROCEDURE MainInit
 LOCAL nPos
 
 SET FONT TO 'Verdana', 9
-SET TOOLTIPSTYLE BALLOON 
+SET TOOLTIPSTYLE BALLOON
 SET NAVIGATION EXTENDED
-SELECT PRINTER DEFAULT   
+SELECT PRINTER DEFAULT
 
 cFileFolder := GETMYDOCUMENTSFOLDER()
 
@@ -937,7 +937,7 @@ IF EMPTY(nPos)
 END
 
 RETURN // MainInit
-   
+
 //***************************************************************************
 
 STATIC PROCEDURE RegRead(cKey, xVal)
@@ -1097,7 +1097,7 @@ BEGIN SEQUENCE
       BREAK
     END
     nCaretPos := wMain.ebDoc.CARETPOS
-    wMain.ebDoc.RELEASE 
+    wMain.ebDoc.RELEASE
     lWordWrap := lSetWordWrap
   END
 
@@ -1164,11 +1164,11 @@ IF nKey > 0
   wMain.imUndo.ENABLED          := wMain.ebDoc.CANUNDO
   wMain.imRedo.ENABLED          := wMain.ebDoc.CANREDO
   wMain.imBold.PICTURE          := IF(wMain.ebDoc.FONTBOLD     , 'BoldOn'         , 'BoldOff')
-  wMain.imItalic.PICTURE        := IF(wMain.ebDoc.FONTITALIC   , 'ItalicsOn'      , 'ItalicsOff') 
-  wMain.imUnderline.PICTURE     := IF(wMain.ebDoc.FONTUNDERLINE, 'UnderlineOn'    , 'UnderlineOff') 
-  wMain.imStrikethrough.PICTURE := IF(wMain.ebDoc.FONTSTRIKEOUT, 'StrikethroughOn', 'StrikethroughOff') 
-  wMain.imSubscript.PICTURE     := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUBSCRIPT  , 'SubscriptOn'  , 'SubscriptOff'  ) 
-  wMain.imSuperscript.PICTURE   := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUPERSCRIPT, 'SuperscriptOn', 'SuperscriptOff') 
+  wMain.imItalic.PICTURE        := IF(wMain.ebDoc.FONTITALIC   , 'ItalicsOn'      , 'ItalicsOff')
+  wMain.imUnderline.PICTURE     := IF(wMain.ebDoc.FONTUNDERLINE, 'UnderlineOn'    , 'UnderlineOff')
+  wMain.imStrikethrough.PICTURE := IF(wMain.ebDoc.FONTSTRIKEOUT, 'StrikethroughOn', 'StrikethroughOff')
+  wMain.imSubscript.PICTURE     := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUBSCRIPT  , 'SubscriptOn'  , 'SubscriptOff'  )
+  wMain.imSuperscript.PICTURE   := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUPERSCRIPT, 'SuperscriptOn', 'SuperscriptOff')
   wMain.imWordWrap.PICTURE      := IF(lWordWrap , 'WordWrapOn' , 'WordWrapOff' )
   wMain.imStatusBar.PICTURE     := IF(lStatusBar, 'StatusBarOn', 'StatusBarOff')
   lModified := .Y.
@@ -1216,18 +1216,18 @@ BEGIN SEQUENCE
   wMain.coZoom.VALUE := nPos
 
   wMain.imBold.PICTURE          := IF(wMain.ebDoc.FONTBOLD     , 'BoldOn'         , 'BoldOff')
-  wMain.imItalic.PICTURE        := IF(wMain.ebDoc.FONTITALIC   , 'ItalicsOn'      , 'ItalicsOff') 
-  wMain.imUnderline.PICTURE     := IF(wMain.ebDoc.FONTUNDERLINE, 'UnderlineOn'    , 'UnderlineOff') 
-  wMain.imStrikethrough.PICTURE := IF(wMain.ebDoc.FONTSTRIKEOUT, 'StrikethroughOn', 'StrikethroughOff') 
-  wMain.imSubscript.PICTURE     := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUBSCRIPT  , 'SubscriptOn'  , 'SubscriptOff'  ) 
-  wMain.imSuperscript.PICTURE   := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUPERSCRIPT, 'SuperscriptOn', 'SuperscriptOff') 
+  wMain.imItalic.PICTURE        := IF(wMain.ebDoc.FONTITALIC   , 'ItalicsOn'      , 'ItalicsOff')
+  wMain.imUnderline.PICTURE     := IF(wMain.ebDoc.FONTUNDERLINE, 'UnderlineOn'    , 'UnderlineOff')
+  wMain.imStrikethrough.PICTURE := IF(wMain.ebDoc.FONTSTRIKEOUT, 'StrikethroughOn', 'StrikethroughOff')
+  wMain.imSubscript.PICTURE     := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUBSCRIPT  , 'SubscriptOn'  , 'SubscriptOff'  )
+  wMain.imSuperscript.PICTURE   := IF(wMain.ebDoc.FONTSCRIPT == RTF_SUPERSCRIPT, 'SuperscriptOn', 'SuperscriptOff')
   wMain.imWordWrap.PICTURE      := IF(lWordWrap , 'WordWrapOn' , 'WordWrapOff' )
   wMain.imStatusBar.PICTURE     := IF(lStatusBar, 'StatusBarOn', 'StatusBarOff')
   wMain.miBold.CHECKED          := wMain.ebDoc.FONTBOLD
   wMain.miItalic.CHECKED        := wMain.ebDoc.FONTITALIC
   wMain.miUnderline.CHECKED     := wMain.ebDoc.FONTUNDERLINE
   wMain.miStrikethrough.CHECKED := wMain.ebDoc.FONTSTRIKEOUT
-  wMain.miSubscript.CHECKED     := wMain.ebDoc.FONTSCRIPT == RTF_SUBSCRIPT  
+  wMain.miSubscript.CHECKED     := wMain.ebDoc.FONTSCRIPT == RTF_SUBSCRIPT
   wMain.miSuperscript.CHECKED   := wMain.ebDoc.FONTSCRIPT == RTF_SUPERSCRIPT
 
   SWITCH wMain.ebDoc.PARAALIGNMENT
@@ -1534,7 +1534,7 @@ DEFINE WINDOW wFileMenu ;
   bAssoc     := {|| bSelect := {|| Associations()}, wFileMenu.RELEASE}
   bAbout     := {|| bSelect := {|| About()       }, wFileMenu.RELEASE}
   bExit      := {|| bSelect := {|| wMain.RELEASE }, wFileMenu.RELEASE}
-  bRecent    := {|nFile| 
+  bRecent    := {|nFile|
     IF !EMPTY(aRecentBases[nFile])
       nSelect := nFile
       bSelect := {|| OpenFile(aRecentNames[nSelect])}
@@ -1771,8 +1771,8 @@ DEFINE WINDOW wFileMenu ;
 
   ON KEY ESCAPE ACTION wFileMenu.RELEASE
 
-END WINDOW 
-   
+END WINDOW
+
 ACTIVATE WINDOW wFileMenu
 
 bSelect:EVAL()
@@ -1789,7 +1789,7 @@ DO CASE
 CASE HMG_LOWER(HB_USUBSTR(cLink,1,7)) == 'http://' .OR. ;
    HMG_LOWER(HB_USUBSTR(cLink,1,8)) == 'https://' .OR. ;
    HMG_LOWER(HB_USUBSTR(cLink,1,6)) == 'ftp://' .OR. ;
-   HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.' 
+   HMG_LOWER(HB_USUBSTR(cLink,1,4)) == 'www.'
    SHELLEXECUTE(NIL, 'Open', cLink, NIL, NIL, SW_SHOWNORMAL)
 CASE '@' $ cLink .AND. !('/' $ cLink)
    SHELLEXECUTE(NIL, 'Open', 'rundll32.exe', 'url.dll,FileProtocolHandler mailto:' + cLink, NIL, SW_SHOWNORMAL)
@@ -1996,7 +1996,7 @@ RETURN // WriteFile
 
 STATIC PROCEDURE Print(lPreview)
 
-LOCAL aSelect   := {0, -1}  
+LOCAL aSelect   := {0, -1}
 LOCAL cPreHead  := IF(EMPTY(cPrintPreHead), '', cPrintPreHead + ' ')
 LOCAL cPostHead := IF(EMPTY(cPrintPostHead), '', ' ' + cPrintPostHead)
 LOCAL lPrint    := .N.
@@ -2048,9 +2048,9 @@ DEFINE WINDOW wPageSetup;
     wPageSetup.tbHeaderPostText.ENABLED := lSet
     RETURN NIL
     }
-  bPrint := {|| 
+  bPrint := {||
     SELECT PRINTER DIALOG
-    wPageSetup.tbPrinterName.VALUE  := OPENPRINTERGETNAME() 
+    wPageSetup.tbPrinterName.VALUE  := OPENPRINTERGETNAME()
     wPageSetup.tbPageHeight.VALUE   := OPENPRINTERGETPAGEHEIGHT()
     wPageSetup.tbPageWidth.VALUE    := OPENPRINTERGETPAGEWIDTH()
     wPageSetup.tbPrintHeight.VALUE  := GETPRINTABLEAREAHEIGHT()
@@ -2065,7 +2065,7 @@ DEFINE WINDOW wPageSetup;
              WIDTH 320 HEIGHT 355
 
   @  40, 115 BUTTON btPrint ;
-             CAPTION 'Select printer' ;  
+             CAPTION 'Select printer' ;
              ACTION bPrint:EVAL() ;
              WIDTH 100 HEIGHT 25
 
@@ -2150,7 +2150,7 @@ DEFINE WINDOW wPageSetup;
 
   @  60, 550 TEXTBOX tbRightMargin ;
              WIDTH 40 ;
-             VALUE nPrintRight ; 
+             VALUE nPrintRight ;
              NUMERIC INPUTMASK '999'
 
   @  90, 345 LABEL laTopMargin ;
@@ -2159,7 +2159,7 @@ DEFINE WINDOW wPageSetup;
 
   @  90, 550 TEXTBOX tbTopMargin ;
              WIDTH 40 ;
-             VALUE nPrintTop ; 
+             VALUE nPrintTop ;
              NUMERIC INPUTMASK '999'
 
   @ 120, 345 LABEL laBottomMargin ;
@@ -2168,13 +2168,13 @@ DEFINE WINDOW wPageSetup;
 
   @ 120, 550 TEXTBOX tbBottomMargin ;
              WIDTH 40 ;
-             VALUE nPrintBottom ; 
+             VALUE nPrintBottom ;
              NUMERIC INPUTMASK '999'
 
   @ 155, 335 FRAME frHeader ;
              CAPTION 'Header' ;
              WIDTH 270 HEIGHT 205
-                  
+
   @ 180, 345 CHECKBOX cbHeader ;
              CAPTION 'Include header' ;
              WIDTH 225 HEIGHT 23 ;
@@ -2187,7 +2187,7 @@ DEFINE WINDOW wPageSetup;
 
   @ 210, 550 TEXTBOX tbHeaderRow ;
              WIDTH 40 ;
-             VALUE nPrintRow ; 
+             VALUE nPrintRow ;
              TOOLTIP 'Distance of center of header from top side of page' ;
              NUMERIC INPUTMASK '999'
 
@@ -2197,7 +2197,7 @@ DEFINE WINDOW wPageSetup;
 
   @ 240, 550 TEXTBOX tbHeaderCol ;
              WIDTH 40 ;
-             VALUE nPrintCol ; 
+             VALUE nPrintCol ;
              TOOLTIP 'Distance of center of header from left side of page' ;
              NUMERIC INPUTMASK '999'
 
@@ -2212,36 +2212,36 @@ DEFINE WINDOW wPageSetup;
 
   @ 300, 460 TEXTBOX tbHeaderPreText ;
              WIDTH 130 ;
-             VALUE cPrintPreHead ; 
+             VALUE cPrintPreHead ;
              MAXLENGTH 40 ;
-             TOOLTIP 'Header text before page number; max 40 characters' 
+             TOOLTIP 'Header text before page number; max 40 characters'
 
   @ 330, 345 LABEL laHeaderPostText ;
              VALUE 'Header post text' ;
              AUTOSIZE
-  
+
   @ 330, 460 TEXTBOX tbHeaderPostText ;
              WIDTH 130 ;
-             VALUE cPrintPostHead ; 
+             VALUE cPrintPostHead ;
              MAXLENGTH 40 ;
              TOOLTIP 'Header text after page number; max 40 characters'
 
   @ 370, 225 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION PageSetupSave() ;
              WIDTH 80 HEIGHT 25
 
-  @ 370, 315 BUTTON btCancel ; 
-             CAPTION 'Cancel' ;  
-             ACTION wPageSetup.RELEASE ; 
+  @ 370, 315 BUTTON btCancel ;
+             CAPTION 'Cancel' ;
+             ACTION wPageSetup.RELEASE ;
              WIDTH 80 HEIGHT 25
 
   bHeader:EVAL(lPrintHead)
   ON KEY RETURN ACTION PageSetupSave()
   ON KEY ESCAPE ACTION wPageSetup.RELEASE
 
-END WINDOW 
-   
+END WINDOW
+
 ACTIVATE WINDOW wPageSetup
 
 RETURN // PageSetup
@@ -2271,10 +2271,10 @@ STATIC PROCEDURE Associations
 
 LOCAL lDeskShort, lMenuShort, lRtfAssoc, lTxtAssoc
 
-DEFINE WINDOW wAssoc ; 
+DEFINE WINDOW wAssoc ;
   AT wMain.ROW + 145, wMain.COL + 10 ;
-  WIDTH 490 HEIGHT 240 ; 
-  TITLE 'Shortcuts and file associations' ; 
+  WIDTH 490 HEIGHT 240 ;
+  TITLE 'Shortcuts and file associations' ;
   MODAL NOSIZE ;
   ON INIT AssocInit(@lDeskShort, @lMenuShort, @lRtfAssoc, @lTxtAssoc)
 
@@ -2303,19 +2303,19 @@ DEFINE WINDOW wAssoc ;
              VALUE .N.
 
   @ 170, 160 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION AssocSet(lDeskShort, lMenuShort, lRtfAssoc, lTxtAssoc) ;
              WIDTH 80 HEIGHT 25
 
-  @ 170, 250 BUTTON btCancel ; 
-             CAPTION 'Cancel' ;  
+  @ 170, 250 BUTTON btCancel ;
+             CAPTION 'Cancel' ;
              ACTION wAssoc.RELEASE ;
              WIDTH 80 HEIGHT 25
 
   ON KEY RETURN ACTION AssocSet(lDeskShort, lMenuShort, lRtfAssoc, lTxtAssoc)
   ON KEY ESCAPE ACTION wAssoc.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wAssoc
 
@@ -2341,7 +2341,7 @@ BEGIN SEQUENCE
   END
   cData := WIN_REGREAD('HKLM\Software\Classes\WordWriter.rtf\shell\open\command\')
   IF HB_ISSTRING(cData) .AND. HMG_UPPER(cThisExe) $ HMG_UPPER(cData)
-    lRtfAssoc := .Y.    
+    lRtfAssoc := .Y.
     BREAK
   END
   lRtfAssoc := .N.
@@ -2355,7 +2355,7 @@ BEGIN SEQUENCE
   END
   cData := WIN_REGREAD('HKLM\Software\Classes\WordWriter.txt\shell\open\command\')
   IF HB_ISSTRING(cData) .AND. HMG_UPPER(cThisExe) $ HMG_UPPER(cData)
-    lTxtAssoc := .Y.    
+    lTxtAssoc := .Y.
     BREAK
   END
   lTxtAssoc := .N.
@@ -2614,7 +2614,7 @@ STATIC PROCEDURE DoFindReplace
 LOCAL lSelectFindText
 LOCAL aPosRange := {0,0}
 
-IF FindReplaceDlg.RETVALUE == FRDLG_CANCEL   
+IF FindReplaceDlg.RETVALUE == FRDLG_CANCEL
    RETURN
 END
 
@@ -2707,7 +2707,7 @@ LOCAL aListRowCol := EX.wMain.taTop.GETSCREENPOS( ;
 
 DEFINE WINDOW wList ;
   AT aListRowCol[1], aListRowCol[2] ;
-  WIDTH 410 HEIGHT 335 ; 
+  WIDTH 410 HEIGHT 335 ;
   MODAL NOSIZE NOCAPTION
 
   EX.wList.DRAWBORDER
@@ -2717,8 +2717,8 @@ DEFINE WINDOW wList ;
              WIDTH 230 HEIGHT 210
 
   @  60,  20 RADIOGROUP rgNumFormat ;
-             OPTIONS aNumFormatLabel ;  
-             VALUE nNumFormat ;  
+             OPTIONS aNumFormatLabel ;
+             VALUE nNumFormat ;
              WIDTH 210 ;
              SPACING 25 ;
              ON CHANGE ListUpdate()
@@ -2726,10 +2726,10 @@ DEFINE WINDOW wList ;
   @  35, 250 FRAME frNum ;
              CAPTION 'Numbering' ;
              WIDTH 150 HEIGHT 210
-    
+
   @  60, 260 RADIOGROUP rgNumStyle ;
-             OPTIONS aNumStyleLabel ;  
-             VALUE nNumStyle ;  
+             OPTIONS aNumStyleLabel ;
+             VALUE nNumStyle ;
              WIDTH 130 ;
              SPACING 25 ;
              ON CHANGE ListUpdate()
@@ -2752,8 +2752,8 @@ DEFINE WINDOW wList ;
              WIDTH 205 HEIGHT 20
 
   @ 295, 165 BUTTON btOk ;
-             CAPTION 'OK' ;  
-             ACTION ListSave() ; 
+             CAPTION 'OK' ;
+             ACTION ListSave() ;
              WIDTH 80 HEIGHT 25
 
   @  10, 375 BUTTON btCancel ;
@@ -2764,7 +2764,7 @@ DEFINE WINDOW wList ;
   ON KEY RETURN ACTION ListSave()
   ON KEY ESCAPE ACTION wList.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wList
 
@@ -2832,7 +2832,7 @@ RETURN // ListSave
 STATIC PROCEDURE ListApply
 
 wMain.ebDoc.PARANUMBERING := aNumFormatRef[nNumFormat]
-wMain.ebDoc.PARAOFFSET := 5        
+wMain.ebDoc.PARAOFFSET := 5
 IF aNumFormatMark[nNumFormat][2]
   wMain.ebDoc.PARANUMBERINGSTYLE := aNumStyleRef[nNumStyle]
   wMain.ebDoc.PARANUMBERINGSTART := nNumStart
@@ -2850,9 +2850,9 @@ STATIC PROCEDURE LineSpace
 LOCAL aLineSpaceRowCol := EX.wMain.taTop.GETSCREENPOS( ;
   wMain.imLineSpaceApply.ROW + wMain.imLineSpaceApply.HEIGHT, wMain.imLineSpaceApply.COL)
 
-DEFINE WINDOW wLineSpace ; 
+DEFINE WINDOW wLineSpace ;
   AT aLineSpaceRowCol[1], aLineSpaceRowCol[2] ;
-  WIDTH 140 HEIGHT 245 ; 
+  WIDTH 140 HEIGHT 245 ;
   MODAL NOSIZE NOCAPTION ;
   ON INIT LineSpaceInit()
 
@@ -2863,25 +2863,25 @@ DEFINE WINDOW wLineSpace ;
              WIDTH 120 HEIGHT 160
 
   @  60,  50 RADIOGROUP rgLineSpace ;
-             OPTIONS aSpaceLabel ;  
-             VALUE 1 ;  
+             OPTIONS aSpaceLabel ;
+             VALUE 1 ;
              WIDTH 60 ;
              SPACING 25
 
   @ 205,  30 BUTTON btOk ;
-             CAPTION 'OK' ;  
-             ACTION LineSpaceSave() ; 
+             CAPTION 'OK' ;
+             ACTION LineSpaceSave() ;
              WIDTH 80 HEIGHT 25
 
-  @  10, 105 BUTTON btCancel ; 
+  @  10, 105 BUTTON btCancel ;
              CAPTION '×' BOLD FLAT ; // U+00D7 MULTIPLICATION SIGN
-             ACTION wLineSpace.RELEASE ; 
+             ACTION wLineSpace.RELEASE ;
              WIDTH 25 HEIGHT 25
 
   ON KEY RETURN ACTION LineSpaceSave()
   ON KEY ESCAPE ACTION wLineSpace.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wLineSpace
 
@@ -2924,7 +2924,7 @@ STATIC PROCEDURE IndentOffset
 LOCAL aInOffRowCol := EX.wMain.taTop.GETSCREENPOS( ;
   wMain.imIndentLeft.ROW + wMain.imIndentLeft.HEIGHT, wMain.imIndentLeft.COL)
 
-DEFINE WINDOW wInOff ; 
+DEFINE WINDOW wInOff ;
   AT aInOffRowCol[1], aInOffRowCol[2] ;
   WIDTH 230 HEIGHT 200 ;
   MODAL NOSIZE NOCAPTION
@@ -2947,30 +2947,30 @@ DEFINE WINDOW wInOff ;
   @  95,  10 FRAME frOffset ;
              CAPTION 'Offset text' ;
              WIDTH 210 HEIGHT 55
-            
-  @ 120,  20 LABEL laOffset ; 
+
+  @ 120,  20 LABEL laOffset ;
              VALUE 'Offset from left (mm)' ;
              AUTOSIZE
 
-  @ 120, 170 TEXTBOX tbOffset ; 
+  @ 120, 170 TEXTBOX tbOffset ;
              WIDTH 40 ;
              VALUE wMain.ebDoc.PARAOFFSET ;
              NUMERIC INPUTMASK '99'
 
   @ 160,  75 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION IndentOffsetSave() ;
              WIDTH 80 HEIGHT 25
 
-  @  10, 195 BUTTON btCancel ; 
+  @  10, 195 BUTTON btCancel ;
              CAPTION '×' BOLD FLAT ; // U+00D7 MULTIPLICATION SIGN
-             ACTION wInOff.RELEASE ; 
+             ACTION wInOff.RELEASE ;
              WIDTH 25 HEIGHT 25
 
   ON KEY RETURN ACTION IndentOffsetSave()
   ON KEY ESCAPE ACTION wInOff.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wInOff
 
@@ -3045,9 +3045,9 @@ STATIC PROCEDURE Zoom
 LOCAL aZoomRowCol := EX.wMain.taTop.GETSCREENPOS( ;
   wMain.coZoom.ROW + wMain.imWordWrap.HEIGHT, wMain.coZoom.COL)
 
-DEFINE WINDOW wZoom ; 
+DEFINE WINDOW wZoom ;
   AT aZoomRowCol[1], aZoomRowCol[2] ;
-  WIDTH 140 HEIGHT 320 ; 
+  WIDTH 140 HEIGHT 320 ;
   MODAL NOSIZE NOCAPTION ;
   ON INIT ZoomInit()
 
@@ -3058,25 +3058,25 @@ DEFINE WINDOW wZoom ;
              WIDTH 120 HEIGHT 235
 
   @  60,  45 RADIOGROUP rgZoom ;
-             OPTIONS aZoomLabel ;  
-             VALUE 1 ;  
+             OPTIONS aZoomLabel ;
+             VALUE 1 ;
              WIDTH 60 ;
              SPACING 25
 
   @ 280,  30 BUTTON btOk ;
-             CAPTION 'OK' ;  
+             CAPTION 'OK' ;
              ACTION ZoomSave() ;
              WIDTH 80 HEIGHT 25
 
-  @  10, 105 BUTTON btCancel ; 
+  @  10, 105 BUTTON btCancel ;
              CAPTION '×' BOLD FLAT ; // U+00D7 MULTIPLICATION SIGN
-             ACTION wZoom.RELEASE ; 
+             ACTION wZoom.RELEASE ;
              WIDTH 25 HEIGHT 25
 
   ON KEY RETURN ACTION ZoomSave()
   ON KEY ESCAPE ACTION wZoom.RELEASE
 
-END WINDOW 
+END WINDOW
 
 ACTIVATE WINDOW wZoom
 
@@ -3162,7 +3162,7 @@ RETURN // Shortcuts
 
 STATIC PROCEDURE About
 
-DEFINE WINDOW wAbout ; 
+DEFINE WINDOW wAbout ;
   AT 0, 0 ;
   WIDTH 575 HEIGHT 245 ;
   TITLE 'About ' + cTitle ;
@@ -3210,7 +3210,7 @@ DEFINE WINDOW wAbout ;
   ON KEY RETURN ACTION wAbout.RELEASE
   ON KEY ESCAPE ACTION wAbout.RELEASE
 
-END WINDOW 
+END WINDOW
 
 CENTER WINDOW wAbout
 ACTIVATE WINDOW wAbout

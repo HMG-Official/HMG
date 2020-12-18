@@ -14,16 +14,16 @@
          [; dbSetIndex( <(indexN)> )]
 
 REQUEST PGRDD
-         
+
 Function Main
 
-Local	cServer			:= '127.0.0.1' 
+Local	cServer			:= '127.0.0.1'
 Local	cDataBase		:= 'data1'
 Local	cUser			:= 'postgres'	
 Local	cPassWord		:= '1234'
 Local	nConnectionHandle	:= 0
 
-	nConnectionHandle	:= dbPGConnection( cServer + ";" + cDataBase + ";" + cUser + ";" + cPassWord ) 
+	nConnectionHandle	:= dbPGConnection( cServer + ";" + cDataBase + ";" + cUser + ";" + cPassWord )
 
 	CreateTable( cServer , cDataBase , cUser , cPassWord )
 
@@ -54,8 +54,8 @@ Local	nConnectionHandle	:= 0
 			WIDTHS { 100 , 120 , 120 , 120 , 120 } ;
 			VALUE { 1 , 1 } ;
 			COLUMNCONTROLS { aCtrl_1 , aCtrl_2 } ;
-			ROWSOURCE "Test" 
-      
+			ROWSOURCE "Test"
+
 	END WINDOW
 
 	CENTER WINDOW Form_1
@@ -66,7 +66,7 @@ Return
 
 Function CreateTable ( cServer , cDataBase , cUser , cPassWord )
 
-Local oServer, oQuery, oRow, i 
+Local oServer, oQuery, oRow, i
 Local cQuery
 
 	oServer := TPQServer():New( cServer , cDataBase , cUser , cPassWord )

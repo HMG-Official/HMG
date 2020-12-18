@@ -5,5 +5,3 @@ Command line build:
 Ide build:
 
 	ide.bat <projectname.hbp>
-
-

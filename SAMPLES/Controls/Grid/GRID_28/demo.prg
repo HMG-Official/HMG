@@ -9,7 +9,7 @@ Function Main
 
 Local aValue := { Nil , Nil }
 
-	* DynamicBackColor 
+	* DynamicBackColor
 
 	Private bColor := { || if ( This.CellRowIndex/2 == int(This.CellRowIndex/2) , { 245,245,245 } , { 255,255,255 } ) }	
 
@@ -27,12 +27,12 @@ Local aValue := { Nil , Nil }
 		WIDTH 800 ;
 		HEIGHT 510 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP 'File'
 				ITEM 'Append (Alt+A)'				ACTION Form_1.Grid_1.Append
-				ITEM 'Set RecNo'				ACTION Form_1.Grid_1.RecNo := val(InputBox('','')) 
+				ITEM 'Set RecNo'				ACTION Form_1.Grid_1.RecNo := val(InputBox('',''))
 				ITEM 'Get RecNo'				ACTION MsgInfo( Str(Form_1.Grid_1.RecNo) )
 				ITEM 'Delete (Alt+D)'				ACTION Form_1.Grid_1.Delete
 				ITEM 'Recall (Alt+R)'				ACTION Form_1.Grid_1.Recall
@@ -58,7 +58,7 @@ Local aValue := { Nil , Nil }
 			COLUMNFIELDS { 'Code' ,  'First' , 'Last' ,  'Birth' , 'Married' , 'Bio' } ;
 			ALLOWAPPEND ;
 			ALLOWDELETE ;
-			DYNAMICBACKCOLOR { bColor , bColor , bColor , bColor , bColor , bColor } 
+			DYNAMICBACKCOLOR { bColor , bColor , bColor , bColor , bColor , bColor }
 		
 	END WINDOW
 
@@ -67,4 +67,3 @@ Local aValue := { Nil , Nil }
 	ACTIVATE WINDOW Form_1
 
 Return
-

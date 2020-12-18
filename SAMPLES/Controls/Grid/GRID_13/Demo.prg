@@ -58,7 +58,7 @@ Local cArea:= SaveDbf(), nOrd, nRes := 0
 
 Select Existencias
 nOrd := SaveDbf()
-Set Order To 1 
+Set Order To 1
 
 If DbSeek( CveAlm + CveArt )
    nRes := Existencias->f_exis_Act

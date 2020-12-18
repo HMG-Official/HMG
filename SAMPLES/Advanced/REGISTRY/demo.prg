@@ -11,12 +11,12 @@
 
 PROCEDURE Main()
 
-	DEFINE WINDOW form_1 ; 
+	DEFINE WINDOW form_1 ;
 		AT 114,218 ;
 		WIDTH 334 ;
-		HEIGHT 276 ; 
-		TITLE 'REGISTRY TEST' ; 
-		MAIN 
+		HEIGHT 276 ;
+		TITLE 'REGISTRY TEST' ;
+		MAIN
 
 		DEFINE MAIN MENU
 
@@ -28,7 +28,7 @@ PROCEDURE Main()
 		END MENU
 
 
-	END WINDOW 
+	END WINDOW
 
 	form_1.center
 	form_1.activate
@@ -44,7 +44,7 @@ Return
 Procedure WriteRegistryTest()
 Local c := ''
 
-	If MsgYesNo ( 'This will change HKEY_CURRENT_USER\Control Panel\Desktop\Wallpaper.','Are you sure?' ) 
+	If MsgYesNo ( 'This will change HKEY_CURRENT_USER\Control Panel\Desktop\Wallpaper.','Are you sure?' )
 
 		c := InputBox ( '' , 'New Value:' )
 
@@ -55,4 +55,3 @@ Local c := ''
 	Endif
 
 Return
-

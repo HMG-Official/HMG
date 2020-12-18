@@ -1,7 +1,7 @@
 #Include "hmg.ch"
 #include "common.ch"
 
-* When ITEMSOURCE property is set to a fieldname, 'Value' property 
+* When ITEMSOURCE property is set to a fieldname, 'Value' property
 * uses the physical record number.
 * If you set the VALUESOURCE property to a fieldname, its containt is
 * returned instead the physical record number.
@@ -10,10 +10,10 @@ Function Main()
 
 	DEFINE WINDOW Form_1			;
 		AT 0,0				;
-		WIDTH 365			;  
+		WIDTH 365			;
 		HEIGHT 120			;
 		TITLE "Exemplos ComboBox New"	;		
-		MAIN				;      
+		MAIN				;
 		NOMAXIMIZE			;
 		NOSIZE				;
 		ON INIT OpenTables()		;
@@ -29,11 +29,11 @@ Function Main()
 		END MENU
 
 		@010,010 COMBOBOX Combo_1		;
-			ITEMSOURCE CIDADES->DESCRICAO	; 
+			ITEMSOURCE CIDADES->DESCRICAO	;
 			VALUE 5				;
 			WIDTH 200 HEIGHT 100		;
 			FONT "Arial" SIZE 9		;
-			TOOLTIP "Combo Cidades" 
+			TOOLTIP "Combo Cidades"
 
 	END WINDOW		
 

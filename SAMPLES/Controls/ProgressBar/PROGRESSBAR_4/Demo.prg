@@ -14,7 +14,7 @@ Function Main
 		WIDTH 365 HEIGHT 350 ;
 		TITLE "HMG ProgressBar Demo" ;
 		MAIN ;
-		FONT "Arial" SIZE 10 
+		FONT "Arial" SIZE 10
 
       @ 000,031 PROGRESSBAR Progress_1 ;
 		RANGE 0 , 100 		;
@@ -22,7 +22,7 @@ Function Main
 		HEIGHT 26 			;
 		TOOLTIP "ProgressBar Horizontal"
 
-      
+
       @ 274,031 PROGRESSBAR Progress_2 ;
 		RANGE 0 , 100 		;
 		WIDTH 300 			;
@@ -45,7 +45,7 @@ Function Main
 		VERTICAL ;
 	   SMOOTH
 
-      @ 50 , 100 BUTTON Button_1 CAPTION "MARQUEE On/Off" WIDTH 150 HEIGHT 35 ACTION  SetMarquee() 
+      @ 50 , 100 BUTTON Button_1 CAPTION "MARQUEE On/Off" WIDTH 150 HEIGHT 35 ACTION  SetMarquee()
 
 		@ 120,155 TEXTBOX TextBox_1 ;
 		VALUE " 50 %" ;
@@ -93,7 +93,7 @@ STATIC Flag := .F.
    IF Flag == .F.
       Flag := .T.
       // Use this command when you do not know the amount of progress toward completion but wish to indicate that progress is being made.
-      SET PROGRESSBAR Progress_1 OF Form_1 ENABLE MARQUEE 
+      SET PROGRESSBAR Progress_1 OF Form_1 ENABLE MARQUEE
       SET PROGRESSBAR Progress_2 OF Form_1 ENABLE MARQUEE UPDATED 10
       SET PROGRESSBAR Progress_3 OF Form_1 ENABLE MARQUEE UPDATED 10
       SET PROGRESSBAR Progress_4 OF Form_1 ENABLE MARQUEE UPDATED 50

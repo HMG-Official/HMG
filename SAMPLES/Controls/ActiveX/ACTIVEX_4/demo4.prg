@@ -4,7 +4,7 @@
  *
  * Copyright 2002-2008 Roberto Lopez <mail.box.hmg@gmail.com>
  * http://www.hmgforum.com//
- * Activex Sample: Inspired by Freewin Activex inplementation by 
+ * Activex Sample: Inspired by Freewin Activex inplementation by
  * Oscar Joel Lira Lira (http://sourceforge.net/projects/freewin).
 */
 
@@ -17,7 +17,7 @@ FUNCTION Main()
 		WIDTH 800 ;
 		HEIGHT 500 ;
 		TITLE 'HMG ActiveX Support Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 
@@ -30,9 +30,9 @@ FUNCTION Main()
 		DEFINE ACTIVEX Test
 			ROW 10
 			COL 50
-			WIDTH 700  
-			HEIGHT 400  
-			PROGID "shell.explorer.2"  
+			WIDTH 700
+			HEIGHT 400
+			PROGID "shell.explorer.2"
 		END ACTIVEX
 
 	END WINDOW
@@ -61,5 +61,3 @@ Local cAddress := ''
 	EndIf
 
 Return
-
-

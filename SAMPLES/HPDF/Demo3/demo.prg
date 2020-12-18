@@ -68,7 +68,7 @@ START HPDFDOC
 		nNextRow += nHeight + 1
 		
 		//Adjust the font size of the text to the fixed height of the area and get the bottom row using the variable by reference.
-		@ nNextRow, 15 HPDFPRINT cEdit TO nNextRow + 12, 185 FONT cFonte1 size 10 FONTSIZEFIT GETBOTTOM @nBottomRow  
+		@ nNextRow, 15 HPDFPRINT cEdit TO nNextRow + 12, 185 FONT cFonte1 size 10 FONTSIZEFIT GETBOTTOM @nBottomRow
 		@ nNextRow, 15 HPDFPRINT RECTANGLE TO nBottomRow , 185 PENWIDTH 0.1
 	
 		//Print the line of text in the last row.

@@ -234,4 +234,3 @@ HB_FUNC( HMG_THREADSHAREDATA )
    else
       hb_retni( -1 );
 }
-

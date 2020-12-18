@@ -224,6 +224,3 @@ Local FontHandle , k
 	endif
 
 Return Nil
-
-
-

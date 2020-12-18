@@ -12,7 +12,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'DRAGITEMS LISTBOX' ;
-		MAIN 
+		MAIN
 
 		DEFINE LISTBOX LIST1
 			ROW		10
@@ -27,7 +27,6 @@ Function Main
 
 	Win1.Center
 
-	ACTIVATE WINDOW Win1 
+	ACTIVATE WINDOW Win1
 
 Return
-

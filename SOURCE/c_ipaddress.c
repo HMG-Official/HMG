@@ -158,5 +158,3 @@ HB_FUNC ( CLEARIPADDRESS )
 
 	SendMessage(hWnd, IPM_CLEARADDRESS, 0, 0);
 }
-
-

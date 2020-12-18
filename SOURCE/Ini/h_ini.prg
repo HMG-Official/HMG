@@ -186,4 +186,3 @@ FUNCTION CToA( cArray )
       cArray := HB_USUBSTR( cArray, 6 + nLen )
    END
 RETURN aArray
-

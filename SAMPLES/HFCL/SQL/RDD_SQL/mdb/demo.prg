@@ -7,7 +7,7 @@
 REQUEST SDDODBC, SQLMIX
 
 #define RDDI_CONNECT          1001
- 
+
 PROC main()
 
 	RDDSETDEFAULT( "SQLMIX" )
@@ -24,7 +24,7 @@ PROC main()
 		WIDTH 500 ;
 		HEIGHT 400 ;
 		TITLE 'RDD SQL' ;
-		WINDOWTYPE MAIN  
+		WINDOWTYPE MAIN
 
 		DEFINE GRID grid1
 			ROW 		10
@@ -43,4 +43,4 @@ PROC main()
 
 	Win_1.Activate
 
-RETURN   
+RETURN

@@ -436,4 +436,3 @@ Local BackRec , WorkArea , cField , cImageField , xCurrentValue , Tmp
 	(WorkArea)->(dbGoto(BackRec))
 
 Return
-

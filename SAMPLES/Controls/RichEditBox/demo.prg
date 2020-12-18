@@ -1,4 +1,4 @@
-﻿/**
+/**
  * This demo is based on the example: RichDemo
  * Copyright 2003-2009 by Janusz Pora <JanuszPora@onet.eu>
  *
@@ -12,7 +12,7 @@ FUNCTION MAIN
 
    nFontNameValue := 0
    nFontSizeValue := 0
-   
+
    cFind         := ""
    cReplace      := ""
    lDown         := .T.
@@ -23,7 +23,7 @@ FUNCTION MAIN
    aFontSize         := {'8','9','10','11','12','14','16','18','20','22','24','26','28','36','48','72'}
    aZoomValue        := {'500%','300%','200%','150%','100%','75%','50%','25%'}
    aZoomPercentage   := { 500  , 300  , 200  , 150  , 100  , 75  , 50  , 25  }
-   
+
    aFontColor       := RTF_FONTAUTOCOLOR
    aFontBackColor   := RTF_FONTAUTOBACKCOLOR
    aBackgroundColor := { 230, 230, 0 } // for default WHITE
@@ -39,12 +39,12 @@ FUNCTION MAIN
       NOSIZE;
       NOMAXIMIZE;
       MAIN
-      
+
       DEFINE STATUSBAR
              STATUSITEM "File: " TOOLTIP "Open File"
              STATUSITEM "" WIDTH 250 TOOLTIP "Select Text Range"
       END STATUSBAR
-      
+
       DEFINE SPLITBOX
 
          DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 23,23 FLAT
@@ -60,8 +60,8 @@ FUNCTION MAIN
             TOOLTIP 'Open File' ;
             PICTURE 'OPEN' ;
             ACTION ( cAuxFileName := GetFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder() ),;
-                     IF ( EMPTY(cAuxFileName),; 
-                     NIL,; 
+                     IF ( EMPTY(cAuxFileName),;
+                     NIL,;
                    ( cFileName := cAuxFileName, Form_1.RichEditBox_1.RTFLoadFile ( cFileName, 4, .F.), Form_1.StatusBar.Item(1) := "File: "+cFileName ) ) )
 
 
@@ -73,10 +73,10 @@ FUNCTION MAIN
 
             BUTTON Button_Save ;
             TOOLTIP 'Save' ;
-            PICTURE 'SAVE' ; 
+            PICTURE 'SAVE' ;
             ACTION ( cAuxFileName := PutFile ( { {"RTF files", "*.rtf"} }, NIL, GetCurrentFolder(), NIL, cFileName, ".rtf" ),;
-                     IF ( EMPTY(cAuxFileName),; 
-                     NIL,; 
+                     IF ( EMPTY(cAuxFileName),;
+                     NIL,;
                    ( cFileName := cAuxFileName , Form_1.RichEditBox_1.RTFSaveFile ( cFileName, 4, .F.), Form_1.StatusBar.Item(1) := "File: "+cFileName ) ) );
                 SEPARATOR
 
@@ -167,7 +167,7 @@ FUNCTION MAIN
 
             BUTTON Button_Repl ;
             TOOLTIP 'Replace' ;
-            PICTURE 'repeat' ; 
+            PICTURE 'repeat' ;
             ACTION ( cFind := Form_1.RichEditBox_1.GetSelectText,;
                      REPLACETEXTDIALOG ON ACTION FindReplaceOnClickProc() FIND cFind REPLACE cReplace CHECKMATCHCASE lMatchCase CHECKWHOLEWORD lWholeWord )
 
@@ -184,7 +184,7 @@ FUNCTION MAIN
               FONT 'Tahoma' SIZE 9 ;
               TOOLTIP 'Font Name';
               ON GOTFOCUS  ( nFontNameValue := Form_1.Combo_1.VALUE ) ;
-              ON CHANGE    ( Form_1.RichEditBox_1.FontName := Form_1.Combo_1.ITEM (Form_1.Combo_1.VALUE) ); 
+              ON CHANGE    ( Form_1.RichEditBox_1.FontName := Form_1.Combo_1.ITEM (Form_1.Combo_1.VALUE) );
               ON CANCEL IF ( HMG_GetLastVirtualKeyDown() == VK_ESCAPE, ( HMG_CleanLastVirtualKeyDown(), Form_1.Combo_1.VALUE := nFontNameValue ), NIL ) ;
               BREAK
 
@@ -199,7 +199,7 @@ FUNCTION MAIN
               ON CANCEL IF ( HMG_GetLastVirtualKeyDown() == VK_ESCAPE, ( HMG_CleanLastVirtualKeyDown(), Form_1.Combo_2.VALUE := nFontSizeValue ), NIL ) ;
 
 
-         DEFINE TOOLBAR ToolBar_3 BUTTONSIZE 23,23 SIZE 8  FLAT 
+         DEFINE TOOLBAR ToolBar_3 BUTTONSIZE 23,23 SIZE 8  FLAT
 
             BUTTON Button_Bold ;
             TOOLTIP 'Bold' ;
@@ -223,21 +223,21 @@ FUNCTION MAIN
             TOOLTIP 'StrikeOut' ;
             PICTURE 'strike' ;
             ACTION Form_1.RichEditBox_1.FontStrikeOut := Form_1.Button_StrikeOut.VALUE ;
-                CHECK;    
+                CHECK;
                 SEPARATOR
 
             BUTTON Button_SubScript ;
             TOOLTIP 'SubScript' ;
             PICTURE 'SubScript' ;
-            ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SubScript.VALUE, RTF_SUBSCRIPT, RTF_NORMALSCRIPT ),; 
-                     Form_1.Button_SuperScript.VALUE := .F.);  
+            ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SubScript.VALUE, RTF_SUBSCRIPT, RTF_NORMALSCRIPT ),;
+                     Form_1.Button_SuperScript.VALUE := .F.);
                 CHECK
 
             BUTTON Button_SuperScript ;
             TOOLTIP 'SuperScript' ;
             PICTURE 'SuperScript' ;
-            ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SuperScript.VALUE, RTF_SUPERSCRIPT, RTF_NORMALSCRIPT ),; 
-                     Form_1.Button_SubScript.VALUE := .F.); 
+            ACTION  (Form_1.RichEditBox_1.FontScript := IF ( Form_1.Button_SuperScript.VALUE, RTF_SUPERSCRIPT, RTF_NORMALSCRIPT ),;
+                     Form_1.Button_SubScript.VALUE := .F.);
                 CHECK;
                 SEPARATOR
 
@@ -250,7 +250,7 @@ FUNCTION MAIN
 
             BUTTON Button_FontColor ;
             TOOLTIP 'Font Color' ;
-            PICTURE 'FontColor'; 
+            PICTURE 'FontColor';
             ACTION  ( aFontColor := GetColor(Form_1.RichEditBox_1.FontColor, NIL, .F.), IF (ValType (aFontColor [1]) == "N",( Form_1.RichEditBox_1.FontColor := aFontColor ) , NIL) );
             DROPDOWN
                DEFINE DROPDOWN MENU BUTTON Button_FontColor
@@ -291,7 +291,7 @@ FUNCTION MAIN
             PICTURE 'Justify' ;
             ACTION ( Form_1.RichEditBox_1.ParaAlignment := RTF_JUSTIFY , OnSelectProc() );
                 CHECK GROUP;
-                SEPARATOR 
+                SEPARATOR
 
             BUTTON Button_Bulleted ;
             TOOLTIP 'Bulleted Paragraphs' ;
@@ -312,13 +312,13 @@ FUNCTION MAIN
             TOOLTIP 'Offset in' ;
             PICTURE 'Offset1' ;
             ACTION (Form_1.RichEditBox_1.ParaIndent := Form_1.RichEditBox_1.ParaIndent + 15, Form_1.RichEditBox_1.ParaIndent := IF (Form_1.RichEditBox_1.ParaIndent > MAX_PARAINDENT, MAX_PARAINDENT, Form_1.RichEditBox_1.ParaIndent))
-            
+
             BUTTON Button_LineSpacing ;
             TOOLTIP 'Line Spacing' ;
             PICTURE 'ParaLineSpacing';
             ACTION {|| Nil };
                 WHOLEDROPDOWN;
-                SEPARATOR 
+                SEPARATOR
 
                DEFINE DROPDOWN MENU BUTTON Button_LineSpacing
                   ITEM "1.0 "   ACTION Form_1.RichEditBox_1.ParaLineSpacing := 1.0
@@ -404,7 +404,7 @@ LOCAL nLeft, nTop, nRight, nBottom, aSelRange
 LOCAL lSuccessVar
 LOCAL nRow, nCol, nPag
 
-   SELECT PRINTER DIALOG TO lSuccessVar PREVIEW 
+   SELECT PRINTER DIALOG TO lSuccessVar PREVIEW
 
    IF lSuccessVar == .T.
 
@@ -412,13 +412,13 @@ LOCAL nRow, nCol, nPag
       nTop    := 20   // Top    page margin in milimeters
       nRight  := 20   // Right  page margin in milimeters
       nBottom := 20   // Bottom page margin in milimeters
-      
+
       aSelRange := { 0, -1 }   // select all text
-      
+
       nPag := 1
       nRow := OpenPrinterGetPageHeight() - 10   // in milimeters
       nCol := OpenPrinterGetPageWidth() / 2     // in milimeters
-      
+
       PrintPageCodeBlock := { || @ nRow , nCol PRINT "Pag. " + HB_NTOS( nPag++ ) CENTER }
 
       Form_1.RichEditBox_1.RTFPrint ( aSelRange, nLeft, nTop, nRight, nBottom, PrintPageCodeBlock )
@@ -437,7 +437,7 @@ LOCAL aPosRange := {0,0}
    IF FindReplaceDlg.RetValue == FRDLG_CANCEL   // User Cancel or Close dialog
       RETURN
    ENDIF
-   
+
    cFind           := FindReplaceDlg.Find
    cReplace        := FindReplaceDlg.Replace
    lDown           := FindReplaceDlg.Down
@@ -448,10 +448,10 @@ LOCAL aPosRange := {0,0}
    DO CASE
       CASE FindReplaceDlg.RetValue == FRDLG_FINDNEXT
            aPosRange := Form_1.RichEditBox_1.FindText ( cFind, lDown, lMatchCase, lWholeWord, lSelectFindText )
-      
+
       CASE FindReplaceDlg.RetValue == FRDLG_REPLACE
            aPosRange := Form_1.RichEditBox_1.ReplaceText ( cFind, cReplace, lMatchCase, lWholeWord, lSelectFindText )
-      
+
       CASE FindReplaceDlg.RetValue == FRDLG_REPLACEALL
            aPosRange := Form_1.RichEditBox_1.ReplaceAllText ( cFind, cReplace, lMatchCase, lWholeWord, lSelectFindText )
    ENDCASE
@@ -473,7 +473,7 @@ LOCAL CharRowCol := Form_1.RichEditBox_1.GetPosChar (nPos)
 #define OFFSET_DLG 30
 
    IF CharRowCol [1] <> -1 .AND. CharRowCol [2] <> -1
-   
+
       IF ( FindReplaceDlg.HEIGHT + OFFSET_DLG ) < CharRowCol [1]
          FindReplaceDlg.Row := CharRowCol [1] - ( FindReplaceDlg.HEIGHT + OFFSET_DLG )
       ELSEIF FindReplaceDlg.Row < CharRowCol [1] + OFFSET_DLG
@@ -541,7 +541,7 @@ PROCEDURE OnLinkProc
 *****************************************************************
    cLink := ALLTRIM ( ThisRichEditBox.GetClickLinkText )
 
-   IF  HMG_LOWER( HB_USUBSTR (cLink,1,7) ) == "http://" .OR. HMG_LOWER( HB_USUBSTR (cLink,1,4) ) == "www." 
+   IF  HMG_LOWER( HB_USUBSTR (cLink,1,7) ) == "http://" .OR. HMG_LOWER( HB_USUBSTR (cLink,1,4) ) == "www."
        ShellExecute ( NIL, "Open", cLink, NIL, NIL, SW_SHOWNORMAL )
 
    ELSEIF "@" $ cLink .AND. "." $ cLink .AND. .NOT.( " " $ cLink )
@@ -577,7 +577,7 @@ PROCEDURE HelpProc
          NOHSCROLL;
          READONLY;
          BACKCOLOR YELLOW
-         
+
    END WINDOW
 
    CENTER   WINDOW Form_2
@@ -638,7 +638,7 @@ PROCEDURE CreateTextRTF
       Form_3.RichEditBox_3.FontBold      := .T.
       Form_3.RichEditBox_3.FontItalic    := .F.
       Form_3.RichEditBox_3.FontColor     := SILVER
-      
+
    Form_3.RichEditBox_3.AddTextAndSelect ( -1 ) := "srvet@adinet.com.uy "
       Form_3.RichEditBox_3.FontName      := "Arial"
       Form_3.RichEditBox_3.FontSize      := 12
@@ -673,6 +673,3 @@ PROCEDURE CreateTextRTF
    Form_3.RichEditBox_3.UnSelectAll ()
 
 RETURN
-
-
-

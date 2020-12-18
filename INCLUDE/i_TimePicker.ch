@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Header File --> i_TimePicker.ch  
+ HMG Header File --> i_TimePicker.ch
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -54,8 +54,8 @@
                      <{lostfocus}> , ;
                      <{gotfocus}> , ;
                      <.shownone.> , ;
-                      <helpid> , ; 
-                      <.invisible.> , ; 
+                      <helpid> , ;
+                      <.invisible.> , ;
                       <.notabstop.> , ;
                       <.bold.>, <.italic.>, <.underline.>, <.strikeout.> , ;
                       <"field">, <{enter}>, <timeformat> )
@@ -65,4 +65,3 @@
 #xtranslate   _TIMESHORT24H   => "HH:mm"
 #xtranslate   _TIMELONG12H    => "hh:mm:ss tt"
 #xtranslate   _TIMESHORT12H   => "hh:mm tt"
-

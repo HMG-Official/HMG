@@ -2729,6 +2729,3 @@ STATIC function ABM2Listado( aImpresoras )
         wndABM2Listado.Release
 
 return NIL
-
-
-

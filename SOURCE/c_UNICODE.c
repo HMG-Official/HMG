@@ -85,4 +85,3 @@ HB_FUNC (HMG_ANSI_TO_UNICODE)
    WCHAR *cTextUNICODE = HMG_MBtoWC (cTextANSI);
    HMG_retc (cTextUNICODE);
 }
-

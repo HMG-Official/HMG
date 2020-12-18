@@ -73,5 +73,3 @@ Static Function GetDate ( dDate )
    cRet += "Year: "+StrZero(nYear,4)
 
    Return cRet
-
-

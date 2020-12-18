@@ -220,4 +220,3 @@ Procedure _DatePickerFormatDate ( ControlHandle , cFormatDate )
    ENDIF
    DATETIME_SETFORMAT (ControlHandle, cFormatDate)
 Return
-

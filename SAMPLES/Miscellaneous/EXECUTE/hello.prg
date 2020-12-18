@@ -11,7 +11,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE BUTTON B1
 			ROW 10
@@ -30,6 +30,6 @@ Return
 Procedure ExecTest()
 *-----------------------------------------------------------------------------*
 
-	EXECUTE FILE "NOTEPAD.EXE" 
+	EXECUTE FILE "NOTEPAD.EXE"
 
 Return Nil

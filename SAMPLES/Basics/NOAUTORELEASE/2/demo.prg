@@ -7,13 +7,13 @@
 
 * NoAutoRelease Style Demo
 
-* Using this style speed up application execution, since the forms are 
-* loaded / created / activated only once (at program startup). Later you 
+* Using this style speed up application execution, since the forms are
+* loaded / created / activated only once (at program startup). Later you
 * only must show or hide them as needed.
 
 #include "hmg.ch"
 
-// DECLARE WINDOW is required, since the windows are referred from code, 
+// DECLARE WINDOW is required, since the windows are referred from code,
 // using semi-oop syntax, prior its definition in code (main window menu)
 
 DECLARE WINDOW Std_Form
@@ -35,7 +35,7 @@ Function Main
 		MAIN ;
 		FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP '&File'
 				ITEM 'Show Standard Form' ACTION Std_Form.Show
 				ITEM 'Hide Standard Form' ACTION Std_Form.Hide
@@ -60,7 +60,7 @@ Function Main
 		AT 300,300 ;
 		WIDTH 320 ;
 		HEIGHT 240 ;
-		TITLE 'Standard Form' 
+		TITLE 'Standard Form'
 
 		DEFINE BUTTON Button_1
 			ROW	10
@@ -78,7 +78,7 @@ Function Main
 		WIDTH 320 ;
 		HEIGHT 240 ;
 		TITLE 'Child Form' ;
-		CHILD 
+		CHILD
 
 		DEFINE BUTTON Button_1
 			ROW	10
@@ -114,7 +114,7 @@ Function Main
 		WIDTH 320 ;
 		HEIGHT 240 ;
 		TITLE 'Modal Form' ;
-		MODAL 
+		MODAL
 
 		DEFINE BUTTON Button_1
 			ROW	10
@@ -125,13 +125,13 @@ Function Main
 
 	END WINDOW
 
-	// Using ACTIVATE WINDOW ALL command, all defined windows will be 
-	// activated simultaneously. NOAUTORELEASE and NOSHOW styles in 
+	// Using ACTIVATE WINDOW ALL command, all defined windows will be
+	// activated simultaneously. NOAUTORELEASE and NOSHOW styles in
 	// non-main windows are forced.
 
-	// NOAUTORELEASE window clause, makes that, when the user closes the 
-	// windows interactively they are hide instead released from memory, 
-	// then, there is no need to reload / redefine / activate prior 
+	// NOAUTORELEASE window clause, makes that, when the user closes the
+	// windows interactively they are hide instead released from memory,
+	// then, there is no need to reload / redefine / activate prior
 	// show it again.
 
 	//NOSHOW clause makes that the windows be not displayed at activation.
@@ -139,6 +139,3 @@ Function Main
 	ACTIVATE WINDOW ALL
 
 Return Nil
-
-
-

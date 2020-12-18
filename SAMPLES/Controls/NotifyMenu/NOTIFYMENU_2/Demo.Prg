@@ -20,12 +20,12 @@ Function Main
 		NOTIFYTOOLTIP 'HMG Power Is Here Too!!' ;
 		ON NOTIFYCLICK ProcessNotify()
 
-		DEFINE NOTIFY MENU 
+		DEFINE NOTIFY MENU
 			ITEM 'About...'	ACTION MsgInfo('HMG Notify Icon Demo')
 			ITEM 'Change Notify Icon' 	ACTION Form_1.NotifyIcon := 'DEMO2.ICO'
 			ITEM 'Change Notify Tooltip'	ACTION Form_1.NotifyTooltip := 'New Tooltip'
-			ITEM 'Get Notify Icon Name'	ACTION MsgInfo ( Form_1.NotifyIcon ) 
-			ITEM 'Get Notify Icon Tooltip'	ACTION MsgInfo ( Form_1.NotifyTooltip ) 
+			ITEM 'Get Notify Icon Name'	ACTION MsgInfo ( Form_1.NotifyIcon )
+			ITEM 'Get Notify Icon Tooltip'	ACTION MsgInfo ( Form_1.NotifyTooltip )
 			SEPARATOR	
 			ITEM 'Exit Application'	ACTION Form_1.Release
 		END MENU
@@ -49,4 +49,3 @@ Function ProcessNotify()
 	EndIf
 
 Return
-

@@ -6,12 +6,12 @@
 Function Main
 
 CreateTemp()
-   
+
    define window winMain ;
       at 0, 0 ;
       width 640 height 480 main ;
-      title "Temporary Table" 
-      
+      title "Temporary Table"
+
       DEFINE GRID brwTemp
          COL 0
          ROW 0
@@ -22,9 +22,9 @@ CreateTemp()
          ROWSOURCE "curItem"
          COLUMNFIELDS {"itemcd", "itemnm", "rate"}
       END GRID
-      
+
    end window
-   
+
    winMain.center
    winMain.activate
 
@@ -35,13 +35,13 @@ function CreateTemp()
    aadd(adbf,   {"itemcd", "c",   10, 0})
    aadd(adbf,   {"itemnm", "c",   40,   0})
    aadd(adbf,   {"rate",   "n",    8, 2})
-   
+
    if !hb_dbcreatetemp("curItem", adbf)
       msgbox("Cannot create temporary table: Item")
       RELEASE WINDOW ALL
       return nil
    endif
-   
+
    if select("curItem") = 0
       use curItem new
    endif

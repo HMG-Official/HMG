@@ -9,7 +9,7 @@ Function Main
 		HEIGHT 480 ;
 		TITLE '' ;
 		MAIN ;
-		BACKCOLOR {212,208,251} 
+		BACKCOLOR {212,208,251}
 
 		@ 40,10 LABEL Label_1 VALUE 'hI All !!' ;
 			BACKCOLOR {212,208,251} ;
@@ -22,4 +22,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return
-

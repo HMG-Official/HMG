@@ -11,7 +11,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 	END WINDOW
 
@@ -20,4 +20,3 @@ Function Main
 	ACTIVATE WINDOW Win_1
 
 Return
-

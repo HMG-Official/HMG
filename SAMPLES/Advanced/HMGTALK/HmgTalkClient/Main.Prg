@@ -28,10 +28,10 @@ Function Main()
    Public l_Conected  := .f.
    Public lMsg_Balloon:= .f.
    Public c_RingTone  := GetCurrentFolder() + "\Media\Toque(1).Wav"
-   
+
    *Set Multiple Off
    Set deleted On
-   
+
    Load Window Main	
    Main.Center
    Main.Activate
@@ -49,7 +49,7 @@ Return Nil
 ************************************************************************
 * This function open a conexion with HMG Talk Server with NETIO.
 * On server side, a unique table was create.
-************************************************************************ 
+************************************************************************
 Function Start_Conexion()
 	Public c_Str_Con := "net:" + Alltrim(c_Ip_Server) + ":Messenger.DBF"
 	
@@ -90,7 +90,7 @@ Function Inc_Line(c_Nick,c_Msg,lOnline,c_TONick)
 		Messenger->(DbAppend())
 		Messenger->COD  	:= Messenger->( LastRec() + 1 )
 		Messenger->Nick 	:= c_Nick
-		Messenger->MSG  	:= c_Msg + " [" + Time() 
+		Messenger->MSG  	:= c_Msg + " [" + Time()
 		If !Empty(c_TONick)
 			Messenger->MSG  := Alltrim(Messenger->MSG) + " - private to " + ;
 			                   Alltrim(c_TONick)
@@ -115,7 +115,7 @@ Function Read_MSG()
 	Local a_Msgs	 := {}
 	Local i , a , d , n_Rest
 	If l_Conected
-		if n_Reg_Grid < Messenger->(LastRec()) 
+		if n_Reg_Grid < Messenger->(LastRec())
 			a_Msgs := Read_Data()
 			
 			if Len(a_Msgs) > 0
@@ -125,19 +125,19 @@ Function Read_MSG()
 				For a := 1 to Len(a_Msgs)			
 					Main.Grid_1.AddItem( a_Msgs[a] )
 					// It is a little easter egg, put this string in your
-					//client, so all clients will down, and not be able 
+					//client, so all clients will down, and not be able
                                         //to connect on server until that the server is restart.
                                         //Try it on privete message, is very fun.
 					Do Case
-						Case SubStr(Alltrim(a_Msgs[a][2]),1,08) == "$LINEOFF" 
+						Case SubStr(Alltrim(a_Msgs[a][2]),1,08) == "$LINEOFF"
 																	Main.Release
 					EndCase
 				Next a
 							
-				if lMsg_Balloon 
+				if lMsg_Balloon
 					if  Main.Check_1.Value
 						for i := 1 to len( a_Msgs )
-							MsgBalloon( Alltrim( a_Msgs[i][2] ), ; 
+							MsgBalloon( Alltrim( a_Msgs[i][2] ), ;
 										Alltrim( a_Msgs[i][1] ) +;
 														 " Say:" )
 						next i
@@ -155,7 +155,7 @@ Function Read_MSG()
 				
 				Main.Label_2.Value := "Last message received at " + ;
 									   Time()
-									   
+									
 				if Alltrim( c_NickName ) != Alltrim( a_Msgs[Len(a_Msgs)][1] )
 					if !Main.Check_1.Value .and. !Main.Check_2.Value
 						iif(empty(c_RingTone),c_RingTone := "Media\Toque(1).Wav",)
@@ -188,7 +188,7 @@ Function Read_Data()
 	Local a_Msgs 	 := {}
 	Local i 	 := 0
 	Local a_Position := Main.Grid_1.Item(Main.Grid_1.ItemCount)
-	Local n_Position := 0 
+	Local n_Position := 0
 	
 	Messenger->( DbGoTo( Main.Grid_1.ItemCount + 1 ) )	
 	While( Messenger->( !EOF() ) )
@@ -249,9 +249,9 @@ Function Read_Nicks()
 
 	for i := 1 to len( a_Nicks )
 		Main.Combo_1.AddItem( a_Nicks[i] )
-	next i 
+	next i
 	
-	if n_OldItem < 1 
+	if n_OldItem < 1
 		Main.Combo_1.Value := Len( a_Nicks )	
 	else
 		Main.Combo_1.Value := n_OldItem
@@ -273,13 +273,13 @@ Return Nil
 ************************************************************************
 Function Change_lMsg(lStatus)
 	lMsg_Balloon := lStatus
-	If !lMsg_Balloon 
+	If !lMsg_Balloon
 		Main.Text_1.SetFocus()
 	endif
 Return Nil
 
 ************************************************************************
-* Restore window MAIN 
+* Restore window MAIN
 ************************************************************************
 Function Show_talk()
 	lMsg_Balloon := .f.	
@@ -355,7 +355,7 @@ static void ShowNotifyInfo(HWND hWnd, BOOL bAdd, HICON hIcon, LPSTR szText, LPST
 
 HB_FUNC ( SHOWNOTIFYINFO )
 {
-	ShowNotifyInfo( (HWND) hb_parnl(1), (BOOL) hb_parl(2), (HICON) hb_parnl(3), (LPSTR) hb_parc(4), 
+	ShowNotifyInfo( (HWND) hb_parnl(1), (BOOL) hb_parl(2), (HICON) hb_parnl(3), (LPSTR) hb_parc(4),
 			(LPSTR) hb_parc(5), (LPSTR) hb_parc(6) );
 }
 

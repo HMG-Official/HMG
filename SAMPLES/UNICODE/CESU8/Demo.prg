@@ -22,7 +22,7 @@ FUNCTION Main
        VALUE "'Birthday ' + HMG_CHR(0x1F382) + ' Smile ' + HMG_CHR(0x1F60A)"
 
     @  10,730 BUTTON btEval CAPTION 'Eval' ;
-              ACTION {|| bEval:EVAL() } WIDTH 60 HEIGHT 26 
+              ACTION {|| bEval:EVAL() } WIDTH 60 HEIGHT 26
 
     @  50, 10 TEXTBOX tbValue WIDTH 710 HEIGHT 26 READONLY ;
               VALUE HMG_CESU8( 'Birthday ' + HMG_CHR(0x1F382) + ' Smile ' + HMG_CHR(0x1F60A) )

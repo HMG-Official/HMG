@@ -8,9 +8,9 @@ Function Main
 		WIDTH 640 ;
 		HEIGHT 400 ;
 		TITLE 'Is<Key>Active() Demo' ;
-		MAIN 
+		MAIN
 
-		DEFINE BUTTON Button_1 
+		DEFINE BUTTON Button_1
 			ROW 10
 			COL 10	
 			CAPTION 'Test'
@@ -22,11 +22,10 @@ Function Main
 				)
 		END BUTTON
 
-		@ 100,10 TEXTBOX Text_1 
+		@ 100,10 TEXTBOX Text_1
 
 	END WINDOW
 
 	ACTIVATE WINDOW Form_1
 
 Return
-

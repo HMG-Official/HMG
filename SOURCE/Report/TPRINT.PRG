@@ -644,5 +644,3 @@ if cop="-" .and. print_preview.edit_p.fontsize > 7
   print_preview.edit_p.fontsize:=  print_preview.edit_p.fontsize - 2
 endif
 return nil
-
-

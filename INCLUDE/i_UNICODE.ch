@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> i_Unicode.ch  
+ HMG Source File --> i_Unicode.ch
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -30,8 +30,8 @@
 #xtranslate ENABLE  [ CONTROL ] EVENT <control> OF <form>   =>   StopControlEventProcedure (<"control">, <"form">, .F.)
 
 
-// #xtranslate SET EVENT REENTRY OFF   =>   _HMG_AvoidReentryEventProcedure := .T. 
-// #xtranslate SET EVENT REENTRY ON    =>   _HMG_AvoidReentryEventProcedure := .F. 
+// #xtranslate SET EVENT REENTRY OFF   =>   _HMG_AvoidReentryEventProcedure := .T.
+// #xtranslate SET EVENT REENTRY ON    =>   _HMG_AvoidReentryEventProcedure := .F.
 
 #translate U(<c>) => ;
   IF(<c> \< 0x80   , CHR(    <c>                  ), ;

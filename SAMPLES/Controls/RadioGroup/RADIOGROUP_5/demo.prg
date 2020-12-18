@@ -15,9 +15,9 @@ Function Main
 		TITLE 'HMG Demo' ;
 		ICON 'DEMO.ICO' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP 'M&isc'
 				ITEM 'Set RadioGroup 1 ReadOnly Property To {.T.,.T.,.T.,.T.}'	ACTION Form_1.Radio_1.ReadOnly := { .T. , .T. , .T. , .T. }
 				ITEM 'Set RadioGroup 1 ReadOnly Property To {.F.,.F.,.F.,.F.}'	ACTION Form_1.Radio_1.ReadOnly := { .F. , .F. , .F. , .F. }
@@ -32,30 +32,30 @@ Function Main
 			END POPUP
 		END MENU
 
-		DEFINE RADIOGROUP Radio_1 
-			OPTIONS	{ 'One' , 'Two' , 'Three', 'Four' } 
-			VALUE	1 
-			WIDTH	100 
-			TOOLTIP	'RadioGroup' 
+		DEFINE RADIOGROUP Radio_1
+			OPTIONS	{ 'One' , 'Two' , 'Three', 'Four' }
+			VALUE	1
+			WIDTH	100
+			TOOLTIP	'RadioGroup'
 			READONLY { .F. , .T. , .F. , .T. }
 			ROW	10
 			COL	10
 		END RADIOGROUP
 			
-		DEFINE RADIOGROUP Radio_2 
+		DEFINE RADIOGROUP Radio_2
 			ROW 10
 			COL 150
-			OPTIONS { 'One' , 'Two' , 'Three', 'Four' } 
-			VALUE 1 
-			WIDTH 100 
-			TOOLTIP 'RadioGroup' 
+			OPTIONS { 'One' , 'Two' , 'Three', 'Four' }
+			VALUE 1
+			WIDTH 100
+			TOOLTIP 'RadioGroup'
 			READONLY { .F. , .T. , .F. , .T. }
 			HORIZONTAL .T.
 		END RADIOGROUP
 
 		@ 150,10 DATEPICKER Date_1 ;
 		VALUE CTOD('  / /  ') ;
-		TOOLTIP 'DatePicker Control' 
+		TOOLTIP 'DatePicker Control'
 
 	END WINDOW
 

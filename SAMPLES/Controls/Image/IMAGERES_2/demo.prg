@@ -8,7 +8,7 @@ Function Main
 		WIDTH 640 ;
 		HEIGHT 480 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE IMAGE Image_1
 			ROW	0
@@ -23,7 +23,6 @@ Function Main
 
 	CENTER WINDOW Form_1
 
-	ACTIVATE WINDOW Form_1 
+	ACTIVATE WINDOW Form_1
 
 Return
-

@@ -14,7 +14,7 @@
 
 #define MAXSHEETS 100
 #define NTRIM( n ) LTrim( Str( n ) )
- 
+
 Static nWindows := 0, aWindows := {}, nRow := -22, nCol := -24, nColors := 0, ;
 	aColors := { { 255 , 255 , 0 }, { 255 , 128 , 192 }, { 255 , 0 , 0 }, ;
 		{ 255 , 0 , 255 }, { 255 , 128 , 64 }, { 0 , 255 , 0 }, { 128 , 0 , 128 }, ;
@@ -29,7 +29,7 @@ Function Main( cPack )
 
 	Set Date German
 	Set Delete On
-   
+
    MsgInfo( "This program is based on a notify menu, Look at system tray to use..."  )
 
 	DEFAULT cPack TO ""
@@ -46,7 +46,7 @@ Function Main( cPack )
 		NOTIFYTOOLTIP PROGRAM + ": Left click for a new sheet" ;
 		ON NOTIFYCLICK NewNotes()
 
-		DEFINE NOTIFY MENU 
+		DEFINE NOTIFY MENU
 			ITEM 'S&top All Sounds'  ACTION (lSound := !lSound, ;
 							( Form_0.Sound.Checked := !lSound)) NAME Sound
 			SEPARATOR
@@ -148,7 +148,7 @@ Function NewNotes()
 		@ 126,60 BUTTON Button_1 CAPTION "OK" ACTION ExitEdit(cForm, nForm, nColor) WIDTH 70 HEIGHT 22 ;
 			FONT "MS Sans Serif" SIZE 9
 
-		DEFINE CONTEXT MENU 
+		DEFINE CONTEXT MENU
 			ITEM '&Hide a sheet' ACTION DoMethod (cForm,'Hide')
 			SEPARATOR
 			ITEM '&Stick a sheet' ACTION CompactNotes(cForm, nForm, nColor)
@@ -440,7 +440,7 @@ Procedure LoadNotes(nId, dDate, cTime, SaveRow, SaveCol, nColor, cText1, cText2,
 		@ 126,60 BUTTON Button_1 CAPTION "OK" ACTION ExitEdit(cForm, nId, nColor) WIDTH 70 HEIGHT 22 ;
 			FONT "MS Sans Serif" SIZE 9
 
-		DEFINE CONTEXT MENU 
+		DEFINE CONTEXT MENU
 			ITEM '&Hide a sheet' ACTION DoMethod (cForm,'Hide')
 			SEPARATOR
 			ITEM '&Stick a sheet' ACTION CompactNotes(cForm, nId, nColor)

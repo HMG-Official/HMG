@@ -7,7 +7,7 @@
 *
 *		Humberto Fornazier	<hfornazier@brfree.com.br>
 *		Mitja Podgornik		<yamamoto@rocketmail.com>
-* 
+*
 */
 
 #include "hmg.ch"
@@ -16,7 +16,7 @@
 Function Main
 *------------------------------------------------------------------------------*
 
-	Private oServer	:= Nil 
+	Private oServer	:= Nil
 	
 	DEFINE WINDOW Win_1 ;
 		AT 0,0 ;
@@ -53,13 +53,13 @@ Procedure Connect
 
 	Class TMySQLServer:
 
-		- Manages access to a MySQL server and returns an oServer object 
+		- Manages access to a MySQL server and returns an oServer object
 		to which you'll send all your queries.
 
 		- Administra el acceso a un servidor MySql y retorna un objeto
 		oServer al cual se le enviaran los comandos SQL.
 
-	Method New(cServer, cUser, cPassword): 
+	Method New(cServer, cUser, cPassword):
 
 		- Opens connection to a server, returns a server object.
 
@@ -94,11 +94,11 @@ Procedure Connect
 
 	If oServer:NetErr()
 		MsgStop(oServer:Error())
-		Win_1.Title := 'MySql Basic Sample - Not Connected' 
+		Win_1.Title := 'MySql Basic Sample - Not Connected'
 	Else
 
 		MsgInfo("Connected")
-		Win_1.Title := 'MySql Basic Sample - Connected' 
+		Win_1.Title := 'MySql Basic Sample - Connected'
 
 	EndIf
 
@@ -117,7 +117,7 @@ Procedure Disconnect()
 ..............................................................................*/
 
 	oServer:Destroy()
-	Win_1.Title := 'MySql Basic Sample - Not Connected' 
+	Win_1.Title := 'MySql Basic Sample - Not Connected'
 
 Return
 
@@ -132,9 +132,9 @@ Private cSearch := ''
 
 	// Check For Error - Verificar Errores
 
-	If oServer:NetErr() 
+	If oServer:NetErr()
 		MsgStop( oServer:Error() )
-	Endif 
+	Endif
 
 	Define Window ShowQuery ;
 		At 0,0 ;
@@ -179,29 +179,29 @@ Function DoQuery( cSearch )
 
 	Class TMySQLServer - Method Query(cQuery):
 
-		- Gets a textual query and returns a TMySQLQuery or TMySQLTable 
+		- Gets a textual query and returns a TMySQLQuery or TMySQLTable
 		object.
 
-		- Obtiene una consulta y retorna un objeto TMySQLQuery o 
-		TMySQLTable 
+		- Obtiene una consulta y retorna un objeto TMySQLQuery o
+		TMySQLTable
 
 	Class TMySQLQuery:
 
-		- A standard query to an oServer with joins. Every query has a 
-		GetRow() method which on every call returns a TMySQLRow object 
+		- A standard query to an oServer with joins. Every query has a
+		GetRow() method which on every call returns a TMySQLRow object
 		which, in turn, contains requested fields.
-		Query objects convert MySQL answers (which is an array of 
+		Query objects convert MySQL answers (which is an array of
 		strings) to clipper level types.
-		At present time N (with decimals), L, D, and C clipper types 
+		At present time N (with decimals), L, D, and C clipper types
 		are supported.
 
 		- Una consulta estandar a un objeto oServer con joins. Cada
-		consulta tiene un metodo GetRow(), el cual en cada llamada, 
-		retorna un objeto TMySQLRow, el que contiene los campos 
+		consulta tiene un metodo GetRow(), el cual en cada llamada,
+		retorna un objeto TMySQLRow, el que contiene los campos
 		requeridos.
 		Los objetos Query convierten las respuestas MySql (la cual es
 		un array de cadenas) a tipos Clipper.
-		Actualmente los tipos N (con decimales), L, D, and C son 
+		Actualmente los tipos N (con decimales), L, D, and C son
 		soportados.
 
 	Class TMySQLQuery - Method LastRec() :
@@ -230,17 +230,17 @@ Function DoQuery( cSearch )
 
 	Class TMySQLRow:
 
-		- Every row returned by a SELECT is converted to a TMySQLRow 
-		object. This object handles fields and has methods to access 
+		- Every row returned by a SELECT is converted to a TMySQLRow
+		object. This object handles fields and has methods to access
 		fields given a field name or position.
 
-		- Cada fila retornada por un SELECT es convertida a un 
+		- Cada fila retornada por un SELECT es convertida a un
 		objeto TMySQLRow- Este objeto maneja campos y tiene metodos
 		para accederlos dado un nombre de campo o una posicion.
 
 	Class TMySQLRow - Method FieldGet(cnField):
 
-		- Same as clipper ones, but FieldGet() and FieldPut() accept a 
+		- Same as clipper ones, but FieldGet() and FieldPut() accept a
 		string as field identifier, not only a number.
 
 		- Identico al de Clipper, excepto que acepta una cadena de
@@ -288,7 +288,7 @@ Local cCode
 
 	i := ShowQuery.Grid_1.Value
 
-	if i == 0 
+	if i == 0
 		Return
 	EndIf
 
@@ -326,7 +326,7 @@ Local cEMail
 
 	i := ShowQuery.Grid_1.Value
 
-	if i == 0 
+	if i == 0
 		Return
 	EndIf
 
@@ -343,7 +343,7 @@ Local cEMail
 		oRow	:= oQuery:GetRow(1)
 		cCode	:= Alltrim(Str(oRow:fieldGet(1)))
 		cName	:= AllTrim(oRow:fieldGet(2))
-		cEMail	:= AllTrim(oRow:fieldGet(3))                  
+		cEMail	:= AllTrim(oRow:fieldGet(3))
 		oQuery:Destroy()
 
 		aResults := InputWindow	(;
@@ -426,32 +426,32 @@ Return Nil
 Function  My_SQL_Database_Create( cDatabase )
 *------------------------------------------------------------------------------*
 Local i:= 0
-Local aDatabaseList:= {} 
+Local aDatabaseList:= {}
 
 	cDatabase:=Lower(cDatabase)
 
-	If oServer == Nil 
+	If oServer == Nil
 		MsgInfo("Not connected to SQL server!")
 		Return Nil
 	EndIf
 
 	aDatabaseList:= oServer:ListDBs()
 
-	If oServer:NetErr() 
+	If oServer:NetErr()
 		MsGInfo("Error verifying database list: " + oServer:Error())
 		Release Window ALL
-	Endif 
+	Endif
 
 	If AScan( aDatabaseList, Lower(cDatabase) ) != 0
 		MsgINFO( "Database allready exists!")
 		Return Nil
-	EndIf 
+	EndIf
 
 	oServer:CreateDatabase( cDatabase )
 
-	If oServer:NetErr() 
+	If oServer:NetErr()
 		MsGInfo("Error creating database: " + oServer:Error() )
-	Endif 
+	Endif
 
 Return Nil
 
@@ -477,29 +477,29 @@ Function My_SQL_Database_Connect( cDatabase )
 ..............................................................................*/
 
 Local i:= 0
-Local aDatabaseList:= {}                                           
+Local aDatabaseList:= {}
 
 	cDatabase:= Lower(cDatabase)
-	If oServer == Nil 
+	If oServer == Nil
 		MsgInfo("Not connected to SQL server!")
 		Return Nil
 	EndIf
 
 	aDatabaseList:= oServer:ListDBs()
-	If oServer:NetErr() 
+	If oServer:NetErr()
 		MsGInfo("Error verifying database list: " + oServer:Error())
 		Release Window ALL
-	Endif 
+	Endif
 
 	If AScan( aDatabaseList, Lower(cDatabase) ) == 0
 		MsgINFO( "Database "+cDatabase+" doesn't exist!")
 		Return Nil
-	EndIf 
+	EndIf
 
 	oServer:SelectDB( cDatabase )
-	If oServer:NetErr() 
+	If oServer:NetErr()
 		MsgStop("Error connecting to database "+cDatabase+": "+oServer:Error() )
-	Endif 
+	Endif
 
 Return Nil
 
@@ -507,48 +507,48 @@ Return Nil
 Function My_SQL_Table_Create( cTable )				
 *------------------------------------------------------------------------------*
 Local i:= 0
-Local aTableList:= {}                                           
-Local aStruc:= {}            
-Local cQuery 
+Local aTableList:= {}
+Local aStruc:= {}
+Local cQuery
 
 	If oServer == Nil
 		MsgStop("Not connected to SQL Server...")
 		Return Nil
 	EndIf
-              
+
 	aTableList:= oServer:ListTables()
-	If oServer:NetErr() 
+	If oServer:NetErr()
 		MsgStop("Error getting table list: " + oServer:Error() )
 		Return
-	Endif 
+	Endif
 
 	If AScan( aTableList, Lower(cTable) ) != 0
 		MsgStop( "Table "+cTable+" allready exists!")
 		Return
-	EndIf 
+	EndIf
 
-	cQuery:= "CREATE TABLE "+ cTable+" ( Code SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,  Name  VarChar(40) ,  eMail  VarChar(40) , PRIMARY KEY (Code) ) "  
+	cQuery:= "CREATE TABLE "+ cTable+" ( Code SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,  Name  VarChar(40) ,  eMail  VarChar(40) , PRIMARY KEY (Code) ) "
 	oQuery := oServer:Query( cQuery )											
-	If oServer:NetErr() 
+	If oServer:NetErr()
 		MsgStop("Error creating table "+cTable+": "+oServer:Error() )
 		Return
-	Endif 
+	Endif
 
-	oQuery:Destroy()     
+	oQuery:Destroy()
 							
 Return Nil
-            
+
 *------------------------------------------------------------------------------*
 Function My_SQL_Table_Insert( cTable )				
 *------------------------------------------------------------------------------*
-Local cQuery:= ""    
-Local NrReg:= 0            
+Local cQuery:= ""
+Local NrReg:= 0
 
-	If ! MsgYesNo( "Import data from NAMES.DBF to table Names(MySql) ?" ) 
+	If ! MsgYesNo( "Import data from NAMES.DBF to table Names(MySql) ?" )
 		Return Nil
-	EndIf                    
+	EndIf
 
-	If !File( "NAMES.DBF" ) 
+	If !File( "NAMES.DBF" )
 		MsgBox( "File Names.dbf doesn't exist!" )
 		Return Nil
 	EndIf
@@ -558,15 +558,15 @@ Local NrReg:= 0
 
 	Do While !Eof()
 
-		cQuery := "INSERT INTO "+ cTable + " VALUES ( '"+Str(Names->Code,8)+"' , '"+ AllTrim(Names->Name)+"' , '"+Names->Email+ "' ) "   
+		cQuery := "INSERT INTO "+ cTable + " VALUES ( '"+Str(Names->Code,8)+"' , '"+ AllTrim(Names->Name)+"' , '"+Names->Email+ "' ) "
 		oQuery := oServer:Query(  cQuery )
-		If oServer:NetErr() 
+		If oServer:NetErr()
 			MsGInfo("Error executing Query "+cQuery+": "+oServer:Error() )
-			EXIT 
-		Endif 
+			EXIT
+		Endif
 
 		oQuery:Destroy()
-                      
+
 		NrReg++
 
 		skip
@@ -575,7 +575,6 @@ Local NrReg:= 0
 
 	use
 
-	MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable)       
+	MsgInfo( AllTrim(Str(NrReg))+" records added to table "+cTable)
 
 Return Nil
-

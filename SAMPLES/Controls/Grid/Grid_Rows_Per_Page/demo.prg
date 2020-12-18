@@ -88,4 +88,3 @@ Local aRows := { ;
    ACTIVATE WINDOW Form_1
 
 Return Nil
-

@@ -15,9 +15,9 @@ Function Main
 		TITLE 'HMG Demo' ;
 		ICON 'DEMO.ICO' ;
 		MAIN ;
-		FONT 'Arial' SIZE 10 
+		FONT 'Arial' SIZE 10
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP 'M&isc'
 				ITEM 'Set RadioGroup 1 ReadOnly Property To {.T.,.T.,.T.,.T.}'	ACTION Form_1.Radio_1.ReadOnly := { .T. , .T. , .T. , .T. }
 				ITEM 'Set RadioGroup 1 ReadOnly Property To {.F.,.F.,.F.,.F.}'	ACTION Form_1.Radio_1.ReadOnly := { .F. , .F. , .F. , .F. }
@@ -48,7 +48,7 @@ Function Main
 
 		@ 150,10 DATEPICKER Date_1 ;
 		VALUE CTOD('  / /  ') ;
-		TOOLTIP 'DatePicker Control' 
+		TOOLTIP 'DatePicker Control'
 
 	END WINDOW
 

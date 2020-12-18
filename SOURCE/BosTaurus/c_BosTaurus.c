@@ -4110,6 +4110,3 @@ HB_FUNC ( BT_DIRECTORYINFO )
    hb_itemReturnRelease (pArray);
    hb_itemRelease (pSubarray);
 }
-
-
-

@@ -12,7 +12,7 @@ Function Main
       @ 30,10 EDITBOX Edit_1 ;
          WIDTH 400 ;
          HEIGHT 200 ;
-         VALUE 'EditBox: Overwrite (press INSERT key) and DoubleClick demo!!!' 
+         VALUE 'EditBox: Overwrite (press INSERT key) and DoubleClick demo!!!'
 
    END WINDOW
 
@@ -20,8 +20,8 @@ Function Main
    CREATE EVENT PROCNAME OnkeyAllEditBox()
 
    CREATE EVENT PROCNAME EditBox_DBLCLICK() HWND Form_1.Edit_1.HANDLE STOREINDEX nIndex
-   EventProcessAllHookMessage ( nIndex, .T. ) 
-   
+   EventProcessAllHookMessage ( nIndex, .T. )
+
    Form_1.Center()
    Form_1.Activate()
 Return Nil
@@ -34,13 +34,13 @@ LOCAL hWnd := EventHWND()
 LOCAL nIndex := GetControlIndexByHandle (hWnd)
 LOCAL X,Y, nWidth, nHeight, ch, nStart, nEnd, A, B, C
    IF nIndex > 0 .AND. GetControlTypeByIndex (nIndex) == "EDIT"
-      
+
       HMG_EditControlGetSel (hWnd, @nStart, @nEnd)
       ch := HMG_EditControlGetChar (hWnd, nEnd)
 
       HMG_GetAverageFontSize (hWnd, @nWidth, @nHeight)
       nWidth := HMG_GetCharWidth (hWnd, ch, @A, @B, @C)
-      
+
       IF GetKeyState (VK_INSERT) <> 0
          CreateCaret (hWnd, 0, INT(nWidth), nHeight)
       ELSE
@@ -48,7 +48,7 @@ LOCAL X,Y, nWidth, nHeight, ch, nStart, nEnd, A, B, C
          CreateCaret (hWnd, 0, GetSystemMetrics(SM_CXBORDER) , nHeight)
       ENDIF
       ShowCaret (hWnd)
-      
+
       IF EventMSG() == WM_CHAR
          IF GetKeyState (VK_INSERT) <> 0 .AND. EventWPARAM() <> VK_RETURN .AND. EventWPARAM() <> VK_BACK
             HMG_EditControlSetSel (hWnd, nEnd, nEnd+1)
@@ -66,5 +66,3 @@ LOCAL nStart, nEnd
          MsgInfo ("DBLCLICK")
       ENDIF
 Return NIL
-
-

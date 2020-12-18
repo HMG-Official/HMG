@@ -1,4 +1,4 @@
-﻿#include 'hmg.ch'
+#include 'hmg.ch'
 
 Function AdministradorDeContactos
 Public Nuevo := .F.		
@@ -10,7 +10,7 @@ Public Nuevo := .F.
 // para todos los controles pertenecientes a la ventana.
 
 // La clausula ON INIT permite definir un procedimiento que se ejecutara
-// durante la inicializacion de la ventana (previa a la activacion) 
+// durante la inicializacion de la ventana (previa a la activacion)
 
 
 DEFINE WINDOW Win_1				;
@@ -25,22 +25,22 @@ DEFINE WINDOW Win_1				;
 		BUTTON PRIMERO 		;
 			CAPTION '&Primero' 	;
 			PICTURE 'primero'	;
-			ACTION ( dBGoTop() , Win_1.grid_1.RecNo := RecNo() ) 
+			ACTION ( dBGoTop() , Win_1.grid_1.RecNo := RecNo() )
 
 		BUTTON ANTERIOR 	;
 			CAPTION '&Anterior' 	;
 			PICTURE 'anterior'	;
-			ACTION ( dBSkip ( -1 ) , Win_1.grid_1.RecNo := RecNo() ) 
+			ACTION ( dBSkip ( -1 ) , Win_1.grid_1.RecNo := RecNo() )
 
 		BUTTON SIGUIENTE	;
 			CAPTION '&Siguiente' 	;
 			PICTURE 'siguiente'	;
-			ACTION ( dBSkip (1) , if ( Eof() , DbGoBottom() , Nil ) , Win_1.grid_1.RecNo := RecNo() ) 
+			ACTION ( dBSkip (1) , if ( Eof() , DbGoBottom() , Nil ) , Win_1.grid_1.RecNo := RecNo() )
 
 		BUTTON ULTIMO 		;
 			CAPTION '&Ultimo' 	;
 			PICTURE 'ultimo'	;
-			ACTION ( dBGoBottom () , Win_1.grid_1.RecNo := RecNo() )  SEPARATOR 
+			ACTION ( dBGoBottom () , Win_1.grid_1.RecNo := RecNo() )  SEPARATOR
 
 		BUTTON BUSCAR 		;
 			CAPTION '&Buscar' 	;
@@ -60,17 +60,17 @@ DEFINE WINDOW Win_1				;
 		BUTTON ELIMINAR 	;
 			CAPTION 'E&liminar'	;
 			PICTURE 'borrar'	;
-			ACTION Eliminar() 
+			ACTION Eliminar()
 
 		BUTTON IMPRIMIR 	;
 			CAPTION '&Imprimir'	;
 			PICTURE 'imprimir2' ;
-			ACTION Imprimir() 
+			ACTION Imprimir()
 
 		BUTTON CERRAR 	;
 			CAPTION '&Cerrar'	;
 			PICTURE 'cerrar' ;
-			ACTION Win_1.release 
+			ACTION Win_1.release
 
 	END TOOLBAR
 
@@ -82,14 +82,14 @@ DEFINE WINDOW Win_1				;
 	// los anchos de las columnas del control.
 	// La clausula WORKAREA requiere el nombre del area de trabajo
 	// base para el BROWSE.	
-	// La clausula VALUE del comando BROWSE requiere un valor numerico, 
-	// conteniendo el numero fisico de registro (RecNo()) que se 
-	// seleccionara 
+	// La clausula VALUE del comando BROWSE requiere un valor numerico,
+	// conteniendo el numero fisico de registro (RecNo()) que se
+	// seleccionara
 	// La clausula FIELDS requiere un array de caracteres conteniendo
 	// los nombres de los campos a mostrar.
 	// al crearse el control.
 	// La clausula ON CHANGE requiere un procedimiento que se ejecutara
-	// cada vez que el registro seleccionado cambie interactiva o 
+	// cada vez que el registro seleccionado cambie interactiva o
 	// programaticamente.
 	// La clausula ON DBLCLICK requiere un procedimiento que se ejecutara
 	// cada vez que el usuario haga doble click o presione ENTER.
@@ -135,7 +135,7 @@ DEFINE WINDOW Win_1				;
 
 	@ 66 , 480 COMBOBOX Control_2 ;
 	    VALUE VeTipo() ;
-		ITEMSOURCE Tipos->Desc 
+		ITEMSOURCE Tipos->Desc
 
 	@ 96 , 220 LABEL LABEL_3 ;
 		VALUE 'Nombres:' ;
@@ -188,8 +188,8 @@ DEFINE WINDOW Win_1				;
 		VALUE 'Tel. Part.:' ;
 		WIDTH 80
 
-	// La clausula INPUTMASK permite establecer mascaras de 
-	// edicion. 
+	// La clausula INPUTMASK permite establecer mascaras de
+	// edicion.
 	// En el caso de TEXTBOX de tipo caracter, las mascaras pueden
 	// contener '9' indicando digitos y 'A' indicando caracteres
 	// alfabeticos. Todos los demas son incluidos literalmente.
@@ -217,7 +217,7 @@ DEFINE WINDOW Win_1				;
 
 	// El control DATEPICKER permite ingresar datos de tipo fecha.
 
-	@ 246 , 290 DATEPICKER Control_11 
+	@ 246 , 290 DATEPICKER Control_11
 
 	@ 276 , 220 LABEL LABEL_12 ;
 		VALUE 'Observ.' ;
@@ -233,7 +233,7 @@ DEFINE WINDOW Win_1				;
 		WIDTH 310 ;
 		HEIGHT 90
 
-	// El comando @...BUTTON permite definir botones de comando 
+	// El comando @...BUTTON permite definir botones de comando
 	// independientes.
 
 	@ 376,320 BUTTON ACEPTAR ;
@@ -271,18 +271,18 @@ Function DesactivarEdicion
 // determinar o establecer si un control esta activo o no (.t. o .f.)
 
 Win_1.grid_1.Enabled		:= .T.
-Win_1.Control_1.Enabled		:= .F. 
-Win_1.Control_2.Enabled		:= .F. 
-Win_1.Control_3.Enabled		:= .F. 
-Win_1.Control_4.Enabled		:= .F. 
-Win_1.Control_5.Enabled		:= .F. 
-Win_1.Control_6.Enabled		:= .F. 
-Win_1.Control_7.Enabled		:= .F. 
-Win_1.Control_8.Enabled		:= .F. 
-Win_1.Control_9.Enabled		:= .F. 
-Win_1.Control_10.Enabled	:= .F. 
-Win_1.Control_11.Enabled	:= .F. 
-Win_1.Control_12.Enabled	:= .F. 
+Win_1.Control_1.Enabled		:= .F.
+Win_1.Control_2.Enabled		:= .F.
+Win_1.Control_3.Enabled		:= .F.
+Win_1.Control_4.Enabled		:= .F.
+Win_1.Control_5.Enabled		:= .F.
+Win_1.Control_6.Enabled		:= .F.
+Win_1.Control_7.Enabled		:= .F.
+Win_1.Control_8.Enabled		:= .F.
+Win_1.Control_9.Enabled		:= .F.
+Win_1.Control_10.Enabled	:= .F.
+Win_1.Control_11.Enabled	:= .F.
+Win_1.Control_12.Enabled	:= .F.
 
 Win_1.Aceptar.Enabled		:= .F.
 Win_1.Cancelar.Enabled		:= .F.
@@ -296,18 +296,18 @@ Return Nil
 
 Function ActivarEdicion
 Win_1.grid_1.Enabled		:= .F.
-Win_1.Control_1.Enabled		:= .T. 
-Win_1.Control_2.Enabled		:= .T. 
-Win_1.Control_3.Enabled		:= .T. 
-Win_1.Control_4.Enabled		:= .T. 
-Win_1.Control_5.Enabled		:= .T. 
-Win_1.Control_6.Enabled		:= .T. 
-Win_1.Control_7.Enabled		:= .T. 
-Win_1.Control_8.Enabled		:= .T. 
-Win_1.Control_9.Enabled		:= .T. 
-Win_1.Control_10.Enabled	:= .T. 
-Win_1.Control_11.Enabled	:= .T. 
-Win_1.Control_12.Enabled	:= .T. 
+Win_1.Control_1.Enabled		:= .T.
+Win_1.Control_2.Enabled		:= .T.
+Win_1.Control_3.Enabled		:= .T.
+Win_1.Control_4.Enabled		:= .T.
+Win_1.Control_5.Enabled		:= .T.
+Win_1.Control_6.Enabled		:= .T.
+Win_1.Control_7.Enabled		:= .T.
+Win_1.Control_8.Enabled		:= .T.
+Win_1.Control_9.Enabled		:= .T.
+Win_1.Control_10.Enabled	:= .T.
+Win_1.Control_11.Enabled	:= .T.
+Win_1.Control_12.Enabled	:= .T.
 
 Win_1.Aceptar.Enabled		:= .T.
 Win_1.Cancelar.Enabled		:= .T.
@@ -341,16 +341,16 @@ DesactivarEdicion()
 // Cuando un control COMBOBOX esta vinculado al campo de una tabla
 // mediante la clausula ITEMSOURCE, la propiedad value, indica el numero
 // fisico del registro cuyo contenido se ha seleccionado.
-// En este caso, ese valor se usa para posicionarse en el area 'Tipos' 
+// En este caso, ese valor se usa para posicionarse en el area 'Tipos'
 // de tal forma de acceder al codigo de tipo que sera guardado en la
 // tabla 'Contactos'
 // Para el resto de los campos, simplemente se guarda en cada uno
 // el contenido de la propiedad 'Value' del control correspondiente.
-// Eligiendo el control adecuado para cada campo, no se requiere ninguna 
+// Eligiendo el control adecuado para cada campo, no se requiere ninguna
 // conversion de tipos.
-// Debe tenerse cuidado, en los campos de tipo numerico y caracter, 
-// de establecer mediante la clausula MAXLENGTH o una mascara de 
-// edicion, la longitud maxima de los datos ingresado para evitar errores 
+// Debe tenerse cuidado, en los campos de tipo numerico y caracter,
+// de establecer mediante la clausula MAXLENGTH o una mascara de
+// edicion, la longitud maxima de los datos ingresado para evitar errores
 // de overflow al grabar los datos en la tabla.
 
 Tipos->(DbGoTo (Win_1.Control_2.Value))
@@ -365,7 +365,7 @@ EndIf
 nNuevoRecNo := Contactos->( RecNo() )
 
 Contactos->Apellido	 := Win_1.Control_1.Value
-Contactos->Cod_Tipo	 := Tipos->Cod_Tipo 
+Contactos->Cod_Tipo	 := Tipos->Cod_Tipo
 Contactos->Nombres	 := Win_1.Control_3.Value
 Contactos->Calle	 := Win_1.Control_4.Value
 Contactos->Numero	 := Win_1.Control_5.Value
@@ -377,7 +377,7 @@ Contactos->E_Mail	 := Win_1.Control_10.Value
 Contactos->Fecha_Nac := Win_1.Control_11.Value
 Contactos->Observ	 := Win_1.Control_12.Value
 
-// El metodo 'Refresh' actualiza el grid de acuerdo a los datos 
+// El metodo 'Refresh' actualiza el grid de acuerdo a los datos
 // actuales de la tabla.
 // debe ejecutarse cada vez que necesitemos estar seguros de que
 // estamos trabajando con datos actualizados.
@@ -441,7 +441,7 @@ Return Nil
 Function BloquearRegistro()
 Local RetVal
 
-// La funcion 'MsgExclamation' muestra una venta con un mensaje (primer 
+// La funcion 'MsgExclamation' muestra una venta con un mensaje (primer
 // parametro) un titulo (segundo parametro) un icono de exclamacion y
 // el boton aceptar.
 
@@ -490,8 +490,8 @@ Local RecContactos , RecTipos
 // que corresponden a cada columna.
 // La clausula WIDTHS requiere un array numerico indicando el ancho (en caracteres)
 // de cada columna
-// La clausula WORKAREA Indica el area de trabajo 
-// LPP indica las lineas por pagina 
+// La clausula WORKAREA Indica el area de trabajo
+// LPP indica las lineas por pagina
 // CPL Indica los caracteres por linea
 // LMARGIN Indica el margen izquierdo (medido en caracteres)
 // PREVIEW Indica que se mostrara una ventana de vista preliminar.

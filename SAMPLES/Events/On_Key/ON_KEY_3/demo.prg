@@ -10,7 +10,7 @@ PROCEDURE Main
     AT 400, 50 ;
     WIDTH 970 HEIGHT 400 ;
     TITLE 'Keyboard events' ;
-		MAIN  
+		MAIN
 
     DEFINE EDITBOX ebDemo
       ROW       10

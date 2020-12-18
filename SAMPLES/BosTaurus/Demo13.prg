@@ -26,10 +26,10 @@ PRIVATE hBitmap2 := 0
       NOMAXIMIZE;
       NOSIZE;
       ON INIT Proc_ON_INIT ()
-      
+
       @   5, 50 IMAGE Image1 PICTURE "" ON CLICK Proc_Image ("Image1", "HMG Control Image 1", RED)
       @ 315, 50 IMAGE Image2 PICTURE "" ON CLICK Proc_Image ("Image2", "HMG Control Image 2", GREEN)
-      
+
    END WINDOW
 
    CENTER WINDOW Win1
@@ -50,10 +50,10 @@ LOCAL hBitmap2_aux := 0
 
   BT_BitmapRelease (hBitmap1_aux)
   BT_BitmapRelease (hBitmap2_aux)
-  
+
   BT_HMGSetImage ("Win1", "Image1", hBitmap1)
   BT_HMGSetImage ("Win1", "Image2", hBitmap2)
-  
+
   MsgInfo ("Click on images")
 
 RETURN
@@ -66,12 +66,11 @@ LOCAL hBitmap
    hBitmap := BT_HMGGetImage ("Win1", cControlName)
 
    hDC := BT_CreateDC (hBitmap, BT_HDC_BITMAP, @BTstruct)
-       nTypeText    := BT_TEXT_TRANSPARENT + BT_TEXT_BOLD    
+       nTypeText    := BT_TEXT_TRANSPARENT + BT_TEXT_BOLD
        nAlingText   := BT_TEXT_LEFT + BT_TEXT_BASELINE
        nOrientation := 30
-       BT_DrawText (hDC, 285, 45, cText, "Times New Roman", 38, aColor, WHITE, nTypeText, nAlingText, nOrientation)  
+       BT_DrawText (hDC, 285, 45, cText, "Times New Roman", 38, aColor, WHITE, nTypeText, nAlingText, nOrientation)
    BT_DeleteDC (BTstruct)
-   
+
    BT_ClientAreaInvalidateAll ("Win1")
 RETURN
-

@@ -9,7 +9,7 @@ procedure main()
 		width 100;
 		height 100 ;
 		title 'DO REPORT Test' ;
-		main 
+		main
 
 		DEFINE MAIN MENU
 			POPUP 'File'
@@ -42,14 +42,11 @@ set century on
 		CPL		80								;
 		LMARGIN		2								;
 		PAPERSIZE	DMPAPER_A4							;
-		PREVIEW										; 
+		PREVIEW										;
 		SELECT										;
 		MULTIPLE									;
 		GROUPED BY	'first'								;
 		HEADRGRP	'Name'	
 
-    
+
 Return Nil
-
-
-

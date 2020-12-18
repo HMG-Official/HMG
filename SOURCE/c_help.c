@@ -94,5 +94,3 @@ HB_FUNC ( WINHELP )
 	hb_retni (retval);
 
 }
-
-

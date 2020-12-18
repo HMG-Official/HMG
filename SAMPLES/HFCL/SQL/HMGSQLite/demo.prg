@@ -16,8 +16,8 @@ set date ital
 if .not. file( cDBName )
    create_populate()
 else
-   oDB := connect2db( cDBName, .f. )   
-endif   
+   oDB := connect2db( cDBName, .f. )
+endif
 
 define window sample at 0,0 width 800 height 500 main
 
@@ -57,7 +57,7 @@ return NIL
 function RefreshTable
 
    sample.table.DeleteAllItems()
-   
+
    aTable := sql(oDB,"select * from new where date1 <= "+c2sql(ctod("15-04-2010")))
    for i := 1 to len(aTable)
       aCurRow := aTable[i]
@@ -67,7 +67,7 @@ function RefreshTable
       sample.table.value := 1
    endif
    sample.table.Refresh
-return nil   
+return nil
 
 
 function create_populate()
@@ -88,7 +88,7 @@ if .not. miscsql(oDB,cCreateIndex)
 endif
 
 for i := 1 to 100
-   
+
 cQStr := "insert into new (text,floating,date1,logic,text2) values ("+;
           c2sql("Giri"+alltrim(str(i)))+","+;
           c2sql(123.45)+","+;
@@ -99,17 +99,17 @@ cQStr := "insert into new (text,floating,date1,logic,text2) values ("+;
 if .not. miscsql(oDB,cQstr)
    return nil
 endif
-         
+
 next i
 
 msginfo("Insert Queries Completed!")
-         
+
 return nil
 
 
 function ViewRecord
    local aResult
-   
+
    aResult := sql(oDB, 'Select text2 from new where text = "Giri11"') // for update')
    if !empty(aResult)
       msgbox("Result is: " + aResult[1,1])
@@ -118,10 +118,10 @@ return
 
 function ChangeRecord
    local aTemp := {space(40)}
-   
+
    aTemp := InputWindow("Put your value for TEXT2", {"New value:"}, {space(40)}, {40})
    if aTemp[1] != Nil // changed here
-      cQstr := "update new set text2= " + c2sql( aTemp[1] ) + " where text= " + c2sql( 'Giri11' )  
+      cQstr := "update new set text2= " + c2sql( aTemp[1] ) + " where text= " + c2sql( 'Giri11' )
        if !miscsql(oDB,cQstr)
          msginfo("Error during writing!")
       else

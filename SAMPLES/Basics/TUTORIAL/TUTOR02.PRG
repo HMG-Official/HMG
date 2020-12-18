@@ -7,7 +7,7 @@ Function Main
         WIDTH 400 ;
         HEIGHT 200 ;
         TITLE 'Tutor 02 - Property Test' ;
-        MAIN 
+        MAIN
 
         DEFINE MAIN MENU
            POPUP "First Popup"
@@ -21,4 +21,3 @@ Function Main
     ACTIVATE WINDOW Win_1
 
 Return
-

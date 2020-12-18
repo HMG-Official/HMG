@@ -5,7 +5,7 @@
 
 #include "hmg.ch"
 
-* When using virtual Grids you must avoid to use Item property and additem 
+* When using virtual Grids you must avoid to use Item property and additem
 * method. It can generate unexpected results.
 
 Function Main
@@ -17,7 +17,7 @@ Function Main
 		WIDTH 450 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP 'File'
@@ -45,7 +45,7 @@ Function Main
 				} ;
 		CELLNAVIGATION ;
 		EDIT ;
-		DYNAMICBACKCOLOR { bColor , bColor , bColor } 
+		DYNAMICBACKCOLOR { bColor , bColor , bColor }
 
 	END WINDOW
 
@@ -67,11 +67,11 @@ Local lRet
 
 	msginfo( ThisWindow.Name )
 
-	cString += 'Cell Edited!'					   + chr(13) + chr(10) 
-	cString += 							   + chr(13) + chr(10) 
-	cString += 'This.CellRowIndex: ' + alltrim(str(This.CellRowIndex)) + chr(13) + chr(10) 
-	cString += 'This.CellColIndex: ' + alltrim(str(This.CellColIndex)) + chr(13) + chr(10) 
-	cString += 'This.CellValue:    ' + alltrim( AutoConvert() ) 
+	cString += 'Cell Edited!'					   + chr(13) + chr(10)
+	cString += 							   + chr(13) + chr(10)
+	cString += 'This.CellRowIndex: ' + alltrim(str(This.CellRowIndex)) + chr(13) + chr(10)
+	cString += 'This.CellColIndex: ' + alltrim(str(This.CellColIndex)) + chr(13) + chr(10)
+	cString += 'This.CellValue:    ' + alltrim( AutoConvert() )
 
 	MsgInfo ( cString )
 
@@ -88,11 +88,11 @@ Local lRet
 Local cString := ''
 
 
-	cString += 'Entering Cell!'					   + chr(13) + chr(10) 
-	cString += 							   + chr(13) + chr(10) 
-	cString += 'This.CellRowIndex: ' + alltrim(str(This.CellRowIndex)) + chr(13) + chr(10) 
-	cString += 'This.CellColIndex: ' + alltrim(str(This.CellColIndex)) + chr(13) + chr(10) 
-	cString += 'This.CellValue:    ' + alltrim( AutoConvert() ) 
+	cString += 'Entering Cell!'					   + chr(13) + chr(10)
+	cString += 							   + chr(13) + chr(10)
+	cString += 'This.CellRowIndex: ' + alltrim(str(This.CellRowIndex)) + chr(13) + chr(10)
+	cString += 'This.CellColIndex: ' + alltrim(str(This.CellColIndex)) + chr(13) + chr(10)
+	cString += 'This.CellValue:    ' + alltrim( AutoConvert() )
 
 	MsgInfo ( cString )
 

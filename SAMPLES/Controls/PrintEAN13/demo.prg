@@ -1,7 +1,7 @@
 #include <minigui.ch>
 #include 'common.ch'
 #define SODIUM	"0123456789+"
-#define NEON	"0123456789" 
+#define NEON	"0123456789"
 #define EAN2	102
 #define EAN5	105
 #define EAN13Parity {"AAAAAA", "AABABB", "AABBAB", "AABBBA", "ABAABB", "ABBAAB", "ABBBAA", "ABABAB", "ABABBA", "ABBABA"}
@@ -40,9 +40,9 @@ Function Main()
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'EAN13 Generator Sample' ;
-		MAIN 
+		MAIN
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			DEFINE POPUP 'File'
 				MENUITEM 'Exit' ACTION DoMethod("Win_1","Release")
 			END POPUP
@@ -103,7 +103,7 @@ function MOL_lookup
 	endif
 
  return 'ERROR'
- 
+
 *--------------------------
 
 function PrintEAN13
@@ -122,7 +122,7 @@ function PrintEAN13
 			PAPERSIZE	PRINTER_PAPER_A4 ;
 			QUALITY		PRINTER_RES_MEDIUM
 	
-	START PRINTDOC name 	'TEST ' 
+	START PRINTDOC name 	'TEST '
 	START PRINTPAGE
 
 	// left margin

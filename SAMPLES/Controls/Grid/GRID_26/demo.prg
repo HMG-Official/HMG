@@ -21,7 +21,7 @@ Local aValue := { 0 , 0 }
 	aCtrl_5 := { 'CHECKBOX' , 'Yes' , 'No' }
 	aCtrl_6 := Nil
 
-	* Dynamic Display 
+	* Dynamic Display
 
 	bdDisplay_1 := { || StrZero(This.CellValue,10) }
 	bdDisplay_2 := { || if ( This.CellRowIndex/2 == int(This.CellRowIndex/2) , Upper(This.CellValue) , Lower(This.CellValue) ) }
@@ -35,12 +35,12 @@ Local aValue := { 0 , 0 }
 		WIDTH 800 ;
 		HEIGHT 510 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
-		DEFINE MAIN MENU 
+		DEFINE MAIN MENU
 			POPUP 'File'
 				ITEM 'Append (Alt+A)'				ACTION Form_1.Grid_1.Append
-				ITEM 'Set RecNo'				ACTION Form_1.Grid_1.RecNo := val(InputBox('','')) 
+				ITEM 'Set RecNo'				ACTION Form_1.Grid_1.RecNo := val(InputBox('',''))
 				ITEM 'Get RecNo'				ACTION MsgInfo( Str(Form_1.Grid_1.RecNo) )
 				ITEM 'Delete (Alt+D)'				ACTION Form_1.Grid_1.Delete
 				ITEM 'Recall (Alt+R)'				ACTION Form_1.Grid_1.Recall
@@ -51,7 +51,7 @@ Local aValue := { 0 , 0 }
 			END POPUP
 		END MENU
 
-		USE TEST 
+		USE TEST
 		INDEX ON CODE TO CODE
 
 		@ 10,10 GRID Grid_1 ;
@@ -69,7 +69,7 @@ Local aValue := { 0 , 0 }
 			EDIT ;
 			DYNAMICDISPLAY	 { bdDisplay_1 , bdDisplay_2 , bdDisplay_3 , bdDisplay_4 , bdDisplay_5 , bdDisplay_6 } ;
 			DYNAMICBACKCOLOR { bColor , bColor , bColor , bColor , bColor , bColor } ;
-			DYNAMICFORECOLOR { fColor , fColor , fColor , fColor , fColor , fColor } 
+			DYNAMICFORECOLOR { fColor , fColor , fColor , fColor , fColor , fColor }
 
 
 	END WINDOW
@@ -79,4 +79,3 @@ Local aValue := { 0 , 0 }
 	ACTIVATE WINDOW Form_1
 
 Return
-

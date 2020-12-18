@@ -13,12 +13,12 @@ Function Main
 		AT 0,0 ;
 		WIDTH 640 HEIGHT 480 ;
 		TITLE 'HMG Demo' ;
-		MAIN 
+		MAIN
 
 		@ 10,10 TEXTBOX Text_1 ;
 			VALUE 123 ;
 			NUMERIC ;
-			ON LOSTFOCUS if ( This.Value < 10 , ( PlayAsterisk() , This.SetFocus ) , Nil ) 
+			ON LOSTFOCUS if ( This.Value < 10 , ( PlayAsterisk() , This.SetFocus ) , Nil )
 
 		@ 40,10 TEXTBOX Text_2 ;
 			VALUE 1 ;
@@ -32,4 +32,3 @@ Function Main
 	Form_1.Activate
 
 Return Nil
-

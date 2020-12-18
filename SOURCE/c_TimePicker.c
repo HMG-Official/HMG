@@ -136,4 +136,3 @@ HB_FUNC ( DATETIME_SETFORMAT )
    hb_retl (DateTime_SetFormat(hWnd, (LPCTSTR) HMG_parc (2)));
    // hb_retl (DateTime_SetFormat(hWnd, _TEXT("hh:mm:ss tt")));   // NOT WORK WITH UNICODE !!!
 }
-

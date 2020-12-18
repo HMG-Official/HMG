@@ -12,7 +12,7 @@ HMG is the union of these main components:
 All together, these tools conform a completely free xBase Windows development
 system, combining the traditional xBase, with an extremely easy to use GUI.
 
-HMG can be downloaded at: 
+HMG can be downloaded at:
 
 	http://www.hmgforum.com
 
@@ -24,6 +24,3 @@ Enjoy!
 
 --HMGFORUM-2020
 Roberto Lopez <mail.box.hmg@gmail.com>
-
-
-

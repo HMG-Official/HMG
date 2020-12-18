@@ -22,7 +22,7 @@ Function Main
          columncontrols { { 'TEXTBOX', 'NUMERIC', '999' }, { 'TEXTBOX', 'CHARACTER' } }
          allowedit .t.
          items { { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' }, { 0, '' } }
-      end grid         
+      end grid
    end window
    sample.center
    sample.activate

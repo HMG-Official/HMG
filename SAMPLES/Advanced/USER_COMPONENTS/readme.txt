@@ -4,7 +4,7 @@ HMG USER COMPONENTS SAMPLE
 
 To run this sample, please add the following text to c:\hmg\include\usrinit.ch
 
-#define BASEDEF_MYBUTTON 
+#define BASEDEF_MYBUTTON
 
 #xcommand @ <row>,<col> MYBUTTON <name> ;
 		OF <parent> ;
@@ -13,7 +13,7 @@ To run this sample, please add the following text to c:\hmg\include\usrinit.ch
 	=>;
 	_DefineMyButton(<"name">,<row>,<col>,<caption>,<{action}>,<"parent">)
 
-#undef BASEDEF_MYBUTTON 
+#undef BASEDEF_MYBUTTON
 
 And ADD the following to c:\hmg\include\i_usrsoop.ch without leaving blank
 lines between the text currently in that file and this.

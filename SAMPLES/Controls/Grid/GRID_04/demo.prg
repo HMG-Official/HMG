@@ -1,4 +1,4 @@
-﻿/*
+/*
 * HMG Virtual Grid Demo
 * (c) 2003 Roberto lopez
 */
@@ -12,7 +12,7 @@ Function Main
 		WIDTH 450 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP 'File'
@@ -27,7 +27,7 @@ Function Main
 		WIDTHS {140,140,140};
 		VIRTUAL ;
 		ITEMCOUNT 100000000 ;
-		ON QUERYDATA QueryTest() MULTISELECT 
+		ON QUERYDATA QueryTest() MULTISELECT
 
 	END WINDOW
 

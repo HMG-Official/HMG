@@ -16,7 +16,7 @@ Function Main
 		MAIN ;
 		FONT "Arial" SIZE 10
 
-		@ 10,10 DATEPICKER Date_1 ; 
+		@ 10,10 DATEPICKER Date_1 ;
       VALUE CTOD("01/01/2001") ;
 		TOOLTIP "DatePicker Control" format " "
 
@@ -44,4 +44,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return Nil
-

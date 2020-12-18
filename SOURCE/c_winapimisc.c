@@ -1590,4 +1590,3 @@ HB_FUNC ( SETWINDOWTHEME )
    hRet = win_SetWindowTheme (hWnd, SubAppName, SubIdList);
    HMG_retnl ((LONG_PTR) hRet);
 }
-

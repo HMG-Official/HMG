@@ -1038,4 +1038,3 @@ HB_FUNC ( TREEVIEW_GETHASBUTTON )
 
 
 // COLORREF TreeView_SetInsertMarkColor (HWND hwndTV, COLORREF clrInsertMark);
-

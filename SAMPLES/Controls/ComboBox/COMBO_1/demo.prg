@@ -11,7 +11,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 200 ;
 		TITLE 'ComboBox Demo' ;
-		MAIN 
+		MAIN
 
 		DEFINE MAIN MENU
 			DEFINE POPUP '&Test'
@@ -24,7 +24,7 @@ Function Main
 			ITEMS { '1 | Uno' , '2 | Dos' , '3 | tres' } ;
 			VALUE 1 ;
 			ON ENTER MsgInfo ( Str(Form_1.Combo_1.value) ) ;
-			FONT 'Courier' SIZE 12 
+			FONT 'Courier' SIZE 12
 
 	END WINDOW
 
@@ -33,6 +33,3 @@ Function Main
 	ACTIVATE WINDOW Form_1
 
 Return
-
-
-

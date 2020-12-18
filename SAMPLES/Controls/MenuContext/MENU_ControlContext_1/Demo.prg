@@ -1,15 +1,15 @@
-﻿
+
 #include "hmg.ch"
 
 Function Main()
 
 DEFINE WINDOW Form_1;
-    AT 0, 0; 
+    AT 0, 0;
     WIDTH 800 HEIGHT 500 ;
     TITLE "HMG Control Context Menu" ;
     MAIN
-    
-    
+
+
     DEFINE TOOLBAR ToolBar_1 BUTTONSIZE 85,85 FONT "Arial" SIZE 9 FLAT BORDER
         BUTTON button1 CAPTION "ContexMenu: ON" PICTURE "button1.bmp" ACTION ON_OFF_ContexMenu()
         BUTTON button2 CAPTION "CTRL ContexMenu: ON" PICTURE "button1.bmp" ACTION ON_OFF_CTRL_ContexMenu()
@@ -238,7 +238,7 @@ DEFINE WINDOW Form_1;
         VISIBLE .T.
         BACKCOLOR NIL
     END SLIDER
-  
+
     DEFINE IMAGE Image_1
         ROW    110
         COL    386
@@ -251,7 +251,7 @@ DEFINE WINDOW Form_1;
         ACTION   NIL
     END IMAGE
 
-    
+
     DEFINE RADIOGROUP RadioGroup_1
         ROW    115
         COL    269
@@ -366,7 +366,7 @@ DEFINE WINDOW Form_1;
         BACKCOLOR NIL
         FONTCOLOR NIL
     END EDITBOX
-    
+
     DEFINE SPINNER Spinner_1
         ROW    360
         COL    546
@@ -410,8 +410,8 @@ Define_Control_Context_Menu ("ProgressBar_1")
 Define_Control_Context_Menu ("ToolBar_1")
 Define_Control_Context_Menu ("StatusBar")
 Define_Control_Context_Menu ("Spinner_1")
-    
-    
+
+
 END WINDOW
 CENTER WINDOW Form_1
 ACTIVATE WINDOW Form_1
@@ -528,7 +528,7 @@ Procedure ControlMenu
       RELEASE CONTROL CONTEXTMENU Image_1 OF Form_1
       // ReleaseControlContextMenu ( "Image_1", "Form_1")
    ENDIF
-   
+
    DEFINE CONTROL CONTEXTMENU Image_1 OF Form_1
       ITEM "New Image 1" ACTION MsgInfo("Image 1")
       ITEM "New Image 2" ACTION MsgInfo("Image 2")
@@ -565,4 +565,3 @@ STATIC ON := .T.
     ENDIF
     MsgInfo ("CONTROL CONTEXT MENU: "+IF(ON, "Enable","Disable"))
 RETURN
-
