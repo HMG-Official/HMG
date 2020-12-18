@@ -1,8 +1,10 @@
 -hblib
 
--o../../lib/edit
+-o../../lib/${hb_plat}/${hb_comp}/edit
 
--Iinclude
+-inc
+
+../../hmg.hbc
 
 -D__HBIDE__
 
