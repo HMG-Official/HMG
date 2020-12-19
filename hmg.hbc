@@ -2,13 +2,14 @@
 
 #{mingw} for gcc.exe link pthread library in static mode
 
-ldflags=-pthread -static-libgcc -static-libstdc++ -static -lpthread -mt
+ldflags=-pthread -static-libgcc -static-libstdc++ -static -lpthread
+######-mt
 
 # paths
 
 incpaths=/.
 incpaths=./include
-libpaths=../lib/${hb_plat}/${hb_comp}
+libpaths=./lib/${hb_plat}/${hb_comp}
 
 # main hmg libs
 
@@ -28,33 +29,33 @@ libs=vfw32
 
 # harbour contrib libs
 
-libs=hbmysql
-libs=mysql
-libs=hbfimage
-libs=hbpgsql
-libs=sddmy
+####libs=hbmysql
+####libs=mysql
+####libs=hbfimage
+####libs=hbpgsql
+####libs=sddmy
 
 libs=hbvpdf
 
-libs=hbct
-libs=hbwin
-libs=hbmzip
+libs=hbct.hbc
+libs=hbwin.hbc
+libs=hbmzip.hbc
 libs=minizip
-libs=hbmemio
-libs=hbmisc
-libs=hbtip
-libs=sqlite3
-libs=hbsqlit3
-libs=sddodbc
-libs=rddsql
-libs=hbodbc
-libs=odbc32
-libs=hbhpdf
-libs=hbnetio
-libs=xhb
+libs=hbmemio.hbc
+libs=hbmisc.hbc
+libs=hbtip.hbc
+####libs=sqlite3
+####libs=hbsqlit3
+####libs=sddodbc
+####libs=rddsql
+####libs=hbodbc
+####libs=odbc32
+libs=hbhpdf.hbc
+####libs=hbnetio.hbc
+libs=xhb.hbc
 libs=png
-libs=libhpdf
-libs=hbzebra
+libs=hbhpdf.hbc
+libs=hbzebra.hbc
 
 # link compiled resources
 
