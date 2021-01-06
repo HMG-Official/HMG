@@ -1,0 +1,14 @@
+
+Date:2021-01-06  Time: 02:51:08
+HMG 3.5 Stable Patch 2020.11.16 (32 bits)
+Error PP/33  Can't open standard rule file 'HMG.CH'
+
+Called from DEFERROR(114)
+Called from (b)ERRORSYS(66)
+Called from __PP_INIT(0)
+Called from HMG_GETCOMPILEVERSIONRAW(97)
+Called from HMG_GETCOMPILEVERSION32(136)
+Called from BUILDIN64BITS(1247)
+Called from PROC_DEFINE_MAIN_MENU(1422)
+Called from MAIN(944)
+
