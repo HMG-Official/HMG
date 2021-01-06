@@ -3,7 +3,14 @@
 -beep
 -w2
 ../../hmg.hbc
+-I./
 -oide
+hbwin.hbc
+hbhpdf.hbc
+hbmisc.hbc
+hbmzip.hbc
+xhb.hbc
+hbct.hbc
 
 IDE_SourceCode.prg
 ide_sourcecode_c.prg

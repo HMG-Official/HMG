@@ -1,6 +1,7 @@
 ../../../hmg.hbc
 
 -w0
+-ocontactos
 
 main.prg
 contactosadmin.prg
