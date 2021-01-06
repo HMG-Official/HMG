@@ -9,16 +9,13 @@
 
 #include "hmg.ch"
 
-#include "demo1.ch"
-#include "demo2.ch"
-
 Function Main()
 DEFINE WINDOW Form_1 ;
 	AT 0,0 ;
 	WIDTH 640 HEIGHT 480 ;
 	TITLE 'HMG Demo' ;
 	MAIN BACKCOLOR BLUE
-		
+
 	DEFINE LABEL Label_1
         ROW    04
         COL    80
@@ -31,7 +28,7 @@ DEFINE WINDOW Form_1 ;
 		FONTCOLOR YELLOW
 		TRANSPARENT .T.
     END LABEL
-	
+
 	DEFINE LABEL Label_2
         ROW    380
         COL    10

@@ -1,3 +1,8 @@
+../../../hmg.hbc
+
+-w0
+
 main.prg
 contactosadmin.prg
 tiposadmin.prg
+contactos.rc

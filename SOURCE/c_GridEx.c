@@ -15,7 +15,6 @@
 
  ----------------------------------------------------------------------------*/
 
-#include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
 
 

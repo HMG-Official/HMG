@@ -1,2 +1,6 @@
+-w0 -es2
+
+../../../hmg.hbc
+
 demo.prg
 miscproc.prg

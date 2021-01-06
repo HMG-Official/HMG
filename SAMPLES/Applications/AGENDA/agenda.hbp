@@ -1,1 +1,6 @@
+
+-w0 -es0
+../../../hmg.hbc
+
 agenda.prg
+agenda.rc

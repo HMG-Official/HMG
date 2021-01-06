@@ -1,2 +1,7 @@
+-w0 -es2
+
+../../../hmg.hbc
+
 demo.prg
 AutoAdjust.PRG
+demo.rc

@@ -114,8 +114,6 @@ return nil
 
 #pragma BEGINDUMP
 
-#include "SET_COMPILE_HMG_UNICODE.ch"
-
 #ifndef COMPILE_HMG_UNICODE
    #define COMPILE_HMG_UNICODE   // Force to compile in UNICODE
 #endif

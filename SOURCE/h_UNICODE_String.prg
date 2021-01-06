@@ -46,8 +46,6 @@ HMG_POKE()              <=>   HB_BPOKE()
 
 */
 
-#include "SET_COMPILE_HMG_UNICODE.ch"
-
 #ifdef COMPILE_HMG_UNICODE
 
   FUNCTION HMG_LEN(cStr)

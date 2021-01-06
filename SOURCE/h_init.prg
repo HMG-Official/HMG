@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under 
- the terms of the GNU General Public License as published by the Free Software 
- Foundation; either version 2 of the License, or (at your option) any later 
- version. 
+ This program is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
 
- This program is distributed in the hope that it will be useful, but WITHOUT 
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with 
- this software; see the file COPYING. If not, write to the Free Software 
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
+ You should have received a copy of the GNU General Public License along with
+ this software; see the file COPYING. If not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
  visit the web site http://www.gnu.org/).
 
  As a special exception, you have permission for additional uses of the text
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other 
- files to produce an executable, this does not by itself cause the resulting 
+ The exception is that, if you link the HMG library with other
+ files to produce an executable, this does not by itself cause the resulting
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the 
+ Your use of that executable is in no way restricted on account of linking the
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -52,10 +52,6 @@
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
 
 ---------------------------------------------------------------------------*/
-
-
-#include "SET_COMPILE_HMG_UNICODE.ch"   // UNICODE
-
 
 MEMVAR _HMG_SYSDATA
 
@@ -96,7 +92,7 @@ MEMVAR _HMG_MsgDebugTimeOut
 MEMVAR _HMG_InitCodepage
 MEMVAR _HMG_MainWindowFirst
 MEMVAR _HMG_MainFormIndex
-MEMVAR _HMG_LastActiveFormIndex 
+MEMVAR _HMG_LastActiveFormIndex
 MEMVAR _HMG_LastActiveControlIndex
 MEMVAR _HMG_LastFormIndexWithCursor
 MEMVAR _HMG_StopWindowEventProcedure
@@ -184,7 +180,7 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 
 #ifdef COMPILE_HMG_UNICODE
        SET CODEPAGE TO UNICODE
-#endif       
+#endif
 
 
 //------------------------------------------------------------------------
@@ -500,7 +496,7 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	* _HMG_SYSDATA [ 297 ] -> _RESERVED_
 	* _HMG_SYSDATA [ 298 ] -> Current Disabled BackColor
 	* _HMG_SYSDATA [ 299 ] -> Current Disabled ForeColor
-	* _HMG_SYSDATA [ 300 ] -> _hmg_ActiveToolBarImageHeight	
+	* _HMG_SYSDATA [ 300 ] -> _hmg_ActiveToolBarImageHeight
 	* _HMG_SYSDATA [ 301 ] -> _HMG_ActiveTabBold
 	* _HMG_SYSDATA [ 302 ] -> _HMG_ActiveTabItalic
 	* _HMG_SYSDATA [ 303 ] -> _HMG_ActiveTabUnderline
@@ -515,7 +511,7 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	* _HMG_SYSDATA [ 312 ] -> _hmg_ActiveToolBarParentWindowHandle
 	* _HMG_SYSDATA [ 313 ] -> _hmg_ActiveToolBarGripperText
 	* _HMG_SYSDATA [ 314 ] -> _hmg_ActiveToolBarBreak
-	* _HMG_SYSDATA [ 315 ] -> _hmg_ActiveToolBarImageWidth	
+	* _HMG_SYSDATA [ 315 ] -> _hmg_ActiveToolBarImageWidth
 	* _HMG_SYSDATA [ 316 ] -> _HMG_ThisFormName
 	* _HMG_SYSDATA [ 317 ] -> _HMG_ThisControlName
 	* _HMG_SYSDATA [ 318 ] -> _HMG_THISItemCellValue
@@ -569,17 +565,17 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	* _HMG_SYSDATA [ 366 ] -> _hmg_printer_scrollstep
 	* _HMG_SYSDATA [ 367 ] -> _hmg_printer_zoomclick_xoffset
 	* _HMG_SYSDATA [ 368 ] -> _HMG_PRINTER_THUMBUPDATE
-	* _HMG_SYSDATA [ 369 ] -> _hmg_printer_thumbscroll 
+	* _HMG_SYSDATA [ 369 ] -> _hmg_printer_thumbscroll
 	* _HMG_SYSDATA [ 370 ] -> _hmg_printer_PrevPageNumber
 	* _HMG_SYSDATA [ 371 ] -> _hmg_printer_usermessages
 	* _HMG_SYSDATA [ 372 ] -> _hmg_printer_hdc_bak
-	* _HMG_SYSDATA [ 373 ] -> _hmg_printer_aPrinterProperties	
-	* _HMG_SYSDATA [ 374 ] -> _hmg_printer_hdc 
-	* _HMG_SYSDATA [ 375 ] -> _hmg_printer_name 
-	* _HMG_SYSDATA [ 376 ] -> _hmg_printer_copies 
-	* _HMG_SYSDATA [ 377 ] -> _hmg_printer_collate 
-	* _HMG_SYSDATA [ 378 ] -> _hmg_printer_preview 
-	* _HMG_SYSDATA [ 379 ] -> _hmg_printer_timestamp 
+	* _HMG_SYSDATA [ 373 ] -> _hmg_printer_aPrinterProperties
+	* _HMG_SYSDATA [ 374 ] -> _hmg_printer_hdc
+	* _HMG_SYSDATA [ 375 ] -> _hmg_printer_name
+	* _HMG_SYSDATA [ 376 ] -> _hmg_printer_copies
+	* _HMG_SYSDATA [ 377 ] -> _hmg_printer_collate
+	* _HMG_SYSDATA [ 378 ] -> _hmg_printer_preview
+	* _HMG_SYSDATA [ 379 ] -> _hmg_printer_timestamp
 	* _HMG_SYSDATA [ 380 ] -> _hmg_printer_PageCount
 	* _HMG_SYSDATA [ 381 ] -> Active Picture Alignment
 	* _HMG_SYSDATA [ 382 ] -> Grid Column Header
@@ -605,9 +601,9 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	* _HMG_SYSDATA [ 402 ] -> _HMG_ActiveControlItemSource
 	* _HMG_SYSDATA [ 403 ] -> _HMG_ActiveControlValueSource
 	* _HMG_SYSDATA [ 404 ] -> _HMG_ActiveControlWrap
-	* _HMG_SYSDATA [ 405 ] -> _HMG_ActiveControlIncrement	
+	* _HMG_SYSDATA [ 405 ] -> _HMG_ActiveControlIncrement
 	* _HMG_SYSDATA [ 406 ] -> _HMG_ActiveControlAddress
-	* _HMG_SYSDATA [ 407 ] -> _HMG_ActiveControlItemCount 
+	* _HMG_SYSDATA [ 407 ] -> _HMG_ActiveControlItemCount
 	* _HMG_SYSDATA [ 408 ] -> _HMG_ActiveControlOnQueryData
 	* _HMG_SYSDATA [ 409 ] -> _HMG_ActiveControlAutoSize
 	* _HMG_SYSDATA [ 410 ] -> _HMG_ActiveControlVirtual
@@ -617,22 +613,22 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	* _HMG_SYSDATA [ 414 ] -> _HMG_ActiveControlFontStrikeOut
 	* _HMG_SYSDATA [ 415 ] -> _HMG_ActiveControlFontUnderLine
 	* _HMG_SYSDATA [ 416 ] -> _HMG_ActiveControlName
-	* _HMG_SYSDATA [ 417 ] -> _HMG_ActiveControlOf                 
-	* _HMG_SYSDATA [ 418 ] -> _HMG_ActiveControlCaption            
-	* _HMG_SYSDATA [ 419 ] -> _HMG_ActiveControlAction             
-	* _HMG_SYSDATA [ 420 ] -> _HMG_ActiveControlWidth              
-	* _HMG_SYSDATA [ 421 ] -> _HMG_ActiveControlHeight             
-	* _HMG_SYSDATA [ 422 ] -> _HMG_ActiveControlFont               
-	* _HMG_SYSDATA [ 423 ] -> _HMG_ActiveControlSize               
+	* _HMG_SYSDATA [ 417 ] -> _HMG_ActiveControlOf
+	* _HMG_SYSDATA [ 418 ] -> _HMG_ActiveControlCaption
+	* _HMG_SYSDATA [ 419 ] -> _HMG_ActiveControlAction
+	* _HMG_SYSDATA [ 420 ] -> _HMG_ActiveControlWidth
+	* _HMG_SYSDATA [ 421 ] -> _HMG_ActiveControlHeight
+	* _HMG_SYSDATA [ 422 ] -> _HMG_ActiveControlFont
+	* _HMG_SYSDATA [ 423 ] -> _HMG_ActiveControlSize
 	* _HMG_SYSDATA [ 424 ] -> _HMG_ActiveControlTooltip
-	* _HMG_SYSDATA [ 425 ] -> _HMG_ActiveControlFlat               
-	* _HMG_SYSDATA [ 426 ] -> _HMG_ActiveControlOnGotFocus         
-	* _HMG_SYSDATA [ 427 ] -> _HMG_ActiveControlOnLostFocus        
-	* _HMG_SYSDATA [ 428 ] -> _HMG_ActiveControlNoTabStop  
-	* _HMG_SYSDATA [ 429 ] -> _HMG_ActiveControlHelpId          
-	* _HMG_SYSDATA [ 430 ] -> _HMG_ActiveControlInvisible  
+	* _HMG_SYSDATA [ 425 ] -> _HMG_ActiveControlFlat
+	* _HMG_SYSDATA [ 426 ] -> _HMG_ActiveControlOnGotFocus
+	* _HMG_SYSDATA [ 427 ] -> _HMG_ActiveControlOnLostFocus
+	* _HMG_SYSDATA [ 428 ] -> _HMG_ActiveControlNoTabStop
+	* _HMG_SYSDATA [ 429 ] -> _HMG_ActiveControlHelpId
+	* _HMG_SYSDATA [ 430 ] -> _HMG_ActiveControlInvisible
 	* _HMG_SYSDATA [ 431 ] -> _HMG_ActiveControlRow
-	* _HMG_SYSDATA [ 432 ] -> _HMG_ActiveControlCol                
+	* _HMG_SYSDATA [ 432 ] -> _HMG_ActiveControlCol
 	* _HMG_SYSDATA [ 433 ] -> _HMG_ActiveControlPicture
 	* _HMG_SYSDATA [ 434 ] -> _HMG_ActiveControlValue
 	* _HMG_SYSDATA [ 435 ] -> _HMG_ActiveControlOnChange
@@ -656,7 +652,7 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	* _HMG_SYSDATA [ 453 ] -> _HMG_ActiveControlNoTodayCircle
 	* _HMG_SYSDATA [ 454 ] -> _HMG_ActiveControlWeekNumbers
 	* _HMG_SYSDATA [ 455 ] -> _HMG_ActiveControlMultiSelect
-	* _HMG_SYSDATA [ 456 ] -> _HMG_ActiveControlEdit		
+	* _HMG_SYSDATA [ 456 ] -> _HMG_ActiveControlEdit
 	* _HMG_SYSDATA [ 457 ] -> _HMG_ActiveControlBackColor
 	* _HMG_SYSDATA [ 458 ] -> _HMG_ActiveControlFontColor
 	* _HMG_SYSDATA [ 459 ] -> _HMG_ActiveControlBorder
@@ -683,7 +679,7 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	* _HMG_SYSDATA [ 480 ] -> _HMG_ActiveControlWorkArea
 	* _HMG_SYSDATA [ 481 ] -> _HMG_ActiveControlFields
 	* _HMG_SYSDATA [ 482 ] -> _HMG_ActiveControlDelete
-	* _HMG_SYSDATA [ 483 ] -> _HMG_ActiveControlValid		
+	* _HMG_SYSDATA [ 483 ] -> _HMG_ActiveControlValid
 	* _HMG_SYSDATA [ 484 ] -> _HMG_ActiveControlValidMessages
 	* _HMG_SYSDATA [ 485 ] -> _HMG_ActiveControlLock
 	* _HMG_SYSDATA [ 486 ] -> _HMG_ActiveControlAppendable
@@ -706,7 +702,7 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
    * _HMG_SYSDATA [ 502 ] -> #xtranslate --> _HMG_PrinterMetaFileDC
    * _HMG_SYSDATA [ 503 ] -> #xtranslate --> _HMG_FindReplaceOptions
    * _HMG_SYSDATA [ 504 ] -> {x,y,w,h}   --> Position of Panel Window
- 
+
    * _HMG_SYSDATA [ 505 ] -> PrintPreview NotSaveButton --> .T. or .F.
    * _HMG_SYSDATA [ 506 ] -> PrintPreview Dialog cFileName
    * _HMG_SYSDATA [ 507 ] -> Print SaveAs cFullFileName
@@ -720,13 +716,13 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
    * _HMG_SYSDATA [ 515 ] -> #xtranslate --> OpenPrinterGetJobID()
    * _HMG_SYSDATA [ 516 ] -> cVarName of STOREJOBDATA <aJobData>
    * _HMG_SYSDATA [ 517 ] -> #xtranslate --> oString
-   * _HMG_SYSDATA [ 518 ] -> #xtranslate --> This.Cargo 
+   * _HMG_SYSDATA [ 518 ] -> #xtranslate --> This.Cargo
 
 	* Create Public Array and Give it Initial Values
 
 	Public _HMG_SYSDATA [ 518 ]
 
-   
+
 	For i := 1 to 108
 		_HMG_SYSDATA [ i ] := {}
 	Next i
@@ -772,9 +768,9 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	_HMG_SYSDATA [ 344 ] := 'None'
 	_HMG_SYSDATA [ 371 ] := ARRAY (29)
    _HMG_SYSDATA [ 373 ] := {0,"",0,0}  // _hmg_printer_aPrinterProperties
-	_HMG_SYSDATA [  55 ] := .F. 
+	_HMG_SYSDATA [  55 ] := .F.
 	_HMG_SYSDATA [  56 ] := NIL
-	_HMG_SYSDATA [  57 ] := NIL 
+	_HMG_SYSDATA [  57 ] := NIL
 	_HMG_SYSDATA [ 383 ] := .F.
 	_HMG_SYSDATA [ 345 ] := 1   // ScrollStep
    _HMG_SYSDATA [ 501 ] := 20  // ScrollPage
@@ -788,14 +784,14 @@ PUBLIC _HMG_InitCodepage := SET (_SET_CODEPAGE)
 	_HMG_SYSDATA [ 350 ] := { GetRed ( GetSysColor (COLOR_HIGHLIGHTTEXT) )	, GetGreen ( GetSysColor ( COLOR_HIGHLIGHTTEXT) )	, GetBlue ( GetSysColor (COLOR_HIGHLIGHTTEXT) ) }
 	_HMG_SYSDATA [ 351 ] := { GetRed ( GetSysColor (COLOR_HIGHLIGHT) )	, GetGreen ( GetSysColor (COLOR_HIGHLIGHT ) )		, GetBlue ( GetSysColor (COLOR_HIGHLIGHT) )	}
 
-   
+
 // for default the selected language is English
    HB_LANGSELECT ("EN")
    InitMessages ("EN")
 
    _HMG_SYSDATA [ 306 ] := IsExeRunning (HB_UTF8STRTRAN (GetProgramFileName(), '\', '_'))
 
-	If 'XP' $ aWINver[1] 
+	If 'XP' $ aWINver[1]
 		_HMG_SYSDATA [ 250 ] := .T.
 	EndIf
 
@@ -873,9 +869,9 @@ Procedure SetMultiple (lSetMultiple, lWarning)
 *--------------------------------------------------*
 LOCAL lExeRunning := _HMG_SYSDATA [ 306 ]
 
-  IF ( lExeRunning == .T.) .AND. (lSetMultiple == .F.)  
+  IF ( lExeRunning == .T.) .AND. (lSetMultiple == .F.)
       IF lWarning == .T.
-         InitMessages() 
+         InitMessages()
          MsgStop (_HMG_SYSDATA [ 331 ] [ 4 ])
       ENDIF
       ExitProcess(0)
@@ -899,11 +895,11 @@ Procedure InitMessages (cSetLang)
 __THREAD STATIC cLang := "EN"
 
    IF cSetLang <> NIL
-      cLang := cSetLang 
+      cLang := cSetLang
    ENDIF
-   
+
    _HMG_SYSDATA [ 211 ] := cLang
-   
+
 // cLang := Set ( _SET_LANGUAGE )
 
 // FINNISH and DUTCH: LANGUAGES NOT SUPPORTED BY hb_langSelect() FUNCTION.
@@ -1012,7 +1008,7 @@ IF HMG_IsCurrentCodePageUnicode()
                      "Kald√Ωr",;
                      "Print",;
                      "Kapat"}
-                     
+
         _HMG_SYSDATA [ 134 ]  := { ;
                      "EDIT, √ßal√Ω√æma alan√Ω ismi noksan",;
                      "EDIT, bu √ßal√Ω√æma alan√Ωnda 16'dan fazla saha var",;
@@ -1034,7 +1030,7 @@ IF HMG_IsCurrentCodePageUnicode()
                      "&Kopyala",;              // 9
                      "&S√ºzge√ßi etkinle√ætir",;  // 10
                      "&S√ºzge√ßi kald√Ωr" }       // 11
-                                      
+
             _HMG_SYSDATA [ 129 ] := { ;
                      "Yok",;                         // 1
                      "Kay√Ωt",;                       // 2
@@ -1068,9 +1064,9 @@ IF HMG_IsCurrentCodePageUnicode()
                      "Daha k√º√ß√ºk",;                  // 30
                      "Daha b√ºy√ºk veya e√æit",;        // 31
                      "Daha k√º√ß√ºk veya e√æit"}         // 32
-                                      
+
             _HMG_SYSDATA [ 130 ] := { ABM_CRLF + ;
-                "Aktif bir alan bulunamad√Ω."  + ABM_CRLF + ;       
+                "Aktif bir alan bulunamad√Ω."  + ABM_CRLF + ;
                 "L√ºtfen EDIT'i √ßa√∞√Ωrmadan √∂nce bir alan se√ßin" + ABM_CRLF,;           //  1
                 "Saha de√∞eri girin ( metin )",;                                       //  2
                 "Saha de√∞eri girin ( say√Ω )",;                                        //  3
@@ -1078,9 +1074,9 @@ IF HMG_IsCurrentCodePageUnicode()
                 "Do√∞ru de√∞eri onayla",;                                               //  5
                 "Saha de√∞eri girin",;                                                 //  6
                 "Bir kay√Ωt se√ßip 'Tamam'a bas√Ωn",;                                    //  7
-                ABM_CRLF + "Aktif kayd√Ω silmek √ºzeresiniz" + ABM_CRLF + ;                 
+                ABM_CRLF + "Aktif kayd√Ω silmek √ºzeresiniz" + ABM_CRLF + ;
                            "Emin misiniz ?    " + ABM_CRLF,;                          //  8
-                ABM_CRLF + "Aktif bir s√Ωra d√ºzeni yok   " + ABM_CRLF + ;                  
+                ABM_CRLF + "Aktif bir s√Ωra d√ºzeni yok   " + ABM_CRLF + ;
                            "L√ºtfen birini se√ßin " + ABM_CRLF,;                        //  9
                 ABM_CRLF + "Memo ve mant√Ωksal sahada arama yap√Ωlam√Ωyor." + ABM_CRLF,; // 10
                 ABM_CRLF + "Kay√Ωt bulunmad√Ω   " + ABM_CRLF,;                          // 11
@@ -1311,9 +1307,9 @@ IF HMG_IsCurrentCodePageUnicode()
 		_hMG_SYSDATA [ 331 ] [5] := 'Uredi'
 		_hMG_SYSDATA [ 331 ] [6] := 'U redu'
 		_hMG_SYSDATA [ 331 ] [7] := 'Prekid'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
-		// BROWSE MESSAGES 
+		// BROWSE MESSAGES
 
         	_HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
                                      " is not defined. Program terminated"                   ,;
@@ -1488,10 +1484,10 @@ IF HMG_IsCurrentCodePageUnicode()
 		_hMG_SYSDATA [ 331 ] [5] := 'Edit'
 		_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 		_hMG_SYSDATA [ 331 ] [7] := 'Cancel'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 
-		// BROWSE MESSAGES 
+		// BROWSE MESSAGES
 
         	_HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
                                      " is not defined. Program terminated"                   ,;
@@ -1649,7 +1645,7 @@ IF HMG_IsCurrentCodePageUnicode()
                                 ABM_CRLF + "Iragazteko edozein eragile aukeratu    " + ABM_CRLF,                                                             ; // 37
                                 ABM_CRLF + "Idatzi edozein balio iragazteko    " + ABM_CRLF,                                                                 ; // 38
                                 ABM_CRLF + "Ez dago iragazki aktiborik    " + ABM_CRLF,                                                                      ; // 39
-                                ABM_CRLF + "Iragazkia kendu?   " + ABM_CRLF,                                                                                  ; // 40                
+                                ABM_CRLF + "Iragazkia kendu?   " + ABM_CRLF,                                                                                  ; // 40
                                 ABM_CRLF + "Record locked by another user" + ABM_CRLF                                                                   } // 41
 
         case cLang == "EN"        // English
@@ -1844,7 +1840,7 @@ IF HMG_IsCurrentCodePageUnicode()
 		_hMG_SYSDATA [ 331 ] [5] := 'Editer'
 		_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 		_hMG_SYSDATA [ 331 ] [7] := 'Abandonner'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -1861,7 +1857,7 @@ IF HMG_IsCurrentCodePageUnicode()
 				     "Entr√©e invalide"                                        }
                 _HMG_SYSDATA [ 137 ] := { 'Etes-vous s√ªre ?' , 'Enregistrement d√©truit' }
 
-		// EDIT 
+		// EDIT
 
                 _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Suppression d'enregistrement"+CHR(13)+"Etes-vous s√ªre ?"+CHR(13)  ,;
                                      CHR(13)+"Index manquant"+CHR(13)+"Recherche impossible"+CHR(13)            ,;
@@ -2020,7 +2016,7 @@ IF HMG_IsCurrentCodePageUnicode()
 		_hMG_SYSDATA [ 331 ] [5] := 'Bearbeiten'
 		_hMG_SYSDATA [ 331 ] [6] := 'OK'
 		_hMG_SYSDATA [ 331 ] [7] := 'Abbrechen'
-		_hMG_SYSDATA [ 331 ] [8] := 'Seite'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Seite'
 
 		// BROWSE
 
@@ -2195,7 +2191,7 @@ IF HMG_IsCurrentCodePageUnicode()
 		_hMG_SYSDATA [ 331 ] [5] := 'Edita'
 		_hMG_SYSDATA [ 331 ] [6] := 'Conferma'
 		_hMG_SYSDATA [ 331 ] [7] := 'Annulla'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -2207,12 +2203,12 @@ IF HMG_IsCurrentCodePageUnicode()
                     " Gi‚Ä¶ definito. Programma Terminato" ,;
                	"Browse: Tipo non valido. Programma Terminato"  ,;
                 "Browse: Modifica non possibile: il campo non ≈† pertinente l'area di lavoro.Programma Terminato",;
-                "Record gi‚Ä¶ utilizzato da altro utente"                 ,;     
+                "Record gi‚Ä¶ utilizzato da altro utente"                 ,;
 		"Attenzione!"                                           ,;
                 "Dato non valido" }
                 _HMG_SYSDATA [ 137 ] := { 'Sei sicuro ?' , 'Cancella Record' }
 
-		// EDIT 
+		// EDIT
 
                 _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Cancellare il record"+CHR(13)+"Sei sicuro ?"+CHR(13)                  ,;
                  	             CHR(13)+"File indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)            ,;
@@ -2356,7 +2352,7 @@ IF HMG_IsCurrentCodePageUnicode()
                                 ABM_CRLF + "Disattivare filtro ?   " + ABM_CRLF,                                                                     ; // 40
                                 ABM_CRLF + "Record bloccato da altro utente" + ABM_CRLF                                                              } // 41
 
-        // case cLang == "PLWIN"  .OR. cLang == "PL852"  .OR. cLang == "PLISO"  .OR. cLang == ""  .OR. cLang == "PLMAZ"   // Polish 
+        // case cLang == "PLWIN"  .OR. cLang == "PL852"  .OR. cLang == "PLISO"  .OR. cLang == ""  .OR. cLang == "PLMAZ"   // Polish
         case cLang == "PL"
 	/////////////////////////////////////////////////////////////
 	// POLISH
@@ -2371,7 +2367,7 @@ IF HMG_IsCurrentCodePageUnicode()
 		_hMG_SYSDATA [ 331 ] [5] := 'Edycja'
 		_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 		_hMG_SYSDATA [ 331 ] [7] := 'Porzu√¶'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -2386,7 +2382,7 @@ IF HMG_IsCurrentCodePageUnicode()
 				     "Rekord edytowany przez innego u¬øytkownika"                ,;
 				     "Ostrze¬øenie"                                               ,;
 				     "Nieprawid¬≥owy wpis"                                          }
-                _HMG_SYSDATA [ 137 ] := { 'Czy jesteo pewny ?' , 'Skasuj rekord' }  
+                _HMG_SYSDATA [ 137 ] := { 'Czy jesteo pewny ?' , 'Skasuj rekord' }
 
 		// EDIT
 
@@ -2547,7 +2543,7 @@ _hMG_SYSDATA [ 331 ] [4] := 'O programa j√° est√° em execu√ß√£o'
 _hMG_SYSDATA [ 331 ] [5] := 'Edita'
 _hMG_SYSDATA [ 331 ] [6] := 'Ok'
 _hMG_SYSDATA [ 331 ] [7] := 'Cancela'
-_hMG_SYSDATA [ 331 ] [8] := 'P√°g.'	
+_hMG_SYSDATA [ 331 ] [8] := 'P√°g.'
 
 
 // BROWSE
@@ -2618,7 +2614,7 @@ _HMG_SYSDATA [ 133 ] := { "Fechar",					;
                            "Sair",					;
                            "Imprimir",					;
                            "Fechar"					}
-     
+
 _HMG_SYSDATA [ 134 ]  := { "EDIT, Nenhuma √Årea foi especificada",					;
                            "EDIT, A √Årea selecionada possui mais de 16 campos",				;
                            "EDIT, Atualiza√ß√£o est√° fora do limite (Favor comunicar este erro)",		;
@@ -2733,7 +2729,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 		_hMG_SYSDATA [ 331 ] [5] := '√à√ß√¨√•√≠√®√≤√º'
 		_hMG_SYSDATA [ 331 ] [6] := '√Ñ√†'
 		_hMG_SYSDATA [ 331 ] [7] := '√é√≤√¨√•√≠√†'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -2909,9 +2905,9 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 		_hMG_SYSDATA [ 331 ] [5] := 'Editar'
 		_hMG_SYSDATA [ 331 ] [6] := 'Aceptar'
 		_hMG_SYSDATA [ 331 ] [7] := 'Cancelar'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
-		// BROWSE		
+		// BROWSE
 
                 _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
                                      " no est√° definida. Ejecuci√≥n terminada"                ,;
@@ -2926,7 +2922,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 				     "Entrada no v√°lida"                                      }
                 _HMG_SYSDATA [ 137 ] := { 'Est√° Seguro ?' , 'Eliminar Registro' }
 
-		// EDIT 
+		// EDIT
 
                 _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Va a eliminar el registro actual"+CHR(13)+"¬ø Est√° seguro ?"+CHR(13)                 ,;
                                      CHR(13)+"No hay un indice activo"+CHR(13)+"No se puede realizar la busqueda"+CHR(13)         ,;
@@ -3083,7 +3079,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 	_hMG_SYSDATA [ 331 ] [5] := 'Korjaa'
 	_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 	_hMG_SYSDATA [ 331 ] [7] := 'Keskeyt√§'
-	_hMG_SYSDATA [ 331 ] [8] := 'Sivu.'      
+	_hMG_SYSDATA [ 331 ] [8] := 'Sivu.'
 
 	// BROWSE
 
@@ -3101,7 +3097,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 
 		_HMG_SYSDATA [ 137 ] := { 'Oletko varma ?' , 'Poista tietue' }
 
-		// EDIT 
+		// EDIT
 		_HMG_SYSDATA [ 131 ]   := { CHR(13)+"Poista tietue"+CHR(13)+"Oletko varma?"+CHR(13)                  ,;
 			CHR(13)+"Indeksi tiedosto puuttuu"+CHR(13)+"En voihakea"+CHR(13)            ,;
 			CHR(13)+"Indeksikentt√§ ei l√∂ydy"+CHR(13)+"En voihakea"+CHR(13)        ,;
@@ -3247,7 +3243,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 			ABM_CRLF + "Ei aktiivisia suotimia    " + ABM_CRLF,                                              ; // 39
 			ABM_CRLF + "Poista suodin?   " + ABM_CRLF,                                        ; // 40
 			ABM_CRLF + "Tietue lukittu    " + ABM_CRLF                                 } // 41
-	
+
         case cLang == "NL"        // Dutch
 	/////////////////////////////////////////////////////////////
 	// DUTCH
@@ -3417,7 +3413,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
                                   ABM_CRLF + "Selecteer A.U.B. een printer " + ABM_CRLF,; // 32
                                   "Gefilterd op", ; // 33
                                   ABM_CRLF + "Er is een actief filter    " + ABM_CRLF,; // 34
-                                  ABM_CRLF + "Kan niet filteren op memo velden    " + ABM_CRLF,; // 35 
+                                  ABM_CRLF + "Kan niet filteren op memo velden    " + ABM_CRLF,; // 35
                                   ABM_CRLF + "Selecteer het veld om op te filteren    " + ABM_CRLF, ; // 36
                                   ABM_CRLF + "Selecteer een operator om te filteren    " + ABM_CRLF,; // 37
                                   ABM_CRLF + "Type een waarde om te filteren " + ABM_CRLF,; // 38
@@ -3444,7 +3440,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 
 		// BROWSE MESSAGES
 
-		_HMG_SYSDATA [ 136 ]  := { "Window: "                        ,;     
+		_HMG_SYSDATA [ 136 ]  := { "Window: "                        ,;
                            " not defined. Program terminated"     ,;
                            "HMG Error"                        ,;
                            "Control: "                            ,;
@@ -3784,7 +3780,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N√£o h√° uma √°rea ativa   "  + ABM_CRLF +
 	endcase
 
 ********************************************************************************************************************************************************
-ELSE   // ANSI 
+ELSE   // ANSI
 ********************************************************************************************************************************************************
 
 	do case
@@ -3877,7 +3873,7 @@ ELSE   // ANSI
                      "Kald˝r",;
                      "Print",;
                      "Kapat"}
-                     
+
         _HMG_SYSDATA [ 134 ]  := { ;
                      "EDIT, Áal˝˛ma alan˝ ismi noksan",;
                      "EDIT, bu Áal˝˛ma alan˝nda 16'dan fazla saha var",;
@@ -3899,7 +3895,7 @@ ELSE   // ANSI
                      "&Kopyala",;              // 9
                      "&S¸zgeÁi etkinle˛tir",;  // 10
                      "&S¸zgeÁi kald˝r" }       // 11
-                                      
+
             _HMG_SYSDATA [ 129 ] := { ;
                      "Yok",;                         // 1
                      "Kay˝t",;                       // 2
@@ -3933,9 +3929,9 @@ ELSE   // ANSI
                      "Daha k¸Á¸k",;                  // 30
                      "Daha b¸y¸k veya e˛it",;        // 31
                      "Daha k¸Á¸k veya e˛it"}         // 32
-                                      
+
             _HMG_SYSDATA [ 130 ] := { ABM_CRLF + ;
-                "Aktif bir alan bulunamad˝."  + ABM_CRLF + ;       
+                "Aktif bir alan bulunamad˝."  + ABM_CRLF + ;
                 "L¸tfen EDIT'i Áa˝rmadan ˆnce bir alan seÁin" + ABM_CRLF,;           //  1
                 "Saha deeri girin ( metin )",;                                       //  2
                 "Saha deeri girin ( say˝ )",;                                        //  3
@@ -3943,9 +3939,9 @@ ELSE   // ANSI
                 "Doru deeri onayla",;                                               //  5
                 "Saha deeri girin",;                                                 //  6
                 "Bir kay˝t seÁip 'Tamam'a bas˝n",;                                    //  7
-                ABM_CRLF + "Aktif kayd˝ silmek ¸zeresiniz" + ABM_CRLF + ;                 
+                ABM_CRLF + "Aktif kayd˝ silmek ¸zeresiniz" + ABM_CRLF + ;
                            "Emin misiniz ?    " + ABM_CRLF,;                          //  8
-                ABM_CRLF + "Aktif bir s˝ra d¸zeni yok   " + ABM_CRLF + ;                  
+                ABM_CRLF + "Aktif bir s˝ra d¸zeni yok   " + ABM_CRLF + ;
                            "L¸tfen birini seÁin " + ABM_CRLF,;                        //  9
                 ABM_CRLF + "Memo ve mant˝ksal sahada arama yap˝lam˝yor." + ABM_CRLF,; // 10
                 ABM_CRLF + "Kay˝t bulunmad˝   " + ABM_CRLF,;                          // 11
@@ -4176,9 +4172,9 @@ ELSE   // ANSI
 		_hMG_SYSDATA [ 331 ] [5] := 'Uredi'
 		_hMG_SYSDATA [ 331 ] [6] := 'U redu'
 		_hMG_SYSDATA [ 331 ] [7] := 'Prekid'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
-		// BROWSE MESSAGES 
+		// BROWSE MESSAGES
 
         	_HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
                                      " is not defined. Program terminated"                   ,;
@@ -4353,10 +4349,10 @@ ELSE   // ANSI
 		_hMG_SYSDATA [ 331 ] [5] := 'Edit'
 		_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 		_hMG_SYSDATA [ 331 ] [7] := 'Cancel'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 
-		// BROWSE MESSAGES 
+		// BROWSE MESSAGES
 
         	_HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
                                      " is not defined. Program terminated"                   ,;
@@ -4514,7 +4510,7 @@ ELSE   // ANSI
                                 ABM_CRLF + "Iragazteko edozein eragile aukeratu    " + ABM_CRLF,                                                             ; // 37
                                 ABM_CRLF + "Idatzi edozein balio iragazteko    " + ABM_CRLF,                                                                 ; // 38
                                 ABM_CRLF + "Ez dago iragazki aktiborik    " + ABM_CRLF,                                                                      ; // 39
-                                ABM_CRLF + "Iragazkia kendu?   " + ABM_CRLF,                                                                                  ; // 40                
+                                ABM_CRLF + "Iragazkia kendu?   " + ABM_CRLF,                                                                                  ; // 40
                                 ABM_CRLF + "Record locked by another user" + ABM_CRLF                                                                   } // 41
 
         case cLang == "EN"        // English
@@ -4709,7 +4705,7 @@ ELSE   // ANSI
 		_hMG_SYSDATA [ 331 ] [5] := 'Editer'
 		_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 		_hMG_SYSDATA [ 331 ] [7] := 'Abandonner'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -4726,7 +4722,7 @@ ELSE   // ANSI
 				     "EntrÈe invalide"                                        }
                 _HMG_SYSDATA [ 137 ] := { 'Etes-vous s˚re ?' , 'Enregistrement dÈtruit' }
 
-		// EDIT 
+		// EDIT
 
                 _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Suppression d'enregistrement"+CHR(13)+"Etes-vous s˚re ?"+CHR(13)  ,;
                                      CHR(13)+"Index manquant"+CHR(13)+"Recherche impossible"+CHR(13)            ,;
@@ -4885,7 +4881,7 @@ ELSE   // ANSI
 		_hMG_SYSDATA [ 331 ] [5] := 'Bearbeiten'
 		_hMG_SYSDATA [ 331 ] [6] := 'OK'
 		_hMG_SYSDATA [ 331 ] [7] := 'Abbrechen'
-		_hMG_SYSDATA [ 331 ] [8] := 'Seite'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Seite'
 
 		// BROWSE
 
@@ -5060,7 +5056,7 @@ ELSE   // ANSI
 		_hMG_SYSDATA [ 331 ] [5] := 'Edita'
 		_hMG_SYSDATA [ 331 ] [6] := 'Conferma'
 		_hMG_SYSDATA [ 331 ] [7] := 'Annulla'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -5072,12 +5068,12 @@ ELSE   // ANSI
                     " GiÖ definito. Programma Terminato" ,;
                	"Browse: Tipo non valido. Programma Terminato"  ,;
                 "Browse: Modifica non possibile: il campo non ä pertinente l'area di lavoro.Programma Terminato",;
-                "Record giÖ utilizzato da altro utente"                 ,;     
+                "Record giÖ utilizzato da altro utente"                 ,;
 		"Attenzione!"                                           ,;
                 "Dato non valido" }
                 _HMG_SYSDATA [ 137 ] := { 'Sei sicuro ?' , 'Cancella Record' }
 
-		// EDIT 
+		// EDIT
 
                 _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Cancellare il record"+CHR(13)+"Sei sicuro ?"+CHR(13)                  ,;
                  	             CHR(13)+"File indice mancante"+CHR(13)+"Ricerca impossibile"+CHR(13)            ,;
@@ -5221,7 +5217,7 @@ ELSE   // ANSI
                                 ABM_CRLF + "Disattivare filtro ?   " + ABM_CRLF,                                                                     ; // 40
                                 ABM_CRLF + "Record bloccato da altro utente" + ABM_CRLF                                                              } // 41
 
-        // case cLang == "PLWIN"  .OR. cLang == "PL852"  .OR. cLang == "PLISO"  .OR. cLang == ""  .OR. cLang == "PLMAZ"   // Polish 
+        // case cLang == "PLWIN"  .OR. cLang == "PL852"  .OR. cLang == "PLISO"  .OR. cLang == ""  .OR. cLang == "PLMAZ"   // Polish
         case cLang == "PL"
 	/////////////////////////////////////////////////////////////
 	// POLISH
@@ -5236,7 +5232,7 @@ ELSE   // ANSI
 		_hMG_SYSDATA [ 331 ] [5] := 'Edycja'
 		_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 		_hMG_SYSDATA [ 331 ] [7] := 'PorzuÊ'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -5251,7 +5247,7 @@ ELSE   // ANSI
 				     "Rekord edytowany przez innego uøytkownika"                ,;
 				     "Ostrzeøenie"                                               ,;
 				     "Nieprawid≥owy wpis"                                          }
-                _HMG_SYSDATA [ 137 ] := { 'Czy jesteo pewny ?' , 'Skasuj rekord' }  
+                _HMG_SYSDATA [ 137 ] := { 'Czy jesteo pewny ?' , 'Skasuj rekord' }
 
 		// EDIT
 
@@ -5412,7 +5408,7 @@ _hMG_SYSDATA [ 331 ] [4] := 'O programa j· est· em execuÁ„o'
 _hMG_SYSDATA [ 331 ] [5] := 'Edita'
 _hMG_SYSDATA [ 331 ] [6] := 'Ok'
 _hMG_SYSDATA [ 331 ] [7] := 'Cancela'
-_hMG_SYSDATA [ 331 ] [8] := 'P·g.'	
+_hMG_SYSDATA [ 331 ] [8] := 'P·g.'
 
 
 // BROWSE
@@ -5483,7 +5479,7 @@ _HMG_SYSDATA [ 133 ] := { "Fechar",					;
                            "Sair",					;
                            "Imprimir",					;
                            "Fechar"					}
-     
+
 _HMG_SYSDATA [ 134 ]  := { "EDIT, Nenhuma ¡rea foi especificada",					;
                            "EDIT, A ¡rea selecionada possui mais de 16 campos",				;
                            "EDIT, AtualizaÁ„o est· fora do limite (Favor comunicar este erro)",		;
@@ -5598,7 +5594,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
 		_hMG_SYSDATA [ 331 ] [5] := '»ÁÏÂÌËÚ¸'
 		_hMG_SYSDATA [ 331 ] [6] := 'ƒ‡'
 		_hMG_SYSDATA [ 331 ] [7] := 'ŒÚÏÂÌ‡'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
 		// BROWSE
 
@@ -5774,9 +5770,9 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
 		_hMG_SYSDATA [ 331 ] [5] := 'Editar'
 		_hMG_SYSDATA [ 331 ] [6] := 'Aceptar'
 		_hMG_SYSDATA [ 331 ] [7] := 'Cancelar'
-		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'	
+		_hMG_SYSDATA [ 331 ] [8] := 'Pag.'
 
-		// BROWSE		
+		// BROWSE
 
                 _HMG_SYSDATA [ 136 ]  := { "Window: "                                              ,;
                                      " no est· definida. EjecuciÛn terminada"                ,;
@@ -5791,7 +5787,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
 				     "Entrada no v·lida"                                      }
                 _HMG_SYSDATA [ 137 ] := { 'Est· Seguro ?' , 'Eliminar Registro' }
 
-		// EDIT 
+		// EDIT
 
                 _HMG_SYSDATA [ 131 ]   := { CHR(13)+"Va a eliminar el registro actual"+CHR(13)+"ø Est· seguro ?"+CHR(13)                 ,;
                                      CHR(13)+"No hay un indice activo"+CHR(13)+"No se puede realizar la busqueda"+CHR(13)         ,;
@@ -5948,7 +5944,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
 	_hMG_SYSDATA [ 331 ] [5] := 'Korjaa'
 	_hMG_SYSDATA [ 331 ] [6] := 'Ok'
 	_hMG_SYSDATA [ 331 ] [7] := 'Keskeyt‰'
-	_hMG_SYSDATA [ 331 ] [8] := 'Sivu.'      
+	_hMG_SYSDATA [ 331 ] [8] := 'Sivu.'
 
 	// BROWSE
 
@@ -5966,7 +5962,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
 
 		_HMG_SYSDATA [ 137 ] := { 'Oletko varma ?' , 'Poista tietue' }
 
-		// EDIT 
+		// EDIT
 		_HMG_SYSDATA [ 131 ]   := { CHR(13)+"Poista tietue"+CHR(13)+"Oletko varma?"+CHR(13)                  ,;
 			CHR(13)+"Indeksi tiedosto puuttuu"+CHR(13)+"En voihakea"+CHR(13)            ,;
 			CHR(13)+"Indeksikentt‰ ei lˆydy"+CHR(13)+"En voihakea"+CHR(13)        ,;
@@ -6112,7 +6108,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
 			ABM_CRLF + "Ei aktiivisia suotimia    " + ABM_CRLF,                                              ; // 39
 			ABM_CRLF + "Poista suodin?   " + ABM_CRLF,                                        ; // 40
 			ABM_CRLF + "Tietue lukittu    " + ABM_CRLF                                 } // 41
-	
+
         case cLang == "NL"        // Dutch
 	/////////////////////////////////////////////////////////////
 	// DUTCH
@@ -6282,7 +6278,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
                                   ABM_CRLF + "Selecteer A.U.B. een printer " + ABM_CRLF,; // 32
                                   "Gefilterd op", ; // 33
                                   ABM_CRLF + "Er is een actief filter    " + ABM_CRLF,; // 34
-                                  ABM_CRLF + "Kan niet filteren op memo velden    " + ABM_CRLF,; // 35 
+                                  ABM_CRLF + "Kan niet filteren op memo velden    " + ABM_CRLF,; // 35
                                   ABM_CRLF + "Selecteer het veld om op te filteren    " + ABM_CRLF, ; // 36
                                   ABM_CRLF + "Selecteer een operator om te filteren    " + ABM_CRLF,; // 37
                                   ABM_CRLF + "Type een waarde om te filteren " + ABM_CRLF,; // 38
@@ -6309,7 +6305,7 @@ _HMG_SYSDATA [ 130 ] := { ABM_CRLF + "N„o h· uma ·rea ativa   "  + ABM_CRLF + 		
 
 		// BROWSE MESSAGES
 
-		_HMG_SYSDATA [ 136 ]  := { "Window: "                        ,;     
+		_HMG_SYSDATA [ 136 ]  := { "Window: "                        ,;
                            " not defined. Program terminated"     ,;
                            "HMG Error"                        ,;
                            "Control: "                            ,;

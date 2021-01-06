@@ -1,4 +1,9 @@
+../../../../hmg.hbc
+hbnetio.hbc
+
+-w0
+
 main.prg
 login_button_1_action.prg
 main_button_4_action.prg
-
+hmgtalk.rc

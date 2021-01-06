@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Header File --> SET_COMPILE_HMG_UNICODE.ch  
+ HMG Header File --> SET_COMPILE_HMG_UNICODE.ch
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -15,7 +15,7 @@
 
  ----------------------------------------------------------------------------*/
 
-/* 
+/*
    If defined       COMPILE_HMG_UNICODE   --->  The HMG library is built to support the ANSI and UNICODE character set.
    If NOT defined   COMPILE_HMG_UNICODE   --->  The HMG library is built to support ONLY the ANSI character set.
 */
@@ -23,6 +23,6 @@
 
 // ENABLE Unicode character set
 
-#define COMPILE_HMG_UNICODE 
+#define COMPILE_HMG_UNICODE
 
 

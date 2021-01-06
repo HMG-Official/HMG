@@ -15,9 +15,6 @@
 
  ----------------------------------------------------------------------------*/
 
-#include "SET_COMPILE_HMG_UNICODE.ch"
-
-
 MEMVAR _HMG_SYSDATA
 MEMVAR _HMG_MainFormIndex
 MEMVAR _HMG_LastActiveFormIndex

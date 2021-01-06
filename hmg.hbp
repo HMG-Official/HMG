@@ -1,0 +1,12 @@
+-beep
+
+-hbcontainer
+
+source/hmg_core.hbp
+source/crypt/hmg_crypt.hbp
+source/edit/hmg_edit.hbp
+source/editex/hmg_editex.hbp
+source/graph/hmg_graph.hbp
+source/ini/hmg_ini.hbp
+source/report/hmg_report.hbp
+hfcl/source/hmg_hfcl.hbp

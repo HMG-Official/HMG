@@ -53,8 +53,6 @@
 
 ---------------------------------------------------------------------------*/
 
-#include "SET_COMPILE_HMG_UNICODE.ch"
-
 MEMVAR _HMG_SYSDATA
 #include "common.ch"
 #include "hmg.ch"

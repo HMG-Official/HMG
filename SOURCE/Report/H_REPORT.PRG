@@ -357,7 +357,7 @@ do while .not. eof()
         next i
         crompe:=&grpby
         nlin++
-        oprint:printdata(nlin,repobject:nlmargin,  '** ' +hb_oemtoansi(chdrgrp)+' ** '+hb_oemtoansi(&grpby),,repobject:nfsize,.T.)
+        oprint:printdata(nlin,repobject:nlmargin,  '** ' +win_oemtoansi(chdrgrp)+' ** '+win_oemtoansi(&grpby),,repobject:nfsize,.T.)
         nlin++
       endif
    endif
