@@ -1,0 +1,10 @@
+##### depends on CH about ANSI or UNICODE, same way as all hmg
+
+-beep
+-w2
+../../hmg.hbc
+-oide
+
+IDE_SourceCode.prg
+ide_sourcecode_c.prg
+ide_ansi.rc
