@@ -5,7 +5,7 @@
 
 #include "hmg.ch"
 
-Function Main
+FUNCTION Main
 
 
 	DEFINE WINDOW Win_1 ;
@@ -14,7 +14,7 @@ Function Main
 		WIDTH 400 ;
 		HEIGHT 400 ;
 		TITLE 'Hello World!' ;
-		WINDOWTYPE MAIN  
+		WINDOWTYPE MAIN
 
 	END WINDOW
 
@@ -22,6 +22,6 @@ Function Main
 
 	Win_1.Activate
 
-Return
+RETURN Nil
 
 

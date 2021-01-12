@@ -1,0 +1,28 @@
+## important:
+## using mingw-posix, need mingw libwinpthread-1.dll on path
+## using mingw-win32, do not need dll
+#set path=%path%;d:\harbour\comp\mingw64\x86_64-w64-mingw32\lib32
+
+## uncomment next lines to use unicode
+##CFLAGS=-DCOMPILE_HMG_UNICODE
+##PRGFLAGS=-DCOMPILE_HMG_UNICODE
+
+## check if gui will really be the default gt
+gt=gtgui
+
+mt=yes
+gui=yes
+incpaths=include
+PRGFLAGS=-i./
+libpaths=lib/${hb_plat}/${hb_comp}
+
+libs=hmg_core hmg_crypt hmg_edit hmg_editex hmg_graph hmg_ini hmg_report hmg_hfcl
+
+libs=msvfw32 vfw32
+
+libs=hbct.hbc hbwin.hbc hbmzip.hbc minizip hbmisc.hbc hbtip.hbc hbhpdf.hbc hbzebra.hbc xhb.hbc
+
+##libs=hbmysql mysql hbfimage hbpgsql sddmy hbvpdf
+##libs=hbmemio sqlite3 hbsqlit3 sddodbc rddsql hbodbc odbc32 hbnetio png
+
+#libs=xhb

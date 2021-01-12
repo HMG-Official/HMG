@@ -1,1 +1,7 @@
+../../../hmg.hbc
+hbmemio.hbc
+-odemo
+
+-w0
+
 demo.prg

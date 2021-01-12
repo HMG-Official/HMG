@@ -1,1 +1,14 @@
+../../../../hmg.hbc
+-ohmgtalkserver
+
+hbnetio.hbc
+hbmzip.hbc
+xhb.hbc
+hbhpdf.hbc
+hbct.hbc
+hbmisc.hbc
+
+-w0
+
 hmgtalkserver.prg
+hmgtalkserver.rc

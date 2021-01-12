@@ -1,4 +1,14 @@
+../../../../hmg.hbc
+hbnetio.hbc
+-w0
+-i.
+hbhpdf.hbc
+hbct.hbc
+xhb.hbc
+hbmzip.hbc
+hbmisc.hbc
+
 main.prg
 login_button_1_action.prg
 main_button_4_action.prg
-
+hmgtalk.rc

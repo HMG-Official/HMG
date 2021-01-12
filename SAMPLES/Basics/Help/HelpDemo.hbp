@@ -1,1 +1,7 @@
+-w0 -es2
+
+../../../hmg.hbc
+-ohelpdemo
+
+
 HelpDemo.prg

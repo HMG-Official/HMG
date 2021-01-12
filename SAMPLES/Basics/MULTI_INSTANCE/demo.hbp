@@ -1,1 +1,6 @@
+-w0 -es2
+
+../../../hmg.hbc
+-I.
+
 demo.prg

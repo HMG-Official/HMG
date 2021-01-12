@@ -1,1 +1,8 @@
+../../../hmg.hbc
+-odemo
+
+-w0
+-es0
+
 demo.prg
+demo.rc

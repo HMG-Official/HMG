@@ -1,0 +1,16 @@
+-beep
+-inc
+-q
+
+-hblib
+
+-o../../lib/${hb_plat}/${hb_comp}/hmg_report
+
+../../hmg.hbc
+
+-D__HBIDE__
+
+-w2 -es2
+
+h_report.prg
+tprint.prg

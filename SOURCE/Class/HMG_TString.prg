@@ -15,20 +15,13 @@
 
  ----------------------------------------------------------------------------*/
 
-#include "SET_COMPILE_HMG_UNICODE.ch"
-
 #include "hmg.ch"
-
 #include "hbclass.ch"
-
-
 
 CREATE CLASS HMG_TGeneral
    // AS <type> ( ARRAY, BLOCK, CHARACTER, DATE, HASH, LOGICAL, NIL, NUMERIC, SYMBOL, TIMESTAMP, POINTER, USUAL )
    VAR cargo   AS USUAL   INIT Nil   EXPORTED // User-definable variable
 ENDCLASS
-
-
 
 CREATE CLASS HMG_TString   INHERIT HMG_TGeneral
 

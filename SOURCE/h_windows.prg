@@ -64,8 +64,6 @@
   blog: http://srvet.blogspot.com
 */
 
-#include "SET_COMPILE_HMG_UNICODE.ch"
-
 #include "SETCompileBrowse.ch"
 
 #include "hmg.ch"
@@ -6164,7 +6162,7 @@ local uResult
 
 	If _HMG_SYSDATA [ 250 ]
 
-		uResult := CallDll32 ( "IsThemeActive" , "UXTHEME.DLL" , 0 )
+		uResult := CallDll( "IsThemeActive" , "UXTHEME.DLL" , 0 )
 
 		if uResult != 0
 			uResult := .T.
@@ -6376,8 +6374,8 @@ Local nVersion
 
 	If nVersion >= 5.1
 
-//		uResult := CallDll32 ( "IsAppThemed" , "UXTHEME.DLL", 0  )
-		uResult := CallDll32 ( "IsAppThemed" , "UXTHEME.DLL"  )
+//		uResult := CallDll( "IsAppThemed" , "UXTHEME.DLL", 0  )
+		uResult := CallDll( "IsAppThemed" , "UXTHEME.DLL"  )
 
 		if uResult != 0
 			uResult := .T.
@@ -6397,19 +6395,19 @@ return uResult
 *------------------------------------------------------------------------------*
 Function OpenThemeData( hwnd , pszClassList )
 *------------------------------------------------------------------------------*
-local uResult := CallDll32 ( "OpenThemeData" , "UXTHEME.DLL" , hwnd , pszClassList )
+local uResult := CallDll( "OpenThemeData" , "UXTHEME.DLL" , hwnd , pszClassList )
 return uResult
 
 *------------------------------------------------------------------------------*
 Function CloseThemeData( hTheme )
 *------------------------------------------------------------------------------*
-local uResult := CallDll32 ( "CloseThemeData" , "UXTHEME.DLL" , hTheme )
+local uResult := CallDll( "CloseThemeData" , "UXTHEME.DLL" , hTheme )
 return uResult
 
 *------------------------------------------------------------------------------*
 Function DrawThemeBackground( hTheme , hdc , iPartId , iStateId , pRect , pClipRect )
 *------------------------------------------------------------------------------*
-local uResult := CallDll32 ( "DrawThemeBackground" , "UXTHEME.DLL" , hTheme , hdc , iPartId , iStateId , pRect , pClipRect )
+local uResult := CallDll( "DrawThemeBackground" , "UXTHEME.DLL" , hTheme , hdc , iPartId , iStateId , pRect , pClipRect )
 return uResult
 
 

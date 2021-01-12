@@ -59,8 +59,6 @@ MEMVAR _HMG_CharRange_Min , _HMG_CharRange_Max
 MEMVAR aResult
 MEMVAR _Y1,_X1,_Y2,_X2
 
-#include "SET_COMPILE_HMG_UNICODE.ch"   // UNICODE
-
 #include "SETCompileBrowse.ch"
 
 #include "common.ch"
@@ -11099,7 +11097,6 @@ RETURN NIL
 
 
 #pragma BEGINDUMP
-#include "SET_COMPILE_HMG_UNICODE.ch"
 #include "HMG_UNICODE.h"
 #include <windows.h>
 #include "hbapi.h"
