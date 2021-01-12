@@ -1,0 +1,11 @@
+-hblib
+
+-o../../lib/hmgsqlite
+
+-Iinclude
+
+-D__HBIDE__
+
+-w2 -es2
+
+hmgsqlite.prg

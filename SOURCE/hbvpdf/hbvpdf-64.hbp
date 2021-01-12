@@ -1,0 +1,24 @@
+#
+# $Id: hbvpdf.hbp 16868 2011-06-07 22:29:10Z vszakats $
+#
+
+
+
+-hblib
+
+
+
+
+-o../../lib-64/hbvpdf-64
+
+
+
+-w3 -es2
+
+
+
+-instfile=inc:hbvpdf.ch
+
+hbvpdf.prg
+hbvpdft.prg
+hbvpsup.prg
