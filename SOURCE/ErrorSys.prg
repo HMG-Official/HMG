@@ -76,12 +76,6 @@ STATIC FUNCTION DefError( oError )
    LOCAL cMessage
    LOCAL cDOSError
 
-   LOCAL n
-   Local Ai
-
-   //Html Arch to ErrorLog
-   LOCAL HtmArch, xText
-
    _HMG_SYSDATA [ 347 ] := .F.
 
    // By default, division by zero results in zero
@@ -104,8 +98,10 @@ STATIC FUNCTION DefError( oError )
       RETURN .F.
    ENDIF
 
-   HtmArch := Html_ErrorLog()
    cMessage := ErrorMessage( oError )
+   IF ValType( cMessage ) != "C"
+      cMessage := ""
+   ENDIF
    IF ! Empty( oError:osCode )
       cDOSError := "(DOS Error " + LTrim( Str( oError:osCode ) ) + ")"
    ENDIF
@@ -115,20 +111,7 @@ STATIC FUNCTION DefError( oError )
    IF ! Empty( oError:osCode )
       cMessage += " " + cDOSError
    ENDIF
-   Html_LineText(HtmArch, '<p class="updated">Date:' + DToC(Date()) + "  " + "Time: " + Time() )
-   Html_LineText(HtmArch, cMessage + "</p>" )
-   n := 2
-   ai = cmessage + CHR(13) + CHR (10) + CHR(13) + CHR (10)
-   WHILE ! Empty( ProcName( n ) )
-      xText := "Called from " + ProcName( n ) + "(" + ALLTRIM( Str( ProcLine( n++ ) ) ) + ")" +CHR(13) +CHR(10)
-      ai = ai + xText
-      Html_LineText(HtmArch,xText)
-   ENDDO
-   Html_Line(HtmArch)
-
-   ShowError(ai)
-
-   QUIT
+   Errorsys_WriteErrorLog( cMessage + hb_Eol() )
 
    RETURN .F.
 
@@ -169,106 +152,41 @@ STATIC FUNCTION ErrorMessage( oError )
 
    RETURN cMessage
 
-
-*******************************************
-Function ShowError ( ErrorMesssage )
-********************************************
-
-	UnloadAllDll()
-
-	dbCloseAll()
-
-	C_MSGSTOP ( ErrorMesssage , 'Program Error' )
-
-	ExitProcess(0)
-
-Return Nil
-
 *------------------------------------------------------------------------------
 *-01-01-2003
 *-AUTHOR: Antonio Novo
 *-Create/Open the ErrorLog.Htm file
 *-Note: Is used in: errorsys.prg and h_error.prg
 *------------------------------------------------------------------------------
-FUNCTION HTML_ERRORLOG
-*---------------------
-    Local HtmArch
-    If .Not. File("\"+CurDir()+"\ErrorLog.Htm")
-        HtmArch := HtmL_Ini("\"+CurDir()+"\ErrorLog.Htm","HMG Errorlog File")
-        Html_Line(HtmArch)
-    Else
-        HtmArch := FOpen("\"+CurDir()+"\ErrorLog.Htm",2)
-        FSeek(HtmArch,0,2)    //End Of File
-    EndIf
-RETURN (HtmArch)
+FUNCTION Errorsys_WriteErrorLog( cText, lAbort )
 
-*------------------------------------------------------------------------------
-*-30-12-2002
-*-AUTHOR: Antonio Novo
-*-HTML Page Head
-*------------------------------------------------------------------------------
-FUNCTION HTML_INI(ARCH,TIT)
-*-------------------------
-    LOCAL HTMARCH
-    LOCAL cStilo:= "<style> "                       +;
-                     "body{ "                       +;
-                       "font-family: sans-serif;"   +;
-                       "background-color: #ffffff;" +;
-                       "font-size: 75%;"            +;
-                       "color: #000000;"            +;
-                       "}"                          +;
-                     "h1{"                          +;
-                       "font-family: sans-serif;"   +;
-                       "font-size: 150%;"           +;
-                       "color: #0000cc;"            +;
-                       "font-weight: bold;"         +;
-                       "background-color: #f0f0f0;" +;
-                       "}"                          +;
-                     ".updated{"                    +;
-                       "font-family: sans-serif;"   +;
-                       "color: #cc0000;"            +;
-                       "font-size: 110%;"           +;
-                       "}"                          +;
-                     ".normaltext{"                 +;
-                      "font-family: sans-serif;"    +;
-                      "font-size: 100%;"            +;
-                      "color: #000000;"             +;
-                      "font-weight: normal;"        +;
-                      "text-transform: none;"       +;
-                      "text-decoration: none;"      +;
-                    "}"                             +;
-                    "</style>"
+   Local cFileName := hb_cwd() + "\hb_out.log", nHandle, n
 
-    HTMARCH := FCreate(ARCH)
-    FWrite(HTMARCH,"<HTML><HEAD><TITLE>"+TIT+"</TITLE></HEAD>" + cStilo +"<BODY>"+CHR(13)+CHR(10))
-    FWrite(HTMARCH,'<H1 Align=Center>'+TIT+'</H1><BR>'+CHR(13)+CHR(10))
-RETURN (HTMARCH)
+   hb_Default( @lAbort, .T. )
 
-*------------------------------------------------------------------------------
-*-30-12-2002
-*-AUTHOR: Antonio Novo
-*-HTM Page Line
-*------------------------------------------------------------------------------
-FUNCTION HTML_LINETEXT(HTMARCH,LINEA)
-*-----------------------------------
-    FWrite(HTMARCH, RTrim( LINEA ) + "<BR>"+CHR(13)+CHR(10))
-RETURN (.T.)
+   _HMG_SYSDATA [ 347 ] := .F.
 
-*------------------------------------------------------------------------------
-*-30-12-2002
-*-AUTHOR: Antonio Novo
-*-HTM Line
-*------------------------------------------------------------------------------
-FUNCTION HTML_LINE(HTMARCH)
-*-------------------------
-    FWrite(HTMARCH,"<HR>"+CHR(13)+CHR(10))
-RETURN (.T.)
+    If .Not. File( cFileName )
+        fClose( fCreate( cFileName ) )
+    ENDIF
+    nHandle := FOpen( cFileName, 2 )
+    FSeek( nHandle, 0, 2 )
+    fWrite( nHandle, hb_Eol() )
+    fWrite( nHandle, "Date:" + Transform( Dtos( Date() ), "@R 9999-99-99" ) + "  Time: " + Time() + hb_Eol() )
+    n := 1
+    fWrite( nHandle, HMGVersion() + hb_Eol() )
+    fWrite( nHandle, cText + hb_Eol() )
+    DO WHILE ! Empty( ProcName( n ) )
+       fWrite( nHandle, "Called from " + ProcName( n ) + "(" + ALLTRIM( Str( ProcLine( n++ ) ) ) + ")" + hb_Eol() )
+    ENDDO
+    fWrite( nHandle, hb_Eol() )
+    fClose( nHandle )
+    wapi_ShellExecute( , "open", "notepad.exe", cFileName, hb_cwd(), 1 ) // SW_SHOWNORMAL )
 
+	UnloadAllDll()
 
-*-----------------------------------------------------------------------------*
-* Pablo César (May 2014)
-*-----------------------------------------------------------------------------*
-FUNCTION HTML_END( HTMARCH )
-   FWrite( HTMARCH, "</BODY></HTML>" )
-   FClose( HTMARCH )
-Return Nil
+	dbCloseAll()
+
+	ExitProcess(0)
+
+RETURN Nil
