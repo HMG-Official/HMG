@@ -1,6 +1,5 @@
 ##### depends on CH about ANSI or UNICODE, same way as all hmg
 
--beep
 -w2
 ../../hmg.hbc
 -I./
