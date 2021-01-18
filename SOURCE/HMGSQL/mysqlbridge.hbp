@@ -1,3 +1,4 @@
+../../hmg.hbc
 -hblib
 
 -o../../lib/hmgmysql

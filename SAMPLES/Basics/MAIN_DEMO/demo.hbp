@@ -1,8 +1,7 @@
 ../../../hmg.hbc
--odemo
-
 -w0
--es0
+
+-odemo
 
 demo.prg
 demo.rc

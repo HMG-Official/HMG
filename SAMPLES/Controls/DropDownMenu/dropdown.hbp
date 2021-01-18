@@ -1,3 +1,6 @@
+..\..\..\hmg.hbc
+-I.
+
 -odemo
 
 dropdown.prg

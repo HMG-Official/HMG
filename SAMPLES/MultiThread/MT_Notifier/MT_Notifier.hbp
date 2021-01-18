@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -omt_notifier
 
 MT_Notifier.prg
+..\..\..\hmg.hbc

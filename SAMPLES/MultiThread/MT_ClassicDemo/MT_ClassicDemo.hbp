@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -omt_classicdemo
 
 MT_ClassicDemo.Prg
+..\..\..\hmg.hbc

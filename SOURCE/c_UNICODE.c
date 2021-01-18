@@ -17,7 +17,9 @@
 
 // All functions this file always compile in Unicode
 
-#define COMPILE_HMG_UNICODE   // Force to compile in Unicode
+#ifndef COMPILE_HMG_UNICODE
+   #define COMPILE_HMG_UNICODE   // Force to compile in Unicode
+#endif
 #include "HMG_UNICODE.h"
 
 #include <windows.h>

@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -odemo
 
 hello.prg
+..\..\..\hmg.hbc

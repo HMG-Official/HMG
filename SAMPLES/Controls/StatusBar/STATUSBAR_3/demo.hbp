@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -odemo
 
 demo.prg
+..\..\..\..\hmg.hbc

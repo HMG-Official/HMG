@@ -1,7 +1,7 @@
 ../../../hmg.hbc
 hbmemio.hbc
--odemo
-
 -w0
+
+-odemo
 
 demo.prg

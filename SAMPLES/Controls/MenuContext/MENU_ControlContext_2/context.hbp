@@ -1,4 +1,8 @@
+-n
+-m
+-w0
+-I.
 -odemo
 
 context.prg
-
+..\..\..\..\hmg.hbc

@@ -1,4 +1,7 @@
+-n
+-m
+-w0
 -onotes
 
 notes.prg
-
+..\..\..\..\hmg.hbc

@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -ocolordemo2
 
 colordemo2.prg
+..\..\..\..\hmg.hbc

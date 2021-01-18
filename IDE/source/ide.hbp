@@ -1,15 +1,8 @@
-##### depends on CH about ANSI or UNICODE, same way as all hmg
-
--w2
 ../../hmg.hbc
--I./
+-I.
+-w0
+
 -oide
-hbwin.hbc
-hbhpdf.hbc
-hbmisc.hbc
-hbmzip.hbc
-xhb.hbc
-hbct.hbc
 
 IDE_SourceCode.prg
 ide_sourcecode_c.prg

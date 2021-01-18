@@ -1,3 +1,11 @@
+..\..\..\..\..\hmg.hbc
+
+hbnetio.hbc
+
+-I.
+
+-w0
+
 -ohmgserverio
 
 HmgServerIO.prg

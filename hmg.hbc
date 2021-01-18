@@ -3,26 +3,29 @@
 ## using mingw-win32, do not need dll
 #set path=%path%;d:\harbour\comp\mingw64\x86_64-w64-mingw32\lib32
 
-## uncomment next lines to use unicode
-##CFLAGS=-DCOMPILE_HMG_UNICODE
-##PRGFLAGS=-DCOMPILE_HMG_UNICODE
+## for unicode use
 
-## check if gui will really be the default gt
-gt=gtgui
+cflags=-DCOMPILE_HMG_UNICODE -Wno-null-dereference
+prgflags=-DCOMPILE_HMG_UNICODE -q -m -n -w3 -es2
+
+## for ansi use
+
+#cflags=-Wno-null-dereference
+#prgflags=-q -m -n -w3 -es2
 
 mt=yes
+
+gt=gtgui
 gui=yes
+
 incpaths=include
-PRGFLAGS=-i./
+
 libpaths=lib/${hb_plat}/${hb_comp}
 
 libs=hmg_core hmg_crypt hmg_edit hmg_editex hmg_graph hmg_ini hmg_report hmg_hfcl
 
 libs=msvfw32 vfw32
 
-libs=hbct.hbc hbwin.hbc hbmzip.hbc minizip hbmisc.hbc hbtip.hbc hbhpdf.hbc hbzebra.hbc xhb.hbc
+libs=hbwin.hbc xhb.hbc hbmzip.hbc hbct.hbc hbhpdf.hbc hbmisc.hbc hbobsolete.hbc
 
-##libs=hbmysql mysql hbfimage hbpgsql sddmy hbvpdf
-##libs=hbmemio sqlite3 hbsqlit3 sddodbc rddsql hbodbc odbc32 hbnetio png
-
-#libs=xhb
+sources=resources/hmg.rc

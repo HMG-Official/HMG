@@ -49,15 +49,14 @@
 
 
 
-#define COMPILE_HMG_UNICODE
-
+#ifndef COMPILE_HMG_UNICODE
+   #define COMPILE_HMG_UNICODE
+#endif
 #include "HMG_UNICODE.h"
-
 
 #ifndef WINVER
    #define WINVER 0x0501   // minimum requirements: Windows XP
 #endif
-
 
 #define COBJMACROS
 

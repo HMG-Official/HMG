@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -omain
 
 main.prg
+..\..\..\hmg.hbc

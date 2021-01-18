@@ -8,7 +8,7 @@
 
 -D__HBIDE__
 
--w2 -es2
+-m -n -w2 -es2
 
 h_report.prg
 tprint.prg

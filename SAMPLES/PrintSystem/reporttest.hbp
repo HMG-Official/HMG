@@ -1,3 +1,9 @@
+..\..\hmg.hbc
+
+-I.
+
+-w0
+
 -odemo
 
 main.prg

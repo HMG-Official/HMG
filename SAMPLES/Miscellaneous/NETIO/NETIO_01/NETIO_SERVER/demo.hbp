@@ -1,4 +1,9 @@
+..\..\..\..\..\hmg.hbc
+
+hbnetio.hbc
+
+-w0
+
 -odemo
 
 demo.prg
-

@@ -1,16 +1,10 @@
--q
-
+../../hmg.hbc
 -hblib
+-Iinclude
+-D__HBIDE__
+-w0
 
 -o../../lib/${hb_plat}/${hb_comp}/hmg_hfcl
-
-../../hmg.hbc
-
--Iinclude
-
--D__HBIDE__
-
--w0 -es2
 
 AutoFill.prg
 ComboSearchBox.prg
@@ -20,5 +14,4 @@ h_qhtm.prg
 c_qhtm.c
 RichEditBoxEx_C.c
 RichEditBoxEx_H.prg
-
 hfcl.rc

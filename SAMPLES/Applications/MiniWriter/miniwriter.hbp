@@ -1,12 +1,7 @@
 ../../../hmg.hbc
--ominiwriter
 -w0
-hbwin.hbc
-hbmzip.hbc
-hbct.hbc
-hbhpdf.hbc
-hbmisc.hbc
-xhb.hbc
+
+-ominiwriter
 
 miniwriter.prg
 miniwriter.rc

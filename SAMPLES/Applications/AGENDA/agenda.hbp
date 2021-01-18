@@ -1,6 +1,6 @@
-
--w0 -es0
 ../../../hmg.hbc
+-w0
+
 -oagenda
 
 agenda.prg
