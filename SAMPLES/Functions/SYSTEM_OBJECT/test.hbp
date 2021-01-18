@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -otest
 
 test.prg
+..\..\..\hmg.hbc

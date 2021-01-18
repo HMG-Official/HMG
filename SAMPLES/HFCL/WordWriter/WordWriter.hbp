@@ -1,5 +1,8 @@
+-n
+-m
+-w0
 -owordwriter
 
 -w -es2
-
 WordWriter.prg
+..\..\..\hmg.hbc

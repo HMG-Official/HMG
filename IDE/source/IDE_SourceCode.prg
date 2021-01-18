@@ -45,8 +45,6 @@
 
 ---------------------------------------------------------------------------*/
 
-#pragma -w2 // -es2
-
 #pragma DEBUGINFO=OFF   // ADD, march 2017
 
 // PUBLIC vars defined in Main()

@@ -7,7 +7,7 @@ Function Main
         WIDTH 400 ;
         HEIGHT 300 ;
         TITLE 'Tutor 04 TextBox Test' ;
-        MAIN 
+        MAIN
 
         DEFINE MAIN MENU
            POPUP "First Popup"
@@ -32,5 +32,5 @@ Function Main
 
     ACTIVATE WINDOW Win_1
 
-Return
+Return Nil
 

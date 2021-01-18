@@ -1,0 +1,54 @@
+name: mingw-0703
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'mingw v 7.3'
+        default: 'mingw-0703'
+        required: true
+
+jobs:
+
+  Build:
+    runs-on: windows-latest
+    steps:
+
+    - name: Load Source
+      run: |
+         c:
+         git clone https://github.com/JoseQuintas/mingw-0703 c:\temp\comp --depth 1
+
+    - name: Clean
+      uses: JoseQuintas/action-rm@v1.0.2
+      with:
+         path: c:\temp\comp\.git
+
+    - name: Clean
+      uses: JoseQuintas/action-rm@v1.0.2
+      with:
+         path: c:\temp\comp\.gitattributes
+
+    - name: Clean
+      uses: JoseQuintas/action-rm@v1.0.2
+      with:
+         path: c:\temp\comp\.github
+
+    - name: Clean
+      uses: JoseQuintas/action-rm@v1.0.2
+      with:
+         path: c:\temp\comp\.gitignore
+
+    - name: Zip
+      env:
+         PATH: c:\program files\7-zip
+      run: |
+         c:
+         cd \temp\comp
+         7z a -r c:\temp\mingw-0703.7z *.*
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: mingw-0703
+         path: c:\temp\mingw-0703.7z

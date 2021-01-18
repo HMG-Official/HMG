@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -omt_gridincrementalsearch
 
 MT_GridIncrementalSearch.prg
+..\..\..\hmg.hbc

@@ -13,7 +13,7 @@ MEMVAR _HMG_SYSDATA
 */
 
 *-----------------------------------------------------------------------------*
-FUNCTION GetPropertyEx( Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8 )
+FUNCTION GetPropertyEx( Arg1, Arg2, Arg3, Arg4, Arg5 )
 *-----------------------------------------------------------------------------*
 
 LOCAL RetVal, hWnd, cType
@@ -32,7 +32,7 @@ CASE PCOUNT() == 3 .AND. VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AN
          DO CASE
             CASE Arg3 == "HASNONASCIICHARS"
                RetVal := RichEditBox_HasNonAsciiChars( hWnd )
-   
+
             CASE Arg3 == "HASNONANSICHARS"
                RetVal := RichEditBox_HasNonAnsiChars( hWnd )
 
@@ -49,10 +49,10 @@ CASE PCOUNT() == 4 .AND. VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AN
    DO CASE
       CASE Arg2 == "GETSCREENPOS"
          RetVal := GetPos_ClientToScreen( hWnd, Arg3, Arg4 )
-   
+
       CASE Arg2 == "GETWINDOWPOS"
          RetVal := GetPos_ScreenToClient( hWnd, Arg3, Arg4 )
-   
+
    ENDCASE
 
 CASE PCOUNT() == 5 .AND. VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AND. VALTYPE( Arg3 ) == "C" .AND. VALTYPE( Arg4 ) == "N" .AND. VALTYPE( Arg5 ) == "N" .AND. ;
@@ -64,10 +64,10 @@ CASE PCOUNT() == 5 .AND. VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AN
    DO CASE
       CASE Arg3 == "GETSCREENPOS"
          RetVal := GetPos_ClientToScreen( hWnd, Arg4, Arg5 )
-   
+
       CASE Arg3 == "GETCONTROLPOS"
          RetVal := GetPos_ScreenToClient( hWnd, Arg4, Arg5 )
-   
+
    ENDCASE
 
 ENDCASE
@@ -81,7 +81,7 @@ RETURN RetVal
 */
 
 *-----------------------------------------------------------------------------*
-FUNCTION DoMethodEx( Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9 )
+FUNCTION DoMethodEx( Arg1, Arg2, Arg3, Arg4, Arg5, Arg6 )
 *-----------------------------------------------------------------------------*
 
 LOCAL RetVal, hWnd, cType
@@ -94,7 +94,7 @@ CASE PCOUNT() >= 2 .AND. VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AN
       CASE Arg2 == "DRAWBORDER"
          RetVal := DrawWindowBorder( Arg1, Arg3, Arg4 )
 
-   ENDCASE   
+   ENDCASE
 
 CASE PCOUNT() >= 4 .AND. VALTYPE( Arg1 ) == "C" .AND. VALTYPE( Arg2 ) == "C" .AND. VALTYPE( Arg3 ) == "C" .AND. VALTYPE( Arg4 ) == "C" .AND. ;
    _IsControlDefined( Arg2 , Arg1 )
@@ -127,10 +127,10 @@ RETURN RetVal
     Enhancement of RichEditBox_LoadFile()
 
     Skips over byte order marks in Unicode text files.
-    This function supports UTF-16 BE text files by using HMG_UTF16ByteSwap() 
-    to first convert it a UTF-16 BE file to UTF-16 LE and then calling 
+    This function supports UTF-16 BE text files by using HMG_UTF16ByteSwap()
+    to first convert it a UTF-16 BE file to UTF-16 LE and then calling
     RichEditBox_StreamInEx() on the UTF-16 LE file.
-*/ 
+*/
 
 *-----------------------------------------------------------------------------*
 FUNCTION RichEditBox_LoadFileEx( hWndControl, cFile, lSelection, nType )
@@ -141,7 +141,7 @@ LOCAL cTempFile
    IF ValType( lSelection ) <> "L"
       lSelection := .F.
    ENDIF
-   
+
    IF ValType( nType ) <> "N"
       nType := RICHEDITFILEEX_RTF
    ENDIF
@@ -172,10 +172,10 @@ RETURN lSuccess
     Enhancement of RichEditBox_SaveFile()
 
     Writes byte order marks to Unicode text files.
-    This function supports UTF-16 BE text files by first calling 
-    RichEditBox_StreamOutEx() to generate a UTF-16 LE file and then calling 
+    This function supports UTF-16 BE text files by first calling
+    RichEditBox_StreamOutEx() to generate a UTF-16 LE file and then calling
     HMG_UTF16ByteSwap() to convert the UTF-16 LE file to UTF-16 BE.
-*/ 
+*/
 
 *-----------------------------------------------------------------------------*
 FUNCTION RichEditBox_SaveFileEx( hWndControl, cFile, lSelection, nType )
@@ -186,7 +186,7 @@ LOCAL cTempFile
    IF ValType( lSelection ) <> "L"
       lSelection := .F.
    ENDIF
-   
+
    IF ValType( nType ) <> "N"
       nType := RICHEDITFILEEX_RTF
    ENDIF
@@ -209,8 +209,8 @@ RETURN lSuccess
 /*
     RichEditBox_HasNonAsciiChars()
 
-    This function tests for the presence of non-ASCII characters in a rich 
-    edit control.  For efficiency, it does not distinguish between non-ASCII 
+    This function tests for the presence of non-ASCII characters in a rich
+    edit control.  For efficiency, it does not distinguish between non-ASCII
     ANSI and non-ASCII Unicode.
 */
 
@@ -227,8 +227,8 @@ RETURN HMG_IsNonASCII( cBuffer, .N. )
 /*
     RichEditBox_HasNonAnsiChars()
 
-    This function tests for the presence of non-ANSI characters in a rich 
-    edit control.  It is slower than RichEditBox_HasNonAsciiChars but does 
+    This function tests for the presence of non-ANSI characters in a rich
+    edit control.  It is slower than RichEditBox_HasNonAsciiChars but does
     not reject any Unicode characters that are in ANSI.
 */
 
@@ -244,18 +244,18 @@ RETURN HMG_UTF8IsNonANSI( cBuffer )
 /*
     GetRichEditFileType()
 
-    This function returns the file type of an RTF file or text file, which 
-    can be used as the file type parameter in the LoadFile, RtfLoadFile, 
-    SaveFile, and RtfSaveFile methods.  This function examines the first few 
-    bytes of the file to see if there is an RTF header or Unicode byte order 
+    This function returns the file type of an RTF file or text file, which
+    can be used as the file type parameter in the LoadFile, RtfLoadFile,
+    SaveFile, and RtfSaveFile methods.  This function examines the first few
+    bytes of the file to see if there is an RTF header or Unicode byte order
     mark.
-      
-    When there is no RTF header or byte order mark:  If the optional 
-    lUtf8Test argument is .T., then the whole file is scanned to see if it is 
-    in UTF-8 format.  If so, then the file type is returned as UTF-8.  
+
+    When there is no RTF header or byte order mark:  If the optional
+    lUtf8Test argument is .T., then the whole file is scanned to see if it is
+    in UTF-8 format.  If so, then the file type is returned as UTF-8.
     Otherwise the file type is returned as ANSI.
 
-*/ 
+*/
 
 *-----------------------------------------------------------------------------*
 FUNCTION GetRichEditFileType( cFile, lUtf8Test )
@@ -311,28 +311,28 @@ LOCAL bIsUtf8NonAscii := {||
 
    FCLOSE( hFile )
 
-RETURN nType   
+RETURN nType
 
 /*
     HMG_IsUTF8Ex()
     Enhancement of HMG_IsUTF8()
 
     Tests whether input string is UTF8.
-    When cString is the empty string or is all ASCII:  If the optional 
-      lAllowASCII argument is .T., then the return value is .T.  Otherwise 
+    When cString is the empty string or is all ASCII:  If the optional
+      lAllowASCII argument is .T., then the return value is .T.  Otherwise
       the return value is .F.
-    When cString is valid UTF-8 except that it ends with an incomplete 
-      UTF-8 byte sequence:  If the optional lAllowPartial argument is .T., 
-      then the return value is .T. and the incomplete byte sequence is 
-      passed back through the cPartial argument.  Otherwise the return 
+    When cString is valid UTF-8 except that it ends with an incomplete
+      UTF-8 byte sequence:  If the optional lAllowPartial argument is .T.,
+      then the return value is .T. and the incomplete byte sequence is
+      passed back through the cPartial argument.  Otherwise the return
       value is .F.  This is useful when cString is a file buffer.
-    The return value is .F. if cString encodes any code point greater than 
-      the Unicode limit of 0x10FFFF, or if it encodes any surrogate 
-      character, or if it contains an overlong UTF-8 byte sequence.  One 
-      overlong sequnce is accepted, the 2-byte overlong sequence for the 
-      null character (0xC0 0x80), which is commonly accepted by UTF-8 
+    The return value is .F. if cString encodes any code point greater than
+      the Unicode limit of 0x10FFFF, or if it encodes any surrogate
+      character, or if it contains an overlong UTF-8 byte sequence.  One
+      overlong sequnce is accepted, the 2-byte overlong sequence for the
+      null character (0xC0 0x80), which is commonly accepted by UTF-8
       parsers.
-*/ 
+*/
 
 *-----------------------------------------------------------------------------*
 FUNCTION HMG_IsUTF8Ex( cString, lAllowASCII, lAllowPartial, cPartial )
@@ -540,7 +540,7 @@ LOCAL cChar, nChar, nCode
                CASE nCode >= 0x80
                   IF ASCAN( aAnsiSkip, nCode ) == 0
                      lNonANSI := .T.
-                  ENDIF                  
+                  ENDIF
                ENDCASE
             ENDIF
 
@@ -606,7 +606,7 @@ LOCAL cOutBuffer, cBytePair, nBufWrite, nByte
       ENDDO
 
       lSuccess := .Y.
-    
+
    END SEQUENCE
 
    FCLOSE( hInFile )

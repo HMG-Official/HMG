@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -omt_richeditbox
 
 MT_RichEditBox.prg
+..\..\..\hmg.hbc

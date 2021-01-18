@@ -1,3 +1,7 @@
+-n
+-m
+-w0
 -ounzipdemo
 
 unzipdemo.prg
+..\..\..\hmg.hbc

@@ -1,9 +1,4 @@
 ../../../../hmg.hbc
-
--odemo
-
 -I.
-
--w0
-
+-odemo
 demo.prg

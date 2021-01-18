@@ -1,6 +1,6 @@
--w0 -es2
--odemo
-
 ../../../../hmg.hbc
+-w0
+
+-odemo
 
 demo.prg

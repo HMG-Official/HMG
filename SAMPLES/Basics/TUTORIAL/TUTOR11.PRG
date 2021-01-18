@@ -7,7 +7,7 @@ Function Main
         WIDTH 400 ;
         HEIGHT 200 ;
         TITLE 'Tutor 11 - CheckButton Test' ;
-        MAIN 
+        MAIN
 
         DEFINE MAIN MENU
            POPUP "First Popup"
@@ -15,24 +15,24 @@ Function Main
              ITEM 'Retrieve Text CheckButton Value' ACTION  MsgInfo ( if(Win_1.CheckButton_1.Value,'.T.','.F.'))
              SEPARATOR
              ITEM 'Change Picture CheckButton Value' ACTION  Win_1.CheckButton_2.Value := .T.
-             ITEM 'Retrieve Picture CheckButton Value' ACTION  MsgInfo ( if(Win_1.CheckButton_2.Value,'.T.','.F.')) 
+             ITEM 'Retrieve Picture CheckButton Value' ACTION  MsgInfo ( if(Win_1.CheckButton_2.Value,'.T.','.F.'))
            END POPUP
         END MENU
 
             @ 10,10 CHECKBUTTON CheckButton_1 ;
                 CAPTION 'CheckButton' ;
-                VALUE .F. 
+                VALUE .F.
 
             @ 50,10 CHECKBUTTON CheckButton_2 ;
                 PICTURE 'Open.Bmp' ;
-                WIDTH 27 ; 
+                WIDTH 27 ;
                 HEIGHT 27 ;
                 VALUE .F. ;
-                TOOLTIP 'Graphical CheckButton' 
+                TOOLTIP 'Graphical CheckButton'
 
     END WINDOW
 
     ACTIVATE WINDOW Win_1
 
-Return
+Return Nil
 

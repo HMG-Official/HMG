@@ -1,8 +1,11 @@
 
 #include "hmg.ch"
 
-#define WS_BORDER           0x00800000
+//#define WS_BORDER           0x00800000
 #define WM_SETREDRAW        0x0b
+
+MEMVAR _HMG_SYSDATA
+MEMVAR cParentTabName, cParentForm
 
 /******
 *
@@ -10,7 +13,7 @@
 *
 */
 Function _DefineQhtm( ControlName, ParentForm, x, y, w, h, Value, fname, resname, fontname, fontsize, Change, lBorder, bold, italic, underline, strikeout)
-Local mVar, k := 0, ControlHandle, FontHandle, nId 
+Local mVar, k := 0, ControlHandle, FontHandle, nId
 
    if _HMG_SYSDATA [ 264 ] = .T.
       ParentForm := _HMG_SYSDATA [ 223 ]
@@ -21,13 +24,13 @@ Local mVar, k := 0, ControlHandle, FontHandle, nId
          FontSize := _HMG_SYSDATA [ 182 ]
       EndIf
    endif
-   
+
    if _HMG_SYSDATA [ 183 ] > 0
       IF _HMG_SYSDATA [ 240 ] == .F.
          x  := x + _HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]]
-         y  := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] 
+         y  := y + _HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]]
          ParentForm := _HMG_SYSDATA [ 332 ] [_HMG_SYSDATA [ 183 ]]
-         cParentTabName := _HMG_SYSDATA [ 225 ] 
+         cParentTabName := _HMG_SYSDATA [ 225 ]
       ENDIF
    EndIf
 
@@ -38,13 +41,13 @@ Local mVar, k := 0, ControlHandle, FontHandle, nId
    If _IsControlDefined (ControlName,ParentForm)
       MsgHMGError (_HMG_SYSDATA [ 136 ][4] + ControlName + _HMG_SYSDATA [ 136 ][5] + ParentForm + _HMG_SYSDATA [ 136 ][6])
    endif
-   
+
    mVar := '_' + ParentForm + '_' + ControlName
 
    cParentForm = ParentForm
 
    ParentForm = GetFormHandle (ParentForm)
-   
+
    nId := _GetId()
 
    ControlHandle := CreateQHTM(ParentForm, nId, IIF (lBorder ==.T., WS_BORDER, 0), y, x, w, h)
@@ -91,8 +94,8 @@ Local mVar, k := 0, ControlHandle, FontHandle, nId
    _HMG_SYSDATA [ 20 ]   [k] := w
    _HMG_SYSDATA [ 21 ]   [k] := h
    _HMG_SYSDATA [ 22 ]   [k] := 0
-   _HMG_SYSDATA [ 23 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
-   _HMG_SYSDATA [ 24 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 ) 
+   _HMG_SYSDATA [ 23 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 333 ] [_HMG_SYSDATA [ 183 ]] , -1 )
+   _HMG_SYSDATA [ 24 ]   [k] := iif ( _HMG_SYSDATA [ 183 ] > 0 ,_HMG_SYSDATA [ 334 ] [_HMG_SYSDATA [ 183 ]] , -1 )
    _HMG_SYSDATA [ 25 ]   [k] := ''
    _HMG_SYSDATA [ 26 ]   [k] := 0
    _HMG_SYSDATA [ 27 ]   [k] := fontname
@@ -102,7 +105,7 @@ Local mVar, k := 0, ControlHandle, FontHandle, nId
    _HMG_SYSDATA [ 31 ]   [k] := 0
    _HMG_SYSDATA [ 32 ]   [k] := 0
    _HMG_SYSDATA [ 33 ]   [k] := ''
-   _HMG_SYSDATA [ 34 ]   [k] := .T.  
+   _HMG_SYSDATA [ 34 ]   [k] := .T.
    _HMG_SYSDATA [ 35 ]   [k] := 0
    _HMG_SYSDATA [ 36 ]   [k] := ''
    _HMG_SYSDATA [ 37 ]   [k] := 0
@@ -182,7 +185,7 @@ Return cLink
 *
 *       nHandle - descriptor of QHTM
 *       nPos - old/new position of scrollbar
-*       
+*
 *       Get/Set position of scrollbar QHTM
 *
 */
@@ -191,7 +194,7 @@ Local nParamCount := PCount()
 
 Switch nParamCount
 
-   Case 0  
+   Case 0
      nPos := 0
      Exit
 
@@ -209,7 +212,7 @@ Switch nParamCount
      Else
         nPos := 0
      Endif
-   
+
 End Switch
 
 Return nPos
@@ -220,7 +223,7 @@ Return nPos
 *
 *       nHandle  - descriptor of QHTM
 *       nPercent - old/new position of scrollbar (in percentage)
-*       
+*
 *       Get/Set position of scrollbar QHTM
 *
 */
@@ -234,11 +237,11 @@ If HB_ISNUMERIC( nHandle )
 
    nHeight := GetWindowHeight( nHandle )
    aSize := QHTM_GetSize( nHandle )
-            
+
    If ( aSize[ 2 ] > nHeight )
       aSize[ 2 ] -= nHeight
     Endif
-    
+
 Endif
 
 Switch nParamCount
@@ -248,7 +251,7 @@ Switch nParamCount
      Exit
 
    Case 1
-   
+
      nPos  := QHTM_GetScrollPos( nHandle )
      nPercent := Min( Round( ( ( nPos / aSize[ 2 ] ) * 100 ), 2 ), 100.00 )
      Exit
@@ -275,14 +278,14 @@ Return nPercent
 */
 Procedure QHTM_EnableUpdate( ControlName, ParentForm, lEnable )
 
-IF Valtype(lEnable) == "U" 
+IF Valtype(lEnable) == "U"
    lEnable := .T.
 ENDIF
 
 If ( PCount() < 2 )
    Return
 Endif
- 
+
 SendMessage( GetControlHandle( ControlName, ParentForm ), WM_SETREDRAW, Iif( lEnable, 1, 0 ), 0 )
 
 Return

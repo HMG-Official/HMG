@@ -1,10 +1,9 @@
--w0 -es2
-
 ../../../hmg.hbc
--odemo
-
 -Iinc1
 -Iinc2
+-w0
+
+-odemo
 
 demo.prg
 other.prg

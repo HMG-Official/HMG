@@ -1,4 +1,11 @@
+..\..\..\..\..\hmg.hbc
+
+hbnetio.hbc
+
+-I.
+
+-w0
+
 -odemo
 
 main.prg
-

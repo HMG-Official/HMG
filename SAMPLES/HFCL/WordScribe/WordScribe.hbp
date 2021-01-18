@@ -1,5 +1,8 @@
+-n
+-m
+-w0
 -owordscribe
 
 -w -es2
-
 WordScribe.prg
+..\..\..\hmg.hbc

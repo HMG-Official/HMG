@@ -1,4 +1,9 @@
+../../hmg.hbc
 -hblib
+
+../../hmg.hbc
+
+-w0
 
 -o../../lib/hmgpgsql
 

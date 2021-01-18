@@ -1,14 +1,9 @@
--q
-
+../hmg.hbc
+-D__HBIDE__
 -hblib
+-w2
 
 -o../lib/${hb_plat}/${hb_comp}/hmg_core
-
-../hmg.hbc
-
--D__HBIDE__
-
--w2 -es2
 
 debugger/dbgHB.prg
 debugger/dbgGUI.prg

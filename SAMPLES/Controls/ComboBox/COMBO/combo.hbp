@@ -1,3 +1,6 @@
--ocombo
+..\..\..\..\hmg.hbc
 
+-I.
+
+-ocombo
 combo.prg
