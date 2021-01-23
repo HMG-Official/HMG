@@ -21,6 +21,7 @@ jobs:
          workflow_conclusion: success
          name: hb34-0703
          path: c:\temp
+         repo: JoseQuintas/hbpack
 
     - name: Unzip
       env:
