@@ -1,0 +1,61 @@
+name: HMG + Harbour 3.2 + Mingw 10.2 32/64 bits
+
+###
+### Current bat/hbp do not permit 32/64 bits simultaneous
+###
+###         cd \temp\harbour\addons\hmg
+###         c:\temp\harbour\addons\hmg\_BuildAllLib64.bat
+###
+
+on:
+  push:
+
+jobs:
+
+  Build:
+    runs-on: windows-latest
+    steps:
+
+    - name: Load mingw
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: hb32_1002.yml
+         workflow_conclusion: success
+         name: hb32_1002
+         path: c:\temp
+         repo: JoseQuintas/harbour-32
+
+    - name: Unzip & Build & Zip
+      run: |
+
+         $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin;" + $env:Path
+         $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
+         $env:hb_compiler = "mingw64"
+         c:
+         cd \temp
+         7z x -y \temp\hb32_1002.7z -o\temp\harbour
+
+         md \temp\harbour\addons
+         git clone https://github.com/HMG-Official/hmg \temp\harbour\addons\hmg --depth 1
+
+         $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
+         $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
+         $env:hb_compiler = "mingw64"
+         c:\temp\harbour\addons\hmg\BuildAllLib32.bat
+
+         7z a -r \temp\hmg_hb32_mingw_1002.7z \temp\harbour\*.*
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: hmg_hb32_mingw_1002
+         path: c:\temp\hmg_hb32_mingw_1002.7z
+
+#   - name: Test MSVC
+#      env:
+#         PATH: c:\temp\harbour\bin
+#         HB_COMPILER: msvc
+#      run: |
+#      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
+#      cd \temp\harbour\addons\hmg
+#      BuildAllLib32.bat

@@ -12,7 +12,7 @@ rem
 rem
 rem   This batch file passes information to hbmk2 to make possible an easy (zero
 rem   configuration build of HMG applications).
-rem 
+rem
 rem   You can achieve a customized build passing parameters directly to hbmk2.
 rem   Please, take a look at hbmk2 help:
 rem
@@ -50,7 +50,7 @@ rem ****************************************************************************
 SET PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
 
 rem *******************************************************************************
-rem PROCESS PARAMETERS 
+rem PROCESS PARAMETERS
 rem *******************************************************************************
 rem
 rem /n   no run after build
@@ -100,10 +100,10 @@ COPY /b %HMGPATH%\resources\hmg32.rc+"%~n1.rc"+%HMGPATH%\resources\filler _temp.
 WINDRES -i _temp.rc -o _temp.o >windres.log 2>&1
 
 rem *******************************************************************************
-rem SET PROJECT OUTPUT FILE NAME 
+rem SET PROJECT OUTPUT FILE NAME
 rem *******************************************************************************
 rem
-rem The first parameter sent to hbmk2 is -o%~n1.exe. I've added to it create the 
+rem The first parameter sent to hbmk2 is -o%~n1.exe. I've added to it create the
 rem application with the project basename (<projectname.hbp> specified by the user.
 
 rem *******************************************************************************
@@ -125,7 +125,7 @@ rem ****************************************************************************
 rem -ldflag="-pthread  -static-libgcc  -static-libstdc++  -static -lpthread"  --> for gcc.exe link pthread library in static mode
 rem -trace --> for show execute command line
 
-HBMK2 -ldflag="-pthread  -static-libgcc  -static-libstdc++  -static -lpthread" -mt -o"%~n1" %HMGPATH%\hmg32.hbc %gtdrivers% %debug% -q %1 %2 %3 %4 %5 %6 %7 %8 >hbmk.log 2>&1
+HBMK2 -q -ldflag="-pthread  -static-libgcc  -static-libstdc++  -static -lpthread" -mt -o"%~n1" %HMGPATH%\hmg32.hbc %gtdrivers% %debug% -q %1 %2 %3 %4 %5 %6 %7 %8 >hbmk.log 2>&1
 
 
 rem ******************************************************************************

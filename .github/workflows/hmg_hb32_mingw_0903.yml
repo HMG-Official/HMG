@@ -1,0 +1,64 @@
+name: HMG + Harbour 3.2 + Mingw 9.3
+
+on:
+  push:
+
+jobs:
+
+  Build:
+    runs-on: windows-latest
+    steps:
+
+    - name: Load mingw
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: mingw_0903.yml
+         workflow_conclusion: success
+         name: mingw_0903
+         path: c:\temp
+         repo: JoseQuintas/hbpack
+
+    - name: Load mingw
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: mingw_0903.yml
+         workflow_conclusion: success
+         name: hb32_0903
+         path: c:\temp
+         repo: JoseQuintas/hbpack
+
+    - name: Unzip & Build & Zip
+      run: |
+
+         $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
+         $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
+         $env:hb_compiler = "mingw"
+
+         c:
+         cd \temp
+         7z x -y \temp\hb32_0903.7z -o\temp\harbour
+
+         md \temp\harbour\comp
+         7z x -y \temp\mingw_0903.7z -o\temp\harbour\comp\mingw32
+
+         md \temp\harbour\addons
+         git clone https://github.com/HMG-Official/hmg \temp\harbour\addons\hmg --depth 1
+
+         cd \temp\harbour\addons\hmg
+         c:\temp\harbour\addons\hmg\BuildAllLib32.bat
+         7z a -r \temp\hmg_hb32_mingw_0903.7z \temp\harbour\*.*
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: hmg_hb32_mingw_0903
+         path: c:\temp\hmg_hb32_mingw_0903.7z
+
+#   - name: Test MSVC
+#      env:
+#         PATH: c:\temp\harbour\bin
+#         HB_COMPILER: msvc
+#      run: |
+#      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
+#      cd \temp\harbour\addons\hmg
+#      BuildAllLib32.bat

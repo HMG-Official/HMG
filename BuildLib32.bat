@@ -3,9 +3,9 @@
 rem SYNTAX:  BuilLib.bat  [/nopause]  [/ansi] | [/unicode]
 
 if  "%1" == "/nopause" (
-    set nopause=1 
-) else ( 
-    set nopause=0 ) 
+    set nopause=1
+) else (
+    set nopause=0 )
 
 if "%1" == "/nopause" shift
 
@@ -21,21 +21,21 @@ echo. *********************************
 echo. *   HMG-Unicode Build Library   *
 echo. *********************************
 echo.
-echo. 
+echo.
 echo. Build HMG Library to support the character set:
 echo. -----------------------------------------------
 echo.
 echo. 1 - ANSI
-echo. 
-echo. 2 - UNICODE
-echo. 
-echo. 0 - Cancel
-echo. 
 echo.
-echo. 
-set /p option=Select an Option [0, 1, 2] (for default: UNICODE): 
-if %ERRORLEVEL% NEQ 0 goto OP2 
-if %option% == 1 goto OP1  
+echo. 2 - UNICODE
+echo.
+echo. 0 - Cancel
+echo.
+echo.
+echo.
+set /p option=Select an Option [0, 1, 2] (for default: UNICODE):
+if %ERRORLEVEL% NEQ 0 goto OP2
+if %option% == 1 goto OP1
 if %option% == 2 goto OP2
 if %option% == 0 exit
 goto MENU
@@ -60,7 +60,7 @@ echo.
 title Build Library:         UNICODE
 echo. Build Library:         UNICODE
 echo.
-if not exist "INCLUDE\_UNICODE.ch" ( goto ERROR2 ) 
+if not exist "INCLUDE\_UNICODE.ch" ( goto ERROR2 )
 copy INCLUDE\_UNICODE.ch  INCLUDE\SET_COMPILE_HMG_UNICODE.ch > nul
 if %ERRORLEVEL% NEQ 0 goto ERROR2
 echo.UNICODE > hmglib.txt
@@ -86,7 +86,9 @@ exit
 :BUILDLIB
 SET HMGPATH=%~dp0
 SET PATH=%HMGPATH%\harbour\bin;%HMGPATH%\mingw\bin;%PATH%
-hbmk2 hmg32.hbp
+SET HBP_PARAM=-q -i%hmgpath%\include
+
+hbmk2 hmg32.hbp %HBP_PARAM%
 echo.
 
-if %nopause% == 0 pause 
+if %nopause% == 0 pause
