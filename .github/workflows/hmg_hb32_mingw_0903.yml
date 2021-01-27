@@ -33,20 +33,22 @@ jobs:
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
          $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
          $env:hb_compiler = "mingw"
+         $env:hbmk_cmd=-q -workdir=c:\temp -rebuild
 
          c:
-         cd \temp
-         7z x -y \temp\hb32_0903.7z -o\temp\harbour
+         cd c:\temp
+         md c:\temp\harbour
+         7z x -y \temp\hb32_0903.7z -oc:\temp\harbour
 
-         md \temp\harbour\comp
-         7z x -y \temp\mingw_0903.7z -o\temp\harbour\comp\mingw32
+         md c:\temp\harbour\comp
+         7z x -y \temp\mingw_0903.7z -oc:\temp\harbour\comp\mingw32
 
-         md \temp\harbour\addons
-         git clone https://github.com/HMG-Official/hmg \temp\harbour\addons\hmg --depth 1
+         md c:\temp\harbour\addons
+         git clone https://github.com/HMG-Official/hmg c:\temp\harbour\addons\hmg --depth 1
 
          cd \temp\harbour\addons\hmg
          c:\temp\harbour\addons\hmg\BuildAllLib32.bat
-         7z a -r \temp\hmg_hb32_mingw_0903.7z \temp\harbour\*.*
+         7z a -r c:\temp\hmg_hb32_mingw_0903.7z c:\temp\harbour\*.*
 
     - name: Save
       uses: actions/upload-artifact@v2
