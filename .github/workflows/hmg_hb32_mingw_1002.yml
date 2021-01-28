@@ -27,7 +27,7 @@ jobs:
 
     - name: Unzip & Build & Zip
       env:
-         githubactor: ${{ github.actor }}
+         githubactor: "${{ github.actor }}"
       run: |
 
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin;" + $env:Path
