@@ -44,7 +44,7 @@ jobs:
          7z x -y \temp\mingw_0903.7z -oc:\temp\harbour\comp\mingw32
 
          md c:\temp\harbour\addons
-         git clone https://github.com/HMG-Official/hmg c:\temp\harbour\addons\hmg --depth 1
+         git clone https://github.com/${github.actor}/hmg c:\temp\harbour\addons\hmg --depth 1
 
          cd \temp\harbour\addons\hmg
          c:\temp\harbour\addons\hmg\BuildAllLib32.bat
