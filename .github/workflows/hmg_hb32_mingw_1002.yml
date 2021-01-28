@@ -1,4 +1,4 @@
-name: HMG + Harbour 3.2 + Mingw 10.2 32/64 bits
+name: HMG + HB 3.2 + Mingw 10.2 32/64 bits
 
 ###
 ### Current bat/hbp do not permit 32/64 bits simultaneous
@@ -27,7 +27,7 @@ jobs:
 
     - name: Unzip & Build & Zip
       env:
-         GITACTOR: ${{ github.actor }}
+         githubactor: ${{ github.actor }}
       run: |
 
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin;" + $env:Path
@@ -40,7 +40,7 @@ jobs:
          7z x -y c:\temp\hb32_1002.7z -oc:\temp\harbour
 
          md c:\temp\harbour\addons
-         git clone https://github.com/$($env.gitactor)/hmg c:\temp\harbour\addons\hmg --depth 1
+         git clone https://github.com/$($env.githubactor)/hmg c:\temp\harbour\addons\hmg --depth 1
 
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
          $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"

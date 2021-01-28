@@ -1,4 +1,4 @@
-name: HMG + Harbour 3.2 + Mingw 9.3
+name: HMG + HB 3.2 + Mingw 9.3
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
 
     - name: Unzip & Build & Zip
        env:
-          GITACTOR: ${{ github.actor }}
+          githubactor: ${{ github.actor }}
        run: |
 
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
@@ -46,7 +46,7 @@ jobs:
          7z x -y \temp\mingw_0903.7z -oc:\temp\harbour\comp\mingw32
 
          md c:\temp\harbour\addons
-         git clone https://github.com/$($env:github_actor)/hmg c:\temp\harbour\addons\hmg --depth 1
+         git clone https://github.com/$($env:githubactor)/hmg c:\temp\harbour\addons\hmg --depth 1
 
          cd \temp\harbour\addons\hmg
          c:\temp\harbour\addons\hmg\BuildAllLib32.bat
