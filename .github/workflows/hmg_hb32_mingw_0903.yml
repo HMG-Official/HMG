@@ -29,11 +29,13 @@ jobs:
 
     - name: Unzip & Build & Zip
       env:
-         Path: "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;c:\program files\7-zip;c:\program files\git\cmd;"
          githubactor: ${{ github.actor }}
-         hb_compiler: "mingw"
-         hbmk_cmd: "-q -workdir=c:\temp -rebuild"
       run: |
+
+         $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
+         $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
+         $env:hb_compiler = "mingw"
+         $env:hbmk_cmd = "-q -workdir=c:\temp -rebuild"
 
          c:
          cd c:\temp
