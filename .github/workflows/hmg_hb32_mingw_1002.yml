@@ -33,7 +33,7 @@ jobs:
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin;" + $env:Path
          $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
          $env:hb_compiler = "mingw64"
-         $env:hbmk_cmd=-q -workdir=c:\temp -rebuild
+         $env:hbmk_cmd = "-q -workdir=c:\temp -rebuild"
          c:
          cd c:\temp
          md c:\temp\harbour
