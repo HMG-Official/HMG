@@ -28,8 +28,6 @@ jobs:
          repo: JoseQuintas/hbpack
 
     - name: Unzip & Build & Zip
-       env:
-          githubactor: "${{ github.actor }}"
        run: |
 
          echo ${github.actor}
