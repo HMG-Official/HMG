@@ -49,7 +49,7 @@ jobs:
          git clone https://github.com/$env:githubactor/hmg c:\temp\harbour\addons\hmg --depth 1
 
          cd \temp\harbour\addons\hmg
-         c:\temp\harbour\addons\hmg\BuildAllLib32.bat
+         c:\temp\harbour\addons\hmg\BuildAllLib32.bat /op2
          7z a -r c:\temp\hmg_hb32_mingw_0903.7z c:\temp\harbour\*.*
 
     - name: Save
