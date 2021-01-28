@@ -27,14 +27,12 @@ jobs:
 
     - name: Unzip & Build & Zip
       env:
+         Path: "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;c:\program files\7-zip;c:\program files\git\cmd;"
          githubactor: ${{ github.actor }}
+         hb_compiler: "mingw"
+         hbmk_cmd: "-q -workdir=c:\temp -rebuild"
       run: |
 
-         echo $($env:githubactor)
-         $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin;" + $env:Path
-         $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
-         $env:hb_compiler = "mingw64"
-         $env:hbmk_cmd = "-q -workdir=c:\temp -rebuild"
          c:
          cd c:\temp
          md c:\temp\harbour
@@ -43,11 +41,11 @@ jobs:
          md c:\temp\harbour\addons
          git clone https://github.com/$env:githubactor/hmg c:\temp\harbour\addons\hmg --depth 1
 
-         $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
-         $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
-         $env:hb_compiler = "mingw64"
-         cd c:\temp\harbour\addons\hmg
-         c:\temp\harbour\addons\hmg\BuildAllLib32.bat /op2
+###         $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
+###         $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
+###         $env:hb_compiler = "mingw64"
+###         cd c:\temp\harbour\addons\hmg
+###         c:\temp\harbour\addons\hmg\BuildAllLib32.bat /op2
 
          7z a -r c:\temp\hmg_hb32_mingw_1002.7z c:\temp\harbour\*.*
 
@@ -57,11 +55,11 @@ jobs:
          name: hmg_hb32_mingw_1002
          path: c:\temp\hmg_hb32_mingw_1002.7z
 
-#   - name: Test MSVC
-#      env:
-#         PATH: c:\temp\harbour\bin
-#         HB_COMPILER: msvc
-#      run: |
-#      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
-#      cd \temp\harbour\addons\hmg
-#      BuildAllLib32.bat
+###   - name: Test MSVC
+###      env:
+###         PATH: c:\temp\harbour\bin
+###         HB_COMPILER: msvc
+###      run: |
+###      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
+###      cd \temp\harbour\addons\hmg
+###      BuildAllLib32.bat
