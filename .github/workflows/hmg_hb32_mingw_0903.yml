@@ -29,7 +29,7 @@ jobs:
 
     - name: Unzip & Build & Zip
        env:
-          GITHUB_ACTOR: ${ { github.actor } }
+          GITHUB_ACTOR: ${{ github.actor }}
        run: |
 
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
