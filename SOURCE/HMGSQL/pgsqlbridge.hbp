@@ -1,0 +1,11 @@
+-hblib
+
+-o../../lib/hmgpgsql
+
+-Iinclude
+
+-D__HBIDE__
+
+-w2 -es2
+
+hmgpgsql.prg
