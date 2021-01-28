@@ -26,6 +26,8 @@ jobs:
          repo: JoseQuintas/harbour-32
 
     - name: Unzip & Build & Zip
+      env:
+         GITHUB_ACTOR: ${ { github.actor } }
       run: |
 
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin;" + $env:Path
@@ -38,7 +40,7 @@ jobs:
          7z x -y c:\temp\hb32_1002.7z -oc:\temp\harbour
 
          md c:\temp\harbour\addons
-         git clone https://github.com/${github.actor}/hmg c:\temp\harbour\addons\hmg --depth 1
+         git clone https://github.com/%GITHUB_ACTOR%/hmg c:\temp\harbour\addons\hmg --depth 1
 
          $env:Path = "c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin;" + $env:Path
          $env:Path += "c:\program files\7-zip;c:\program files\git\cmd;"
