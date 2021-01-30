@@ -27,5 +27,4 @@ libpaths=lib/${hb_plat}/${hb_comp}
 
 # link compiled resources
 
-{!hblib}sources=${hb_curdir}_temp.o
-
+{!hblib}sources=resources/hmg.rc
