@@ -12,50 +12,50 @@ rem hbmk2 hmg.hbp
 
 rem cd..\..
 cd source\crypt
-hbmk2 crypt.hbp -i%hmgpath%\include
+hbmk2 crypt.hbp -q -i%hmgpath%\include
 echo.
 
 cd..\..
 cd source\edit
-hbmk2 edit.hbp -i%hmgpath%\include
+hbmk2 edit.hbp -q -i%hmgpath%\include
 echo.
 
 cd..\..
 cd source\editex
-hbmk2 editex.hbp -i%hmgpath%\include
+hbmk2 editex.hbp -q -i%hmgpath%\include
 echo.
 
 cd..\..
 cd source\graph
-hbmk2 graph.hbp -i%hmgpath%\include
+hbmk2 graph.hbp -q -i%hmgpath%\include
 echo.
 
 cd..\..
 cd source\hbvpdf
-hbmk2 hbvpdf.hbp -i%hmgpath%\include
+hbmk2 hbvpdf.hbp -q -i%hmgpath%\include
 echo.
 
 cd..\..
 cd source\HMGSQL
-hbmk2 mysqlbridge.hbp -i%hmgpath%\include
-hbmk2 pgsqlbridge.hbp -i%hmgpath%\include
-hbmk2 sqlitebridge.hbp -i%hmgpath%\include
+hbmk2 mysqlbridge.hbp -q -i%hmgpath%\include
+hbmk2 pgsqlbridge.hbp -q -i%hmgpath%\include
+hbmk2 sqlitebridge.hbp -q -i%hmgpath%\include
 echo.
 
 cd..\..
 cd source\ini
-hbmk2 ini.hbp -i%hmgpath%\include
+hbmk2 ini.hbp -q -i%hmgpath%\include
 echo.
 
 cd..\..
 cd source\report
-hbmk2 report.hbp -i%hmgpath%\include
+hbmk2 report.hbp -q -i%hmgpath%\include
 echo.
 
 
 cd..\..
 cd hfcl\source
-hbmk2 hfcl.hbp -i%hmgpath%\include -i%hmgpath%\hfcl\include
+hbmk2 hfcl.hbp -q -i%hmgpath%\include -i%hmgpath%\hfcl\include
 echo.
 
 cd..\..
