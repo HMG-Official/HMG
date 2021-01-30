@@ -77,7 +77,10 @@ jobs:
       run: |
          c:
          cd \temp\harbour
-         7z a -r c:\temp\hmg_hb32_mingw_1002.7z c:\temp\harbour\*.*
+         7z a -r c:\temp\hmg_hb32_mingw_1002.7z c:\temp\harbour\addons\hmg\*.*
+
+# big size, temporary removed harbour 3.2 and mingw 10.2
+#         7z a -r c:\temp\hmg_hb32_mingw_1002.7z c:\temp\harbour\*.*
 
     - name: Save
       uses: actions/upload-artifact@v2
