@@ -51,10 +51,12 @@ jobs:
          HB_COMPILER: mingw
          HB_INSTALL_PREFIX: c:\temp\harbour
          PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin
+         HBMK_CMD: -q -rebuild -workdir=c:\temp
       run: |
          c:
          cd c:\temp\harbour\addons\hmg
-         c:buildalllib32.bat
+         copy test\hbmk.hbc \temp\harbour\bin
+         c:buildlib.bat
 
 #    - name: Build 64 bits
 #      env:
@@ -64,7 +66,7 @@ jobs:
 #      run: |
 #         c:
 #         cd \temp\harbour\addons\hmg
-#         _buildalllib64.bat
+#         c:buildlib.bat
 
 # msvc
 # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
@@ -83,3 +85,13 @@ jobs:
          name: hmg_hb32_mingw_1002
          path: c:\temp\hmg_hb32_mingw_1002.7z
 
+#    - name: TestAll
+#      env:
+#         HB_COMPILER: mingw
+#         HB_INSTALL_PREFIX: c:\temp\harbour
+#         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin
+#         HBMK_CMD: -q -rebuild -workdir=c:\temp
+#      run: |
+#         c:
+#         cd c:\temp\harbour\addons\hmg\test
+#         hbmk2 testall.hbp -q -workdir=c:\temp

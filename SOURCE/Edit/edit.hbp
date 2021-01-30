@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/edit
+-o../../lib/${hb_plat}/${hb_comp}/edit
 
 -Iinclude
 
@@ -9,3 +9,4 @@
 -w2 -es2
 
 h_edit.prg
+

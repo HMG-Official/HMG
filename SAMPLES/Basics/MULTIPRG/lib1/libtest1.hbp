@@ -1,5 +1,4 @@
 -hblib
--inc
 -otest1
 
 -Iinclude
@@ -9,3 +8,5 @@
 -w0 -es2
 
 code1.prg
+
+

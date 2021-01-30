@@ -1,0 +1,2 @@
+libpaths=../addons/hmg
+libs=hmg.hbc

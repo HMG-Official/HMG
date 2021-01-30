@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/ini
+-o../../lib/${hb_plat}/${hb_comp}/ini
 
 -Iinclude
 
@@ -10,3 +10,4 @@
 
 h_ini.prg
 c_ini.c
+

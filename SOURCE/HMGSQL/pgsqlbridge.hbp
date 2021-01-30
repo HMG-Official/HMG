@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/hmgpgsql
+-o../../lib/${hb_plat}/${hb_comp}/hmgpgsql
 
 -Iinclude
 
@@ -9,3 +9,4 @@
 -w2 -es2
 
 hmgpgsql.prg
+

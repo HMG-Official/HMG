@@ -1,0 +1,16 @@
+-hbcontainer
+
+source\hmg.hbp
+source\crypt\crypt.hbp
+source\edit\edit.hbp
+source\editex\editex.hbp
+source\graph\graph.hbp
+source\hbvpdf\hbvpdf.hbp
+source\hmgsql\mysqlbridge.hbp
+source\hmgsql\pgsqlbridge.hbp
+source\hmgsql\sqlitebridge.hbp
+source\ini\ini.hbp
+source\report\report.hbp
+hfcl\source\hfcl.hbp
+
+

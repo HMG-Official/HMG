@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/graph
+-o../../lib/${hb_plat}/${hb_comp}/graph
 
 -Iinclude
 
@@ -10,3 +10,4 @@
 
 h_graph.prg
 c_graph.c
+

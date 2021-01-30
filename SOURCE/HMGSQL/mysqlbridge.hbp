@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/hmgmysql
+-o../../lib/${hb_plat}/${hb_comp}/hmgmysql
 
 -Iinclude
 
@@ -9,3 +9,4 @@
 -w2 -es2
 
 hmgmysql.prg
+

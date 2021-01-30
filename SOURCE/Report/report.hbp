@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/report
+-o../../lib/${hb_plat}/${hb_comp}/report
 
 -Iinclude
 
@@ -10,3 +10,4 @@
 
 h_report.prg
 tprint.prg
+

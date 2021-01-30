@@ -1,5 +1,5 @@
 -hblib
--o../../lib/hfcl
+-o../../lib/${hb_plat}/${hb_comp}/hfcl
 
 -Iinclude
 -I../include
@@ -16,3 +16,5 @@ h_qhtm.prg
 c_qhtm.c
 RichEditBoxEx_C.c
 RichEditBoxEx_H.prg
+
+

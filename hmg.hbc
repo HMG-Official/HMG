@@ -1,0 +1,31 @@
+# default
+
+PRGFLAGS=-m -n -q -w0
+
+# paths
+
+incpaths=./
+incpaths=include
+libpaths=lib/${hb_plat}/${hb_comp}
+
+# main hmg libs
+
+{!hblib}libs=hmg crypt edit editex graph ini report hfcl
+
+# system libs
+
+{!hblib}libs=msvfw32 vfw32
+
+# harbour contrib libs
+
+{!hblib}libs=hbmysql mysql hbfimage hbpgsql sddmy
+
+{!hblib}libs=hbvpdf
+
+{!hblib}libs=hbct hbwin hbmzip minizip hbmemio hbmisc hbtip sqlite3 hbsqlit3
+{!hblib}libs=sddodbc rddsql hbodbc odbc32 hbhpdf hbnetio xhb png hpdf hbzebra
+
+# link compiled resources
+
+{!hblib}sources=${hb_curdir}_temp.o
+

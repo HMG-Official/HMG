@@ -1,15 +1,12 @@
 -hblib
 
--o../lib/hmg
+..\hmg.hbc
 
--I../include
+-o../lib/${hb_plat}/${hb_comp}/hmg
 
 -D__HBIDE__
 
 -w2 -es2
-
-#-inc
-
 
 debugger/dbgHB.prg
 debugger/dbgGUI.prg
@@ -113,4 +110,5 @@ c_toolbar.c
 c_tree.c
 c_winapimisc.c
 c_windows.c
+
 

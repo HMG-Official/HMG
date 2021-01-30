@@ -7,7 +7,7 @@
 -hblib
 
 
--o../../lib/hbvpdf
+-o../../lib/${hb_plat}/${hb_comp}/hbvpdf
 
 
 
@@ -20,3 +20,4 @@
 hbvpdf.prg
 hbvpdft.prg
 hbvpsup.prg
+
