@@ -1,9 +1,9 @@
 #
-# use:    JoseQuintas/harbour_32/hb32_1002
-# create: hmg_hb32_mingw_1002
+# use:    JoseQuintas/harbour_34/hb34_0703
+# create: hmg_hb34_mingw_0703
 #
 
-name: HMG Harbour 3.2 mingw 10.2 32 bits
+name: HMG Harbour 3.4 mingw 7.3 32/64 bits
 
 on:
   push:
@@ -12,8 +12,8 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: 'Harbour 3.2 mingw 10.2'
-        default: 'hmg_hb32_mingw_1002'
+        description: 'Harbour 3.4 mingw 7.3'
+        default: 'hmg_hb34_mingw_0703'
         required: true
 
 jobs:
@@ -25,18 +25,18 @@ jobs:
     - name: Load Mingw
       uses: JoseQuintas/action-download-artifact@v2
       with:
-         workflow: hb32_1002.yml
+         workflow: hb34_0703.yml
          workflow_conclusion: success
-         name: hb32_1002
+         name: hb34_0703
          path: c:\temp
-         repo: JoseQuintas/harbour_32
+         repo: JoseQuintas/harbour_34
 
     - name: Unzip
       run: |
          c:
          dir c:\temp
          md c:\temp\harbour
-         7z x -y c:\temp\hb32_1002.7z -oc:\temp\harbour
+         7z x -y c:\temp\hb34_0703.7z -oc:\temp\harbour
 
     - name: Install Source Code
       env:
@@ -50,7 +50,7 @@ jobs:
       env:
          HB_COMPILER: mingw
          HB_INSTALL_PREFIX: c:\temp\harbour
-         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin
+         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin
          HBMK_CMD: -q -rebuild -workdir=c:\temp
       run: |
          c:
@@ -58,15 +58,15 @@ jobs:
          copy test\hbmk.hbc \temp\harbour\bin
          c:buildlib.bat
 
-#    - name: Build 64 bits
-#      env:
-#         HB_COMPILER: mingw64
-#         HB_INSTALL_PREFIX: c:\temp\harbour
-#         PATH: c:\temp\harbour\comp\mingw64\bin
-#      run: |
-#         c:
-#         cd \temp\harbour\addons\hmg
-#         c:buildlib.bat
+    - name: Build 64 bits
+      env:
+         HB_COMPILER: mingw64
+         HB_INSTALL_PREFIX: c:\temp\harbour
+         PATH: c:\temp\harbour\comp\mingw64\bin
+      run: |
+         c:
+         cd \temp\harbour\addons\hmg
+         c:buildlib.bat
 
 # msvc
 # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
@@ -77,22 +77,19 @@ jobs:
       run: |
          c:
          cd \temp\harbour
-         7z a -r c:\temp\hmg_hb32_mingw_1002.7z c:\temp\harbour\addons\hmg\*.*
-
-# big size, temporary removed harbour 3.2 and mingw 10.2
-#         7z a -r c:\temp\hmg_hb32_mingw_1002.7z c:\temp\harbour\*.*
+         7z a -r c:\temp\hmg_hb34_mingw_0703.7z c:\temp\harbour\addons\hmg\*.*
 
     - name: Save
       uses: actions/upload-artifact@v2
       with:
-         name: hmg_hb32_mingw_1002
-         path: c:\temp\hmg_hb32_mingw_1002.7z
+         name: hmg_hb34_mingw_0703
+         path: c:\temp\hmg_hb34_mingw_0703.7z
 
     - name: TestAll
       env:
          HB_COMPILER: mingw
          HB_INSTALL_PREFIX: c:\temp\harbour
-         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin
+         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin
          HBMK_CMD: -q -rebuild -workdir=c:\temp
       run: |
          c:
