@@ -1,6 +1,6 @@
 -hblib
 
--o../../lib/crypt
+-o../../lib/${hb_plat}/${hb_comp}/crypt
 
 -Iinclude
 
