@@ -6,7 +6,7 @@
 name: HMG Harbour 3.2 mingw 10.2 32 bits
 
 on:
-  push:
+#  push:
   schedule:
    - cron: "0 0 * * *"
   workflow_dispatch:
