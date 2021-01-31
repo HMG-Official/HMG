@@ -88,13 +88,13 @@ jobs:
          name: hmg_hb32_mingw_1002
          path: c:\temp\hmg_hb32_mingw_1002.7z
 
-#    - name: TestAll
-#      env:
-#         HB_COMPILER: mingw
-#         HB_INSTALL_PREFIX: c:\temp\harbour
-#         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin
-#         HBMK_CMD: -q -rebuild -workdir=c:\temp
-#      run: |
-#         c:
-#         cd c:\temp\harbour\addons\hmg\test
-#         hbmk2 testall.hbp -q -workdir=c:\temp
+    - name: TestAll
+      env:
+         HB_COMPILER: mingw
+         HB_INSTALL_PREFIX: c:\temp\harbour
+         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw32\bin
+         HBMK_CMD: -q -rebuild -workdir=c:\temp
+      run: |
+         c:
+         cd c:\temp\harbour\addons\hmg\test
+         hbmk2 testall.hbp -q -workdir=c:\temp
