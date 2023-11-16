@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link the HMG library with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
+ Your use of that executable is in no way restricted on account of linking the 
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+	Copyright 2002 AJ Wos <andrwos@aust1.net> 
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -55,9 +55,9 @@
 
 
 
-/*
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
+/* 
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -76,7 +76,7 @@
 #include <commctrl.h>
 #include <tchar.h>
 #include "hbapi.h"
-
+#include "hg_unicode.h"
 
 #define MAX_ITEM_TEXT   1024
 
@@ -121,14 +121,14 @@ HB_FUNC ( TREE_SETBCFC )   // Set DynamicBackColor and Set DynamicForeColor
 
    lptvcd->clrTextBk = hb_parni(2);
    lptvcd->clrText   = hb_parni(3);
-
+   
    HFONT hFont = (HFONT) HMG_parnl (4);
    if ( hFont != NULL )
        SelectObject (lptvcd->nmcd.hdc, hFont);
 
    hb_retni ( CDRF_NEWFONT );
 }
-
+ 
 
  //       TreeView_CustomDraw_GetAction ( lParam )
 HB_FUNC ( TREEVIEW_CUSTOMDRAW_GETACTION )
@@ -136,7 +136,7 @@ HB_FUNC ( TREEVIEW_CUSTOMDRAW_GETACTION )
    LPARAM lParam = (LPARAM) HMG_parnl (1);
    LPNMTVCUSTOMDRAW lptvcd = (LPNMTVCUSTOMDRAW) lParam;
 
-   if (lptvcd->nmcd.dwDrawStage == CDDS_PREPAINT )
+   if (lptvcd->nmcd.dwDrawStage == CDDS_PREPAINT ) 
        hb_retni ( CDRF_NOTIFYITEMDRAW ) ;
 
    else if (lptvcd->nmcd.dwDrawStage == CDDS_ITEMPREPAINT)
@@ -158,13 +158,13 @@ HB_FUNC ( INITTREE )
    icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
    icex.dwICC  = ICC_TREEVIEW_CLASSES;
    InitCommonControlsEx (&icex);
-
+   
    int style = WS_VISIBLE | WS_TABSTOP | WS_CHILD | TVS_HASLINES | TVS_HASBUTTONS | TVS_SHOWSELALWAYS;
 
    if ( hb_parnl (9) == FALSE )   // NoRootButton
       style = style | TVS_LINESATROOT;
 
-   hWndTV = CreateWindowEx( WS_EX_CLIENTEDGE , WC_TREEVIEW /*_TEXT("SysTreeView32")*/ ,
+   hWndTV = CreateWindowEx( WS_EX_CLIENTEDGE , WC_TREEVIEW /*_TEXT("SysTreeView32")*/ , 
                             _TEXT(""),
                             style,
                             hb_parni(2),
@@ -205,7 +205,7 @@ HB_FUNC ( INITTREEVIEWBITMAP )
 
          if ( hImageList != NULL )
             SendMessage (hTree, TVM_SETIMAGELIST, (WPARAM) TVSIL_NORMAL, (LPARAM) hImageList);
-
+         
          ic = ImageList_GetImageCount (hImageList);
    }
 
@@ -216,7 +216,7 @@ HB_FUNC ( INITTREEVIEWBITMAP )
 HB_FUNC ( ADDTREEVIEWBITMAP )
 {
    HWND  hTree     = (HWND)   HMG_parnl (1);
-   TCHAR *FileName = (TCHAR*) HMG_parc  (2);
+   TCHAR *FileName = (TCHAR*) HG_parc  (2);
    int Transparent = hb_parl(3) ? 0 : 1;
    HIMAGELIST hImageList = TreeView_GetImageList (hTree, TVSIL_NORMAL);
    int ic = 0;
@@ -228,6 +228,7 @@ HB_FUNC ( ADDTREEVIEWBITMAP )
       ic = ImageList_GetImageCount (hImageList);
    }
    hb_retni ((INT) ic );
+   HG_xfree( FileName ) ;
 }
 
 
@@ -241,7 +242,7 @@ typedef struct {
 
 void AddTreeItemLPARAM (HWND hWndTV, HTREEITEM ItemHandle, LONG nID, BOOL IsNodeFlag)
 {  if ((hWndTV != NULL) && (ItemHandle != NULL))
-   {
+   { 
       HMG_StructTreeItemLPARAM * TreeItemLPARAM = (HMG_StructTreeItemLPARAM *) hb_xgrab (sizeof(HMG_StructTreeItemLPARAM));
       TreeItemLPARAM->ItemHandle = ItemHandle;
       TreeItemLPARAM->nID        = nID;
@@ -272,7 +273,7 @@ HB_FUNC (ADDTREEITEM)
 
    LONG nID        = (LONG) hb_parnl(6);
    BOOL IsNodeFlag = (BOOL) hb_parl (7);
-
+   
 	tvi.mask       = TVIF_TEXT | TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_PARAM ;
 	tvi.pszText		= ItemText;
 	tvi.cchTextMax		= sizeof (ItemText) / sizeof (TCHAR);
@@ -365,7 +366,7 @@ HB_FUNC (TREEVIEW_GETSELECTIONID)
 {
    HWND        hWndTV     = (HWND) HMG_parnl (1);
    HTREEITEM   ItemHandle = (HTREEITEM) TreeView_GetSelection ( hWndTV );
-
+   
    if (ItemHandle == NULL)
        return;   // return NIL
 
@@ -374,7 +375,7 @@ HB_FUNC (TREEVIEW_GETSELECTIONID)
    TreeItem.hItem  = ItemHandle;
    TreeItem.lParam = (LPARAM) 0;
    TreeView_GetItem ( hWndTV , &TreeItem );
-
+   
    HMG_StructTreeItemLPARAM * TreeItemLPARAM = (HMG_StructTreeItemLPARAM *) TreeItem.lParam;
    hb_retnl ((LONG) TreeItemLPARAM->nID);
 }
@@ -384,10 +385,10 @@ HB_FUNC (TREEVIEW_GETSELECTION)
 {
    HWND      hWndTV     = (HWND) HMG_parnl (1);
    HTREEITEM ItemHandle = (HTREEITEM) TreeView_GetSelection( hWndTV );
-
+   
    if (ItemHandle == NULL)
        return;   // return NIL
-
+   
    HMG_retnl  ((LONG_PTR) ItemHandle );
 }
 
@@ -425,7 +426,9 @@ HB_FUNC (TREEVIEW_GETITEM)
    TreeItem.cchTextMax = sizeof (ItemText) / sizeof (TCHAR);
 
    TreeView_GetItem ( hWndTV , &TreeItem );
-   HMG_retc ( ItemText );
+   HG_pustr( pStr ) ;
+   HG_retc( ItemText ,pStr );
+   //HMG_retc ( ItemText );
 }
 
 
@@ -509,7 +512,7 @@ HB_FUNC (TREEVIEW_DELETECHILDREN)
 {
    HWND      hWndTV     = (HWND) HMG_parnl (1);
    HTREEITEM ItemHandle = (HTREEITEM) HMG_parnl (2);
-
+ 
    HTREEITEM ChildItem = TreeView_GetChild (hWndTV, ItemHandle);
    while ( ChildItem != NULL )
    {
@@ -591,7 +594,7 @@ HB_FUNC (TREEVIEW_SETCHECKSTATE)
    HWND      hWndTV     = (HWND) HMG_parnl (1);
    HTREEITEM ItemHandle = (HTREEITEM) HMG_parnl (2);
    BOOL      fCheck     = (BOOL)      hb_parl  (3);
-
+   
    TreeView_SetCheckState (hWndTV, ItemHandle, fCheck);
 }
 
@@ -646,7 +649,7 @@ void TreeView_ExpandChildrenRecursive (HWND hWndTV, HTREEITEM ItemHandle, UINT n
         while ( ChildItem != NULL )
         {
             TreeView_ExpandChildrenRecursive (hWndTV, ChildItem, nExpand);
-
+      
             HTREEITEM NextItem = TreeView_GetNextSibling (hWndTV, ChildItem);
             ChildItem = NextItem;
         }
@@ -660,18 +663,18 @@ HB_FUNC (TREEVIEW_EXPANDCHILDRENRECURSIVE)
    HTREEITEM ItemHandle = (HTREEITEM) HMG_parnl (2);
    UINT      nExpand    = (UINT)      hb_parnl (3);
    BOOL      fRecurse   = (BOOL)      hb_parl  (4);
-
+   
    if ( fRecurse == FALSE )
       TreeView_Expand ( hWndTV, ItemHandle, nExpand );
    else
    {
       HWND hWndParent = GetParent (hWndTV);
       BOOL lEnabled   = IsWindowEnabled (hWndParent);
-
+      
       EnableWindow (hWndParent, FALSE);
-
+      
       TreeView_ExpandChildrenRecursive ( hWndTV, ItemHandle, nExpand );
-
+      
       if (lEnabled == TRUE)
           EnableWindow (hWndParent, TRUE);
    }
@@ -693,7 +696,7 @@ void TreeView_SortChildrenRecursive (HWND hWndTV, HTREEITEM ItemHandle)
       while ( ChildItem != NULL )
       {
          TreeView_SortChildrenRecursive (hWndTV, ChildItem);
-
+      
          HTREEITEM NextItem = TreeView_GetNextSibling (hWndTV, ChildItem);
          ChildItem = NextItem;
       }
@@ -706,7 +709,7 @@ HB_FUNC (TREEVIEW_SORTCHILDRENRECURSIVE)
    HWND      hWndTV     = (HWND)      HMG_parnl (1);
    HTREEITEM ItemHandle = (HTREEITEM) HMG_parnl (2);
    BOOL      fRecurse   = (BOOL)      hb_parl  (3);
-
+   
    if ( fRecurse == FALSE )
       TreeView_SortChildren ( hWndTV, ItemHandle, FALSE );
    else
@@ -763,7 +766,7 @@ int CALLBACK TreeViewCompareFunc (LPARAM lParam1, LPARAM lParam2, LPARAM lParamS
    TreeView_GetItem (hWndTV, &TV_Item2);
 
    BOOL IsTreeNode1 = (TreeItemLPARAM1->IsNodeFlag == TRUE || TreeView_GetChild (hWndTV, ItemHandle1) != NULL)? TRUE : FALSE;
-   BOOL IsTreeNode2 = (TreeItemLPARAM2->IsNodeFlag == TRUE || TreeView_GetChild (hWndTV, ItemHandle2) != NULL)? TRUE : FALSE;
+   BOOL IsTreeNode2 = (TreeItemLPARAM2->IsNodeFlag == TRUE || TreeView_GetChild (hWndTV, ItemHandle2) != NULL)? TRUE : FALSE;   
 
    int CmpValue;
 
@@ -806,7 +809,7 @@ void TreeView_SortChildrenRecursiveCB (HWND hWndTV, TVSORTCB TVSortCB)
       {
          TVSortCB.hParent = (HTREEITEM) ChildItem;
          TreeView_SortChildrenRecursiveCB (hWndTV, TVSortCB);
-
+      
          HTREEITEM NextItem = TreeView_GetNextSibling (hWndTV, ChildItem);
          ChildItem = NextItem;
       }
@@ -822,14 +825,14 @@ HB_FUNC (TREEVIEW_SORTCHILDRENRECURSIVECB)
    BOOL      lCaseSensitive  = (BOOL)      hb_parl  (4);
    BOOL      lAscendingOrder = (BOOL)      hb_parl  (5);
    INT       nNodePosition   = (INT)       hb_parnl (6);
-
+   
    HMG_StructTreeViewCompareInfo TreeViewCompareInfo;
-
+   
    TreeViewCompareInfo.hWndTV          = hWndTV;
    TreeViewCompareInfo.CaseSensitive   = lCaseSensitive;
    TreeViewCompareInfo.AscendingOrder  = lAscendingOrder;
    TreeViewCompareInfo.NodePosition    = nNodePosition;
-
+   
    TVSORTCB  TVSortCB;
    TVSortCB.hParent     = (HTREEITEM)    ItemHandle;
    TVSortCB.lpfnCompare = (PFNTVCOMPARE) TreeViewCompareFunc;
@@ -841,11 +844,11 @@ HB_FUNC (TREEVIEW_SORTCHILDRENRECURSIVECB)
    {
       HWND hWndParent = GetParent (hWndTV);
       BOOL lEnabled   = IsWindowEnabled (hWndParent);
-
+      
       EnableWindow (hWndParent, FALSE);
-
+      
       TreeView_SortChildrenRecursiveCB (hWndTV, TVSortCB);
-
+      
       if (lEnabled == TRUE)
           EnableWindow (hWndParent, TRUE);
    }
@@ -907,7 +910,7 @@ HB_FUNC (TREEITEM_GETID)
 {
    HWND        hWndTV     = (HWND)      HMG_parnl (1);
    HTREEITEM   ItemHandle = (HTREEITEM) HMG_parnl (2);
-
+   
    TV_ITEM TreeItem ;
    TreeItem.mask   = TVIF_PARAM;
    TreeItem.hItem  = ItemHandle;
@@ -920,14 +923,14 @@ HB_FUNC (TREEITEM_GETID)
 }
 
 
-//        TreeView_SetImageList ( hWnd , hImageList , [iImageList] )
+//        TreeView_SetImageList ( hWnd , hImageList , [iImageList] ) 
 HB_FUNC ( TREEVIEW_SETIMAGELIST )
 {
    HWND hWnd = (HWND) HMG_parnl (1);
    HIMAGELIST hImageList = (HIMAGELIST) HMG_parnl (2);
    int iImageList = HB_ISNIL(3) ? TVSIL_NORMAL : hb_parni (3);
    HIMAGELIST hImageListPrevious = TreeView_SetImageList (hWnd, hImageList, iImageList);
-   HMG_retnl ((LONG_PTR) hImageListPrevious);
+   HMG_retnl ((LONG_PTR) hImageListPrevious); 
 }
 
 
@@ -937,7 +940,7 @@ HB_FUNC ( TREEVIEW_GETIMAGELIST )
    HWND hWnd      = (HWND) HMG_parnl (1);
    int iImageList = HB_ISNIL(2) ? TVSIL_NORMAL : hb_parni (2);
    HIMAGELIST hImageList = TreeView_GetImageList (hWnd, iImageList);
-   HMG_retnl ((LONG_PTR) hImageList);
+   HMG_retnl ((LONG_PTR) hImageList); 
 }
 
 
@@ -947,11 +950,11 @@ HB_FUNC (TREEITEM_GETIMAGEINDEX)
 {
    HWND        hWndTV     = (HWND)      HMG_parnl (1);
    HTREEITEM   ItemHandle = (HTREEITEM) HMG_parnl (2);
-
+   
    TV_ITEM TreeItem ;
    TreeItem.mask           = TVIF_IMAGE | TVIF_SELECTEDIMAGE ;
    TreeItem.hItem          = ItemHandle;
-   TreeItem.iImage         = 0;
+   TreeItem.iImage         = 0; 
    TreeItem.iSelectedImage = 0;
    TreeView_GetItem ( hWndTV , &TreeItem );
 
@@ -977,11 +980,11 @@ HB_FUNC (TREEITEM_SETIMAGEINDEX)
    HTREEITEM   ItemHandle = (HTREEITEM) HMG_parnl (2);
    INT iUnSel             = (INT)       hb_parni (3);
    INT iSelectedImage     = (INT)       hb_parni (4);
-
+   
    TV_ITEM TreeItem ;
    TreeItem.mask           = TVIF_IMAGE | TVIF_SELECTEDIMAGE;
    TreeItem.hItem          = ItemHandle;
-   TreeItem.iImage         = iUnSel;
+   TreeItem.iImage         = iUnSel; 
    TreeItem.iSelectedImage = iSelectedImage;
    TreeView_SetItem ( hWndTV , &TreeItem );
 }
@@ -1006,7 +1009,7 @@ HB_FUNC ( TREEVIEW_SETHASBUTTON )
    TV_ITEM TreeItem;
    TreeItem.mask      = TVIF_CHILDREN;
    TreeItem.hItem     = ItemHandle;
-   TreeItem.cChildren = lHasButton ? 1 : 0;
+   TreeItem.cChildren = lHasButton ? 1 : 0; 
    TreeView_SetItem ( hWndTV , &TreeItem );
 }
 

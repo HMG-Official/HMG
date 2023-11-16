@@ -64,7 +64,7 @@ HB_FUNC( QHTM_INIT )
       hQhtmDll = LoadLibrary( (LPCTSTR) cLibname );
       if( hQhtmDll )
       {
-         QHTM_INITIALIZE   pFunc = ( QHTM_INITIALIZE ) GetProcAddress( hQhtmDll, "QHTM_Initialize" );
+         QHTM_INITIALIZE   pFunc = ( QHTM_INITIALIZE ) (void *) GetProcAddress( hQhtmDll, "QHTM_Initialize" );
          if( pFunc )
          {
             bSuccess = pFunc( GetModuleHandle(NULL) );
@@ -216,7 +216,7 @@ HB_FUNC( QHTM_MESSAGEBOX )
    {
       const TCHAR       *cTitle = ( hb_pcount() < 2 ) ? _TEXT("") : HMG_parc( 2 );
       UINT              uType = ( hb_pcount() < 3 ) ? MB_OK : ( UINT ) hb_parni( 3 );
-      QHTM_MESSAGEBOX   pFunc = ( QHTM_MESSAGEBOX ) GetProcAddress( hQhtmDll, "QHTM_MessageBox" );
+      QHTM_MESSAGEBOX   pFunc = ( QHTM_MESSAGEBOX ) (void *) GetProcAddress( hQhtmDll, "QHTM_MessageBox" );
 
       if( pFunc )
       {
@@ -360,7 +360,7 @@ HB_FUNC( QHTM_ENABLECOOLTIPS )
 {
    if( hQhtmDll )
    {
-      QHTM_ENABLECOOLTIPS  pFunc = ( QHTM_ENABLECOOLTIPS ) GetProcAddress( hQhtmDll, "QHTM_EnableCooltips" );
+      QHTM_ENABLECOOLTIPS  pFunc = ( QHTM_ENABLECOOLTIPS ) (void *) GetProcAddress( hQhtmDll, "QHTM_EnableCooltips" );
       if( pFunc )
       {
          hb_retl( pFunc() );
@@ -385,7 +385,7 @@ HB_FUNC( QHTM_SETHTMLBUTTON )
 {
    if( hQhtmDll )
    {
-      QHTM_SETHTMLBUTTON   pFunc = ( QHTM_SETHTMLBUTTON ) GetProcAddress( hQhtmDll, "QHTM_SetHTMLButton" );
+      QHTM_SETHTMLBUTTON   pFunc = ( QHTM_SETHTMLBUTTON ) (void *) GetProcAddress( hQhtmDll, "QHTM_SetHTMLButton" );
       if( pFunc )
       {
          hb_retl( pFunc((HWND) HMG_parnl (1)) );
@@ -410,7 +410,7 @@ HB_FUNC( QHTM_PRINTCREATECONTEXT )
 {
    if( hQhtmDll )
    {
-      QHTM_PRINTCREATECONTEXT pFunc = ( QHTM_PRINTCREATECONTEXT ) GetProcAddress( hQhtmDll, "QHTM_PrintCreateContext" );
+      QHTM_PRINTCREATECONTEXT pFunc = ( QHTM_PRINTCREATECONTEXT ) (void *) GetProcAddress( hQhtmDll, "QHTM_PrintCreateContext" );
       hb_retnl( (LONG) pFunc((hb_pcount() == 0) ? 1 : (UINT) hb_parni(1)) );
    }
    else
@@ -428,7 +428,7 @@ HB_FUNC( QHTM_PRINTSETTEXT )
 {
    if( hQhtmDll )
    {
-      QHTM_PRINTSETTEXT pFunc = ( QHTM_PRINTSETTEXT ) GetProcAddress( hQhtmDll, "QHTM_PrintSetText" );
+      QHTM_PRINTSETTEXT pFunc = ( QHTM_PRINTSETTEXT ) (void *) GetProcAddress( hQhtmDll, "QHTM_PrintSetText" );
       hb_retl( pFunc((QHTMCONTEXT) hb_parnl(1), HMG_parc(2)) );
    }
    else
@@ -446,7 +446,7 @@ HB_FUNC( QHTM_PRINTSETTEXTFILE )
 {
    if( hQhtmDll )
    {
-      QHTM_PRINTSETTEXTFILE   pFunc = ( QHTM_PRINTSETTEXTFILE ) GetProcAddress( hQhtmDll, "QHTM_PrintSetTextFile" );
+      QHTM_PRINTSETTEXTFILE   pFunc = ( QHTM_PRINTSETTEXTFILE ) (void *) GetProcAddress( hQhtmDll, "QHTM_PrintSetTextFile" );
       hb_retl( pFunc((QHTMCONTEXT) hb_parnl(1), HMG_parc(2)) );
    }
    else
@@ -464,7 +464,7 @@ HB_FUNC( QHTM_PRINTSETTEXTRESOURCE )
 {
    if( hQhtmDll )
    {
-      QHTM_PRINTSETTEXTRESOURCE  pFunc = ( QHTM_PRINTSETTEXTRESOURCE ) GetProcAddress( hQhtmDll, "QHTM_PrintSetTextResource" );
+      QHTM_PRINTSETTEXTRESOURCE  pFunc = ( QHTM_PRINTSETTEXTRESOURCE ) (void *) GetProcAddress( hQhtmDll, "QHTM_PrintSetTextResource" );
       hb_retl( pFunc((QHTMCONTEXT) hb_parnl(1), GetModuleHandle(NULL), HMG_parc(2)) );
    }
    else
@@ -486,7 +486,7 @@ HB_FUNC( QHTM_PRINTLAYOUT )
       QHTMCONTEXT       qhtmCtx = ( QHTMCONTEXT ) hb_parnl( 2 );
       RECT              rcPage;
       int               nNumberOfPages;
-      QHTM_PRINTLAYOUT  pFunc = ( QHTM_PRINTLAYOUT ) GetProcAddress( hQhtmDll, "QHTM_PrintLayout" );
+      QHTM_PRINTLAYOUT  pFunc = ( QHTM_PRINTLAYOUT ) (void *) GetProcAddress( hQhtmDll, "QHTM_PrintLayout" );
 
       rcPage.left = rcPage.top = 0;
       rcPage.right = GetDeviceCaps( hDC, HORZRES );
@@ -513,7 +513,7 @@ HB_FUNC( QHTM_PRINTPAGE )
       HDC            hDC = (HDC) HMG_parnl (1);
       QHTMCONTEXT    qhtmCtx = ( QHTMCONTEXT ) hb_parnl( 2 );
       RECT           rcPage;
-      QHTM_PRINTPAGE pFunc = ( QHTM_PRINTPAGE ) GetProcAddress( hQhtmDll, "QHTM_PrintPage" );
+      QHTM_PRINTPAGE pFunc = ( QHTM_PRINTPAGE ) (void *) GetProcAddress( hQhtmDll, "QHTM_PrintPage" );
 
       rcPage.left = rcPage.top = 0;
       rcPage.right = GetDeviceCaps( hDC, HORZRES );
@@ -536,7 +536,7 @@ HB_FUNC( QHTM_PRINTDESTROYCONTEXT )
 {
    if( hQhtmDll )
    {
-      QHTM_PRINTDESTROYCONTEXT   pFunc = ( QHTM_PRINTDESTROYCONTEXT ) GetProcAddress( hQhtmDll, "QHTM_PrintDestroyContext" );
+      QHTM_PRINTDESTROYCONTEXT   pFunc = ( QHTM_PRINTDESTROYCONTEXT ) (void *) GetProcAddress( hQhtmDll, "QHTM_PrintDestroyContext" );
       pFunc( (QHTMCONTEXT) hb_parnl(1) );
    }
 }

@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link the HMG library with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
+ Your use of that executable is in no way restricted on account of linking the 
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+	Copyright 2002 AJ Wos <andrwos@aust1.net> 
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -55,9 +55,9 @@
 
 
 
-/*
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
+/* 
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -81,6 +81,7 @@
 //#include "winreg.h"
 #include <tchar.h>
 
+#include "hg_unicode.h"
 
 #ifndef LVS_EX_DOUBLEBUFFER
    #define LVS_EX_DOUBLEBUFFER   0x10000
@@ -124,12 +125,12 @@ HB_FUNC (INITLISTVIEW)
 
 
    hWndLV = CreateWindowEx ( WS_EX_CLIENTEDGE , WC_LISTVIEW /*_TEXT("SysListView32")*/ ,
-                             _TEXT(""),
+                             _TEXT(""), 
                              style,
                              hb_parni(3), hb_parni(4) , hb_parni(5), hb_parni(6) ,
                              hwnd,
-                             (HMENU) HMG_parnl (2),
-                             GetModuleHandle(NULL),
+                             (HMENU) HMG_parnl (2), 
+                             GetModuleHandle(NULL), 
                              NULL ) ;
 
 
@@ -147,7 +148,7 @@ HB_FUNC ( LISTVIEW_SETITEMCOUNT )
 {
    HWND hWnd       = (HWND) HMG_parnl (1);
    INT  nItemCount = (INT) hb_parni (2);
-
+   
    if ( (GetWindowLongPtr (hWnd, GWL_STYLE) & LVS_OWNERDATA) == LVS_OWNERDATA )   // ADD3, July 2015
       ListView_SetItemCountEx (hWnd, nItemCount, LVSICF_NOINVALIDATEALL);
    else
@@ -197,7 +198,7 @@ HB_FUNC ( LISTVIEW_GETFIRSTITEM )
 HB_FUNC ( ADDLISTVIEWITEMS )
 {
    HWND hWnd;
-   LV_ITEM LI;
+   LV_ITEM LI; 
    int nColumnCount, nCol, nRow;
 
    hWnd = (HWND) HMG_parnl (1);
@@ -206,20 +207,30 @@ HB_FUNC ( ADDLISTVIEWITEMS )
    if ( HB_ISNIL(4) )
       nRow = ListView_GetItemCount (hWnd);
    else
-      nRow = hb_parni (4);
+      nRow = hb_parni (4); 
 
+   HG_pstr( lpText );
+
+   lpText = HG_parvc (2, 1); //caption;
    LI.mask       = LVIF_TEXT | LVIF_IMAGE;
    LI.state      = 0;
    LI.stateMask  = 0;
    LI.iImage     = hb_parni (3);
    LI.iSubItem   = 0;
    LI.iItem      = nRow;
-   LI.pszText    = (TCHAR*) HMG_parvc (2, 1);
+   LI.pszText    = lpText; //(TCHAR*) HMG_parvc (2, 1);
 
    ListView_InsertItem (hWnd, &LI);
 
-   for (nCol = 1; nCol < nColumnCount; nCol++)
-       ListView_SetItemText (hWnd, nRow, nCol, (TCHAR*) HMG_parvc (2, nCol+1));
+   for (nCol = 1; nCol < nColumnCount; nCol++) {
+
+   lpText = HG_parvc (2, nCol+1); //caption;
+
+   ListView_SetItemText (hWnd, nRow, nCol,lpText );
+//       ListView_SetItemText (hWnd, nRow, nCol, (TCHAR*) HMG_parvc (2, nCol+1));
+}
+
+   HG_xfree( lpText );
 
 }
 
@@ -302,25 +313,33 @@ HB_FUNC ( LISTVIEWSETMULTISEL )
 }
 
 
-//        ListViewSetItem (hWnd, aItem, nRow)
+//         ListViewSetItem (hWnd, aItem, nRow)
 HB_FUNC ( LISTVIEWSETITEM )
 {
+
+   HG_pstr( cText ); 
    HWND hWnd = (HWND) HMG_parnl (1);
    int  nLen = hb_parinfa (2, 0);
    int  nRow = hb_parni (3) - 1;
-   TCHAR *cText;
+   //TCHAR *cText;
    int nCol;
 
    for (nCol=0 ; nCol < nLen ; nCol++ )
    {
-      cText = (TCHAR*) HMG_parvc (2 , nCol + 1);
+      cText = HG_parvc (2 , nCol + 1 ); //(TCHAR*) HMG_parvc (2 , nCol + 1);
       ListView_SetItemText (hWnd, nRow, nCol, cText);
+
+      HG_xfree( cText );
+
    }
 }
 
 
 HB_FUNC ( LISTVIEWGETITEM )
 {
+
+  HG_pustr( pstring ) ;
+
 	TCHAR string [1024];
 	HWND hWnd;
 	int nCol;
@@ -338,7 +357,9 @@ HB_FUNC ( LISTVIEWGETITEM )
 	for (nCol = 0 ; nCol <= nColumnCount-1 ; nCol++ )
 	{
 		ListView_GetItemText (hWnd, nRow, nCol, string, 1024);
-		HMG_storvc( string , -1 , nCol+1) ;
+
+      HG_storvc( string , -1 , nCol+1 ,pstring) ; 
+//		HMG_storvc( string , -1 , nCol+1) ;
 	}
 }
 
@@ -360,12 +381,16 @@ HB_FUNC ( LISTVIEW_GETITEMCOUNT )
 HB_FUNC ( SETGRIDCOLOMNHEADER )
 {
 
+   HG_pstr( lpText ); lpText = HG_parc(3) ; //hb_parc( 3 );
+
 	LV_COLUMN COL;
 
 	COL.mask = LVCF_TEXT ;
-	COL.pszText= (TCHAR*)HMG_parc(3) ;
+	COL.pszText= lpText; //(TCHAR*)HMG_parc(3) ;
 
 	ListView_SetColumn ( (HWND) HMG_parnl (1), hb_parni ( 2 ) - 1 , &COL );
+
+  HG_xfree( lpText );
 
 }
 
@@ -387,10 +412,10 @@ HB_FUNC ( SETIMAGELISTVIEWITEMS )
 
 	h = (HWND) HMG_parnl (1);
 
-	LI.mask= LVIF_IMAGE ;
+	LI.mask= LVIF_IMAGE ;	
 	LI.state=0;
 	LI.stateMask=0;
-        LI.iImage= hb_parni( 3 );
+        LI.iImage= hb_parni( 3 );	
         LI.iSubItem=0;
 	LI.iItem=hb_parni(2) - 1 ;
 
@@ -405,7 +430,7 @@ HB_FUNC ( GETIMAGELISTVIEWITEMS )
 
 	h = (HWND) HMG_parnl (1);
 
-	LI.mask= LVIF_IMAGE ;
+	LI.mask= LVIF_IMAGE ;	
 	LI.state=0;
 	LI.stateMask=0;
         LI.iSubItem=0;
@@ -558,11 +583,14 @@ _THREAD_UNLOCK();
 
 HB_FUNC ( LISTVIEW_ADDCOLUMN )
 {
+
+   HG_pstr( lpText ); lpText = HG_parc(4);
+
    LV_COLUMN COL;
 
    COL.mask= LVCF_WIDTH | LVCF_TEXT | LVCF_FMT | LVCF_SUBITEM ;
    COL.cx= hb_parni(3);
-   COL.pszText = (TCHAR*) HMG_parc(4);
+   COL.pszText = lpText; //(TCHAR*) HMG_parc(4);
    COL.iSubItem=hb_parni(2)-1;
    COL.fmt = hb_parni(5) ;
 
@@ -573,6 +601,9 @@ _THREAD_LOCK();
        RedrawWindow ( (HWND) HMG_parnl (1), NULL , NULL , RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW );
    }
 _THREAD_UNLOCK();
+
+   HG_xfree( lpText );
+
 }
 
 
@@ -658,6 +689,7 @@ HB_FUNC( INITLISTVIEWCOLUMNS )
    PHB_ITEM    jArray;
 
    HWND        hc;
+   HG_pstr(    lpText );
    LV_COLUMN   COL;
    int         iLen;
    int         s;
@@ -676,7 +708,8 @@ HB_FUNC( INITLISTVIEWCOLUMNS )
    {
       COL.fmt = hb_arrayGetNI( jArray, s + 1 );
       COL.cx = hb_arrayGetNI( wArray, s + 1 );
-      COL.pszText = (TCHAR *) HMG_arrayGetCPtr( hArray, s + 1 );
+      lpText = HG_arrayGetCPtr( hArray, s + 1 );
+      COL.pszText = lpText; //(TCHAR *) HMG_arrayGetCPtr( hArray, s + 1 );
       COL.iSubItem = iColumn;
       ListView_InsertColumn( hc, iColumn, &COL );
       if( iColumn == 0 && COL.fmt != LVCFMT_LEFT )
@@ -687,6 +720,9 @@ HB_FUNC( INITLISTVIEWCOLUMNS )
       }
 
       iColumn++;
+
+      HG_xfree( lpText );
+
    }
 
    if( iColumn != s )
@@ -703,7 +739,7 @@ HB_FUNC ( GETGRIDVKEY )
 {
    LPARAM lParam = (LPARAM) HMG_parnl (1);
    LV_KEYDOWN * LVK = (LV_KEYDOWN *) lParam;
-   hb_retni ( LVK->wVKey );
+   hb_retni ( LVK->wVKey ); 
 }
 
 
@@ -746,8 +782,8 @@ HB_FUNC ( GETGRIDDISPINFOINDEX )
    int iSubItem = pDispInfo->item.iSubItem;
 
    hb_reta( 2 );
-   hb_storvni( iItem    + 1, -1, 1 );
-   hb_storvni( iSubItem + 1, -1, 2 );
+   hb_storvni( iItem    + 1, -1, 1 ); 
+   hb_storvni( iSubItem + 1, -1, 2 ); 
 }
 
 
@@ -755,14 +791,19 @@ HB_FUNC ( SETGRIDQUERYDATA )
 {
    LPARAM lParam = (LPARAM) HMG_parnl (1);
    LV_DISPINFO* pDispInfo = (LV_DISPINFO*) lParam;
-
+   
    // HMG_Trace( __FILE__, __LINE__, __FUNCTION__, _TEXT(" %p |- %s -| %d "), pDispInfo->item.pszText, (TCHAR*) HMG_parc (2), pDispInfo->item.cchTextMax, NULL );
 
 #ifdef COMPILE_HMG_UNICODE
+  LPWSTR lpText ;
    if( hb_iswinvista() )   // Is Win Vista or newer   // ADD3, September 2015
-      lstrcpyn(pDispInfo->item.pszText, (TCHAR*) HMG_parc (2), pDispInfo->item.cchTextMax);   // ADD3, July 2015
+   {  lpText = HG_parc( 2 );
+      lstrcpyn(pDispInfo->item.pszText, lpText , pDispInfo->item.cchTextMax) ; } //(TCHAR*) HMG_parc (2), pDispInfo->item.cchTextMax);   // ADD3, July 2015
    else
-      pDispInfo->item.pszText = (TCHAR*) HMG_parc (2); // Is Win XP
+   { lpText = HG_parc( 2 );
+     pDispInfo->item.pszText = lpText ; }
+   //   pDispInfo->item.pszText = (TCHAR*) HMG_parc (2); // Is Win XP
+   hb_xfree( lpText );
 #else   // ANSI mode
    lstrcpyn(pDispInfo->item.pszText, (TCHAR*) HMG_parc (2), pDispInfo->item.cchTextMax); // ADD, March 2017, contrib by huiyi_ch
 #endif

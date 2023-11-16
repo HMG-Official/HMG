@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link the HMG library with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
+ Your use of that executable is in no way restricted on account of linking the 
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+	Copyright 2002 AJ Wos <andrwos@aust1.net> 
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -55,9 +55,9 @@
 
 
 
-/*
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
+/* 
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -76,6 +76,7 @@
 #include <commctrl.h>
 #include "hbapi.h"
 
+#include "hg_unicode.h"
 
 //#define TBIF_TEXT 2
 
@@ -120,15 +121,15 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
 //
 // ----------------------------------------------------------------------------
 HB_FUNC ( INITTOOLBAR )
-{
+{ 
 
-	HWND hwndParent = (HWND) HMG_parnl (1);
+	HWND hwndParent = (HWND) HMG_parnl (1); 
 	HWND hwndTB ;
-	int Style = WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | TBSTYLE_TOOLTIPS ;
+	int Style = WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | TBSTYLE_TOOLTIPS ;  
 	int ExStyle = 0 ;
-
+   
 	int imagewidth , imageheight ;
-
+ 
 //  InitCommonControls();
    INITCOMMONCONTROLSEX icex;
    icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
@@ -156,23 +157,23 @@ HB_FUNC ( INITTOOLBAR )
 	{
 		Style = Style | CCS_NOPARENTALIGN | CCS_NODIVIDER | CCS_NORESIZE;
 	}
-
-	// Create the toolbar.
+ 
+	// Create the toolbar. 
 // Create the toolbar window.
 
 	hwndTB = CreateWindowEx ( ExStyle , TOOLBARCLASSNAME /*_TEXT("ToolbarWindow32")*/,
-				TEXT(""), Style ,
-            0, 0, 0, 0,
-				hwndParent,
-				(HMENU) HMG_parnl(2),
-				GetModuleHandle( NULL ) ,
+				TEXT(""), Style , 
+            0, 0, 0, 0, 
+				hwndParent, 
+				(HMENU) HMG_parnl(2), 
+				GetModuleHandle( NULL ) , 
 				NULL
-				) ;
+				) ; 
 
-	SendMessage ( hwndTB,TB_SETEXTENDEDSTYLE,0,(LPARAM) TBSTYLE_EX_DRAWDDARROWS );
-
-	// Send the TB_BUTTONSTRUCTSIZE message.
-	SendMessage ( hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM) sizeof(TBBUTTON), 0);
+	SendMessage ( hwndTB,TB_SETEXTENDEDSTYLE,0,(LPARAM) TBSTYLE_EX_DRAWDDARROWS ); 
+ 
+	// Send the TB_BUTTONSTRUCTSIZE message. 
+	SendMessage ( hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM) sizeof(TBBUTTON), 0); 
 
 	// Set Button Size
 	SendMessage	( hwndTB , TB_SETBUTTONSIZE , 0 , (LPARAM) MAKELONG ( hb_parni(3) , hb_parni(4) ) ) ;
@@ -214,11 +215,11 @@ HB_FUNC ( INITTOOLBAR )
 	}
 
 	hb_reta( 3 );
-	HMG_storvnl ((LONG_PTR) hwndTB,      -1, 1 );
-	hb_storvni  ((INT)      imagewidth,  -1, 2 );
-	hb_storvni  ((INT)      imageheight, -1, 3 );
+	HMG_storvnl ((LONG_PTR) hwndTB,      -1, 1 ); 
+	hb_storvni  ((INT)      imagewidth,  -1, 2 ); 
+	hb_storvni  ((INT)      imageheight, -1, 3 ); 
 
-}
+} 
 // ----------------------------------------------------------------------------
 // InitToolButton Function
 // ----------------------------------------------------------------------------
@@ -242,15 +243,16 @@ HB_FUNC ( INITTOOLBAR )
 // ----------------------------------------------------------------------------
 
 HB_FUNC ( INITTOOLBUTTON )
-{
-   HWND hwndTB = (HWND) HMG_parnl (1);
-   TBADDBITMAP tbab;
-   TBBUTTON tbb;
-   INT_PTR StringIndex ;
+{ 
+   HWND hwndTB = (HWND) HMG_parnl (1); 
+   TBADDBITMAP tbab; 
+   TBBUTTON tbb; 
+   INT_PTR StringIndex ; 
    int BitMapIndex = 0;
    HBITMAP hBitmap = NULL;
    int Style = TBSTYLE_BUTTON ;
-   TCHAR *text;
+   HG_pstr( text ); //TCHAR *text;
+   HG_pstr( lpimgName ); lpimgName = HG_parc(2);
 
    // AutoSize
    if ( hb_parl(6) )
@@ -258,27 +260,28 @@ HB_FUNC ( INITTOOLBUTTON )
 
    // Check
    if ( hb_parl(7) )
-      Style = Style | BTNS_CHECK ;
+      Style = Style | BTNS_CHECK ;  
 
    // Group
    if ( hb_parl(8) )
-      Style = Style | BTNS_GROUP ;
+      Style = Style | BTNS_GROUP ; 
 
    // DropDown
-   if ( hb_parl(9) )
+   if ( hb_parl(9) )  
       Style = Style | BTNS_DROPDOWN ;
 
 
    // WholeDropDown
-   if ( hb_parl(10) )
+   if ( hb_parl(10) )  
       Style = Style | BTNS_WHOLEDROPDOWN ;
 
-
-   // Add bitmap.
+ 
+   // Add bitmap. 
 
    int Transparent = hb_parl(13) ? 0 : 1;
                                                                       //    ScaleStretch, Transparent, BackgroundColor,  AdjustImage,   TransparentColor
-   hBitmap = HMG_LoadPicture ((TCHAR*) HMG_parc(2) , -1, -1, (HWND) hwndTB,            0, Transparent,              -1,            0,                 -1 ) ;
+   hBitmap = HMG_LoadPicture (lpimgName , -1, -1, (HWND) hwndTB,
+            0, Transparent, -1, 0, -1 ) ;
 
    tbab.hInst = NULL;
    tbab.nID   = (UINT_PTR) (HBITMAP) hBitmap;
@@ -290,48 +293,51 @@ HB_FUNC ( INITTOOLBUTTON )
 
 
    // Add string.
-   text = (TCHAR *) HMG_parc(3);
-   StringIndex = SendMessage (hwndTB, TB_ADDSTRING, (WPARAM) 0, (LPARAM) text );
-
-   // Fill the TBBUTTON array.
-   tbb.iBitmap   = BitMapIndex ;
-   tbb.idCommand = hb_parni(4) ;
-   tbb.fsState   = TBSTATE_ENABLED;
-   tbb.fsStyle   = Style ;
-   tbb.dwData    = 0;
-   tbb.iString   = StringIndex ;
+   text = HG_parc(3); //(TCHAR *) HMG_parc(3);   
+   StringIndex = SendMessage (hwndTB, TB_ADDSTRING, (WPARAM) 0, (LPARAM) text ); 
+ 
+   // Fill the TBBUTTON array. 
+   tbb.iBitmap   = BitMapIndex ; 
+   tbb.idCommand = hb_parni(4) ; 
+   tbb.fsState   = TBSTATE_ENABLED; 
+   tbb.fsStyle   = Style ; 
+   tbb.dwData    = 0; 
+   tbb.iString   = StringIndex ; 
 
    SendMessage (hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM) sizeof (TBBUTTON), 0);   // ADD
-   SendMessage (hwndTB, TB_ADDBUTTONS, (WPARAM) 1 , (LPARAM) (LPTBBUTTON) &tbb);
+   SendMessage (hwndTB, TB_ADDBUTTONS, (WPARAM) 1 , (LPARAM) (LPTBBUTTON) &tbb); 
 
 
    // Separator
    if ( hb_parl (5) )
    {
-      tbb.iBitmap = 0 ;
-      tbb.idCommand = 0 ;
-      tbb.fsState = TBSTATE_ENABLED ;
-      tbb.dwData = 0;
-      tbb.iString = 0 ;
+      tbb.iBitmap = 0 ; 
+      tbb.idCommand = 0 ; 
+      tbb.fsState = TBSTATE_ENABLED ; 
+      tbb.dwData = 0; 
+      tbb.iString = 0 ; 
       tbb.fsStyle = TBSTYLE_SEP ;
 
       SendMessage (hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM) sizeof (TBBUTTON), 0);   // ADD
-      SendMessage (hwndTB, TB_ADDBUTTONS, (WPARAM) 1 , (LPARAM) (LPTBBUTTON) &tbb);
+      SendMessage (hwndTB, TB_ADDBUTTONS, (WPARAM) 1 , (LPARAM) (LPTBBUTTON) &tbb); 
    }
 
    HMG_retnl ((LONG_PTR) hBitmap );
-}
+   HG_xfree( lpimgName ) ;
+   HG_xfree( text ) ;
+} 
 
 
 HB_FUNC( TB_REPLACEBITMAP )
 {
-   HWND    hwndTB     = (HWND)    HMG_parnl (1);
+   HWND    hwndTB     = (HWND)    HMG_parnl (1); 
    HBITMAP hBitmapOld = (HBITMAP) HMG_parnl (2);
    int     nButtonID  = (int)     hb_parni  (5);
-   int     BitMapIndex;
+   int     BitMapIndex;   
    int     Transparent = hb_parl(4) ? 0 : 1;
+   HG_pstr( lpimgName ); lpimgName = HG_parc(3);
                                                                                  //    ScaleStretch, Transparent, BackgroundColor,  AdjustImage,   TransparentColor
-   HBITMAP hBitmapNew = HMG_LoadPicture ((TCHAR*) HMG_parc(3) , -1, -1, (HWND) hwndTB,            0, Transparent,              -1,            0,                 -1 ) ;
+   HBITMAP hBitmapNew = HMG_LoadPicture (lpimgName , -1, -1, (HWND) hwndTB,            0, Transparent,              -1,            0,                 -1 ) ;
 
    if(( hBitmapOld != NULL ) && ( hBitmapNew != NULL ))
    {
@@ -346,7 +352,7 @@ HB_FUNC( TB_REPLACEBITMAP )
    else
    {
       if (hBitmapNew != NULL)
-      {  TBADDBITMAP tbab;
+      {  TBADDBITMAP tbab; 
          tbab.hInst = NULL;
          tbab.nID   = (UINT_PTR) hBitmapNew;
          BitMapIndex = SendMessage (hwndTB, TB_ADDBITMAP, (WPARAM) 1, (LPARAM) &tbab);
@@ -364,6 +370,7 @@ HB_FUNC( TB_REPLACEBITMAP )
    }
 
    HMG_retnl ((LONG_PTR) hBitmapNew );
+   HG_xfree( lpimgName ) ;
 }
 
 
@@ -416,22 +423,23 @@ HB_FUNC( GETTOOLBARWIDTH )
 // ----------------------------------------------------------------------------
 HB_FUNC ( ACTIVATETOOLBAR )
 {
-   HWND hwndTB = (HWND) HMG_parnl (1);
+   HWND hwndTB = (HWND) HMG_parnl (1); 
    SendMessage( hwndTB ,TB_AUTOSIZE,0,0);
 }
 
 
 HB_FUNC ( SHOWTOOLBUTTONTIP )
 {
-   LPTOOLTIPTEXT lpttt;
+   HG_pstr( lpTtip ); lpTtip =  HG_parc(2);
+   LPTOOLTIPTEXT lpttt; 
    lpttt = (LPTOOLTIPTEXT) HMG_parnl (1);
    lpttt->hinst = GetModuleHandle (NULL) ;
-   lpttt->lpszText =  (LPTSTR) HMG_parc(2) ;
+   lpttt->lpszText = lpTtip ; // (LPTSTR) HMG_parc(2) ;
 }
 
 HB_FUNC ( GETTOOLBUTTONID )
 {
-   LPTOOLTIPTEXT lpttt;
+   LPTOOLTIPTEXT lpttt; 
    lpttt = (LPTOOLTIPTEXT) HMG_parnl (1);
    hb_retni ( lpttt->hdr.idFrom ) ;
 }
@@ -449,12 +457,12 @@ HB_FUNC( GETTOOLBUTTONSIZE )
 	hb_retnl( MAKELONG(rc.left,rc.bottom) );
 
 	hb_reta( 2 );
-	hb_storvni( (INT) rc.left , -1, 1 );
-	hb_storvni( (INT) rc.bottom , -1, 2 );
+	hb_storvni( (INT) rc.left , -1, 1 ); 
+	hb_storvni( (INT) rc.bottom , -1, 2 ); 
 
  }
 
-HB_FUNC (ISTOOLBUTTONCHECKED)
+HB_FUNC (ISTOOLBUTTONCHECKED) 
 {
    int r;
    TBBUTTON lpBtn;
@@ -465,14 +473,14 @@ HB_FUNC (ISTOOLBUTTONCHECKED)
    {   SendMessage ( (HWND) HMG_parnl(1), TB_GETBUTTON, (WPARAM) hb_parni(2), (LPARAM) &lpBtn );
        r = SendMessage ( (HWND) HMG_parnl(1), TB_ISBUTTONCHECKED, (WPARAM) lpBtn.idCommand, 0 );
    }
-
+   
    if ( r == 0 )
       hb_retl ( FALSE );
    else
       hb_retl ( TRUE );
 }
 
-HB_FUNC( CHECKTOOLBUTTON )
+HB_FUNC( CHECKTOOLBUTTON )       
 {
    TBBUTTON lpBtn;
 
@@ -490,7 +498,7 @@ HB_FUNC( ENABLETOOLBUTTON )
    long RetVal;
    RetVal = SendMessage( (HWND) HMG_parnl (1), TB_ENABLEBUTTON, (WPARAM) hb_parni(2), (LPARAM) MAKELONG(1,0));
    hb_retnl( RetVal );
-
+   
 }
 
 HB_FUNC( DISABLETOOLBUTTON )
@@ -499,7 +507,7 @@ HB_FUNC( DISABLETOOLBUTTON )
    long RetVal;
    RetVal = SendMessage( (HWND) HMG_parnl (1), TB_ENABLEBUTTON, (WPARAM) hb_parni(2), (LPARAM) MAKELONG(0,0));
    hb_retnl( RetVal );
-
+   
 }
 
 HB_FUNC( SETTOOLBUTTONCAPTION )
@@ -508,9 +516,11 @@ HB_FUNC( SETTOOLBUTTONCAPTION )
 	TBBUTTONINFO tbinfo ;
 	tbinfo.cbSize = sizeof(tbinfo) ;
 	tbinfo.dwMask = TBIF_TEXT ;
-	tbinfo.pszText =  (LPTSTR) HMG_parc(3) ;
+  HG_pstr( lpBtnText ); lpBtnText = HG_parc(3);
+	tbinfo.pszText = lpBtnText ; // (LPTSTR) HMG_parc(3) ;
 
 	SendMessage( (HWND) HMG_parnl (1), TB_SETBUTTONINFO, (WPARAM) hb_parni(2) , (LPARAM)&tbinfo) ;
 
+  HG_xfree( lpBtnText ) ;
 }
 

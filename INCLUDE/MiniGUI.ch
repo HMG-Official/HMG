@@ -70,7 +70,7 @@
 #ifndef _INCLUDE_HMG_CH_
    #define _INCLUDE_HMG_CH_
 #endif
-
+#include "hmgeivar.ch" //20111108 kenny ooi
 REQUEST ERRORSYS
 
 #include "i_UsrInit.ch"

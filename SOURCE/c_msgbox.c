@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link the HMG library with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
+ Your use of that executable is in no way restricted on account of linking the 
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+	Copyright 2002 AJ Wos <andrwos@aust1.net> 
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -55,9 +55,9 @@
 
 
 
-/*
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
+/* 
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -68,6 +68,7 @@
 #include <shlobj.h>
 #include <windows.h>
 #include "hbapi.h"
+#include "hg_unicode.h"
 
 #include "hbthread.h"
 extern HB_CRITICAL_T _HMG_Mutex;   // global Mutex variable defined into c_Thread.c
@@ -75,46 +76,71 @@ extern HB_CRITICAL_T _HMG_Mutex;   // global Mutex variable defined into c_Threa
 
 HB_FUNC( C_MSGBOX )
 {
-   MessageBox( GetActiveWindow(), HMG_parc( 1 ), HMG_parc( 2 ), MB_OK | MB_SYSTEMMODAL ) ;
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   MessageBox( GetActiveWindow(),lpText ,lpCaption ,  MB_OK | MB_SYSTEMMODAL ) ;
+//HMG_parc( 1 ), HMG_parc( 2 ), MB_OK | MB_SYSTEMMODAL ) ;
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 HB_FUNC( C_MSGINFO )
 {
-   MessageBox( GetActiveWindow(), HMG_parc(1) , HMG_parc(2) , MB_OK | MB_ICONINFORMATION | MB_SYSTEMMODAL );
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   MessageBox( GetActiveWindow(), lpText , lpCaption , MB_OK | MB_ICONINFORMATION | MB_SYSTEMMODAL );
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 HB_FUNC( C_MSGSTOP )
 {
-   MessageBox( GetActiveWindow(), HMG_parc(1) , HMG_parc(2) , MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL );
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   MessageBox( GetActiveWindow(), lpText ,lpCaption , MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL );
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 HB_FUNC( C_MSGEXCLAMATION )
 {
-   MessageBox( GetActiveWindow(), HMG_parc(1), HMG_parc(2), MB_ICONEXCLAMATION | MB_OK | MB_SYSTEMMODAL );
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   MessageBox( GetActiveWindow(), lpText, lpCaption, MB_ICONEXCLAMATION | MB_OK | MB_SYSTEMMODAL );
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 HB_FUNC( C_MSGRETRYCANCEL )
 {
-   int r = MessageBox( GetActiveWindow(), HMG_parc(1), HMG_parc(2) , MB_RETRYCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ) ;
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   int r = MessageBox( GetActiveWindow(), lpText, lpCaption , MB_RETRYCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ) ;
    hb_retni ( r ) ;
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 HB_FUNC( C_MSGOKCANCEL )
 {
-   int r = MessageBox( GetActiveWindow(), HMG_parc(1),HMG_parc(2) , MB_OKCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ) ;
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   int r = MessageBox( GetActiveWindow(), lpText, lpCaption , MB_OKCANCEL | MB_ICONQUESTION | MB_SYSTEMMODAL ) ;
    hb_retni ( r ) ;
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 HB_FUNC( C_MSGYESNO )
 {
-   int r = MessageBox( GetActiveWindow(), HMG_parc(1),HMG_parc(2) , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL ) ;
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   int r = MessageBox( GetActiveWindow(), lpText, lpCaption , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL ) ;
    hb_retni ( r ) ;
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 HB_FUNC( C_MSGYESNO_ID )
 {
-   int r = MessageBox( GetActiveWindow(), HMG_parc(1),HMG_parc(2) , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL | MB_DEFBUTTON2 ) ;
+   HG_pstr( lpText ); lpText = HG_parc(1);
+   HG_pstr( lpCaption ); lpCaption = HG_parc(2);
+   int r = MessageBox( GetActiveWindow(), lpText, lpCaption , MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL | MB_DEFBUTTON2 ) ;
    hb_retni ( r ) ;
+   HG_xfree( lpText ) ;HG_xfree( lpCaption ) ;
 }
 
 
@@ -123,18 +149,18 @@ HB_FUNC( C_MSGYESNO_ID )
 
 #define ID_TIMEDOUT 32000
 
-int WINAPI MessageBoxTimeout (HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType, WORD wLanguageId, DWORD dwMilliseconds)
+int WINAPI MessageBoxTimeout (HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType, WORD wLanguageId, DWORD dwMilliseconds) 
 {
    typedef BOOL (WINAPI *PMessageBoxTimeout)(HWND,LPCTSTR,LPCTSTR,UINT,WORD,DWORD);
 _THREAD_LOCK();
    static PMessageBoxTimeout pMessageBoxTimeout = NULL;
-   if (pMessageBoxTimeout == NULL)
+   if (pMessageBoxTimeout == NULL) 
    {
       HMODULE hLib = LoadLibrary (_TEXT("User32.dll"));
       #ifdef UNICODE
-         pMessageBoxTimeout = (PMessageBoxTimeout)GetProcAddress(hLib, "MessageBoxTimeoutW");
+         pMessageBoxTimeout = (PMessageBoxTimeout) (void *) GetProcAddress(hLib, "MessageBoxTimeoutW");
       #else
-         pMessageBoxTimeout = (PMessageBoxTimeout)GetProcAddress(hLib, "MessageBoxTimeoutA");
+         pMessageBoxTimeout = (PMessageBoxTimeout) (void *) GetProcAddress(hLib, "MessageBoxTimeoutA");
       #endif
    }
 _THREAD_UNLOCK();

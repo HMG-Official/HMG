@@ -497,15 +497,15 @@ _THREAD_UNLOCK();
        return FALSE;
 
 _THREAD_LOCK();
-   GdiPlusStartup              = (Func_GdiPlusStartup)              GetProcAddress (GdiPlusHandle, "GdiplusStartup");
-   GdiPlusShutdown             = (Func_GdiPlusShutdown)             GetProcAddress (GdiPlusHandle, "GdiplusShutdown");
-   GdipCreateBitmapFromStream  = (Func_GdipCreateBitmapFromStream)  GetProcAddress (GdiPlusHandle, "GdipCreateBitmapFromStream");
-   GdipCreateHBITMAPFromBitmap = (Func_GdipCreateHBITMAPFromBitmap) GetProcAddress (GdiPlusHandle, "GdipCreateHBITMAPFromBitmap");
-
-   GdipGetImageEncodersSize    = (Func_GdipGetImageEncodersSize)    GetProcAddress (GdiPlusHandle, "GdipGetImageEncodersSize");
-   GdipGetImageEncoders        = (Func_GdipGetImageEncoders)        GetProcAddress (GdiPlusHandle, "GdipGetImageEncoders");
-   GdipLoadImageFromStream     = (Func_GdipLoadImageFromStream)     GetProcAddress (GdiPlusHandle, "GdipLoadImageFromStream");
-   GdipSaveImageToFile         = (Func_GdipSaveImageToFile)         GetProcAddress (GdiPlusHandle, "GdipSaveImageToFile");
+   GdiPlusStartup              = (Func_GdiPlusStartup)              (void *) GetProcAddress (GdiPlusHandle, "GdiplusStartup");
+   GdiPlusShutdown             = (Func_GdiPlusShutdown)             (void *) GetProcAddress (GdiPlusHandle, "GdiplusShutdown");
+   GdipCreateBitmapFromStream  = (Func_GdipCreateBitmapFromStream)  (void *) GetProcAddress (GdiPlusHandle, "GdipCreateBitmapFromStream");
+   GdipCreateHBITMAPFromBitmap = (Func_GdipCreateHBITMAPFromBitmap) (void *) GetProcAddress (GdiPlusHandle, "GdipCreateHBITMAPFromBitmap");
+   
+   GdipGetImageEncodersSize    = (Func_GdipGetImageEncodersSize)    (void *) GetProcAddress (GdiPlusHandle, "GdipGetImageEncodersSize");
+   GdipGetImageEncoders        = (Func_GdipGetImageEncoders)        (void *) GetProcAddress (GdiPlusHandle, "GdipGetImageEncoders");
+   GdipLoadImageFromStream     = (Func_GdipLoadImageFromStream)     (void *) GetProcAddress (GdiPlusHandle, "GdipLoadImageFromStream");
+   GdipSaveImageToFile         = (Func_GdipSaveImageToFile)         (void *) GetProcAddress (GdiPlusHandle, "GdipSaveImageToFile");
 _THREAD_UNLOCK();
 
    if ( GdiPlusStartup               == NULL ||

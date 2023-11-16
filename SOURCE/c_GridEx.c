@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------
- HMG Source File --> c_GridEx.c
+ HMG Source File --> c_GridEx.c  
 
- Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay).
+ Copyright 2012-2017 by Dr. Claudio Soto (from Uruguay). 
 
  mail: <srvet@adinet.com.uy>
  blog: http://srvet.blogspot.com
@@ -27,8 +27,9 @@
 #include <tchar.h>
 #include "hbapi.h"
 #include "hbapiitm.h"
-
+#include "hg_unicode.h"
 #include "hbthread.h"
+
 extern HB_CRITICAL_T _HMG_Mutex;   // global Mutex variable defined into c_Thread.c
 
 
@@ -90,7 +91,7 @@ HB_FUNC ( LISTVIEW_SETWORKAREAS )
 {
    HWND hWnd       = (HWND) HMG_parnl (1);
    PHB_ITEM pArray = hb_param (2, HB_IT_ARRAY);
-
+   
    if ( pArray )
    {  UINT nCount = (UINT) hb_arrayLen (pArray);
       if ( nCount > 0 )
@@ -122,8 +123,8 @@ HB_FUNC ( LISTVIEW_SETWORKAREAS )
 HB_FUNC ( LISTVIEW_SETCOLUMNJUSTIFY )
 {
    LV_COLUMN   COL;
-   COL.mask = LVCF_FMT;
-   COL.fmt  = hb_parni(3);
+   COL.mask = LVCF_FMT; 
+   COL.fmt  = hb_parni(3);   
    ListView_SetColumn ( (HWND) HMG_parnl(1), hb_parni(2), &COL);
 }
 
@@ -136,15 +137,15 @@ HB_FUNC ( LISTVIEW_GETCOLUMNORDERARRAY )
    int i, *p;
    p = (int*) hb_xgrab (sizeof(int)*hb_parni(2));
    ListView_GetColumnOrderArray ( (HWND) HMG_parnl(1), hb_parni(2), (int*) p);
-   hb_reta (hb_parni(2));
-   for( i= 0; i < hb_parni(2); i++ )
+   hb_reta (hb_parni(2)); 
+   for( i= 0; i < hb_parni(2); i++ ) 
         hb_storvni( (int)(*(p+i))+1, -1, i+1);
    hb_xfree (p);
 }
 
 
 //-----------------------------------------------------------------------------------------------
-// LISTVIEW_SETCOLUMNORDERARRAY (ControlHandle, nColumnCount, aArrayOrder)
+// LISTVIEW_SETCOLUMNORDERARRAY (ControlHandle, nColumnCount, aArrayOrder) 
 //-----------------------------------------------------------------------------------------------
 HB_FUNC ( LISTVIEW_SETCOLUMNORDERARRAY )
 {
@@ -153,7 +154,7 @@ HB_FUNC ( LISTVIEW_SETCOLUMNORDERARRAY )
    aArray = hb_param (3, HB_IT_ARRAY);
    p = (int*) hb_xgrab ( sizeof(int) * hb_parni(2) );
    for( i= 0; i < hb_parni(2); i++ )
-        *(p+i) = (int) hb_arrayGetNI (aArray, i+1)-1;
+        *(p+i) = (int) hb_arrayGetNI (aArray, i+1)-1;  
    ListView_SetColumnOrderArray ( (HWND) HMG_parnl(1), hb_parni(2), (int*) p);
    // hb_xfree (p);
 }
@@ -167,7 +168,7 @@ static __TLS__ BOOL _CoInitialize_Flag_ = FALSE;
 // LISTVIEW_SETBKIMAGE (ControlHandle, cPicture, yOffset, xOffset, nFlag)
 //-----------------------------------------------------------------------------------------------
 HB_FUNC ( LISTVIEW_SETBKIMAGE )
-{
+{  
    LVBKIMAGE plBackImage;
    HBITMAP hBitmap = NULL;
    TCHAR *cPicture = (TCHAR*) HMG_parc(2);
@@ -182,24 +183,24 @@ _THREAD_UNLOCK();
 
    if (cPicture != NULL && flag != 0)
        hBitmap = HMG_LoadImage (cPicture);
-
+       
    plBackImage.ulFlags = LVBKIF_SOURCE_NONE;
-
-   if (flag == 1)
+   
+   if (flag == 1) 
       plBackImage.ulFlags =  LVBKIF_SOURCE_HBITMAP | LVBKIF_STYLE_NORMAL;
-
-   if (flag == 2)
-       plBackImage.ulFlags =  LVBKIF_SOURCE_HBITMAP | LVBKIF_STYLE_TILE | LVBKIF_FLAG_TILEOFFSET;
+    
+   if (flag == 2) 
+       plBackImage.ulFlags =  LVBKIF_SOURCE_HBITMAP | LVBKIF_STYLE_TILE | LVBKIF_FLAG_TILEOFFSET;  
 
    if (flag == 3)
        plBackImage.ulFlags = LVBKIF_TYPE_WATERMARK;
-
+   
    plBackImage.hbm = hBitmap;
    plBackImage.pszImage = NULL;
    plBackImage.cchImageMax = 0;
    plBackImage.xOffsetPercent = hb_parni(3);
    plBackImage.yOffsetPercent = hb_parni(4);
-
+    
    ListView_SetBkImage ( (HWND) HMG_parnl(1), &plBackImage);
 }
 
@@ -208,20 +209,20 @@ _THREAD_UNLOCK();
 // LISTVIEW_GETBKIMAGE (ControlHandle)
 //-----------------------------------------------------------------------------------------------
 HB_FUNC ( LISTVIEW_GETBKIMAGE )
-{
+{  
    LVBKIMAGE plBackImage;
    ListView_GetBkImage ( (HWND) HMG_parnl(1), &plBackImage);
    hb_reta (4);
    HMG_storvnl ((LONG_PTR) plBackImage.hbm,         -1, 1);
    hb_storvnl  ((LONG) plBackImage.ulFlags,         -1, 2);
-   hb_storvnl  ((LONG) plBackImage.yOffsetPercent,  -1, 3);
+   hb_storvnl  ((LONG) plBackImage.yOffsetPercent,  -1, 3); 
    hb_storvnl  ((LONG) plBackImage.xOffsetPercent,  -1, 4);
 }
 
 
 
 //-----------------------------------------------------------------------------------------------
-// LISTVIEW_GETITEMTEXT (ControlHandle, nRow, nCol)
+// LISTVIEW_GETITEMTEXT (ControlHandle, nRow, nCol) 
 //-----------------------------------------------------------------------------------------------
 HB_FUNC ( LISTVIEW_GETITEMTEXT )
 {
@@ -233,21 +234,27 @@ HB_FUNC ( LISTVIEW_GETITEMTEXT )
 
    ListView_GetItemText (hWnd, nRow, nCol, cItem, sizeof(cItem) / sizeof(TCHAR));
 
-   HMG_retc (cItem);
+   HG_pustr( pStr ) ;
+   HG_retc( cItem ,pStr );
+   //HMG_retc (cItem);
 }
 
 
 //-----------------------------------------------------------------------------------------------
-// LISTVIEW_SETITEMTEXT (ControlHandle, nRow, nCol, cItem)
+// LISTVIEW_SETITEMTEXT (ControlHandle, nRow, nCol, cItem) 
 //-----------------------------------------------------------------------------------------------
 HB_FUNC ( LISTVIEW_SETITEMTEXT )
 {
    HWND hWnd    = (HWND) HMG_parnl (1);
    INT nRow     = (INT)  hb_parni (2);
    INT nCol     = (INT)  hb_parni (3);
-   TCHAR *cItem = (TCHAR*) HMG_parc (4);
+   //TCHAR *cItem = (TCHAR*) HMG_parc (4);
+   HG_pstr( cItem ); cItem = HG_parc(4) ;
 
    ListView_SetItemText (hWnd, nRow, nCol, cItem);
+
+   HG_xfree( cItem );
+
 }
 
 
@@ -262,18 +269,32 @@ HB_FUNC ( LISTVIEW_INSERTITEM )
    INT nColumnCount = (INT)  hb_parni (4);
    INT nCol;
 
+   HG_pstr( lpText ); lpText = HG_parvc (3, 1);
+   HG_pstr( lpiText );
+
+   
    LVI.mask      = LVIF_TEXT;
    LVI.iItem     = nRow;
    LVI.iSubItem  = 0;
    LVI.state     = 0;
    LVI.stateMask = 0;
-   LVI.pszText   = (TCHAR*) HMG_parvc (3, 1);
+   LVI.pszText   = lpText ; //(TCHAR*) HMG_parvc (3, 1);
    LVI.iImage    = 0;
 
    ListView_InsertItem (hWnd, &LVI);
 
-   for (nCol = 1 ; nCol < nColumnCount ; nCol++)
-        ListView_SetItemText (hWnd, nRow, nCol, (TCHAR*) HMG_parvc (3, nCol+1));
+   for (nCol = 1 ; nCol < nColumnCount ; nCol++) {
+
+     lpiText = HG_parvc (3,  nCol+1);
+
+        ListView_SetItemText (hWnd, nRow, nCol, lpiText ) ; //(TCHAR*) HMG_parvc (3, nCol+1));
+
+        HG_xfree( lpiText );
+
+      }
+
+      hb_xfree( lpText );
+
 }
 
 
@@ -346,11 +367,11 @@ HB_FUNC ( LISTVIEW_CUSTOMDRAW_GETROWCOL )
 
    hb_reta( 2 );
    // nRow draw
-   hb_storvnl( (LONG) lplvcd->nmcd.dwItemSpec + 1 , -1, 1 );   // The item number. What is contained in this member will depend on the type of control
-                                                               // that is sending the notification. See the NM_CUSTOMDRAW notification reference for
+   hb_storvnl( (LONG) lplvcd->nmcd.dwItemSpec + 1 , -1, 1 );   // The item number. What is contained in this member will depend on the type of control 
+                                                               // that is sending the notification. See the NM_CUSTOMDRAW notification reference for 
                                                                // the specific control to determine what, if anything, is contained in this member.
-   // nCol draw
-   hb_storvnl( (LONG) lplvcd->iSubItem + 1 , -1, 2 );   // Index of the subitem that is being drawn.
+   // nCol draw                                                            
+   hb_storvnl( (LONG) lplvcd->iSubItem + 1 , -1, 2 );   // Index of the subitem that is being drawn. 
                                                         // If the main item is being drawn, this member will be zero.
 }
 
@@ -361,7 +382,7 @@ HB_FUNC ( LISTVIEW_CUSTOMDRAW_GETACTION )
    LPARAM lParam = (LPARAM) HMG_parnl (1);
    LPNMLVCUSTOMDRAW lplvcd = (LPNMLVCUSTOMDRAW) lParam;
 
-   if (lplvcd->nmcd.dwDrawStage == CDDS_PREPAINT )
+   if (lplvcd->nmcd.dwDrawStage == CDDS_PREPAINT ) 
        hb_retni ( CDRF_NOTIFYITEMDRAW ) ;
 
    else if (lplvcd->nmcd.dwDrawStage == CDDS_ITEMPREPAINT )
@@ -424,7 +445,7 @@ HB_FUNC ( LISTVIEW_GETCOLUMNCOUNT )
    HWND hGrid   = (HWND) HMG_parnl (1);
    HWND hHeader = (HWND) ListView_GetHeader (hGrid);
    hb_retni( Header_GetItemCount( hHeader ) );
-}
+} 
 
 
 //        Header_CustomDraw_GetItem ( lParam ) --> nColumnHeader
@@ -442,7 +463,7 @@ HB_FUNC ( HEADER_CUSTOMDRAW_GETACTION )
    LPARAM lParam = (LPARAM) HMG_parnl (1);
    LPNMCUSTOMDRAW lpNMCustomDraw = (LPNMCUSTOMDRAW) lParam;
 
-   if ( lpNMCustomDraw->dwDrawStage == CDDS_PREPAINT )
+   if ( lpNMCustomDraw->dwDrawStage == CDDS_PREPAINT ) 
        hb_retni ( CDRF_NOTIFYITEMDRAW ) ;
    else if ( lpNMCustomDraw->dwDrawStage == CDDS_ITEMPREPAINT )   // not work in 64-bits, never dwDrawStage == CDDS_ITEMPREPAINT ???
         hb_retni ( -1 ) ;   // Change font, forecolor , backcolor
@@ -476,7 +497,7 @@ HB_FUNC ( HEADER_SETFONT )
 
    hb_retni ( CDRF_NEWFONT );
 }
-
+ 
 
 //       ListView_ChangeView ( hWnd, [ nNewView ] ) --> nOldView
 HB_FUNC( LISTVIEW_CHANGEVIEW )
@@ -518,14 +539,14 @@ HB_FUNC( LISTVIEW_GETEXTENDEDSTYLE )
 }
 
 
-//        ListView_SetImageList ( hWnd , hImageList , [iImageList] )
+//        ListView_SetImageList ( hWnd , hImageList , [iImageList] ) 
 HB_FUNC ( LISTVIEW_SETIMAGELIST )
 {
    HWND hWnd = (HWND) HMG_parnl (1);
    HIMAGELIST hImageList = (HIMAGELIST) HMG_parnl (2);
    int iImageList = HB_ISNIL(3) ? LVSIL_SMALL : hb_parni (3);
    HIMAGELIST hImageListPrevious = ListView_SetImageList (hWnd, hImageList, iImageList);
-   HMG_retnl ((LONG_PTR) hImageListPrevious);
+   HMG_retnl ((LONG_PTR) hImageListPrevious); 
 }
 
 
@@ -535,7 +556,7 @@ HB_FUNC ( LISTVIEW_GETIMAGELIST )
    HWND hWnd      = (HWND) HMG_parnl (1);
    int iImageList = HB_ISNIL(2) ? LVSIL_SMALL : hb_parni (2);
    HIMAGELIST hImageList = ListView_GetImageList (hWnd, iImageList);
-   HMG_retnl ((LONG_PTR) hImageList);
+   HMG_retnl ((LONG_PTR) hImageList); 
 }
 
 
@@ -577,7 +598,7 @@ HB_FUNC ( LISTVIEW_GETITEMIMAGEINDEX )
 
    ListView_GetItem (hWnd, &LV);
 
-   hb_retni ((int) LV.iImage);
+   hb_retni ((int) LV.iImage); 
 }
 
 
@@ -615,7 +636,7 @@ HB_FUNC ( LISTVIEW_GROUPITEMGETID )
 }
 
 
-//        ListView_IsGroupViewEnabled ( hWnd )
+//        ListView_IsGroupViewEnabled ( hWnd ) 
 HB_FUNC ( LISTVIEW_ISGROUPVIEWENABLED )
 {
    HWND hWnd    = (HWND) HMG_parnl (1);
@@ -628,11 +649,11 @@ HB_FUNC ( LISTVIEW_ENABLEGROUPVIEW )
 {
    HWND hWnd   = (HWND) HMG_parnl (1);
    BOOL Enable = (BOOL) hb_parl   (2);
-   ListView_EnableGroupView (hWnd, Enable);
+   ListView_EnableGroupView (hWnd, Enable); 
 }
 
 
-//        ListView_GroupDeleteAll ( hWnd )
+//        ListView_GroupDeleteAll ( hWnd ) 
 HB_FUNC ( LISTVIEW_GROUPDELETEALL )
 {
    HWND hWnd    = (HWND) HMG_parnl (1);
@@ -640,7 +661,7 @@ HB_FUNC ( LISTVIEW_GROUPDELETEALL )
 }
 
 
-//        ListView_GroupDelete ( hWnd, nGroupID )
+//        ListView_GroupDelete ( hWnd, nGroupID ) 
 HB_FUNC ( LISTVIEW_GROUPDELETE )
 {
    HWND hWnd    = (HWND) HMG_parnl (1);
@@ -680,7 +701,7 @@ HB_FUNC ( LISTVIEW_GROUPSETINFO )
    UINT  nAlignFooter = (UINT)    hb_parni  (6);
    UINT  nState       = (UINT)    hb_parni  (7);
 
-   WCHAR cHeaderBuffer [ MAX_GROUP_BUFFER ];
+   WCHAR cHeaderBuffer [ MAX_GROUP_BUFFER ]; 
    WCHAR cFooterBuffer [ MAX_GROUP_BUFFER ];
 
    LVGROUP LVG;
@@ -691,7 +712,7 @@ HB_FUNC ( LISTVIEW_GROUPSETINFO )
    LVG.cchHeader = sizeof (cHeaderBuffer) / sizeof (WCHAR);
    LVG.pszFooter = cFooterBuffer;
    LVG.cchFooter = sizeof (cFooterBuffer) / sizeof (WCHAR);
-
+   
    if ( ListView_GetGroupInfo ( hWnd, GroupID, &LVG ) != -1)
    {
       UINT nAlign = 0;
@@ -716,7 +737,7 @@ HB_FUNC ( LISTVIEW_GROUPGETINFO )
    INT   GroupID  = (INT)     hb_parni  (2);
 
    INT nRet;
-   WCHAR cHeaderBuffer [ MAX_GROUP_BUFFER ];
+   WCHAR cHeaderBuffer [ MAX_GROUP_BUFFER ]; 
    WCHAR cFooterBuffer [ MAX_GROUP_BUFFER ];
 
    LVGROUP LVG;
