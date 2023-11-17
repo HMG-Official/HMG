@@ -231,7 +231,7 @@ _THREAD_LOCK();\
    if (pfunc == NULL)\
    {\
       HMODULE hLib = LoadLibrary (_TEXT (_DLL_LIBNAME) );\
-      pfunc = (PFUNC) GetProcAddress (hLib, _DLL_FUNC_NAMESTRINGAW);\
+      pfunc = (PFUNC) (void *) GetProcAddress (hLib, _DLL_FUNC_NAMESTRINGAW);\
    }\
 _THREAD_UNLOCK();\
    if(pfunc == NULL)\

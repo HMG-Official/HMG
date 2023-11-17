@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link the HMG library with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
+ Your use of that executable is in no way restricted on account of linking the 
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+	Copyright 2002 AJ Wos <andrwos@aust1.net> 
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -54,9 +54,9 @@
 ---------------------------------------------------------------------------*/
 
 
-/*
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
+/* 
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -82,6 +82,7 @@
 #include "hbvm.h"
 #include "hbapiitm.h"
 #include "hbapi.h"
+#include "hg_unicode.h"
 
 extern HB_CRITICAL_T _HMG_Mutex;   // global Mutex variable defined into c_Thread.c
 
@@ -108,18 +109,23 @@ HB_FUNC ( ISDLGBUTTONCHECKED )
 
 HB_FUNC ( SETDLGITEMTEXT )
 {
-   SetDlgItemText ((HWND) HMG_parnl(1), hb_parni(2), (LPCTSTR) HMG_parc(3));
+  HG_pstr( lpText ); lpText = HG_parc(3);
+   SetDlgItemText ((HWND) HMG_parnl(1), hb_parni(2), lpText ) ; //(LPCTSTR) HMG_parc(3));
+   HG_xfree( lpText ) ;
 }
 
 
 HB_FUNC( GETDLGITEMTEXT )
 {
+   HG_pustr( pStr ) ;
    HWND hDlg  = (HWND) HMG_parnl (1);
    INT  id    = (INT)  hb_parni  (2);
    INT  nLen  = (INT)  SendMessage (GetDlgItem (hDlg, id), WM_GETTEXTLENGTH, 0, 0);
-   TCHAR cText [ nLen + 2 ];
+   TCHAR * cText = ( TCHAR * ) hb_xgrab( ( nLen + 2 ) * sizeof( TCHAR ) );
+   //TCHAR cText [ nLen + 2 ];
    GetDlgItemText (hDlg, id, (LPTSTR) cText, nLen + 1);
-   HMG_retc (cText);
+   HG_retc( cText ,pStr );
+   hb_xfree( cText );
 }
 
 
@@ -134,7 +140,7 @@ HB_FUNC( GETDLGITEMINT )
    BOOL bTranslated;
    hb_retni ((INT) GetDlgItemInt((HWND) HMG_parnl(1), (INT) hb_parni(2), &bTranslated, (BOOL) hb_parl(4)));
    if (HB_ISBYREF (3))
-      hb_storl (bTranslated, 3);
+      hb_storl (bTranslated, 3); 
 }
 
 
@@ -182,14 +188,19 @@ HB_FUNC ( CHOOSEFONT )
    BOOL lBold;
    HWND hWnd;
    HDC  hDC;
+   ZeroMemory ( &lf, sizeof (lf) );
+   HG_pustr( pStr ) ;
+   HG_pstr( pWStr ) ;pWStr = HG_parc(2) ;
+   lstrcpy( lf.lfFaceName, pWStr );
+   HG_xfree( pWStr ) ;
 
    hWnd = HB_ISNIL(1) ? GetActiveWindow() : (HWND) HMG_parnl (1);
    hDC  = GetDC ( hWnd );
 
-   ZeroMemory ( &lf, sizeof (lf) );
+   //ZeroMemory ( &lf, sizeof (lf) );
 
-   lstrcpy ( lf.lfFaceName , HMG_parc(2) );
-
+   //lstrcpy ( lf.lfFaceName , HMG_parc(2) );
+   
    lf.lfHeight = - MulDiv ( hb_parnl(3), GetDeviceCaps (hDC, LOGPIXELSY), 72 );
 
    if ( hb_parl (4) )
@@ -233,26 +244,27 @@ HB_FUNC ( CHOOSEFONT )
          lBold = FALSE;
 
       hb_reta( 8 );
-      HMG_storvc (       lf.lfFaceName,  -1, 1 );
-      hb_storvnl ((LONG) PointSize,      -1, 2 );
-      hb_storvl  ((BOOL) lBold,          -1, 3 );
-      hb_storvl  ((BOOL) lf.lfItalic,    -1, 4 );
-      hb_storvnl ((LONG) cf.rgbColors,   -1, 5 );
-      hb_storvl  ((BOOL) lf.lfUnderline, -1, 6 );
-      hb_storvl  ((BOOL) lf.lfStrikeOut, -1, 7 );
-      hb_storvni ((INT)  lf.lfCharSet,   -1, 8 );
+      HG_storvc(lf.lfFaceName, -1, 1, pStr ) ;
+
+      hb_storvnl ((LONG) PointSize,      -1, 2 ); 
+      hb_storvl  ((BOOL) lBold,          -1, 3 ); 
+      hb_storvl  ((BOOL) lf.lfItalic,    -1, 4 ); 
+      hb_storvnl ((LONG) cf.rgbColors,   -1, 5 ); 
+      hb_storvl  ((BOOL) lf.lfUnderline, -1, 6 ); 
+      hb_storvl  ((BOOL) lf.lfStrikeOut, -1, 7 ); 
+      hb_storvni ((INT)  lf.lfCharSet,   -1, 8 ); 
    }
    else
    {
       hb_reta( 8 );
       HMG_storvc (       _TEXT(""),  -1, 1 );
-      hb_storvnl ((LONG) 0,          -1, 2 );
-      hb_storvl  ((BOOL) 0,          -1, 3 );
-      hb_storvl  ((BOOL) 0,          -1, 4 );
-      hb_storvnl ((LONG) 0,          -1, 5 );
-      hb_storvl  ((BOOL) 0,          -1, 6 );
-      hb_storvl  ((BOOL) 0,          -1, 7 );
-      hb_storvni ((INT)  0,          -1, 8 );
+      hb_storvnl ((LONG) 0,          -1, 2 ); 
+      hb_storvl  ((BOOL) 0,          -1, 3 ); 
+      hb_storvl  ((BOOL) 0,          -1, 4 ); 
+      hb_storvnl ((LONG) 0,          -1, 5 ); 
+      hb_storvl  ((BOOL) 0,          -1, 6 ); 
+      hb_storvl  ((BOOL) 0,          -1, 7 ); 
+      hb_storvni ((INT)  0,          -1, 8 ); 
    }
 
    ReleaseDC ( hWnd, hDC );
@@ -273,6 +285,7 @@ HB_FUNC ( C_GETFILE )
 
    int flags = OFN_FILEMUSTEXIST | OFN_EXPLORER;
 
+   HG_pstr( lpsIniDir ); HG_pstr( lpsTitle );HG_pustr( pRetStr ); 
    memset ((void*)&buffer, 0, sizeof(buffer));
 
    if ( hb_parl(4) )
@@ -283,17 +296,17 @@ HB_FUNC ( C_GETFILE )
 
 
 
-//******************************************************************************************************//
-// ofn.lpstrFilter = A buffer containing pairs of null-terminated filter strings.
+//******************************************************************************************************//   
+// ofn.lpstrFilter = A buffer containing pairs of null-terminated filter strings. 
 //                   The last string in the buffer must be terminated by two NULL characters.
 // The following code converts a ANSI (CHAR) filter string into a UNICODE (UNSIGNED INT) filter string
-
+   
    #define _MAX_FILTER 5*1024
    INT i, j=0, cont=0;
    CHAR *p = (CHAR*) hb_parc(1);
    TCHAR Filter [ _MAX_FILTER ];
    memset((void*) &Filter, 0, sizeof(Filter));
-
+   
    for (i=0; *p != '\0'; i++)
    {  cont = cont + strlen (p) + 1;
       if (cont < _MAX_FILTER)
@@ -304,7 +317,7 @@ HB_FUNC ( C_GETFILE )
       else
          break;
    }
-//**********************************************************************//
+//**********************************************************************//   
 
    memset( (void*) &ofn, 0, sizeof( OPENFILENAME ) );
 
@@ -314,14 +327,15 @@ HB_FUNC ( C_GETFILE )
    ofn.nFilterIndex     = ((hb_parni(6) > 0) ? (DWORD) hb_parni(6) : 1);
    ofn.lpstrFile        = (LPTSTR) &buffer;
    ofn.nMaxFile         = sizeof(buffer) / sizeof(TCHAR);
-   ofn.lpstrInitialDir  = (LPCTSTR) HMG_parc(3);
-   ofn.lpstrTitle       = (LPCTSTR) HMG_parc(2);
+   lpsIniDir =  HG_parc(3); lpsTitle  =  HG_parc(2);
+   ofn.lpstrInitialDir  = lpsIniDir ; //(LPCTSTR) HMG_parc(3); 20210926
+   ofn.lpstrTitle       = lpsTitle ; //(LPCTSTR) HMG_parc(2);
    ofn.Flags            = flags;
 
    if( GetOpenFileName (&ofn) )
    {
       if ( ofn.nFileExtension !=0 )
-         HMG_retc (ofn.lpstrFile);
+        { HG_retc( ofn.lpstrFile ,pRetStr ); }
       else
       {
          wsprintf ( cCurDir, _TEXT("%s"), &buffer [iPosition] );
@@ -338,43 +352,49 @@ HB_FUNC ( C_GETFILE )
          if (iNumSelected > 1)
          {
             hb_reta (iNumSelected - 1);
-            for (i = 1; i < iNumSelected; i++)
-               HMG_storvc (cFullName[i], -1, i );
-         }
+            for (i = 1; i < iNumSelected; i++) {
+              HG_storvc( cFullName[ i ] , -1, i ,pRetStr ) ; }
+         } 
          else
-            HMG_retc( &buffer[0] );
+          { HG_retc( &buffer[0] ,pRetStr ) ; }
       }
    }
    else
       HMG_retc( _TEXT("") );
+
+HG_xfree( lpsIniDir ) ; HG_xfree( lpsTitle ) ;
+
 }
 
 
 
 HB_FUNC ( C_PUTFILE )
 {
-
+ 
  OPENFILENAME ofn;
  TCHAR buffer[1024];
-
+ 
+ HG_pstr( lpsIniDir ); HG_pstr( lpsTitle );
+ HG_pstr( lpsDefFname );HG_pustr( pRetStr );
+ HG_pstr( lpsDefExt ) ;
  int flags = OFN_OVERWRITEPROMPT | OFN_EXPLORER ;
-
+ 
  if ( hb_parl(4) )
  {
   flags = flags | OFN_NOCHANGEDIR ;
  }
-
-//******************************************************************************************************//
-// ofn.lpstrFilter = A buffer containing pairs of null-terminated filter strings.
+ 
+//******************************************************************************************************//   
+// ofn.lpstrFilter = A buffer containing pairs of null-terminated filter strings. 
 //                   The last string in the buffer must be terminated by two NULL characters.
 // The following code converts a ANSI (CHAR) filter string into a UNICODE (UNSIGNED INT) filter string
-
+   
    #define _MAX_FILTER 5*1024
    INT i, j=0, cont=0;
    CHAR *p = (CHAR*) hb_parc(1);
    TCHAR Filter [_MAX_FILTER];
    memset((void*) &Filter, 0, sizeof(Filter));
-
+   
    for (i=0; *p != '\0'; i++)
    {  cont = cont + strlen (p) + 1;
       if (cont < _MAX_FILTER)
@@ -385,10 +405,10 @@ HB_FUNC ( C_PUTFILE )
       else
          break;
    }
-//**********************************************************************//
-
- lstrcpy (buffer, HMG_parc(5));
-
+//**********************************************************************//   
+  lpsDefFname = HG_parc(5); lstrcpy( buffer, lpsDefFname );
+  HG_xfree( lpsDefFname ) ;
+  
  memset( (void*) &ofn, 0, sizeof( OPENFILENAME ) );
  ofn.lStructSize = sizeof(OPENFILENAME);
  ofn.hwndOwner = GetActiveWindow() ;
@@ -396,29 +416,33 @@ HB_FUNC ( C_PUTFILE )
  ofn.nFilterIndex = ((hb_parni(7)) > 0 ? (DWORD) hb_parni(7) : 1);
  ofn.lpstrFile = (LPTSTR) &buffer;
  ofn.nMaxFile = sizeof(buffer) / sizeof(TCHAR);
- ofn.lpstrInitialDir = (LPCTSTR) HMG_parc(3);
- ofn.lpstrTitle = (LPCTSTR) HMG_parc(2);
+ lpsIniDir = HG_parc(3); lpsTitle = HG_parc(2); lpsDefExt = HG_parc(6);
+ ofn.lpstrInitialDir = lpsIniDir ;
+ ofn.lpstrTitle = lpsTitle ;
  ofn.Flags = flags;
- ofn.lpstrDefExt = (LPCTSTR) HMG_parc(6);
-
+ ofn.lpstrDefExt = lpsDefExt;
+  
  if ( GetSaveFileName (&ofn) )
  {
      if (HB_ISBYREF(6))
-     {  if (ofn.nFileExtension > ofn.nFileOffset)
+     {  if (ofn.nFileExtension > ofn.nFileOffset)  
             HMG_storc (&ofn.lpstrFile [ofn.nFileExtension], 6);
         else
             HMG_storc (_TEXT(""), 6);
      }
 
-     if (HB_ISBYREF(7))
-        hb_storni ((INT) ofn.nFilterIndex, 7);
+     if (HB_ISBYREF(7)) {
+        hb_storni ((INT) ofn.nFilterIndex, 7); }
 
-     HMG_retc(ofn.lpstrFile);
+        HG_retc( ofn.lpstrFile ,pRetStr ) ;
+
  }
  else
      HMG_retc( _TEXT("") );
-}
 
+HG_xfree( lpsIniDir ) ; HG_xfree( lpsTitle ) ; HG_xfree( lpsDefExt ) ;
+}
+ 
 
 HB_FUNC ( CHOOSECOLOR )
 {
@@ -427,7 +451,7 @@ HB_FUNC ( CHOOSECOLOR )
    int i ;
 
    for( i = 0 ; i <16 ; i++ )
-   {  if ( HB_ISARRAY(3) )
+   {  if ( HB_ISARRAY(3) ) 
           crCustClr[i] = hb_parvnl (3, i+1);
       else
           crCustClr[i] = GetSysColor ( COLOR_BTNFACE );
@@ -448,21 +472,21 @@ HB_FUNC ( CHOOSECOLOR )
 
 
    if ( HB_ISBYREF (3) )   // Dr. Claudio Soto, January 2014
-   {
-       PHB_ITEM pArray = hb_param (3, HB_IT_ANY );
+   {   
+       PHB_ITEM pArray = hb_param (3, HB_IT_ANY ); 
        hb_arrayNew ( pArray, 16 );
        PHB_ITEM pSubarray = hb_itemNew ( NULL );
-
+       
        for ( i=0; i < 16; i++ )
        {
            hb_arrayNew   ( pSubarray, 3 );
            hb_arraySetNL ( pSubarray, 1, GetRValue (crCustClr[i]) );
            hb_arraySetNL ( pSubarray, 2, GetGValue (crCustClr[i]) );
            hb_arraySetNL ( pSubarray, 3, GetBValue (crCustClr[i]) );
-
+           
            hb_arraySet( pArray, i+1, pSubarray );
        }
-
+       
        hb_itemRelease( pSubarray );
     }
 }
@@ -490,7 +514,7 @@ BFFM_VALIDATEFAILED : The user typed an invalid name into the dialog's edit box.
 
 SendMessage ()
 BFFM_SETSELECTION   : Specifies the path of a folder to select. The path can be specified as a string or a PIDL.
-BFFM_ENABLEOK       : Enables or disables the dialog box's OK button.
+BFFM_ENABLEOK       : Enables or disables the dialog box's OK button. 
 BFFM_SETOKTEXT      : Sets the text that is displayed on the dialog box's OK button.
 BFFM_SETEXPANDED    : Specifies the path of a folder to expand in the Browse dialog box. The path can be specified as a Unicode string or a PIDL.
 BFFM_SETSTATUSTEXT  : Sets the status text. Set theBrowseCallbackProc lpData parameter to point to a null-terminated string with the desired text.
@@ -498,7 +522,7 @@ BFFM_SETSTATUSTEXT  : Sets the status text. Set theBrowseCallbackProc lpData par
 */
 
   TCHAR cTitle [ GetWindowTextLength(hWnd) + 1];
-
+  
   GetWindowText(hWnd, cTitle, sizeof(cTitle)/sizeof(TCHAR));
 
   UNREFERENCED_PARAMETER (lParam);   // avoid warning message: lParam defined but not used
@@ -509,14 +533,14 @@ BFFM_SETSTATUSTEXT  : Sets the status text. Set theBrowseCallbackProc lpData par
    {
       case BFFM_INITIALIZED:
            if (BrowseForFolderText->cInitPath)
-               SendMessage( hWnd, BFFM_SETSELECTION, (WPARAM) TRUE, (LPARAM) BrowseForFolderText->cInitPath);
+               SendMessage( hWnd, BFFM_SETSELECTION, (WPARAM) TRUE, (LPARAM) BrowseForFolderText->cInitPath); 
            break;
 
       case BFFM_VALIDATEFAILED:
            if (BrowseForFolderText->cInvalidDataMsg)
                MessageBox (hWnd, BrowseForFolderText->cInvalidDataMsg, cTitle, MB_ICONHAND | MB_OK | MB_SYSTEMMODAL);   // (TCHAR *)lParam ---> cFolderName
            else
-               MessageBeep (MB_ICONHAND);
+               MessageBeep (MB_ICONHAND);           
            return 1;
    }
    return 0;
@@ -530,7 +554,8 @@ HB_FUNC( C_GETFOLDER )
    BROWSEINFO     BrowseInfo;
    TCHAR          cBuffer [ MAX_PATH ];
    LPITEMIDLIST   ItemIDList;
-
+   HG_pstr( lpsIniDir ); HG_pstr( lpsTitle );HG_pustr( pRetStr ); 
+   HG_pstr( lpsInvldMsg );
    SHGetSpecialFolderLocation ( hWnd, HB_ISNIL(3)? CSIDL_DRIVES : hb_parnl(3), &ItemIDList );
 
 // BrowseInfo.ulFlags
@@ -540,10 +565,10 @@ HB_FUNC( C_GETFOLDER )
 // BIF_STATUSTEXT         : Include a status area in the dialog box ( not supported when BIF_NEWDIALOGSTYLE )
 // BIF_RETURNFSANCESTORS  : Only return file system ancestors. An ancestor is a subfolder that is beneath the root folder in the namespace hierarchy.
 // BIF_EDITBOX            : Include an edit control in the browse dialog box that allows the user to type the name of an item.
-// BIF_VALIDATE           : If the user types an invalid name into the edit box, the browse dialog box calls the application's BrowseCallbackProc
+// BIF_VALIDATE           : If the user types an invalid name into the edit box, the browse dialog box calls the application's BrowseCallbackProc 
 //                          with the BFFM_VALIDATEFAILED message ( ignored if BIF_EDITBOX is not specified)
-// BIF_NEWDIALOGSTYLE     : Use the new user interface. Setting this flag provides the user with a larger dialog box that can be resized.
-//                          The dialog box has several new capabilities, including: drag-and-drop capability within the dialog box,
+// BIF_NEWDIALOGSTYLE     : Use the new user interface. Setting this flag provides the user with a larger dialog box that can be resized. 
+//                          The dialog box has several new capabilities, including: drag-and-drop capability within the dialog box, 
 //                          reordering, shortcut menus, new folders, delete, and other shortcut menu commands.
 // BIF_BROWSEINCLUDEURLS  : The browse dialog box can display URLs. The BIF_USENEWUI and BIF_BROWSEINCLUDEFILES flags must also be set.
 // BIF_USENEWUI           : equivalent to BIF_EDITBOX + BIF_NEWDIALOGSTYLE.
@@ -551,37 +576,41 @@ HB_FUNC( C_GETFOLDER )
 // BIF_NONEWFOLDERBUTTON  : Do not include the New Folder button in the browse dialog box.
 // BIF_NOTRANSLATETARGETS : When the selected item is a shortcut, return the PIDL of the shortcut itself rather than its target.
 // BIF_BROWSEFORCOMPUTER  : Only return computers
-// BIF_BROWSEFORPRINTER   : Only allow the selection of printers. In Windows XP and later systems, the best practice is to use a Windows XP-style dialog,
+// BIF_BROWSEFORPRINTER   : Only allow the selection of printers. In Windows XP and later systems, the best practice is to use a Windows XP-style dialog, 
 //                          setting the root of the dialog to the Printers and Faxes folder (CSIDL_PRINTERS).
 // BIF_BROWSEINCLUDEFILES : The browse dialog box displays files as well as folders.
 // BIF_SHAREABLE          : The browse dialog box can display sharable resources on remote systems. The BIF_NEWDIALOGSTYLE flag must also be set.
 // BIF_BROWSEFILEJUNCTIONS: Windows 7 and later. Allow folder junctions such as a library or a compressed file with a .zip file name extension to be browsed.
 
    BROWSEFORFOLDERTEXT BrowseForFolderText;
-   BrowseForFolderText.cInvalidDataMsg = (TCHAR *) HMG_parc (4);
-   BrowseForFolderText.cInitPath = (TCHAR *) HMG_parc (5);
-
+   lpsInvldMsg = HG_parc(4);
+   BrowseForFolderText.cInvalidDataMsg = lpsInvldMsg ; //(TCHAR *) HMG_parc (4);
+   lpsIniDir = HG_parc (5);
+   BrowseForFolderText.cInitPath = lpsIniDir ; //(TCHAR *) HMG_parc (5);
    BrowseInfo.hwndOwner      = hWnd;
    BrowseInfo.pidlRoot       = ItemIDList;
    BrowseInfo.pszDisplayName = cBuffer;
-   BrowseInfo.lpszTitle      = HMG_parc (1);
+   lpsTitle = HG_parc(1) ;
+   BrowseInfo.lpszTitle      = lpsTitle ; //HMG_parc (1);
    BrowseInfo.ulFlags        = hb_parnl (2);
    BrowseInfo.lpfn           = BrowseCallbackProc;
    BrowseInfo.lParam         = (LPARAM) &BrowseForFolderText;
    BrowseInfo.iImage         = 0;
-
+   
    ItemIDList = SHBrowseForFolder( &BrowseInfo );
 
    if( ItemIDList )
    {
       SHGetPathFromIDList (ItemIDList, cBuffer);
-      HMG_retc (cBuffer);
+      HG_retc( cBuffer ,pRetStr );
    }
    else
       HMG_retc (_TEXT(""));
 
-   CoTaskMemFree ((LPVOID) ItemIDList);   // It is the responsibility of the calling application to call CoTaskMemFree to free the IDList returned
+   CoTaskMemFree ((LPVOID) ItemIDList);   // It is the responsibility of the calling application to call CoTaskMemFree to free the IDList returned 
                                           // by SHBrowseForFolder when it is no longer needed.
+HG_xfree( lpsIniDir ) ; HG_xfree( lpsTitle ) ;HG_xfree( lpsInvldMsg ) ;
+
 }
 
 
@@ -776,7 +805,7 @@ _THREAD_LOCK();
    _HMG_DialogBoxPosSizeInfo.Center  = (BOOL) hb_parl   (3);
    _HMG_DialogBoxPosSizeInfo.hWnd    = (HWND) HMG_parnl (4);
    _HMG_DialogBoxPosSizeInfo.Process = (BOOL) hb_parl   (5);
-
+   
    if (_HMG_DialogBoxPosSizeInfo.pCodeBlock_Row)
       hb_itemRelease (_HMG_DialogBoxPosSizeInfo.pCodeBlock_Row);
 
@@ -846,14 +875,14 @@ _THREAD_LOCK();
                nCol = rDlg.left;
 
           if ( nRow == HMG_INTNIL )
-               nRow = rDlg.top;
+               nRow = rDlg.top; 
 
           if ( nCol < 0 )
                nCol = 0;
 
           if ( nRow < 0 )
                nRow = 0;
-
+          
           if ( nCol + nWidth > GetSystemMetrics(SM_CXSCREEN) )
                nCol = GetSystemMetrics(SM_CXSCREEN) - nWidth;
 

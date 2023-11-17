@@ -50,22 +50,13 @@ HMG_POKE()              <=>   HB_BPOKE()
 
 #ifdef COMPILE_HMG_UNICODE
 
-  FUNCTION HMG_LEN(cStr)
-  LOCAL nByte, nBytes, nLen, lCrawl
-    IF HB_ISSTRING(cStr) // HB_ISCHAR(cStr) .OR. HB_ISMEMO(cStr)
-      nByte  := 1
-      nBytes := LEN(cStr)
-      nLen   := 0
-      lCrawl := !EMPTY(nBytes)
-      WHILE lCrawl
-        nByte  := HMG_UTF8CRAWL(cStr, nByte, 1)
-        nLen   ++
-        lCrawl := (nByte <= nBytes)
-      END
-    ELSE
-      nLen := LEN(cStr)
-    END
-  RETURN nLen
+   FUNCTION HMG_LEN (x)
+      IF ValType(x) == "C"   // HB_ISSTRING(x) .OR. HB_ISCHAR(x) .OR. HB_ISMEMO(x)
+         RETURN HB_ULEN (x)
+      ELSE
+         RETURN LEN (x)
+      ENDIF
+   RETURN NIL
 
   FUNCTION HMG_PADC (xValue, nLen, cFillChar)
   LOCAL cText, nSize, cPadText := ""
@@ -246,7 +237,7 @@ HMG_POKE()              <=>   HB_BPOKE()
     cPostStr := SUBSTR(cInStr, nByte)
     cOutStr  := cPreStr + IF(cInsert == NIL, '', cInsert) + cPostStr
   RETURN cOutStr
-
+/*
   FUNCTION HMG_LOWER(cStr); RETURN HMG_UNCESU8(HMG_LOWER_BMP(HMG_CESU8(cStr)))
   FUNCTION HMG_UPPER(cStr); RETURN HMG_UNCESU8(HMG_UPPER_BMP(HMG_CESU8(cStr)))
   FUNCTION HMG_ISALPHA(cStr); RETURN HMG_ISALPHA_BMP(HMG_CESU8(cStr))
@@ -254,7 +245,7 @@ HMG_POKE()              <=>   HB_BPOKE()
   FUNCTION HMG_ISLOWER(cStr); RETURN HMG_ISLOWER_BMP(HMG_CESU8(cStr))
   FUNCTION HMG_ISUPPER(cStr); RETURN HMG_ISUPPER_BMP(HMG_CESU8(cStr))
   FUNCTION HMG_ISALPHANUMERIC(cStr); RETURN HMG_ISALPHANUMERIC_BMP(HMG_CESU8(cStr))
-
+*/
 /*
   Defined in c_UNICODE_String.c
   HB_FUNC (HMG_LOWER_BMP)
@@ -318,9 +309,6 @@ FUNCTION HMG_UTF8InsertBOM ( cString )
     cString := UTF8_BOM + cString
   ENDIF
 RETURN cString
-
-FUNCTION HMG_STRCMP ( cStr1, cStr2, lCaseSens )
-RETURN HMG_STRCMP_BMP (HMG_CESU8 (cStr1), HMG_CESU8 (cStr2), lCaseSens )
 
 //***************************************************************************
 

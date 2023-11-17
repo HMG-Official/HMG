@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link the HMG library with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
+ Your use of that executable is in no way restricted on account of linking the 
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+	Copyright 2002 AJ Wos <andrwos@aust1.net> 
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -54,9 +54,9 @@
 ---------------------------------------------------------------------------*/
 
 
-/*
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
+/* 
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -79,7 +79,7 @@
 #include "winreg.h"
 #include "tchar.h"
 
-
+#include "hg_unicode.h"
 
 HB_FUNC( INITCHECKBOX )
 {
@@ -88,6 +88,7 @@ HB_FUNC( INITCHECKBOX )
 	int Style;
 
 	hwnd = (HWND) HMG_parnl (1);
+  HG_pstr( lpWinName ); lpWinName = HG_parc(2);
 
 	Style = BS_NOTIFY | WS_CHILD | BS_AUTOCHECKBOX ;
 
@@ -101,12 +102,13 @@ HB_FUNC( INITCHECKBOX )
 		Style = Style | WS_TABSTOP ;
 	}
 
-	hbutton = CreateWindowEx( WS_EX_TRANSPARENT , WC_BUTTON /*_TEXT("Button")*/ ,
-   HMG_parc(2), Style ,
+	hbutton = CreateWindowEx( WS_EX_TRANSPARENT , WC_BUTTON /*_TEXT("Button")*/ , 
+   lpWinName, Style ,
 	hb_parni(4), hb_parni(5) , hb_parni(8), hb_parni(9) ,
 	hwnd,(HMENU) HMG_parnl (3), GetModuleHandle(NULL) , NULL ) ;
 
 	HMG_retnl ((LONG_PTR) hbutton);
+  HG_xfree( lpWinName ) ;
 }
 
 
@@ -117,6 +119,7 @@ HB_FUNC( INITCHECKBUTTON )
 	int Style;
 
 	hwnd = (HWND) HMG_parnl (1);
+  HG_pstr( lpWinName ); lpWinName = HG_parc(2);
 
 	Style = BS_NOTIFY | WS_CHILD | BS_AUTOCHECKBOX | BS_PUSHLIKE ;
 
@@ -130,13 +133,13 @@ HB_FUNC( INITCHECKBUTTON )
 		Style = Style | WS_TABSTOP ;
 	}
 
-	hbutton = CreateWindowEx( 0L , WC_BUTTON /*_TEXT("Button")*/ ,
-   HMG_parc(2), Style ,
+	hbutton = CreateWindowEx( 0L , WC_BUTTON /*_TEXT("Button")*/ , 
+   lpWinName, Style ,
 	hb_parni(4), hb_parni(5) , hb_parni(8), hb_parni(9),
 	hwnd,(HMENU) HMG_parnl (3), GetModuleHandle(NULL) , NULL ) ;
 
 	HMG_retnl ((LONG_PTR) hbutton);
-
+  HG_xfree( lpWinName ) ;
 }
 
 
@@ -153,6 +156,7 @@ HB_FUNC( INITIMAGECHECKBUTTON )
    HWND hButton;
    HBITMAP hBitmap;
    HIMAGELIST hImageList;
+   HG_pstr( lpWinName ); lpWinName = HG_parc(2);
 
    int Style = BS_NOTIFY | BS_BITMAP | WS_CHILD | BS_AUTOCHECKBOX | BS_PUSHLIKE ;
 
@@ -162,18 +166,19 @@ HB_FUNC( INITIMAGECHECKBUTTON )
    if ( ! hb_parl(12) )
       Style = Style | WS_TABSTOP ;
 
-   hButton = CreateWindowEx ( 0, WC_BUTTON /*_TEXT("Button")*/,
-                              HMG_parc(2),
+   hButton = CreateWindowEx ( 0, WC_BUTTON /*_TEXT("Button")*/, 
+                              lpWinName, 
                               Style,
-                              hb_parni(4),
+                              hb_parni(4), 
                               hb_parni(5),
                               hb_parni(9),
                               hb_parni(10),
                               hwnd,
                               (HMENU) HMG_parnl (3),
-                              GetModuleHandle(NULL),
+                              GetModuleHandle(NULL), 
                               NULL);
 
+   HG_xfree( lpWinName ) ;
    TCHAR *FileName = (TCHAR *) HMG_parc (8);
 
    BOOL _IsAppThemed = (BOOL) hb_parl (13);
@@ -183,11 +188,11 @@ HB_FUNC( INITIMAGECHECKBUTTON )
    if ( _IsAppThemed == FALSE )
    {                                                     //    ScaleStretch, Transparent, BackgroundColor,  AdjustImage,   TransparentColor
       hBitmap = HMG_LoadPicture ( FileName, -1, -1, NULL,                 0, Transparent,              -1,            0,                 -1 );
-
+ 
       SendMessage ( hButton, (UINT) BM_SETIMAGE, (WPARAM) IMAGE_BITMAP, (LPARAM) hBitmap);
 
       hb_reta (2);
-      HMG_storvnl ((LONG_PTR) hButton,  -1, 1);
+      HMG_storvnl ((LONG_PTR) hButton,  -1, 1); 
       HMG_storvnl ((LONG_PTR) hBitmap , -1, 2);
    }
    else
@@ -196,7 +201,8 @@ HB_FUNC( INITIMAGECHECKBUTTON )
 
       hb_reta (2);
       HMG_storvnl ((LONG_PTR) hButton,      -1, 1);
-      HMG_storvnl ((LONG_PTR) hImageList,   -1, 2);
+      HMG_storvnl ((LONG_PTR) hImageList,   -1, 2); 
    }
+   HG_xfree( FileName ) ;
 }
 

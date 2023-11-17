@@ -12,27 +12,27 @@
       2012-2017 Dr. Claudio Soto <srvet@adinet.com.uy>
       http://srvet.blogspot.com
 
- This program is free software; you can redistribute it and/or modify it under
- the terms of the GNU General Public License as published by the Free Software
- Foundation; either version 2 of the License, or (at your option) any later
- version.
+ This program is free software; you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation; either version 2 of the License, or (at your option) any later 
+ version. 
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ This program is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License along with
- this software; see the file COPYING. If not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or
+ You should have received a copy of the GNU General Public License along with 
+ this software; see the file COPYING. If not, write to the Free Software 
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA (or 
  visit the web site http://www.gnu.org/).
 
- As a special exception, you have permission for additional uses of the text
+ As a special exception, you have permission for additional uses of the text 
  contained in this release of HMG.
 
- The exception is that, if you link the HMG library with other
- files to produce an executable, this does not by itself cause the resulting
+ The exception is that, if you link the HMG library with other 
+ files to produce an executable, this does not by itself cause the resulting 
  executable to be covered by the GNU General Public License.
- Your use of that executable is in no way restricted on account of linking the
+ Your use of that executable is in no way restricted on account of linking the 
  HMG library code into it.
 
  Parts of this project are based upon:
@@ -46,7 +46,7 @@
 	Copyright 1999-2008, http://www.harbour-project.org/
 
 	"WHAT32"
-	Copyright 2002 AJ Wos <andrwos@aust1.net>
+	Copyright 2002 AJ Wos <andrwos@aust1.net> 
 
 	"HWGUI"
   	Copyright 2001-2008 Alexander S.Kresin <alex@belacy.belgorod.su>
@@ -56,9 +56,9 @@
 
 
 
-/*
-  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made
-  by Dr. Claudio Soto, November 2012 and June 2014 respectively.
+/* 
+  The adaptation of the source code of this file to support UNICODE character set and WIN64 architecture was made 
+  by Dr. Claudio Soto, November 2012 and June 2014 respectively. 
   mail: <srvet@adinet.com.uy>
   blog: http://srvet.blogspot.com
 */
@@ -78,6 +78,7 @@
 #include <commctrl.h>
 #include <tchar.h>
 #include "hbapi.h"
+#include "hg_unicode.h"
 
 //#include "hbvm.h"
 //#include "hbstack.h"
@@ -92,14 +93,14 @@ HBITMAP HMG_LoadPicture ( TCHAR *FileName, int New_Width, int New_Height, HWND h
 LONG_PTR HMG_ChangeWindowStyle ( HWND hWnd, LONG_PTR Add, LONG_PTR Remove, BOOL ExStyle, BOOL lRedrawWindow )
 {
    int nIndex  = ExStyle ? GWL_EXSTYLE : GWL_STYLE;
-
+   
    LONG_PTR OldStyle = GetWindowLongPtr ( hWnd, nIndex );
    LONG_PTR NewStyle = (OldStyle | Add) & ( ~Remove );
    LONG_PTR Style    = SetWindowLongPtr ( hWnd, nIndex, NewStyle );
-
+   
    if ( lRedrawWindow )
       SetWindowPos ( hWnd, NULL, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED );
-
+   
    return Style;
 }
 
@@ -115,16 +116,16 @@ BOOL HMG_IsWindowStyle ( HWND hWnd, LONG_PTR Style, BOOL ExStyle )
 HB_FUNC ( TRACKPOPUPMENU )
 {
    HWND hWnd = (HWND) HMG_parnl (4);
-
+   
    SetForegroundWindow( hWnd );
 
    BOOL lTopMost = HMG_IsWindowStyle( hWnd, WS_EX_TOPMOST, TRUE );
-
+ 
    if( lTopMost )   // ADD September 2015
       SetWindowPos( hWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS | SWP_NOOWNERZORDER | SWP_NOMOVE | SWP_NOSIZE );
-
+   
    TrackPopupMenu ( (HMENU) HMG_parnl(1), TPM_LEFTALIGN | TPM_TOPALIGN | TPM_LEFTBUTTON, hb_parni(2), hb_parni(3), 0, hWnd, NULL );
-
+   
    if( lTopMost )   // ADD September 2015
       SetWindowPos( hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS | SWP_NOOWNERZORDER | SWP_NOMOVE | SWP_NOSIZE );
 
@@ -135,7 +136,9 @@ HB_FUNC ( TRACKPOPUPMENU )
 HB_FUNC ( APPENDMENUSTRING )
 {
    // AppendMenu() return BOOL value
-	hb_retnl ( AppendMenu( (HMENU) HMG_parnl (1), MF_STRING , hb_parni(2), HMG_parc(3)) ) ;
+  HG_pstr( lpItem ); lpItem = HG_parc(3);
+	hb_retnl ( AppendMenu( (HMENU) HMG_parnl (1), MF_STRING , hb_parni(2), lpItem )) ; //HMG_parc(3)) ) ;
+  HG_xfree( lpItem ) ;
 }
 
 
@@ -148,8 +151,10 @@ HB_FUNC ( APPENDMENUSEPARATOR )
 
 HB_FUNC ( APPENDMENUPOPUP )
 {
+  HG_pstr( lpItem ); lpItem = HG_parc(3);
    // AppendMenu() return BOOL value
-	hb_retnl ( AppendMenu( (HMENU) HMG_parnl (1), MF_POPUP | MF_STRING , hb_parni(2), HMG_parc(3)) ) ;
+	hb_retnl ( AppendMenu( (HMENU) HMG_parnl (1), MF_POPUP | MF_STRING , hb_parni(2), lpItem ) ) ;
+  HG_xfree( lpItem ) ;
 }
 
 
@@ -197,7 +202,7 @@ HB_FUNC ( XUNCHECKMENUITEM )
 
 HB_FUNC ( XGETMENUCHECKSTATE )
 {
-	UINT r = GetMenuState(  (HMENU) HMG_parnl (1), hb_parni(2) , MF_BYCOMMAND ) ;
+	UINT r = GetMenuState(  (HMENU) HMG_parnl (1), hb_parni(2) , MF_BYCOMMAND ) ; 
 
 	if ( r == MF_CHECKED )
       hb_retni (1);
@@ -208,7 +213,7 @@ HB_FUNC ( XGETMENUCHECKSTATE )
 
 HB_FUNC ( XGETMENUENABLEDSTATE )
 {
-	UINT r = GetMenuState(  (HMENU) HMG_parnl (1), hb_parni(2) , MF_BYCOMMAND ) ;
+	UINT r = GetMenuState(  (HMENU) HMG_parnl (1), hb_parni(2) , MF_BYCOMMAND ) ; 
 
 	if ( r == MF_GRAYED )
        hb_retni (0);
@@ -230,6 +235,7 @@ HB_FUNC ( MENUITEM_SETBITMAPS )
    HBITMAP hBitmap2 = HMG_LoadPicture (FileName2, -1, -1, NULL,            0, Transparent,              -1,            0,                 -1 );
 
    SetMenuItemBitmaps (hMenu, nID, MF_BYCOMMAND, hBitmap1, hBitmap2);
+
 }
 
 
@@ -348,5 +354,5 @@ HB_FUNC ( GETMENUSTATE )
    UINT  MenuID = (UINT)  hb_parni  (2);
    UINT  uFlags = (UINT)  HB_ISNUM  (3) ? hb_parni (3) : MF_BYCOMMAND;
    UINT  uState = GetMenuState ( hMenu, MenuID, uFlags );
-   hb_retni ((INT) uState);
+   hb_retni ((INT) uState); 
 }
